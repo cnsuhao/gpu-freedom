@@ -235,6 +235,7 @@ procedure TGPU.CollectResults(JobId, Result: string; ComputedTime: TDateTime);
 var
   i:   integer;
   res: extended;
+  arg : String;
 begin
   Result := ExtractParam(Result, ',');
   if (Result = WRONG_GPU_COMMAND) then
@@ -244,7 +245,10 @@ begin
   try
     i := StrToInt(JobID);
     begin
-      res := StrToFloat(Result, FormatSet.fs);
+      Arg := StringReplace (Result, '.', DecimalSeparator, []);
+      Arg := StringReplace (Arg, ',', DecimalSeparator, []);
+
+      res := StrToFloat(Arg);
     end;
 
     if ((i > 0) and (i <= MAX_COLLECTING_IDS)) then
