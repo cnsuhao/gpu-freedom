@@ -33,7 +33,7 @@ type
     Progress : Extended;    //  indicates plugin progress from 0 to 100}
     
     {  Stack for strings, only for
-              Borland DLLs. If a value in stack is INF, then StrStack
+              Freepascal/Borland DLLs. If a value in stack is INF, then StrStack
               is assigned to a String. If a value in StrStack is NULL,
               then a float is assigned in Stack.
 
