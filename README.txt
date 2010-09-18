@@ -61,14 +61,19 @@ File Tree structure for this package, codenamed freedom follows:
      /screensaver source code for screensaver
 
      /frontends    source code for frontends
-     /plugins      source code for plugins
+       /simclimate Climate simulation frontend
 
+     /plugins      source code for plugins
+       /basic      plugin containg basic routines like add and mul
+ 
      /lib          libraries for GPU
        /own        own libraries developed by the project
+         /simclimate  logic of simclimate extension
        /ext        external libraries
 
      /packages     components for GPU
        /own        own components developed by the project
+          /tgpu    TGPU component used in core to manage plugins
        /ext        external packages
 
 

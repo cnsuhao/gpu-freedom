@@ -1,3 +1,8 @@
+18.9.2010 git
+- moved TGPU component, libclimate, simclimate, and basic plugin
+ from gpu_solar module
+- described new directory tree in README.txt
+
 17.9.2010 git
 - initial commit of gpu_freedom on git repository
 - inital tree structure of package
