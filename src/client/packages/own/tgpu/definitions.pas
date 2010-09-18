@@ -1,10 +1,3 @@
-{$DEFINE MSWINDOWS}
-{$IFDEF VER170}
-{$DEFINE D7}
-{$ENDIF}
-{$IFDEF VER150}
-{$DEFINE D7}
-{$ENDIF}
 {
   In this unit, important structures of GPU are defined.
   TDllFunction is the signature for methods inside a DLL.
@@ -26,13 +19,8 @@ unit definitions;
 
 interface
 
-{$IFDEF MSWINDOWS}
-uses Windows;
-
-{$ENDIF}
-
 const
-  MAXSTACK = 128; {Maximum size of Stack in Virtual Machine}
+  MAXSTACK = 256; {Maximum size of Stack in Virtual Machine}
   MAX_COLLECTING_IDS = 128; {Maximum number of Jobs we keep also average track}
   WRONG_PACKET_ID = 7777777; {if you get seven seven as result, the plugin returns false}
   INF      = 1.0 / 0.0;    {infinite to distinguish PChars from floats}
@@ -64,9 +52,6 @@ type
     My: Pointer;
     {used to store data passed between update and function itself}
 
-     {$IFDEF MSWINDOWS}
-    hw:     HWND;
-     {$ENDIF}
     Update: boolean; {function wants an update on the graphics window}
 
      {Stack for strings, PChar for compatibility with non

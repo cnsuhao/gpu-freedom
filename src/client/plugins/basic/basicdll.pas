@@ -3,7 +3,7 @@ unit basicdll;
 
 interface
 
-uses Common, Definitions, Math;
+uses Definitions, Math;
 
 function description: PChar;
 function weblinktoplugin: PChar;
@@ -442,16 +442,16 @@ function total(var stk: TStack): boolean; stdcall;
 var
   Idx: integer;
   i  : longint;
-  total: Double;
+  tot: Double;
 begin
   Result := False;
   Idx    := stk.StIdx;
   if Idx < 1 then Exit;
 
-  total := 0;
+  tot := 0;
   For i := 1 to Idx  do
-  	total := total + Stk.Stack[i];
-  Stk.Stack[1] := total;
+  	tot := tot + Stk.Stack[i];
+  Stk.Stack[1] := tot;
   Stk.StIdx := 1;
   {never forget to set the Idx right at the end}
   Result    := True;
