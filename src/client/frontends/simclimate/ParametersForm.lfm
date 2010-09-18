@@ -1,0 +1,1436 @@
+object ParamForm: TParamForm
+  Left = 304
+  Height = 710
+  Top = 101
+  Width = 882
+  ActiveControl = cbNonlinearGrid
+  Caption = 'Parameters'
+  ClientHeight = 710
+  ClientWidth = 882
+  OnCreate = FormCreate
+  ParentFont = False
+  Position = poScreenCenter
+  LCLVersion = '0.9.26'
+  object gbModel: TGroupBox
+    Left = 12
+    Height = 180
+    Top = 4
+    Width = 420
+    Caption = 'Model parameters'
+    ClientHeight = 162
+    ClientWidth = 416
+    TabOrder = 0
+    object lblAtmLayers: TLabel
+      Left = 253
+      Height = 14
+      Top = 103
+      Width = 96
+      Caption = 'Atmospheric layers:'
+      ParentColor = False
+    end
+    object edtAlbedo: TLabeledEdit
+      Left = 123
+      Height = 21
+      Top = 4
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtAlbedo
+      EditLabel.AnchorSideTop.Control = edtAlbedo
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtAlbedo
+      EditLabel.AnchorSideBottom.Control = edtAlbedo
+      EditLabel.Left = 60
+      EditLabel.Height = 14
+      EditLabel.Top = 7
+      EditLabel.Width = 60
+      EditLabel.Caption = 'Albedo (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 0
+    end
+    object cbRotation: TCheckBox
+      Left = 235
+      Height = 19
+      Top = 4
+      Width = 93
+      Caption = 'Earth rotation'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+    end
+    object cbRevolution: TCheckBox
+      Left = 235
+      Height = 19
+      Top = 68
+      Width = 161
+      Caption = 'Earth revolution around Sun'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+    object edtDistanceFromSun: TLabeledEdit
+      Left = 123
+      Height = 21
+      Top = 36
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDistanceFromSun
+      EditLabel.AnchorSideTop.Control = edtDistanceFromSun
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDistanceFromSun
+      EditLabel.AnchorSideBottom.Control = edtDistanceFromSun
+      EditLabel.Left = 7
+      EditLabel.Height = 14
+      EditLabel.Top = 39
+      EditLabel.Width = 113
+      EditLabel.Caption = 'Distance from Sun (AU)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 3
+    end
+    object edtDawn: TLabeledEdit
+      Left = 235
+      Height = 21
+      Top = 36
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDawn
+      EditLabel.AnchorSideLeft.Side = asrBottom
+      EditLabel.AnchorSideTop.Control = edtDawn
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideBottom.Control = edtDawn
+      EditLabel.Left = 318
+      EditLabel.Height = 14
+      EditLabel.Top = 39
+      EditLabel.Width = 102
+      EditLabel.Caption = 'Initial Dawn (degree)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpRight
+      ParentColor = False
+      TabOrder = 4
+    end
+    object edtTauVisible: TLabeledEdit
+      Left = 123
+      Height = 21
+      Top = 68
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtTauVisible
+      EditLabel.AnchorSideTop.Control = edtTauVisible
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtTauVisible
+      EditLabel.AnchorSideBottom.Control = edtTauVisible
+      EditLabel.Left = 43
+      EditLabel.Height = 14
+      EditLabel.Top = 71
+      EditLabel.Width = 77
+      EditLabel.Caption = 'Tau visible (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 5
+    end
+    object edtTauInfrared: TLabeledEdit
+      Left = 123
+      Height = 21
+      Top = 100
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtTauInfrared
+      EditLabel.AnchorSideTop.Control = edtTauInfrared
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtTauInfrared
+      EditLabel.AnchorSideBottom.Control = edtTauInfrared
+      EditLabel.Left = 34
+      EditLabel.Height = 14
+      EditLabel.Top = 103
+      EditLabel.Width = 86
+      EditLabel.Caption = 'Tau infrared (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 6
+    end
+    object seAtmLayers: TSpinEdit
+      Left = 363
+      Height = 21
+      Top = 100
+      Width = 50
+      MaxValue = 5
+      MinValue = 1
+      TabOrder = 7
+      Value = 3
+    end
+    object edtDistanceLayers: TLabeledEdit
+      Left = 332
+      Height = 21
+      Top = 132
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDistanceLayers
+      EditLabel.AnchorSideTop.Control = edtDistanceLayers
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDistanceLayers
+      EditLabel.AnchorSideBottom.Control = edtDistanceLayers
+      EditLabel.Left = 126
+      EditLabel.Height = 14
+      EditLabel.Top = 135
+      EditLabel.Width = 203
+      EditLabel.Caption = 'Distance between atmospheric layers (m):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 8
+    end
+    object cbInverseRot: TCheckBox
+      Left = 331
+      Height = 19
+      Top = 4
+      Width = 84
+      Caption = 'Inverse rot.'
+      TabOrder = 9
+    end
+  end
+  object gbInitialConditions: TGroupBox
+    Left = 439
+    Height = 204
+    Top = 4
+    Width = 433
+    Caption = 'Initial Conditions'
+    ClientHeight = 186
+    ClientWidth = 429
+    TabOrder = 1
+    object edtThermicPoles: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 4
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtThermicPoles
+      EditLabel.AnchorSideTop.Control = edtThermicPoles
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtThermicPoles
+      EditLabel.AnchorSideBottom.Control = edtThermicPoles
+      EditLabel.Left = 11
+      EditLabel.Height = 14
+      EditLabel.Top = 7
+      EditLabel.Width = 108
+      EditLabel.Caption = 'Temperature at poles:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 0
+      OnChange = onChangeInitialCondition
+    end
+    object edtThermicExcursion: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 33
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtThermicExcursion
+      EditLabel.AnchorSideTop.Control = edtThermicExcursion
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtThermicExcursion
+      EditLabel.AnchorSideBottom.Control = edtThermicExcursion
+      EditLabel.Left = 28
+      EditLabel.Height = 14
+      EditLabel.Top = 36
+      EditLabel.Width = 91
+      EditLabel.Caption = 'Thermic excursion:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 1
+      OnChange = onChangeInitialCondition
+    end
+    object edtSurfaceShift: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 64
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtSurfaceShift
+      EditLabel.AnchorSideTop.Control = edtSurfaceShift
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtSurfaceShift
+      EditLabel.AnchorSideBottom.Control = edtSurfaceShift
+      EditLabel.Left = 21
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 98
+      EditLabel.Caption = 'Temp. surface shift:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 2
+      OnChange = onChangeInitialCondition
+    end
+    object edtOceanShift: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 92
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtOceanShift
+      EditLabel.AnchorSideTop.Control = edtOceanShift
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtOceanShift
+      EditLabel.AnchorSideBottom.Control = edtOceanShift
+      EditLabel.Left = 28
+      EditLabel.Height = 14
+      EditLabel.Top = 95
+      EditLabel.Width = 91
+      EditLabel.Caption = 'Temp. ocean shift:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 3
+      OnChange = onChangeInitialCondition
+    end
+    object edtTerrainShift: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 123
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtTerrainShift
+      EditLabel.AnchorSideTop.Control = edtTerrainShift
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtTerrainShift
+      EditLabel.AnchorSideBottom.Control = edtTerrainShift
+      EditLabel.Left = 25
+      EditLabel.Height = 14
+      EditLabel.Top = 126
+      EditLabel.Width = 94
+      EditLabel.Caption = 'Temp. terrain shift:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 4
+      OnChange = onChangeInitialCondition
+    end
+    object edtDesertBeltLat: TLabeledEdit
+      Left = 326
+      Height = 21
+      Top = 4
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDesertBeltLat
+      EditLabel.AnchorSideTop.Control = edtDesertBeltLat
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDesertBeltLat
+      EditLabel.AnchorSideBottom.Control = edtDesertBeltLat
+      EditLabel.Left = 226
+      EditLabel.Height = 14
+      EditLabel.Top = 7
+      EditLabel.Width = 97
+      EditLabel.Caption = 'Desert belt latitude:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 5
+      OnChange = onChangeInitialCondition
+    end
+    object edtDesertBeltExt: TLabeledEdit
+      Left = 326
+      Height = 21
+      Top = 33
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDesertBeltExt
+      EditLabel.AnchorSideTop.Control = edtDesertBeltExt
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDesertBeltExt
+      EditLabel.AnchorSideBottom.Control = edtDesertBeltExt
+      EditLabel.Left = 215
+      EditLabel.Height = 14
+      EditLabel.Top = 36
+      EditLabel.Width = 108
+      EditLabel.Caption = 'Desert belt extension:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 6
+      OnChange = onChangeInitialCondition
+    end
+    object edtDesertBeltTemp: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 64
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDesertBeltTemp
+      EditLabel.AnchorSideTop.Control = edtDesertBeltTemp
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDesertBeltTemp
+      EditLabel.AnchorSideBottom.Control = edtDesertBeltTemp
+      EditLabel.Left = 209
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 115
+      EditLabel.Caption = 'Desert belt Temp. shift:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 7
+      OnChange = onChangeInitialCondition
+    end
+    object edtThermicGradientAvg: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 92
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtThermicGradientAvg
+      EditLabel.AnchorSideTop.Control = edtThermicGradientAvg
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtThermicGradientAvg
+      EditLabel.AnchorSideBottom.Control = edtThermicGradientAvg
+      EditLabel.Left = 198
+      EditLabel.Height = 14
+      EditLabel.Top = 95
+      EditLabel.Width = 126
+      EditLabel.Caption = 'Therm. grad. avg. (100m)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 8
+      OnChange = onChangeInitialCondition
+    end
+    object edtThermicGradientsea: TLabeledEdit
+      Left = 326
+      Height = 21
+      Top = 123
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtThermicGradientsea
+      EditLabel.AnchorSideTop.Control = edtThermicGradientsea
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtThermicGradientsea
+      EditLabel.AnchorSideBottom.Control = edtThermicGradientsea
+      EditLabel.Left = 196
+      EditLabel.Height = 14
+      EditLabel.Top = 126
+      EditLabel.Width = 127
+      EditLabel.Caption = 'Therm. grad. sea (1000m)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 9
+      OnChange = onChangeInitialCondition
+    end
+    object edtEarthRadius: TLabeledEdit
+      Left = 122
+      Height = 21
+      Top = 156
+      Width = 72
+      EditLabel.AnchorSideLeft.Control = edtEarthRadius
+      EditLabel.AnchorSideTop.Control = edtEarthRadius
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtEarthRadius
+      EditLabel.AnchorSideBottom.Control = edtEarthRadius
+      EditLabel.Left = 37
+      EditLabel.Height = 14
+      EditLabel.Top = 159
+      EditLabel.Width = 82
+      EditLabel.Caption = 'Earth radius (m):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 10
+      OnChange = onChangeInitialCondition
+    end
+  end
+  object gbSimulation: TGroupBox
+    Left = 439
+    Height = 448
+    Top = 216
+    Width = 433
+    Caption = 'Simulation Parameters'
+    ClientHeight = 430
+    ClientWidth = 429
+    TabOrder = 2
+    object lblStep: TLabel
+      Left = 11
+      Height = 14
+      Top = 376
+      Width = 77
+      Caption = 'Simulation step:'
+      ParentColor = False
+    end
+    object edtCloudReflection: TLabeledEdit
+      Left = 131
+      Height = 21
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCloudReflection
+      EditLabel.AnchorSideTop.Control = edtCloudReflection
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCloudReflection
+      EditLabel.AnchorSideBottom.Control = edtCloudReflection
+      EditLabel.Left = 26
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 102
+      EditLabel.Caption = 'Cloud reflection (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 0
+    end
+    object edtCloudIsolation: TLabeledEdit
+      Left = 131
+      Height = 21
+      Top = 32
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCloudIsolation
+      EditLabel.AnchorSideTop.Control = edtCloudIsolation
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCloudIsolation
+      EditLabel.AnchorSideBottom.Control = edtCloudIsolation
+      EditLabel.Left = 32
+      EditLabel.Height = 14
+      EditLabel.Top = 35
+      EditLabel.Width = 96
+      EditLabel.Caption = 'Cloud isolation (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 1
+    end
+    object edtRiverAndLakes: TLabeledEdit
+      Left = 131
+      Height = 21
+      Top = 96
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtRiverAndLakes
+      EditLabel.AnchorSideTop.Control = edtRiverAndLakes
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtRiverAndLakes
+      EditLabel.AnchorSideBottom.Control = edtRiverAndLakes
+      EditLabel.Left = 7
+      EditLabel.Height = 14
+      EditLabel.Top = 99
+      EditLabel.Width = 121
+      EditLabel.Caption = 'Water flow in rivers (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 2
+    end
+    object edtEnergyTransferWind: TLabeledEdit
+      Left = 171
+      Height = 21
+      Top = 296
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtEnergyTransferWind
+      EditLabel.AnchorSideTop.Control = edtEnergyTransferWind
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtEnergyTransferWind
+      EditLabel.AnchorSideBottom.Control = edtEnergyTransferWind
+      EditLabel.Left = 9
+      EditLabel.Height = 14
+      EditLabel.Top = 299
+      EditLabel.Width = 159
+      EditLabel.Caption = 'Energy transferred by wind (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 3
+    end
+    object edtTerrestrialEnergyTemp: TLabeledEdit
+      Left = 206
+      Height = 21
+      Top = 254
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtTerrestrialEnergyTemp
+      EditLabel.AnchorSideTop.Control = edtTerrestrialEnergyTemp
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtTerrestrialEnergyTemp
+      EditLabel.AnchorSideBottom.Control = edtTerrestrialEnergyTemp
+      EditLabel.Left = 35
+      EditLabel.Height = 14
+      EditLabel.Top = 257
+      EditLabel.Width = 168
+      EditLabel.Caption = 'Inner earth temp. added per hour:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 4
+    end
+    object cbInvertWindFlow: TCheckBox
+      Left = 310
+      Height = 19
+      Top = 2
+      Width = 104
+      Caption = 'Invert wind flow'
+      TabOrder = 5
+    end
+    object edtRainHours: TLabeledEdit
+      Left = 331
+      Height = 21
+      Top = 32
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtRainHours
+      EditLabel.AnchorSideTop.Control = edtRainHours
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtRainHours
+      EditLabel.AnchorSideBottom.Control = edtRainHours
+      EditLabel.Left = 272
+      EditLabel.Height = 14
+      EditLabel.Top = 35
+      EditLabel.Width = 56
+      EditLabel.Caption = 'Rain hours:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 6
+    end
+    object edtSteamHours: TLabeledEdit
+      Left = 332
+      Height = 21
+      Top = 64
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtSteamHours
+      EditLabel.AnchorSideTop.Control = edtSteamHours
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtSteamHours
+      EditLabel.AnchorSideBottom.Control = edtSteamHours
+      EditLabel.Left = 264
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 65
+      EditLabel.Caption = 'Steam hours:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 7
+    end
+    object edtRadiationHours: TLabeledEdit
+      Left = 332
+      Height = 21
+      Top = 96
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtRadiationHours
+      EditLabel.AnchorSideTop.Control = edtRadiationHours
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtRadiationHours
+      EditLabel.AnchorSideBottom.Control = edtRadiationHours
+      EditLabel.Left = 249
+      EditLabel.Height = 14
+      EditLabel.Top = 99
+      EditLabel.Width = 80
+      EditLabel.Caption = 'Radiation hours:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 8
+    end
+    object edtExchangeAtmTerr: TLabeledEdit
+      Left = 333
+      Height = 21
+      Top = 128
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtExchangeAtmTerr
+      EditLabel.AnchorSideTop.Control = edtExchangeAtmTerr
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtExchangeAtmTerr
+      EditLabel.AnchorSideBottom.Control = edtExchangeAtmTerr
+      EditLabel.Left = -3
+      EditLabel.Height = 14
+      EditLabel.Top = 131
+      EditLabel.Width = 333
+      EditLabel.Caption = 'Hours needed to exchange energy between atmosphere and terrain:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 9
+    end
+    object edtExchangeFluxAtm: TLabeledEdit
+      Left = 332
+      Height = 21
+      Top = 160
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtExchangeFluxAtm
+      EditLabel.AnchorSideTop.Control = edtExchangeFluxAtm
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtExchangeFluxAtm
+      EditLabel.AnchorSideBottom.Control = edtExchangeFluxAtm
+      EditLabel.Left = 86
+      EditLabel.Height = 14
+      EditLabel.Top = 163
+      EditLabel.Width = 243
+      EditLabel.Caption = 'Hours needed to exchange energy in atmosphere:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 10
+    end
+    object edtExchangeFluxTerr: TLabeledEdit
+      Left = 332
+      Height = 21
+      Top = 192
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtExchangeFluxTerr
+      EditLabel.AnchorSideTop.Control = edtExchangeFluxTerr
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtExchangeFluxTerr
+      EditLabel.AnchorSideBottom.Control = edtExchangeFluxTerr
+      EditLabel.Left = 107
+      EditLabel.Height = 14
+      EditLabel.Top = 195
+      EditLabel.Width = 222
+      EditLabel.Caption = 'Hours needed to exchange energy on terrain:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 11
+    end
+    object edtExchangeFluxOcean: TLabeledEdit
+      Left = 331
+      Height = 21
+      Top = 224
+      Width = 81
+      EditLabel.AnchorSideLeft.Control = edtExchangeFluxOcean
+      EditLabel.AnchorSideTop.Control = edtExchangeFluxOcean
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtExchangeFluxOcean
+      EditLabel.AnchorSideBottom.Control = edtExchangeFluxOcean
+      EditLabel.Left = 109
+      EditLabel.Height = 14
+      EditLabel.Top = 227
+      EditLabel.Width = 219
+      EditLabel.Caption = 'Hours needed to exchange energy on ocean:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 12
+    end
+    object edtPaintRiverPct: TLabeledEdit
+      Left = 310
+      Height = 21
+      Top = 264
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtPaintRiverPct
+      EditLabel.AnchorSideBottom.Control = edtPaintRiverPct
+      EditLabel.Left = 310
+      EditLabel.Height = 14
+      EditLabel.Top = 247
+      EditLabel.Width = 115
+      EditLabel.Caption = 'Paint rivers (% of avg):'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 13
+    end
+    object edtDecreaseVegetation: TLabeledEdit
+      Left = 171
+      Height = 21
+      Top = 352
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDecreaseVegetation
+      EditLabel.AnchorSideTop.Control = edtDecreaseVegetation
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDecreaseVegetation
+      EditLabel.AnchorSideBottom.Control = edtDecreaseVegetation
+      EditLabel.Left = 14
+      EditLabel.Height = 14
+      EditLabel.Top = 355
+      EditLabel.Width = 154
+      EditLabel.Caption = 'Decrease Vegetation (days dry)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 14
+    end
+    object rb1h: TRadioButton
+      Left = 11
+      Height = 19
+      Top = 400
+      Width = 45
+      Caption = '1 h.'
+      TabOrder = 15
+      TabStop = False
+    end
+    object rb20min: TRadioButton
+      Left = 55
+      Height = 19
+      Top = 400
+      Width = 61
+      Caption = '20 min.'
+      Checked = True
+      State = cbChecked
+      TabOrder = 16
+    end
+    object rb4min: TRadioButton
+      Left = 115
+      Height = 19
+      Top = 400
+      Width = 55
+      Caption = '4 min.'
+      TabOrder = 17
+      TabStop = False
+    end
+    object edtCO2Isolation: TLabeledEdit
+      Left = 131
+      Height = 23
+      Top = 61
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCO2Isolation
+      EditLabel.AnchorSideTop.Control = edtCO2Isolation
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCO2Isolation
+      EditLabel.AnchorSideBottom.Control = edtCO2Isolation
+      EditLabel.Left = 38
+      EditLabel.Height = 14
+      EditLabel.Top = 65
+      EditLabel.Width = 90
+      EditLabel.Caption = 'CO2 isolation (%):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 18
+    end
+    object edtPaintCloudsPct: TLabeledEdit
+      Left = 171
+      Height = 23
+      Top = 321
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtPaintCloudsPct
+      EditLabel.AnchorSideTop.Control = edtPaintCloudsPct
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtPaintCloudsPct
+      EditLabel.AnchorSideBottom.Control = edtPaintCloudsPct
+      EditLabel.Left = 38
+      EditLabel.Height = 14
+      EditLabel.Top = 325
+      EditLabel.Width = 130
+      EditLabel.Caption = 'Paint clouds (kg steam/m2)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 19
+    end
+    object cbNonlinearGrid: TCheckBox
+      Left = 316
+      Height = 19
+      Top = 404
+      Width = 97
+      Caption = 'Non-linear Grid'
+      TabOrder = 20
+    end
+    object edtEvaporationStart: TLabeledEdit
+      Left = 279
+      Height = 23
+      Top = 312
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtEvaporationStart
+      EditLabel.AnchorSideBottom.Control = edtEvaporationStart
+      EditLabel.Left = 279
+      EditLabel.Height = 14
+      EditLabel.Top = 295
+      EditLabel.Width = 146
+      EditLabel.Caption = 'Evaporation start at: (Celsius)'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 21
+    end
+    object edtFullEvaporation: TLabeledEdit
+      Left = 279
+      Height = 23
+      Top = 355
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtFullEvaporation
+      EditLabel.AnchorSideBottom.Control = edtFullEvaporation
+      EditLabel.Left = 279
+      EditLabel.Height = 14
+      EditLabel.Top = 338
+      EditLabel.Width = 139
+      EditLabel.Caption = 'Full evaporation at: (Celsius)'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 22
+    end
+  end
+  object gbPhysical: TGroupBox
+    Left = 13
+    Height = 177
+    Top = 184
+    Width = 417
+    Caption = 'Physical Constants'
+    ClientHeight = 159
+    ClientWidth = 413
+    TabOrder = 3
+    object edtSolarConstant: TLabeledEdit
+      Left = 127
+      Height = 21
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtSolarConstant
+      EditLabel.AnchorSideTop.Control = edtSolarConstant
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtSolarConstant
+      EditLabel.AnchorSideBottom.Control = edtSolarConstant
+      EditLabel.Left = 11
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 113
+      EditLabel.Caption = 'Solar constant (W/m2):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 0
+    end
+    object edtEarthInclination: TLabeledEdit
+      Left = 127
+      Height = 21
+      Top = 32
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtEarthInclination
+      EditLabel.AnchorSideTop.Control = edtEarthInclination
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtEarthInclination
+      EditLabel.AnchorSideBottom.Control = edtEarthInclination
+      EditLabel.Left = 14
+      EditLabel.Height = 14
+      EditLabel.Top = 35
+      EditLabel.Width = 110
+      EditLabel.Caption = 'Earth inclination (deg):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 1
+    end
+    object edtStefanBoltzmann: TLabeledEdit
+      Left = 127
+      Height = 21
+      Top = 96
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtStefanBoltzmann
+      EditLabel.AnchorSideTop.Control = edtStefanBoltzmann
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtStefanBoltzmann
+      EditLabel.AnchorSideBottom.Control = edtStefanBoltzmann
+      EditLabel.Left = 1
+      EditLabel.Height = 14
+      EditLabel.Top = 99
+      EditLabel.Width = 123
+      EditLabel.Caption = 'St-Boltzmann (W/(m2K4))'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 2
+    end
+    object edtGravAcc: TLabeledEdit
+      Left = 127
+      Height = 21
+      Top = 64
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtGravAcc
+      EditLabel.AnchorSideTop.Control = edtGravAcc
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtGravAcc
+      EditLabel.AnchorSideBottom.Control = edtGravAcc
+      EditLabel.Left = 75
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 49
+      EditLabel.Caption = 'g (m/s^2)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 3
+    end
+    object edtCpWater: TLabeledEdit
+      Left = 327
+      Height = 21
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCpWater
+      EditLabel.AnchorSideTop.Control = edtCpWater
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCpWater
+      EditLabel.AnchorSideBottom.Control = edtCpWater
+      EditLabel.Left = 233
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 91
+      EditLabel.Caption = 'cp water (J/(kg K))'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 4
+    end
+    object edtCpSteam: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 32
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCpSteam
+      EditLabel.AnchorSideTop.Control = edtCpSteam
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCpSteam
+      EditLabel.AnchorSideBottom.Control = edtCpSteam
+      EditLabel.Left = 232
+      EditLabel.Height = 14
+      EditLabel.Top = 35
+      EditLabel.Width = 92
+      EditLabel.Caption = 'cp steam (J/(kg K))'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 5
+    end
+    object edtCpAir: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 64
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCpAir
+      EditLabel.AnchorSideTop.Control = edtCpAir
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCpAir
+      EditLabel.AnchorSideBottom.Control = edtCpAir
+      EditLabel.Left = 249
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 75
+      EditLabel.Caption = 'cp air (J/(kg K))'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 6
+    end
+    object edtCpEarth: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 96
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCpEarth
+      EditLabel.AnchorSideTop.Control = edtCpEarth
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtCpEarth
+      EditLabel.AnchorSideBottom.Control = edtCpEarth
+      EditLabel.Left = 235
+      EditLabel.Height = 14
+      EditLabel.Top = 99
+      EditLabel.Width = 89
+      EditLabel.Caption = 'cp earth (J/(kg K))'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 7
+    end
+    object edtDensityWater: TLabeledEdit
+      Left = 327
+      Height = 21
+      Top = 128
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDensityWater
+      EditLabel.AnchorSideTop.Control = edtDensityWater
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDensityWater
+      EditLabel.AnchorSideBottom.Control = edtDensityWater
+      EditLabel.Left = 216
+      EditLabel.Height = 14
+      EditLabel.Top = 131
+      EditLabel.Width = 108
+      EditLabel.Caption = 'Density water (kg/m3)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 8
+    end
+    object edtDensityEarth: TLabeledEdit
+      Left = 127
+      Height = 21
+      Top = 128
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtDensityEarth
+      EditLabel.AnchorSideTop.Control = edtDensityEarth
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtDensityEarth
+      EditLabel.AnchorSideBottom.Control = edtDensityEarth
+      EditLabel.Left = 18
+      EditLabel.Height = 14
+      EditLabel.Top = 131
+      EditLabel.Width = 106
+      EditLabel.Caption = 'Density earth (kg/m3)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 9
+    end
+  end
+  object gbSpecial: TGroupBox
+    Left = 12
+    Height = 145
+    Top = 368
+    Width = 420
+    Caption = 'Special parameters'
+    ClientHeight = 127
+    ClientWidth = 416
+    TabOrder = 4
+    object cbVulcan: TCheckBox
+      Left = 4
+      Height = 19
+      Width = 57
+      Caption = 'Vulcan'
+      TabOrder = 0
+    end
+    object edtVulcanLat: TLabeledEdit
+      Left = 94
+      Height = 21
+      Width = 40
+      EditLabel.AnchorSideLeft.Control = edtVulcanLat
+      EditLabel.AnchorSideTop.Control = edtVulcanLat
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtVulcanLat
+      EditLabel.AnchorSideBottom.Control = edtVulcanLat
+      EditLabel.Left = 67
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 24
+      EditLabel.Caption = 'Lat.:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 1
+    end
+    object edtVulcanLon: TLabeledEdit
+      Left = 174
+      Height = 21
+      Width = 40
+      EditLabel.AnchorSideLeft.Control = edtVulcanLon
+      EditLabel.AnchorSideTop.Control = edtVulcanLon
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtVulcanLon
+      EditLabel.AnchorSideBottom.Control = edtVulcanLon
+      EditLabel.Left = 145
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 26
+      EditLabel.Caption = 'Lon.:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 2
+    end
+    object edtVulcanHours: TLabeledEdit
+      Left = 262
+      Height = 21
+      Width = 48
+      EditLabel.AnchorSideLeft.Control = edtVulcanHours
+      EditLabel.AnchorSideTop.Control = edtVulcanHours
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtVulcanHours
+      EditLabel.AnchorSideBottom.Control = edtVulcanHours
+      EditLabel.Left = 226
+      EditLabel.Height = 14
+      EditLabel.Top = 3
+      EditLabel.Width = 33
+      EditLabel.Caption = 'Hours:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 3
+    end
+    object edtVulcanAshesPct: TLabeledEdit
+      Left = 374
+      Height = 21
+      Top = 26
+      Width = 33
+      EditLabel.AnchorSideLeft.Control = edtVulcanAshesPct
+      EditLabel.AnchorSideTop.Control = edtVulcanAshesPct
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtVulcanAshesPct
+      EditLabel.AnchorSideBottom.Control = edtVulcanAshesPct
+      EditLabel.Left = 233
+      EditLabel.Height = 14
+      EditLabel.Top = 29
+      EditLabel.Width = 138
+      EditLabel.Caption = 'Vulcano Ashes Intensity (%)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 4
+    end
+    object cbNuclearBomb: TCheckBox
+      Left = 4
+      Height = 19
+      Top = 64
+      Width = 91
+      Caption = 'Nuclear bomb'
+      TabOrder = 5
+    end
+    object cbNuclearWar: TCheckBox
+      Left = 4
+      Height = 19
+      Top = 96
+      Width = 83
+      Caption = 'Nuclear war'
+      TabOrder = 6
+    end
+    object edtNBLat: TLabeledEdit
+      Left = 124
+      Height = 21
+      Top = 64
+      Width = 40
+      EditLabel.AnchorSideLeft.Control = edtNBLat
+      EditLabel.AnchorSideTop.Control = edtNBLat
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtNBLat
+      EditLabel.AnchorSideBottom.Control = edtNBLat
+      EditLabel.Left = 97
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 24
+      EditLabel.Caption = 'Lat.:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 7
+    end
+    object edtNBLon: TLabeledEdit
+      Left = 204
+      Height = 21
+      Top = 64
+      Width = 32
+      EditLabel.AnchorSideLeft.Control = edtNBLon
+      EditLabel.AnchorSideTop.Control = edtNBLon
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtNBLon
+      EditLabel.AnchorSideBottom.Control = edtNBLon
+      EditLabel.Left = 175
+      EditLabel.Height = 14
+      EditLabel.Top = 67
+      EditLabel.Width = 26
+      EditLabel.Caption = 'Lon.:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 8
+    end
+    object edtNBEnergy: TLabeledEdit
+      Left = 370
+      Height = 21
+      Top = -128
+      Width = 56
+      EditLabel.AnchorSideLeft.Control = edtNBEnergy
+      EditLabel.AnchorSideTop.Control = edtNBEnergy
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtNBEnergy
+      EditLabel.AnchorSideBottom.Control = edtNBEnergy
+      EditLabel.Left = 318
+      EditLabel.Height = 14
+      EditLabel.Top = -125
+      EditLabel.Width = 49
+      EditLabel.Caption = 'megaTon:'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 9
+    end
+    object edtNBAshesPct: TLabeledEdit
+      Left = 360
+      Height = 21
+      Top = 62
+      Width = 46
+      EditLabel.AnchorSideLeft.Control = edtNBAshesPct
+      EditLabel.AnchorSideTop.Control = edtNBAshesPct
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtNBAshesPct
+      EditLabel.AnchorSideBottom.Control = edtNBAshesPct
+      EditLabel.Left = 257
+      EditLabel.Height = 14
+      EditLabel.Top = 65
+      EditLabel.Width = 100
+      EditLabel.Caption = 'Ashes intensity: (%)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 10
+    end
+    object edtNBHours: TLabeledEdit
+      Left = 204
+      Height = 21
+      Top = 96
+      Width = 64
+      EditLabel.AnchorSideLeft.Control = edtNBHours
+      EditLabel.AnchorSideTop.Control = edtNBHours
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtNBHours
+      EditLabel.AnchorSideBottom.Control = edtNBHours
+      EditLabel.Left = 95
+      EditLabel.Height = 14
+      EditLabel.Top = 99
+      EditLabel.Width = 106
+      EditLabel.Caption = 'War duration (hours):'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 11
+    end
+    object edtAshesFalloutPct: TLabeledEdit
+      Left = 174
+      Height = 21
+      Top = 26
+      Width = 40
+      EditLabel.AnchorSideLeft.Control = edtAshesFalloutPct
+      EditLabel.AnchorSideTop.Control = edtAshesFalloutPct
+      EditLabel.AnchorSideTop.Side = asrCenter
+      EditLabel.AnchorSideRight.Control = edtAshesFalloutPct
+      EditLabel.AnchorSideBottom.Control = edtAshesFalloutPct
+      EditLabel.Left = 84
+      EditLabel.Height = 14
+      EditLabel.Top = 29
+      EditLabel.Width = 87
+      EditLabel.Caption = 'Ashes Fallout (%)'
+      EditLabel.ParentColor = False
+      LabelPosition = lpLeft
+      ParentColor = False
+      TabOrder = 12
+    end
+  end
+  object btnOK: TButton
+    Left = 439
+    Height = 26
+    Top = 664
+    Width = 96
+    Caption = 'OK'
+    OnClick = btnOKClick
+    TabOrder = 5
+  end
+  object btnApply: TButton
+    Left = 536
+    Height = 25
+    Top = 664
+    Width = 96
+    Caption = 'Apply'
+    OnClick = btnApplyClick
+    TabOrder = 6
+  end
+  object btnCancel: TButton
+    Left = 744
+    Height = 25
+    Top = 664
+    Width = 91
+    Caption = 'Cancel'
+    OnClick = btnCancelClick
+    TabOrder = 7
+  end
+  object btnReset: TButton
+    Left = 632
+    Height = 25
+    Top = 664
+    Width = 107
+    Caption = 'Reset'
+    OnClick = btnResetClick
+    TabOrder = 8
+  end
+  object gbCO2: TGroupBox
+    Left = 13
+    Height = 168
+    Top = 521
+    Width = 415
+    Caption = 'CO2 (values per year)'
+    ClientHeight = 150
+    ClientWidth = 411
+    TabOrder = 9
+    object lblEnergySource: TLabel
+      Left = 113
+      Height = 14
+      Top = 8
+      Width = 74
+      Caption = 'Energy source:'
+      ParentColor = False
+    end
+    object cbPopulation: TCheckBox
+      Left = 15
+      Height = 19
+      Top = 7
+      Width = 76
+      Caption = 'Population'
+      TabOrder = 0
+    end
+    object rbOil: TRadioButton
+      Left = 203
+      Height = 19
+      Top = 7
+      Width = 77
+      Caption = 'Oil/fossiles'
+      TabOrder = 1
+    end
+    object rbRenewables: TRadioButton
+      Left = 281
+      Height = 19
+      Top = 7
+      Width = 111
+      Caption = 'Wind/Hydro/Solar'
+      TabOrder = 2
+    end
+    object edtPopIncreasePct: TLabeledEdit
+      Left = 65
+      Height = 23
+      Top = 54
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtPopIncreasePct
+      EditLabel.AnchorSideBottom.Control = edtPopIncreasePct
+      EditLabel.Left = 65
+      EditLabel.Height = 14
+      EditLabel.Top = 37
+      EditLabel.Width = 89
+      EditLabel.Caption = 'Pop.increase (%):'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 3
+    end
+    object edtCO2ProdHuman: TLabeledEdit
+      Left = 169
+      Height = 23
+      Top = 55
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCO2ProdHuman
+      EditLabel.AnchorSideBottom.Control = edtCO2ProdHuman
+      EditLabel.Left = 169
+      EditLabel.Height = 14
+      EditLabel.Top = 38
+      EditLabel.Width = 105
+      EditLabel.Caption = 'CO2 prod. per human'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 4
+    end
+    object edtCO2ProdVulcano: TLabeledEdit
+      Left = 289
+      Height = 23
+      Top = 54
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCO2ProdVulcano
+      EditLabel.AnchorSideBottom.Control = edtCO2ProdVulcano
+      EditLabel.Left = 289
+      EditLabel.Height = 14
+      EditLabel.Top = 37
+      EditLabel.Width = 91
+      EditLabel.Caption = 'CO2 prod. vulcano'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 5
+    end
+    object edtCO2AbsorpVegetation: TLabeledEdit
+      Left = 73
+      Height = 23
+      Top = 111
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCO2AbsorpVegetation
+      EditLabel.AnchorSideBottom.Control = edtCO2AbsorpVegetation
+      EditLabel.Left = 73
+      EditLabel.Height = 14
+      EditLabel.Top = 94
+      EditLabel.Width = 131
+      EditLabel.Caption = 'CO2 absorption vegetation'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 6
+    end
+    object edtCO2AbsorpOcean: TLabeledEdit
+      Left = 238
+      Height = 23
+      Top = 111
+      Width = 80
+      EditLabel.AnchorSideLeft.Control = edtCO2AbsorpOcean
+      EditLabel.AnchorSideBottom.Control = edtCO2AbsorpOcean
+      EditLabel.Left = 238
+      EditLabel.Height = 14
+      EditLabel.Top = 94
+      EditLabel.Width = 108
+      EditLabel.Caption = 'CO2 absorption ocean'
+      EditLabel.ParentColor = False
+      ParentColor = False
+      TabOrder = 7
+    end
+  end
+end

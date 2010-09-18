@@ -1,0 +1,540 @@
+{ Das ist eine automatisch erzeugte Lazarus-Ressourcendatei }
+
+LazarusResources.Add('TParamForm','FORMDATA',[
+  'TPF0'#10'TParamForm'#9'ParamForm'#4'Left'#3'0'#1#6'Height'#3#198#2#3'Top'#2
+  +'e'#5'Width'#3'r'#3#13'ActiveControl'#7#15'cbNonlinearGrid'#7'Caption'#6#10
+  +'Parameters'#12'ClientHeight'#3#198#2#11'ClientWidth'#3'r'#3#8'OnCreate'#7#10
+  +'FormCreate'#10'ParentFont'#8#8'Position'#7#14'poScreenCenter'#10'LCLVersion'
+  +#6#6'0.9.26'#0#9'TGroupBox'#7'gbModel'#4'Left'#2#12#6'Height'#3#180#0#3'Top'
+  +#2#4#5'Width'#3#164#1#7'Caption'#6#16'Model parameters'#12'ClientHeight'#3
+  +#162#0#11'ClientWidth'#3#160#1#8'TabOrder'#2#0#0#6'TLabel'#12'lblAtmLayers'#4
+  +'Left'#3#253#0#6'Height'#2#14#3'Top'#2'g'#5'Width'#2'`'#7'Caption'#6#19'Atmo'
+  +'spheric layers:'#11'ParentColor'#8#0#0#12'TLabeledEdit'#9'edtAlbedo'#4'Left'
+  +#2'{'#6'Height'#2#21#3'Top'#2#4#5'Width'#2'P EditLabel.AnchorSideLeft.Contro'
+  +'l'#7#9'edtAlbedo'#31'EditLabel.AnchorSideTop.Control'#7#9'edtAlbedo'#28'Edi'
+  +'tLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'
+  +#7#9'edtAlbedo"EditLabel.AnchorSideBottom.Control'#7#9'edtAlbedo'#14'EditLab'
+  +'el.Left'#2'<'#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2#7#15'EditLabel.'
+  +'Width'#2'<'#17'EditLabel.Caption'#6#11'Albedo (%):'#21'EditLabel.ParentColo'
+  +'r'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#0#0#0#9
+  +'TCheckBox'#10'cbRotation'#4'Left'#3#235#0#6'Height'#2#19#3'Top'#2#4#5'Width'
+  +#2']'#7'Caption'#6#14'Earth rotation'#7'Checked'#9#5'State'#7#9'cbChecked'#8
+  +'TabOrder'#2#1#0#0#9'TCheckBox'#12'cbRevolution'#4'Left'#3#235#0#6'Height'#2
+  +#19#3'Top'#2'D'#5'Width'#3#161#0#7'Caption'#6#27'Earth revolution around Sun'
+  +#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#2#0#0#12'TLabeledEdit'#18
+  +'edtDistanceFromSun'#4'Left'#2'{'#6'Height'#2#21#3'Top'#2'$'#5'Width'#2'P Ed'
+  +'itLabel.AnchorSideLeft.Control'#7#18'edtDistanceFromSun'#31'EditLabel.Ancho'
+  +'rSideTop.Control'#7#18'edtDistanceFromSun'#28'EditLabel.AnchorSideTop.Side'
+  +#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#18'edtDistanceFromSun"Ed'
+  +'itLabel.AnchorSideBottom.Control'#7#18'edtDistanceFromSun'#14'EditLabel.Lef'
+  +'t'#2#7#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2''''#15'EditLabel.Width'
+  +#2'q'#17'EditLabel.Caption'#6#22'Distance from Sun (AU)'#21'EditLabel.Parent'
+  +'Color'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#3#0#0
+  +#12'TLabeledEdit'#7'edtDawn'#4'Left'#3#235#0#6'Height'#2#21#3'Top'#2'$'#5'Wi'
+  +'dth'#2'P EditLabel.AnchorSideLeft.Control'#7#7'edtDawn'#29'EditLabel.Anchor'
+  +'SideLeft.Side'#7#9'asrBottom'#31'EditLabel.AnchorSideTop.Control'#7#7'edtDa'
+  +'wn'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter"EditLabel.AnchorSideBott'
+  +'om.Control'#7#7'edtDawn'#14'EditLabel.Left'#3'>'#1#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2''''#15'EditLabel.Width'#2'f'#17'EditLabel.Caption'#6#21
+  +'Initial Dawn (degree)'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#7'lp'
+  +'Right'#11'ParentColor'#8#8'TabOrder'#2#4#0#0#12'TLabeledEdit'#13'edtTauVisi'
+  +'ble'#4'Left'#2'{'#6'Height'#2#21#3'Top'#2'D'#5'Width'#2'P EditLabel.AnchorS'
+  +'ideLeft.Control'#7#13'edtTauVisible'#31'EditLabel.AnchorSideTop.Control'#7
+  +#13'edtTauVisible'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.'
+  +'AnchorSideRight.Control'#7#13'edtTauVisible"EditLabel.AnchorSideBottom.Cont'
+  +'rol'#7#13'edtTauVisible'#14'EditLabel.Left'#2'+'#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2'G'#15'EditLabel.Width'#2'M'#17'EditLabel.Caption'#6#16
+  +'Tau visible (%):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'
+  +#11'ParentColor'#8#8'TabOrder'#2#5#0#0#12'TLabeledEdit'#14'edtTauInfrared'#4
+  +'Left'#2'{'#6'Height'#2#21#3'Top'#2'd'#5'Width'#2'P EditLabel.AnchorSideLeft'
+  +'.Control'#7#14'edtTauInfrared'#31'EditLabel.AnchorSideTop.Control'#7#14'edt'
+  +'TauInfrared'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.Ancho'
+  +'rSideRight.Control'#7#14'edtTauInfrared"EditLabel.AnchorSideBottom.Control'
+  +#7#14'edtTauInfrared'#14'EditLabel.Left'#2'"'#16'EditLabel.Height'#2#14#13'E'
+  +'ditLabel.Top'#2'g'#15'EditLabel.Width'#2'V'#17'EditLabel.Caption'#6#17'Tau '
+  +'infrared (%):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11
+  +'ParentColor'#8#8'TabOrder'#2#6#0#0#9'TSpinEdit'#11'seAtmLayers'#4'Left'#3'k'
+  +#1#6'Height'#2#21#3'Top'#2'd'#5'Width'#2'2'#8'MaxValue'#2#5#8'MinValue'#2#1#8
+  +'TabOrder'#2#7#5'Value'#2#3#0#0#12'TLabeledEdit'#17'edtDistanceLayers'#4'Lef'
+  +'t'#3'L'#1#6'Height'#2#21#3'Top'#3#132#0#5'Width'#2'P EditLabel.AnchorSideLe'
+  +'ft.Control'#7#17'edtDistanceLayers'#31'EditLabel.AnchorSideTop.Control'#7#17
+  +'edtDistanceLayers'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel'
+  +'.AnchorSideRight.Control'#7#17'edtDistanceLayers"EditLabel.AnchorSideBottom'
+  +'.Control'#7#17'edtDistanceLayers'#14'EditLabel.Left'#2'~'#16'EditLabel.Heig'
+  +'ht'#2#14#13'EditLabel.Top'#3#135#0#15'EditLabel.Width'#3#203#0#17'EditLabel'
+  +'.Caption'#6'(Distance between atmospheric layers (m):'#21'EditLabel.ParentC'
+  +'olor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#8#0#0
+  +#9'TCheckBox'#12'cbInverseRot'#4'Left'#3'K'#1#6'Height'#2#19#3'Top'#2#4#5'Wi'
+  ,'dth'#2'T'#7'Caption'#6#12'Inverse rot.'#8'TabOrder'#2#9#0#0#0#9'TGroupBox'
+  +#19'gbInitialConditions'#4'Left'#3#183#1#6'Height'#3#204#0#3'Top'#2#4#5'Widt'
+  +'h'#3#177#1#7'Caption'#6#18'Initial Conditions'#12'ClientHeight'#3#186#0#11
+  +'ClientWidth'#3#173#1#8'TabOrder'#2#1#0#12'TLabeledEdit'#15'edtThermicPoles'
+  +#4'Left'#2'z'#6'Height'#2#21#3'Top'#2#4#5'Width'#2'H EditLabel.AnchorSideLef'
+  +'t.Control'#7#15'edtThermicPoles'#31'EditLabel.AnchorSideTop.Control'#7#15'e'
+  +'dtThermicPoles'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.An'
+  +'chorSideRight.Control'#7#15'edtThermicPoles"EditLabel.AnchorSideBottom.Cont'
+  +'rol'#7#15'edtThermicPoles'#14'EditLabel.Left'#2#11#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2#7#15'EditLabel.Width'#2'l'#17'EditLabel.Caption'#6#21'T'
+  +'emperature at poles:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpL'
+  +'eft'#11'ParentColor'#8#8'TabOrder'#2#0#8'OnChange'#7#24'onChangeInitialCond'
+  +'ition'#0#0#12'TLabeledEdit'#19'edtThermicExcursion'#4'Left'#2'z'#6'Height'#2
+  +#21#3'Top'#2'!'#5'Width'#2'H EditLabel.AnchorSideLeft.Control'#7#19'edtTherm'
+  +'icExcursion'#31'EditLabel.AnchorSideTop.Control'#7#19'edtThermicExcursion'
+  +#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Co'
+  +'ntrol'#7#19'edtThermicExcursion"EditLabel.AnchorSideBottom.Control'#7#19'ed'
+  +'tThermicExcursion'#14'EditLabel.Left'#2#28#16'EditLabel.Height'#2#14#13'Edi'
+  +'tLabel.Top'#2'$'#15'EditLabel.Width'#2'['#17'EditLabel.Caption'#6#18'Thermi'
+  +'c excursion:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11
+  +'ParentColor'#8#8'TabOrder'#2#1#8'OnChange'#7#24'onChangeInitialCondition'#0
+  +#0#12'TLabeledEdit'#15'edtSurfaceShift'#4'Left'#2'z'#6'Height'#2#21#3'Top'#2
+  +'@'#5'Width'#2'H EditLabel.AnchorSideLeft.Control'#7#15'edtSurfaceShift'#31
+  +'EditLabel.AnchorSideTop.Control'#7#15'edtSurfaceShift'#28'EditLabel.AnchorS'
+  +'ideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#15'edtSurfa'
+  +'ceShift"EditLabel.AnchorSideBottom.Control'#7#15'edtSurfaceShift'#14'EditLa'
+  +'bel.Left'#2#21#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'C'#15'EditLabe'
+  +'l.Width'#2'b'#17'EditLabel.Caption'#6#20'Temp. surface shift:'#21'EditLabel'
+  +'.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'
+  +#2#2#8'OnChange'#7#24'onChangeInitialCondition'#0#0#12'TLabeledEdit'#13'edtO'
+  +'ceanShift'#4'Left'#2'z'#6'Height'#2#21#3'Top'#2'\'#5'Width'#2'H EditLabel.A'
+  +'nchorSideLeft.Control'#7#13'edtOceanShift'#31'EditLabel.AnchorSideTop.Contr'
+  +'ol'#7#13'edtOceanShift'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!Edit'
+  +'Label.AnchorSideRight.Control'#7#13'edtOceanShift"EditLabel.AnchorSideBotto'
+  +'m.Control'#7#13'edtOceanShift'#14'EditLabel.Left'#2#28#16'EditLabel.Height'
+  +#2#14#13'EditLabel.Top'#2'_'#15'EditLabel.Width'#2'['#17'EditLabel.Caption'#6
+  +#18'Temp. ocean shift:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lp'
+  +'Left'#11'ParentColor'#8#8'TabOrder'#2#3#8'OnChange'#7#24'onChangeInitialCon'
+  +'dition'#0#0#12'TLabeledEdit'#15'edtTerrainShift'#4'Left'#2'z'#6'Height'#2#21
+  +#3'Top'#2'{'#5'Width'#2'H EditLabel.AnchorSideLeft.Control'#7#15'edtTerrainS'
+  +'hift'#31'EditLabel.AnchorSideTop.Control'#7#15'edtTerrainShift'#28'EditLabe'
+  +'l.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#15
+  +'edtTerrainShift"EditLabel.AnchorSideBottom.Control'#7#15'edtTerrainShift'#14
+  +'EditLabel.Left'#2#25#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'~'#15'Ed'
+  +'itLabel.Width'#2'^'#17'EditLabel.Caption'#6#20'Temp. terrain shift:'#21'Edi'
+  +'tLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'Tab'
+  +'Order'#2#4#8'OnChange'#7#24'onChangeInitialCondition'#0#0#12'TLabeledEdit'
+  +#16'edtDesertBeltLat'#4'Left'#3'F'#1#6'Height'#2#21#3'Top'#2#4#5'Width'#2'P '
+  +'EditLabel.AnchorSideLeft.Control'#7#16'edtDesertBeltLat'#31'EditLabel.Ancho'
+  +'rSideTop.Control'#7#16'edtDesertBeltLat'#28'EditLabel.AnchorSideTop.Side'#7
+  +#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#16'edtDesertBeltLat"EditLa'
+  +'bel.AnchorSideBottom.Control'#7#16'edtDesertBeltLat'#14'EditLabel.Left'#3
+  +#226#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2#7#15'EditLabel.Width'#2
+  +'a'#17'EditLabel.Caption'#6#21'Desert belt latitude:'#21'EditLabel.ParentCol'
+  +'or'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#5#8'OnC'
+  +'hange'#7#24'onChangeInitialCondition'#0#0#12'TLabeledEdit'#16'edtDesertBelt'
+  +'Ext'#4'Left'#3'F'#1#6'Height'#2#21#3'Top'#2'!'#5'Width'#2'P EditLabel.Ancho'
+  +'rSideLeft.Control'#7#16'edtDesertBeltExt'#31'EditLabel.AnchorSideTop.Contro'
+  +'l'#7#16'edtDesertBeltExt'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!Ed'
+  +'itLabel.AnchorSideRight.Control'#7#16'edtDesertBeltExt"EditLabel.AnchorSide'
+  +'Bottom.Control'#7#16'edtDesertBeltExt'#14'EditLabel.Left'#3#215#0#16'EditLa'
+  +'bel.Height'#2#14#13'EditLabel.Top'#2'$'#15'EditLabel.Width'#2'l'#17'EditLab'
+  +'el.Caption'#6#22'Desert belt extension:'#21'EditLabel.ParentColor'#8#13'Lab'
+  +'elPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#6#8'OnChange'#7#24
+  ,'onChangeInitialCondition'#0#0#12'TLabeledEdit'#17'edtDesertBeltTemp'#4'Left'
+  +#3'G'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'P EditLabel.AnchorSideLeft.Con'
+  +'trol'#7#17'edtDesertBeltTemp'#31'EditLabel.AnchorSideTop.Control'#7#17'edtD'
+  +'esertBeltTemp'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.Anc'
+  +'horSideRight.Control'#7#17'edtDesertBeltTemp"EditLabel.AnchorSideBottom.Con'
+  +'trol'#7#17'edtDesertBeltTemp'#14'EditLabel.Left'#3#209#0#16'EditLabel.Heigh'
+  +'t'#2#14#13'EditLabel.Top'#2'C'#15'EditLabel.Width'#2's'#17'EditLabel.Captio'
+  +'n'#6#24'Desert belt Temp. shift:'#21'EditLabel.ParentColor'#8#13'LabelPosit'
+  +'ion'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#7#8'OnChange'#7#24'onChang'
+  +'eInitialCondition'#0#0#12'TLabeledEdit'#21'edtThermicGradientAvg'#4'Left'#3
+  +'G'#1#6'Height'#2#21#3'Top'#2'\'#5'Width'#2'P EditLabel.AnchorSideLeft.Contr'
+  +'ol'#7#21'edtThermicGradientAvg'#31'EditLabel.AnchorSideTop.Control'#7#21'ed'
+  +'tThermicGradientAvg'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLab'
+  +'el.AnchorSideRight.Control'#7#21'edtThermicGradientAvg"EditLabel.AnchorSide'
+  +'Bottom.Control'#7#21'edtThermicGradientAvg'#14'EditLabel.Left'#3#198#0#16'E'
+  +'ditLabel.Height'#2#14#13'EditLabel.Top'#2'_'#15'EditLabel.Width'#2'~'#17'Ed'
+  +'itLabel.Caption'#6#24'Therm. grad. avg. (100m)'#21'EditLabel.ParentColor'#8
+  +#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#8#8'OnChange'
+  +#7#24'onChangeInitialCondition'#0#0#12'TLabeledEdit'#21'edtThermicGradientse'
+  +'a'#4'Left'#3'F'#1#6'Height'#2#21#3'Top'#2'{'#5'Width'#2'P EditLabel.AnchorS'
+  +'ideLeft.Control'#7#21'edtThermicGradientsea'#31'EditLabel.AnchorSideTop.Con'
+  +'trol'#7#21'edtThermicGradientsea'#28'EditLabel.AnchorSideTop.Side'#7#9'asrC'
+  +'enter!EditLabel.AnchorSideRight.Control'#7#21'edtThermicGradientsea"EditLab'
+  +'el.AnchorSideBottom.Control'#7#21'edtThermicGradientsea'#14'EditLabel.Left'
+  +#3#196#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'~'#15'EditLabel.Width'
+  +#2''#17'EditLabel.Caption'#6#24'Therm. grad. sea (1000m)'#21'EditLabel.Pare'
+  +'ntColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#9#8
+  +'OnChange'#7#24'onChangeInitialCondition'#0#0#12'TLabeledEdit'#14'edtEarthRa'
+  +'dius'#4'Left'#2'z'#6'Height'#2#21#3'Top'#3#156#0#5'Width'#2'H EditLabel.Anc'
+  +'horSideLeft.Control'#7#14'edtEarthRadius'#31'EditLabel.AnchorSideTop.Contro'
+  +'l'#7#14'edtEarthRadius'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!Edit'
+  +'Label.AnchorSideRight.Control'#7#14'edtEarthRadius"EditLabel.AnchorSideBott'
+  +'om.Control'#7#14'edtEarthRadius'#14'EditLabel.Left'#2'%'#16'EditLabel.Heigh'
+  +'t'#2#14#13'EditLabel.Top'#3#159#0#15'EditLabel.Width'#2'R'#17'EditLabel.Cap'
+  +'tion'#6#17'Earth radius (m):'#21'EditLabel.ParentColor'#8#13'LabelPosition'
+  +#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#10#8'OnChange'#7#24'onChangeIni'
+  +'tialCondition'#0#0#0#9'TGroupBox'#12'gbSimulation'#4'Left'#3#183#1#6'Height'
+  +#3#192#1#3'Top'#3#216#0#5'Width'#3#177#1#7'Caption'#6#21'Simulation Paramete'
+  +'rs'#12'ClientHeight'#3#174#1#11'ClientWidth'#3#173#1#8'TabOrder'#2#2#0#6'TL'
+  +'abel'#7'lblStep'#4'Left'#2#11#6'Height'#2#14#3'Top'#3'x'#1#5'Width'#2'M'#7
+  +'Caption'#6#16'Simulation step:'#11'ParentColor'#8#0#0#12'TLabeledEdit'#18'e'
+  +'dtCloudReflection'#4'Left'#3#131#0#6'Height'#2#21#5'Width'#2'P EditLabel.An'
+  +'chorSideLeft.Control'#7#18'edtCloudReflection'#31'EditLabel.AnchorSideTop.C'
+  +'ontrol'#7#18'edtCloudReflection'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCe'
+  +'nter!EditLabel.AnchorSideRight.Control'#7#18'edtCloudReflection"EditLabel.A'
+  +'nchorSideBottom.Control'#7#18'edtCloudReflection'#14'EditLabel.Left'#2#26#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#2#3#15'EditLabel.Width'#2'f'#17'Ed'
+  +'itLabel.Caption'#6#21'Cloud reflection (%):'#21'EditLabel.ParentColor'#8#13
+  +'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#0#0#0#12'TLabele'
+  +'dEdit'#17'edtCloudIsolation'#4'Left'#3#131#0#6'Height'#2#21#3'Top'#2' '#5'W'
+  +'idth'#2'P EditLabel.AnchorSideLeft.Control'#7#17'edtCloudIsolation'#31'Edit'
+  +'Label.AnchorSideTop.Control'#7#17'edtCloudIsolation'#28'EditLabel.AnchorSid'
+  +'eTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#17'edtCloudIs'
+  +'olation"EditLabel.AnchorSideBottom.Control'#7#17'edtCloudIsolation'#14'Edit'
+  +'Label.Left'#2' '#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'#'#15'EditLa'
+  +'bel.Width'#2'`'#17'EditLabel.Caption'#6#20'Cloud isolation (%):'#21'EditLab'
+  +'el.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrde'
+  +'r'#2#1#0#0#12'TLabeledEdit'#16'edtRiverAndLakes'#4'Left'#3#131#0#6'Height'#2
+  +#21#3'Top'#2'`'#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#16'edtRiver'
+  +'AndLakes'#31'EditLabel.AnchorSideTop.Control'#7#16'edtRiverAndLakes'#28'Edi'
+  +'tLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'
+  +#7#16'edtRiverAndLakes"EditLabel.AnchorSideBottom.Control'#7#16'edtRiverAndL'
+  +'akes'#14'EditLabel.Left'#2#7#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2
+  +'c'#15'EditLabel.Width'#2'y'#17'EditLabel.Caption'#6#25'Water flow in rivers'
+  ,' (%):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentC'
+  +'olor'#8#8'TabOrder'#2#2#0#0#12'TLabeledEdit'#21'edtEnergyTransferWind'#4'Le'
+  +'ft'#3#171#0#6'Height'#2#21#3'Top'#3'('#1#5'Width'#2'P EditLabel.AnchorSideL'
+  +'eft.Control'#7#21'edtEnergyTransferWind'#31'EditLabel.AnchorSideTop.Control'
+  +#7#21'edtEnergyTransferWind'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!'
+  +'EditLabel.AnchorSideRight.Control'#7#21'edtEnergyTransferWind"EditLabel.Anc'
+  +'horSideBottom.Control'#7#21'edtEnergyTransferWind'#14'EditLabel.Left'#2#9#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#3'+'#1#15'EditLabel.Width'#3#159#0
+  +#17'EditLabel.Caption'#6#31'Energy transferred by wind (%):'#21'EditLabel.Pa'
+  +'rentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#3
+  +#0#0#12'TLabeledEdit'#24'edtTerrestrialEnergyTemp'#4'Left'#3#206#0#6'Height'
+  +#2#21#3'Top'#3#254#0#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#24'edt'
+  +'TerrestrialEnergyTemp'#31'EditLabel.AnchorSideTop.Control'#7#24'edtTerrestr'
+  +'ialEnergyTemp'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.Anc'
+  +'horSideRight.Control'#7#24'edtTerrestrialEnergyTemp"EditLabel.AnchorSideBot'
+  +'tom.Control'#7#24'edtTerrestrialEnergyTemp'#14'EditLabel.Left'#2'#'#16'Edit'
+  +'Label.Height'#2#14#13'EditLabel.Top'#3#1#1#15'EditLabel.Width'#3#168#0#17'E'
+  +'ditLabel.Caption'#6'!Inner earth temp. added per hour:'#21'EditLabel.Parent'
+  +'Color'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#4#0#0
+  +#9'TCheckBox'#16'cbInvertWindFlow'#4'Left'#3'6'#1#6'Height'#2#19#3'Top'#2#2#5
+  +'Width'#2'h'#7'Caption'#6#16'Invert wind flow'#8'TabOrder'#2#5#0#0#12'TLabel'
+  +'edEdit'#12'edtRainHours'#4'Left'#3'K'#1#6'Height'#2#21#3'Top'#2' '#5'Width'
+  +#2'P EditLabel.AnchorSideLeft.Control'#7#12'edtRainHours'#31'EditLabel.Ancho'
+  +'rSideTop.Control'#7#12'edtRainHours'#28'EditLabel.AnchorSideTop.Side'#7#9'a'
+  +'srCenter!EditLabel.AnchorSideRight.Control'#7#12'edtRainHours"EditLabel.Anc'
+  +'horSideBottom.Control'#7#12'edtRainHours'#14'EditLabel.Left'#3#16#1#16'Edit'
+  +'Label.Height'#2#14#13'EditLabel.Top'#2'#'#15'EditLabel.Width'#2'8'#17'EditL'
+  +'abel.Caption'#6#11'Rain hours:'#21'EditLabel.ParentColor'#8#13'LabelPositio'
+  +'n'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#6#0#0#12'TLabeledEdit'#13'ed'
+  +'tSteamHours'#4'Left'#3'L'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'P EditLab'
+  +'el.AnchorSideLeft.Control'#7#13'edtSteamHours'#31'EditLabel.AnchorSideTop.C'
+  +'ontrol'#7#13'edtSteamHours'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!'
+  +'EditLabel.AnchorSideRight.Control'#7#13'edtSteamHours"EditLabel.AnchorSideB'
+  +'ottom.Control'#7#13'edtSteamHours'#14'EditLabel.Left'#3#8#1#16'EditLabel.He'
+  +'ight'#2#14#13'EditLabel.Top'#2'C'#15'EditLabel.Width'#2'A'#17'EditLabel.Cap'
+  +'tion'#6#12'Steam hours:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6
+  +'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#7#0#0#12'TLabeledEdit'#17'edtRadiat'
+  +'ionHours'#4'Left'#3'L'#1#6'Height'#2#21#3'Top'#2'`'#5'Width'#2'P EditLabel.'
+  +'AnchorSideLeft.Control'#7#17'edtRadiationHours'#31'EditLabel.AnchorSideTop.'
+  +'Control'#7#17'edtRadiationHours'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCe'
+  +'nter!EditLabel.AnchorSideRight.Control'#7#17'edtRadiationHours"EditLabel.An'
+  +'chorSideBottom.Control'#7#17'edtRadiationHours'#14'EditLabel.Left'#3#249#0
+  +#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'c'#15'EditLabel.Width'#2'P'#17
+  +'EditLabel.Caption'#6#16'Radiation hours:'#21'EditLabel.ParentColor'#8#13'La'
+  +'belPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#8#0#0#12'TLabeledE'
+  +'dit'#18'edtExchangeAtmTerr'#4'Left'#3'M'#1#6'Height'#2#21#3'Top'#3#128#0#5
+  +'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#18'edtExchangeAtmTerr'#31'Ed'
+  +'itLabel.AnchorSideTop.Control'#7#18'edtExchangeAtmTerr'#28'EditLabel.Anchor'
+  +'SideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#18'edtExch'
+  +'angeAtmTerr"EditLabel.AnchorSideBottom.Control'#7#18'edtExchangeAtmTerr'#14
+  +'EditLabel.Left'#2#253#16'EditLabel.Height'#2#14#13'EditLabel.Top'#3#131#0#15
+  +'EditLabel.Width'#3'M'#1#17'EditLabel.Caption'#6'?Hours needed to exchange e'
+  +'nergy between atmosphere and terrain:'#21'EditLabel.ParentColor'#8#13'Label'
+  +'Position'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#9#0#0#12'TLabeledEdit'
+  +#18'edtExchangeFluxAtm'#4'Left'#3'L'#1#6'Height'#2#21#3'Top'#3#160#0#5'Width'
+  +#2'P EditLabel.AnchorSideLeft.Control'#7#18'edtExchangeFluxAtm'#31'EditLabel'
+  +'.AnchorSideTop.Control'#7#18'edtExchangeFluxAtm'#28'EditLabel.AnchorSideTop'
+  +'.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#18'edtExchangeFlu'
+  +'xAtm"EditLabel.AnchorSideBottom.Control'#7#18'edtExchangeFluxAtm'#14'EditLa'
+  +'bel.Left'#2'V'#16'EditLabel.Height'#2#14#13'EditLabel.Top'#3#163#0#15'EditL'
+  +'abel.Width'#3#243#0#17'EditLabel.Caption'#6'.Hours needed to exchange energ'
+  +'y in atmosphere:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'
+  +#11'ParentColor'#8#8'TabOrder'#2#10#0#0#12'TLabeledEdit'#19'edtExchangeFluxT'
+  +'err'#4'Left'#3'L'#1#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'P EditLabel.An'
+  ,'chorSideLeft.Control'#7#19'edtExchangeFluxTerr'#31'EditLabel.AnchorSideTop.'
+  +'Control'#7#19'edtExchangeFluxTerr'#28'EditLabel.AnchorSideTop.Side'#7#9'asr'
+  +'Center!EditLabel.AnchorSideRight.Control'#7#19'edtExchangeFluxTerr"EditLabe'
+  +'l.AnchorSideBottom.Control'#7#19'edtExchangeFluxTerr'#14'EditLabel.Left'#2
+  +'k'#16'EditLabel.Height'#2#14#13'EditLabel.Top'#3#195#0#15'EditLabel.Width'#3
+  +#222#0#17'EditLabel.Caption'#6'+Hours needed to exchange energy on terrain:'
+  +#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8
+  +#8'TabOrder'#2#11#0#0#12'TLabeledEdit'#20'edtExchangeFluxOcean'#4'Left'#3'K'
+  +#1#6'Height'#2#21#3'Top'#3#224#0#5'Width'#2'Q EditLabel.AnchorSideLeft.Contr'
+  +'ol'#7#20'edtExchangeFluxOcean'#31'EditLabel.AnchorSideTop.Control'#7#20'edt'
+  +'ExchangeFluxOcean'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel'
+  +'.AnchorSideRight.Control'#7#20'edtExchangeFluxOcean"EditLabel.AnchorSideBot'
+  +'tom.Control'#7#20'edtExchangeFluxOcean'#14'EditLabel.Left'#2'm'#16'EditLabe'
+  +'l.Height'#2#14#13'EditLabel.Top'#3#227#0#15'EditLabel.Width'#3#219#0#17'Edi'
+  +'tLabel.Caption'#6')Hours needed to exchange energy on ocean:'#21'EditLabel.'
+  +'ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2
+  +#12#0#0#12'TLabeledEdit'#16'edtPaintRiverPct'#4'Left'#3'6'#1#6'Height'#2#21#3
+  +'Top'#3#8#1#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#16'edtPaintRive'
+  +'rPct"EditLabel.AnchorSideBottom.Control'#7#16'edtPaintRiverPct'#14'EditLabe'
+  +'l.Left'#3'6'#1#16'EditLabel.Height'#2#14#13'EditLabel.Top'#3#247#0#15'EditL'
+  +'abel.Width'#2's'#17'EditLabel.Caption'#6#24'Paint rivers (% of avg):'#21'Ed'
+  +'itLabel.ParentColor'#8#11'ParentColor'#8#8'TabOrder'#2#13#0#0#12'TLabeledEd'
+  +'it'#21'edtDecreaseVegetation'#4'Left'#3#171#0#6'Height'#2#21#3'Top'#3'`'#1#5
+  +'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#21'edtDecreaseVegetation'#31
+  +'EditLabel.AnchorSideTop.Control'#7#21'edtDecreaseVegetation'#28'EditLabel.A'
+  +'nchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#21'ed'
+  +'tDecreaseVegetation"EditLabel.AnchorSideBottom.Control'#7#21'edtDecreaseVeg'
+  +'etation'#14'EditLabel.Left'#2#14#16'EditLabel.Height'#2#14#13'EditLabel.Top'
+  +#3'c'#1#15'EditLabel.Width'#3#154#0#17'EditLabel.Caption'#6#30'Decrease Vege'
+  +'tation (days dry)'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'
+  +#11'ParentColor'#8#8'TabOrder'#2#14#0#0#12'TRadioButton'#4'rb1h'#4'Left'#2#11
+  +#6'Height'#2#19#3'Top'#3#144#1#5'Width'#2'-'#7'Caption'#6#4'1 h.'#8'TabOrder'
+  +#2#15#7'TabStop'#8#0#0#12'TRadioButton'#7'rb20min'#4'Left'#2'7'#6'Height'#2
+  +#19#3'Top'#3#144#1#5'Width'#2'='#7'Caption'#6#7'20 min.'#7'Checked'#9#5'Stat'
+  +'e'#7#9'cbChecked'#8'TabOrder'#2#16#0#0#12'TRadioButton'#6'rb4min'#4'Left'#2
+  +'s'#6'Height'#2#19#3'Top'#3#144#1#5'Width'#2'7'#7'Caption'#6#6'4 min.'#8'Tab'
+  +'Order'#2#17#7'TabStop'#8#0#0#12'TLabeledEdit'#15'edtCO2Isolation'#4'Left'#3
+  +#131#0#6'Height'#2#23#3'Top'#2'='#5'Width'#2'P EditLabel.AnchorSideLeft.Cont'
+  +'rol'#7#15'edtCO2Isolation'#31'EditLabel.AnchorSideTop.Control'#7#15'edtCO2I'
+  +'solation'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSi'
+  +'deRight.Control'#7#15'edtCO2Isolation"EditLabel.AnchorSideBottom.Control'#7
+  +#15'edtCO2Isolation'#14'EditLabel.Left'#2'&'#16'EditLabel.Height'#2#14#13'Ed'
+  +'itLabel.Top'#2'A'#15'EditLabel.Width'#2'Z'#17'EditLabel.Caption'#6#18'CO2 i'
+  +'solation (%):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11
+  +'ParentColor'#8#8'TabOrder'#2#18#0#0#12'TLabeledEdit'#17'edtPaintCloudsPct'#4
+  +'Left'#3#171#0#6'Height'#2#23#3'Top'#3'A'#1#5'Width'#2'P EditLabel.AnchorSid'
+  +'eLeft.Control'#7#17'edtPaintCloudsPct'#31'EditLabel.AnchorSideTop.Control'#7
+  +#17'edtPaintCloudsPct'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLa'
+  +'bel.AnchorSideRight.Control'#7#17'edtPaintCloudsPct"EditLabel.AnchorSideBot'
+  +'tom.Control'#7#17'edtPaintCloudsPct'#14'EditLabel.Left'#2'&'#16'EditLabel.H'
+  +'eight'#2#14#13'EditLabel.Top'#3'E'#1#15'EditLabel.Width'#3#130#0#17'EditLab'
+  +'el.Caption'#6#26'Paint clouds (kg steam/m2)'#21'EditLabel.ParentColor'#8#13
+  +'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#19#0#0#9'TCheckB'
+  +'ox'#15'cbNonlinearGrid'#4'Left'#3'<'#1#6'Height'#2#19#3'Top'#3#148#1#5'Widt'
+  +'h'#2'a'#7'Caption'#6#15'Non-linear Grid'#8'TabOrder'#2#20#0#0#12'TLabeledEd'
+  +'it'#19'edtEvaporationStart'#4'Left'#3#23#1#6'Height'#2#23#3'Top'#3'8'#1#5'W'
+  +'idth'#2'P EditLabel.AnchorSideLeft.Control'#7#19'edtEvaporationStart"EditLa'
+  +'bel.AnchorSideBottom.Control'#7#19'edtEvaporationStart'#14'EditLabel.Left'#3
+  +#23#1#16'EditLabel.Height'#2#14#13'EditLabel.Top'#3''''#1#15'EditLabel.Width'
+  +#3#146#0#17'EditLabel.Caption'#6#31'Evaporation start at: (Celsius)'#21'Edit'
+  +'Label.ParentColor'#8#11'ParentColor'#8#8'TabOrder'#2#21#0#0#12'TLabeledEdit'
+  +#18'edtFullEvaporation'#4'Left'#3#23#1#6'Height'#2#23#3'Top'#3'c'#1#5'Width'
+  +#2'P EditLabel.AnchorSideLeft.Control'#7#18'edtFullEvaporation"EditLabel.Anc'
+  +'horSideBottom.Control'#7#18'edtFullEvaporation'#14'EditLabel.Left'#3#23#1#16
+  ,'EditLabel.Height'#2#14#13'EditLabel.Top'#3'R'#1#15'EditLabel.Width'#3#139#0
+  +#17'EditLabel.Caption'#6#30'Full evaporation at: (Celsius)'#21'EditLabel.Par'
+  +'entColor'#8#11'ParentColor'#8#8'TabOrder'#2#22#0#0#0#9'TGroupBox'#10'gbPhys'
+  +'ical'#4'Left'#2#13#6'Height'#3#177#0#3'Top'#3#184#0#5'Width'#3#161#1#7'Capt'
+  +'ion'#6#18'Physical Constants'#12'ClientHeight'#3#159#0#11'ClientWidth'#3#157
+  +#1#8'TabOrder'#2#3#0#12'TLabeledEdit'#16'edtSolarConstant'#4'Left'#2''#6'He'
+  +'ight'#2#21#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#16'edtSolarCons'
+  +'tant'#31'EditLabel.AnchorSideTop.Control'#7#16'edtSolarConstant'#28'EditLab'
+  +'el.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#16
+  +'edtSolarConstant"EditLabel.AnchorSideBottom.Control'#7#16'edtSolarConstant'
+  +#14'EditLabel.Left'#2#11#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2#3#15
+  +'EditLabel.Width'#2'q'#17'EditLabel.Caption'#6#22'Solar constant (W/m2):'#21
+  +'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8
+  +'TabOrder'#2#0#0#0#12'TLabeledEdit'#19'edtEarthInclination'#4'Left'#2''#6'H'
+  +'eight'#2#21#3'Top'#2' '#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#19
+  +'edtEarthInclination'#31'EditLabel.AnchorSideTop.Control'#7#19'edtEarthIncli'
+  +'nation'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSide'
+  +'Right.Control'#7#19'edtEarthInclination"EditLabel.AnchorSideBottom.Control'
+  +#7#19'edtEarthInclination'#14'EditLabel.Left'#2#14#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2'#'#15'EditLabel.Width'#2'n'#17'EditLabel.Caption'#6#24
+  +'Earth inclination (deg):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6
+  +'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#1#0#0#12'TLabeledEdit'#18'edtStefan'
+  +'Boltzmann'#4'Left'#2''#6'Height'#2#21#3'Top'#2'`'#5'Width'#2'P EditLabel.A'
+  +'nchorSideLeft.Control'#7#18'edtStefanBoltzmann'#31'EditLabel.AnchorSideTop.'
+  +'Control'#7#18'edtStefanBoltzmann'#28'EditLabel.AnchorSideTop.Side'#7#9'asrC'
+  +'enter!EditLabel.AnchorSideRight.Control'#7#18'edtStefanBoltzmann"EditLabel.'
+  +'AnchorSideBottom.Control'#7#18'edtStefanBoltzmann'#14'EditLabel.Left'#2#1#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#2'c'#15'EditLabel.Width'#2'{'#17'E'
+  +'ditLabel.Caption'#6#23'St-Boltzmann (W/(m2K4))'#21'EditLabel.ParentColor'#8
+  +#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#2#0#0#12'TLab'
+  +'eledEdit'#10'edtGravAcc'#4'Left'#2''#6'Height'#2#21#3'Top'#2'@'#5'Width'#2
+  +'P EditLabel.AnchorSideLeft.Control'#7#10'edtGravAcc'#31'EditLabel.AnchorSid'
+  +'eTop.Control'#7#10'edtGravAcc'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCent'
+  +'er!EditLabel.AnchorSideRight.Control'#7#10'edtGravAcc"EditLabel.AnchorSideB'
+  +'ottom.Control'#7#10'edtGravAcc'#14'EditLabel.Left'#2'K'#16'EditLabel.Height'
+  +#2#14#13'EditLabel.Top'#2'C'#15'EditLabel.Width'#2'1'#17'EditLabel.Caption'#6
+  +#9'g (m/s^2)'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'P'
+  +'arentColor'#8#8'TabOrder'#2#3#0#0#12'TLabeledEdit'#10'edtCpWater'#4'Left'#3
+  +'G'#1#6'Height'#2#21#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#10'edt'
+  +'CpWater'#31'EditLabel.AnchorSideTop.Control'#7#10'edtCpWater'#28'EditLabel.'
+  +'AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#10'e'
+  +'dtCpWater"EditLabel.AnchorSideBottom.Control'#7#10'edtCpWater'#14'EditLabel'
+  +'.Left'#3#233#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2#3#15'EditLabel'
+  +'.Width'#2'['#17'EditLabel.Caption'#6#19'cp water (J/(kg K))'#21'EditLabel.P'
+  +'arentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2
+  +#4#0#0#12'TLabeledEdit'#10'edtCpSteam'#4'Left'#3'G'#1#6'Height'#2#21#3'Top'#2
+  +' '#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#10'edtCpSteam'#31'EditL'
+  +'abel.AnchorSideTop.Control'#7#10'edtCpSteam'#28'EditLabel.AnchorSideTop.Sid'
+  +'e'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#10'edtCpSteam"EditLab'
+  +'el.AnchorSideBottom.Control'#7#10'edtCpSteam'#14'EditLabel.Left'#3#232#0#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#2'#'#15'EditLabel.Width'#2'\'#17'E'
+  +'ditLabel.Caption'#6#19'cp steam (J/(kg K))'#21'EditLabel.ParentColor'#8#13
+  +'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#5#0#0#12'TLabele'
+  +'dEdit'#8'edtCpAir'#4'Left'#3'G'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'P E'
+  +'ditLabel.AnchorSideLeft.Control'#7#8'edtCpAir'#31'EditLabel.AnchorSideTop.C'
+  +'ontrol'#7#8'edtCpAir'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLa'
+  +'bel.AnchorSideRight.Control'#7#8'edtCpAir"EditLabel.AnchorSideBottom.Contro'
+  +'l'#7#8'edtCpAir'#14'EditLabel.Left'#3#249#0#16'EditLabel.Height'#2#14#13'Ed'
+  +'itLabel.Top'#2'C'#15'EditLabel.Width'#2'K'#17'EditLabel.Caption'#6#17'cp ai'
+  +'r (J/(kg K))'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11
+  +'ParentColor'#8#8'TabOrder'#2#6#0#0#12'TLabeledEdit'#10'edtCpEarth'#4'Left'#3
+  +'G'#1#6'Height'#2#21#3'Top'#2'`'#5'Width'#2'P EditLabel.AnchorSideLeft.Contr'
+  +'ol'#7#10'edtCpEarth'#31'EditLabel.AnchorSideTop.Control'#7#10'edtCpEarth'#28
+  +'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Contr'
+  ,'ol'#7#10'edtCpEarth"EditLabel.AnchorSideBottom.Control'#7#10'edtCpEarth'#14
+  +'EditLabel.Left'#3#235#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'c'#15
+  +'EditLabel.Width'#2'Y'#17'EditLabel.Caption'#6#19'cp earth (J/(kg K))'#21'Ed'
+  +'itLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'Ta'
+  +'bOrder'#2#7#0#0#12'TLabeledEdit'#15'edtDensityWater'#4'Left'#3'G'#1#6'Heigh'
+  +'t'#2#21#3'Top'#3#128#0#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#15
+  +'edtDensityWater'#31'EditLabel.AnchorSideTop.Control'#7#15'edtDensityWater'
+  +#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Co'
+  +'ntrol'#7#15'edtDensityWater"EditLabel.AnchorSideBottom.Control'#7#15'edtDen'
+  +'sityWater'#14'EditLabel.Left'#3#216#0#16'EditLabel.Height'#2#14#13'EditLabe'
+  +'l.Top'#3#131#0#15'EditLabel.Width'#2'l'#17'EditLabel.Caption'#6#21'Density '
+  +'water (kg/m3)'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11
+  +'ParentColor'#8#8'TabOrder'#2#8#0#0#12'TLabeledEdit'#15'edtDensityEarth'#4'L'
+  +'eft'#2''#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'P EditLabel.AnchorSideLe'
+  +'ft.Control'#7#15'edtDensityEarth'#31'EditLabel.AnchorSideTop.Control'#7#15
+  +'edtDensityEarth'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.A'
+  +'nchorSideRight.Control'#7#15'edtDensityEarth"EditLabel.AnchorSideBottom.Con'
+  +'trol'#7#15'edtDensityEarth'#14'EditLabel.Left'#2#18#16'EditLabel.Height'#2
+  +#14#13'EditLabel.Top'#3#131#0#15'EditLabel.Width'#2'j'#17'EditLabel.Caption'
+  +#6#21'Density earth (kg/m3)'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7
+  +#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#9#0#0#0#9'TGroupBox'#9'gbSpecial'
+  +#4'Left'#2#12#6'Height'#3#145#0#3'Top'#3'p'#1#5'Width'#3#164#1#7'Caption'#6
+  +#18'Special parameters'#12'ClientHeight'#2''#11'ClientWidth'#3#160#1#8'TabO'
+  +'rder'#2#4#0#9'TCheckBox'#8'cbVulcan'#4'Left'#2#4#6'Height'#2#19#5'Width'#2
+  +'9'#7'Caption'#6#6'Vulcan'#8'TabOrder'#2#0#0#0#12'TLabeledEdit'#12'edtVulcan'
+  +'Lat'#4'Left'#2'^'#6'Height'#2#21#5'Width'#2'( EditLabel.AnchorSideLeft.Cont'
+  +'rol'#7#12'edtVulcanLat'#31'EditLabel.AnchorSideTop.Control'#7#12'edtVulcanL'
+  +'at'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRigh'
+  +'t.Control'#7#12'edtVulcanLat"EditLabel.AnchorSideBottom.Control'#7#12'edtVu'
+  +'lcanLat'#14'EditLabel.Left'#2'C'#16'EditLabel.Height'#2#14#13'EditLabel.Top'
+  +#2#3#15'EditLabel.Width'#2#24#17'EditLabel.Caption'#6#5'Lat.:'#21'EditLabel.'
+  +'ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2
+  +#1#0#0#12'TLabeledEdit'#12'edtVulcanLon'#4'Left'#3#174#0#6'Height'#2#21#5'Wi'
+  +'dth'#2'( EditLabel.AnchorSideLeft.Control'#7#12'edtVulcanLon'#31'EditLabel.'
+  +'AnchorSideTop.Control'#7#12'edtVulcanLon'#28'EditLabel.AnchorSideTop.Side'#7
+  +#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#12'edtVulcanLon"EditLabel.'
+  +'AnchorSideBottom.Control'#7#12'edtVulcanLon'#14'EditLabel.Left'#3#145#0#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#2#3#15'EditLabel.Width'#2#26#17'Ed'
+  +'itLabel.Caption'#6#5'Lon.:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7
+  +#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#2#0#0#12'TLabeledEdit'#14'edtVulc'
+  +'anHours'#4'Left'#3#6#1#6'Height'#2#21#5'Width'#2'0 EditLabel.AnchorSideLeft'
+  +'.Control'#7#14'edtVulcanHours'#31'EditLabel.AnchorSideTop.Control'#7#14'edt'
+  +'VulcanHours'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.Ancho'
+  +'rSideRight.Control'#7#14'edtVulcanHours"EditLabel.AnchorSideBottom.Control'
+  +#7#14'edtVulcanHours'#14'EditLabel.Left'#3#226#0#16'EditLabel.Height'#2#14#13
+  +'EditLabel.Top'#2#3#15'EditLabel.Width'#2'!'#17'EditLabel.Caption'#6#6'Hours'
+  +':'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'
+  +#8#8'TabOrder'#2#3#0#0#12'TLabeledEdit'#17'edtVulcanAshesPct'#4'Left'#3'v'#1
+  +#6'Height'#2#21#3'Top'#2#26#5'Width'#2'! EditLabel.AnchorSideLeft.Control'#7
+  +#17'edtVulcanAshesPct'#31'EditLabel.AnchorSideTop.Control'#7#17'edtVulcanAsh'
+  +'esPct'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideR'
+  +'ight.Control'#7#17'edtVulcanAshesPct"EditLabel.AnchorSideBottom.Control'#7
+  +#17'edtVulcanAshesPct'#14'EditLabel.Left'#3#233#0#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2#29#15'EditLabel.Width'#3#138#0#17'EditLabel.Caption'#6
+  +#27'Vulcano Ashes Intensity (%)'#21'EditLabel.ParentColor'#8#13'LabelPositio'
+  +'n'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#4#0#0#9'TCheckBox'#13'cbNucl'
+  +'earBomb'#4'Left'#2#4#6'Height'#2#19#3'Top'#2'@'#5'Width'#2'['#7'Caption'#6
+  +#12'Nuclear bomb'#8'TabOrder'#2#5#0#0#9'TCheckBox'#12'cbNuclearWar'#4'Left'#2
+  +#4#6'Height'#2#19#3'Top'#2'`'#5'Width'#2'S'#7'Caption'#6#11'Nuclear war'#8'T'
+  +'abOrder'#2#6#0#0#12'TLabeledEdit'#8'edtNBLat'#4'Left'#2'|'#6'Height'#2#21#3
+  +'Top'#2'@'#5'Width'#2'( EditLabel.AnchorSideLeft.Control'#7#8'edtNBLat'#31'E'
+  +'ditLabel.AnchorSideTop.Control'#7#8'edtNBLat'#28'EditLabel.AnchorSideTop.Si'
+  +'de'#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#8'edtNBLat"EditLabel'
+  +'.AnchorSideBottom.Control'#7#8'edtNBLat'#14'EditLabel.Left'#2'a'#16'EditLab'
+  ,'el.Height'#2#14#13'EditLabel.Top'#2'C'#15'EditLabel.Width'#2#24#17'EditLabe'
+  +'l.Caption'#6#5'Lat.:'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpL'
+  +'eft'#11'ParentColor'#8#8'TabOrder'#2#7#0#0#12'TLabeledEdit'#8'edtNBLon'#4'L'
+  +'eft'#3#204#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'  EditLabel.AnchorSideLe'
+  +'ft.Control'#7#8'edtNBLon'#31'EditLabel.AnchorSideTop.Control'#7#8'edtNBLon'
+  +#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLabel.AnchorSideRight.Co'
+  +'ntrol'#7#8'edtNBLon"EditLabel.AnchorSideBottom.Control'#7#8'edtNBLon'#14'Ed'
+  +'itLabel.Left'#3#175#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'C'#15'E'
+  +'ditLabel.Width'#2#26#17'EditLabel.Caption'#6#5'Lon.:'#21'EditLabel.ParentCo'
+  +'lor'#8#13'LabelPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#8#0#0
+  +#12'TLabeledEdit'#11'edtNBEnergy'#4'Left'#3'r'#1#6'Height'#2#21#3'Top'#2#128
+  +#5'Width'#2'8 EditLabel.AnchorSideLeft.Control'#7#11'edtNBEnergy'#31'EditLab'
+  +'el.AnchorSideTop.Control'#7#11'edtNBEnergy'#28'EditLabel.AnchorSideTop.Side'
+  +#7#9'asrCenter!EditLabel.AnchorSideRight.Control'#7#11'edtNBEnergy"EditLabel'
+  +'.AnchorSideBottom.Control'#7#11'edtNBEnergy'#14'EditLabel.Left'#3'>'#1#16'E'
+  +'ditLabel.Height'#2#14#13'EditLabel.Top'#2#131#15'EditLabel.Width'#2'1'#17'E'
+  +'ditLabel.Caption'#6#8'megaTon:'#21'EditLabel.ParentColor'#8#13'LabelPositio'
+  +'n'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#9#0#0#12'TLabeledEdit'#13'ed'
+  +'tNBAshesPct'#4'Left'#3'h'#1#6'Height'#2#21#3'Top'#2'>'#5'Width'#2'. EditLab'
+  +'el.AnchorSideLeft.Control'#7#13'edtNBAshesPct'#31'EditLabel.AnchorSideTop.C'
+  +'ontrol'#7#13'edtNBAshesPct'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!'
+  +'EditLabel.AnchorSideRight.Control'#7#13'edtNBAshesPct"EditLabel.AnchorSideB'
+  +'ottom.Control'#7#13'edtNBAshesPct'#14'EditLabel.Left'#3#1#1#16'EditLabel.He'
+  +'ight'#2#14#13'EditLabel.Top'#2'A'#15'EditLabel.Width'#2'd'#17'EditLabel.Cap'
+  +'tion'#6#20'Ashes intensity: (%)'#21'EditLabel.ParentColor'#8#13'LabelPositi'
+  +'on'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#10#0#0#12'TLabeledEdit'#10
+  +'edtNBHours'#4'Left'#3#204#0#6'Height'#2#21#3'Top'#2'`'#5'Width'#2'@ EditLab'
+  +'el.AnchorSideLeft.Control'#7#10'edtNBHours'#31'EditLabel.AnchorSideTop.Cont'
+  +'rol'#7#10'edtNBHours'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCenter!EditLa'
+  +'bel.AnchorSideRight.Control'#7#10'edtNBHours"EditLabel.AnchorSideBottom.Con'
+  +'trol'#7#10'edtNBHours'#14'EditLabel.Left'#2'_'#16'EditLabel.Height'#2#14#13
+  +'EditLabel.Top'#2'c'#15'EditLabel.Width'#2'j'#17'EditLabel.Caption'#6#21'War'
+  +' duration (hours):'#21'EditLabel.ParentColor'#8#13'LabelPosition'#7#6'lpLef'
+  +'t'#11'ParentColor'#8#8'TabOrder'#2#11#0#0#12'TLabeledEdit'#18'edtAshesFallo'
+  +'utPct'#4'Left'#3#174#0#6'Height'#2#21#3'Top'#2#26#5'Width'#2'( EditLabel.An'
+  +'chorSideLeft.Control'#7#18'edtAshesFalloutPct'#31'EditLabel.AnchorSideTop.C'
+  +'ontrol'#7#18'edtAshesFalloutPct'#28'EditLabel.AnchorSideTop.Side'#7#9'asrCe'
+  +'nter!EditLabel.AnchorSideRight.Control'#7#18'edtAshesFalloutPct"EditLabel.A'
+  +'nchorSideBottom.Control'#7#18'edtAshesFalloutPct'#14'EditLabel.Left'#2'T'#16
+  +'EditLabel.Height'#2#14#13'EditLabel.Top'#2#29#15'EditLabel.Width'#2'W'#17'E'
+  +'ditLabel.Caption'#6#17'Ashes Fallout (%)'#21'EditLabel.ParentColor'#8#13'La'
+  +'belPosition'#7#6'lpLeft'#11'ParentColor'#8#8'TabOrder'#2#12#0#0#0#7'TButton'
+  +#5'btnOK'#4'Left'#3#183#1#6'Height'#2#26#3'Top'#3#152#2#5'Width'#2'`'#7'Capt'
+  +'ion'#6#2'OK'#7'OnClick'#7#10'btnOKClick'#8'TabOrder'#2#5#0#0#7'TButton'#8'b'
+  +'tnApply'#4'Left'#3#24#2#6'Height'#2#25#3'Top'#3#152#2#5'Width'#2'`'#7'Capti'
+  +'on'#6#5'Apply'#7'OnClick'#7#13'btnApplyClick'#8'TabOrder'#2#6#0#0#7'TButton'
+  +#9'btnCancel'#4'Left'#3#232#2#6'Height'#2#25#3'Top'#3#152#2#5'Width'#2'['#7
+  +'Caption'#6#6'Cancel'#7'OnClick'#7#14'btnCancelClick'#8'TabOrder'#2#7#0#0#7
+  +'TButton'#8'btnReset'#4'Left'#3'x'#2#6'Height'#2#25#3'Top'#3#152#2#5'Width'#2
+  +'k'#7'Caption'#6#5'Reset'#7'OnClick'#7#13'btnResetClick'#8'TabOrder'#2#8#0#0
+  +#9'TGroupBox'#5'gbCO2'#4'Left'#2#13#6'Height'#3#168#0#3'Top'#3#9#2#5'Width'#3
+  +#159#1#7'Caption'#6#21'CO2 (values per year)'#12'ClientHeight'#3#150#0#11'Cl'
+  +'ientWidth'#3#155#1#8'TabOrder'#2#9#0#6'TLabel'#15'lblEnergySource'#4'Left'#2
+  +'q'#6'Height'#2#14#3'Top'#2#8#5'Width'#2'J'#7'Caption'#6#14'Energy source:'
+  +#11'ParentColor'#8#0#0#9'TCheckBox'#12'cbPopulation'#4'Left'#2#15#6'Height'#2
+  +#19#3'Top'#2#7#5'Width'#2'L'#7'Caption'#6#10'Population'#8'TabOrder'#2#0#0#0
+  +#12'TRadioButton'#5'rbOil'#4'Left'#3#203#0#6'Height'#2#19#3'Top'#2#7#5'Width'
+  +#2'M'#7'Caption'#6#12'Oil/fossiles'#8'TabOrder'#2#1#0#0#12'TRadioButton'#12
+  +'rbRenewables'#4'Left'#3#25#1#6'Height'#2#19#3'Top'#2#7#5'Width'#2'o'#7'Capt'
+  +'ion'#6#16'Wind/Hydro/Solar'#8'TabOrder'#2#2#0#0#12'TLabeledEdit'#17'edtPopI'
+  +'ncreasePct'#4'Left'#2'A'#6'Height'#2#23#3'Top'#2'6'#5'Width'#2'P EditLabel.'
+  +'AnchorSideLeft.Control'#7#17'edtPopIncreasePct"EditLabel.AnchorSideBottom.C'
+  +'ontrol'#7#17'edtPopIncreasePct'#14'EditLabel.Left'#2'A'#16'EditLabel.Height'
+  +#2#14#13'EditLabel.Top'#2'%'#15'EditLabel.Width'#2'Y'#17'EditLabel.Caption'#6
+  ,#17'Pop.increase (%):'#21'EditLabel.ParentColor'#8#11'ParentColor'#8#8'TabOr'
+  +'der'#2#3#0#0#12'TLabeledEdit'#15'edtCO2ProdHuman'#4'Left'#3#169#0#6'Height'
+  +#2#23#3'Top'#2'7'#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#15'edtCO2'
+  +'ProdHuman"EditLabel.AnchorSideBottom.Control'#7#15'edtCO2ProdHuman'#14'Edit'
+  +'Label.Left'#3#169#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2'&'#15'Edi'
+  +'tLabel.Width'#2'i'#17'EditLabel.Caption'#6#19'CO2 prod. per human'#21'EditL'
+  +'abel.ParentColor'#8#11'ParentColor'#8#8'TabOrder'#2#4#0#0#12'TLabeledEdit'
+  +#17'edtCO2ProdVulcano'#4'Left'#3'!'#1#6'Height'#2#23#3'Top'#2'6'#5'Width'#2
+  +'P EditLabel.AnchorSideLeft.Control'#7#17'edtCO2ProdVulcano"EditLabel.Anchor'
+  +'SideBottom.Control'#7#17'edtCO2ProdVulcano'#14'EditLabel.Left'#3'!'#1#16'Ed'
+  +'itLabel.Height'#2#14#13'EditLabel.Top'#2'%'#15'EditLabel.Width'#2'['#17'Edi'
+  +'tLabel.Caption'#6#17'CO2 prod. vulcano'#21'EditLabel.ParentColor'#8#11'Pare'
+  +'ntColor'#8#8'TabOrder'#2#5#0#0#12'TLabeledEdit'#22'edtCO2AbsorpVegetation'#4
+  +'Left'#2'I'#6'Height'#2#23#3'Top'#2'o'#5'Width'#2'P EditLabel.AnchorSideLeft'
+  +'.Control'#7#22'edtCO2AbsorpVegetation"EditLabel.AnchorSideBottom.Control'#7
+  +#22'edtCO2AbsorpVegetation'#14'EditLabel.Left'#2'I'#16'EditLabel.Height'#2#14
+  +#13'EditLabel.Top'#2'^'#15'EditLabel.Width'#3#131#0#17'EditLabel.Caption'#6
+  +#25'CO2 absorption vegetation'#21'EditLabel.ParentColor'#8#11'ParentColor'#8
+  +#8'TabOrder'#2#6#0#0#12'TLabeledEdit'#17'edtCO2AbsorpOcean'#4'Left'#3#238#0#6
+  +'Height'#2#23#3'Top'#2'o'#5'Width'#2'P EditLabel.AnchorSideLeft.Control'#7#17
+  +'edtCO2AbsorpOcean"EditLabel.AnchorSideBottom.Control'#7#17'edtCO2AbsorpOcea'
+  +'n'#14'EditLabel.Left'#3#238#0#16'EditLabel.Height'#2#14#13'EditLabel.Top'#2
+  +'^'#15'EditLabel.Width'#2'l'#17'EditLabel.Caption'#6#20'CO2 absorption ocean'
+  +#21'EditLabel.ParentColor'#8#11'ParentColor'#8#8'TabOrder'#2#7#0#0#0#0
+]);
