@@ -1,0 +1,2170 @@
+#
+0.960: climate simulation simulates vulcano Eyjafjallajoekull
+
+GPU 0.960 features a simple climate simulation. With the latest update (0.9607) which can be retrieved with the menu "Tools->Autoupdate to latest version" on the main GPU application, the climate simulation
+also shows the path of ashes spread by the vulcano Eyjafjallajökull and the CO2 production of the world population.
+
+However, it is difficult to calibrate the parameters of the model. Anyone can try simple tasks like: having a world with stable temperature at 15.5 Celsius, start a nuclear war, move Earth down to Mercury orbit or up to Iupiter, stop earth rotation or revolution, etc.
+
+A screenshot of the climate simulation can be seen at https://sourceforge.net/project/screenshots.php?group_id=58134&ssid=132912
+Source code of this frontend can be found under /lib/libclimate and /src/frontend/thedayaftertomorrow.
+2010-07-20 10:42:05 UTC by dangermaus
+
+
+Super C.R.A.P.
+
+This is a preview of what is being built right now. Super C.R.A.P is an acronym for Super Cluster Ready At Processing, core of the system is a Rollin KVM switch with 8 outputs (VGA, mouse, keyboard) bought for 218 CHF (=140 €). Additionally, 8 cables with VGA, mouse and keyboard are needed (each one costs about 15 €). An old 10 MBit Ethernet Switch will provide connectivity to the nodes of the cluster.
+
+The cluster which now features 4 computers (2 XP, 1 Gentoo and 1 Sun) will be extended to 8 computers, all computers are coming from people who substituted their one and therefore are a little bit old, but very cheap (got them for free). The Rollin KVM Switch does not support the Sun Ultrasparc, so it will be put up separately.
+
+The cluster will be both a showcase and a sounding board for GPU. Particular care will be needed when operating the 8 computers simultaneously, the necessary power will be taken from different phases. Estimated consumption is about 8x500W + 200 W (LCD screen) = 4200 W which is quite a big oven :-)
+
+The cluster should be fully operational for beginning of 2010.
+
+2009-10-08 06:24:48 UTC by dangermaus
+
+
+#
+Two breathtaking ideas / 0.952 released
+
+The first one is from nanobit who fortunately rejoined the project: to use a script engine (e.g the one of Thexa4 released with 0.9256) as basis for distributed stored procedures. Stored procedures are a well-known thing for people working with databases, they are most of the time SQL procedures stored for convenience in what a database system can administer at best: a table with a column for the row number and another for the lines of the script. Using the distributed WAN database firstly introduced by nanobit in 0.943 joined with the stored procedure concept would allow another way of doing distributed computing with one major advance: it is possible for the user to distribute new code in almost real time.
+
+The second one is to have sensors which broadcast collected data via GPU to the nodes. A special frontend collects data and filters it by sensor types (e.g earthquake sensors, temperature, insulation) and by streamers (the nodes which have a sensor attached and which broadcast its data). There is a prototype on CVS and we have two earthquake sensors, one in Holland and one in Switzerland. It will take a fairly amount of time and development effort until GPU people will be able to look at both signals and to compare them and average them. The averaging effect should in principle remove noise from the signal (like bus, or neighbour walking around).
+
+0.9253 introduces an important bugfix in the milestoning mechanism of Eternity II plugin. Duncan White kindly reported it, and helped to test it. And we still are working on the duplicate packets issue which plagues the GPU network since 2004. Maybe this time we will find a solution, at least we identified once for all in source code where the problem is. Last but not least, this news is written with the 100$ laptop, a dream who is becoming true,see http://www.olpcnews.com
+
+0.953 will be release at mid March. Keep an eye on the ChangeLog on CVS for the latest details.
+
+0.952 released
+--------------
+0.952 is released on sourceforge.net. It contains important fixes to the connection layer done by Alex Fihman. This should be the most stable GPU ever.
+
+Additionally, the command:
+
+'add', whichplugin
+
+will tell that basic.dll is the plugin that implements the function add. This will help users in deciding which plugins to unload, if some kind of jobs creates problems.
+
+2008-03-05 23:06:53 UTC by dangermaus
+
+
+#
+Torrentes, Wiki and deltasql
+
+During last month GPU experienced a short popularity blast with at least 20 nodes online all the time and with peaks of 25-26 nodes. Though this blast finished (now we have 10-15 nodes as usual in the last two years), the blast brought new improvements in the way the community can work together to achieve the goal of a flexible Internet Supercomputer.
+
+Thanks to everclear64, GPU is availabe as torrent and can be downloaded with a Torrent client like ABC (available at http://pingpong-abc.sourceforge.net ). The GPU torrent itself can be downloaded at http://www.tek-zone.com/gpu/GPU.torrent .
+
+The GPU project also got a wiki at http://www.gpu-grid.net/wiki as home to collaborative notes about the project, powered by MediaWiki. MediaWiki powers not only Wikipedia, but it is used also in other important projects like One Laptop Per Child. Thexa4 and everclear64 started filling it with some content available on the official website. If you want to help, you can open an account on the wiki and add your own content.
+
+A deltasql was added to the project ( http://deltasql.sourceforge.net ). Deltasql is a tool that helps managing databases, a Database Version Control. As more server side components are added like the File Distributor, deltasql will help keep track of the database schemas. A JobPipe and ResultCollector component are planned and will be released during 2008.
+
+Finally, Thierry noticed a mistake in how the Eternity plugin places the central piece. Its rotation is wrong in 0.950. The mistake was introduced in 0.9493, during a small refactoring introduced for the hints support. The problem is fixed with 0.9502 which is available on Tools->Autoupdate to latest version in the main GPU window.
+
+Merry Christmas and Happy New Year!
+
+2007-12-20 16:33:14 UTC by dangermaus
+
+
+#
+Monotone Boolean Functions and Script Engine
+
+GPU in its latest version 0.949 has a new plugin written by Alex Fihman called Monotone Boolean Functions (mbf.dll). The plugin attempts to approximate Dedekind's problem by means of a Monte Carlo approximation. This is the first "real-world" GPU plugin that tries to solve a mathematical problem.
+More information on this plugin can be found at http://www.fihman.com/mbf/mbf.html
+
+0.949 also contains Thexa4's Script Engine, which is a novel frontend written in Visual Basic. This frontend adds scripting capabilities to the GPU stack language. It handles GPU answers from different nodes as a set with unique elements, stored into particular variables. The frontend has also loop and echo support. For more about the GPU stack language go to http://gpu.sourceforge.net/virtual.php
+
+0.949 is also released with tons of bugfixes: in particular long strings were producing Access Violations (fixed by Alex Fihman), a memory leak was discovered. The job modifiers as described in chapter 5.4 of gpu_ext.pdf were not working. The upgrade from the lite to the full version did not work for the Orbit Reconstruction Extension. New entry nodes are added (Thexa4 and hisoka), and guevara is moved to a more accessible port (8080).
+Double clicking in chat was not opening a search browser anymore. The mailing list menu item is replaced by a Wiki one. In the current version on autoupdate (0.9491), the total uptime bugfix is solved.
+
+If the period July, September was very bad, the period October, November revealed itself as one of the most proficous for the project :-)
+Stay tuned
+
+2007-11-16 22:32:42 UTC by dangermaus
+
+
+#
+Eternity II plugin launched!
+
+Eternity II plugin
+------------------
+
+On autoupdate there is a new GPU plugin which can help people solving the Eternity II puzzle. Eternity II is a puzzle with 256 pieces, which have to be placed on a 16x16 board. Each squared piece has 4 faces with a particular sign on it. Adiacent faces of neighboured pieces need the same sign.
+
+A 2 million $ price will be paid to the first valid solution submitted to the puzzle creators.
+
+A much simpler online demo of Eternity II is available at
+http://uk.eternityii.com/try-eternity2-online/
+
+The presentation of Eternity II with Lucy Pinder as youtube video is here: http://www.youtube.com/watch?v=RzjIctATZs8
+
+Instructions to install the Eternity II plugin inside GPU are here: http://gpu.sourceforge.net/eternity.php
+
+
+Network
+-------
+
+In June, a lightning hit one of the entry nodes (spartacus). Damages included the windows partition configuration files and the water cooling pump. After that until mid September, only Laurent's lwm-media node was available as entry node, the GPU network never was so close to shutdown. In September, Ninja tried to revive spartacus, but also the processor turned out to be burned. Ninja then upgraded the guevara node (an AMD Athlon 700 MHz) with low-noise fans and recovered DVD and 1Gig-Ethernet card from spartacus. An attempt to install Windows Vista failed due to the much more restrictive Genuine program. Therefore guevara is now running Debian 4.0 with wine and will act as entry node for GPU in the future.
+
+Next scheduled release
+----------------------
+
+0.948 will be released only in mid November.
+Have fun!
+
+2007-09-20 12:47:35 UTC by dangermaus
+
+#
+0.946: Single Work Unit Set projects
+
+The File Distributor component ( hosted at http://www.gpu-grid.net/file_distributor ) grew into a
+complete solution to distribute work units and applications, suitable for small-sized projects.
+The GPU plugin integrates with it, and a standalone client is available as well. The PHP set is
+now used to collect computer information on the cluster. The hope is that this data will help
+to understand the current scalability issues. With 0.946, projects with Single Work Unit set (typical
+for rendering projects) are supported.
+
+Below the release notes for the last three releases:
+
+0.946: - Important File Distributor Plugin bugfixes -
+FD server with computer/user/team statistics - FD server and plugin with Single Work Unit Set support -
+GPU core reports periodically status to FD server (will be used later to create better clusters).
+
+0.945 File Distributor plugin and standalone client ready for tests in the GPU community.
+Possibility to distribute applications as .zip files. Uploading results to a FTP server.
+
+0.944 Stability improved (no out of memory errors) /
+PHP File Distributors enhanced: XML jobs, possibility to upload work units as zip files,
+possibility to upload applications as .zip files, ftp upload settings /
+File Distributor GPU plugin still in work... This is mainly a release for production purposes.
+
+2007-06-01 18:52:58 UTC by dangermaus
+
+
+#
+0.943 Distributed P2P WAN DB by nanobit
+
+First, the GPU organization thanks Laurent Wattieaux ( http://www.lwm-media.org )
+for mantaining an own FTP server where occasional users can upload the Terragen images
+computed by the GPU network.
+
+
+After the file distributor, a new paradigm ideated and implemented by nanobit (René Tegel)
+enters into the GPU arena. Technically implemented as two new plugins called pwansrw.dll and gpu2pwandb.dll,
+the P2P WAN database uses environment variables, which can be synchronized between 2 nodes or the entire network by using hashes.
+The paradigm is powerful and could be used to exchange results of computations between nodes without having any loss of data.
+The distributed P2P WAN DB is described in the document pwandb_paper.odt.doc, to be found in the docs folder.
+
+Several other improvements followed the release of 0.938.
+- 0.939 introduced user management into the File Distributor (user statistics are planned in a future release).
+- 0.940 introduced XML messages for netmapper. Due to the switch, version prior to 0.940 cannot see each other and vice versa.
+This lead also to a simplification of the code.
+- 0.941 was released only on autoupdate, its purpose being to stabilize the distributed P2P WAN DB plugin, which
+was crashing on some platforms
+- 0.942 introduced the Distributed P2P WAN DB by nanobit
+- 0.943 has a new screensaver with zooming and autoupdate information, fixes for the Vista and Linux Wine platform,
+and meanings to update the lite version to a full version.
+
+The project finally sketched a roadmap, which can be found at http://gpu.sourceforge.net/roadmap.php
+
+As usual, we thank all people who sustain the network by running the GPU client and who feed us with new ideas and source code.
+
+2007-03-23 14:01:07 UTC by dangermaus
+
+#
+0.938: File Distributor Release
+
+GPU is a client for distributed computing over P2P.
+
+0.938 is released with a set of PHP scripts (based on preliminary work done by Justin Adams), which allow clients to download work units in a simple manner. The GPU client has an improved 'downloader' plugin, which can deal with the new file distributor. The plugin uses exponential waiting to avoid webserver overload. To get an idea, you can visit the project FD at http://spartacus.is-a-geek.net/file_distributor
+More information on FD is also here: http://gpu.sourceforge.net/file_distributor.php
+
+0.937 introduced labels on the screensaver, an internal refactoring which regarded all 3D frontends. GPU was recompiled with the latest
+Synapse release 37 (instead of 36). Attempts to unbound UDP Gate on GPU Core failed. Attempts to add a screenshot to the computed html statistics failed, due to the old glut library GPU uses.
+
+0.936 reports back data to the search engine in XML format. Some other maintenance was done in the automatic VM tests.
+
+2007-01-02 15:47:43 UTC by dangermaus
+
+#
+0.935: Project reverts to plain GPL
+
+After an internal discussion between team members, we decided to release 0.935 with the unmodified (GPL version 2), and to remove the public released versions beginning from 0.910 up to 0.934.
+
+This for two main reasons: one is that Sourceforge.net hosts only projects that are licensed under the Open Source Definition. The project is not big enough to provide its own CVS and web space.
+
+The second one is that GPL cannot be modified without changing its name. So we should have chosen a name like "No military Use Public License".
+
+There was discussion going on for the GPL version 3 that regards a restriction for military use. Read for example David Turner's blog: http://www.fsf.org/blogs/licensing/20050211.html
+
+Release 0.935 includes a new search plugin and frontend by nanobit, an updated DelphiPackagerTool by DelphiFreak and an attempt to include JPL planets inside Orsa.
+
+2006-08-19 15:10:16 UTC by dangermaus
+
+#
+Discussion about modified GPL
+
+What started like a little taunt suddenly got another dimension. The GPU project has modified the GPL license a little by adding Asimov's first law of robotics.
+
+Meanwhile, we have been written be members of the Free Software Foundation, asking us to reconsider the change or at least not violate their copyright by removing the preamble and altering the name. We are aware modifying the GPL is not allowed by the GPL license itself, but did it without bad intentions. We go consider what is appropiate. After all, we're not after a legal conflict with the FSF. Give us some time for internal debate, we'll keep you informed.
+
+2006-08-15 03:32:11 UTC by artee
+
+'Seen once statistics', Search Engine Improvements, Bugfixes
+
+The statistics engine was slightly improved (in the latest fix on autoupdate 0.9331) to keep record of all nodes which ever connected to the network.
+We are now able to compare our community with the bigger ones in the distributed computing arena. Well, after running the statistics engine for some
+months, we collected one year of uptime (which is only uptime, because the network is still idle most of the time). We indexed about 80 GB
+of internet data. According to nanobit, the amount of crawled data should be 3/4 times the size of the indexed data. And fortuntately, filters are included by default, so we avoid to crawl quite a lot of crap :-#
+Still some nodes can appear twice in the statistics, but the bug will automatically disappear as soon as everyone runs a version equal or higher 0.933.
+
+The search engine improvements and a call for help is included in the "message from nanobit" which can be read in the
+mailing list archive at: http://sourceforge.net/mailarchive/forum.php?thread_id=10295891&forum_id=40848
+Remember to give a try at the search engine, the address is http://search.centraldatabase.org
+Cluster statistics are here: http://www.gpu-grid.net/gpu/statistics/gpu_statistics.html
+
+0.933 comes out with several bugfixes. If we compare with 0.930, we discover that we fixed a bug that involved duplicate packets on the initiator node.
+Another bug, which caused some Intel dual cores to be wrongly detected disappeared. The behaviour of speed buttons in the core client is now almost correct.
+The screensaver startup was fixed as well.
+
+Other things happened outside in the real world: luciolis generated a terragen video on the cluster, the energia team
+fought hard to get the c++ plugin working. nonobotae and lwm kept competing for the first rank in the hall of fame.
+and some developers still have to learn the magics of jboss clusters.
+
+#
+Spanish Translation, Total Uptime, TCP/IP patch
+
+The monthly release schema went broken due to time constraints and stress at work. Anyway with 0.930 we have a stable release which can run for entire months. The latest changes are on CVS and on autoupdate as usual. To get the changes described below, install 0.930 and then choose from the menu 'Tools' the item 'Autoupdate to
+latest version'.
+
+Spanish translation
+-------------------
+
+Alberto Pérez Garcìa-Plaza filed a clean spanish localization file. We thank him a lot :-)
+To get Spanish, go to Edit->Settings->Language Options and choose 'Change Language'.
+
+
+Total uptime computation
+------------------------
+
+As a long awaited feature, the total uptime of a GPU node is stored in a temper proof manner.
+It still has some issues, if the node crashes, though. Total uptime got also the most
+weighted factor inside the statistics formula.
+
+
+Patch to unblock TCP/IP limit of 10 connections
+-----------------------------------------------
+
+We run on spartacus node the patch described here:
+http://www.speedguide.net/read_articles.php?id=1497
+which moves the limit of 10 concurrent connections on XP service pack 2 up to 50 connections.
+This should help people who cannot connect to the GPU network. Note that the patch is not needed for occasional users, but it is important for nodes which have very long uptimes. We are running investigations to understand why so many people cannot connect. We might move GPU to some other port than the 6346 Gnutella port, which might be often firewalled. If you find out something regarding this matter, we would be glad to hear from you!
+
+The TCP/IP patch by hacker LvLlord can be found here:
+http://www.lvllord.de/
+
+
+Miscellaneous
+-------------
+
+The Screensaver was slightly modified: colors of the graph were changed, and UTC time was added.
+After autoupdating, you should choose Tools->Screensaver->Install to copy screensaver.exe inside the windows folder and then make 'Gpu 3d Network' as your default screensaver manually.
+
+Thanks to the donation of blueapple2 autoudpate service was moved last week to http://www.gpu-grid.net/gpu. The domain http://www.gpu-grid.net is active as well and might host some of our webpages later in time.
+
+
+What comes next:
+----------------
+
+We are planning the move to the SVN repository, which should solve some long outstanding CVS issues. Keep watching the mailing list for updates on this regard.
+
+2006-04-12 08:03:30 UTC by dangermaus
+
+
+#
+0.930: Screensaver, XML, Uptime...
+
+As often in life the release 0.930 did not follow exactly the roadmap with the Orsa plugin. It ended instead with a new screensaver, inspired by the BOINC screensavers. People often online on our network will not be too surprised, to see a 3D network mapper blown to full screen.
+
+At the beginning of January, we released a .zip file containing statistics between November 04 and December 05. Beginning from January 06, we also generate and collect XML statistics, which might be parsed to a later point in time.
+
+We additionally monitor uptime of nodes (which can reach 15 days and more) and approximate the scalability of the cluster by simply summing up the number of free connection slots of all nodes.
+
+<lwm> backboned the network with his huge cluster of nodes. <nanobit> improved Search Engine data collection, although now we run the old webinterface due to some (ehm) technical issues. <paulatreides> is studying molecular dynamics [1,2] and the GAMESS program which might be bound in GPU. <simbasabi> is already at work to build a follower of spartacus, which is quite noisy, even if watercooled.
+
+As long term roadmap for 0.940, it would be good if we would allow external developers to easily bound their .exe applications inside our network (applaunch improvements, file distributors are the keywords here).
+
+Stay tuned.
+
+
+[1] http://folding.mesdiscussions.net/forum2.php?config=foldinghome.inc&post=2&cat=12&cache=cache&sondage=0&owntopic=%20%20
+[2] http://perso.wanadoo.fr/paulatreides/fichiertest/eau_calcul_frequences_IR.pdf
+
+2006-02-27 20:31:00 UTC by dangermaus
+
+#
+More C/C++ examples, new orsa released soon
+
+While Tiziano works sweat and tears to finish the exiting 'liborsa for pascal and gpu' project, others have put some effort to create the much requested C examples.
+A simple C plugin we already had, but we were requested for frontend examples. User edsatori has put a small GUI example using BCB (Borland C builder).
+I (Rene) made two examples using minGW/Dev-c++ demonstrating UDP communications with the gpu core. One shows how to register to netmapper or chat messages and how to execute a gpu command and fetch the results. The other is the gpu chat, interactive, but on the console as frontend. Both demonstrate how easy udp works, also in single-threaded applications. As suprise is a port from the famous megahal chat AI as gpu chatbot. Stuff for study for the C programmers who are interested in gpu.
+
+2005-12-27 20:31:16 UTC by artee
+
+#
+C/C++ compatibility, Water Cooling, Nova-TS Team
+
+In "Tapping the matrix" [1], a talk given by Carlos Justiniano (founder of Chessbrain), GPU is described as an active project with one big drawback. It is implemented, we quote, in an "obscure Pascal dialect". Ok, this was like a trigger for nanobit:
+
+C/C++ compatibility achieved for plugins
+----------------------------------------
+
+Since the beginning, GPU was intended to load standard dynamic link libraries. We used pointer of chars instead of the very practical Delphi Strings for the communication between core and plugins. Using Bloodshed Dev-C++ [2], an amazing C++ IDE written in Delphi (ehm) and under GPL, nanobit was able to compile a C-DLL. The source code for the C plugin is under /src/dllbuilding/c_example. We had to change a little the TStack definition, so that the parameters were understood by the plugin. This prompted us to recompile all plugins, and recompiling everything was easy step thanks to Samuel Herzogs "DelphiPackageTool". So, we can now easily plug-in any sort of C/C++-code into the GPU system.
+
+As final remark, frontends written in any language can communicate with the core, if they use the UDP/IP channel mechanism. We will try to provide some of them in some crazy languages, if we manage to get them working.
+
+Water Cooling
+-------------
+
+Running a GPU node for long time is a challenge, one has to fight with dust, noise and neighbourhood.
+A big thank to Stefano Godenzi (Ninja), who managed to install the Thermaltake [3] Watercooling system inside spartacus, one of the titled computers of the network. The pump as delivered by factory was wrong cabled, and some adjustement was needed. We plan to cover his work into a webpage, which we will made available on this site.
+
+
+Nova-TS Team
+------------
+
+Laurent Wattieaux put up to 6 computers on the network, so that his Nova-TS [4] team often was top team in the GPU Cluster statistics [5]. By the way, we are collecting statistics since about a year, and the network itself is operating since one and a half years. We probably had an average of 6 nodes always on the network, with tops of 16-18 nodes. Ah, nodes with the LNX flag, are GPUs running under wine emulator.
+
+
+Version 0.926 is the current stable release. It is compiled for C/C++ compatibility, has a whiteboard able to display nanobit's seismograph (more on this in a later news ;-), a netmapper which resizes better and let's the cluster spin on the center of mass. Bugfixes to autopdate, to the core as usual. The source release now includes a Changelog file, such that developers can better follow changes. Do not hesitate and ask our mailing list [6] for developer CVS access!
+
+[1] Tapping the Matrix, http://bof.linuxforum.dk/2005/slides/Carlos/tappingthematrix.html
+[2] Bloodshed Dev-C++, http://www.bloodshed.net/devcpp.html
+[3] Thermaltake, http://www.thermaltake.com
+[4] Nova-TS team, http://www.nova-ts.com/
+[5] GPU Cluster Statistics, http://www.tea.ch/gpu/statistics/gpu_statistics.html
+[6] GPU mailing list, gpu-world@lists.sourceforge.net
+
+2005-11-08 11:18:08 UTC by dangermaus
+
+#
+Universal Time Plugin, Jedi Formatted Code
+
+GPU is an experimental grid computing project which targets the rise of a big and cheap supercomputer over Internet, run by volunteers.
+This is the project status for October 12, 2005.
+
+First, we thank gratefully lwm (Laurent Wattieaux) for adding a new entry host for the GPU network, which solves the problem of the momentaneously broken spartacus node. A big thanks to paulatreides, for fixing some problems in earthsim plugin and reformatting most of the GPU source code with the Jedi formatter. Now the source code looks most of the time nicer and more readable. With time, we will reformat some parts where Jedi did not perform so well. The formatted source code is already on CVS and will be released with 0.925.
+Lot of credits to sabybuld (Stefano Godenzi) for buying and planning the water cooling system which will be built in spartacus very soon. Delphifreak (Samuel Herzog) keeps his support to the DelphiPackagerTool, too. pisces computer is now running version 0.9194 for more than 850 hours (35 days) without application crashes.
+Red's movie ShipRockFinal was published on the Movies section as well.
+
+
+Universal Time Plugin
+---------------------
+
+nanobit (Rene Tegel) realized a new plugin which keeps synchronized the clock of any computer running GPU with the atomic clock of the U.S. National Institute of Standards and Technology. The plugin queries time.nist.gov at 5 minute intervals and consequently adjusts the system clock of the operating system in little steps of 100 milliseconds, so that other applications are not affected.
+With the GPU command "timeerrorms, nodename", it is possible to see the difference in milliseconds in respect to universal time. This plugin is very important, if we would like to turn the GPU network into a sensor network. It would be then easier to compare data from sensors like weather stations or even seismographs. More on http://nist.time.gov
+
+
+
+Search Engine News and Manual
+-----------------------------
+
+nanobit wrote an interesting news describing the progress done by the search engine here:
+http://www.tea.ch/gpu/updates/gpuse_news_sept25-2005.pdf
+Try to query the GPU network at http://search.dubaron.com with some keyword like "grid computing". The query interface is really impressive, especially if viewed with Firefox or Mozilla browsers.
+A new manual on how to use GPU together with the Search Engine is available at
+http://www.tea.ch/gpu/updates/gpuse_manual.pdf
+
+
+Other improvements
+------------------
+
+GPU Core improved only slowly, providing new functions to load and discard dynamic link libraries one by one. This lead to DLL Manager fixes and to an autoupdater which does not always need to close GPU to perform its work. There will be more work on Core in the upcoming month of November (in particular fixes to the frontend manager, allowing more frontends to register to the same service).
+Terragen shipped with GPU was updated from 0.9.21 to 0.9.43. This step should fix some rendering bugs.
+Finally GPU is shipped with a full (16MB) and lite (6MB) install. Releases are now marked as "test" when they are released. Depending on how they perfom, they will be renamed in "stable" or "unstable". In fact, 0.923 was quite weird, we apologize for any inconvenient it might have created to our community!
+Finally, be sure to check out the Seismograph section on http://gpu.sourceforge.net!
+
+2005-10-12 15:18:25 UTC by dangermaus
+
+
+#
+Search engine boosts, new icons, GPL for non military use
+
+GPU is a software for clustering over P2P. This is the project status for 31 August, 2005. Current release is 0.921. Here the areas were there was improvement.
+
+Search Engine
+
+nanobit (Rene Tegel) did a lot to improve the search engine. The new library sqlite3.dll (that replaces sqlite.dll) is able to handle UTF8 characters, so that languages like Chinese are supported. The updated search plugin now does not commit each time a new webpage is crawled but waits for several changes and then commits. As consequence, the journaling of NTFS is much less stressed, and disk usage is reduced a lot. Finally, the webinterface on http://search.dubaron.com that runs mysql is able to work in synergy with the sqlite plugins on the GPU network.
+
+Look & Feel
+
+All images inside the client are externalized to the subdirectory icons. An ini file (boot.ini) allows to customize some of the frontends buttons. Sabybuld (Stefano Godenzi) created a new set of icons for the frontends, which definitely look better now. Additionally, some details on GPU core were corrected: many bug chats were corrected (including the annoying bug of occasionally missing end of line). Closing GPU now closes all frontends as well. The hooks to show Pastella connections were missing until now in GPU, they are now included, but we need more work on this.
+
+Improvements to whiteboard
+
+Again nanobit included webcam support to the whiteboard, if users of the cluster are equipped with a webcam, they can create a sort of virtual view of the cluster on the whiteboard. Rumors say, that even dangermaus black & white TV was broadcasted on the whiteboard :-)
+
+GPL for no military use
+
+Following inquires of Nick Johnson (npj), we decided to create our own version of the GPL. The text can be read here http://gpu.sourceforge.net/GPL_license_modified.txt . Goal of the modification is to prohibit military use, without giving away the advantages provided by GPL
+
+Miscellaneous
+
+Website FAQ was updated, a new site http://gpu.sourceforge.net/titan_movie.php tries to present the work done on January to recreate Titan's conditions using Huygens space probe data. Red produced a new movie "ShipRockFinal" which is available as a preview on our ftp servers.
+
+However, you might encounter problems in connecting to the GPU network. spartacus entry point (also built by Stefano Godenzi) got too noisy and waits for a new water cooling. If you would like to provide a computer running GPU as entry point, please read http://gpu.sourceforge.net/advanced.php#publish and contact us on gpu-world@lists.sourceforge.net
+
+Thx for your help!
+
+
+[comments from rene]In fact the change from sqlite2 to sqlite3 has nothing to do with utf-8 support. Webpages in foreign (detectable) code pages gets converted to utf-8 before indexing. This works as well for sqlite2 as sqlite3. For developers, sqlite 3 may be more convenient due to widestring/utf16 support.
+The change to sqlite3 was merely to be forward compatible and due to some small changes in design it was a convenient moment to drop existing databases and switch to sqlite3 simultaniously.
+
+
+2005-08-31 14:00:42 UTC by dangermaus
+
+
+#
+File Distributor, Delphi 2005, Whiteboard, Balloons
+
+GPU is a cluster software with a P2P based architecture. This is the project status for July, 17, 2005.
+
+Despite summer hole and high temperatures, both the cluster and the development kept running at sustained rhythm.
+
+Network Status
+
+On July 12, <Budtske> connected his Internet Coffe to the GPU system. During that day, 24 nodes formed one unique entity and joined their forces to compute a movie by <Red>. Smoking like an old steam motive, the cluster broke the 30 gigaflops barrier.
+http://www.tea.ch/gpu/statistics/july05/gpu_stats_120705_80GHz.html
+
+The Network Mapper showed overheated connections, so work to reduce bandwidth will be soon unavoidable.
+A movie generated by <Camsinny> some time ago, "Around the peak" is now available for download, too.
+
+File Distributor
+
+Justin Adams (<shakezilla>) wrote a set of PHP scripts that can be used by any centralized or P2P based project to download files and mark them as processed. The downloader plugin was adapted to implement exponential waiting. An uploader plugin is on works. However, scripts still do not work through Apache server. It might take some more months until we get something running, but the path is set.
+http://gpu.sourceforge.net/file_distributor.php
+
+
+Delphi 2005
+
+
+<paulatreides> fought a battle with the new Delphi IDE and got everything compiled into Delphi 2005. As important result, we got some bugs resolved caused by the Delphi 7 compiler into GPU core. Additionally, Delphi 2005 Personal Edition was distributed for free in computer magazines last month. Modifications compatible with Delphi 2005 and 7 are on CVS and will be in the next 0.919 release.
+
+Whiteboard
+
+<nanobit> wrote another frontend, a whiteboard to share draws among people on the cluster. Lines, ellipses, images travel through the chat service channel and form funny draws, formulae and network charts.
+
+Balloons
+
+The trayicon of GPU informs the user with balloons if new user enter or leave the cluster. If GPU is minimized, chat sentences pop up, but with a frequency of one in two minutes. This feature can be deactivated in the configuration settings, if it should bother too much.
+
+Additional improvements included in release 0.918 are:
+- GPU detects SMP computers and computes their MHz in a more accurate manner.
+- Terragen wrappers work with multiple FTPs
+- Some more bugfixes
+
+Might the force be with you, rebels of cyberspace ;-)
+
+2005-07-17 17:34:12 UTC by dangermaus
+
+#
+GPU 0.916: DelphiPackageTool and additional 2D statistics
+
+This is the project status for GPU, a "Gnutella Processing Unit" on May, 22, 2005. GPU is a software able to cluster computers around the internet in a random graph.
+
+Network status
+----------------------
+Some problems for the entry points <iap_mohan> and <spartacus> seem solved now. Great thanks to <swiftstream> and <leo> nodes that kept the network running despite all troubles. In order to survive, the GPU network needs more entry points. Read here how to create one: http://gpu.sourceforge.net/advanced.php#publish
+Unfortunately, there were no video computations going on these days, too. Additional anonymous ftp servers that could host computed images would be cool...
+
+2D graph on network mapper
+------------------------------------------
+The network mapper features a new 2D graph (realized with Delphi TChart), that keeps track of GFlops, Terrastones, Crawlostones, Number of nodes, Traffic and Cluster load in real time. To increase the special effect, statistics frequency increased from once in 2 hours to once in 2 minutes without stability loss. E.g., it is now possible to follow how the amount of crawled data increases. Or to look at the amount of available GFlops computed by short FFT calls issued each 2 minutes, while the node is idle. By keeping netmapper running for several hours, the fluctuation of all parameters becomes evident.
+
+Package changes
+--------------------------
+DelphiPackagerTool is included in 0.916. It will help developers installing GPU faster into Delphi IDE. DelphiPackageTool is located in the directory \install\dev and can compile in one shot several plugins, frontends and the core client.
+
+Menus for the core client
+------------------------------------
+The core client has now menus following request of many users. It will take a while until translations make their way through, though.
+
+Other
+--------
+Some initial experiments with lazarus and Freepascal were done. One far day, we hope to move all code there :)
+
+Ok, that's all. Let's hope Bzzz. the project will not fall on the dark side of the power. Bzzzz. Pop.
+
+2005-05-22 19:44:21 UTC by dangermaus
+
+
+#
+New open source connection layer for GPU: Pastella
+
+Pastella is an Open Source protocol implemented as Delphi library and based on Synapse, that allows applications of any type to build their own P2P network. Pastella is in early beta stage and was written and designed by Rene Tegel (nanobit). Pastella is an alternative p2p protocol, just like gnutella is. The main goal is to perform network optimalization, at the cost of some memory power and cpu cost for some intelligent caching and hashing. It's design goals are: less network overhead, avoidance of redundant data, good broadcast support, minimalization of packet loss, host-to-host routing by other hosts and walkers and agent support.
+Why is it called Pastella? Well. there are several fantasy-rich theories about that. For example, that we replaced the GNU from GNUtella to PAStella to honour the language Pascal. Another one, cause some of us like Pasta :)
+
+New GPUs will first offer an hybrid between the commercial TGnutella component written by Kamil Pogorzelski and TPastella.
+
+While TGnutella was very stable and suitable for commercial purposes, (and Kamil Pogorzelski was very kind to allow us to use it on the GPU project with only one license), it is now time to try to reach independence with Pastella. Kamil's TGnutella is doing an excellent work, but we would like to have an open source license on the connection layer and solve some issues that raise up with porting it to Linux.
+
+Right now, we have problems solving the network entry point problem, which is not related to TGnutella nor Pastella, but more to trouble in running our network infrastructure. We are sorry for the inconvenients.
+
+Pastella is available at http://sourceforge.net/projects/visualsynapse
+TGnutella is available at http://delphi.pogorzelski.de
+
+2005-04-23 16:50:55 UTC by dangermaus
+
+#
+GPU 0.912: new package structure, chatbots
+
+This is the project status for GPU, a "Gnutella Processing Unit" on March, 24, 2005. A list of recent changes, known issues and information on network status follow here.
+
+Before we go on, we thank a lot blueapple2 for his donation, which boosted our motivation quite a bit. We still have to decide what to do with it.
+
+Package structure
+-----------------
+
+Samuel Herzog (delphifreak) sent us a new proposal for the directory tree of GPU. He also adapted his DelphiPackagerTool, available from http://www.novabit.ch, to help developers to install the myriad of components needed by GPU in one shot. All frontends, plugins and mainapp contain relative paths to libraries and components, now.
+
+The new file tree is described in the Readme.txt at the top level of the source zip file. From now on, the zip package will not contain binaries anymore, so that we have a clean separation between source and binary distribution. gpu_solar module was succesfully imported into CVS yesterday.
+
+The structural change is important and therefore GPU gets a brand new codename: solar substitutes matrix. 0.912 is still transitional: the last glitches should be fixed in the next two-three releases.
+
+Chatbots
+--------
+
+gina.dll is a new chatbot by nanobit that will entartain users in the sad hours, when the chat is emptier than deep space. It is a port of his markov-chain chatbot. To create a new genious of the caliber of an Einstein, Kant or Shakespeare, one should first collect a clean ASCII file with their work. This ASCII file should be named Einstein.brn and put into the main gpu directory. Issuing the command "gina_enable" followed by "1,'Einstein.brn',gina_brain", Einstein will pop up on channel 1 and enlighten us on general relativity issues. Similarly, Kant could teach us about the Kritik der reinen Vernunft. Any language works, thanks to the markov chain principle.
+
+GPU implements a new chat service, similar to the netmap service, allowing frontends and plugins to listen for chat activity. The simple frontend allows registering for both services, so that developers can figure out how the system works. Documentation on this can be found under gpu_ext.pdf and is still far from completion.
+
+Huygens movie of touchdown on Titan
+-----------------------------------
+
+Some Huygens movies can be seen here: ftp://spartacus.is-a-geek.net/movie/new_ones
+In particular we thank MM, nanobit and paulatreides for their effort. MM used a picture of Cassini and got better results. Huygens image quality is very poor and presents difficulties when imported into a Terragen terrain file. More work on Huygens movie is planned.
+
+Other changes
+-------------
+
+GPU system underwent more changes, including direct messages support as requested by Dr_Moebius. The ORSA extension is able to simulate doppler oscillations of Pioneer transmissions, mysql search engine improved speed and is available as webservice on http://search.dubaron.com , chatbot service and simple frontend improvements were discussed before.
+
+
+Network status
+--------------
+
+We thank first Manic Guru, swiftstream, lwm1 and Seeschloss for their support in running the GPU application.
+
+Network load and activity was lower in the period february, march and was partially dued by structural changes. iap_mohan upgraded OS from Windows 2000 to XP. iap_mohan covered night activity (GMT+1) and is currently not ready for operations.
+
+spartacus moved house. spartacus is a 486 box with a 586 heart, built by simbasabi (Stefano Godenzi). simba told dangermaus, be careful with the feets of spartacus, cause the holes for screws do not match exactly. 8 months later the warning was lost in time, and dangermaus managed to throw downstairs spartacus for one stair as the foot broke, while moving house. However, nothing serious broke internally thanks to the robust design of simba and sparta is now operational 24h a day.
+
+Known issues for 0.912
+----------------------
+- file sharing is disabled
+- terragen stats keep reporting -2 for work done
+- using big fonts creates layout problems on GPU
+- search engine does not work on more than one machine, because reporting of partial results seems broken
+
+The report for 0.912 finishes here, 73 over.
+
+2005-03-24 09:50:06 UTC by dangermaus
+
+
+#
+Computing the movie of Huygens touchdown on Titan...
+
+After a journey of seven years with companion Cassini, Huygens space probe landed on Titan's surface on 14 January.
+The probe sent back around 350 images to mother ship Cassini, which relayed data back to Earth.
+
+As soon as the raw images were published, computer enthusiasts pounced on the images immediately, and improved them using a range of free or commercially available software before swapping their pictures in Internet chatrooms. One of these tools was Terragen. ( http://www.nature.com/news/2005/050117/full/050117-7.html ).
+
+Nanobit managed to import an ESA image as Terragen terrain file as well. GPU is now computing a movie of Huygens touchdown in distributed fashion, although we still do not know many parameters varying from sun disc size, atmosphere thicked (is it all cloudy?), redness of light on ground and so on...
+
+Everyone who wants to help us to compute the movie can download the GPU program and autoupdate it to a version which should be at least 0.9089. Then, it is necessary to make sure that the Terragen plugin is activated (GPU window - Advanced plugins and frontends). Release of 0.909 is planned in the next days and will make autoupdate step not mandatory.
+
+We plan to attach the radar sound of the touchdown ( http://www.esa.int ). After showing the touchdown, the movie will take a ride on Titan's rivers.
+
+We also invite Terragen artists and everyone who can provide us with information on how to make the movie more realistic to contact us at gpu-world@lists.sourceforge.net
+
+Thank you!
+
+2005-01-23 23:08:17 UTC by dangermaus
+
+
+#
+Project status (January 2005)
+
+This is the status report for the project GPU, a Gnutella Processing Unit for January 2005.
+
+Cluster statistics
+----------------
+Since 8 November 2004, the cluster is monitored. The first manually generated graphs reporting gigahertz of speed, FFT benchmarks, crawled data and generated images are here:
+http://www.tea.ch/gpu/statistics/stats_graph.html
+Current statistics are now in HTML format:
+http://www.tea.ch/gpu/statistics/gpu_statistics.html
+
+Thanks to johnatemps and Skystation for their presence on the cluster.
+
+Generated data
+---------------
+
+For the first time, the framework was used in a sort of productive manner.
+Around fifteen movies were generated with Terragen. Worth to mention are paulatreides project_lavelanet which explains how the camera moves on the landscape, nico's Lord of the Rings, Red's incredible basejump and Red's Visit of the Monument Valley in Utah with real data of the U.S. Geographical Survey.
+
+
+Client improvements
+-------------------
+Between 0.900 and 0.908 the main improvement was in stability. nanobit fixed such an amount of memory leaks that dangermaus position changed from developer to memory leaker. The best way to recognize it is to run GPU under wine emulator and this for weeks (disabling applauncher.dll is recommended :-) Other improvements
+like plugin manager for advanced extensions and reorganization of layout with panels were done. nanobit rewrital of the core loop of TComputationThread increased speed. The netmapper is now able to display connection traffic with a heat color map (black: no gnutella packets, white: more than 10kbit/s bandwidth).
+
+Documentation
+--------------
+
+Documentation was splitted into Users and Developers section. New user's docs include an introductory tutorial in Quicktime format (camera: Martin Waldburger) and a powerpoint presentation presented at the coffee break. New developer's doc include a preview of nanobit's improvements called "GPU Extensions for Terragen and the Distributed Search Engine". While forging one line of code, developers think hundreds more they would like to implement. This effect created a semester/diploma thesis proposals page:
+http://gpu.sourceforge.net/thesis-ideas.php
+
+Long term goals
+---------------
+
+In the powerpoint presentation ( http://www.tea.ch/gpu/GPU_with_extensions.ppt ) long term goals for the project are stated. Licensing issues are shortly addressed: keep core under GPL, move away from commercial TGnutella, allow commercial extensions. There is hope to get nanobit's TPastella with Distributed Hash Tables as new connection layer. Integrating the Orsa framework by Pasquale Tricarico into GPU might be another target. Orsa is a framework to compute and analyze orbits inside the solar system, including Near Earth objects that might hit the Earth.
+
+2005-01-07 12:57:22 UTC by dangermaus
+
+
+#
+GPU 0.900: the sleeping giant is awaking
+
+GPU, a Gnutella Processing Unit is a Gnutella Client that can perform computations on a peer-to-peer based grid.
+
+Version 0.900 includes a plugin able to render virtual landscapes. The plugin is a wrapper for the famous Terragen program [1], free for non-commercial use. Videos already generated by the framework can be downloaded from here:
+http://www.dubaron.com/terragen/movie/
+We thank Terragen artists nikoala, paulatreides and nico for their engagement.
+
+The GPU core experienced improvements: the core loop
+inside ComputationThread was rewritten by nanobit and results follow: GPU now works without bugs on symmetric multiprocessor machines (SMPs like <gemini>, one of our official FTP servers), the core loop is at least ten time faster and the nasty bug with non-terminating threads is solved.
+
+Many bugs in chat were fixed as well, including channel bug and 'is typing a message' bug. Chat was improved with clickable URLs. Felipe Mendon?a sent the Portogues e translation. New documentation is available in the /docs/gpu_ext subdirectory of GPU partially explaining Terragen and the Distributed Search Engine.
+
+Aggregated statistics for the cluster can be seen here:
+http://gpu.sourceforge.net/clusterstats/gpu_statistics.txt
+They are published on a daily basis on sourceforge, but can be computed at any time but any GPU using the network mapper.
+
+At time of writing, the framework delivers about 10 gigaflops of speed while 2 gigabytes of virtual landscapes were generated. 10 users are online mostly all the time. The cluster should be able to grow up to about 50 users and then hit some scalability limit.
+
+Also, we have to deal with slow ftp servers and full hard disks. Is the sleeping giant awaking?
+
+[1] PlanetSide Software http://planetside.co.uk/terragen
+
+
+2004-10-27 13:19:27 UTC by dangermaus
+
+#
+GPU 0.898 - Render a virtual world movie
+
+With the newest GPU (use autoupdate) you can help rendering movies of a virtual world, using the new plugin 'earthsim' that launches terragen to create a frame of this movie. Normally creating these animations can take weeks. Using distributed computing, terragen artists have a way of rendering their work in strongly reduced time.
+As of version 0.898, the GPU plugin for terragen http://www.planetside.co.uk/terragen/ is declared 'stable - release candidate'.
+If no more serieus issues are reported (they will be fixed with version 0.899), gpu is ready for a very interesting 0.9 release!
+
+2004-10-09 10:39:28 UTC by artee
+
+#
+Help us to crawl it all :-)
+
+GPU 0.883 is released with the latest robust search plugin written by nanobit (Rene Tegel). We hope some new users will join our network to collect impressions, bugs and new ideas. At time of writing, it is possible to search on about 20000 crawlostones of Internet data (20 GB). This number experiences fluctuations dued to nodes living and joining.
+
+The search frontend features now a Visual Synapse webserver, so that any GPU can offer a query interface on the web. Additionally, for experienced users, a mySQL version of the plugin is available (more details on http://gpu.sourceforge.net/search_engine.php ).
+
+GPU itself implements now a fast Visual Synapse DNS client, instead of the broken and slow Delphi 5 Indy DNS component. The underlying TGnutella component is now more robust, duplicates are less frequent, although more work should still be done here.
+
+The question on how much GPU really scales is still open, probably with 0.883 we could reach maybe around 100 nodes.
+
+The Visual Synapse webserver component opens new horizons, cause we will be able to offer other services, even to people that do not run the GPU client.
+
+The network was well shaped these days, and we thank <Cheese> and <lwm> for their continous support.
+
+2004-08-12 17:38:57 UTC by dangermaus
+
+#
+GPU 0.878: color maps - chat improvements - CVS
+
+GPU 0.878 (available on autoupdate) features several improvements, most of them done by nanobit (Rene):
+
+Changes in current version
+-------------------------
+- chat was improved with user's list, notification of typing and bell. The way the duplicate's problem is solved for chat will soon be implemented for GPU packets as well.
+- a much faster search plugin is implemented. Database is split into four files, so that the database can stay on FAT32 up to 16GB of data (each file on FAT32 can be 4GB at maximum). FAT32 is much faster than NTFS for crawling purposes.
+- the GPU engine features now callback for plugins to send back multiple results. Callbacks as implemented by nanobit are easier to use.
+- GPU has a list of hosts tried once a minute and stored in gpu_fix.txt. The reason we use an additional list to the well known gpu_hosts.txt is simple: it will allow to setup a sort of backbone for the network.
+- Feynman-Kac frontend implements now several interpolated color maps, to display function results graphically.
+- Chess plugin displays score of actual move.
+
+CVS setup
+----------
+CVS module gpu_matrix is now actively used in team and in a productive way, although sometimes we implement features twice :-). Tortoise CVS and Cygwin are very useful.
+
+Network status
+--------------
+Best network supporters were <Cheese> from New Zealand, <lwm> from France and <kosia> from Poland. Connections from new users dropped to one in two days.
+
+Backbone of the network held by <nanobit>, <oleander> and <spartacus>-<iap_mohan> tandem.
+New node added: <iron-linux> running GPU with wine under SuSE Linux 9.1.
+
+Crawlers
+--------
+<nanobit> and <spartacus> collected about 12'000 crawlostones (12 GB) of Internet data. Database is now dropped because of new database definition.
+
+As final remark: July seems a cold month with lot of programming weather :-)
+
+2004-07-12 21:03:57 UTC by dangermaus
+
+#
+GPU 0.868: Distributed Search Engine by nanobit
+
+0.868 and 0.874 autoupdate feature a new plugin/frontend couple written by nanobit. This extension allows GPU to crawl the web and index it using a SQL database. Users can then search each database created indipendently by GPUs for strings contained in the website or in the URL.
+
+Using the search frontend, the user first submits to the crawler initial websites (Submit URL tab). Then, the user can enable a different number of crawlers. After selecting a place for the database, local statistics will show the visited URLs and display graphically statistics about CPU and network bandwith usage. The new GPU command "crawlostones" will return the number of megabytes crawled by the local GPU (Compute locally button) or crawled by the entire GPU network (Compute globally button).
+
+At time of writing and in a few days, around 6000 crawlostones were collected and about 300'000 pages indexed. This is about 1/10000 in respect to the Internet size. Right now, GPU Search Engine (abbreviated with SE) does not implement robots.txt, so that some websites might decide to block access from the crawler's
+IP.
+
+In the recommended autoupdate to 0.874, the new command "speedostones" is introduced: this will perform
+a benchmark of the computer running GPU using the FFT routines in fftplug.dll.
+
+0.874 core client enhances frontend management so that multiple jobs can be sent at once and implements an additional UDP/IP channel with VisualSynapse for communication with frontends. 0.874 has the ability to run GPU with a normal set of plugins, or with the normal set plus a set of experimental plugins.
+
+Finally, some network status information will be found in the forums. Shortly, <spartacus> had some problems, <nanobit> entered as new permanent host and substituted <X_spider>, <andromeda> laptop broke its 30 GB harddisk and <iap_mohan> schedule was extended a little bit.
+
+lwm reported GPU running under Suse Linux 9.0 with Wine emulator. Months before, seeschloss reported GPU running under Linux with VMWare framework.
+
+2004-06-08 12:54:25 UTC by dangermaus
+
+#
+GPU 0.860 string as parameters
+
+0.860 and further versions on autoupdate contain an extension of the virtual machine that allows strings to be passed as parameters to plugins.
+
+New plugins were introduced: strbasic.dll shows how to use strings as parameter. downloader.dll is
+able to get URLs as parameter and start a file download through HTTP. downloader.dll is the first step toward the "The centralized model as subset of GPU" ( http://gpu.sourceforge.net/gpu_p2p/node27.html ).
+
+0.862 introduced FFT routines by Joost Ruysch in fftplug.dll. The core routine is optimized in assembler. Speed of this routine is said to be around 20 times faster than FFT routines used in Seti@home.
+
+0.856 introduced thread priority settings and user/local time for chat entries. 0.862 (on autoupdate) introduced the possibility to load and unload experimental plugins with extension .exp. Plugins are marked as experimental if they are not stable and cause GPU crashes. 0.864 introduced ping intervals of 10 seconds to keep connections open if they go through firewalls.
+
+nanobit (Rene) is working on a Distributed Search Engine driven by GPU. The results are already quite impressive and can be seen by autoupdating the application. Configuration is still a little bit difficult, ask developers lurking in chat for further help... Source code for this new plugin-frontend couple will be released as soon as the database structure is almost definitive.
+
+Future directions for the projects include: UDP/IP visual synapse as further channel for communication between plugins and frontends, webscript to get data from a webserver. See the Help Wanted section for more details.
+
+2004-05-23 00:11:12 UTC by dangermaus
+
+#
+GPU 0.851: bug fixes by Bjorn Madsen
+
+Changes in current version
+-------------------------
+
+Bjorn Madsen fixed two dangerous bugs in GPU version 0.851: he fixed a memory leak in the procedure Gnutella1SearchResult (in gpu_mainform.pas) that was reserving memory each time a request for files was issued. This might have been the cause for slow GPU responsivity after days of running.
+The second bug he fixed was in TGnutella: uploaded files from GPUs clients were one byte shorter. This is seldom a problem if the file is music, but it is very serious is the file is compressed. Another thing he noticed and that was fixed is that the downloaded list with GWebCaches was useless because all caches were closed in the meanwhile. Other minor changes in Network Mapper were done.
+
+0.853 is available on autoupdate: GPU collects but does not display statistics data if the statistics are not shown. This significantly reduces CPU-time consumption (from 2% to 0%) if GPU is idle. On <X_spider>, the fan was running faster because of this problem.
+
+0.853 contains now a primitive priority queue for incoming packets: for each computer, only 5 jobs can be put in another computer's queue. This to avoid flooding attacks, mainly caused by improper use of the Feynman Kac frontend.
+
+Autoupdate service officially moved from ETH to tea.ch server. This because dangermaus account will be closed very soon.
+
+
+Network status
+--------------
+
+<X_spider> from Canada, owned by Simon Blondeau was new permanent host and reliable meeting point. <lwm>, <lwm-zoom>, more recently <nanobit>, <glc> and a node from Hong Kong were very often connected.
+The tandem <iap_mohan>,-<spartacus> was only backing them. In particular, <spartacus> had some trouble in standig up in the morning and got a virulent Sasser influence while the student's network was experiencing problems as usual.
+
+Interesting discussions were held in Chat, and some of the proposed ideas might be part of GPU very soon.
+
+2004-05-09 15:42:10 UTC by dangermaus
+
+
+#
+Thesis out, Trigger, Donations
+
+The thesis with title "GPU, a framework for Distributed Computing over Gnutella" is finally out
+and published as html and pdf here: http://gpu.sourceforge.net/doc.php
+Please inform us of mistakes and in particular if we forgot to mention some contributors at the end.
+
+<iap_mohan> resumed normal operations on April 9, although it will run only at night between 00:30-6:15 (GMT+1). During the day, <iap_mohan> will serve customers in Poschiavo as normal Internet Access Point.
+We use the little 'Trigger' utility, available in the package 'GPU components', to start and stop GPU at given times.
+
+<spartacus> will run approximately between 09:30-23:30 (GMT+1). There are time windows, where no hosts are available as meeting point:
+between 06:15-9:30 in the morning and 23:30-00:30 in the evening. Unfortunately, we do not provide plugins on <iap_mohan> anymore, because we had stability problems and abuses.
+On the contrary, <spartacus> runs with all plugins.
+
+We added a note in the download section to inform people that port forwarding is needed in order to have more interesting network topologies than the current centralized one, where all clients connect to the same meeting point. Any network topology is allowed in a LAN by using the 'Connect' button. We also tried to move the focus on the webiste from file-sharing to grid computing.
+
+The project is open to donations and to eventual sponsorships. On our side, we will try to mantain the current infrastructure working (tandem <iap_mohan>-<spartacus>) and add some more nodes. We will slowly move away autoupdate services from ETH infrastructure to the http://www.tea.ch servers. For this, a GPU update is not required.
+
+No real 'breakthrough' in development is planned for the next months. And in fact, work is still needed to solve the duplicate's problem. As always, we are open to your suggestions, in how
+to improve and continue the project.
+
+Finally as personal note, let me thank from this column David Jensen, a researcher at IBM Watson Labs in NJ, for installing the Globus Toolkit on my laptop.
+
+2004-04-10 11:00:41 UTC by dangermaus
+
+#
+GPU scales up to 64 machines, &lt;spartacus&gt;, Polls
+
+Last wednesday, we tested GPU in a particular configuration: each computer was connected to 4 neighbours only and we had a sort of 2D-grid. Doing so, we did not have an exponential growth of results. After adding 23 computers (21 on a student's room, one in a student's house and one in Russia <tm>) we had almost linear speedup. Because of TTL constraints, the grid can get only 8x8 wide, so GPU scales up to 64 machines for now.
+I think, we are not far away to get normal Gnutella scaling (up to 500'000) nodes. A photo of the cluster with the Network Mapper view is here: http://gpu.sourceforge.net/download.php
+
+<spartacus> is finally in place thanks to Nigia. It will be the meeting point for the next months. However, it is difficult to sleep with that noise, so it is online only during the day in Europe. We might write a little trigger program that starts and stops GPU during the night on <iap_mohan>.
+
+We have now polls on the website thanks to Ayhan (on the left of the window). You can answer more pools here: http://gpu.sourceforge.net/polls . Thanks for your feedback!
+
+The thesis is finished and out the pipe, but it will take until next wednesday, until we get the final ok to publish. There will be a PDF, ps and HTML version (created with the amazing html2latex tool).
+
+Autoupdating to 0.849 will delete the crabs_simulator, that creates problem because of the popup window. We will work on a version that can run only locally.
+
+2004-03-26 16:51:03 UTC by dangermaus
+
+#
+Call for help on Thursday 18 for a benchmark
+
+It would be very nice if some of you could connect GPU to the international network on Thursday 18 at 21:00 (Time of Zuerich, GMT+1) by pressing the Start button. To get times right, the dynamic clock of Ayhan ( http://gpu.sf.net/map.php ) should be helpful. From then on, for about one hour, we will send out jobs and perform measuraments on how many packets we receive back. Results will be published in the thesis at the end of March. Remember to set your nickname and country in the chat window. Thank you! For more info mail to dangermaus@users.sourceforge.net.
+
+Current network status is bad: <iap_mohan> will be down for the entire week: a new webcam and an usb smartcard added to the internet access point seem to create problems with GPU: lot of access violations are reported. However, we hope GPU is not the cause of these problems in this era of viruses and spam.
+
+Beginning from next sunday, I hope to publish a new node on the GPU network with the help of Nigia, at least during the day (8:00-22:00 GMT+1). Its name will be <spartacus>.
+
+Thanks to Ayhan, we have a new poll section on the website; scroll down on the left to see it. The homepage received a book section, where we advertise a little for Wes book.
+
+The address for GPU statistics was wrong in the last news. Correct address is http://gpu.sf.net/stats
+
+2004-03-14 11:15:00 UTC by dangermaus
+
+#
+Project status (March 2004)
+
+Sorry for being late with the weekly news, but stress around here breaks us apart.
+
+We were working on two theoretical problems for a while: Wes right found now the solution for the coupon collector problem. We have an argument for the Milgram's experiment, too: according to our little estimation, Gnutella should be a fractal with dimension about d=7.8. But this is not new as well, there are books on social physics and fractals on Amazon. Anyway the problems are interesting. How many people are between you and Musharraf? How many coupons do you have to collect until your figure's book is completed? In which way do they relate to GPU? Answer should come around the 25 of March.
+
+dangermaus Delphi is broken, so we are performing some benchmarks with version 0.847. Nicely, if we connect nine computers in a line, the last computer will not compute because packets contain a TTL of 7, cool eh? If we connect this 9 computers in a star, we have packet loss because the central computer is overloaded. We still have to perform tests in the tree and random graph topology.
+
+The website received a partner and book section. Sorry for being so late in acknowledgeing people who help us.
+
+Network status was fine: We saw often <nanobit> and <nono> in the beginning of the week. <rv73-USA> and <SeeSchloss> often were online in the second week. <HE9ZMM> is another machine at ETH Zuerich.
+
+GPU statistiscs (public, you can see them at http://gpu.sf.net ) had jumps due to the fact that http://framasoft.net and http://ratiatum.com provided a short description of GPU on their homepage. We thank them, France is top nation for the month of March because of this.
+
+Ayhan experimented with a script to add time zones to the network maps. It works fine under Mozilla, but not under IE. You can see it under http://gpu.sf.ent/map1.php . If you have ideas on how to solve the compatibility problem, we would be glad to hear from you.
+
+Phyrum donated a Pentium II 100 MHz to the project. We will use it to test GPU on Windows 95-98. Thanks!
+
+Finally, I do not have time to perform tracebacks on IAP, if someone is interested I can mail a filtered log file.
+ciao!
+
+2004-03-07 14:56:08 UTC by dangermaus
+
+#
+Welcome to Iran, Brasil, Malaysia!
+
+A warm welcome to Malaysia, Iran and Brasil. These
+are three countries we did not previously see in the
+logfile of <iap_mohan>! Hundreds of tracebacks can be seen in the Network Status forum.
+A thank to <cloudtee@am> and <ChandraX> for their useful tips, too.
+
+The project is now in a documentation phase: new in the docs sections is the "Advanced Tips and Tricks" document.
+The thesis will be published on March 24, although now it is clear that GPU scales only to around 20 computers. This is a bug and not a feature, of course, because normally Gnutella can scale to 500000 nodes. We will fix it, but it is difficult to say when.
+
+On Friday, we published the Floppyx distribution of GPU. The name is similar to Knoppix, a Linux distribution that can be started from a CD. GPU can
+run from a floppy disk, although there was not enough place to save the Network Mapper and many plugins. A batch file to create the disk is provided as well.
+
+This week was signed by little failures:
+- <iap_mohan> was down for unkown reasons since
+Friday 13 (!) for three days. <SeeSchloss> and <SeeSchloss[2]> jumped in heroically to stop the hole
+- Delphi 7 of dangermaus broke for unknown reasons
+- ETH AFS where the autoupdate files are hosted was unreliable
+- Little sections of the thesis went lost
+
+2004-02-22 13:02:06 UTC by dangermaus
+
+#
+GPU 0.845: Feynman-Kac initial release
+
+GPU 0.845, a Gnutella client for sharing CPU-time, is released.
+
+Following improvements were done from 0.840:
+- Feynman-Kac plugin and frontend solve a partial differential equation in a 3D domain (ellipse). Documentation will follow to explain it a little.
+- Netmapper displays multiple users behind the same IP (useful for example in student houses where all connections are behind a router with Network Address Translation). Late answer management is improved: a late GPU is now added correctly to the list, the sphere changes from gray to a color.
+- advanced seed management: the first time GPU is installed, a seed file is generated. This allows reproducibility of results (one of the fundaments of science) at least on one machine.
+- Bug fixed: connecting to hosts with different ports (like seeschloss.no-ip.org:1789) does not generate an error
+- possibility to disable writing in logfiles in the preferences tab
+- gpu_hosts.txt included; if ETH account is down, people can connect to the network anyway.
+- Frequently Asked Question added.
+
+Autoupdate 0.846:
+following a request from Stackem, 0.846 does not clean the panel at the end of the computation
+
+Network Status:
+Backbone formed by <Seeschloss>,<iap_mohan> and <albatros>. Support from <bernina>. Less users connecting from around the world.
+
+2004-02-14 12:36:07 UTC by dangermaus
+
+#
+Network crash not caused by GPU
+
+I retold at least 5 times to my friends how GPU could bring down the network in the computer room, the network of the entire computer science building and wireless access. I then went at home, and while searching for the address of support, I realized that the website of the department was down, too.
+
+On Saturday morning I sent a letter of excuses. A man came complaining that mailserver was down, too. I prefered to stay silent.
+
+However, support people answered very kindly: they think that is very unlikely that a simultaneous write access (seven times) to the same file can bring down the Andrew File System. Outage was caused by a router/switch crash, most likely.
+
+Anyway, 0.842 is available on autoupdate with an option to disable writing in the logfile. Network Mapper supports now a little bit better late answers and people behind the same IP (typical for student houses, e.g.)
+
+F.A.Q were updated with two new questions and two mirrors for the Windows setup are available on the download site now.
+
+2004-02-09 16:08:24 UTC by dangermaus
+
+#
+Statistics, FAQ, First big network crash
+
+Many thanks to Seeschloss that gave more detailed statistics to the GPU project, they are available if you add /stats to the project's web address.
+
+Frequently Asked Questions are available as well. "so far, we had no big flaw" should be updated with what follows.
+
+During this week, <permanode>, <iap_mohan> and <albatros> were the network's backbone with <SeeSchloss> and <dangermaus> as supporters.
+However, this friday evening, based on the fact that very few people were in the university computer room, I was tweaking GPU to get more accurate 3D graphs. Unfortunately, I was logged in 7 computers on the same account and all GPUs were writing the same logfile at the same time... this brought down the network for the entire computer science department, wireless access and webpage as well. I will write a letter of excuse as soon as they are back online and hope they will not beat me too much. Please do not autoupdate (to version 0.841, in particular) until we fix the problem!
+
+<albatros> and the <mammut-x> cluster did not survive the crash, <iap_mohan> is still available and people should connect to "iap.mine.nu" until we reestablish normal operations.
+
+What's new in 0.840? 0.840 gathers IPs from outside each six hours and reestablish connections to permanent hosts if they were lost. The second release of the Feynman-Kac plugin is provided.
+The setup file for 0.835 was missing the Dllbuilding subdirectory, this is fixed in 0.840. Other minor install problems (by running several times Setup.exe and by uninstall) were fixed.
+
+2004-02-06 22:08:26 UTC by dangermaus
+
+#
+GPU enters 3D era, &lt;yaymiss&gt; node, globetrotter map
+
+Plenty of news for this week:
+First, many thanks to yaymiss (James Dixon) for providing a host running GPU and this in Goodyear, Arizona. Last week, three permanent nodes <yaymiss>, <albatros> and <iap_mohan> were forming the network's backbone. <Seeschloss>, <stackem> and <dangermaus> heavily supported it with long uptimes. Around 30 users were registered by the logfile of <iap_mohan>.
+Note that news on network infrastructure and tracebacks moved to the new "Network Status" forum.
+
+Then in 0.835 (and 0.836 with some fixes, available through autoupdate), GPU enters the 3D era for frontends with the Network Mapper and for backends with the OpenGL Teapot plugin, an example to show how OpenGL can be "hacked" to run inside the little Graphics window of GPU.
+
+A 3D Feynman-Kac plugin is on works, but should not be ready till the end of next week. Results for this plugin should be more scientific and less show-biz...
+
+Finally, notice the new "guestbook" of GPU: a worldwide map provided by the Globetrotter project (powered by Xenolth) where everyone running a GPU can "eternize" his/her effort. You are welcome to add yourself there. Address is http://gpu.sf.net/map.php .
+
+Thank you for supporting the project!
+
+2004-02-01 16:20:31 UTC by dangermaus
+
+#
+GPU 0.830: See through the eyes of &lt;albatros&gt;!
+
+GPU is a Gnutella client for sharing files and CPU-time.
+
+0.830 is a milestone release: it includes a frontend, called GPU Network Mapper to visualize in three dimensions how the GPU network looks like. It is enough to be connected to one permanent host (for example <albatros> or <iap_mohan>) to get information about load of all other nodes (color green: no load and red: busy) and how they are interconnected. The Network Mapper works like the other frontends: it sends a "gpustatus" request, all connected GPUs answer with information about load and their connections. This information is a graph, displayed in 3D by the Frontend thanks to the OpenGL routines made by Tom Nuydens (tom@delphi3d.net) and Chris Rorden (chris.rorden@nottingham.ac.uk). The flare effect is also by Tom.
+
+This weekend, you can expect to view on the GPU network the following nodes: <Seeschloss[2]>, <albatros>, <dangermaus>, and <iap_mohan>.
+
+GPU with lower version numbers than 0.827 are plotted as wire spheres, the Network Mapper knows their existence because newer clients reported them into their connection list.
+
+IP information is corrected in 0.830 (sometimes wrong in 0.829 and 0.828, if GPU was behind a router): the page of siwi with the IP script is visited to retrieve it.
+
+If you check 'Periodic update', the Network mapper will rebuild the graph about every 40 minutes. Please consider that higher update rates might hurt the Gnutella network.
+
+People can download 0.830 from the homepage, or autoupdate from lower version numbers, starting from 0.815. If you should get a float conversion error, you should temporarely change your decimal separator to '.', in control panel, section 'international settings'. The float conversion bug is fixed in 0.827.
+
+Finally, a list of tracebacks follows, thank you for visiting <iap_mohan>, although the number of visits dropped a little during last week.
+
+21/01/2004 04:41:09 Incoming gpu 0.825 (winxp en) 12.217.209.40 Chicago, Illinois, USA
+
+21/01/2004 12:12:05 Incoming gpu 0.825 (unknown en) 195.131.116.13 Saint Petersburg, Russia via Finland
+21/01/2004 12:15:11 Chat: 1(14:12:23) > Is anybody listening me&
+21/01/2004 12:16:46 Chat: 1(14:13:58) ASAP> Hello!!!!!!!!!!!
+
+21/01/2004 17:52:50 Incoming gpu 0.825 (unknown en) 65.103.161.185 Omaha NE USA softwaresharing.org
+21/01/2004 17:59:48 Incoming gpu 0.825 (winxp en) 148.243.57.193 Dallas TX USA
+
+21/01/2004 20:53:57 Incoming gpu 0.825 (winxp en) 200.79.193.69 Fort Worth TX USA
+
+22/01/2004 09:34:31 Incoming gpu 0.825 <asap> (unknown en) 195.131.116.13 Russia
+
+24/01/2004 17:07:22 Incoming gpu 0.829 <stackem> (winxp en uk) 81.132.88.225 UK
+
+24/01/2004 13:43:15 Incoming gpu 0.828 <seeschloss [2]> (winxp fr fr) 62.39.214.233 France
+
+
+24/01/2004 11:41:35 Incoming gpu 0.825 (winxp en) 66.137.213.172 St. Louis MO USA
+
+23/01/2004 16:34:58 Incoming gpu 0.825 (winxp en) 62.37.145.145 Madrid Spain
+
+23/01/2004 13:36:22 Incoming gpu 0.820 (winxp ) 81.48.138.211 Rennes, French
+
+23/01/2004 07:47:54 Incoming gpu 0.820 (winxp ) 81.53.6.236 Rennes, French
+
+
+23/01/2004 09:12:32 Incoming gpu 0.825 (winxp cn) 152.3.48.63 Washington USA? why Chinese language? Packets lost
+
+22/01/2004 17:30:35 Incoming gpu 0.825 (win98 en) 65.93.121.157 Kitchener ON Canada
+
+22/01/2004 19:20:23 Incoming gpu 0.825 (winxp fr) 24.201.24.44 Montreal Canada
+
+2004-01-25 00:16:09 UTC by dangermaus
+
+
+#
+The blue ball is small (connections from everywhere!)
+
+Wow, in these two days the Internet Access Point of Mohan (zanet) received connections from Germany, China (Beijing NetCom), Greece via London, United Kingdom (Ealing), U.S.A (New York, Chicago, Kansas City, Santa Clara), Saudi Arabia (Sultan Bin Abdulaziz Foundation), Switzerland (Poschiavo, Zuerich), Thailand (Samart Corporation).
+
+The only problem is that we still not are enough to meet each other. Sometimes, we do not meet because of 5 minutes. Or just because we live somewhere else on the blueball. So, if you can, it would be good to keep running the client for longer times. It should be stable, even if you choose to run it at startup as a service (option in configuration tab of 0.823, available on autoupdate).
+
+An excerpt of the logfile with additional data from visualroute (http://www.visualroute.com) follows:
+
+1/3/2004 12:37:00 AM Incoming gpu 0.813 (win2k en) 205.238.33.3 Germany
+
+1/4/2004 3:47:32 PM Incoming gpu 0.814 (win2k cn) 210.82.35.45 Beijing China Netcom
+
+15/01/2004 14:28:41 Incoming gpu 0.820 (winxp en) 213.5.98.124 Greece via London
+
+15/01/2004 02:52:53 Incoming gpu 0.820 <stackem> (winxp en) 81.132.92.234 Ealing United Kingdom
+
+15/01/2004 17:54:56 Incoming gpu 0.820 (win98 en) 200.150.64.74 New York USA
+
+15/01/2004 14:14:01 Incoming gpu 0.820 (winxp en) 213.230.4.144 Saudi Arabia (Sultan Bin Abdulaziz Foundation)
+
+15/01/2004 21:37:33 Incoming gpu 0.820 (win2k en) 63.150.87.48 Chicago Illinois
+
+15/01/2004 23:57:13 Incoming gpu 0.820 (winxp en) 207.157.110.12 Kansas City Missouri
+
+16/01/2004 12:55:19 Incoming gpu 0.8165 (winxp pc) 207.157.110.12 Poschiavo Switzerland Zanet
+
+
+------------------------------------
+1/16/2004 4:50:30 PM Incoming gpu 0.820 (winxp cn) 218.245.165.152 Beijing China Network com
+
+1/16/2004 4:53:19 PM Chat: (23:53:18) bill> hello
+16/01/2004 18:23:23 Incoming gpu 0.820 (win2k en) 203.149.33.216 Thailand Samart Corporation
+
+
+
+2004-01-16 21:06:29 UTC by dangermaus
+
+#
+GPU 0.820 with installer and dns resolver
+
+GPU is a gnutella client for sharing files and CPU-time.
+
+It is cool to see how Open Source can help deploying software to the people: 0.820 comes with the installer of the sourceforge project Nullsoft Scriptable Install System ( http://nsis.sf.net ), which is easy to use and does not bloat the package.
+
+0.820 automatically resolves DNS names, and always reaches iap.mine.nu, our first permanent host running on the Internet Caf? of Mohan.
+
+The autoupdate feature is getting mature (download is performed by non-blocking threads) and is usable for users that want to follow the project's development.
+
+Minor changes were done to the website: a new screenshot, a download page inbetween and some changes to the "How to Help" documentation.
+
+2004-01-15 15:05:41 UTC by dangermaus
+
+#
+GPU 0.815 out, 0.816 available through autoupdate
+
+0.815 comes out with an autoupdate system that should make easier for people interested in the project to follow the GPU development. Once installed, 0.815 will allow any update up to version 1.000 and higher. Even the updater program can be updated!
+
+Once released, it turned out that 0.815 had flaws in the Chess plugin. A quarter hour later, 0.816 was available through autoupdate.
+
+The only drawback is that for keeping things easier, only executables, signature files, language files and plugins are updated. The source code will be available only by downloading the newest package again.
+
+Also for the GPU team, it is sometimes painful to upload again 3 Megabytes of stuff, to rerelease the files, and to check that the release works just because some variable settings were wrong. Finally as side effect, the patch tracker disappears from the project's webpage.
+
+2004-01-10 21:58:50 UTC by dangermaus
+
+#
+Results from unannounced test and other news
+
+One server kept running through the last week beginning from tuesday to thursday and three from then on: per default, all GPUs connected to these servers. Unfortunately, there were not many connections, but thanks to the logfiles and Visualroute 6.0b, it was possible to spot the locations of the incoming gpus: connections were from China (Beijing), US (Portland, Ohio, Seattle) and England (Ealing). The most executed task (3 times) was the crab_simulator :-), followed by the pi computation.
+The three servers will go down tomorrow, to allow normal operations in the university computer room.
+
+Beginning from next week, we hope to have at least one permanent host running. We hope also to get volunteers running GPU as permanent host (see the Help Wanted section, please). If there are many volunteers, GPUs can be configured so that only one host from the permanent host list is tried.
+
+Other news: thanks to Nim for keeping the website up to date and to Phyrum for providing us with an own GWebCache system dedicated to GPUs. The slideshow was translated to Italian as well and is available on the website. Two new screenshots were added. Keep on fighting!
+
+2004-01-05 01:09:49 UTC by dangermaus
+
+#
+GPU 0.813: network dawn?
+
+GPU 0.813 extends the TGnutella component: now GWebcache.pas can write entries to existing gnutella caches. Before 0.813, GPUs could not meet directly.
+Thanks to Phyrum Tea, we have now a dedicated GWebCache for GPUs.
+
+You are now encouraged to download and try out the client: andromeda will run as server until Sunday, January 4 23:00 GMT+1 and will act as meeting point. Thank you!
+
+2004-01-01 23:12:33 UTC by dangermaus
+
+#
+GPU 0.810: experimental chess plugin
+
+While writing this news, my GPU is connected to 4 Gnutella clients and plays chess against itself.
+The new chess engine has problems with mate positions (dued to changes needed to split the chess component by Daniel Terhell and Tom Kerrigan into a front- and back-end part), but at least it is possible to work normally on my computer.
+
+Run GPU, and the program GPUchess located into the /frontend/chess subdirectory. Play against the computer, or if you are lazy like me, simply click on the GPU against GPU checkbox. Decrease SearchDepth to see some more action...
+
+Please notice that the algorithm is still not parallelized, and there will be an attempt in the next month to get some parallelism out of the algorithm... and please be patient with all sort of bugs...
+
+Have fun!
+
+2003-12-26 17:26:58 UTC by dangermaus
+
+#
+GPU 0.808: upload finally works
+
+Although upload facility is far away to be perfect, GPU is now a fully qualified Gnutella client with down- and upload facility.
+
+Upload functionality was already present in 0.795 thanks to the TGnutella component of Kamil. A beginner's bug, not found for lack of time and ressources, prevented correct functioning: instead of using full path names, the client was using relative path names while calling the Gnutella1.ShareFile() function.
+
+Development follows now three directions:
+- attempt to get a chess distributed application out of the Open Source component made by Daniel Terhell and Tom Kerrigan
+- attempt to establish a functioning network of GPUs connected to each other by installing a linux server running the GWebCache system dedicated to GPUs only
+- attempt to cleanly rewrite the system, how GPU jobs are distributed: instead of abusing the Gnutella search mechanism, new packet codes with their own queues should be defined.
+
+2003-12-18 12:54:52 UTC by dangermaus
+
+#
+GPU 0.805: it scales at least up to 20 machines
+
+On the last two saturdays, GPU 0.800 was tested on 20 machines and 0.802 on 10 machines in a local student's computer room. The entire series from 0.801 to 0.805 aims to solve minor issues detected while running the client; a new packet logger, implemented as external application that talks to GPU with messages will help in tracking multiple answers. Loop connections are not allowed anymore. A longstanding bug that prevented the UpdateThread to close properly was solved in 0.805. Other minor bugs were closed as well.
+
+0.805 comes out with interesting features for people that intend to run it on a server: it is less CPU consuming (statistics rate was reduced by a half) and the reaction to incoming packets is four times faster. Now, GPU can be configured so that it only accepts incoming connections initiated by other GPUs, to help reduce traffic on a server. Incoming GPUs reveal their version, the user's nickname, the operating system and the chosen language.
+All interesting events (chat, incoming jobs, incoming gpu's connections and status report) are logged into a file, log.txt namely.
+Finally, if there are new chat entries, the balloon will blink for a minute.
+
+For reasons of major force (mandatory military service :-( ), there will be no significant updates for the next three weeks. Later in December, it would be nice if some of you could provide a server with fix IP number running GPU. Versions up from 0.804 can automatically connect to a downloaded list of IP numbers. To be included in that list, write something in the forum. Unfortunately, there will be no answers for at least two weeks (guard at weekend :-( ).
+
+2003-11-22 17:04:56 UTC by dangermaus
+
+
+#
+GPU 0.802: DDE services attempt
+
+An attempt was done to increase flexibility of GPU: the idea was to use Dynamic Data Exchange to permit to external applications to use GPU functionality. For the moment, 0.802 is able to establish monodirectional DDE connection only. All attempts to get bidirectional connections failed for the moment.
+Run simple.exe to get an idea of how a simple frontend application should look.
+
+A short plugin (stattest.dll) computes probabilities for a problem of relevance for the framework. See the plugin description for more details.
+
+The following bugs were fixed:
+- correct version of PGP dll included
+- code recompiled with Delphi 5, after Update Pack 1 was installed
+- an error was fixed, that caused the 'For you' tab to disappear, if a job was added before the 'For you' tab was displayed by the VCL.
+
+2003-11-14 18:05:36 UTC by dangermaus
+
+#
+'Internet-based Distributed Computing' lists us
+
+We thank warmly Kirk Pearson, editor of one of the best ressources on the web for people interested in distributed computing, for adding the GPU project into the "Upcoming Projects" section.
+
+This will increase traffic to the GPU page and we might get some more posts in forums and feedback in general, which is always appreciated, even if it is critic...
+
+Kirk Pearson's page:
+http://www.aspenleaf.com/distributed/
+GPU is listed at the bottom of this page:
+http://www.aspenleaf.com/distributed/distrib-upcoming.html
+
+The "Fun and parody site" listed as external link in the documentation section is written and maintaned by Kirk, too.
+
+2003-11-07 14:02:57 UTC by dangermaus
+
+#
+GPU 0.800: Windows clusters are feasible
+
+The Development Team is proud to announce the release of version 0.800, which should be regarded as a little but important milestone.
+
+In fact, GPU is now capable of receiving and sending back results as it was in version 0.688. However, this version is much more stable and should be suitable for short and long runtimes, the latter in a server configuration.
+
+GPU 0.800 was tested only on 4 machines, but theoretically, it should allow to connect around 2000 machines together. In fact, 2000 is the approximated number of clients that can be reached by one initiator in the Gnutella network.
+
+Notice that this number is theoretical: other Gnutella clients tend to drop the too long GPU packets that carry jobs and results.
+
+We are interested in receiving your impressions of the client, so that we can further improve it. Another interesting thing to do, would be to try GPU on some local network with 20-25 machines, as described in a README file in the \docs directory.
+
+0.800 special edition comes along with the full documentation produced until now. In particular, there is the slideshow translated by Cassandra Greer into English.
+
+Your ideas for an interesting plugin that will have some practical use are really appreciated.
+If you see things in 0.800 that are completely wrong, tell us as well.
+
+2003-10-31 13:48:38 UTC by dangermaus
+
+
+#
+Repositioning the project
+
+The project needs some repositioning and the main reason is that I did not succeed in reinstalling GPU in Delphi after a Windows crash (PGPnet 7.0 cut my Internet connection in such a way that I had to reinstall Windows).
+
+The other problem is caused by the fact that other developers do no want to join the project, because the source code is a mess.
+
+Finally, I like now the idea of a free operating system very much and I have lot of respect the community that develops it. It reminds the old David against Goliath story.
+
+The idea is to reposition the project in such manner, so that other developers can join. I'll try to redesign GPU in UML and in a cleaner way. I will choose C++ as programming language and try to put some emphasis on design patterns. Random walkers will be used to diffuse information through the network.
+
+This is the fourth phase the project undergoes, the result is quite uncertain because I do not know C++ and have less experience on Linux.
+I have to thank Wes that accepted this fourth phase as master thesis. I can do something I am very interested in.
+
+You can read more details in the "Open Discussion forum". Your feedback, ideas and criticism are always appreciated!
+
+2003-09-03 08:55:04 UTC by dangermaus
+
+#
+&quot;Hubble in a bottle!&quot; released
+
+"Hubble in a bottle!" is a small tool that displays models of the universe computed by simulations that run on supercomputers. The tool is designed to be used for both the astrophysicists and astroamateurs (if they run Linux).
+
+The code is optimized for speed: at the CPU level, using the so called streaming extensions of modern CPUs (SSE for Intel and 3dnow for AMD). Additionally, the code provides support for MPI extensions:
+once compiled with these extensions, the code can run on large Beowulf clusters and display much more particles.
+
+Documentation and screenshots will follow in the next weeks.
+
+As a partner project of @PU, it will try to publicize the idea of @PU among supercomputer scientists.
+
+The link is: http://sf.net/projects/hubble
+
+2003-07-19 18:57:24 UTC by dangermaus
+
+#
+Project status (June 2003)
+
+Some news regarding the project:
+
+- Gianluca reports that while upload works in the normal TGnutella demo, it does not in GPU. It is probably a detail that should be fixed quite easily.
+
+- in the linux version, the TComputationThread was partially rewritten, to make the code clearer. As soon as dangermaus's windows works again, the windows version will be released with the same source.
+
+- two small images that point to dmoz.org and http://www.syndic8.org should be added as well.
+
+- finally, download statistics do not work for a large number of projects. This explains why project activity dropped to 0% as well.
+
+- dangermaus hopes to find a professor so that his master thesis can be on GPU...
+
+2003-06-12 08:34:35 UTC by dangermaus
+
+#
+dmoz.org lists GPU into the distributed computing section
+
+dmoz.org, the Open Directory project, is the largest, human-edited directory of the Web.
+Like Yahoo, dmoz.org organizes submitted links into categories. However, the work of reviewing links is completely carried out by volunteers.
+
+In the spirit of the Open Source movement, there is no cost to submit links or to use directory's data, so that it helps most search engines in improving quality of their results. For example, Google and Netscape search use the directory's data.
+
+For the GPU project, this is a small, but very important recognition.
+
+links:
+http://dmoz.org/Computers/Computer_Science/Distributed_Computing/Projects/
+http://dmoz.org/about.html
+
+2003-05-21 10:16:16 UTC by dangermaus
+
+
+#
+0.111 (linux): GPU engine and multilingual support work
+
+Part of GPU is ported right now under Linux, using the Delphi compiler for Linux, called Kylix. Main advantage of Kylix is that of writing easily GUIs for
+Linux. The main disadvantage is maybe that binaries run only on the Intel Architecture. At the moment, Borland is not considering to port Kylix/Delphi on platforms other than Intel.
+0.111 is relased together with the required Kylix libraries (11 MB). Download them first, and set the enviromental variable LD_LIBRARY_PATH, so that it points to the downloanded libraries. For example, use the following sequence of commands:
+
+tar -xf kylix_libraries.tar.gz
+gunzip kylix_libraries.tar
+tar -xf gpu_linux_0.111.tar.gz
+gunzip gpu_linux_0.111.tar
+
+export LD_LIBRARY_PATH=<path were libraries are installed>
+<path to gpu_polaris>/gpu &
+
+The actual version of GPU implements the GPU engine with plugins without graphical output, statistics work only for GPU packets. Multilingual support should work as well, although Chinese Charset is not installed on my machine.
+What is missing now is the important Gnutella layer, the graphical output for plugins and a download system for the newsticker and update system (there are solutions on Internet for this).
+
+
+Regarding project's activity: in the past two weeks there were about 60 CVS updates, although not counted by sourceforge (other projects, but not all, had the same problem). Maybe now the problem is over because the last 12 updates where counted. At the moment, screenshots and the presentation do not work on the homepage, but we will fix it. A screenshot with the Linux version of GPU will be added as well.
+
+2003-05-16 08:49:59 UTC by dangermaus
+
+#
+GPU 0.795: Gnutella layer update by Kamil
+
+Kamil sent an update to the Gnutella layer. TGnutella is now released officially and is not beta anymore, after one year of development and testing. See also http://delphi.pogorzelski.de ...
+
+2003-05-01 07:00:03 UTC by dangermaus
+
+#
+Drafts for developers series
+
+4 slides are now available on the homepage ( http://gpu.sourceforge.net ) and can be downloaded in Corel Draw format from the File release system as well. They are released in the hope to help puzzled Delphi developers who do not dare to join the project, that needs lot of coding and cleaning.
+Other slides will follow. Possible ideas could be "A small intro to Delphi", "How to get CVS working with sourceforge", "Notes for the computer scientist", "A small intro to asymmetric crypto", "GPU component's overview", "Plugins with graphical output".
+
+2003-04-24 23:07:15 UTC by dangermaus
+
+#
+Slideshow translated into English and French
+
+The slideshow was translated from German to English by Cassandra Greer and from English to French by Nim.
+
+Both can be viewed here:
+http://gpu.sourceforge.net/doc.php
+
+2003-04-19 16:07:23 UTC by dangermaus
+
+#
+Rename GPU into @PU?
+
+Should we change the project's name?
+Discuss this issue in the Open Discussion Forum.
+
+2003-04-08 04:52:04 UTC by dangermaus
+
+#
+Indonesian Translation by Muhammad Panji
+
+Muhammad Panji sent right now the Indonesian translation of the GPU GUI.
+It is included in 0.788 b.
+Eventually, if you have a recent version of GPU (not more than 2 weeks old) you can simply download the Indonesian.lng file from the Patches page and put it into the language subdirectory of GPU. Be sure that the extension of Indonesian.lng stays the same (normally, sourceforge changes the file name into Indonesian.lng.txt).
+
+2003-04-06 14:15:03 UTC by dangermaus
+
+
+#
+0.788: OS shutdown bug solved by siwi
+
+Yesterday, I stripped off one by one the components implemented by GPU. The trayicon, the GPU engine, then the language component... all this in the hope to get rid of a bug that prevented GPU to close, if the operating system is going down for a sleep.
+The bug did not go away: I decided to get rid of the SplashScreen, I deleted the PGP components: bug still there. I stripped off some of my hair and I went sleeping desperate. Nightmares visited me, I felt an ant in front of a huge mountain.
+
+Today, I met siwi at dinner, and he told me how to get rid of the bug. Take a look in gpu_main_form.pas, in the event OnCanCloseQuery :-) Two lines!
+
+2003-04-02 20:48:01 UTC by dangermaus
+
+#
+News about the home page
+
+We work hard [almost] every day to improve every part of the project ;-)
+
+The last change made on the website was to make the screenshots roll randomly.
+Someone asked me how I did that, and I thought I should post it here, as somebody else may be interested (and it was not so easy to figure out how I could do this).
+
+So, for those who want to know how it is done, here is an annotated source of the screenshots page :
+http://gpu.sourceforge.net/screenshots.phps
+
+2003-03-28 22:54:12 UTC by seeschloss
+
+#
+French Translation Ready
+
+Alexis (alexis@ruc.dk) sent the French translation. It is ready to be downloaded in the patches section of the project.
+
+http://sourceforge.net/tracker/index.php?func=detail&aid=710763&group_id=58134&atid=486627
+
+Click on the download button at the bottom of the page, save the file on the languages subdirectory of GPU. Rename the file from French.lng.txt to French.lng. Run GPU and click on the "Change Language" button in the About window. Et voil? :)
+
+2003-03-28 08:52:10 UTC by dangermaus
+
+
+Chinese Translation Ready
+
+I am glad to say that Chinese Translation is available now. Click here and download it now.
+
+http://sourceforge.net/tracker/index.php?func=detail&aid=710477&group_id=58134&atid=486627
+
+This langauge resource file is in GB2312 coding.
+We will offer a Big5 coding late. According to the progress of the project, we will improve and update this language file.
+
+
+
+#
+German translation ready
+
+The next release will be in one or two weeks.
+In the meanwhile, you can get the german translation of the Graphical User Interface here:
+
+http://sourceforge.net/tracker/index.php?func=detail&aid=708741&group_id=58134&atid=486627
+
+Click on the Download link of the URL above and save the Deutsch.lng file into the subdirectory \languages of GPU. Run GPU, switch to the About window and click on the "Change Language" button. Select Deutsch.lng. Done!
+
+2003-03-26 08:15:20 UTC by dangermaus
+
+#
+0.786 released: connection settings
+
+GPU is a Gnutella client that hopes to become the cheapest supercomputer ever built.
+
+0.786 features a connection settings window; with this feature we hope to avoid some unpleasent bugs that happen when GPU ran under 95 / 98 / ME.
+
+0.786 is officially released with PGP support, multilingual support, The Nine Billion Names plugin, and a fixed harmless crab simulator.
+
+Enjoy :-)
+
+2003-03-23 11:45:58 UTC by dangermaus
+
+#
+0.783 for testers, feedback needed
+
+GPU is a Gnutella client that allows users to share CPU-time without privileged users.
+
+0.783 comes out with two new features: multilingual support and PGP for verifying plugins. It is released in the "gpu museum and test releases" package.
+
+We'd like to get feedback for the following issues, especially on Windows 95/98/ME:
+
+- does the error API Async Lookup (110001) still occur?
+- do you still have blue screens on 95/98 ME, if you click on the Start Button? (on these platforms we reduced the number of TCP/IP connections by factor two)
+- does the operating system close if you let GPU open?
+- does the Reset Virtual machine button create problems in particular situations?
+- in general: is GPU stable or not, on your W95/98 ME platform?
+
+please submit your feedback using a support request, thank you.
+
+2003-03-20 08:15:13 UTC by dangermaus
+
+#
+do not install GPU on 95/98 ME!
+
+heavy problems reported there: the operating system hangs up, the crab_simulator hooks and restarts each time you run windows...
+
+sorry! why did you not report these bugs previously??
+
+2003-03-13 21:34:38 UTC by dangermaus
+
+#
+first Linux attempt
+
+I put on the CVS repository (not for the masses, just for interested Kylix developers) an initial bad version of GPU for Linux, where I snipped out code using compiler directives.
+
+I am confident, that I can get the GPU part working (without graphic output for the moment). However, the commercial TGnutella component will be very difficult to port on Linux: TCustomSockets are used instead of Indy components. Any help is very very welcome!
+
+2003-03-08 20:42:49 UTC by dangermaus
+
+
+#
+0.779 Released
+
+This version adds two plugins :
+
+- Nine billion names of God, taken from a novel written by Arthur C. Clarke (see the story here : http://gpu.sourceforge.net/9billion.php)
+- Crab simulator, a harmless plugin demonstrating how someone could run a malicious program using a plugin.
+
+2003-03-06 22:32:44 UTC by seeschloss
+
+#
+GPU website finally up!
+
+GPU is a Gnutella client that aims to become a supercomputer using a normal filesharing network.
+
+Link: http://gpu.sourceforge.net
+
+2003-02-22 10:49:21 UTC by dangermaus
+
+#
+GPU 0.77 major release
+
+GPU is a Gnutella client that aims to become the cheapest supercomputer ever... Who knows :-)
+
+In version 0.77, plugins can display results and their progress on a paintbox of the main window.
+GPU can manage maximally three plugins at a time.
+The plugin Pi displays a circle, and throws randomly points to compute Pi.
+I hope to implement soon other plugins with graphical output.
+
+The application design should become like the initial splash screen, soon or later.
+
+2003-02-16 22:01:39 UTC by dangermaus
+
+#
+New plugin idea: Core Wars
+
+Viewed that the discrete logarithm plugin didn't reach any popularity, and while waiting for some modifications to the Gnutella engine (thanks, Kamil :-) especially made for GPU, I present here a new plugin idea: a tournament game.
+
+Core Wars is a game where digital warriors, written as an assembler program, fight in a virtual arena.
+The warriors kill each other by sending bombs (a non-executable operation) or sleeping bombs (a SPLIT 0) operation. Warriors can split their execution in up to 64 threads.
+
+The game was described by Dewndey in an old Scientific American issue.
+
+You are encouraged to download and try out the demo. Run MARS.EXE then choose from the pull down menu "Nucleo-Carica i contendenti in battaglia", write "Terman5" in the edit box and press OK, then write "imp" and press OK. Now choose "Nucleo - Inizia la battaglia" and try to figure out what happens. A lot of warriors (with extension .srg) are provided.
+
+GPU should first implement a system, so that plugins can display some graphic output. Then with the Core Wars plugin it will be possible to run whole tournaments of Core Wars on a local network.
+
+References
+http://corewars.sourceforge.net/
+http://www.csd.uwo.ca/faculty/akd/akd.html
+
+2003-02-10 19:50:25 UTC by dangermaus
+
+#
+Presentation at the 19 Chaos Computer Club Congress
+
+The project GPU, with a small introduction about Distributed computing, will be presented in a 15 minutes talk at the Chaos Computer Club Congress in Berlin, December, 28.
+Two other projects are presented as well, Mosix and Plurix.
+
+You can download the slides from the Download page.
+
+Language is german.
+
+For further information
+http://www.ccc.de/congress/2002/fahrplan/event/491.de.html
+
+2002-12-23 17:12:34 UTC by dangermaus
+
+#
+0.767 with statistics
+
+Version 0.767 implements Kamil's statistics.
+next comes the complete upload section.
+
+2002-12-18 01:47:35 UTC by dangermaus
+
+#
+0.76 will reach soon functionality of 0.688
+
+after reimplementing the gnutella engine, versions between 0.69 and 0.76 don't have the full functionality 0.688 had. With the next release 0.77 I hope to reach the previous stadium.
+
+what is new in 0.76?
+- fixed bug in closing window
+- added plugin description window
+- fixed bug with stucked downloads
+- better downloading mechanism
+- if chat entries are present a balloon is displayed
+- intelligent jobid autodefinition
+
+what comes in 0.77?
+- jobs will be sent back to sender again, once computed
+- sj will probably work again.
+- perhaps little bugfixes from the TGnutella component made by Kamil
+
+2002-10-24 21:42:00 UTC by dangermaus
+
+#
+0.74 released
+
+Kamil sent me the update of his TGnutella component. Now his component is able to display the name of other Gnutella clients (e.g. Gnucleus or Morpheus). Some minor bugs are fixed.
+
+The GPU engine now implements completly the "Compute locally" mechanism, with a queuing system, if all computational threads are busy.
+
+GPU is implemented as separated Delphi component.
+
+2002-10-21 15:09:05 UTC by dangermaus
+
+#
+GPU 0.7 major release
+
+GPU is a Gnutella client that dreams to become a supercomputer for peaceful development.
+
+Version 0.7 bases on the new gnutella engine (protocol version 0.6) and implements the TGnutella component made by Kamil Pogorzelski.
+
+Additionally, the application presents itself in a new look & feel, I hope easier to understand.
+
+Next versions will soon reimplement the GPU mechanism. GPU itself will be implemented as a Delphi component.
+
+2002-10-17 09:39:45 UTC by dangermaus
+
+
+#
+Survey
+
+I prepared a small survey with few questions, to learn a little about our user community.
+
+To fill out questions, you need to be registered at sourceforge.net. This is strange for an anonymous survey, however registration was probably introduced to avoid abuses.
+
+The survey is here
+http://sourceforge.net/account/login.php?return_to=%2Fsurvey%2Fsurvey.php%3Fgroup_id%3D58134%26survey_id%3D13548
+
+If you don't have an account, you should register a new one here
+http://sourceforge.net/account/register.php
+
+Thanks for submitting your precious opinion!
+
+2002-10-13 07:15:12 UTC by dangermaus
+
+#
+A new Gnutella engine for GPU!
+
+GPU is a Gnutella client that aims to become a supercomputer for peaceful development.
+
+After a very good month, this month the project looks dead.
+In order to get rid of many runtime errors we experienced before, I bought a new Gnutella component written by Kamil Pogorzelsky. Kamil wrote a good TNapster component and I think his Gnutella component could give a boost to the project: in fact his component supports handshake 0.6 and Ultrapeers. File Download and Upload is already implemented in the component.
+
+If we modify the component using the "Random Walkers" feauture, we could get a powerful Gnutella client. That change should make Gnutella itself more scalable.
+
+2002-10-08 09:58:56 UTC by dangermaus
+
+#
+September 2002 review
+
+In September the project experienced a boost: team size grew from 5 to 20 and GPU was downloaded 1500 times, 5 times more than in the previous month.
+
+We released versions from 0.66 to 0.688 and we discovered that 0.65 is stable if it works in a modus where only incoming connections are accepted.
+
+We implemented (but the implementation still doesn't have the checking system) the "random walkers" mechanism, showed to be the best in the paper "Search and Replication in unstructured Peer to Peer networks" written by a team at Berkeley, University of California and at University of Princeton.
+
+The GPU Homepage Layout is ready, too.
+
+You can read our weekly status report here:
+http://sourceforge.net/mailarchive/forum.php?forum_id=10385
+
+On the other side I believe it will be difficult to repeat the results of September, and I have reasons to think that the project reached a crucial point, where it can die out like most of open source projects.
+
+2002-10-03 09:55:21 UTC by dangermaus
+
+#
+0.688 first version on new polaris core
+
+GPU is a Gnutella client that aims to become a supercomputer for peaceful research.
+
+In version 0.688 the code was revised and lot of functions were encapsulated in objects.
+The following objects were added: TPluginManger, TConfigurationManager, TChatSystem, TMonitorManager and TTimerServices. TUpdateCheckThread, TWebCacheThread and TDownloadThread moved out to a new file: threads.pas
+
+The restructuring cure is still not finished yet, but we hope developers will appreciate the better readability of the source code.
+
+2002-09-27 13:59:22 UTC by dangermaus
+
+#
+small presentation at ETH Z?rich
+
+I can present my semester work on which GPU bases at ETH Z?rich (Switzerland), Wednesday 2 October at 10 o'clock in HRS building (Hirschengraben 84), room G21. You are invited and welcome!
+However if you come from New Zealand or India I can't partecipate in journey expenses ;-)
+
+2002-09-25 12:01:30 UTC by dangermaus
+
+#
+0.685 released: last version on old GPU core
+
+GPU is a Gnutella client that aims to become a supercomputer over Internet for peaceful research.
+
+release 0.685 is still based on the old core; newer versions will run with the new core, more structured. New functionality will not be added, until the new core is finished (e.g. timer so that people can compare speed of their machines)
+The proposal for the new core comes with documentation.
+
+the release 0.685 has minor changes compared to 0.68. here what is new:
+- GPU checks on which OS is running. If an older machine is detected, the connection mechanism is less aggressive. Network load and CPU load can also be changed manually when the application is minimized using the menu on the icontray near the clock.
+- a newer permanent host list can be downloaded from web. if a new permanent host joins, GPU automatically gets aware of this new host and tries a connection at startup.
+- the newsticker can become a link, so that users can be redirected to interesting articles
+
+2002-09-24 18:14:41 UTC by dangermaus
+
+#
+Our project appeared on the main sourceforge site!!
+
+Take a look at the news archive of sourceforge.net
+http://sourceforge.net/news/ for September 19.
+
+Every day, only six news are selectioned to appear on the main site. This news is also a channel, listed in some other pages.
+
+Today we had 122 downloads. This is a lot for a project that normally has 10 downloads a day.
+This explains probably also the download burst at the beginning of september, where 716 GPU's where downloaded in one day!
+
+yuhui ;-)
+
+
+2002-09-21 19:45:02 UTC by dangermaus
+
+
+#
+GPU v0.68 major release
+
+GPU is a Gnutella client that aims to become a supercomputer over Internet for peaceful research.
+
+Version 0.68
+- implements the new "random walkers" system that should boost peer to peer performance and that was recently proposed by a joint team of scientists at Berkeley and Princenton. The new system is explained in the documentation, too. At the moment GPU is the only Gnutella client that implements the feature.
+
+- An update checking system and a newsticker inform you if there are newer versions available.
+
+- CPU load can be changed, when GPU is minimized in the icon tray, by a right click of the mouse.
+
+- Other minor bugfixes and a lot of new pictures in the documentation.
+
+2002-09-19 19:32:28 UTC by dangermaus
+
+#
+Shakespeare is nothing compared to Peter!
+
+Peter is from U.S.A.and is an Information Technology student. He has programming knowledge in Java, VB and Perl and he is an excellent writer! (not like me :-).
+Additionally he knows a lot about network protocols.
+Thanks for joining us!
+
+2002-09-18 07:53:30 UTC by dangermaus
+
+#
+Beta GPU Website online
+
+Mark, Dave and Tim setup a very professional look & feel, in my opinion.
+Take a look at http://gpu.sourceforge.net/betasite
+Submit your comments to Mark, mrtgrady@hotmail.com , thanks.
+
+2002-09-16 04:24:52 UTC by dangermaus
+
+#
+Sayan, manager of the Pi project, joins us!
+
+Sayan Chakraborti, from India, is the project manager of the Pi project, hosted by sourceforge.net, too. He knows at least seven different methods to calculate Pi (I know only two :-(
+
+In addition, he runs a site on social and cultural issues called Peaceful action.
+
+Thanks a lot for joining us!!
+
+visit him at
+http://projectpi.sourceforge.net/ or
+http://www.peacefulaction.org/index.php
+
+2002-09-11 18:38:52 UTC by dangermaus
+
+
+#
+Siwi releases v0.67!
+
+0.67 has a configuration file where settings in the monitor page are stored. Transparency is not a default anymore, viewed that many people experienced problems with that option.
+(although transparency on my machine is checked. but it's a 1GHz laptop)
+
+0.67 is compiled with higher Stack size limit.
+
+people running a permanent host will appreciate this new feature!
+
+0.67 is released by Siwi
+
+2002-09-10 18:53:38 UTC by dangermaus
+
+#
+A Unix Guru for our CVS problems!
+
+Christian is from Germany and is an IT trainer. In other words he teaches persons from other firms Linux, Java, C, XML... He joins us to solve our problems with CVS, the current version system that allows many developers to work on the same source code. His task is crucial because without CVS we can't properly work together and our activity can't compete with other sourceforge sites. Thanks for joining us!
+
+2002-09-08 13:19:03 UTC by dangermaus
+
+#
+Lewis owns an ISP!
+
+Terry Lewis is from Ohio, U.S.A. He started an ISP just few months ago and has several servers that are in use and several just for the lab. He programs in several languages, but unfortunately not Delphi. He was network admin for 8 years and director of technologies, too!
+Welcome in the GPU team! ehm, and before installing GPU on the commercial server, try it on the lab ;-)
+
+2002-09-05 23:50:44 UTC by dangermaus
+
+#
+Daryl from New Zealand joins us!
+
+wow and so we become more international!
+If I'll grab a hole from here (Switzerland) I should come in New Zealand, right?
+Thanks for joining us!
+
+2002-09-03 20:00:53 UTC by dangermaus
+
+500 downloads reached
+
+additionally, we are now members of the Clustering foundry. There, we are at position three in the activity ranking list. In the other ranking list at the Distributed Computing foundry, we are fourth.
+
+2002-09-03 07:08:03 UTC by dangermaus
+
+#
+KrIpThOr joins us as Bug Hunter
+
+KrIpThOr is portuguese and has the longest name I saw in my life: Pedro Miguel de Matos Teixeira Umbelino! He is currently taking a degree in computer engenering at IST. His main field
+is Artificial Inteligence. As owner of a local network, he can test lot of issues related to GPU.
+
+Thanks a lot for joining us! I hope GPU won't crash too much on your system. Sorry for that!
+
+2002-09-01 13:09:17 UTC by dangermaus
+
+#
+0.66f released. should be more stable
+
+In version 0.66f I rewrote DealWithData and ReadFromSocket. These two methods generate before a runtime error "Das Index der Liste ?berschreibt das Maximum".
+
+Another runtime error that should be solved, is the following: GPU disappeared after making about 4000 connections. The TGConnection object was not freed properly. The attached Socket was not closed at all.
+
+I hope the three permanent hosts will profit from 0.66f
+
+2002-08-31 22:04:43 UTC by dangermaus
+
+#
+Dave's graphics are from another planet!
+
+Dave is from Georgia, USA. I saw some of his works and I can guarantee that they are phantastic :-) Never seen something like this on Earth. Thanks for joining us!
+
+2002-08-29 22:51:10 UTC by dangermaus
+
+#
+User relish joins us as a Unix admin!
+
+relish is long time in the open source world. With his deep knowledge of Unix, he helped and will support us, if we have questions about CVS, the current version system that keeps the source code up to date.
+
+2002-08-29 12:20:31 UTC by dangermaus
+
+
+#
+about the status of &quot;permanent&quot; hosts
+
+eh, permanent is sometimes an euphemism.
+here the list of the 3 host, which should be available 24 hours a day. If the first doesn't work, try the second and so on:
+
+algol.homeip.net
+flupa.homelinux.com
+zaf.homeip.net
+
+there are mistakes in the source code, so that the uptime lies between 2 and 3 days.
+
+2002-08-28 21:23:54 UTC by dangermaus
+
+
+#
+Flupa joins with the third permanent host!!
+
+Flupa is from Switzerland, too. He joins as Support Manager. He installed a new permanent GPU, which is connected to algol.homeip.net
+
+After connecting to algol.homeip.net, If you send a packet with the Virus packet option checked, you'll get back two results, one from Algol, and the other one from this new host.
+Thanks for joining us
+
+2002-08-28 17:29:44 UTC by dangermaus
+
+#
+New docs released (0.67). Plugin crypto finally explained
+
+In the package GPU screenshots and docs there is new documentation available.
+
+In Appendix B I try to explain the discrete logarithm problem and how the GPU solves it. Background information is provided, too.
+
+There is a project's mission statement at the end of the document.
+I don't know if this is exhagerated, I will consult the team, if they agree to that.
+
+2002-08-27 15:00:39 UTC by dangermaus
+
+#
+second permanent host added
+
+although zaf.homeip.net is down for two or three days, my host algol.homeip.net is now up .
+Try it out
+
+2002-08-26 21:12:47 UTC by siwi
+
+#
+version 0.66 released
+
+-special effects (transparency) added
+-load traffic for permanent hosts checkbox added
+-taskmanager button to see cpu load and network traffic
+
+2002-08-26 21:09:29 UTC by siwi
+
+#
+Jey will try to port GPU on Linux!
+
+Jey is a developer from India. He choosed the difficult task of porting GPU from the Windows platform to the Linux platform. He should be helped by the Kylix program, the Delphi version for Linux. Thanks for joining us, Jey!
+
+2002-08-26 12:17:34 UTC by dangermaus
+
+#
+Rene joins us!
+
+Rene Astudillo is a Delphi developer, currently working as Systems Analyst Programmer in
+Thailand. He develops distributed applications in medical field, specially in tele-radiology.
+Thanks for joining us!
+
+2002-08-26 07:22:59 UTC by dangermaus
+
+#
+First permanent GPU host running!
+
+The host is available 24 hours a day for people interested in testing GPU on two machines.
+In the host page, type near the 'Add' button 'zaf.homeip.net', then press the 'Add' button.
+
+Switch then to the Computing page, choose a predefined job from the Edit box (like '1,1,add' or '2,3,mul') and press the 'Compute globally' button. You'll then get results from the permanent host, an Internet coffee located in Poschiavo, Switzerland ( http://www.valposchiavo.ch ).
+
+Host details: mantained by Zanet ( fabio@liberi.ch ) the host should be always available. Report to him if not.
+Host runs Windows 2000 and remote access is provided thanks to PC anywhere, so that he can do maintenance faster.
+
+The host has a dynamic IP that changes every 20 hours, and http://www.dyndns.org helps in keeping the IP updated.
+
+
+Later, next week, also algol.homeip.net will become the second permanent GPU host. Algol will be maintained by Siwi.
+
+2002-08-23 23:41:22 UTC by dangermaus
+
+n international team for the supercomputer project
+
+Long ago I posted a news stating that GPU becomes a 24 hours project. We were then only three people. A month later there are some changes: here how our team looks like:
+
+Tim and Mark are British.
+Tiziano, Simon and Fabio are Swiss.
+Daniele is Italian.
+Zillion is Chinese.
+Wesley is American.
+Vahim is Canadian. (oops I notice now that Vahim deleted himself from the project)
+
+The nice thing of Internet is that nationalities are played down. The important thing is that we are all on the same Earth, I think.
+
+2002-08-23 09:46:30 UTC by dangermaus
+
+#
+Tim is our content manager!
+
+Tim Harvey is British with the best English on the blue ball, too. He will help us in revising doc and will help Mark writing the website. Thanks for joining in!
+
+2002-08-23 09:39:35 UTC by dangermaus
+
+#
+Mark Grady joins the project!
+
+Mark is from now one our Webdesigner! He is British, with the best English available on the small blue ball. thank you Mark for joining the project!
+
+2002-08-23 09:36:18 UTC by dangermaus
+
+#
+GPU version 0.65 released
+
+compared to version 0.64 there especially are documentation improvements. documentation in the help window uses now images and bookmarks inside the page. There are external links to articles and other distributed computing project (e.g the cancer research project).
+
+Chapter 5 deals with possible applications of the program.
+Chapter 6 explains the concept of the virtual machine inside the program
+Chapter 7 explains the special computational commands GPU understands.
+
+documentation is still not revised, professor Petersen should come back soon.
+
+
+a link to the permanent host zaf.homeip.net is also provided (momentanly down, should come up again in the next days).
+
+related web pages are now moved out in the gpu screenshots and docs, and need to be downloaded separatly.
+
+2002-08-22 12:25:37 UTC by dangermaus
+
+#
+Fabio joins the project!
+
+Fabio (hacker name is Mohan) will administrate the permanent GPU set up on the host zaf.homeip.net . He won't do anything else for the project, because he has thousands other things to do, as I know him.
+
+2002-08-22 12:17:32 UTC by dangermaus
+
+#
+I generated and uploaded a SSH key today.
+
+Secure SHell (SSH) is a protocol and tool suite which provides the means to securely establish interactive sessions, transfer files, and tunnel other protocols (such as CVS). SSH can be used as a replacement for protocols such as TELNET, FTP and rlogin. SSH may be used to replace CVS' pserver in sourceforge.net authentication mechanism, as to provide a more secure means to establish access to a CVS repository of GPU.
+
+******************************************************
+I will send the private key file to all of yous.
+
+2002-08-06 03:16:45 UTC by zillioncn
+
+ small hack for computing at distance
+
+If you can't connect to any other GPU clients (there aren't so many at the moment) try the following small hack:
+first download the latest GPU release (e.g. v0.64 works)
+Start the program, and at the beginning deactivate both the checkboxes "Accept incoming connection" and "Automatic connection management" so that GPU can't connect to any other clients.
+
+Then click on the Add button to connect to algol.homeip.net:5634. If you want to see where this host is placed, see http://algol.homeip.net
+
+Now click on the link below:
+http://algol.homeip.net:5634/search/
+
+you can now start searches for files from a host located in Switzerland, in a very special server room.
+
+Try to type the following in the "Search the GnutellaNet" edit box:
+
+GPU:1,1,add
+
+choose then Wait up to "15 seconds" and click on the "go" button. What happens?
+if it doesn't work try several times, after removing and adding again Algol to the list.
+
+can you explain why 2,5,4,add,mul gives the result 18 back?
+
+2002-08-03 14:41:24 UTC by dangermaus
+
+#
+Project less active for the next two weeks
+
+Until about August 17, Dangermouse, Prof. Petersen and Daniele will be in holiday.
+Contact our project manager Zillion if you want to join the project. If you have questions, ideas, criticism submit it to the forum of this site!
+hope to see you soon again on this site!
+
+2002-08-03 14:31:11 UTC by dangermaus
+
+
+#
+all people using GPU should upgrade to 0.64
+
+all versions including 0.63 suffer from the connection entry problem. 0.64 includes the right implementation of the GWebCache system: after one minute uptime (uptime is now displayed near the world animation) you'll have for sure at least 3 connections.
+
+2002-08-01 18:28:14 UTC by dangermaus
+
+
+#
+Version 0.64 released
+
+GWebcache fixes. GPU client correctly connects now, in the same way Gnucleus does.
+
+Uptime is now displayed, too
+
+Ask forum button added
+Reset all threads button added
+
+2002-08-01 11:34:14 UTC by dangermaus
+
+ood news for puzzled GPU developers
+
+Danny, a professional Delphi developer, will review the GPU code. After building an UML schema of the project, he will rewrite some part of GPU using patterns.
+This will make the code more readable, and perhaps it will solve also some stability problems
+
+2002-07-31 22:10:12 UTC by dangermaus
+
+#
+Daniele Franceschi joins the project!
+
+After taking a look at the code, Daniele realized that it is very bad structured. So he will perhaps reorganise the code using UML and classes. Thank you Daniele!
+
+2002-07-31 13:46:42 UTC by dangermaus
+
+#
+we are in the Top 50!
+
+after eleven hard days on sourceforge.net we are at position 41 with 99.6% activity. There were 135 downloads and 1,330 page views.
+
+we hope to get the CVS system working for saturday. Saturday we will also install a permanent GPU client in an Internet Coffee.
+
+we failed many times in life and one more won't hurt too much ;-) but at the moment let's say yuhui!
+
+2002-07-30 04:43:38 UTC by dangermaus
+
+#
+Gnutella people download again, v0.63 is released!!
+
+here the changelog, now using the modern Gwebcache system, the proble of the entry point to the network should be solved.
+
+- gwebcache support for better network connectivity
+- problem of double incoming connections solved
+- send init on connect increases traffic to GPU
+- configuration possibility for GPU's behind a firewall
+- copyrights updated including all people working on the project
+
+2002-07-30 04:21:00 UTC by dangermaus
+
+#
+Siwi joins the project!
+
+Simon is a programmer in Java and Perl interested in P2P. Thank you for joining the project!
+
+2002-07-30 01:58:42 UTC by dangermaus
+
+
+#
+Professor W. joins the project!
+
+Welcome professor Petersen, Mathematics Dept., ETHZ
+
+2002-07-29 15:08:03 UTC by dangermaus
+
+
+#
+please stop downloading Gnutella people!
+
+we experience too many problems in finding the entry host to the Gnutella network. Until a working host catcher system is implemented, there is no need to spend time using GPU.
+
+However, if you want to see GPU connecting to the network: run another Gnutella client that connects to the network. then copy the file where the client has an updated list of hosts in the directory where GPU lies and rename it 'gnutella.txt'. after a while GPU v0.6 will connect to the network.
+sorry for the inconvenients, we are at development stage
+
+2002-07-29 09:59:42 UTC by dangermaus
+
+#
+Version 0.6 released! First BETA release
+
+With this version I could download many music files. We still search for Delphi programmers and people interested in getting involved in the project!
+
+Prototype description:
+
+GPU is a prototype for an application which shares CPU-time of normal computers connected to the Internet.
+To do this, the application connects to the Gnutella network and, as any other Gnutella client does, is able to share files with others. In addition the application, from now on simply called the node, is able to send, receive and perform some computational jobs.
+Jobs travel through the Gnutella network disguised as search string for files, until they find a node willing to execute them or until their short life terminates, limited by a counter decreased every time the job is retransmitted again.
+Once the good-willing node finishes the job, it returns the result to sender. The sender has to collect results the same way he does for files found on the network.
+Jobs are described with the polnish notation, which can be interpreted as commands for a stack. "1 + 1" becomes "1,1,+" and although at first look it seems more complicated, it frees the node from some difficult issues, like operator precedence and bracket management.
+The application implements the commands for the computation in an elegant way, making easy to extend the set of basic computing functions the node knows.
+
+At the moment the following plugins exist and work:
+
+
+- a simple plugin that computes Pi using the method of throwing randomly a point and checking if it is in the circle with radius one. This is one of the easiest montecarlo computations, easy to understand for people willing to implement their first plugin
+
+- a plugin with simple operations on vectors, like dot and cross product.
+
+- a complex plugin for computing the discrete logarithm over huge integers, the inverse function of the most used one-way function in cryptography (although cryptographers won't fear this plugin, even if all computers on Internet will run the plugin! It takes an hour for solving the discrete log problem on one machine with a 42 bit integer, cryptographers use 2048 bit numbers!).
+
+GPU was tested in different network topologies (trees and graphs), but the number of workstations involved never exceeded 10.
+
+2002-07-27 13:39:41 UTC by dangermaus
+
+#
+Version 0.59 released, Gnutella client fully functional!
+
+Changes:
+- file download works, but only one at a time
+- source code reorganized for better understanding, important procedures now marked with stars
+
+Project description:
+
+GPU is yet another Gnutella client. In addition to the standard functionality for sharing files, GPU is able to share CPU-time among users. GPU will provide a robust framework for distributed computing, but unlike Kaazaa, GPU won't hurt the basic principle of Gnutella: "every node is able to use services from other nodes and has to offer services to other nodes". This means that the computational tasks will be fully transparent to the users, and all users will have the privilege of starting a computation.
+
+GPU implements the commands for the computation in an elegant way, making easy to extend the set of basic computing functions the Gnutella-node knows. GPU doesn't suffer of the limits a virtual machine has: plugins are developed as dynamic link libraries which are loaded at runtime and allow computations to be performed at the maximum speed, the speed of machine-compiled code. Of course, if GPU developes, there will be the necessity of signing these plugins, to avoid serious security holes.
+
+Possible applications are the search for prime numbers and golomb rulers, montecarlo integrations, stochastic solving of PDEs, number factorisation, cryptographic applications and repetitive tasks over huge chunks of data, e.g. a Fast Fourier Transform over data recorded from telescopes, to find out special events in the Universe.
+
+At the moment, a working prototype exists, written in Delphi for Windows.
+
+2002-07-27 01:25:59 UTC by dangermaus
+
+#
+Version 0.57 released
+
+main feauture of the release is the download queue: files found on the network can be put in this queue. Next releases will then implement the file download.
+
+another small feature is that GPU now runs minimized as small icon near the clock.
+
+2002-07-25 15:49:51 UTC by dangermaus
+
+#
+GPU becomes a 24-hours project!
+
+We are now three developers, one in Asia (China), one in Europe (Switzerland) and one in America (Canada).
+
+When the first developer goes sleeping the second one stands up!
+
+We search now a Delphi programmer from Hawaii for better world coverage.
+
+2002-07-25 12:19:42 UTC by dangermaus
+
+#
+Vahid joins the project
+
+Thank you!
+
+2002-07-24 21:12:25 UTC by dangermaus
+
+#
+Version 0.53 released
+
+small changes:
+1) the chat system works without underline characters
+2) the help window displays the file index.htm in the help subdirectory
+3) if there is too much traffic, search window in the hosts blocked the application. This is not the case anymore, a maximum of 10 searches per second are added
+
+2002-07-24 11:50:01 UTC by dangermaus
+
+
+#
+Zillion Zhang becomes Project Manager!
+
+Thank you Zhang, fill free to edit, add, past, delete and change this homepage! and if something goes wrong, no problem, I have backup copies
+
+2002-07-24 11:46:43 UTC by dangermaus
+
+#
+Version 0.51 released
+
+0.51 connects to the Gnutella network, but hosts.txt seems not very up to date
+
+2002-07-20 15:38:51 UTC by dangermaus
+
+
+
+
+
+
+
+
+
+
+
+
+

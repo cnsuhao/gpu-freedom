@@ -1,0 +1,2327 @@
+17.9.2010 git
+- initial commit of gpu_freedom on git repository
+- inital tree structure of package
+
+
+16.9.2009 0.963 Release Notes
+- Several improvements in simclimate frontend:
+major bugfixes, CO2 production by human population,
+ simulation of Eyjafjallajkull in Island covers Europe with ashes,
+  clicking on a point on the upper images reveals details of
+  square, nonlinear grid option, new parameters
+- Added 5 Saturn moons to ORSA frontend, added Saturn rings
+- GPU core reports back much more information to File Distributor
+
+
+15.9.2010 CVS
+Simclimate:
+- fix water on surface over ocean
+- fix decrease rain times (which was not done anymore)
+- added parameters for linear evaporation
+Filedistributor:
+Fields in table tbgpuprocessor reported back in 
+list_computers_online_xml.php
+
+
+14.9.2010 0.9616
+Simclimate:
+- clicking on the maps at the top pops out a messagebox containing 
+information on square (temperatures, energies, steam, etc.)
+- attempt to model atmosphere better to avoid melting of poles effect
+
+13.9.2010 CVS
+Filedistributor: reporting of several new fields supported (table tbgpuprocessor
+ extends table tbprocessor)
+GPU core reports several fields to filedistributor
+
+8.9.2010 CVS
+Simclimate:
+- reduced size of planet-elevation.txt (only integers not floats)
+- defaulting to linear grid due to artifacts on borders of splits and 
+merges
+
+7.9.2010 CVS
+Filedistributor:
+- ability to deliver online nodes in xml format
+
+11.8.2010 0.9613
+Simclimate:
+- winds follow surface topography
+
+10.8.2010 0.9612
+Simclimate:
+- nonlinear grid to avoid melting of poles in 2015 (hopefully)
+- density based plotting of clouds (in kg/m^2) instead of humidity based cloud plotting
+
+1.8.2010 0.9609
+- correct units in creation of ORSA outputfile
+- orsa.dll is now able to generate an outputfile under plugins/output which
+ can be reused if moved under plugins/input
+
+28.7.2010 CVS
+- ORSA: generation of output file can be used as input file
+- simclimate: created a class mainloop.pas which is used
+ both by plugin and frontend
+
+22.7.2010 0.9608
+- ORSA:
+ - passing timestep to plugin
+ - fixed error in \lib\misc\DisplayList.pas which might affect netmapper as well 
+   the display list is allowed to rotate as a circular buffer if it is full
+ - generation of output file works almost
+ 
+21.7.2010 CVS
+ORSA:
+- considering sidereal year
+- fixed bug in orsa plugin parameters
+- computing number of substeps based on
+ time step in seconds, plot each hour parameter and plot until parameter.
+
+20.7.2010 CVS
+- simclimate: added population increase
+ORSA:
+- pause/resume works for plugin
+- more robust input files (one trim was missing)
+- pause/resume works almost for frontend
+
+19.7.2010 0.9607
+- parameter to plot clouds
+- diffusion according to /src/dllbuilding/thedayaftertomorrow/docs/flux.pas-computation.png
+- co2 cycle implemented
+
+17.7.2010 CVS
+- loading planet population into simclimate
+
+Source: Global Population Distribution Database
+United Nations Environment Program
+
+http://na.unep.net/globalpop/1-degree/description.php#datasets
+
+17.7.2010 0.9606
+- corrected direction of Coriolis
+- corrected movement of sunlight over earth surface and added option to invert it
+- Coriolis over several layers
+- plotting of clouds over several layers
+- switching between line 1 and 2 allows all possible combinations
+
+16.7.2010 0.9605
+- simulation steps can be now one hour, 20 minutes and 4 minutes
+- decoupled atmosphere and ocean with change in parameter
+- fixed bug in plotting ice
+- "better" representation of coriolis force
+- vulcano Eyjafjallajkull in Island covers Europe with ashes
+
+15.7.2010 CVS
+- Euler step reduced by 10 to increase accuracy of factor 10 (to get stable orbits for Rhea and Dione)
+- added pause/resume button to frontend (still not working)
+
+15.7.2010 0.9604
+- diffusion of ashes and steam
+- rerelease of simclimate.exe on autoupdate
+
+14.7.2010 CVS
+- simclimate: added initial support for vulcan, nuclear bomb and nuclear war.
+- attempt to fix saturn rings to match moons inclination
+
+13.7.2010 0.9603
+- added six saturn moons: Iapetus has an irregular orbit,
+ Rhea and Dione are too close to Saturn and the Euler integrator fails
+- orsa plugin supports pause and resume
+
+12.7.2010 0.9602
+- simclimate.exe fixed freezing of seas in Mercury orbit
+
+10.7.2010 Release Notes
+
+New frontend for Clima Simulation
+ORSA frontend is able to display planet and moons (if you zoom in)
+
+10.7.2010 CVS
+Orsa: - plotting of saturn rings works somehow
+      - if resolution is low, I use lines instead of pair of triangles
+	  - for saturn rings I use lines due to aliasing effects
+TheDayAfterTomorrow:
+ - compiled the plugin with the same functionality as the frontend
+
+7.7.2010 CVS
+TheDayAfterTomorrow
+- ParametersForm is working also with applying initial conditions
+Orbit simulation and reconstruction
+- added radius of planets and scale factor
+
+5.7.2010 CVS
+TheDayAftertomorrow
+- parametersform finished
+
+2.7.2010 CVS
+ORSA:
+- added ability to switch between textures 720x360 (highres) or 360x180 (lowres)
+- planet textures are loaded now: however: planets have fix size, saturn has no 
+ rings etc. :-(
+
+TheDayAfterTomorrow:
+- introduced initial conditions parameters on ParametersForm
+- simulation parameters in progress...
+
+1.7.2010 CVS
+TheDayAftertomorrow
+- recompiled all test programs under lib/libclimate/test
+- integrated simclimate frontend into autoupdater and main GPU app
+- modified install script (draft)
+
+ORSA
+- added high definition planet textures (720x360)
+
+29.6.2010 CVS
+TheDayAftertomorrow
+- added saving settings in paramform
+- bugfix in watercycle: water did not evaporate on river and lakes
+- moved part of the code from src/dllbuilding/thedayaftertomorrow
+ to /lib/libclimate and /src/frontend/thedayafertomorrow
+
+Orsa:
+- added textures for planets as files
+- iupiter is shown as textured sphere :-) in Orsa frontend
+
+28.6.2010 CVS
+- ability to stop Earth rotation and revolution around Sun (via parameters)
+- ParametersForm to adjust parameters
+
+26.6.2010 CVS
+- all constants are now in separate classes (TSimConst, TMdlConst, TPhysConst)
+
+23.6.2010 CVS
+- plotting earth surface with triangles instead of quads to avoid aliasing
+- fixed bug when selecting line 1 and 2
+- ability to stop rotation
+- arcball is working now
+- ability to select 3d plot between terrain and sphere
+
+22.6.2010 CVS
+- moved OpenGL code into component OpenGLWorldControl
+- added arcball support (still not working)
+- earth rotates on y - axis now
+
+21.6.2010 CVS
+- plotting of 3d world works with line 1 and line 2 (see Lazarus project
+  /src/dllbuilding/thedayaftertomorrow/test/testBitmap.lpi
+- added "Overview" modus in line 2 GUI control
+
+18.6.2010 CVS
+- initial three d support skeleton with OpenGL (world as sphere or as terrain)
+- moved colorconstants into earthDrawingControl 
+- added Lazarus OpenGL documentation
+- new unit "threeDplot.pas" added
+
+
+15.6.2010 CVS
+- code refactored, two units stripped off from "datastructure": "initmodel" and "averages"
+- pressure on altitude non linear following new docs
+- experiments with p v = n K T gave numerical instabilities due to temperature
+- vegetation not allowed if temperature below zero
+
+14.6.2010 CVS
+- bugfix in plotting temperature of surface
+- back to percentage modus for atmosphere
+- removed onIce conditions for energy transfer
+- inverted meaning of tau-visible constant
+
+11.6.2010 CVS
+- added 5 atmospheric layers with steam going up and down following thermic gradient
+- better world surface initialization
+- thermal tranfer between terrain
+- simplified flux of energy for ocean and terrain
+- plotting of energy transfer on frontend
+
+9.6.2010 CVS
+- splitted energy incoming and outgoing circle
+- form shows average model parameters (temperature on surface, etc...)
+
+8.6.2010 CVS
+- added vegetation (grass, forest, jungle)
+- desert belt with sinusoidal temperature
+- year, hour and day on frontend
+
+
+7.6.2010 CVS
+- added plot for marine currents
+- atmosphere with percentage spread of energy
+- implemented river and lakes with flow of water down to ocean
+- plot of river and lakes
+- temperature gradient applied also to sea depth
+
+4.6.2010 CVS
+- added wind plot with help of Supervirgi
+- flux with stefan boltzmann for winds and currents instead of percentage of energy
+- thermic gradient also for atmosphere
+
+3.6.2010 CVS
+bugfix in isInSunlight routine, the sun did not cycle properly
+
+testBitmap.lpi: a lazarus form application that shows earth surface
+ with ice clouds and rain or temperature of atmosphere or
+  temperature of terrain by drawing on images (eDrawingControl)
+
+28.5.2010 CVS
+- clouds did not move at all,  now they move also over terrain (found bug)
+- added unit to test steam movements
+
+14.5.2010 CVS
+New plugin under /src/dllbuilding/thedayaftertomorrow:
+It is a climate simulation with one degree squared of resolution.
+For each square, the balance between incoming energy of the sun and 
+ the radiated energy of earth is computed. There are oceans
+  with clouds and rain, and the poles are covered with ice.
+  Developed in the holidays between 3.5.2010 and 14.5.2010.
+Now the model needs some calibration, though.
+
+3.3.2010 CVS
+Fix in TSimpleGravitationalDoppler according to correction
+ of Alonso PHYSICS, pg 513
+
+
+24.2.2010 0.9552
+Orsa plugin: switched TOrsaFloat from Double to Extended,
+ computed doppler difference for MOND and Newton,
+ passing power law parameter to MOND interaction,
+ passing interfering body to Simple Gravitational Doppler effect
+Orsa frontend:
+  added power law parameter for MOND to frontend,
+  added interfering body parameter for Gravitational doppler effect
+  removed non-relativistic doppler effect as it is valid only for v<<c
+  added approach detection parameter in meters for close approachs (marked as yellow lines)
+
+17.2.2010 0.9551
+Orsa plugin:
+creation of a csv file with doppler frequency in the plugins output directory
+ for exact comparation of different doppler/interactions
+
+29.11.09 0.955 Release notes
+- added a Google Gadget menu item, so that item opens automatically
+- 2D chart for Orsa to display the Doppler frequence shift
+
+19.10.09
+- added font size and number of nodes as preferences for the Google Gadget
+
+13.10.09
+- created a Google Gadget which is distributed together with the file distributor.
+  The filenames are gpu_google_gadget.php and gpu_google_gadget.xml which can be found
+   under /src/file_distributor
+
+9.4.09 0.9542
+- minor fix in autoupdater
+
+8.4.09 0.9541
+- added a 2D chart to Orsa displaying the doppler frequency shift
+- if GPU runs on Vista, we remove the version entry on the title of the main window
+
+7.3.09 0.9537
+- added random orbit name to Orsa
+- added possibility to interrupt Orsa computation
+- reorganized a little bit Orsa frontend
+
+22.05.08 CVS
+- netmapper fix: all parameters are stored (a part of splitter) 
+
+19.05.08 0.9534 
+- netmapper remembers zoom factor.
+
+15.05.08 0.9533 
+- netmapper remembers checkbox settings when closed.
+
+12.05.08 0.9532 
+Changed IPs of Thexa4 and hisoka entry points
+
+14.05.08 CVS
+File Distributor Server: search among computers is possible under
+http://www.gpu-grid.net/file_distributor/list_computers.php
+
+03-04.08 Deltasql development. It is used now in production at Logobject AG
+ see also http://deltasql.sourceforge.net
+
+22.03.08 0.953 release notes
+- removed blinking arrow at startup as it might create some race conditions
+ on old computers
+- log rotation bugfix, caused GPUs to crash and never restart after several months
+ of running
+- eternity2 milestone bugfix
+- scriptparser plugin by Thexa understands LUA scripts
+- several unfinished works: nanobit frontend for distributed stored procedures,
+ dangermouse frontend for sensor networks 
+- more work is still needed at TGnutella layer to definitively get rid of duplicates
+
+05.03.08 0.9256
+Thexa4 releases scriptparser.dll, a script parser for LUA scripts
+
+01.03.08 CVS
+- nanobit's frontend for distributed stored procedures (WAN database
+ browser) has a hierarchical view on variables
+- Thexa commits some fixes on scriptparser
+- initial release for the interface Pico Datalogger - GPU
+- 23:44 evviva :-) data sent from sensor to GPU is relayed back locally
+ to the sensor frontend and displayed graphically. Needs more refinement though
+
+29.02.08 0.9255
+- log rotation bugfix (critical): GPUs running for months are creating 1000
+logfiles. If more than 100 logfiles, than GPU was hanging in the background
+before the form showed up. Happens after 3-4 months of running.
+- initial release for the Sensor Network Frontend (skeleton)
+
+25.02.08 0.9254
+3D Network Mapper:
+- refresh button disables it after pressed once, and reenables it.
+- messages which do not contain the XML flatfile tag are discarded.
+
+25.02.08 0.9253 CVS
+- Thexa commits scriptparser plugin 
+- GPU core contains layer to relay sensor packets (the sensors broadcast service)
+- Parameters in Gnutella.pas changed from
+ MAX_QUEUE     = 13;
+ MAX_HASH      = 17;
+to
+ MAX_QUEUE     = 1330;
+ MAX_HASH      = 171;
+
+This causes much more memory footprint of GPU core, but should prevent the
+avalanche effect which can be sometimes observed on GPU as bursts in network traffic:
+ what happens is that if there are too many nodes, the circular lists that detect
+  double packets get overflowed and do not work anymore, therefore their limiting
+   effect on network traffic is nullified.
+ 
+
+22.02.08 CVS
+- nanobit commits Wide Area Network Database browser
+(see also his wiki page at http://www.gpu-grid.net/wiki/index.php/PWanDB )
+The concept is revolutionary and can be imagined as "distributed stored procedures"
+
+20.02.08 CVS 0.9252
+- FD server has First, Next, Previous, Last buttons in list_scripts.php
+- another bugfix in loading milestones: current depth was set to 0 instead
+ of the previuos one
+
+19.02.08 0.9251
+- bugfixes in loading milestones in eternity2, it was not working
+ due to a missing trim statement. 
+
+0.952 Release Notes
+- Several important stability bugfixes done by Alex Fihman in
+ GPU core and TGnutella component
+- iscapable, isbusy, whichdll (or whichplugin) functions added in core,
+ they help in debugging and executing more efficently jobs
+
+1.2.08 - 14.2.08 CVS TGnutella
+- several important stability bugfixes done by Alex Fihman
+
+13.2.08 CVS
+- removed critical section disposal in lib/misc/utils.pas and 
+ /src/dllbuilding/eternity2/eternitycommons.pas which created
+  an AV at address 000000. (finalization CS.Free block)
+
+6.2.08 CVS
+- added iscapable, isbusy and whichdll commands
+
+19.1.08 0.951 Release Notes
+- mbf plugin supports random walks
+- Eternity plugin with milestones support
+- Memory Leak Watchdog
+- several core stability improvements
+
+15.1.08 0.9505
+- Alex Fihman's Monotone Boolean Functions plugin supports Montecarlo integration
+via random walks.
+
+2.1.08 0.9504
+- removed ShareMem in gpu.dpr, as it creates Unknown Software Exceptions in GPU core
+- eternity2: minor fix: color bucket was not set for hints
+- eternity2: loading already used pieces in a milestone
+
+Happy New Year 2008!
+
+30.12.07 CVS
+- saving also already used pieces for each position on board
+
+26.12.07 0.9503
+- refactoring: created method clearMilestone(...)
+- routine to load a milestone implemented. Now testing phase...
+- as far as I could test milestoning works: enable milestones
+ in plugins\eternity.ini and modify or collect plugins\output\eternity_milestone.txt
+
+23.12.07 CVS
+- eternity II milestone: rotation matrix saved in eternity2.net format,
+ path to the solution saved as a matrix. The milestone itself is now stored
+  and contains enough information to restart the computation.
+
+22.12.07 CVS
+- initial steps to save an eternity II milestone (position of pieces
+- added settotaluptime special command to ComputationThread.pas
+
+20.12.07 CVS
+- reenabled anticheat code for total uptime
+
+15.12.07 CVS
+File Distributor Server: 
+- added $dbserver variable if mySQL runs on another computer than Apache in config.inc.php
+- changed config.inc.php to example_config.inc.php and updated manual to easy deployments
+- moved version to utils/utils.inc.php to easy deployments
+
+6.12.07 0.9503
+- eternity2 bugfix: center piece placed correctly again 
+  (wrong since 0.9493)
+
+3.12.07 CVS (0.9501 rerelease)
+- added total uptime on core window
+
+2.12.07 CVS (0.9501 rerelease)
+- renaming of plugins in DLL Manager in Core much more robust:
+  it survives existing files, and inconsistent states due to autoupdate.
+  it reestablishes a consistent state.
+- added loadedplugins command in core that returns a list with loaded plugins
+- another fix in total uptime storage
+
+1.12.07 0.9501
+- added memory leak watchdog gpu_watchdog.exe which starts only in deep night
+ and restarts GPU if memory used is more than 300 MB.
+
+1.12.07 0.950 Release Notes
+- Thexa4's Script Engine has plenty of improvements like search function, QuickWatch for variables,speedbuttons 
+toolbar, copy-paste options.
+- Eternity plugin fully supports hints file e2hints.txt and displays percentage of work unit
+- Fihman's Monotone Boolean Functions with fixes and percentage
+- Possibility to copy results to clipboard in GPU engine and Console Frontend
+- Console Frontend can send jobs in configurable intervals (in minutes)
+- Lost Uptime bugfix in Core, if people changed localization settings
+- Added menu item 'Subscribe to Mailing List', changed URL for Wiki
+- Added memory monitoring functions to core for Heap
+
+
+1.12.07 CVS
+- added memory monitoring functions inside core. Their names are:
+ memused, memoverhead, memtotalspace and memheaperrorcode
+ They will be used by the memory leak watchdog (another ugly workaround ughs)
+- readded 'Subscribe to Mailing List' menu item under Help
+- made some little used plugins experimental
+- readded chattranslate to full installation as Babel/Altavista interface works
+
+29.11.07 0.9500
+- memory leak fix in pastella.pas, TQueue structure. Made by Alex Fihman
+- changed link to the new wiki at http://www.gpu-grid.net/wiki in GPU core
+- fixes to display name of plugin in core
+- pressing reset vm button clears virtual machine _and_ collected GPU results
+
+27.11.07 0.9499
+- mbf plugin shows percentage of work unit
+- console frontends allows to change intervals of resending jobs in minutes.
+ it also allows to decide if the list needs to be cleared or not
+- netmapper released with change on CVS
+
+26.11.07 CVS
+- netmapper file with seen nodes is stored only once an hour
+ (instead of each 3 minutes)
+
+24.11.07 0.9498
+- core released with plugin names 
+- netmapper with smaller spheres
+- another attempt to fix netmapper acess violation (still there in 
+ previous releases)
+- changed sinus effect in screensaver
+
+23.11.07 CVS
+- added plugin names in threads, shown on core window and on netmapper
+ in column j1, j2, j3
+
+23.11.07 0.9497
+- Thexa's Script Engine has search function, QuickWatch for variables,
+ speedbuttons toolbar, copy-paste options.
+- basic.dll now contains total, average, variance and stddev commands
+- eternity plugin has a new divide and conquer strategy which should
+ work best if there are hints
+- eternity plugin displays progress in %
+ 
+22.11.07 0.9496
+- eternity plugin: parsing of e2hints.txt more robust:
+ empty lines are accepted. center piece can be defined
+  but is skipped as GPU plugin already knows about it
+
+20.11.07 0.9495
+- new release of Thexa's script engine
+- another attempt bugfix at netmapper to remove sporadic access violation
+
+18.11.07 0.9493
+- internal refactoring in eternity plugin: center piece is treated as a hint
+- bugfixing in board place routine and hints matching
+- on CVS: reenabled uptime check for GPU core, Unload All button removed
+  as it was not working. >> and << now always enabled to unload or load
+  single plugins
+
+18.11.07 0.9492
+- eternity plugin:
+  -> supports e2hints.txt file as described in http://www.eternity2.net/definition.php,
+  it needs to be placed in the same directory where e2pieces.txt is placed
+  -> places edges first when going inward, and last when going outward
+- 3d netmapper
+  - access violation bugfix when exiting. entries in netlistview are stored now
+    not when exiting, but each 3 minutes.
+
+16.11.07 0.9491
+- bugfix: Total Uptime went lost if someone changed localization settings
+  now Total Uptime is always preserved
+
+16.11.07 0.949 Release Notes
+- Thexa4's Script Engine, a frontend in Visual Basic which allows to script the GPU stack "language"
+- mbf plugin from Alex Fihman, which attempts to give accurate estimations to Dedekind's problem. With Montecarlo,
+ an estimation of the number of Monotone Boolean Functions is estimated.
+- Screensaver supports Whiteboard API
+- Several important and minor GPU core fixes, including a long string bug in virtual machine and working job modifiers 
+as described in chapter 5.4 of gpu_ext.pdf (see ChangeLog for more details)
+
+16.11.07 0.9490
+- changed logic in core: missing frontends are not shown as disabled menu items,
+ the item is now invisible.
+- removed chattranslate from full distribution as it does not work anymore
+ (probably google and babelfish API changed).
+- universaltime.dll and seinjector not distributed with lite version
+ 
+13.11.07 0.9489
+- Second Release of Alex Fihman's Monotone Boolean Functions plugin
+ (changes in mfbinternals.pas)
+
+11.11.07 CVS
+- Wiki menu item instead of Mailing List item in GPU core
+
+10.11.07 0.9488
+- First Release of Alex Fihman's Monotone Boolean Functions plugin which
+attempts to solve Dedekin's problem with a Monte Carlo approach. See
+ http://www.fihman.com/mbf/mbf.html for more information
+- Screensaver now fully supports whiteboard protocol. If someone writes
+ something on the whiteboard, it will be shown on the screensaver.
+
+9.11.07 CVS
+- hisoka commits the Monotone Boolean Function plugin to CVS
+- added Change Password form to File Distributor Server
+- added scaling and useMultipleSheets option to whiteboardutils
+
+5.11.07 0.9486
+- Thexa4 script engine released as first Visual Basic 6 frontend!
+- GPU core has menu item to launch the script engine.
+- double click in chat queries google instead of search.centraldatabase.org
+ which is down since a long time
+ 
+4.11.07 0.9485
+- Thexa4 added average function to basic.dll
+- Thexa4 committed rainbowfinder plugin in CVS, which is a MD5 hash reverser
+- megahertz was always zero as the called function was called MHz
+ fix done by Alex Fihman again
+
+4.11.07 0.9484
+- another memory leak in FuncCallController fixed by hisoka
+- GPU core allows to select multiple rows and copy results to clipboard
+- GPU core allows sorting of Online Users if click on column
+- borlndmm.dll is now shipped with GPU, ShareMem unit included in project source
+- Console Frontend allows to select multiple rows and copy results to clipboard
+
+3.11.07 0.9483
+- bugfix by hisoka, long strings where causing Access Violation, as StrPas
+ was used instead of string.
+- bugfix in GPU core: since HandleMessageThroughNetworkGate refactoring
+ the job modifiers described in Chapter 5.4 of gpu_ext.pdf did not work.
+ Now they work, and virtual machine tests were added.
+- bugfix in from Lite To Full version: console frontend was missing,
+ orsa frontend was causing access violation as no input file was ready.
+
+23.10.07 0.9482
+<hisoka> (alias Alex Fihman) added several mathematic functions to the
+ basic plugin including ln, cos, sin, tan, arccos, arcsin and arctan.
+<Thexa4> is rendering a nice movie called IslandDusk.
+ 
+20.10.07 Info 
+The Eternity plugin released with 0.948 is working also for both hint
+ puzzles (including the second one in format 6x12). The release note
+ for 0.9478 was dued to an incorrect piece definition file.
+
+17.10.07 0.9481
+- added static IP addresses of <Thexa4> and <hisoka> to the list
+ of permanent hosts
+
+15.10.07 0.948 Release notes
+Eternity plugin computes valid positions, but requires to buy the puzzle
+ due to the rules of the game. Eternity output is stored in logfiles
+  and shown on the screensaver. Refer to http://gpu.sourceforge.net/eternity.php
+  for more information.
+
+
+14.10.07 0.9478
+- screensaver with circular chat buffer works correctly
+- eternity plugin sends output also to local screensaver
+- removed all calls to deleted method AllowLogFile
+- changes to release 0.948
+(note, the eternity.dll plugin does not solve the hint2 in this release
+ it gaves an exception, fix on autoupdate later)
+
+20.09.07 Network
+
+In June, a lightning hit one of the entry nodes (spartacus). Damages included the windows partition configuration files and the water cooling pump. After that until mid September, only Laurent's lwm-media node was available as entry node, the GPU network never was so close to shutdown. In September, Ninja (Stefano Godenzi) tried to revive spartacus, but also the processor turned out to be burned. Ninja then upgraded the guevara node (an AMD Athlon 700 MHz) with low-noise fans and recovered DVD and 1Gig-Ethernet card from spartacus. An attempt to install Windows Vista failed due to the much more restrictive Genuine program. Therefore guevara is now running Debian 4.0 with wine and will act as entry node for GPU in the future. 
+
+
+12.9.07 0.9477
+- Eternity: storing of several log files under plugins\output including
+ current best depth and overall best depth. Solving of hints puzzles
+  6x6 and 12x6 in 1 respectively 20 seconds. Result from plugin is 
+  achieved depth to be used as report result on file distributor.
+
+29.8.07 0.9472
+- Eternity algo starts to rock.
+
+28.8.07 CVS
+- Eternity plugin works also for 16x16 board
+- some more refinements needed before going public
+
+7.8.07 CVS
+- initiated the Eternity II puzzle plugin (which has a 2 million $ price for 
+ the ones who solve it).
+ A demo online is at http://uk.eternityii.com/try-eternity2-online/
+
+13.7.07 done a bugfix for race condition at startup. Should be okay now...
+
+12.7.07 0.947 still not released as there are race conditions on
+ <andromeda> (old laptop). On new Intel Core Duo <gandhi> everything ok,
+  a little bit strange though. Problem seems to be search_plugin.dll
+
+11.7.07 Release Notes 0.947
+- screensaver with password protection
+- updater should be Vista compatible as it asks user to close GPU core first
+- File Distributor server handles team statistics correctly
+- File Distributor plugin informs server at startup of presence of a node
+- File Distributor server shows online nodes as blue rows
+This version was tested on Windows XP, Windows XP with Core Duo, Debian 4.0 with wine,
+ Suse Linux 9.3 with wine
+
+4.7.07 0.9465
+- added password protection to screensaver. password dialog is transparent.
+ CTRL+ALT+DEL is disabled if password protection is enabled.
+
+3.7.07 CVS
+- FD server: showing computers and users belonging to a team
+
+2.7.07 CVS
+- FD server: team statistics based on computers instead on users.
+
+26.6.07 0.9464
+- updater should be Vista friendly as it forces a Windows Vista user to close GPU manually first.
+
+25.6.07 0.9463
+- bugfix: GPU core: if pressing 'Reset VM Button' buttons
+ to load/unload plugins are reenabled.
+
+23.6.07 CVS
+- teams reported to FD server, computers have team as foreign key
+- bugfix: report status with form was not working
+- orsa: bugfixes to orsa_orbit, and to orsa_integrator_ra15
+
+20.06.07 lighting shuts down <spartacus>
+
+Wednesday evening <spartacus> was shutdown because of strong lightnings.
+However, during shutdown "install windows updates" was chosen, lightning
+ hit some configuration files under c:\windows\config. Windows partition
+  not bootable anymore. Therefore, Debian 4.0 installed with wine.
+
+After one hour of operation heard overheating beeps. Stopped system
+and discovered that water cooling pump had failed as well. Close to processor
+ one water cooling tube was fused on the top.
+ 
+Will take a while until <spartacus> is repaired. Ask Ninja for help.
+In the meanwhile, strong support of <lwm-x64>. <guevara> seems also to keep running
+ well.
+
+
+12.6.07 0.9462
+- version reporting on FD server
+
+8.6.07 CVS (after midnight)
+- now liborsa works, velocities are equal to JPL, but I had to compute mu
+ out of sqrt((4 Pi^2 a^3)/mu)=365.25 which is the turnaround period in days.
+- ok, now everything is clear. the turnaround period in days given by Horizons
+ is PR :-)
+
+7.6.07 CVS
+- important fix to liborsa.pas. Position of Earth is exactly the one
+computed by Horizons at Jet Propulsion Laboratory. Now velocities still broken.
+
+28.5.07-6.6.07 0.9641
+- GPU core: Reporting to FD server as soon as possible when UpdaterCheckThread finishes
+- FD server: Recording updated times, and showing online nodes in blue
+
+Release Notes for 0.946:
+
+- Important File Distributor Plugin bugfixes
+- FD server with computer/user/team statistics
+- FD server and plugin with Single Work Unit Set support
+- GPU core reports periodically status to FD server
+ (will be used later to create better clusters).
+
+22.5-28.5.07 0.9459
+- GPU core reports status on File Distributor.
+- Possibility to attach new computers to users on http://www.gpu-grid.net/file_distributor
+
+22.5.07 0.9457
+New GPU core: support for nodeid,uptime,totuptime,ip,port,acceptincoming,
+cputype commands in virtual machine in preparation of reporting on FD
+server. Refactoring of some parts. Storing RemoteIP until UpdateCheckThread
+ updates it.
+
+19.5.07-20.5.07
+FD server: - computer/user/team stats
+           - nicer layout and formatting
+FD plugin: - supports ftp extensions
+           - added execparams $xmljob and $xmlappconfig
+		   
+Next step is to get GPU core to touch FD server regularly
+with uptime, IP, availability information, country, geolocation information.
+FD server will then compute a better IP list, customized for a particular node.
+
+18.5.07
+FD server: added possibility for new users to register as
+ "Computational User".
+
+17.5.07 0.9455
+FD plugin: added support for single work unit set project,
+ added priority management, bugfix if no work units were present for upload.
+
+15.5-14.5 CVS
+FD server: added data structure to support single work unit set project
+FD server: added statistics for single computer
+
+11.5.07 0.9454
+- FD plugin: added subfolder handling with number of passes.
+
+9.5.07 0.9453
+- FD plugin: better URL reporting
+
+7.5.07 0.9452
+- bugfix Terragen Plugin and File Distributor Plugin:
+ CreateProcess was not working if working directory had a space in the path
+- bugfix FD plugin: logic of ftp prefix was the opposite as explained on the website:
+ files which match the prefix are uploaded to the FTP server
+- bugfix FD plugin: parameters for filenames and local path are computed using
+ExtractShortPathName function.
+
+6.5.07 0.945 Release Notes
+File Distributor plugin and standalone client ready for tests
+in the GPU community.
+
+1.5.07 0.9448
+Manual and FD fixes
+
+28.4.07 0.9445
+File Distributor standalone thin client:
+  compiled based on the file distributor plugin :-)
+
+File Distributor plugin:
+- bugfix: file distributor was not waiting that the application stops
+- guessing appname and parameters if appconfig.xml is missing
+- guessing folder name if parameter is missing
+- added hide property to hide the application at startup
+- added results to the stack to know what happened
+
+26.4.07 0.9444
+- file distributor plugin: moving processed wu's and results into subfolders
+
+23.4.07 0.9443
+- reporting a one back if file distributor finished the job implemented.
+- initial tests for file distributor:
+parsing of xmls was wrong. directory check after unzipping.
+it looks damn good now, man :-)
+
+22.4.07 0.9442
+- file distributor server: changed logic of uploading executables
+- added parameter that defines to which folders .zip applications extract.
+
+21.4.07 0.9441
+- file distributor server: added executables and ftp upload options to
+ project details. added ftp port, username and password.
+- finished logic to wait for executable.
+- finished logic to upload files (uploader plugin was slightly modified)
+
+Now the FD plugin is ready to be tested :-)
+
+19.4.07 CVS
+- file distributor plugin
+ wrote logic to unzip file, parse application descriptor and launch
+ application.
+
+18.4.07 CVS
+- modified PHP File Distributor to contain examples of
+ application descriptor into .zip file, and instructions
+ on how to do it.
+- moved FD manual into subfolder
+
+17.4.07 CVS
+- added DelphiZip (or ZipMaster?) component from
+http://www.delphizip.org/dz178.html
+we use v1.78 as it has separate dlls for zipping and unzipping
+- modified gpu_components.dpk with local paths
+
+15.4.07 CVS
+- moved work units of Terragen in binexec\terragen-0.9
+- moved default applaunch folder to sandbox\applaunch
+- remember to recompile and test earthsim.dll and applaunch.dll!
+
+12.4.07 0.944
+- 0.944 as stable release
+- potential out of memory bugfix for screensaver fixed
+- file distributor plugin is still in work, major
+  changes are required to implement unzip functionality.
+  For this reason, 0.944 is released now.
+
+9.4.07 0.9431
+- out of memory bugfix for netmapper and gpu core
+- added more fields structure to the returned xml
+- initial skeleton for file distributor plugin
+
+8.4.07 CVS
+File Distributor:
+- executable and ftp upload features are stored into the db.
+
+7.4.07 CVS
+File Distributor:
+- possibility to upload work units compressed as zip files.
+- get_work.php allows getting jobs in XML format
+- form to create new project has more features
+
+3.4.07
+Current Terragen files moved into /sandbox/terragen-0.9
+
+1.4.07 Extensions tracker
+Update to Terragen 2 Analysis results:
+Data on http://www.gpu-grid.net/gpu/exp/tg2/tg2-firstlight.zip
+
+It was possible to generate a picture with a planet by following the tutorial (probably no way to add Saturn rings).
+
+The format of the project file changed from .tgw which was not human readable, to a non standard XML .tgd which is human readable. TG2 Technology Preview is more straightforward in usage as TG 0.9.x
+
+Currently, the tgdcli.exe, which is the command line interface to Terragen is broken and does not accept parameters.
+The command line interface was fixed, but the fix is available only to registered users.
+
+Terrain file is now specified in .tgd. Probably no flag to give it on the command line. Terrain files of 0.9.x are
+combatible with TG2. They probably are exactly the same.
+
+If .tgs files generated by Terranim with camera path should not be supported by the command line tgdcli.exe, then no problem: one could easily parse .tgs and fill into the .tgd camera position and view angles.
+
+If command line will be fixed for the free non commercial version, it will take about one weekend of work, to make GPU earthsim plugin Terragen 2 compliant. 	
+
+All files in /sandbox will be moved in /sandbox/terragen-0.9 and a new directory /sandbox/terragen will be created.
+
+A tutorial to add planets and moons in Terragen 2 is here:
+http://www.designpaths.com/terragen-tutorials/adding-planets/ 	
+Terragen 2 is available at:
+http://www.planetside.co.uk/terragen/download.php?item=tg2freewin
+
+
+30.3.07 CVS
+added head comments to most units of /lib/misc and /lib/colormap
+initial changes in db layout to make FD ftp upload and executables features possible.
+
+27.3.07 CVS
+added head comments to all units of /packages/owncomp/TGPU
+
+20.3.07
+0.943 Release notes 
+-------------------
+ Screensaver enhanced:
+ - cool zooming effect
+ - autoupdate information
+ - uptime information
+ - node, team, country information 
+ 
+ OS support: 
+ - Vista/Linux Wine menu bug fix 
+ - Vista ready Lite Version: Lite Version has possibility to be upgraded to 
+   full version via autoupdater. 
+   
+ Other: XML class refactored minor visual enhancements to netmapper
+ 
+8.3.07 0.9427
+- several attempts to fix netmapper did not work
+- some seinjector fixes (for netmapper)
+
+5.3.07 0.9426
+- Screensaver displays total uptime
+- Vista support also fixes Linux/Wine menu bug
+
+4.3.07 0.9425
+- Vista support
+
+3.3.07 0.9424
+- GPU lite support (menu entry)
+- updater is able to make a full version out of a lite version
+- netmapper fix: storing list only on close again
+
+1.3.07 0.9422
+- Screensaver with sinus zoom and pictures if newest or oldest
+- Screensaver with update line
+- Netmapper and Screensaver fixes (cpu load)
+
+28.2.07 CVS
+- old XML broadcast dropped from Netmapper and Screensaver
+- fix in broadcasting job and percentage information
+
+27.2.07 0.942
+- moved out loop to load plugins from FormCreate to the FirstTime in Timer1Timer event.
+This because the plugin pwansrw.dll from nanobit was crashing gpu core on my dual core
+as it tried to communicate with GPU before the GPU main application was ready.
+
+19.2.07 0.9419
+- added <xmlflat> around an xml message, made sure that
+GPU engine does not process these messages
+- fix to updater which should now update also screensaver
+on the fly
+- fix to netmapper: statistics for all nodes is always
+recomputed as function might change with time.
+
+18.2.07 0.9416
+- fix to terragen stable settings
+- terragen frontend recompiled to support LWM server:
+gpuftp.lwm-media.net:21
+
+15.2.07 0.941 (not released on sourceforge)
+nanobit's P2P environment variables as two new plugins
+called pwansrw.dll and gpu2pwandb.dll.
+This is a completely new paradigm, which uses variables
+which can be synchronized between 2 nodes using
+hashes. The paradigm is powerful and could be used
+to exchange results of computations between nodes
+without of having loss of data.
+nanobit delivered documentation which will be published
+on sourceforge.
+
+Try telnet localhost 22007 to connect to the p2p persistent
+database of nanobit. Available commands are:
+%¨
+%gpu
+name=variable
+name
+&nodeid=gemini
+*sync
+
+15.2.07 0.9405
+- added CRC support to XML messages (backward compatible)
+- attempt to fix Netmapper multiple access violations
+
+12.2.07 0.9401
+- minor bugfix to uptime and total uptime in netmapper for old clients less than 0.940
+
+11.2.07 0.940 Release Notes
+Netmapper and Screensaver listen to an XML broadcast. Important Broadcast fixes. 
+New Search Engine injector plugin is shown on netmapper. Code cleaning and minor bugfixes. 
+Latest NSIS installer is used to pack GPU, to avoid wrong antivirus warnings.
+
+11.2.07 0.93995
+- bugfix cpu load in netmapper and screensaver
+- attempt to fix access violation on closing netmapper
+
+10.2.07 0.93993
+- nanobit adds injector XML messages
+- GPU core broadcasts via XML to netmapper
+- xyz_netmapper and remoteip jobs added to VM
+- changes are important and backward compatible,
+ but as soon as everyone is on XML, there will be a code cleanup :-)
+- screensaver is also able to interpret XML messages
+
+9.2.07 0.9398
+important bugfixes to broadcast mechanism: 
+  - in particular requests broadcast now exactly as reply do
+  - loopback broadcast for jobs coming through local gate
+netmapper features now XML messages (tested)
+with XML messages one can change color and position of the sphere
+as well.  
+
+8.2.07 CVS
+- new service for netmapper XML_NETMAPSTATS_BROADCAST
+ added, so that standalone crawlers can send their statistics
+ via simple XML messages. Code is on CVS, but
+ needs to be compiled tomorrow to check for typos
+
+4.2.07 0.9393
+- Improved monitoring of traffic on network
+- Setup a mutella node at www.gpu-grid.net:6346/remote
+ and trying to recompile it so that it is compatible to GPU
+
+21.1.07 0.939 Release Notes
+- Orsa plugin works with File Distributor and computes best approaches
+- File Distributor has User Management
+- Screensaver is less CPU intensive
+- Netmapper shows online nodes first and computes uptime with seconds
+granularity
+- Updater behaves correctly if experimental plugins are defined
+- Chess frontend/plugin included in main distribution again
+
+21.1.07 0.9387
+- Much more less CPU intensive screensaver and netmapper (TimerTimeOuts only each
+ 2 seconds)
+- Added chess as experimental plugin to the full distribution
+
+20.1.07 0.9385
+Updater uses common install routines to install a new screensaver.
+
+20.1.07 CVS 0.9385
+- Netmapper shows online nodes first (if option is checked)
+ Uptime and Total uptime sorting now also checks for hours and minutes
+ Last change improves statistics precision, and stability as timers
+ were revised
+ 
+- Updater installs screensaver in windows directory
+- Updater deletes experimental plugins if a new plugin is downloaded
+  to keep consistency
+ 
+- Tests with file distributor and orsa work :-) The job used
+to test is under gpu_solar/bin/config/jobs.txt at the end.
+This is the first project computed with the file distributor.
+Now a way to generate easily these files out of orbital elements
+is necessary.
+- updated team file in gpu_solar/bin/config with the existing teams
+- fixed cleanup script to delete all logfiles
+
+
+10.1.07 CVS
+written test unit for OrbitsWithEpoch, results are close
+but not close enough 8-)
+
+9.1.07 CVS
+ported OrbitWithEpoch from Pasquale's Orsa
+
+1.1.07 CVS
+FD has incorporated User Management with 3 categories:
+Guest, Project Manager and Administrator.
+
+29.12.06 0.9383
+orsa:
+- distance management works fine
+- approachs are showed with lines
+- crunching of parameters adapted to file distributor 
+
+28.12.06 CVS 0.9382
+- Radau integrator works fine and computes right orbits
+- all interactions have year (timestep) skewed
+- approach detector written but not tested
+
+
+27.12.06 0.9381
+- orsa displays current year of computation
+- file with major bodies created: this will be the template for asteroid computations
+- some icons changed
+
+25.12.06 0.938
+- FD manual finished
+
+21.12.06 CVS
+- FD manual almost finished
+- code cleaning in downloader.dll, URL encoding for processor already works
+
+19.12.06 0.9378
+- Fix to downloader.dll to handle right an error response from FD
+
+18.12.06 CVS 0.9376
+- Fixes to FD: reset project resets percents, getwork delivers newlines
+if done with form method, processor is stored into db already when request is
+done.
+- FD: Install steps written
+- Console frontend is able to resend jobs each 30 seconds
+- First tests of FD with a bigger project (Junk Generator) generated with
+/src/file_distributors/tests/junk_generator.zip show that there is a cache
+problem, as the webserver answers with the same webpage each time the client
+asks.
+- Fixes to downloader plugin to overcome proxy caches
+
+14.12.06 0.9374
+- new function in basic.dll: pop
+- new functions in strbasic.dll: tostr, compare
+They will support FD GPU jobs
+
+13.12.06 CVS and 0.9372
+- downloader plugin is able to interface with file distributor (and well documented).
+- Reporting percentage of delivered work units and percentage of sent work units.
+Skeleton for manual ready.
+
+12.12.06 CVS
+File Distributor: manually reporting work units works.
+
+11.12.06 CVS
+File Distributor: Inserting project automatically scans for files. Getting work
+with manual form works.
+
+10.12.06 CVS
+initial revision for the File Distributor, a set of PHP scripts based on Apache, MySql can be 
+found under /src/file_distributor
+Current /lib/visualsynapse/pastella.pas in CVS is broken and delivers runtime errors.
+
+?.11.06 0.9371
+Chinese translation improved and refined by Ray Resume.
+
+6.11.06 CVS
+- installed lazarus 0.9.20 and freepascal 2.0.4 on
+andromeda, andro-linux and guevara
+- document about universal gpu_core written under /doc/dev/concepts-new-gpu-core.txt
+- first gpu_core compiled with lazarus and pastella includes under
+/src/gpu_core
+
+
+0.937 Release Notes 30.10.06
+- labels on 3D Network Mapper show node names
+- labels on Screensaver show node names. Screensaver displays chat traffic in green if there is some.
+- code refactored for Netmapper, Screensaver, Feynman-Kac
+ and Orsa using DisplayListObjects unit.
+- GPU core recompiled with Synapse release 37 (instead of 36).
+- Attempts to unbound UDP Gate on GPU Core (see Settings->Advanced), however no way to compile a frontend which connects from outside.
+- Attempts to add a screenshot to the computed html statistics failed.
+- gina.dll plugin documented
+
+23.10.06 0.9364
+30.10.06 0.937
+- GPU core recompiled with Synapse version 37
+- gina.dll documented and 2 example included in full distribution
+
+GPU core: - Setting to unbound UDP port
+          - WriteLogCheckBox fixed
+          - LogAllPacketsCheckbox removed
+
+21.10.06 0.9363
+- screensaver, netmapper, feynkac 3d refactored with class DisplayListObjects
+- screensaver, netmapper: code made more robust with StrToFloatDef
+- updater: help line if new screensaver was downloaded
+
+15.10.06 0.9361
+- 3d network mapper shows node names as labels in 3d window
+- screensaver shows node names in 3d window
+- screensaver shows chat lines in matrix style
+
+19.09.06 0.9356
+0.936 Release Notes 24.09.06
+- search plugin reports results using XML
+- netmapper stores only nodes with at least only one day of uptime or 10 megabytes of crawled data
+- in the screensaver configuration form, it is possible to set username, team and country.
+- applaunch plugin is tested by the console frontend
+
+15.09.06 0.9355
+Netmapper stores permanently only nodes with at least one day of uptime or 10
+crawlostones.
+
+5.09.06 0.93533
+Seinjector plugin for standalone crawler released by nanobit
+
+28.08.06 0.9352
+Memory leak fixed in TComputationThread by Delphifreak
+
+24.08.06 0.9351
+Important Crawler Update by nanobit:
+Crawlers use XML to report data.
+A page containing downloads for the standalone crawler is here
+http://search.centraldatabase.org/join.html
+
+
+19.8.06 0.935
+We go back to the normal GPL license as modifications are not allowed without changing the name of the license.
+Additionally, the terms of service of sourceforge.net allow only OSI licenses, so in order to be hosted as sourceforge
+we have to revert the license back to GPL. 
+See also David's Turner blog entry on this: http://www.fsf.org/blogs/licensing/20050211.html
+
+15.8.06
+Article by on GPL modified license for non military used published on
+Newsforge: http://trends.newsforge.com/trends/06/08/14/1438204.shtml?tid=147&tid=138 by Tina Gasperson.
+
+Reactions appeared on:
+http://trends.newsforge.com/trends/06/08/14/1438204.shtml?tid=147&tid=138
+http://slashdot.org/article.pl?sid=06/08/14/1850219
+http://www.theinquirer.net/default.aspx?article=33685
+http://arstechnica.com/news.ars/post/20060815-7511.html
+http://tweakers.net/nieuws/43970/Antimilitaristische-versie-GPL-onder-vuur-genomen.html
+http://sourceforge.net/mailarchive/forum.php?forum_id=40848
+http://sourceforge.net/forum/forum.php?forum_id=601861
+http://www.golem.de/0608/47173.html
+
+
+14.8.06 0.9345
+DelphiFreak controls that the DelphiPackagerTool can compile all projects.
+New search engine plugin/frontend release by nanobit
+
+05.08.06 0.9344
+two minor fixes to netmapper: computed amount in main window is equal to the
+amount computed on the html file (1000, 1024 divider).
+cluster load is displayed with smaller numbers.
+
+
+25.7.06 0.9343
+color, mass, radius fixes to jpl orbit.
+
+24.07.06 0.9342
+orsa is able to display a real JPL solar system on 1 Jan 2001.
+more fixes to follow in the next days.
+
+23.07.06 0.9341
+Changes to search plugin by nanobit
+
+18.07.06 0.934
+Maintenance Release for 0.933
+- improvements to netmapper statistics engine to handle up to 500 teams
+- bugfixes to netmapper statistics engine
+- log file size handling
+
+13.07.06 
+percent of cluster for nodes added (not tested yet)
+maximal size for logfiles is 3 MB  (0.9936)
+do not log search engine jobs      (0.9936)
+
+30.06.06 0.9335
+consumption in kwh for teams and countries
+column names total uptime / computers switched
+used a more correct tag for < and >
+
+27.06.06 0.9333
+no more negative terrastones allowed in stats
+calculation of an estimate of consumed power in megawatthour
+
+26.6.06
+0.9333 netmapper computes free connection slots and cluster load right.
+
+21.6.06
+0.9332 Empty teams and country are ranked last
+
+15.6.06
+0.9331 Netmapper bugfix: statistics do not work anymore with the hashtable system
+       but with a more reliable system.
+
+9.6.06
+0.9330 (=0.9239) Release Notes
+       Seen Once Statistics / Dual Core bug fix / Duplicate Packets bug fix / Screensaver bug fix
+
+0.9239 last fixes to netmapper so that files that remember nodes is more manageable
+0.9328 attempt to fix screensaver bar flickering on same screens    
+
+8.6.06
+0.9327 setting hour of day to Offline for some nodes
+       node id and hour of day also in xml stats
+0.9326 duplicate jobs on initiator node is solved at GPU level
+       hour of day reported on netmapper
+       nodes identified by a permanent id in netmapper instead of a couple
+       (IP, nodename)
+
+
+0.9325 Netmapper remembers nodes which go offline and uses that information
+to generate statistics. 
+
+28.5.06
+0.9324 MHz speed updated once in 3 minutes to get changes of speedstep technology.
+0.9323 a better processor string with modifiers is sent to netmapper. 
+0.9322 CPU detection bugfix for dual cores
+       
+26.5.06 0.9321
+Netmapper bugfix: mflops field duplicated in stats
+
+21.05.06 0.932 Released (0.9138)
+
+?.5.06 0.9312 - 0.9318 
+Improvements to Distributed Search Engine by nanobit
+
+30.4.06 0.9312
+Better startup sequence for screensaver. Bugfix where nodes do not show up
+if computer is under load should be solved.
+
+?.04.06 0.9311
+Search plugin improvements by nanobit
+
+23.04.06 0.931
+- Code cleaning in screensaver (arcball code removed)
+ and attempt to optimize speed in screensaver by changing timers.
+- GPU core: button index bugfix
+
+20.04.06 0.9308
+Netmapper computes overall total uptime. Version column of list hidden
+(width 0) in Netmapper.
+
+18.04.06 0.9307
+URL for searches inside chat changed from http://www.google.com to
+http://search.centraldatabase.com which is the GPU Search URL. 
+
+11.04.06 0.9306
+Screensaver displays UTC time and broken year time.
+Colors of screensaver changed.
+
+06.04.06 0.9304
+Spanish Translation by Alberto Pérez García-Plaza
+
+04.04.06 CVS
+Changed URL for autoupdate from www.tea.ch/gpu to www.gpu-grid.net/gpu
+
+14.3.06 0.9303
+Storing Total Uptime not only at closing but about any 2 hours to avoid crash loss.
+
+12.3.06 0.9302
+Total uptime is included with day granularity in team and country statistics as well.
+
+11.3.06 0.9301
+Total Uptime is computed and stored in gpu.ini with a hash to avoid tampering.
+Total Uptime is displayed on netmapper, and is used in the computation of netmapper
+statistics for single users.
+
+27.2.06 CVS
+Netmapper shows originator node for statistics in html and xml.
+
+26.2.06 0.930 Release Notes
+Screensaver: initial release.
+Netmapper displays scalability factor, represented as  the number of free connection slots.
+
+26.2.06 0.9298
+Binding screensaver to adapter 127.0.0.1 and to another port than the one of netmapper.
+Screensaver closes much faster (sleep(..) statement removed).
+
+25.2.06 0.9297
+Install scripts ask the user if he/she wants the screensaver installed and made as default.
+Fixed little Anonymous username bug at startup.
+SCR Abarth label on Netmapper if user runs screensaver.
+
+25.2.06 0.9296 
+Option to remove screensaver in Tools->Screensaver->Uninstall added.
+
+24.2.06 0.9295
+GPU core asks at startup and via menu if one would like to install the screensaver.
+
+20.2.06 0.9294
+configuration form for screensaver added.
+screensaver launching logic.
+
+18.2.06 CVS
+screensaver deactivation code.
+description of screensaver with {$D} directive.
+
+14.2.06 0.9293
+netmapper displays scalability
+formula to compute partecipation level slightly changed
+jobs are now recorded as the function call string instead of the jobid
+
+layout for screensaver is improving.
+
+11.2.06 0.9292
+netmapper with animated zoom, aggregation of teams not case sensitive,
+paging up to 70000 statistic entries.
+
+under /src/frontend/screensaver there is a stripped off netmapper without
+XML export and +,-,Refresh buttons. this will be the new screensaver :-)
+
+10.2.06 0.9291
+- netmapper: 
+ column sorting for uptime works, statistics includes Terragen images produced
+ uptime days are now relevant for statistics :-)
+ code cleaning
+
+31.1.06 0.929 Release Notes
+- Direct Traffic reduces network traffic for Distributed Search Engine
+- Uptime information on netmapper
+- XML export for cluster statistics
+- Orsa and GPU core bugfixes
+- 0.929 is a slightly modified 0.9288 (autoupdater is less verbose)
+- 0.929 runs at least for 10 days under low traffic
+
+25.1.06 0.9288
+XML Cluster Status export implemented in netmapper
+
+18.1.06 0.9287
+Uptime label with minute granularity and day horizon is displayed on client
+and on netmapper as well.
+
+6.1.06 0.9286
+- bugfix: if a dll is unloaded, and someone tries to unload it again
+PluginManager.unloadDLL(DLLName : String) returns true instead of false.
+This avoids confusion, especially for the autoupdater.
+
+3.1.06 0.9285
+- new files three_earth_problem.start with computed orbital velocities
+- nanobit fixes bug in orsa, fm_input.close() was missing.
+
+1.1.06 0.9283
+- improvements for search_plugin, direct traffic should reduce
+traffic on Gnutella network
+
+30.12.05 0.9282
+- improvements for search_plugin
+- fixes to orsa system: float conversion should work internationally now
+
+29.12.05 0.928 Release Notes
+- 3 new C++ frontend examples including MegaHAL chatbot under /src/frontend, first one made by Edgar Sartori 
+- most used frontends switched to UDP-IP message technique for improved OS stability 
+- orsa frontend can handle multiple files 
+- search plugin fixes 
+- synapse and visualsynapse library update 
+
+29.12.05 0.9279
+- orsa error handling and centering fixes. link to pioneer anomaly paper added.
+- /lib/synapse updated to v36. /lib/visualsynapse updated to 0.50
+- resizeable orsa frontend
+
+28.12.05 0.9277
+- search plugin changes
+
+28.12.05 0.9276
+- orsa frontend can primitively handle multiple input files.
+
+27.12.05 0.9275
+- nanobit adds /src/frontend/simple_cpp_demo and /src/frontend/c_chat_demo,
+both C++ examples which can get back results from GPU and register to
+network broadcasts as well.  
+- reset virtual machine resets function call controller as well
+- orsa frontend works with other input files
+
+26.12.05 CVS
+- orsa frontend with UDP/IP, too.
+
+25.12.05 0.9274
+
+23.12.05 CVS
+- simple frontend under src/frontend/simple
+moved from windows messages to UDP/IP channels as well.
+- simple-udp directory removed.
+
+NOTE: autoupdate is out of order for a while
+
+21.12.05 CVS
+Edgar Sartori checked in C++ frontend example under
+/src/frontend/Simplest_c_example
+
+
+19.12.05 0.9273
+fixes to netmapper. signature of sendMsgtoGPU modified to include
+isLocal flag. In fact, 'register' and 'unregister' jobs have to be
+local, while 'gpustatus' jobs have to be global.
+
+18.12.05 CVS 0.9272
+
+17.12.05 
+netmapper uses UDP/IP channels instead of Windows messages.
+The amount of windows messages generated by netmapper/GPU 
+was creating trouble to other applications such as Internet Explorer.
+On the long term we should switch everything to UDP/IP.
+
+10.12.05 CVS
+created new file for orsa: three iupiter problem.
+
+9.12.05
+orsa.dll accepts file placed in plugins\input as initial frame
+
+3.12.05 0.9271
+fixes to search plugin
+
+2.12.05 0.927
+Added primitive whitelist support
+gpu.exe as singleton as well
+
+30.11.05 0.9269
+blacklist inside P2P search system to avoid crawler traps.
+
+28.11.05 0.9268
+search_frontend as singleton.
+
+28.11.05 0.9267
+optimizing timing in gpu_timer and computationthread.
+updater removes update.txt at the end of operations such
+that there are no copies of update.txt around.
+chattranslate acts as singleton.
+terragen frontend acts as singleton.
+chat translator is considered as frontend in updater and gpu core.
+
+27.11.05 0.9266
+even nine_billion_names runs only one by one after changes
+in vm and funccontroller.
+max_threads variable in GPU component from 32 to 3 to achieve
+some additional speedup.
+
+27.11.05 0.9265
+whiteboard, feynman-kac, orsa, console frontends recompiled
+to be singleton as netmapper is
+
+26.11.05 0.9264
+exception to the rule of queue management: terragengrid
+jobs can run concurrently, cause they were meant to be so
+at the time. to achieve this, new function in FunctionCallController
+was implemented.
+
+20.11.05 0.9263
+some more intelligence in queue: if a job is in queue and wants
+to call a function which is already used by a computation thread,
+the job is not accepted and moved back to the queue
+
+show logfile button moved to the configuration tab. stats tab
+has some more place now.
+
+netmapper: blue line in front of red line for better readability
+
+16.11.05 0.9262
+FunctionCallController added in GPU component
+two threads at the same time in the same DLL function are not allowed
+anymore, for stability reasons.
+
+6.11.05 0.926b or 0.9261
+search_plugin is compiled correctly, such that it can unload
+autoupdate: killgpu command is working properly
+
+5.11.05 0.926 unstable
+GUI for java frontend written under /src/frontend/java_example,
+UDP connection still does not work...
+This release is marked as unstable because search_plugin does not want to unload.
+gpu.exe stays around in memory even if you close the GPU main window.
+
+5.11.05 0.9259
+whiteboard shows nanobit's seismograph recordings
+search_plugin recompiled with SQLLITE switch
+
+5.11.05 0.9257
+Splitter to resize panel on netmapper
+Processor type is displayed on netmapper (change in GPU core needed, too)
+
+
+5.11.05 0.9256
+Fixed Blue-Red line problem on netmapper
+Spinning on center of mass for netmapper
+Viewport calls changed into netmapper
+Resizing of netpanel is always half of the window
+GPU core does not close frontends under wine emulator
+Rewrote logic to disable menu items if frontend is not present
+
+4.11.05 0.9255 
+recompiled all plugins with the new definitions.pas, which is compatible to C/C++ plugin under /src/dllbuilding/c_example
+
+
+15.10.05 0.925
+New Features:
+- Ability to load / unload plugins one by one led
+to an "on the fly autoupdater" which does not necessarily need to close GPU.
+- Autoupdater can update in once a day intervals
+- paulatreides formatted parts of the code with Jedi
+- FrontendManager is now able to handle multiple frontends registered to the chatbot and netmapper broadcast services
+- earthsim replaced with the one of version 0.919
+- second part of documentation regarding nanobits' seismograph
+
+Fixes:
+- in chat a double click on a link caused GPU to crash cause the dot at the end of the sentence was misunderstood.
+
+2.10.05 0.924
+All changes in 0.924 are towards stabylizing 0.923
+- fixes to universaltime.dll so that application can close
+- fixes to Terragen plugin, Terragen Frontend back to stable version of 0.921
+- fixes to DLL Manager
+- TGPU: PluginManager can load and unload DLLs one at a time
+- autoupdater can move files around into the subfolder
+- autoupdater can kill a GPU behaving weird
+
+New Docs (Full Install only):
+Search Engine News from Nanobit
+Draft on how to build a seismograph
+
+2005-09-18 0.923 unstable
+New stuff:
+- Search Engine improvements by Nanobit
+- New docs: Search Engine Manual
+- Terragen improvements by Paulatreides
+- Help Button by Ninja
+- Terragen updated from 0.9.19 to 0.9.43
+- minor core changes
+- new docs: Applaunch tutorial
+
+Broken stuff:
+- GPU does not close and stays in memory dued to plugin
+universaltime.dll which should be deleted from subfolder plugins
+- Therefore autoupdate does not work correctly
+- Terragen frontend produces exceptions on some computers
+
+
+30.08.05 0.921
+Search engine improvements:
+- UTF8 encoding to support language with special characters (e.g. Chinese)
+- crawler does not exhagerate with hard disk usage (commits only once in a while, in order to avoid stress to the journaling system)
+- better interaction between mysql indexing (done by webinterface on search.dubaron.com and sqlite on the newtork)
+
+Core:
+- new buttons by Stefano Godenzi
+- again several bug fixes in chat
+- closing core automatically closes all frontends
+- netmapper does not show gnutella connections (several
+users reported this as a bug)
+
+2005-08-13 0.920
+New Features:
+- webcam can be sent to entire network with whiteboard
+- images on core client are configurable and stored in icons subfolder (see also icons\icons.ini)
+- hyperthreading and 64 bit processors are recognized
+- some more Delphi 2005 files are included in source zip
+
+Bug fixes:
+- Pastella hooks added (missing since first pastella release :-#)
+- SMP recognition works again (broken in 0.919)
+- All files needed to run GPU without exceptions included in source folder
+- Some bugfixes in DelphiPackageInstaller
+- GPU runs without exceptions on windows systems with uptime more than 30 days (millisecond bug)
+- chat sentences do not get truncated anymore
+
+2005-09-18 0.919
+
+2005-07-15 0.918
+- whiteboard to share sketches of ideas between users
+- chat balloons every two minutes for chat entries (can be disabled in configuration settings)
+- chat balloons for people entering and leaving the cluster
+- Terragen plugin works now with some more FTP servers (some incompatibilities solved)
+- Terragen frontend allows to remember other FTP servers servicing the network
+- GPU compiled in 800x600 resolution for older monitors
+- GPU GUI fixes
+- Languages regenerated, French menus added
+
+2005-07-01 0.917
+- File Distributor by Justin Adams (description in http://gpu.sourceforge.net/file_distributor.php)
+- Downloader.dll adapted to File Distributor (download_wait_exp implements exponential waiting)
+- More accurate MHz computation with SMP recognition
+- Netmapper with timestamps to know when events on the cluster happened
+- New language dialog replaces the old File Open Dialog
+- Label size adapted to languages
+- Italian, German, English, French language update
+- Computation of cluster load changed to be a little bit more generous
+- Bug fixes in Netmapper (Int var -> Longint), GPU core (enter calls connect function) 
+
+2005-09-18 0.916
+- DelphiPackagerTool updated by delphifreak
+- netmapper displays additional 2D cluster graph
+- frequency of stats increased without stability loss from once in 2 hours to once in 2 minutes
+- orsa, internal changes, which still do not reflect on GUI
+- fixes
+
+2005-07-15 0.915
+This release contains Rene Tegel's Pastella
+as new connection layer, under /lib/visualsynapse
+
+Fixes in menu system
+Menus for Orsa Frontend (without comparing feature)
+
+2005-05-22 0.914
+- 0.914 includes the latest version of the DelphiPackagerTool made by delphifreak
+- it includes the new chattranslator made by nanobit
+- redesigned netmapper GUI, resizeable. GUI shows totals for GHz and stats directly on GUI.
+- ORSA: unfinished menus, computations done with doubles instead of Extended
+
+Changes in core client:
+- fixes bugs in ForceIP that prevented to get incoming connections
+- fixed some GUI glitches
+- added menus for faster navigation
+- fixed bugs in virtual machine: it accepts now scientific  notation and negative numbers again.
+- buttons for frontends
+
+2005-05-22 0.912
+- new package structure proposed by Samuel Herzog (delphifreak).
+- new install script follows package structure
+- source release much shorter now (does not include binaries anymore)
+- DelphiPackagerTool by Samuel helps developers in installing GPU and its components
+- new CVS module gpu_solar, which is the new codename for the current development branch
+
+2005-07-15 0.911
+GPU core:
+- direct messages allowed
+- transport of messages fixed
+- service channel added
+- chatbot broadcast system added
+
+Plugins
+- chatbot gina added by nanobit. the chatbot uses Markov chains
+- Orsa is able to display some Doppler effects
+- simple frontend fixed. Frontend is able to register
+ to chat and netmapstats broadcasts. Global / Local switch
+
+Docs:
+- french translation by paulatreides
+- gpu_ext.pdf extended to include direct messages and chatbot broadcast, example on how to use UDP packets without visual component support
+
+2005-02-12 0.910
+- ORSA frontend:
+    orbits visualized while computing via UDP (nanobit)
+    all planets added
+- GPU core: 
+    recompiled with Synapse Release 35.
+    service chat channel support
+    chatbot channel support
+    postmessage() used instead of sendmessage()
+    to improve responsiveness 
+- Chatbot echo plugin initial release
+- little docs maintenance 
+
+2005-01-28 0.909
+- Terragen is now own plugin (earthsim.dll) without earthsim.exe stub launched by applaunch.dll. This adds
+stability and will help to compute movie of Huygen's
+landing on Titan
+- Netmapper computes statistics for cluster load
+- Collected statistics between November and beginning of January as excel table with graphs
+- ORSA plugin / frontend first light
+known issues: sometimes orbits are not displayed (directory bug), relativistic iteration is a straight line, Radau15 integrator can close orbits but still some issue on timestep
+management.
+
+2004-12-16 0.908
+- Cluster management for people running small
+ clusters
+- Installer adds documentation directory
+- GPU and its goals (powerpoint slide)
+- FAQ update
+
+2004-11-26 0.907
+Changes between 0.906 and 0.9073
+
+- netmapper displays connection load with heat color map
+- autoupdate is able to get stable/unstable versions
+- terragen frontend is able to run stable/unstable projects
+- extensive message in chat to inform people about unstable
+ terragen projects
+- memory leaks fixed in gpu.exe
+
+2004-11-06 0.906
+- nanobit fixed several memory leaks using memmaker
+  in particular TFormatSet and JobForThread were not freed.
+- a minor bug involving teams or usernames with comma produced errors in netmapper -> fixed now
+- Waterworks and LensFX plugins for Terragen added
+- the way how GPU handles strings was rewritten by nanobit:
+ a new QCharStack is defined in TStack to handle output strings from dlls back to thread. PCharStack keeps the meaning of input feeds. This version keeps throwing a EInvalidPointer catched internally, the problem does not arise if FreeMem is uncommented in TComputatinThread. We are still investigating on this
+- anyway, this GPU performs more stable under wine-linux, indicator that nanobit is on the good way.
+
+2004-10-28 0.901
+- bug fix: writelog not messed up, GPU acts faster in computations
+- bug fix: isfloat is correct now
+- resizing of formular using panels
+
+2004-10-25 0.900
+* Terragen framework extension with frontend 
+* speed improvement in computation core loop
+* Fixed the multi-processor bug that affected SMP and hyperthreading cpu's
+* Modified the chat system
+  - to display this message
+  - to display users active on other channels
+  - to allow you to click on an url
+  - underscores are displayed (another character is now not.. we fix that later)
+  - to send multiline messages (easier copy'n'pasting)
+* Added a dll manager. 
+  - This allows you to switch status of plugins between experimental and normal.
+* Minor bug fixes in virtual machine button
+
+2004-10-21 0.89985
+Welcome to the new GPU!
+
+Changes in 0.8998
+* Fixed the multi-processor bug that affected SMP and hyperthreading cpu's
+* Modified the chat system
+  - to display this message
+  - to display users active on other channels
+  - to allow you to click on an url
+  - underscores are displayed (another character is now not.. we fix that later)
+  - to send multiline messages (easier copy'n'pasting)
+* Added a dll manager. 
+  - This allows you to switch status of plugins between experimental and normal.
+
+
+Changes in 0.89984
+- fixed some multithreading issues
+hopefully GPU jobs stay cool now
+- added an exception catcher if a plugin fails,
+the exception is returned
+
+2004-10-10 0.899
+This packege is the pre-release of GPU 0.900, 
+and can be considered as  0.9 RC # 1.
+
+New features:
+* Improved netmapper, statistics, cluster statistics and lot more
+* Improved chat, removed some practical and optical bugs.
+* Multi-channel chat fully supported (again)
+* New terragen plugin for rendering virtual world video's
+
+2004-09-29 0.885
+- clients and netmapper display MHz, Speed, Crawlostones and RAM of connecting clients
+- timeout for queues
+- improved documentation, faq.html and advanced.html added
+
+2004-09-15 0.884
+- ability for frontends to register for particular broadcasts added
+- improved netmapper uses previous mentioned ability to scale at least up to 25 computers
+- netmapper refreshes itself as soon as all people update to 0.884
+- netmapper highlights selected items in NetListView with a white ball in the 3D OpenGL view
+- documentation part of the package
+- runtime bug incoming connections timeout solved
+- runtime bug TGnutella.Hash data length zero solved
+
+2004-08-07 0.883
+- improved crawler reports URL
+- searchfrontend implements a Visual Synapse HTTP interface, so that people can query from a browser
+- Gnutella interface improved to find doubles in a faster way, using circular buffers and hash values.
+- GPU features now a better DNS discovery system, with the DNS component of Visual Synapse. The Indy component is dropped
+- GPU reports sum of results
+- crawlostones command works again
+
+2004-07-13 0.879
+Milestone release:
+- Gnutella duplicates bug finally fixed (circular buffers check for this)
+- Interactive chat with user's list, bell
+- Higher connectivity, hosts list tried once a minute
+
+2004-06-25 0.876
+- 0.875: fixes to search_plugin that now unloads correctly
+- 0.875: fixes to search frontend, results of searchs now
+            displayed correctly
+- 0.876: Feynman-Kac frontend with color maps
+- 0.876: bugfix to F-K frontend involving displayed colors of results
+- 0.876: improved speed of F-K plugin to factor three
+
+2004-06-21 0.874b
+- code is now in sync with CVS module gpu_matrix
+- nanobit's search engine improvement in speed
+- crawlostones and speedostones commands
+- virtual machine bug fixes
+- UDP/IP support for frontends
+- frontends requests are queued in gpu_component\frontend_manager.pas
+
+2004-02-12 0.845
+- Netmapper displays multiple users behind same IP
+- late answer management in Netmapper
+- advanced seed management that allows reproducible results on a machine, although all machines are differently seeded
+- precision, accuracy fixed in pde3d.dll, stattest.dll, isaacrnd.dll
+- Feynman Kac plugin third release with oscillating erro
+- Feynman Kac frontend initial release
+- bug connecting to hosts with different ports (like Seeschloss) fixed
+- possibility to disable writing in logfiles
+- gpu_hosts.txt included, if ETH account is down
+- FAQ docs added
+
+2004-02-05 0.840
+- second 3D feynman-kac release
+- GPU gathers outside IP each six hours, and reconnects to other clients
+- minor autoupdate fixes
+- missing dllbuilding directory in NSIS installer added
+- minor NSIS installer fixes
+
+2004-01-31 0.835
+- 3D Netmapper displays connections to other Gnutella clients as white lines. It uses random job IDs to avoid interference with other Netmappers. A link to the worlwide map of the globetrotter project and a link to the Network status forum is now provided
+- Teapot OpenGL example shows how to get backend plugins 3D ready
+- IP is gathered from outside webpages each six hours
+
+2004-01-24 0.830
+- 3D network mapper with Flare effect
+- GPU always answers with the IP seen from outside. This allows more accurate 3D graphs.
+
+2004-01-24 0.829
+- 3D Network mapper with colors
+- autoupdate fix (float conversion error if in international setting decimal separator was different from dot)
+- float conversion errors on GPU fixed
+- gpu answers with high priority the command "gpustatus"
+ (this command is used by the network mapper)
+- chat with channels fix (last entries in channels are remembered)
+
+2004-01-19 0.825
+- chess plugin plays until the bitter end
+- chat system with channels
+- adult filters
+- subscribe to the list button
+- working image
+
+2004-01-15 0.820
+- forward dns lookup for permanent hosts
+- fixes to the chess plugin under faster machines
+- chat system flashes if new entries come in
+
+2004-01-12 0.817
+- autoupdate system downloads with threads without blocking 
+- chess frontend sends job with deeper search depth if returned move was illegal 
+- chess backend closes correctly and has a timeout  
+- first time that a setup.exe is provided, thanks to the Nullsoft install system
+
+2004-01-08 0.815
+- autoupdate
+- faster chess plugin
+- beep on special events
+- fix on hidetrayicon
+- update info movable to another URL
+
+milestone release
+
+2004-01-04 0.814
+- minor fix to the timeout connections
+- run as service option (with hidefromtray suboption to run on an Internet access point)
+
+
+2004-01-01 0.813b
+- fixes "I/O error 6" connection bug
+
+2004-01-01 0.813
+GWebCache fixes so that gpus register correctly to the host catcher. 
+SelectAll button works. Happy new year!
+
+2003-12-30 0.811
+A minor problem in the GPU discovery feature is solved: any port can be assigned now in the file gpu_ips.txt. I will keep my laptop running as long as possible to see if someone succeeds in connecting...
+
+2003-12-26 0.810
+- Chess engine works, although there is some problem with mate - Chess engine still not parallelized - Minor form fixes (deleted a "Related link" label lost somewhere behind the form)
+- Cool release :-)
+
+2003-12-24 0.809
+OS shutdown bug solved, closing under computational load bug solved, transparency effects, some work on chess backend (but not finished, of course). GPU recompiled with Delphi 7.
+
+2003-12-17 0.808
+- upload works for connected gpus, although to be enhanced
+- upload uses full path (to be changed)
+- upload of offensive material not allowed
+- upload still not tested with other clients
+
+- UpdateCheckThread informs of changes for the latest version and the current development status
+- extensively tested on two machines only
+
+2003-12-06 0.807
+- new configuration tab
+- directory bug if GPU runs for the first time fixed
+- enable local network searches checkbox added
+- arrow that blinks to the start button added
+- layout of the application reorganized a little
+- loadoptions, saveoptions slightly changed
+
+2003-11-29 0.806
+- gnutella autoping and autopong are disabled if autoconnect checkbox is false
+- computeglobally button is now translated again
+- gnutella blocklocalsearchresults is now configured in gpu.ini
+- good behaviour of this release on 15 machines
+- cleared results in GPU packet logger
+
+2003-11-22 0.805
+- longstanding bug with non-closing UpdateThread solved
+- log of interesting events in log.txt
+- each incoming gpu reveals username, version, language and operating system
+- statistics rate reduced by a half
+- reaction to incoming packets increased by factor 4
+
+2003-11-18 0.804
+- GPU Chess front end, initial setup
+- GPU can be configured so that only other GPUs can connect
+minor things:
+- loop connections not allowed anymore
+- chat ballon blinks if there are chat entries
+- automatic download of a list with IPs of other GPUs
+- Nickname is also written in UserAgent string
+- window focus is ok on first launch of GPU
+- GPU is a little bit larger
+- new chat button
+
+2003-11-15 0.803
+A mechanism using windows messages was implemented, instead of DDE. The simple frontend can now be used to perform some measuraments, to collect some speedup data of the framework.
+
+2003-11-14 0.802
+- PGP DLL is correct
+- fixed bug that caused 'For you' tab to display incorrectly, if DDE services were called
+- DDE Services attempt, bidirection does not work, unfortunately
+- Simple front end application that uses DDE
+- recompiled code after installing Delphi Update Pack 1
+
+2003-11-02 0.800 special edition b
+- changed README_how_to_build_cluster
+- added the missing crabs program
+
+2003-10-30 0.800 special edition a
+- results come back
+- it should be now possible to build windows clusters
+  using GPUs
+- GPU is fairly stable
+- UpdateCheckThread proposes one IP to connect,
+  if I have a machine running GPU
+- removed entry "Use 0.688 instead"
+- changed underlying mechanism to spread packets
+- code now imported in gpu_revolutions CVS
+- special edition comes with slideshow and documentation
+- added small readme to explain how to build GPU clusters
+- extensively tested GPU on both Windows 2000 and XP.
+
+2003-11-10 0.800 special edition 
+PGP did not work because the UTF8sec.dll was wrong.
+
+2003-10-28 0.796
+- release seems stable under Windows XP AND 2000
+- connections between two GPU nodes seem stable for
+at least 30 minutes.
+- TComputationThread was taken from broken 0.795b
+- also basicdll.pas from broken 0.795b
+- PluginManager of 0.795b brings runtime errors
+- Chat function, and exchange of jobs works fine
+- results still have to come back, (still not implemented)
+
+2003-06-25 0.795b
+- readme files updated
+- cleaner TComputationThread.pas
+- reformatted all textes
+
+WARNING: I did not check that this version compiles under Windows, but it should. My windows OS is still screwed up
+
+2003-05-01 0.795
+- Gnutella layer updated by Kamil
+- better README files for Linux and Windows, in particular how to test GPU GUI on Linux is explained
+
+2003-04-06 0.788b
+- Indonesian language support
+- Pusciavin language support
+- link to the translator of the slideshow (www.greer.de)
+
+2003-04-02 0.788
+- OS shutdown bug solved by siwi
+- two .html help files added. One explains the directory structure of the GPU package, the other one explains a little how to get GPU compiled with Delphi.
+
+2003-04-01 0.787b
+- link to regional forum added
+
+2003-03-31 0.787
+this is 0.786 e plus some fixes and all available languages at the moment:
+English, Italian, German, French, Chinese and Tamil.
+
+2003-03-23 0.786e
+- cosmetics in statistics window
+- PGP support
+- crab simulator
+- multilingual
+- Nine billion names... plugin
+
+2003-03-22 0.786d
+- flick to the download system
+
+2003-03-22 0.786c
+- flicks on GnutellaOptions
+- PGP support
+- multilingual support
+- for the masses
+
+2003-03-22 0.786b
+
+2003-03-06 0.779
+
+2003-02-27 0.777
+- new plugin solves laplacian pde with random walkers. no bugs, however approximated result does not match analytical result. Plugin has graphical output
+- new plugin implements the freely available strong pseudo random generator ISAAC, much better than the delphi-one.
+- minor changes in webpages, english and french version now correct
+
+2003-02-21 0.776
+- Sayan plugin for computing Pi ported from C to Delphi, however there is still a bug, the plugin does not give the right result.
+- minor impromements in help system
+
+2003-02-21 0.775
+- help file improvements (gpu bar as a frame)
+- "how to help.htm" written
+- links exchange system to get more visitors
+
+2003-02-19 0.774
+- directory bug solved (if upload select directory was changed)
+- docs "update"
+- small discretelog bug fixed
+
+2003-02-17 0.772
+- project recompiled under Delphi 5
+- gpu engine fixed, parameters problems don't crash the app
+- graphics output only if graphics tab is active (plugins get faster if they don't have to display progress)
+- TComputationThread source code partially moved to plugins
+- trayicon installed (however this could lead to problems)
+
+2003-02-16 0.77
+- graphics engine finally works
+- plugins have to implement one method for computation and release from time to time. Another method (update) displays progress on screen.
+
+2003-02-16 0.769c
+- I introduced an update function in the plugins
+- I got rid of the runtime errors, however the plugin displays only at the end a picture.
+- In the next release I will try to introduce three other threads that display the update function using the synchronized method
+- the splash screen closes itself.
+
+2003-02-15 0.769b
+- multiple graphics, however thread synchronization problems :-(
+
+2003-02-15 0.769
+- graphics engine displays output of pi plugin
+- splash screen at startup
+
+2003-02-10 0.768c
+link to Kamil added
+
+2003-01-16 0.768b
+qtintf.dll included
+
+2002-12-19 0.768
+
+2002-12-18 0.767
+
+2002-12-17 0.766
+
+2002-11-01 0.764
+- ultrapeers
+- gnutella update by Kamil
+
+2002-10-30 0.763
+- minor internal changes in the TGPU component
+
+2002-10-29 0.762
+- resizeable window
+- jobs collected up to 128
+- prepared for answering system
+
+2002-10-24 0.76
+- plugin description
+- bug on closing fixed
+- chat entries visible if someone typed something
+
+2002-10-23 0.75
+- better download
+
+2002-10-21 0.743
+small changes in GUI, that should be now more user-friendly. Uptime label.
+
+2002-10-16 0.7
+new look & feel
+gpu engine not implemented yet
+
+2002-10-14 0.69
+
+2002-09-27 0.688
+in 0.688 the whole source code was revised in structure, but new functionality was not added.
+
+the following objects are now here:
+TPluginManager
+TConfigManager
+TTimerServices
+TChatSystem
+
+the revision is still not finished yet.
+a Threadmanager will come soon.
+I hope developers will appreciate the restructuring cure.
+
+2002-09-24 0.685b
+- all exceptions catched
+- multiple selections allowed for removing connections stopped to handshake
+- chat fix
+
+- os checking system computes suitable network load
+- cpu load is saved
+- gpu permanent hosts list can be updated via web
+- appendix f of documentation explains the new core revision to be implemented soon.
+
+2002-09-19 0.68*
+PGP signature of package
+
+2002-09-19 0.68
+- random walkers
+- update checking system
+- revised docs
+- bug fixes
+- cpu load can be set
+
+2002-09-10 0.67
+- configuration file saves last settings
+- transparency only as option, viewed that some people experienced problems, especially if they have old machines.
+
+2002-08-26 0.66f
+exception catched, when FSocket.Close is done
+
+0.66e
+solved a bug. after 4000 connections attempts memory filled because TGConnection objects were not rightly disposed
+
+0.66d
+important changes in Gnutellatrans
+
+0.66b
+fixed bug in TWebCacheThread. Sometimes HTML code was downloaded as host catcher list
+fixed bug if window with fadeout was closed two times
+team is updated in GPU Core (Monitor)
+buttons in help window are now more
+documentation is from 0.67
+special effects, transparency
+taskman button
+load traffic checkbox for permanent hosts
+this version was released by Siwi
+
+2002-08-01 0.65
+documentation with images and hyperlinks
+exception API async lookup catched 11001
+permanent host zaf.homeip.net can be added
+GWebcache fixed
+Ask forum button added
+Reset all threads button added
+typing enter starts search
+
+----------------------------------------------------------------------------
+GPU is yet another Gnutella client. In addition to the standard functionality for sharing files, GPU is able to share CPU-time among users. GPU will provide a robust framework for distributed computing, but unlike Kaazaa, GPU won't hurt the basic principle of Gnutella: "every node is able to use services from other nodes and has to offer services to other nodes". This means that the computational tasks will be fully transparent to the users, and all users will have the privilege of starting a computation.
+
+GPU implements the commands for the computation in an elegant way, making easy to extend the set of basic computing functions the Gnutella-node knows. GPU doesn't suffer of the limits a virtual machine has: plugins are developed as dynamic link libraries which are loaded at runtime and allow computations to be performed at the maximum speed, the speed of machine-compiled code. Of course, if GPU developes, there will be the necessity of signing these plugins, to avoid serious security holes.
+
+Possible applications are the search for prime numbers and golomb rulers, montecarlo integrations, stochastic solving of PDEs, number factorisation, cryptographic applications and repetitive tasks over huge chunks of data, e.g. a Fast Fourier Transform over data recorded from telescopes, to find out special events in the Universe. 
+
+At the moment, a working prototype exists, written in Delphi for Windows. 
+
+
+small add: GPU is also the first client that tries to implement a chat system directly over the Gnutella transport protocol. Of course we don't know if the system will work or not, but let's try.
+----------------------------------------------------------------------------------------------
+Prototype description:
+
+
+GPU is a prototype for an application which shares CPU-time of normal computers connected to the Internet.
+To do this, the application connects to the Gnutella network and, as any other Gnutella client does, is able to share files with others. In addition the application, from now on simply called the node, is able to send, receive and perform some computational jobs.
+Jobs travel through the Gnutella network disguised as search string for files, until they find a node willing to execute them or until their short life terminates, limited by a counter decreased every time the job is retransmitted again.
+Once the good-willing node finishes the job, it returns the result to sender. The sender has to collect results the same way he does for files found on the network.
+Jobs are described with the polnish notation, which can be interpreted as commands for a stack. "1 + 1" becomes "1,1,+" and although at first look it seems more complicated, it frees the node from some difficult issues, like operator precedence and bracket management.
+The application implements the commands for the computation in an elegant way, making easy to extend the set of basic computing functions the node knows.
+
+At the moment the following plugins exist and work:
+
+
+- a simple plugin that computes Pi using the method of throwing randomly a point and checking if it is in the circle with radius one. This is one of the easiest montecarlo computations, easy to understand for people willing to implement their first plugin
+
+- a plugin with simple operations on vectors, like dot and cross product.
+
+- a complex plugin for computing the discrete logarithm over huge integers, the inverse function of the most used one-way function in cryptography (although cryptographers won't fear this plugin, even if all computers on Internet will run the plugin! It takes an hour for solving the discrete log problem on one machine with a 42 bit integer, cryptographers use 2048 bit numbers!).
+
+GPU was tested in different network topologies (trees and graphs), but the number of workstations involved never exceeded 10.
+
+We search for people interested in the project: if you want to partecipate, you are welcome!
+------------------------------------------------------------------------------------------
+
+
+2002-07-30 0.63
+- gwebcache support for better network connectivity
+- problem of double incoming connections solved
+- send init on connect increases traffic to GPU
+- configuration possibility for GPU's behind a firewall
+- copyrights updated including all people working on the project
+
+2002-07-27 0.6
+
+2002-07-27 0.59
+- now it is possible to download files one at a time
+- source code in unit1.pas reorganized, important functions are now highlighted with stars for helping people understanding the code
+- now also functions called min and max are possible
+
+2002-07-25 0.57
+
+2002-07-24 0.53
+- help window works
+- chat system without underlines
+- search log and log in monitor window don't block anymore
+
+2002-07-19 0.51
+plugin description
+huge integers support for discrete logarithm plugin
+
+(0.51 was the initial release on sourceforge)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

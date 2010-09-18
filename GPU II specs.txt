@@ -1,0 +1,73 @@
+GPU II
+------
+
+
+GPU II Client
+-------------
+
+Freepascal/Lazarus 
+
+Base setup
+----------
+Client has one home GPU II server
+It announces itself to the home GPU II server (each two minutes)
+It retrieves a list of other available GPU II servers from the home server
+
+
+Functionality:
+--------------
+
+Chat: integrated browser to server which redirects to home GPU II server which redirects to IRC channel
+http://wiki.lazarus.freepascal.org/Webbrowser
+
+Netmapper: Lazuarus OpenGLControl showing rotated earth with geolocated IPs retrieved from all webserver
+
+Jobs: ability to send GPU jobs with broadcast or target node flag from webserver
+      ability to retrieve jobs from webserver for our node
+
+Network presence: like it is done now in filedistributor, additionally, clients can retrieve
+ information from multiple GPU II servers one after the other
+
+TGPU component to handle GPU jobs loaded with DLLs (most plugins and frontends compatible with GPU I)
+TXmlJobs component to handle XML work units
+Trayicon minimize
+
+Autoupdate compatible with GPU I
+
+GPU II Server
+-------------
+
+PHP/mySQL
+
+Functionality
+-------------
+
+Network presence for client: like it is done now in filedistributor. Client can retrieve a list
+ of online GPU II servers as well
+
+Network presence for server: server announces itself to GPU superserver and retrieves a list
+ of other available nodes. If the GPU superserver is down, it sends back the latest retrieved list
+ from the GPU superserver
+
+Chat: redirection to IRC client
+http://cgiirc.org/
+
+Geolocation of IPs
+http://www.ardamis.com/2008/01/27/how-to-geolocate-visitors-using-an-ip-to-country-database/
+
+QueueXMLJobs:
+component that queues jobs, jobs that are marked as broadcast can be retrieved from everyone
+
+QueueXMLAnswer:
+component that queues answers to jobs, answer to jobs
+
+Filedistributor:
+ ability to load zip files, and to distribute them via work units
+
+Ability to distribute binary files based on architecture 
+
+
+GPU II superserver
+------------------
+
+Only handles the availability of GPU II servers 
