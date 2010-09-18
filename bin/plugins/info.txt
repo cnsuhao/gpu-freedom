@@ -1,0 +1,3 @@
+This directories contains compiled pugins (.dll under windows or .so under Linux or .dylib under macosx).
+
+If gpu will support Java plugins, also .jar (Java archives) will come here.
