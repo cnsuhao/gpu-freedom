@@ -1,4 +1,3 @@
-{$DEFINE MSWINDOWS}
 unit FrontendManager;
 {
  FrontendManager defines queues.
@@ -8,8 +7,8 @@ unit FrontendManager;
 }
 interface
 
-uses {$IFDEF MSWINDOWS} Windows, FileCtrl,{$ENDIF}
-  SysUtils, definitions, common, utils;
+uses
+  SysUtils, definitions, common;
 
 const
   SIZE_CIRC_BUFFER = 100;
@@ -59,7 +58,6 @@ type
       var _type: TContactType; var QueuePos : Longint): boolean;
 
     procedure UnregisterFrontend(_JobID, _Contact: string; _type: TContactType);
-    procedure PrintFrontendStatus;
     procedure BeforeDestruction; override;
   end;
 
@@ -192,14 +190,6 @@ end;
 
 
 
-procedure TFrontendManager.PrintFrontendStatus;
-var
-  i: integer;
-begin
-  for i := 1 to SIZE_CIRC_BUFFER do
-    WriteLog(FrontendsCircular[i].RegisteredJobId + '/' +
-      FrontendsCircular[i].Contact + '/');
-end;
 
 procedure TFrontendManager.BeforeDestruction;
 begin

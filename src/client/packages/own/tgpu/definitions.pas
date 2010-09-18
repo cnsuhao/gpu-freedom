@@ -20,16 +20,16 @@ unit definitions;
 interface
 
 const
-  MAXSTACK = 256; {Maximum size of Stack in Virtual Machine}
+  MAXSTACK = 128; {Maximum size of Stack in Virtual Machine}
   MAX_COLLECTING_IDS = 128; {Maximum number of Jobs we keep also average track}
   WRONG_PACKET_ID = 7777777; {if you get seven seven as result, the plugin returns false}
   INF      = 1.0 / 0.0;    {infinite to distinguish PChars from floats}
   APOSTROPHE = Chr(39);    {apostrophe is character to separate strings}
   QUOTE    = Chr(39);      {alias for apostrophe, '}
 
-procedure GpuGetMem(var P: Pointer; Size: integer);
-procedure GpuReallocMem(var P: Pointer; Size: integer);
-procedure GpuFreeMem(var P: Pointer; Size: integer = 0);
+procedure GpuGetMem(var P: Pointer; Size: integer); stdcall;
+procedure GpuReallocMem(var P: Pointer; Size: integer); stdcall;
+procedure GpuFreeMem(var P: Pointer; Size: integer = 0); stdcall;
 
 
 type
@@ -37,11 +37,9 @@ type
   TSendCallBack = procedure(stk: PStack); stdcall;
   TSendStack = procedure; stdcall;
 
-
-
   TGpuGetMem = procedure(var P: Pointer; Size: integer); stdcall;
   TGpuReallocMem = procedure(var P: Pointer; Size: integer); stdcall;
-  TGpuFreeMem = procedure(var P: Pointer); stdcall;
+  TGpuFreeMem = procedure(var P: Pointer; Size: integer = 0); stdcall;
 
 
   TStack = record
@@ -97,6 +95,11 @@ type
 
 type
   TDllFunction = function(var stk: TStack): boolean; stdcall;
+type
+  PDllFunction = ^TDllFunction;
+
+type TDescFunction = function : PChar;
+     PDescFunction = ^TDescFunction;
 
 
 type   {here we collect results, computing average and so on}
@@ -159,18 +162,17 @@ var
 
 implementation
 
-//maybe move to gpu_utils?
-procedure GpuGetMem(var P: Pointer; Size: integer);
+procedure GpuGetMem(var P: Pointer; Size: integer); stdcall;
 begin
   GetMem(P, Size);
 end;
 
-procedure GpuReallocMem(var P: Pointer; Size: integer);
+procedure GpuReallocMem(var P: Pointer; Size: integer); stdcall;
 begin
   ReallocMem(P, Size);
 end;
 
-procedure GpuFreeMem(var P: Pointer; Size: integer = 0);
+procedure GpuFreeMem(var P: Pointer; Size: integer = 0); stdcall;
 begin
   if Size = 0 then
     FreeMem(P)

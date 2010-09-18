@@ -1,10 +1,3 @@
-{$DEFINE MSWINDOWS}
-{$IFDEF VER170}
-{$DEFINE D7}
-{$ENDIF}
-{$IFDEF VER150}
-{$DEFINE D7}
-{$ENDIF}
 unit PluginManager;
 {
  The PluginManager handles a linked list of Plugins, which are DLLs
@@ -25,15 +18,18 @@ unit PluginManager;
 
 interface
 
-uses {$IFDEF MSWINDOWS} Windows, FileCtrl,{$ENDIF}
-  SysUtils, definitions, common, utils;
+uses
+  SysUtils, definitions, dynlibs;
+
+const
+  PLUGINS_DIR = 'plugins/';  // directory where plugins are stored
 
 type
   {list used to load plugins}
   PPluginList = ^TPluginList;
   {list element}
   TPluginList = record
-    DLL:  THandle;
+    DLL:  TLibHandle;
     Name: string;
     Next: PPluginList;
   end;
@@ -72,9 +68,9 @@ type
       var WebLinkToPlugin: string);
     function CallUpdateFunction(DLL: THandle; stk: TStack): boolean;
     function FindFunction(FunctionName: string;
-      var PluginUsed: THandle): TDLLFunction;  overload;
+      var PluginUsed: THandle): PDLLFunction;  overload;
     function FindFunction(FunctionName: string;
-      var PluginUsed: THandle; var pluginName : String): TDLLFunction; overload;
+      var PluginUsed: THandle; var pluginName : String): PDLLFunction; overload;
     
     // returns true if a function is present in one of the dlls
     function isCapable(FunctionName : String) : Boolean;
@@ -103,11 +99,11 @@ procedure TPluginManager.LoadAllPlugins(Extension: string);
 var
   SRec:   TSearchRec;
   retval: integer;
-  HDll:   THandle;
+  HDll:   TLibHandle;
   buf:    array [0..1024] of char;
   PlugElement: PPluginList;
 begin
-  retval := FindFirst(Directory + PLUG_INS + '*.' + Extension, faAnyFile, SRec);
+  retval := FindFirst(Directory + PLUGINS_DIR + Extension, faAnyFile, SRec);
   while retval = 0 do
   begin
     if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
@@ -115,14 +111,14 @@ begin
              log it. Bail out if the log function returns false. *)
     begin
       {here we try to load a plugin with SRec.Name}
-      hDLL := LoadLibrary(StrPCopy(buf, Directory + PLUG_INS + SRec.Name));
+      hDLL := LoadLibrary(StrPCopy(buf, Directory + PLUGINS_DIR + SRec.Name));
       if hDLL <> 0 then
       begin
         {we attach new element at the front of the list}
         New(PlugElement);
-        PlugElement.Dll := hDll;
-        PlugElement.Next := Plugins;
-        PlugElement.Name := SRec.Name;
+        PlugElement^.DLL := hDll;
+        PlugElement^.Next := Plugins;
+        PlugElement^.Name := SRec.Name;
         Plugins := PlugElement;
       end;
     end;
@@ -142,9 +138,9 @@ begin
   while Assigned(p) do
   begin
     PlugIns := p;
-    FreeLibrary(p.DLL);
+    FreeLibrary(p^.DLL);
     tmp := p;
-    p   := p.Next;
+    p   := p^.Next;
     Dispose(tmp);
   end;
   Plugins := nil;
@@ -167,21 +163,21 @@ begin
     end;
 
   //find the file
-  retval := FindFirst(Directory + PLUG_INS + DLLName, faAnyFile, SRec);
+  retval := FindFirst(Directory + PLUGINS_DIR + DLLName, faAnyFile, SRec);
   if retval <> 0 then
     Exit;
 
   if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
   begin
     //here we try to load a plugin with SRec.Name}
-    hDLL := LoadLibrary(StrPCopy(buf, Directory + PLUG_INS + SRec.Name));
+    hDLL := LoadLibrary(StrPCopy(buf, Directory + PLUGINS_DIR + SRec.Name));
     if hDLL <> 0 then
     begin
       //we attach new element at the front of the list}
       New(PlugElement);
-      PlugElement.Dll := hDll;
-      PlugElement.Next := Plugins;
-      PlugElement.Name := SRec.Name;
+      PlugElement^.Dll := hDll;
+      PlugElement^.Next := Plugins;
+      PlugElement^.Name := SRec.Name;
       Plugins := PlugElement;
       Result  := True;
     end;
@@ -207,24 +203,24 @@ begin
   begin
     //p is first element so there is no element before
     //we advance the beginning of the list by one
-    Plugins := p.Next;
+    Plugins := p^.Next;
   end
   else
   begin
     q := Plugins;
     while Assigned(q) do
     begin
-      if (q.Next = p) then
+      if (q^.Next = p) then
         break;
-      q := q.Next;
+      q := q^.Next;
     end;
     //here is q previous element
     //now we exclude p from the chain
-    q.Next := p.Next;
+    q^.Next := p^.Next;
   end;
 
   //finally we dispose p
-  FreeLibrary(p.DLL);
+  FreeLibrary(p^.DLL);
   Dispose(p);
   Result := True;
 end;
@@ -243,12 +239,12 @@ begin
   Result  := False;
   while Assigned(p) do
   begin
-    if (p.Name = DLLName) then
+    if (p^.Name = DLLName) then
     begin
       Result := True;
       Exit;
     end;
-    p := p.Next;
+    p := p^.Next;
   end;
   p:= nil; // we did not find the plugin
 end;
@@ -265,8 +261,8 @@ begin
   Result := '';
   if tmpList <> nil then
   begin
-    Result  := tmpList.Name;
-    tmpList := tmpList.Next;
+    Result  := tmpList^.Name;
+    tmpList := tmpList^.Next;
   end;
 end;
 
@@ -275,7 +271,7 @@ function TPluginManager.ExecFuncInPlugIns(var ResFunc: boolean;
  {the reference var Resfunc is the result of the plugin function and it is
   true if all went right}
 var
-  theFunction: TDllFunction;
+  theFunction: PDllFunction;
   p:   PPluginList;
   buf: array [0..144] of char;
 begin
@@ -286,16 +282,16 @@ begin
   p := PlugIns;
   while Assigned(p) do
   begin
-    theFunction := GetProcAddress(p.DLL, StrPCopy(buf, Arg));
+    theFunction := GetProcAddress(p^.DLL, StrPCopy(buf, Arg));
     if Assigned(theFunction) then
     begin
-      ResFunc := theFunction(Stk);
+      ResFunc := theFunction^(Stk);
       Result := True;
-      PluginUsed := p.DLL;
+      PluginUsed := p^.DLL;
       p := nil; {to exit loop, plugin found}
     end {if}
     else
-      p := p.Next;
+      p := p^.Next;
   end; {while}
 end; {SearchInPlugIns}
 
@@ -304,35 +300,33 @@ procedure TPluginManager.GetPluginDescription(DLLString: string;
 var
   p: PPluginList;
   ResFunc: PChar;
-  theFunction:
-
-       function: PChar;
+  theFunction:  PDescFunction;
   buf: array [0..64] of char;
 begin
 
   p := PlugIns;
   while Assigned(p) do
   begin
-    if p.Name = DllString then
+    if p^.Name = DllString then
     begin
-      {get address of the description function} @
-        theFunction := GetProcAddress(p.DLL, StrPCopy(buf, 'description'));
+      {get address of the description function}
+        theFunction := GetProcAddress(p^.DLL, StrPCopy(buf, 'description'));
       {get description}
-      if @theFunction <> nil then
+      if Assigned(theFunction) then
       begin
-        ResFunc := theFunction;
+        ResFunc := theFunction^();
         if ResFunc <> nil then
         begin
           Description := ResFunc;
         end;
       end;
 
-      {get link to site} @
-        theFunction := GetProcAddress(p.DLL, StrPCopy(buf, 'weblinktoplugin'));
-      if @theFunction <> nil then
+      {get link to site}
+      theFunction := GetProcAddress(p^.DLL, StrPCopy(buf, 'weblinktoplugin'));
+      if Assigned(theFunction) then
       begin
 
-        ResFunc := theFunction;
+        ResFunc := theFunction^();
 
         if ResFunc <> nil then
         begin
@@ -343,7 +337,7 @@ begin
       p := nil;  {to exit loop}
     end
     else
-      p := p.Next;
+      p := p^.Next;
   end;
 
 end;
@@ -351,14 +345,14 @@ end;
 function TPluginManager.CallUpdateFunction(DLL: THandle; stk: TStack): boolean;
 var
   ResFunc:     boolean;
-  theFunction: TDLLFunction;
+  theFunction: PDLLFunction;
 begin
   Result  := False;
   ResFunc := False;
-  @theFunction := GetProcAddress(DLL, PChar('update'));
-  if @theFunction <> nil then
+  theFunction := GetProcAddress(DLL, PChar('update'));
+  if Assigned(theFunction) then
     try
-      ResFunc := theFunction(stk);
+      ResFunc := theFunction^(stk);
     except
       ResFunc := False;
     end;
@@ -372,7 +366,7 @@ begin
 end;
 
 function TPluginManager.FindFunction(FunctionName: string;
-  var PluginUsed: THandle; var PluginName : String): TDLLFunction;
+  var PluginUsed: THandle; var PluginName : String): PDLLFunction;
 var
   p: PPluginList;
 begin
@@ -381,20 +375,20 @@ begin
   PluginUsed := THandle(0);
   while Assigned(p) do
   begin
-    Result := GetProcAddress(p.DLL, PChar(FunctionName));
+    Result := GetProcAddress(p^.DLL, FunctionName);
     if Assigned(Result) then
     begin
-      PluginUsed := p.DLL;
-      PluginName := p.Name;
+      PluginUsed := p^.DLL;
+      PluginName := p^.Name;
       break;
     end
     else
-      p := p.Next;
+      p := p^.Next;
   end; {while}
 end;
 
 function TPluginManager.FindFunction(FunctionName: string;
-      var PluginUsed: THandle): TDLLFunction;  
+      var PluginUsed: THandle): PDLLFunction;
 var dummy : String;
 begin
  FindFunction(FunctionName, pluginUsed, dummy);

@@ -1,11 +1,5 @@
-{$DEFINE MSWINDOWS}
-{$IFDEF VER170}
-{$DEFINE D7}
-{$ENDIF}
-{$IFDEF VER150}
-{$DEFINE D7}
-{$ENDIF}
-{ 
+unit ComputationThread;
+{
     ComputationThread is a thread which executes stored in
     JobForThread.StackCommands.
     
@@ -29,16 +23,12 @@
     
 
 }
-unit ComputationThread;
 
 interface
 
 uses
-  {$IFDEF MSWINDOWS}
-  Windows, Dialogs,
-  {$ENDIF}
   Classes, Definitions, SysUtils, PluginManager, Jobs, Math,
-  gpu_utils, common, utils, FunctionCallController;
+  gpu_utils, FunctionCallController, common;
 
 const
   WAIT_FOR_RESULT = 3000;
@@ -66,7 +56,7 @@ type
 
     GPUID: TGPUIdentity; {holds identity information}
 
-    ThreadID: integer;
+    MyThreadID: TThreadID;
 
     // this is unique object for all threads and helps avoiding
     // two threads into the same DLL function for stability reasons.
@@ -203,12 +193,12 @@ begin
     Add(Self);
   TL.UnlockList;
   try
-    ThreadID := GetCurrentThreadID;
+    MyThreadID := GetCurrentThreadID;
 
     JobDone   := False;
     FormatSet := TFormatSet.Create;
     try
-      synchronize(SyncOnJobCreated);
+      SyncOnJobCreated; //removed synchronize call as it had problems
       try
         JobForThread.Stack.Thread     := Self;
         JobForThread.Stack.SendCallback := @SendCallBack;
@@ -227,7 +217,7 @@ begin
             '''Exception caught: ' + StringReplace(E.Message, '''',
             '"', [rfReplaceAll]) + '''';
       end;
-      synchronize(SyncOnJobFinished);
+      SyncOnJobFinished;
       //clean up PChar's that may be left in stack
       CleanStackMem(JobForThread.Stack);
       JobDone := True;
@@ -273,7 +263,7 @@ var
   ArgFound,              {if argument is not a number, ArgFound is true}
   ResultFunc: boolean;   {ResultFunc is the result of the Dll function}
 
-  theFunction: TDLLFunction;
+  theFunction: PDLLFunction;
   i: integer;
 
   function HandleSpecialCommands(var S: string): boolean;
@@ -345,10 +335,11 @@ var
     else
     if ('version' = Arg) then Result := LoadStringOnStack(MyGPUID.Version, Stk)
     else
-    if ('mhz' = Arg) then Result := LoadExtendedOnStack(GetProcessorSpeed, Stk)
+    if ('mhz' = Arg) then Result := LoadExtendedOnStack(MyGPUID.SpeedMHz, Stk)
     else
     if ('ram' = Arg) then Result := LoadExtendedOnStack(MyGPUID.RAM, Stk)
 	else
+    {
     if ('memused' = Arg) then Result := LoadExtendedOnStack(memused, Stk)
     else
      if ('memtotalspace' = Arg) then Result := LoadExtendedOnStack(memtotalspace, Stk)
@@ -356,7 +347,7 @@ var
      if ('memoverhead' = Arg) then Result := LoadExtendedOnStack(memoverhead, Stk)
     else
      if ('memheaperrorcode' = Arg) then Result := LoadExtendedOnStack(memheaperrorcode, Stk)
-    else
+    else }
     if ('acceptincoming' = Arg) then Result := LoadBooleanOnStack(MyGPUId.AcceptIncoming, Stk)
     else
     if ('loadedplugins' = Arg) then
@@ -452,8 +443,6 @@ begin
          {gives the actual argument back,
           without any spaces at beginning and at the end.}
 
-    //FillChar (Stk.PCharStack[1], Sizeof(Stk.PCharStack), #0);
-
     Arg := Trim(ReturnArg(J.StackCommands));
     repeat
       {argument might be a special command}
@@ -477,21 +466,8 @@ begin
             if Arg <> '' then
             begin
               StrArray[Stk.StIdx] := Arg;
-              Stk.PCharStack[Stk.StIdx] := Pointer(Arg);
-      {
-      if Assigned (Stk.PCharStack[Stk.StIdx]) then
-        ReAllocMem(Stk.PCharStack[Stk.StIdx], length(Arg)+1)
-      else
-         GetMem(Stk.PCharStack[Stk.StIdx], length(Arg)+1);
-      // FillChar (Stk.PCharStack[Stk.StIdx]^, length(Arg)+1 , #0);
-      // if Arg <> '' then
-      //   move (Arg[1], Stk.PCharStack[Stk.StIdx]^, length(Arg));
-         StrPCopy (Stk.PCharStack[Stk.StIdx], Arg);
-       }
+              Stk.PCharStack[Stk.StIdx] := @Arg[1];
             end;
-            //StrArray[Stk.StIdx] := Arg;
-            //Stk.PCharStack[Stk.StIdx] := PChar(StrArray[Stk.StIdx]);
-            //Stk.PCharStack[Stk.StIdx] := StrArray[Stk.StIdx];
           end; {floating number block}
         end
         else
@@ -507,14 +483,9 @@ begin
           else
           begin
             Stk.StIdx := Stk.StIdx + 1;
-            {$IFDEF D7}
-            Stk.Stack[Stk.StIdx] := StrToFloat(Arg, FormatSet.fs);
-            {$ELSE}
             Arg := StringReplace (Arg, '.', DecimalSeparator, []);
             Arg := StringReplace (Arg, ',', DecimalSeparator, []);
             Stk.Stack[Stk.StIdx] := StrToFloat(Arg);
-            {$ENDIF}
-
             Stk.PCharStack[Stk.StIdx] := nil;
           end; {floating number block}
 
@@ -565,7 +536,7 @@ begin
            // we call the function in the core loop multiple times
            repeat
               //try
-               ResultFunc := theFunction(stk);
+               ResultFunc := theFunction^(stk);
               {
                 // the idea of this block is to prevent an exception
                 // to block the execution of a particular function
@@ -589,13 +560,12 @@ begin
                     StackToStr(JobForThread.Stack);
                   JobForThread.ComputedTime :=
                     Time - JobForThread.ComputedTime;
-                  synchronize(SyncOnJobFinished);
-                  //JobForThread.OnFinished(JobForThread);
+                  SyncOnJobFinished;
                 end;
               {update window panel if necessary}
               if UpdateNeeded and Stk.Update and (Plugin <> THandle(0)) then
               begin
-                Synchronize(Update);
+                Update;
               end;
 
             until (Stk.Progress = 0) or (Stk.Progress >= 100) or Terminated;
@@ -614,12 +584,12 @@ begin
              Move (Stk.QCharStack[i]^, Stk.PCharStack[i]^, 1+length(Stk.QCharStack[i]));
   }
                 StrArray[i] := Stk.QCharStack[i];
-                Stk.PCharStack[i] := Pointer(StrArray[i]);
+                Stk.PCharStack[i] := @StrArray[i][1];
               end;
             theFunction := PlugMan.FindFunction('cleanstack', Plugin, PluginName);
             //dll may now clean up QStack
             if Assigned(theFunction) then
-              theFunction(Stk);
+              theFunction^(Stk);
           end;
 
           // EOF new core
@@ -655,7 +625,7 @@ end;
 function TComputationThread.StackToStr(var Stk: TStack): string;
 var
   i:    integer;
-  resS: string;
+  resS, v: string;
   //        resN : Extended;
 begin
   if Stk.StIdx = -1 then
@@ -713,21 +683,20 @@ begin
   begin
     JobForThread.Result := StackToStr(stk^{JobForThread.Stack});
     JobForThread.ComputedTime := Time - JobForThread.ComputedTime;
-    //    JobForThread.OnFinished(JobForThread);
-    Synchronize(SyncOnJobFinished);
+    SyncOnJobFinished;
   end;
   //TStack(stk^).MultipleResults := tmp;
   JobForThread.Stack.MultipleResults := tmp;
 end;
 
-procedure SendCallBack(stk: PStack);
+procedure SendCallBack(stk: PStack);  stdcall;
 begin
   if Assigned(stk) and Assigned(stk^.Thread) and (stk^.Thread is
     TComputationThread) then
     TComputationThread(stk^.Thread).SendResultCallback(stk);
 end;
 
-procedure SendStack;
+procedure SendStack; stdcall;
 var
   i, h: integer;
   ct:   TComputationThread;
@@ -740,7 +709,7 @@ begin
   with TL.LockList do
   begin
     for i := 0 to Count - 1 do
-      if TComputationThread(Items[i]).ThreadID = h then
+      if TComputationThread(Items[i]).MyThreadID = h then
       begin
         ct := TComputationThread(Items[i]);
         break;

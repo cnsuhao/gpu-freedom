@@ -1,9 +1,8 @@
+unit gpu_utils;
 {
 This unit contains help functions for the ComputationThread.
 See also http://gpu.sourceforge.net/virtual.php
 }
-
-unit gpu_utils;
 
 interface
 
@@ -13,6 +12,7 @@ uses
 function isFloat(S: string): boolean;
 function ReturnArg(var S: string): string;
 function NumberInSquareBrackets(S: string): integer;
+function ExtractParam(var S: string; Separator: string): string;
 
  //allocates mem for PChar
  //and copies it
@@ -145,5 +145,24 @@ begin
   GetMem(Result, length(S) + 1);
   StrPCopy(Result, S);
 end;
+
+
+function ExtractParam(var S: string; Separator: string): string;
+var
+  i: Longint;
+begin
+  i := Pos(Separator, S);
+  if i > 0 then
+  begin
+    Result := Copy(S, 1, i - 1);
+    Delete(S, 1, i);
+  end
+  else
+  begin
+    Result := S;
+    S      := '';
+  end;
+end;
+
 
 end.

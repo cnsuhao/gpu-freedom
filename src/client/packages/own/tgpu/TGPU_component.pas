@@ -1,10 +1,3 @@
-{$DEFINE MSWINDOWS}
-{$IFDEF VER170}
-{$DEFINE D7}
-{$ENDIF}
-{$IFDEF VER150}
-{$DEFINE D7}
-{$ENDIF}
 {
   TGPU_component class is the main class which registers the GPU component on 
   the Delphi bar.
@@ -37,11 +30,8 @@ unit TGPU_component;
 interface
 
 uses
- {$IFDEF MSWINDOWS}
-  Windows, Messages, Dialogs,
-  {$ENDIF}
   SysUtils, Classes, PluginManager, ComputationThread, Jobs, Definitions,
-  common, utils, gpu_utils, FrontendManager, FunctionCallController;
+  common, gpu_utils, FrontendManager, FunctionCallController;
 
 const
   MAX_THREADS = 3;  {maximum number of allowed threads}
@@ -54,9 +44,6 @@ type
   protected
     { Protected declarations }
     FMaxThreads, FCurrentThreads: integer;
-    {$IFDEF MSWINDOWS}
-    FPriority: TThreadPriority;
-    {$ENDIF}
     FIdle:     boolean;
     procedure OnTerminatedThread(Sender: TObject);
   public
@@ -104,9 +91,6 @@ type
     { Published declarations }
     property MaxThreads: integer Read FMaxThreads Write SetMaxThreads;
     property CurrentThreads: integer Read FCurrentThreads;
-   {$IFDEF MSWINDOWS}
-    property Priority: TThreadPriority Read FPriority Write FPriority;
-    {$ENDIF}
     property Idle: boolean Read FIdle Write FIdle;
   end;
 
@@ -115,7 +99,6 @@ procedure Register;
 
 implementation
 
-{$G+}
 
 procedure Register;
 begin
@@ -186,8 +169,9 @@ begin
   for i := 1 to MAX_THREADS do
     if WorkThread[i] <> nil then
     begin
-      if not WorkThread[i].JobDone then
-        TerminateThread(WorkThread[i].Handle, 0);
+      //TODO: reenable it
+      //if not WorkThread[i].JobDone then
+      //  TerminateThread(WorkThread[i].Handle, 0);
       FreeAndNil(WorkThread[i]);
     end;
 
@@ -212,10 +196,6 @@ begin
     begin
       ThreadCreated := True;
       WorkThread[i] := TComputationThread.Create(True);
-             {$IFDEF MSWINDOWS}
-      WorkThread[i].Priority := Priority;
-             {$ENDIF}
-
       Job.ComputedTime := Time;
 
       {passing parameters to the thread}
@@ -264,12 +244,7 @@ begin
   try
     i := StrToInt(JobID);
     begin
-     {$IFDEF D7}
       res := StrToFloat(Result, FormatSet.fs);
-     {$ELSE}
-     Result := StringReplace (Result, ',', '.', []);
-     res := StrToFloat(Result);
-     {$ENDIF}
     end;
 
     if ((i > 0) and (i <= MAX_COLLECTING_IDS)) then

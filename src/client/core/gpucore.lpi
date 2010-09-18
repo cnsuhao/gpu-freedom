@@ -12,7 +12,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -31,25 +31,232 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="1">
+    <Units Count="11">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <CursorPos X="31" Y="2"/>
+        <CursorPos X="16" Y="25"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <UnitName Value="TGPU_component"/>
+        <CursorPos X="40" Y="234"/>
+        <TopLine Value="23"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\packages\own\tgpu\PluginManager.pas"/>
+        <UnitName Value="PluginManager"/>
+        <CursorPos X="30" Y="303"/>
+        <TopLine Value="287"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\packages\own\tgpu\definitions.pas"/>
+        <UnitName Value="definitions"/>
+        <CursorPos X="66" Y="32"/>
+        <TopLine Value="21"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\lib\own\libclimate\climaconstants.pas"/>
+        <UnitName Value="climaconstants"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\lib\own\libclimate\datastructure.pas"/>
+        <UnitName Value="datastructure"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="16"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\plugins\basic\basicdll.pas"/>
+        <UnitName Value="basicdll"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\packages\own\tgpu\gpu_utils.pas"/>
+        <UnitName Value="gpu_utils"/>
+        <CursorPos X="1" Y="16"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <UnitName Value="ComputationThread"/>
+        <CursorPos X="9" Y="208"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\lib\own\misc\common.pas"/>
+        <UnitName Value="common"/>
+        <CursorPos X="1" Y="19"/>
+        <TopLine Value="9"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <UnitName Value="FrontendManager"/>
+        <CursorPos X="1" Y="61"/>
+        <TopLine Value="33"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit10>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="489" Column="53" TopLine="471"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="564" Column="37" TopLine="548"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="569" Column="23" TopLine="553"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="588" Column="53" TopLine="572"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="593" Column="27" TopLine="577"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="629" Column="10" TopLine="622"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="687" Column="1" TopLine="672"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="692" Column="37" TopLine="677"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="89" Column="23" TopLine="73"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="185" Column="45" TopLine="169"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="204" Column="57" TopLine="188"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="700" Column="30" TopLine="677"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\packages\own\tgpu\ComputationThread.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="10" Column="6" TopLine="1"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="34" Column="11" TopLine="11"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="10" Column="6" TopLine="1"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="11" Column="32" TopLine="1"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\packages\own\tgpu\FrontendManager.pas"/>
+        <Caret Line="193" Column="1" TopLine="167"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="77" Column="49" TopLine="48"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="253" Column="24" TopLine="221"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="34" Column="71" TopLine="15"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="274" Column="61" TopLine="243"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="34" Column="61" TopLine="20"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
+        <Caret Line="172" Column="26" TopLine="157"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\packages\own\tgpu\gpu_utils.pas"/>
+        <Caret Line="150" Column="1" TopLine="133"/>
+      </Position30>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\packages\own\tgpu\"/>
+      <OtherUnitFiles Value="..\packages\own\tgpu\;..\lib\own\misc\"/>
       <UnitOutputDirectory Value="..\..\..\bin"/>
     </SearchPaths>
     <Other>

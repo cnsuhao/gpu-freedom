@@ -6,8 +6,9 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp
-  { you can add units after this };
+  Classes, SysUtils, CustApp,
+  { you can add units after this }
+  TGPU_component;
 
 type
 
@@ -20,6 +21,8 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
     procedure WriteHelp; virtual;
+  private
+    GPU : TGPU;
   end;
 
 { TGPUCoreApp }
