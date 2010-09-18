@@ -1,3 +1,4 @@
+GPU, a Global Processing Unit
 (c) 2002-2010 the GPU Development Team
 
 Most source is under GNU General Public License (see GPL_license.txt).
@@ -43,5 +44,42 @@ File Tree structure for this package, codenamed freedom follows:
       /textures    textures for general OpenGL use
         /solarysystem textures of solarsystem
 
+/dcu  compiled units for the client
+
+/docs documentation for gpu_freedom
+  /dev   documentation for developers
+  /users documentation for users
+
+/install
+  /users install script for users
+  /dev   install script for developers
+
+/src
+  /client source code for the client
+     /core source code for core component (no GUI)
+     /mainapp   source code for main application with GUI
+     /screensaver source code for screensaver
+
+     /frontends    source code for frontends
+     /plugins      source code for plugins
+
+     /lib          libraries for GPU
+       /own        own libraries developed by the project
+       /ext        external libraries
+
+     /packages     components for GPU
+       /own        own components developed by the project
+       /ext        external packages
+
+
+/server  Server source code
+   /chat  source code implementing chat
+   /cluster  source code for cluster management of clients
+   /db    scripts to create the database schema
+   /jobqueue  source code managing the job queue
+   /supercluster   source code to manage cluster of servers
+   /workunits  source code to manage workunits
+ 
+    
 
 Have fun!
