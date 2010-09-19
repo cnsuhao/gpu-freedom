@@ -24,16 +24,31 @@ const
   QUOTE              = Chr(39);      // alias for apostrophe, '
   
   // error codes
-  METHOD_NOT_FOUND_ID = 1;
-  METHOD_NOT_FOUND    = 'METHOD_NOT_FOUND';
+  NO_ERROR_ID              = 0;
+  NO_ERROR                 = 'NO ERROR';
+  METHOD_NOT_FOUND_ID      = 1;
+  METHOD_NOT_FOUND         = 'METHOD NOT FOUND';
+  EMPTY_ARGUMENT_ID        = 2;
+  EMPTY_ARGUMENT           = 'EMPTY ARGUMENT';
+  MISSING_QUOTE_ID         = 3;
+  MISSING_QUOTE            = 'ENDING QUOTE MISSING ('+QUOTE+')';
+  COULD_NOT_PARSE_FLOAT_ID = 4;
+  COULD_NOT_PARSE_FLOAT    = 'COULD NOT PARSE FLOAT';
+  
+type TGPUFloat : Extended;
 
+type TGPUError = record
+    ErrorID : Longint;
+    ErrorMsg,            // the error in human readable form
+    ErrorArg : String;  // some parameter for the error
+end;
 
 type
   TStack = record
-    stack    : Array [1..MAXSTACK] of Extended;
+    stack    : Array [1..MAXSTACK] of TGPUFloat;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
-    Progress : Extended;    //  indicates plugin progress from 0 to 100}
+    Progress : TGPUFloat;    //  indicates plugin progress from 0 to 100}
     
     {  Stack for strings, only for
               Freepascal/Borland DLLs. If a value in stack is INF, then StrStack
@@ -43,9 +58,7 @@ type
               There is only  one stack pointer for both Stack and StrStack.}
     StrStack: array[1..MAXSTACK] of PChar;
     
-    ErrorID : Longint;
-    Error,                // the error in human readable form
-    ErrorArg : String;  // some parameter for the error
+    error : TGPUError;
   end;
 
 type  
@@ -64,12 +77,12 @@ type   {here we collect results, computing average and so on}
   TGPUCollectResult = record
     TotalTime: TDateTime;
     FirstResult,
-    LastResult: Extended;
+    LastResult: TGPUFloat;
     N:        : Longint;
     Sum,                    {with sum and N we can compute average}
     Min,
     Max,
-    Avg    : Extended;  
+    Avg    : TGPUFloat;  
   end;
 
 implementation

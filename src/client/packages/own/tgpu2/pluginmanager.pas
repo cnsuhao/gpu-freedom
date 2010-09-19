@@ -131,9 +131,9 @@ begin
      end;
   
   // we did not find the method, we report it as an error
-  Stk.ErrorID := METHOD_NOT_FOUND_ID;
-  Stk.Error := METHOD_NOT_FOUND;
-  Stk.ErrorArg := name;  
+  Stk.error.ErrorID := METHOD_NOT_FOUND_ID;
+  Stk.error.ErrorMsg := METHOD_NOT_FOUND;
+  Stk.error.ErrorArg := name;  
 end;
 
 function  TPluginManager.loadOne(pluginName : String)  : Boolean;
