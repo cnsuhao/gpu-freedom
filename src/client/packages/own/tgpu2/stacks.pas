@@ -84,7 +84,36 @@ type   {here we collect results, computing average and so on}
     Avg    : TGPUFloat;  
   end;
 
+function stackToStr(var stk : Stack) : String;
+
 implementation
 
+function stackToStr(var stk : Stack) : String;
+var i : Longint;
+    str : String;
+begin
+ str := '';
+ for i:=1 to stk.Idx do
+      begin
+        if stk.Stack[i] = INF then
+           begin
+             // we need to add a string
+             str := str + ', '+ QUOTE + stk.StrStack[i] + QUOTE;             
+           end
+         else
+           begin
+             // we need to add a float
+             str := str + ', ' + FloatToStr(stk.Stack[i], formatSet.fs);
+           end;           
+      end;
+      
+ if (str<>'') then
+       begin
+         // we remove the last two chars ', ' from the string
+         if Pos(', ', str) = 1 then
+            Delete(str, 1, 2);
+       end;       
+ Result := str;
+end;
 
 end.
