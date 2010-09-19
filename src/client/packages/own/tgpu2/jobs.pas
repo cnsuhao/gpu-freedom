@@ -1,4 +1,3 @@
-{$DEFINE MSWINDOWS}
 unit jobs;
 {
   In order to create a new ComputationThread via TGPU::Compute()
@@ -27,10 +26,7 @@ unit jobs;
 }
 interface
 
-uses {$IFDEF MSWINDOWS}
-  Windows,
-     {$ENDIF}
-  Classes, definitions;
+uses Classes, stacks;
 
 type
   TNotifyEvent = procedure(Sender: TObject) of object;
@@ -44,10 +40,13 @@ type
     JobSlot: integer;
 
     Stack: TStack;
-    StackCommands, Result: string;
+    Job,                 // this contains the job itself
+    JobResult : string;  // this contains the result of the computation
+    
+    hasError : Boolean;  // there is an error in the TStack structure
+    error    : TGPUError;
 
     ComputedTime: TDateTime;
-
   end;
 
 type

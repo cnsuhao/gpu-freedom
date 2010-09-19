@@ -1,5 +1,13 @@
 unit argretrievers;
+{
+This unit defines the object TArgRetriever which is initialized
+with a GPU command. 
 
+The object TArgRetrieve allows to iterate over the arguments of the command
+with hasArguments() and getArgument().
+
+It is used by the TGPUParser to parse the arguments
+}
 interface
 
 uses SysUtils, stacks, plugins, utils, common;

@@ -17,9 +17,8 @@ unit stacks;
 interface
 
 const
-  MAXSTACK           = 128;          // Maximum size of Stack in Virtual Machine
+  MAX_STACK_PARAM    = 128;          // Maximum size of Stack in Virtual Machine
   MAX_COLLECTING_IDS = 128;          // Maximum number of Jobs we keep also average track
-  WRONG_PACKET_ID    = 7777777;      // if you get seven seven as result, the plugin returns false
   INF                = 1.0 / 0.0;    // infinite to distinguish Strings from floats
   QUOTE              = Chr(39);      // alias for apostrophe, '
   
@@ -36,6 +35,8 @@ const
   COULD_NOT_PARSE_FLOAT    = 'COULD NOT PARSE FLOAT';
   WRONG_NUMBER_OF_BRACKETS_ID = 5;
   WRONG_NUMBER_OF_BRACKETS = 'WRONG NUMBER OF BRACKETS';
+  TOO_MANY_ARGUMENTS_ID    = 6;
+  TOO_MANY_ARGUMENTS       = 'TOO MANY ARGUMENTS';
   
 type TGPUFloat : Extended;
 
@@ -54,13 +55,9 @@ type
     
     {  Stack for strings, only for
               Freepascal/Borland DLLs. If a value in stack is INF, then StrStack
-              is assigned to a String. If a value in StrStack is NULL,
-              then a float is assigned in Stack.
-
-              There is only  one stack pointer for both Stack and StrStack.}
-    StrStack: array[1..MAXSTACK] of PChar;
-    
-    error : TGPUError;
+              is assigned to a String. 
+          }
+    StrStack: array[1..MAXSTACK] of String;
   end;
 
 type  
