@@ -16,11 +16,12 @@ interface
 
 uses SysUtils, stacks, plugins;
 
-const MAX_PLUGINS = 256;  // how many plugins we can load at maximum
-      MAX_HASH    = 512;  // how many function calls we hash for faster retrieval
+const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
+      MAX_HASH    = 64;  // how many function calls we hash for faster retrieval
 
 type THashPlugin = record
-     method   : String;
+     method,
+     plugname : String;
      callplug : PPlugin;
 end;
       
@@ -37,7 +38,8 @@ type
     
     // calls the method, and passes the stack to the method
     function method_execute(name : String, var Stk : TStack) : Boolean;
- 
+    // checks if the method exists, returns the plugin name if found
+    function method_exists(name : String; var plugName : String) : Boolean;
     
    private
      path_, extension    : String;
@@ -126,6 +128,7 @@ begin
             if (hashidx_>MAX_HASH) then hashidx_ := 1;
             hash_[i].method   := name;
             hash_[i].callplug := plugs_[i];
+            hash_[i].plugname := plugs_[i]^.getName();
             Exit;
           end;
      end;
@@ -135,6 +138,33 @@ begin
   Stk.error.ErrorMsg := METHOD_NOT_FOUND;
   Stk.error.ErrorArg := name;  
 end;
+
+function method_exists(name : String; var plugName : String) : Boolean;
+var i : Longint;
+begin
+ Result := False;
+ if Trim(name)='' then Exit;
+ // we check in the hash list if we already have the plugin name
+ for i:=1 to MAX_HASH do
+      if (hash_[i].method=name) then
+         begin
+           if hash_[i].callplug^.isloaded then
+              plugName := hash_[i].plugName;
+           Result := true;   
+           Exit;   
+         end;
+ 
+ // go through the plugin list
+ for i:=1 to plugidx_ do
+       if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
+              begin
+                 plugName := plugs_[i].getName();
+                 Result := true;
+                 Exit;
+              end;
+ 
+
+end; 
 
 function  TPluginManager.loadOne(pluginName : String)  : Boolean;
 var i : Longint;

@@ -204,7 +204,7 @@ var arg : String;
 begin
  arg := ExtractParam(toparse_, ',');
  Result.argtype   := GPU_CALL;
- Result.argstring := arg;
+ Result.argstring := Trim(arg);
 end;
 
 function TArgRetriever.getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;

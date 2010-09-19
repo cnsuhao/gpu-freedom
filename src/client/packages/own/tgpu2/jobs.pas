@@ -43,7 +43,7 @@ type
     Job,                 // this contains the job itself
     JobResult : string;  // this contains the result of the computation
     
-    hasError : Boolean;  // there is an error in the TStack structure
+    hasError : Boolean;  // there is an error in the Job structure
     error    : TGPUError;
 
     ComputedTime: TDateTime;
