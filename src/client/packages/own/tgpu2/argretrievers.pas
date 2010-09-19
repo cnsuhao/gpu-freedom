@@ -30,10 +30,13 @@ type TArgRetriever = class(TObject);
    toparse_   : String;
    
    procedure deleteComma; 
+   function getBracketArgument(openbracket, closebracket : String; 
+                               errorID : Longint; errorMsg : String; 
+                               var error : TGPUError) : TArgGPU;
    function getStringArgument(var error : TGPUError) : TArgGPU;
    function getFloatArgument(var error : TGPUError) : TArgGPU;
    function getCallArgument(var error : TGPUError) : TArgGPU;
-   function getExpressionArgument(var error : TGPUError) : TArgGPU;
+   function getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 
 end;
 
@@ -82,8 +85,8 @@ begin
  if (ordchar>=48 and ordchar<=57) or startchar='.'
      Result := getFloatArgument(error)
  else
- if startchar = '{' then
-     Result := getExpressionArgument(error)
+ if (startchar = '{') or (startchar = '(')  then
+     Result := getExpressionArgument(startchar, error)
  else    
  // it has to be a method call inside a plugin
      Result := getCallArgument(error);
@@ -95,6 +98,48 @@ begin
  TrimLeft(toparse_);
  if Pos(',', toparse_) = 1 then
       Delete(toparse_, 1, 1);
+end;
+
+function TArgRetriever.getBracketArgument(openbracket, closebracket : String; errorID : Longint; errorMsg : String; 
+                            var error : TGPUError) : TArgGPU;
+var 
+   bracketCount, i : Longint;
+   arg : String;
+begin
+    
+    //string begins with bracket, we will return an argument
+    //enclosed between two brackets
+    bracketCount := 1;
+    i := 2;
+    arg := '';
+
+    while (bracketCount <> 0) and (i <= Length(S)) do
+    begin
+      if toparse_[i] = openbracket then
+        Inc(BracketCount)
+      else
+      if toparse_[i] = closebracket then
+        Dec(BracketCount);
+      Inc(i);
+    end;
+
+    if bracketCount = 0 then
+    begin
+      arg := Copy(toparse_, 2, i - 2);
+      // i-1 because we increment when we find
+      // the right closing bracket
+      Delete(toparse_, 1, i - 1);
+      deleteComma();
+      Result.argtype := GPU_EXPRESSION;
+      Result.argstring := arg;
+    end
+    else {problem in brackets}
+    begin
+      Result.argtype   := GPU_ERROR;
+      error.errorID := errorID;
+      error.errorMsg := errorMsg;
+      error.errorArg := toparse_;
+    end;
 end;
 
 function TArgRetriever.getStringArgument(var error : TGPUError) : TArgGPU;
@@ -154,8 +199,15 @@ begin
  Result.argstring := arg;
 end;
 
-function getExpressionArgument(var error : TGPUError) : TArgGPU;
+function TArgRetriever.getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 begin
+  if openbracket='{' then
+     Result := getBracketArgument('{', '}', 
+               WRONG_NUMBER_OF_BRACKETS_ID, WRONG_NUMBER_OF_BRACKETS+' ->{}', error)
+  else 
+  if openbracket='(' then
+     Result := getBracketArgument('(', ')', 
+               WRONG_NUMBER_OF_BRACKETS_ID, WRONG_NUMBER_OF_BRACKETS+' ->()', error);
 end;
 
 
