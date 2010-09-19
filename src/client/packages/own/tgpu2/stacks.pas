@@ -22,12 +22,15 @@ const
   WRONG_PACKET_ID    = 7777777;      // if you get seven seven as result, the plugin returns false
   INF                = 1.0 / 0.0;    // infinite to distinguish Strings from floats
   QUOTE              = Chr(39);      // alias for apostrophe, '
-  WRONG_GPU_COMMAND = 'UNKNOWN_COMMAND';
+  
+  // error codes
+  METHOD_NOT_FOUND_ID = 1;
+  METHOD_NOT_FOUND    = 'METHOD_NOT_FOUND';
 
 
 type
   TStack = record
-    stack : Array [1..MAXSTACK] of Extended;
+    stack    : Array [1..MAXSTACK] of Extended;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
     Progress : Extended;    //  indicates plugin progress from 0 to 100}
@@ -39,6 +42,10 @@ type
 
               There is only  one stack pointer for both Stack and StrStack.}
     StrStack: array[1..MAXSTACK] of PChar;
+    
+    ErrorID : Longint;
+    Error,                // the error in human readable form
+    ErrorArg : String;  // some parameter for the error
   end;
 
 type  

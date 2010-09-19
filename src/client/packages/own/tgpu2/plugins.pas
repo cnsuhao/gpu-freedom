@@ -6,6 +6,8 @@ uses
   SysUtils, stacks, dynlibs;
 
 type
+  PPlugin = ^TPlugin;
+  
   TPlugin = class(TObject)
    public 
      constructor Create(Path, Name, Extension : String);
@@ -14,6 +16,8 @@ type
      function load() : Boolean;
      function discard() : Boolean;
      function isloaded() : Boolean;
+     
+     function getName() : String;
      
      // check if  a method is present in this dll
      function method_exists(name : String) : Boolean;
@@ -117,6 +121,10 @@ begin
       end;
 
 end;
-     
+
+function TPlugin.getName() : String;
+begin
+  Result := name_;
+end;     
 
 end.

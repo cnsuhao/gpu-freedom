@@ -19,6 +19,10 @@ core, mainapp and screensaver in Freepascal/Lazarus
 server in PHP&mySQL
 plugins and frontends in Freepascal/C/C++/Java 
 
+Targeted platform
+-----------------
+client will run on Windows, Linux and MacOSX and Windows (everywhere where Lazarus runs)
+server will run on Windows, Linux, MacOSX, several Unix flavors (everywhere where PHP/mySQL run on Apache)
 
 File Tree structure for this package, codenamed freedom follows:
 ----------------------------------------------------------------
