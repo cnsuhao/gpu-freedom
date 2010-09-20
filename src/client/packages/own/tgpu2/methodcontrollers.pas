@@ -12,7 +12,7 @@ uses stacks, computationthreads,
      SysUtils, Classes, gpuconstants, SyncObjs;
 
 
-type TMethodController = class(TObject);
+type TMethodController = class(TObject)
  public 
    constructor Create();
    destructor Destroy();

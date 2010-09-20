@@ -11,7 +11,8 @@ type
   TComputationThread = class(TThread)
    public
       
-    constructor Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController; 
+                       var speccomands : TSpecialCommand; var job : TJob; threadId : Longint);
     function    isJobDone : Boolean;
 	  
 	  
@@ -31,6 +32,7 @@ type
  	    // helper structures
 	     plugMan_        :  TPluginManager;
       methController_ :  TMethodController;
+      speccommands_   : TSpecialCommand;
       // if the thread is finished, job done is set to finish
       jobDone_: boolean;
    end;	  
@@ -39,13 +41,14 @@ end;
 
 implementation
 
-constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
+constructor TComputationThread.Create(var plugman : TPluginManager; var speccomands : TSpecialCommand; var meth : TMethodController; var job : TJob; threadId : Longint);
 begin
   inherited Create(true);
   
   jobDone_ := false;
   plugMan_ := plugman;
   methController_ := meth;
+  speccommands := speccomands;
   job_ := job;
   thrdId_ := threadId;
 end;
@@ -59,7 +62,7 @@ procedure  TComputationThread.Execute; override;
 var parser : TGPUParser;
 begin
  syncOnJobCreated;
- parser := TGPUParser.Create(plugman_, methController_, job_, thrdId_);
+ parser := TGPUParser.Create(plugman_, methController_, speccommands_, job_, thrdId_);
  parser.parse();
  parser.Free;
  syncOnJobFinished;

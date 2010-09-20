@@ -5,11 +5,7 @@
   
   TStack is the internal structure used by plugins to communicate
   with the GPU core.
-  
-  TGPUCollectResult is used by the GPU component to collect
-  results internally. However, frontends should collect
-  results themselves. They cannot access this structure.
-  
+   
 }
 unit stacks;
 
@@ -25,16 +21,14 @@ end;
 
 type
   TStack = record
-    stack    : Array [1..MAXSTACK] of TGPUFloat;
+    stack    : Array [1..MAX_STACK_PARAMS] of TGPUFloat;
+    strStack : Array [1..MAX_STACK_PARAMS] of String;
+    isFloat  : Array [1..MAX_STACK_PARAMS] of boolean;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
-    Progress : TGPUFloat;    //  indicates plugin progress from 0 to 100}
     
-    {  Stack for strings, only for
-              Freepascal/Borland DLLs. If a value in stack is INF, then StrStack
-              is assigned to a String. 
-          }
-    StrStack: array[1..MAXSTACK] of String;
+    Progress : TGPUFloat;    //  indicates plugin progress from 0 to 100}
+   
     
     workunitIncoming,            // filename of workunit placed in directory workunits/staged
     workunitOutgoing : String;   // if the plugin outputs something, it will create a file in
@@ -52,7 +46,7 @@ type
 type TDescFunction = function : String;
      PDescFunction = ^TDescFunction;
 
-
+// TODO: move this in collectresults
 type   {here we collect results, computing average and so on}
   TGPUCollectResult = record
     TotalTime: TDateTime;
@@ -65,9 +59,29 @@ type   {here we collect results, computing average and so on}
     Avg    : TGPUFloat;  
   end;
 
+function initStack(var stk : TStack);
 function stackToStr(var stk : Stack) : String;
 
+function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
+function LoadStringOnStack(str : String; var stk : TStack; var error : TError) : Boolean;
+function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TError) : Boolean;
+function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TError) : Boolean;
+
+
 implementation
+
+function initStack(var stk : TStack);
+var i : Longint;
+begin
+ stk.Idx := 0; // to have it empty
+ for i:=1 to MAX_STACK_PARAM do
+   begin
+     stk.Stack[i] := 0;
+     stk.StrStack[i] := '';
+     stk.isFloat[i] := true;
+   end;
+
+end;
 
 function stackToStr(var stk : Stack) : String;
 var i : Longint;
@@ -76,7 +90,7 @@ begin
  str := '';
  for i:=1 to stk.Idx do
       begin
-        if stk.Stack[i] = INF then
+        if not stk.isFloat[i] then
            begin
              // we need to add a string
              str := str + ', '+ QUOTE + stk.StrStack[i] + QUOTE;             
@@ -96,5 +110,68 @@ begin
        end;       
  Result := str;
 end;
+
+
+function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
+begin
+ Result := false;
+ if (stk.Idx>MAX_STACK_PARAMS) then
+       begin
+         Result := true;
+         error.errorID := TOO_MANY_ARGUMENTS_ID;
+         error.errorMsg := TOO_MANY_ARGUMENTS;
+         error.errorArg := '';
+         Dec(stk.Idx);
+       end;
+end;
+
+
+function LoadStringOnStack(str : String; var Stk : TStack; var error : TError) : Boolean;
+var hasErrors : Boolean;
+begin
+ Result := false;
+ Inc(stk.Idx);
+ hasErrors := maxStackReached(stk, error); 
+ if not hasErrors then
+                 begin                     
+                   Stk.Stack[stk.Idx] := 0;
+                   Stk.StrStack[stk.Idx] := str;
+                   Stk.isFloat[stk.Idx] := false;
+                   Result := true;
+                 end;              
+end;
+
+function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TError) : Boolean;
+var hasErrors : Boolean;
+begin
+ Result := false;
+ Inc(stk.Idx);
+ hasErrors := maxStackReached(stk, error); 
+ if not hasErrors then
+                 begin                     
+                   Stk.Stack[stk.Idx] := ext;
+                   Stk.StrStack[stk.Idx] := '';
+                   Stk.isFloat[stk.Idx] := true;
+                   Result := true;
+                 end;              
+end;
+
+function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TError) : Boolean;
+var hasErrors : Boolean;
+    value     : TGPUFloat;
+begin
+ Result := false;
+ Inc(stk.Idx);
+ if b then value :=1 else value := 0;
+ hasErrors := maxStackReached(stk, error);
+ if not hasErrors then
+                 begin                     
+                   Stk.Stack[stk.Idx] := value;
+                   Stk.StrStack[stk.Idx] := '';
+                   Stk.isFloat[stk.Idx] := true;
+                   Result := true;
+                 end;              
+end;
+
 
 end.

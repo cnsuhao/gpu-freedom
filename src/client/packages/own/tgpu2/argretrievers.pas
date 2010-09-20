@@ -13,11 +13,13 @@ interface
 uses SysUtils, stacks, plugins, utils, common;
 
 const
-  GPU_CALL       = 10;
-  GPU_STRING     = 20;
-  GPU_FLOAT      = 30;
-  GPU_EXPRESSION = 40;
-  GPU_ERROR      = 99;
+  GPU_CALL         = 10;
+  GPU_STRING       = 20;
+  GPU_FLOAT        = 30;
+  GPU_EXPRESSION   = 40;
+  GPU_SPECIAL_CALL = 50;
+  GPU_BOOLEAN      = 60;
+  GPU_ERROR        = 99;
 
 type TArgGPU = record
      argtype : ShortInt;
@@ -27,7 +29,7 @@ end;
 
 type TArgRetriever = class(TObject);
  public 
-   constructor Create(job : String);
+   constructor Create(job : String; var speccommands : TSpecialCommand);
    function getJob() : String;
    
    function hasArguments() : Boolean;
@@ -36,6 +38,7 @@ type TArgRetriever = class(TObject);
  private
    job_,
    toparse_   : String;
+   speccomands_ : TSpecialCommand;
    
    procedure deleteComma; 
    function getBracketArgument(openbracket, closebracket : String; 
@@ -43,18 +46,23 @@ type TArgRetriever = class(TObject);
                                var error : TGPUError) : TArgGPU;
    function getStringArgument(var error : TGPUError) : TArgGPU;
    function getFloatArgument(var error : TGPUError) : TArgGPU;
-   function getCallArgument(var error : TGPUError) : TArgGPU;
    function getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 
+   function getOtherArgument(var error : TGPUError) : TArgGPU;
+   function getSpecialArgument(var error : TGPUError; arg : String) : TArgGPU;
+   function getBooleanArgument(var error : TGPUError;arg : String) : TArgGPU;
+   function getCallArgument(var error : TGPUError; arg : String) : TArgGPU;
+   
 end;
 
 
 implementation
 
-constructor TArgRetriever.Create(job : String);
+constructor TArgRetriever.Create(job : String; var speccommands : TSpecialCommand);
 begin
  job_ := Trim(job);
  toparse_ := job_;
+ speccommands_ := speccommands;
 end;
 
 function TArgRetriever.getJob() : String;
@@ -96,8 +104,8 @@ begin
  if (startchar = '{') or (startchar = '(')  then
      Result := getExpressionArgument(startchar, error)
  else    
- // it has to be a method call inside a plugin
-     Result := getCallArgument(error);
+ // it has to be something else
+     Result := getOtherArgument(error);
 end;
 
 procedure TArgRetriever.deleteComma();
@@ -199,14 +207,6 @@ begin
  Result.argvalue := float;
 end;
 
-function TArgRetriever.getCallArgument(var error : TGPUError) : TArgGPU;
-var arg : String;
-begin
- arg := ExtractParam(toparse_, ',');
- Result.argtype   := GPU_CALL;
- Result.argstring := Trim(arg);
-end;
-
 function TArgRetriever.getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 begin
   if openbracket='{' then
@@ -220,6 +220,42 @@ end;
 
 
 
+function TArgRetriever.getOtherArgument(var error : TGPUError) : TArgGPU;
+var arg,
+    lowerarg : String;
+begin
+  arg := Trim(ExtractParam(toparse_, ','));
+  lowerarg := lowercase(arg);
+  if (lowerarg='true') or (lowerarg='false') then
+      Result := getBooleanArgument(error, lowerarg)
+  else    
+  if speccommands_.isSpecialCommand(arg) then
+      Result := getSpecialArgument(error, arg)
+  else
+  Result := getCallArgument(error, arg);  
+end;
+
+function TArgRetriever.getBooleanArgument(var error : TGPUError; arg : String) : TArgGPU;
+var value : TGPUFloat;
+begin
+ if (arg='true') then value := 1 else value := 0;
+ Result.argtype   := GPU_BOOLEAN;
+ Result.argvalue  := value;
+end;
+
+
+function TArgRetriever.getSpecialArgument(var error : TGPUError; arg : String) : TArgGPU;
+begin
+ Result.argtype   := GPU_SPECIAL_CALL;
+ Result.argstring := arg;
+end;
+
+
+function TArgRetriever.getCallArgument(var error : TGPUError; arg : String) : TArgGPU;
+begin
+ Result.argtype   := GPU_CALL;
+ Result.argstring := arg;
+end;
 
 
 end.

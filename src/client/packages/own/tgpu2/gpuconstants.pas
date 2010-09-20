@@ -9,13 +9,12 @@ const
   DEFAULT_THREADS = 3;   // default number of threads in TGPU2.pas
   MAX_THREADS     = 16;  // maximum number of allowed threads in TGPU2.pas
 
-  MAX_STACK_PARAM    = 128;          // Maximum size of Stack in Virtual Machine
+  MAX_STACK_PARAMS   = 128;          // Maximum size of Stack in Virtual Machine
                                      // changes in this value or in TStack structure
                                      // require recompilation of all plugins
                                      
   MAX_COLLECTING_IDS = 128;          // Maximum number of Jobs we keep also average track
 
-  INF                = 1.0 / 0.0;    // infinite to distinguish Strings from floats in TStack
   QUOTE              = Chr(39);      // alias for apostrophe, ', used in argretrievers.pas
   
   // error codes, used gpu core wide

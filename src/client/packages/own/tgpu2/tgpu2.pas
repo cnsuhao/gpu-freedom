@@ -6,8 +6,6 @@
   by using the Compute(...) method after defining a TJob structure. 
   This class is the only class which can istantiate a new ComputationThread.
   
-  Results are collected into the JobsCollected array. 
-  
   TGPU2 component encapsulates the PluginManager which manages Plugins
   which contain the computational algorithms.
   
@@ -49,6 +47,8 @@ type
     is_idle_        : Boolean;
     plugman_        : TPluginManager;
     methController_ : TMethodController;
+    speccommands_   : TSpecialCommand;
+    // TODO: define a ResultCollector
     CS_             : TCriticalSection;
     
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
@@ -67,6 +67,7 @@ begin
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
   CS_ := TCriticalSection.Create();
+  speccommands_ := TSpecialCommand.Create(plugman_, methController_);
   for i:=1 to MAX_THREADS do slots_[i] := nil;
 end;
 
@@ -77,7 +78,7 @@ begin
 end;
 
 
-function findAvailableSlot() : Longint;
+function TGPUCore2.findAvailableSlot() : Longint;
 var i : Longint;
 begin
   Result := -1;
@@ -90,7 +91,7 @@ begin
        end;
 end;
 
-function Compute(job: TJob): boolean;
+function TGPUCore2.Compute(job: TJob): boolean;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -112,7 +113,7 @@ begin
             end;
   
   Inc(current_threads_);  
-  slots_[slot] := TComputationThread.Create(plugman_, methController_, job, slot); 
+  slots_[slot] := TComputationThread.Create(plugman_, methController_, speccomands_, job, slot); 
   
   Return := true;
   CS_.Leave;
