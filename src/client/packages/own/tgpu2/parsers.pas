@@ -6,24 +6,31 @@ uses argretrievers, stacks, pluginmanager, methodcontrollers;
 
 type TGPUParser = class(TObject);
  public 
-   constructor Create();
+   constructor Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
    destructor Destroy();
    
-   plugman        : TPluginManager;
-   methController : TMethodController;
-   threadId       : Longint;
+   function parse() : Boolean; overload;  
+   function parse(jobStr : String; var stk : TStack; var error : TError) : Boolean; overload;
    
-   function parse(job : String; var stk : TStack; var error : TError) : Boolean;
  private
+   plugman_        : TPluginManager;
+   methController_ : TMethodController;
+   thrdId_         : Longint;
+   job_            : TJob;
+
    function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
 end;
 
 
 implementation
 
-constructor TGPUParser.Create();
+constructor TGPUParser.Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
 begin
   inherited Create();
+  plugMan_ := plugman;
+  methController_ := meth;
+  job_ := job;
+  thrdId_ := threadId;
 end;
 
 destructor TGPUParser.Destroy();
@@ -31,7 +38,8 @@ begin
   inherited;
 end;
 
-function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
+
+function TGPUParser.maxStackReached(var stk : TStack; var error : TError) : Boolean; 
 begin
  Result := false;
  if (stk.Idx>MAX_STACK_PARAM) then
@@ -44,7 +52,14 @@ begin
        end;
 end;
 
-procedure TGPUParser.parse(job : String; var stk : TStack; var error : TError);
+
+procedure TGPUParser.parse() : Boolean;; overload;
+begin
+   Result := parse(job_.job, job_.Stack, job_.error);
+   job_.hasError := (job._error.ErrorId>0);
+end;
+
+procedure TGPUParser.parse(jobStr : String; var stk : TStack; var error : TError); overload;
 var arg    : TGPUArg;
     argRetriever : TArgRetriever;
     resexpr,
@@ -53,7 +68,7 @@ var arg    : TGPUArg;
 	pluginName   : String;
 begin
   Result := False;
-  argRetriever := TArgRetriever.Create(job);
+  argRetriever := TArgRetriever.Create(jobStr);
   hasErrors := false;
   
   while (argRetriever_.hasArguments() and (not hasErrors)) do
@@ -89,13 +104,13 @@ begin
                    end;     
              GPU_CALL :
                    begin
-                     funcexists := plugman.method_exists(arg.argstring, pluginName, error);
+                     funcexists := plugman_.method_exists(arg.argstring, pluginName, error);
 					 haserrors := not funcexists;
 					 if funcexists then
 					      begin
-						    methController.registerMethodCall(arg.argstring, pluginName, threadID);
+						    methController_.registerMethodCall(arg.argstring, pluginName, thrdID_);
 							try
-							  resexpr := plugman.method_execute(arg.argstring, pluginName, error);
+							  resexpr := plugman_.method_execute(arg.argstring, pluginName, error);
 							  hasErrors := not resexpr;
 							except (Exception e)
 							  error.errorID := PLUGIN_THREW_EXCEPTION_ID;
@@ -103,7 +118,7 @@ begin
 							  error.errorArg := e.Message;
 							  hasErrors := true;
 							end;
-							methController.unregisterMethodCall(threadID);
+							methController_.unregisterMethodCall(thrdID_);
 						  end;
 
                    end;				   
