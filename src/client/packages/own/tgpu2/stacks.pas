@@ -62,10 +62,10 @@ type   {here we collect results, computing average and so on}
 function initStack(var stk : TStack);
 function stackToStr(var stk : Stack) : String;
 
-function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
-function LoadStringOnStack(str : String; var stk : TStack; var error : TError) : Boolean;
-function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TError) : Boolean;
-function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TError) : Boolean;
+function maxStackReached(var stk : TStack; var error : TGPUError) : Boolean; 
+function LoadStringOnStack(str : String; var stk : TStack; var error : TGPUError) : Boolean;
+function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
+function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
 
 
 implementation
@@ -112,7 +112,7 @@ begin
 end;
 
 
-function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
+function maxStackReached(var stk : TStack; var error : TGPUError) : Boolean; 
 begin
  Result := false;
  if (stk.Idx>MAX_STACK_PARAMS) then
@@ -126,7 +126,7 @@ begin
 end;
 
 
-function LoadStringOnStack(str : String; var Stk : TStack; var error : TError) : Boolean;
+function LoadStringOnStack(str : String; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -141,7 +141,7 @@ begin
                  end;              
 end;
 
-function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TError) : Boolean;
+function LoadExtendedOnStack(ext : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -156,7 +156,7 @@ begin
                  end;              
 end;
 
-function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TError) : Boolean;
+function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
     value     : TGPUFloat;
 begin

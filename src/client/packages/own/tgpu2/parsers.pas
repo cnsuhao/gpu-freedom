@@ -12,7 +12,7 @@ type TGPUParser = class(TObject);
    destructor Destroy();
    
    function parse() : Boolean; overload;  
-   function parse(jobStr : String; var stk : TStack; var error : TError) : Boolean; overload;
+   function parse(jobStr : String; var stk : TStack; var error : TGPUError) : Boolean; overload;
    
  private
    plugman_        : TPluginManager;
@@ -20,8 +20,6 @@ type TGPUParser = class(TObject);
    speccommands_   : TSpecialCommand;  
    thrdId_         : Longint;
    job_            : TJob;
-
-   function maxStackReached(var stk : TStack; var error : TError) : Boolean; 
 end;
 
 
@@ -49,7 +47,7 @@ begin
    job_.hasError := (job._error.ErrorId>0);
 end;
 
-procedure TGPUParser.parse(jobStr : String; var stk : TStack; var error : TError); overload;
+procedure TGPUParser.parse(jobStr : String; var stk : TStack; var error : TGPUError); overload;
 var arg    : TGPUArg;
     argRetriever : TArgRetriever;
     isOK         : Boolean;

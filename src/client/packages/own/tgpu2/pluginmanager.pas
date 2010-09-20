@@ -38,9 +38,9 @@ type
 	function  isAlreadyLoaded(pluginName : String)  : Boolean;
     
     // calls the method, and passes the stack to the method
-    function method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
+    function method_execute(name : String, var Stk : TStack; var error : TGPUError) : Boolean;
     // checks if the method exists, returns the plugin name if found
-    function method_exists(name : String; var plugName : String; var error : TError) : Boolean;
+    function method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
     
    private
      path_, extension    : String;
@@ -49,8 +49,8 @@ type
      plugsidx_, hashidx_ : Longint;  // indexes for the arrays above
      function  load(pluginName : String)  : Boolean;
 	 procedure register_hash(funcName : String; plugin : PPlugin);
-	 procedure addNotFoundError(var error : TError);
-	 function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TError) : Boolean;
+	 procedure addNotFoundError(var error : TGPUError);
+	 function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
      
 	 CS_ : TCriticalSection;
 end;
@@ -136,7 +136,7 @@ begin
 end;
 
 
-procedure TPluginManager.addNotFoundError(var error : TError);
+procedure TPluginManager.addNotFoundError(var error : TGPUError);
 begin
   // we did not find the method, we report it as an error
   error.ErrorID := METHOD_NOT_FOUND_ID;
@@ -144,7 +144,7 @@ begin
   error.ErrorArg := name;  
 end;
 
-function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TError) : Boolean;
+function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
 var i : Longint;
 begin
  Result := false;
@@ -183,7 +183,7 @@ begin
  CS_.Leave;
 end;
 
-function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
+function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TGPUError) : Boolean;
 var plugname : String;
     p        : PPlugin;
 begin
@@ -192,7 +192,7 @@ begin
       p^.method_execute(name, stk, error);
 end;
 
-function method_exists(name : String; var plugName : String; var error : TError) : Boolean;
+function method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
 var plugname : String;
     p        : PPlugin;
 begin
