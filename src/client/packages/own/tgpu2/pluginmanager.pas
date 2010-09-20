@@ -35,6 +35,7 @@ type
     procedure discardAll();
     function  loadOne(pluginName : String)  : Boolean;
     function  discardOne(pluginName : String)  : Boolean;
+	function  isAlreadyLoaded(pluginName : String)  : Boolean;
     
     // calls the method, and passes the stack to the method
     function method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
@@ -49,6 +50,7 @@ type
      function  load(pluginName : String)  : Boolean;
 	 procedure register_hash(funcName : String; plugin : PPlugin);
 	 procedure addNotFoundError(var error : TError);
+	 function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TError) : Boolean;
      
 	 CS_ : TCriticalSection;
 end;
@@ -111,6 +113,16 @@ begin
  CS_.Leave;
 end;
 
+function  TPluginManager.isAlreadyLoaded(pluginName : String)  : Boolean;
+begin
+ Result := false;
+ CS_.Enter;
+ for i:=1 to plugidx_ do
+     if plugs_i[i].plugname=pluginName then
+	    Result := true;
+ CS_.Leave;
+end;
+
 procedure TPluginManager.register_hash(funcName : String; plugin : PPlugin);
 begin
  CS_.Enter;
@@ -132,18 +144,25 @@ begin
   error.ErrorArg := name;  
 end;
 
-function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
+function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TError) : Boolean;
 var i : Longint;
 begin
- Result := False;
+ Result := false;
  if Trim(name)='' then Exit;
+ 
+ CS_.Enter;
  // check if we have the method call in the hash table
  for i:=1 to MAX_HASH do
-      if (hash_[i].method=name) then
+      if (hash_[i].method=funcname) then
          begin
            if hash_[i].callplug^.isloaded then
-              Result := hash_[i].callplug^.method_execute(name, Stk);
-           Exit;   
+             begin 
+			   p := hash_[i].callplug;
+			   plugname := hash_[i].plugname;
+			   Result := true;
+			   CS_.Leave;
+               Exit;
+	         end;		  
          end;
     
  // go through the list and call the method, register to hash if we found the plugin
@@ -152,40 +171,33 @@ begin
        if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
           begin
             register_hash(name, plugs_[i]);
-			Result := plugs_[i]^.method_execute(name, Stk);
-            Exit;
+			p := plugs_[i];
+			plugName :=  plugs_[i]^.getName();
+			Result := true;
+            CS_.Leave;
+			Exit;
           end;
      end;
   
  addNotFound(error : TError);
+ CS_.Leave;
+end;
+
+function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
+var plugname : String;
+    p        : PPlugin;
+begin
+ Result := retrievePlugin(name, plugname, p, error);
+ if Result then
+      p^.method_execute(name, stk, error);
 end;
 
 function method_exists(name : String; var plugName : String; var error : TError) : Boolean;
-var i : Longint;
+var plugname : String;
+    p        : PPlugin;
 begin
- Result := False;
- if Trim(name)='' then Exit;
- // we check in the hash list if we already have the plugin name
- for i:=1 to MAX_HASH do
-      if (hash_[i].method=name) then
-         begin
-           if hash_[i].callplug^.isloaded then
-              plugName := hash_[i].plugName;
-           Result := true;   
-           Exit;   
-         end;
- 
- // go through the plugin list
- for i:=1 to plugidx_ do
-       if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
-              begin
-				 register_hash(name, plugs_[i]);
-			     plugName := plugs_[i].getName();
-                 Result := true;
-                 Exit;
-              end;
- 
- addNotFound(error : TError);
+ p:=nil; // not used
+ Result := retrievePlugin(name, plugname, p, error);
 end; 
 
 function  TPluginManager.loadOne(pluginName : String)  : Boolean;

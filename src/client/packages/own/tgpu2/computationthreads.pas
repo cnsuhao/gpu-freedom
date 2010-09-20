@@ -55,19 +55,32 @@ begin
 end;
 
 procedure  TComputationThread.Execute; override;
+var parser : TGPUParser;
 begin
-
+ syncOnJobCreated;
+ parser := TGPUParser.Create(plugman_, methController_, job_, thrdId_);
+ parser.parse();
+ parser.Free;
+ syncOnJobFinished;
 end;
 
 
 procedure TComputationThread.SyncOnJobCreated;
 begin
-
+try
+    if not Terminated and Assigned(job_.OnCreated) then
+      job_.OnCreated(job_);
+  except
+  end;
 end;
 
 procedure TComputationThread.SyncOnJobFinished;
 begin
-
+  try //maybe a overkill, but make sure thread continues.
+    if not Terminated and Assigned(job_.OnFinished) then
+      job_.OnFinished(job_);
+  except
+  end;
 end;
 
 
