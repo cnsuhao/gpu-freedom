@@ -11,25 +11,25 @@ type
   TComputationThread = class(TThread)
    public
       
-      constructor Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
-      function    isJobDone : Boolean;
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
+    function    isJobDone : Boolean;
 	  
 	  
    protected
-	  procedure Execute; override;
+    procedure Execute; override;
     
  	  procedure SyncOnJobCreated;
-      procedure SyncOnJobFinished;
+    procedure SyncOnJobFinished;
 	  
    private
       job_done_    : Boolean; 
       // input parameters
-	  // the job which needs to be computed
+	     // the job which needs to be computed
       job_            :  TJob;
-	  // thread id for GPU component
+	     // thread id for GPU component
       thrdID_        : Longint;
- 	  // helper structures
-	  plugMan_        :  TPluginManager;
+ 	    // helper structures
+	     plugMan_        :  TPluginManager;
       methController_ :  TMethodController;
       // if the thread is finished, job done is set to finish
       jobDone_: boolean;
@@ -41,8 +41,9 @@ implementation
 
 constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController; var job : TJob; threadId : Longint);
 begin
-  inherited Create();
+  inherited Create(true);
   
+  jobDone_ := false;
   plugMan_ := plugman;
   methController_ := meth;
   job_ := job;
@@ -62,6 +63,7 @@ begin
  parser.parse();
  parser.Free;
  syncOnJobFinished;
+ jobDone := true;
 end;
 
 

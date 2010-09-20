@@ -9,17 +9,14 @@ unit methodcontrollers;
 interface
 
 uses stacks, computationthreads,
-     SysUtils, Classes, SyncObjs;
+     SysUtils, Classes, gpuconstants, SyncObjs;
 
 
 type TMethodController = class(TObject);
  public 
-   constructor Create(nbthreads : Longint);
+   constructor Create();
    destructor Destroy();
-   
-   function getNbThreads : Longint;
-   procedure setNbThreads(nbthreads : Longint);
-   
+      
    procedure registerMethodCall(funcName, plugName : String; threadId : Longint);
    procedure unregisterMethodCall(threadId : Longint) : Boolean;
    
@@ -38,7 +35,6 @@ type TMethodController = class(TObject);
    procedure clear();
 
  private
-   nbthreads_ : Longint;
    method_calls : Array[1..MAX_THREADS] of String;
    plugin_names : Array[1..MAX_THREADS] of String;
    CS_ : TCriticalSection;
@@ -47,10 +43,9 @@ end;
 
 implementation
 
-constructor TMethodController.Create(nbthreads : Longint);
+constructor TMethodController.Create();
 begin
   inherited Create;
-  nbthreads_ := nbthreads;
   CS_ := TCriticalSection.Create;
   concurrently_allowed_ := TStringList.Create;
   clear();
@@ -63,15 +58,6 @@ begin
  inherited;
 end;
    
-function TMethodController.getNbThreads : Longint;
-begin
- Result := nbthreads_;
-end;
-
-procedure TMethodController.setNbThreads(nbthreads : Longint);
-begin
- nbthreads_ := nbthreads;
-end;
 
 procedure TMethodController.registerMethodCall(funcName, plugName : String; threadId : Longint);
 begin
@@ -100,7 +86,7 @@ var i : Longint;
 begin
   CS_.Enter;
   Result := true;
-  for i:=1 to nbthreads_ do
+  for i:=1 to MAX_THREADS do
      if (method_call_[i] = funcName) then
          begin
            CS_.Leave;
