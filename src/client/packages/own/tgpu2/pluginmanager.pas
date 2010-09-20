@@ -14,7 +14,7 @@ unit pluginmanager
 
 interface
 
-uses SysUtils, stacks, plugins;
+uses SysUtils, stacks, plugins, SyncObjs;
 
 const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
       MAX_HASH    = 64;  // how many function calls we hash for faster retrieval
@@ -37,9 +37,9 @@ type
     function  discardOne(pluginName : String)  : Boolean;
     
     // calls the method, and passes the stack to the method
-    function method_execute(name : String, var Stk : TStack) : Boolean;
+    function method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
     // checks if the method exists, returns the plugin name if found
-    function method_exists(name : String; var plugName : String) : Boolean;
+    function method_exists(name : String; var plugName : String; var error : TError) : Boolean;
     
    private
      path_, extension    : String;
@@ -47,7 +47,10 @@ type
      hash_               : array[1..MAX_HASH] of THashPlugin;
      plugsidx_, hashidx_ : Longint;  // indexes for the arrays above
      function  load(pluginName : String)  : Boolean;
-    
+	 procedure register_hash(funcName : String; plugin : PPlugin);
+	 procedure addNotFoundError(var error : TError);
+     
+	 CS_ : TCriticalSection;
 end;
 
 
@@ -58,6 +61,7 @@ constructor TPluginManager.Create(Path, Extension : String);
 var i : Longint;
 begin
   inherited Create();
+  CS_ := TCriticalSection.Create;
   path_ := Path;
   extension_ := Extension;
   plugidx_ := 0;
@@ -75,12 +79,14 @@ destructor  TPluginManager.Destroy();
 var i : Longint;
 begin
   discardAll();
+  CS_.free;
 end;
 
 procedure TPluginManager.loadAll();
 var retval  : integer;
     SRec:   TSearchRec;
 begin
+  CS_.Enter;
   if plugidx_<>0 then raise Exception.Create('Please call discardAll() first');
 
   retval := FindFirst(path_+SEPARATOR+'*.' + extension_, faAnyFile, SRec);
@@ -89,20 +95,44 @@ begin
      if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
         load(SRec.Name);
    end;
+  CS_.Leave;  
 end;
 
 procedure TPluginManager.discardAll();
 var i : Longint;
 begin
+ CS_.Enter;
  for i:=1 to plugidx_ do
   begin
    plugs_[i]^.discard();
    plugs_[i]^.Free;
   end; 
  plugidx_ := 0;
+ CS_.Leave;
 end;
 
-function TPluginManager.method_execute(name : String, var Stk : TStack) : Boolean;
+procedure TPluginManager.register_hash(funcName : String; plugin : PPlugin);
+begin
+ CS_.Enter;
+ // remember on the hash where we found the function call
+ Inc(hashidx_);
+ if (hashidx_>MAX_HASH) then hashidx_ := 1;
+ hash_[i].method   := name;
+ hash_[i].callplug := plugin;
+ hash_[i].plugname := plugin^.getName();
+ CS_.Leave;
+end;
+
+
+procedure TPluginManager.addNotFoundError(var error : TError);
+begin
+  // we did not find the method, we report it as an error
+  error.ErrorID := METHOD_NOT_FOUND_ID;
+  error.ErrorMsg := METHOD_NOT_FOUND;
+  error.ErrorArg := name;  
+end;
+
+function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TError) : Boolean;
 var i : Longint;
 begin
  Result := False;
@@ -121,25 +151,16 @@ begin
      begin
        if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
           begin
-            Result := plugs_[i]^.method_execute(name, Stk);
-            
-            // remember on the hash where we found the function call
-            Inc(hashidx_);
-            if (hashidx_>MAX_HASH) then hashidx_ := 1;
-            hash_[i].method   := name;
-            hash_[i].callplug := plugs_[i];
-            hash_[i].plugname := plugs_[i]^.getName();
+            register_hash(name, plugs_[i]);
+			Result := plugs_[i]^.method_execute(name, Stk);
             Exit;
           end;
      end;
   
-  // we did not find the method, we report it as an error
-  Stk.error.ErrorID := METHOD_NOT_FOUND_ID;
-  Stk.error.ErrorMsg := METHOD_NOT_FOUND;
-  Stk.error.ErrorArg := name;  
+ addNotFound(error : TError);
 end;
 
-function method_exists(name : String; var plugName : String) : Boolean;
+function method_exists(name : String; var plugName : String; var error : TError) : Boolean;
 var i : Longint;
 begin
  Result := False;
@@ -158,18 +179,20 @@ begin
  for i:=1 to plugidx_ do
        if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
               begin
-                 plugName := plugs_[i].getName();
+				 register_hash(name, plugs_[i]);
+			     plugName := plugs_[i].getName();
                  Result := true;
                  Exit;
               end;
  
-
+ addNotFound(error : TError);
 end; 
 
 function  TPluginManager.loadOne(pluginName : String)  : Boolean;
 var i : Longint;
     plug : TPlugin;
 begin
+ CS_.Enter;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
     if plugs_[i]^.getName() = pluginName then
@@ -177,17 +200,20 @@ begin
          if (not plugs_[i]^.isloaded()) then
             begin           
              Result := plugs_[i].load();
-             Exit;
+             CS_.Leave;
+			 Exit;
             end; 
        end;
   
   // this plugin is new then
   Result := load(pluginName);
+  CS_.Leave;
 end;
 
 function  TPluginManager.discardOne(pluginName : String);
 var i : Longint;
 begin
+ CS_.Enter;
  Result := false;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
@@ -195,7 +221,10 @@ begin
        begin
          if (plugs_[i]^.isloaded()) then
             Result := plugs_[i]^.discard();
+			CS_.Leave;
+			Exit;
        end;
+ CS_.Leave;	   
 end; 
 
 function  TPluginManager.load(pluginName : String) : Boolean;

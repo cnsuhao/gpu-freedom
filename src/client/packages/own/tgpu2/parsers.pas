@@ -2,12 +2,16 @@ unit parser;
 
 interface
 
-uses argretrievers, stacks;
+uses argretrievers, stacks, pluginmanager, methodcontrollers;
 
 type TGPUParser = class(TObject);
  public 
    constructor Create();
    destructor Destroy();
+   
+   plugman        : TPluginManager;
+   methController : TMethodController;
+   threadId       : Longint;
    
    function parse(job : String; var stk : TStack; var error : TError) : Boolean;
  private
@@ -44,7 +48,9 @@ procedure TGPUParser.parse(job : String; var stk : TStack; var error : TError);
 var arg    : TGPUArg;
     argRetriever : TArgRetriever;
     resexpr,
+	funcexists,
     hasErrors    : Boolean;
+	pluginName   : String;
 begin
   Result := False;
   argRetriever := TArgRetriever.Create(job);
@@ -80,7 +86,27 @@ begin
                      // we found an expression, we need to recursively call this method
                      resexpr := parse(arg.argstring, stk, error);
                      hasErrors := not resexpr;
-                   end;                   
+                   end;     
+             GPU_CALL :
+                   begin
+                     funcexists := plugman.method_exists(arg.argstring, pluginName, error);
+					 haserrors := not funcexists;
+					 if funcexists then
+					      begin
+						    methController.registerMethodCall(arg.argstring, pluginName, threadID);
+							try
+							  resexpr := plugman.method_execute(arg.argstring, pluginName, error);
+							  hasErrors := not resexpr;
+							except (Exception e)
+							  error.errorID := PLUGIN_THREW_EXCEPTION_ID;
+							  error.errorMsg := PLUGIN_THREW_EXCEPTION;
+							  error.errorArg := e.Message;
+							  hasErrors := true;
+							end;
+							methController.unregisterMethodCall(threadID);
+						  end;
+
+                   end;				   
        
        end; // case
      
