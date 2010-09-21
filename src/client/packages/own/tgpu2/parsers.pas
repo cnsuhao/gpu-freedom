@@ -45,6 +45,8 @@ procedure TGPUParser.parse() : Boolean;; overload;
 begin
    Result := parse(job_.job, job_.Stack, job_.error);
    job_.hasError := (job._error.ErrorId>0);
+   
+   if (Result<>job_.hasError) then raise Exception.Create('Internal error in TGPUParser.Parse()!');
 end;
 
 procedure TGPUParser.parse(jobStr : String; var stk : TStack; var error : TGPUError); overload;
@@ -61,19 +63,33 @@ begin
      begin
        arg := getArgument(error);
        case arg.argType of
+       
             GPU_ARG_ERROR :  isOK := false; // the error structure contains the error
             GPU_ARG_FLOAT : // a float was detected
-                     isOK := loadFloatOnStack(arg.argvalue, stk, error); 
+                     isOK := pushFloat(arg.argvalue, stk, error); 
                    
             GPU_ARG_STRING : // a string was detected
-                     isOK := loadStringOnStack(arg.argstring, stk, error);
+                     isOK := pushStr(arg.argstring, stk, error);
             GPU_ARG_BOOLEAN :
-                     isOK := loadBooleanOnStack(arg.argvalue, stk, error);
+                     isOK := pushBool(arg.argvalue, stk, error);
             GPU_ARG_EXPRESSION :
                      // we found an expression, we need to recursively call this method
                      isOK := parse(arg.argstring, stk, error);
-            GPU_ARG_SPECIAL_CALL :
-                     isOK := speccommands_.execSpecialCommand(arg.argstring, stk, error);            
+            GPU_ARG_SPECIAL_CALL_NODE :
+                     isOK := speccommands_.execNodeCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_USER :
+                     isOK := speccommands_.execUserCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_THREAD :
+                     isOK := speccommands_.execThreadCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_PLUGIN :
+                     isOK := speccommands_.execPluginCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_FRONTEND :
+                     isOK := speccommands_.execFrontendCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_RESULT :
+                     isOK := speccommands_.execResultCommand(arg.argstring, stk, error);
+            GPU_ARG_SPECIAL_CALL_CORE :
+                     isOK := speccommands_.execCoreCommand(arg.argstring, stk, error);
+                     
             GPU_ARG_CALL :
                    begin
                      isOK := plugman_.method_exists(arg.argstring, pluginName, error);

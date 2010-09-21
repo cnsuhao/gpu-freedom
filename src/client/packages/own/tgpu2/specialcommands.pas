@@ -12,28 +12,38 @@ type TSpecialCommand = class(TObject)
  public
    constructor Create(var core : TGPU2Core);
    function isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
-   //function execSpecialCommand(arg : String; var error : TGPUError) : boolean
+   
+   function execUserCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+   function execNodeCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+   function execThreadCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+   function execCoreCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+   function execPluginCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+   function execFrontendCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+   function execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+
+
  private
    core_    : TGPU2Core;
    plugman_ : TPluginManager;
    meth_    : TMethodController;   
 end;
 
+implementation
+
 constructor Create(var core : TGPU2Core);
 begin
- inherited Create();
+ inherited TSpecialCommand.Create();
   core_    := core;
   plugman_ := core_.getPluginManager();
   meth_    := core_.getMethController();
 end;
 
-implementation
-
 function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
 begin
   Result := false;
   specialType := GPU_ARG_UNKNOWN;
-  if (arg='user.id') or (arg='user.name') or (arg='user.email') or (arg='user.homepage_url')   then
+  if (arg='user.id') or (arg='user.name') or (arg='user.email') or (arg='user.homepage_url') or
+     (arg='user.realname')  then
       begin
 	    specialType := GPU_SPECIAL_CALL_USER;
 	    Result := true;
@@ -44,7 +54,8 @@ begin
 	 (arg='node.accept') or (arg='node.mhz') or (arg='node.ram') or (arg='node.gflops')  or
 	 (arg='node.issmp') or (arg='node.isht') or (arg='node.is64bit') or (arg='node.iswine')  or
 	 (arg='node.isscreensaver') or (arg='node.cpus') or (arg='node.uptime') or (arg='node.totuptime') or 
-	 (arg='node.processor') or (arg='node.localip') or (arg='node.lon') or (arg='node.lat') then
+	 (arg='node.cputype') or (arg='node.localip') or (arg='node.longitude') or (arg='node.latitude') or
+     (arg='node.port') then
       begin
 	    specialType := GPU_SPECIAL_CALL_NODE;
 	    Result := true;
@@ -56,147 +67,118 @@ begin
 	    Result := true;
       end
   else	  
+  if (arg='core.threads') or (arg='core.maxthreads') or (arg='core.isidle') or (arg='core.hasresources') or
+     (arg='core.version')  then
+      begin
+        specialType := GPU_SPECIAL_CALL_CORE;
+	    Result := true;
+      end
+  else	  
+  if (arg='plugin.load') or (arg='plugin.discard') or (arg='plugin.loadall') or (arg='plugin.discardall') or 
+     (arg='plugin.list') or (arg='plugin.isloaded') or (arg='plugin.which') or (arg='plugin.isable') then
+      begin
+        specialType := GPU_SPECIAL_CALL_PLUGIN;
+	    Result := true;      
+      end
+  else
+  if (arg='frontend.register') or (arg='frontend.unregister') or (arg='frontend.list') then 
+     begin
+        specialType := GPU_SPECIAL_CALL_FRONTEND;
+	    Result := true;      
+     end
+  else
+  if (arg='result.last') or (arg='result.first') or (arg='result.avg') or (arg='result.n') or
+     (arg='result.stddev') or (arg='result.variance') or (arg='result.history') then
+     begin
+        specialType := GPU_SPECIAL_CALL_RESULT;
+	    Result := true;
+     end;     
   
 end;
 
 
-
-function TSpecialCommand.execSpecialCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+function TSpecialCommand.execUserCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
 begin
-  //TODO: go through this mess
-    if 'sleep' = Arg then
-    begin
-      if stk.Idx > 0 then
-      begin
-        Sleep(Round(Stk.Stack[Stk.StIdx] * 1000));
-        Stk.StIdx := Stk.StIdx - 1;
-      end;
-      Result := True;
-    end
-    else
-    if 'nodename'= Arg then Result := LoadStringOnStack(MyGPUID.NodeName, Stk)
-    else
-    if 'team' = Arg then Result := LoadStringOnStack(MyGPUID.Team, Stk)
-    else
-    if 'country' = Arg then Result := LoadStringOnStack(MyGPUID.Country, Stk)
-    else
-    if 'nodeid' = Arg then Result := LoadStringOnStack(MyGPUID.NodeId, Stk)
-    else
-    if 'uptime' = Arg then Result := LoadExtendedOnStack(MyGPUID.Uptime, Stk)
-    else
-    if 'totuptime' = Arg then Result := LoadExtendedOnStack(MyGPUID.TotalUptime, Stk)
-    else
-    if 'opsys' = Arg then Result := LoadStringOnStack(MyGPUID.OS, Stk)
-    else
-    if ('ip' = Arg) or ('remoteip' = Arg)  then
-       Result := LoadStringOnStack(MyGPUID.IP, Stk)
-    else
-    if ('port' = Arg) then Result := LoadExtendedOnStack(MyGPUID.Port, Stk)
-    else
-    if ('cputype' = Arg) then Result := LoadStringOnStack(MyGPUID.Processor, Stk)
-    else
-    if ('version' = Arg) then Result := LoadStringOnStack(MyGPUID.Version, Stk)
-    else
-    if ('mhz' = Arg) then Result := LoadExtendedOnStack(MyGPUID.SpeedMHz, Stk)
-    else
-    if ('ram' = Arg) then Result := LoadExtendedOnStack(MyGPUID.RAM, Stk)
-	else
-    {
-           if ('memused' = Arg) then Result := LoadExtendedOnStack(memused, Stk)
-           else
-           if ('memtotalspace' = Arg) then Result := LoadExtendedOnStack(memtotalspace, Stk)
-           else
-           if ('memoverhead' = Arg) then Result := LoadExtendedOnStack(memoverhead, Stk)
-           else
-           if ('memheaperrorcode' = Arg) then Result := LoadExtendedOnStack(memheaperrorcode, Stk)
-           else }
-    if ('acceptincoming' = Arg) then Result := LoadBooleanOnStack(MyGPUId.AcceptIncoming, Stk)
-    else
-    if ('loadedplugins' = Arg) then
-            begin
-               Result := false;
-               PlugMan.PluginNamesTop;
-               repeat
-                tmp := PlugMan.GetPluginsName;
-                if tmp <> '' then LoadStringOnStack(tmp, Stk);
-               until tmp = '';
-               Result := true;
-            end
-    else
-    if ('loaddll' = Arg) then
-    begin
-      Result := PlugMan.LoadSinglePlugin(StrPas(Stk.PCharStack[Stk.StIdx]));
-      Stk.PCharStack[Stk.StIdx] := nil;
-      if Result then
-        stk.Stack[stk.StIdx] := 1
+  Result := false;
+  if (arg='user.id') then Result := pushStr(MyUserID.userid, stk, error) else
+  if (arg='user.name') then Result := pushStr(MyUserID.username, stk, error) else
+  if (arg='user.email') then Result := pushStr(MyUserID.email, stk, error) else
+  if (arg='user.realname') then Result := pushStr(MyUserID.realname, stk, error) else
+  if (arg='user.homepage_url') then Result := pushStr(MyUserID.homepage_url, stk, error) else
+    raise Exception.Create('User argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
+  Result := true;  
+end;
+
+function TSpecialCommand.execNodeCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+begin
+  Result := false;
+  if (arg='node.name')          then Result := pushStr(MyGPUID.nodename, stk, error) else
+  if (arg='node.team')          then Result := pushStr(MyGPUID.team, stk, error) else
+  if (arg='node.country')       then Result := pushStr(MyGPUID.country, stk, error) else
+  if (arg='node.region')        then Result := pushStr(MyGPUID.region, stk, error) else
+  if (arg='node.id')            then Result := pushStr(MyGPUID.nodeid, stk, error) else
+  if (arg='node.ip')            then Result := pushStr(MyGPUID.ip, stk, error) else
+  if (arg='node.port')          then Result := pushStr(MyGPUID.port, stk, error) else
+  if (arg='node.os')            then Result := pushStr(MyGPUID.os, stk, error) else
+  if (arg='node.version')       then Result := pushStr(MyGPUID.version, stk, error) else
+  if (arg='node.accept')        then Result := pushBool(MyGPUID.acceptincoming, stk, error) else
+  if (arg='node.mhz')           then Result := pushFloat(MyGPUID.mhz, stk, error) else
+  if (arg='node.ram')           then Result := pushFloat(MyGPUID.ram, stk, error) else
+  if (arg='node.gflops')        then Result := pushFloat(MyGPUID.gigaflops, stk, error) else
+  if (arg='node.issmp')         then Result := pushBool(MyGPUID.issmp, stk, error) else
+  if (arg='node.isht')          then Result := pushBool(MyGPUID.isht, stk, error) else
+  if (arg='node.is64bit')       then Result := pushBool(MyGPUID.is64bit, stk, error) else
+  if (arg='node.iswine')        then Result := pushBool(MyGPUID.iswine, stk, error) else
+  if (arg='node.isscreensaver') then Result := pushBool(MyGPUID.isscreensaver, stk, error) else
+  if (arg='node.cpus')          then Result := pushFloat(MyGPUID.cpus, stk, error) else
+  if (arg='node.uptime')        then Result := pushFloat(MyGPUID.uptime, stk, error) else
+  if (arg='node.totuptime')     then Result := pushFloat(MyGPUID.totuptime, stk, error) else
+  if (arg='node.cputype')       then Result := pushStr(MyGPUID.cputype, stk, error) else
+  if (arg='node.localip')       then Result := pushStr(MyGPUID.localip, stk, error) else
+  if (arg='node.longitude')     then Result := pushFloat(MyGPUID.longitude, stk, error) else
+  if (arg='node.latitude')      then Result := pushFloat(MyGPUID.latitude, stk, error) else
+    raise Exception.Create('Node argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
+  Result := true;
+end;
+
+function TSpecialCommand.execThreadCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+var float : TGPUType;
+begin
+  Result := false;
+  if (arg='thread.sleep') then
+       begin
+         Result := popFloat(float, stk, error);
+         if Result then Sleep(Round(float * 1000));
+       end
       else
-        stk.Stack[stk.StIdx] := 0;
-    end
-    else
-    if ('unloaddll' = Arg) then
-    begin
-      Result := PlugMan.UnloadSinglePlugin(StrPas(Stk.PCharStack[Stk.StIdx]));
-      Stk.PCharStack[Stk.StIdx] := nil;
-      if Result then
-        stk.Stack[stk.StIdx] := 1
-      else
-        stk.Stack[stk.StIdx] := 0;
-    end
-    else
-    if ('xyz_netmapper' = Arg) then
-    begin
-      Result := True;
-      Stk.StIdx := Stk.StIdx+3;
-      Stk.Stack[Stk.StIdx]      := MyGPUID.netmap_x;
-      Stk.Stack[Stk.StIdx-1]    := MyGPUID.netmap_y;
-      Stk.Stack[Stk.StIdx-2]    := MyGPUID.netmap_z;
-      Stk.PCharStack[Stk.StIdx] := nil;
-      Stk.PCharStack[Stk.StIdx-1] := nil;
-      Stk.PCharStack[Stk.StIdx-2] := nil;
-    end
-    else
-    if ('settotaluptime' = Arg) then
-    begin
-      Result := False;
-      if Trim(MyGPUID.NodeName) = Trim(StrPas(Stk.PCharStack[Stk.StIdx])) then
-           begin
-             Result := true;
-             MyGPUID.Uptime := 0;
-             MyGPUID.TotalUptime := Stk.Stack[Stk.StIdx-1];
-             Stk.StIdx := Stk.StIdx-1;
-           end;
-    end
-    else
-    if ('iscapable' = Arg) then
-    begin
-      Result := false;
-      if PlugMan.IsCapable(StrPas(Stk.PCharStack[Stk.StIdx])) then
-        stk.Stack[stk.StIdx] := 1
-      else
-        stk.Stack[stk.StIdx] := 0;
-      Stk.PCharStack[Stk.StIdx] := nil;
-      Result := true;
-    end
-    else
-    if ('isbusy' = Arg) then
-    begin
-      Result := false;
-      if FuncController.isAlreadyCalled(StrPas(Stk.PCharStack[Stk.StIdx])) then
-        stk.Stack[stk.StIdx] := 1
-      else
-        stk.Stack[stk.StIdx] := 0;
-      Stk.PCharStack[Stk.StIdx] := nil;
-      Result := true;
-    end
-    else
-    if ('whichdll' = Arg) or  ('whichplugin' = Arg) then
-    begin
-      Result := false;
-      PlugMan.WhichPlugin(StrPas(Stk.PCharStack[Stk.StIdx]), tmpSpecial);
-      Stk.PCharStack[Stk.StIdx] := nil;
-      Stk.StIdx := Stk.StIdx-1;
-      Result := LoadStringOnStack(tmpSpecial, Stk);
-    end;
+    raise Exception.Create('Thread argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');      
+end;
+
+function TSpecialCommand.execCoreCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
+begin
+  Result := false;  
+  if (arg='core.threads')      then Result := pushFloat(core_.getCurrentThreads(), stk, error) else
+  if (arg='core.maxthreads')   then Result := pushFloat(core_.getMaxThreads(), stk, error) else
+  if (arg='core.isidle')       then Result := pushBool(core_.isIdle(), stk, error) else
+  if (arg='core.hasresources') then Result := pushBool(core_.hasResources(), stk, error) else
+  if (arg='core.version')      then Result := pushStr(GPU_CORE_VERSION, stk, error) else
+    raise Exception.Create('Node argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
+  Result := true;   
+end;
+
+function TSpecialCommand.execPluginCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+begin
+
+
+end;
+
+function execFrontendCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+begin
+
+end;
+
+function execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+begin
 
 end;
 

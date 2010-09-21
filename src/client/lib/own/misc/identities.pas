@@ -35,7 +35,7 @@ type
     nbCPUs: Longint;
     Uptime,
     TotalUptime : Double;
-    Processor   : String;
+    CPUType     : String;
 
     Longitude,
     Latitude : Extended;
@@ -46,13 +46,15 @@ type
      userid,
      username,
      password,
+     email,
+     realname,
      homepage_url : String;
   end;
 
 
 
 var
-  MyGPUID: TGPUIdentity;
+  MyGPUID  : TGPUIdentity;
   MyUserID : TUserIdentity;
 
 implementation

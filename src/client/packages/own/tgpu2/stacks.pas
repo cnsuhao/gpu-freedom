@@ -77,16 +77,19 @@ function enoughParametersOnStack(required : Longint; var stk : TStack; var error
 function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackType; var error : TGPUError) : Boolean;
 
 // loading stuff on stack
-function LoadStringOnStack(str : String; var stk : TStack; var error : TGPUError) : Boolean;
-function LoadFloatOnStack(float : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
-function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushStr  (str : String; var stk : TStack; var error : TGPUError) : Boolean;
+function pushFloat(float : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushBool (b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
 
 // checking stack types
-function isGPUFloat(i : Longint; var stk : TStack) : Boolean;
+function isGPUFloat  (i : Longint; var stk : TStack) : Boolean;
 function isGPUBoolean(i : Longint; var stk : TStack) : Boolean;
-function isGPUString(i : Longint, var stk : TStack) : Boolean;
+function isGPUString (i : Longint, var stk : TStack) : Boolean;
 
-
+// popping stuff from stack
+function popFloat(var float : TGPUFloat; var stk : Stack; var error : TGPUError) : Boolean;
+function popBool (var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+function popStr  (var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
 
 
 implementation
@@ -196,7 +199,7 @@ end;
 
 
 
-function LoadStringOnStack(str : String; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushStr(str : String; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -211,7 +214,7 @@ begin
                  end;              
 end;
 
-function LoadFloatOnStack(ext : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushFloat(ext : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -226,7 +229,7 @@ begin
                  end;              
 end;
 
-function LoadBooleanOnStack(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushBool(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
     value     : TGPUFloat;
 begin
@@ -265,6 +268,37 @@ function isGPUString(i : Longint, var stk : TStack) : Boolean;
 begin
  if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUString ('+IntToStr(i)+')');
  Result := (stk.stkType[i]=GPU_STRING_STKTYPE);
+end;
+
+function popFloat(var float : TGPUFloat; var stk : Stack; var error : TGPUError) : Boolean;
+var types : TGPUTypes;
+begin
+  Result  := false;
+  types[1]:= GPU_FLOAT_STKTYPE;
+  if not typeOfParametersCorrect(1, stk,  types, error) then Exit;
+  float := stk.Stack[stk.Idx];
+  Dec(stk.Idx);
+  Result := true;
+end;
+
+function popBool(var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+begin
+  Result  := false;
+  types[1]:= GPU_BOOLEAN_STKTYPE;
+  if not typeOfParametersCorrect(1, stk,  types, error) then Exit;
+  b := (stk.Stack[stk.Idx]>0);
+  Dec(stk.Idx);
+  Result := true;
+end;
+
+function popString(var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+begin
+  Result  := false;
+  types[1]:= GPU_STRING_STKTYPE;
+  if not typeOfParametersCorrect(1, stk,  types, error) then Exit;
+  str := stk.strStack[stk.Idx];
+  Dec(stk.Idx);
+  Result := true;
 end;
 
 end.
