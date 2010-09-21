@@ -33,8 +33,8 @@ type
     
     procedure loadAll();
     procedure discardAll();
-    function  loadOne(pluginName : String)  : Boolean;
-    function  discardOne(pluginName : String)  : Boolean;
+    function  loadOne(pluginName : String; var error : TGPUError)  : Boolean;
+    function  discardOne(pluginName : String; var error : TGPUError)  : Boolean;
 	function  isAlreadyLoaded(pluginName : String)  : Boolean;
     
     // calls the method, and passes the stack to the method
@@ -200,7 +200,7 @@ begin
  Result := retrievePlugin(name, plugname, p, error);
 end; 
 
-function  TPluginManager.loadOne(pluginName : String)  : Boolean;
+function  TPluginManager.loadOne(pluginName : String; var error : TGPUError)  : Boolean;
 var i : Longint;
     plug : TPlugin;
 begin
@@ -219,23 +219,36 @@ begin
   
   // this plugin is new then
   Result := load(pluginName);
+  if not Result then
+       begin
+        error.errorID  := COULD_NOT_LOAD_PLUGIN_ID;
+        error.errorMsg := COULD_NOT_LOAD_PLUGIN;
+        error.errorArg := '('+pluginName+'.'+extension_+')';
+       end;
   CS_.Leave;
 end;
 
-function  TPluginManager.discardOne(pluginName : String);
+function  TPluginManager.discardOne(pluginName : String; var error : TGPUError);
 var i : Longint;
 begin
  CS_.Enter;
  Result := false;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
-    if plugs_[i]^.getName() = pluginName then
-       begin
-         if (plugs_[i]^.isloaded()) then
-            Result := plugs_[i]^.discard();
-			CS_.Leave;
-			Exit;
-       end;
+    if plugs_[i]^.getName() = pluginName and
+         (plugs_[i]^.isloaded()) then
+           begin 
+              Result := plugs_[i]^.discard();
+              if not Result then
+                  begin
+                   error.errorID  := COULD_NOT_DISCARD_PLUGIN_ID;
+                   error.errorMsg := COULD_NOT_DISCARD_PLUGIN;
+                   error.errorArg := '('+pluginName+'.'+extension_+')';
+                  end;
+			  CS_.Leave;
+			  Exit;
+           end;
+ Result := true;
  CS_.Leave;	   
 end; 
 

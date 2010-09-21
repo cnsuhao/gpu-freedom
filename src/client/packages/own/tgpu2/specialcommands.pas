@@ -74,7 +74,7 @@ begin
 	    Result := true;
       end
   else	  
-  if (arg='plugin.load') or (arg='plugin.discard') or (arg='plugin.loadall') or (arg='plugin.discardall') or 
+  if (arg='plugin.load') or (arg='plugin.discard')  or 
      (arg='plugin.list') or (arg='plugin.isloaded') or (arg='plugin.which') or (arg='plugin.isable') then
       begin
         specialType := GPU_SPECIAL_CALL_PLUGIN;
@@ -162,24 +162,53 @@ begin
   if (arg='core.isidle')       then Result := pushBool(core_.isIdle(), stk, error) else
   if (arg='core.hasresources') then Result := pushBool(core_.hasResources(), stk, error) else
   if (arg='core.version')      then Result := pushStr(GPU_CORE_VERSION, stk, error) else
-    raise Exception.Create('Node argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
+    raise Exception.Create('Core argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   Result := true;   
 end;
 
 function TSpecialCommand.execPluginCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+var str, pluginName : String;
 begin
-
-
+     (arg='plugin.list') or (arg='plugin.isloaded') or (arg='plugin.which') or (arg='plugin.isable') then
+   
+  Result := false;
+  if (arg='plugin.list') then  
+          begin
+          
+            Result := true;
+            Exit;
+          end;
+  
+  // all other commands have a string as argument
+  Result := popStr(str, stk, error);
+  if not Result then Exit;
+  
+  if (arg='plugin.load') then      Result := plugman_.loadOne(str, error) else
+  if (arg='plugin.discard') then   Result := plugman_.discardOne(str, error) else
+  if (arg='plugin.isloaded') then  Result := pushBool(plugman_.isAlreadyLoaded(str, error), stk, error) else
+  // tells which plugin implements a given function
+  if (arg='plugin.which') then
+        begin  
+           Result := plugman_.method_exists(str, pluginName, error);
+           pushStr(pluginName, stk, error);
+        end
+  else      
+  if (arg='plugin.isable') then
+        begin  
+          Result := pushBool(plugman_.method_exists(str, pluginName, error), pluginName, error);
+        end;  
+  else
+    raise Exception.Create('Plugin argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
 end;
 
 function execFrontendCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
 begin
-
+    raise Exception.Create('Frontend argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
 end;
 
 function execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
 begin
-
+    raise Exception.Create('Result argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
 end;
 
 

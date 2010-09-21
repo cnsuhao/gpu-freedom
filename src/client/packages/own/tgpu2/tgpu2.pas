@@ -44,7 +44,7 @@ type
 	// helper structures
 	function getPluginManger()   : TPluginManager;
 	function getMethController() : TMethodController;
-	function getSpecCommands() : TSpecialCommand;
+	function getSpecCommands()   : TSpecialCommand;
     
   private
     max_threads_, 

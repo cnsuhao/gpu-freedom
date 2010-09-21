@@ -88,8 +88,8 @@ function isGPUString (i : Longint, var stk : TStack) : Boolean;
 
 // popping stuff from stack
 function popFloat(var float : TGPUFloat; var stk : Stack; var error : TGPUError) : Boolean;
-function popBool (var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
-function popStr  (var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+function popBool (var b : Boolean; var stk : Stack; var error : TGPUError) : Boolean;
+function popStr  (var str : String; var stk : Stack; var error : TGPUError) : Boolean;
 
 
 implementation
@@ -281,7 +281,8 @@ begin
   Result := true;
 end;
 
-function popBool(var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+function popBool(var b : Boolean; var stk : Stack; var error : TGPUError) : Boolean;
+var types : TGPUTypes;
 begin
   Result  := false;
   types[1]:= GPU_BOOLEAN_STKTYPE;
@@ -291,7 +292,8 @@ begin
   Result := true;
 end;
 
-function popString(var b : TBoolean; var stk : Stack; var error : TGPUError) : Boolean;
+function popString(var str : String; var stk : Stack; var error : TGPUError) : Boolean;
+var types : TGPUTypes;
 begin
   Result  := false;
   types[1]:= GPU_STRING_STKTYPE;
