@@ -2,13 +2,13 @@ unit specialcommands;
 
 interface
 
-uses identities;
+uses identities, gpuconstants;
 
 type TSpecialCommand = class(TObject)
  public
    constructor Create(var plugman : TPluginManager; var meth : TMethodController);
-   function isSpecialCommmand(arg : String) : boolean;
-   function execSpecialCommand(arg : String; var error : TGPUError) : boolean
+   function isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
+   //function execSpecialCommand(arg : String; var error : TGPUError) : boolean
  private
    plugman_ : TPluginManager;
    meth_    : TMethodController;   
@@ -22,10 +22,12 @@ end;
 
 implementation
 
-function TSpecialCommand.isSpecialCommmand(arg : String) : boolean;
+function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
 begin
   //TODO: define this
 end;
+
+
 
 function TSpecialCommand.execSpecialCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
 begin

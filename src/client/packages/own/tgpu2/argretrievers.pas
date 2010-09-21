@@ -10,16 +10,7 @@ It is used by the TGPUParser to parse the arguments
 }
 interface
 
-uses SysUtils, stacks, plugins, utils, common;
-
-const
-  GPU_CALL         = 10;
-  GPU_STRING       = 20;
-  GPU_FLOAT        = 30;
-  GPU_EXPRESSION   = 40;
-  GPU_SPECIAL_CALL = 50;
-  GPU_BOOLEAN      = 60;
-  GPU_ERROR        = 99;
+uses SysUtils, stacks, plugins, utils, common, gpuconstants;
 
 type TArgGPU = record
      argtype : ShortInt;
@@ -49,7 +40,7 @@ type TArgRetriever = class(TObject);
    function getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 
    function getOtherArgument(var error : TGPUError) : TArgGPU;
-   function getSpecialArgument(var error : TGPUError; arg : String) : TArgGPU;
+   function getSpecialArgument(var error : TGPUError; arg : String; specialType : Longint) : TArgGPU;
    function getBooleanArgument(var error : TGPUError;arg : String) : TArgGPU;
    function getCallArgument(var error : TGPUError; arg : String) : TArgGPU;
    
@@ -86,7 +77,7 @@ begin
  if startchar = ',' then
     begin
        // an empty argument, raise error
-       Result.argtype := GPU_ERROR;
+       Result.argtype := GPU_ARG_ERROR;
        error.ErrorID  := EMPTY_ARGUMENT_ID;
        error.ErrorMsg := EMPTY_ARGUMENT;
        error.ErrorArg := toparse_;
@@ -146,12 +137,12 @@ begin
       // the right closing bracket
       Delete(toparse_, 1, i - 1);
       deleteComma();
-      Result.argtype := GPU_EXPRESSION;
+      Result.argtype := GPU_ARG_EXPRESSION;
       Result.argstring := arg;
     end
     else {problem in brackets}
     begin
-      Result.argtype   := GPU_ERROR;
+      Result.argtype   := GPU_ARG_ERROR;
       error.errorID := errorID;
       error.errorMsg := errorMsg;
       error.errorArg := toparse_;
@@ -169,7 +160,7 @@ begin
  if (i=Length(toparse_) and toparse_[i]<>QUOTE then
      begin
        // quote is not closed
-       Result.argtype := GPU_ERROR;
+       Result.argtype := GPU_ARG_ERROR;
        error.errorID := MISSING_QUOTE_ID;
        error.errorMsg := MISSING_QUOTE;
        error.errorArg := toparse_;
@@ -184,7 +175,7 @@ begin
  Delete(toparse_, 1, i);
  deleteComma();
  
- Result.argtype   := GPU_STRING;
+ Result.argtype   := GPU_ARG_STRING;
  Result.argstring := arg;
 end;
 
@@ -196,14 +187,14 @@ begin
  try
    float := StrToFloat(arg, formatSet.fs);
  except
-   Result.argtype := GPU_ERROR;
+   Result.argtype := GPU_ARG_ERROR;
    error.ErrorID  := COULD_NOT_PARSE_FLOAT_ID;
    error.ErrorMsg := COULD_NOT_PARSE_FLOAT;
    error.ErrorArg := arg;
    Exit;
  end;
  
- Result.argtype  := GPU_FLOAT;
+ Result.argtype  := GPU_ARG_FLOAT;
  Result.argvalue := float;
 end;
 
@@ -223,14 +214,15 @@ end;
 function TArgRetriever.getOtherArgument(var error : TGPUError) : TArgGPU;
 var arg,
     lowerarg : String;
+	specialType : Longint;
 begin
   arg := Trim(ExtractParam(toparse_, ','));
   lowerarg := lowercase(arg);
   if (lowerarg='true') or (lowerarg='false') then
       Result := getBooleanArgument(error, lowerarg)
   else    
-  if speccommands_.isSpecialCommand(arg) then
-      Result := getSpecialArgument(error, arg)
+  if speccommands_.isSpecialCommand(arg, specialType) then
+      Result := getSpecialArgument(error, arg, specialType)
   else
   Result := getCallArgument(error, arg);  
 end;
@@ -239,21 +231,21 @@ function TArgRetriever.getBooleanArgument(var error : TGPUError; arg : String) :
 var value : TGPUFloat;
 begin
  if (arg='true') then value := 1 else value := 0;
- Result.argtype   := GPU_BOOLEAN;
+ Result.argtype   := GPU_ARG_BOOLEAN;
  Result.argvalue  := value;
 end;
 
 
-function TArgRetriever.getSpecialArgument(var error : TGPUError; arg : String) : TArgGPU;
+function TArgRetriever.getSpecialArgument(var error : TGPUError; arg : String; specialType : Longint) : TArgGPU;
 begin
- Result.argtype   := GPU_SPECIAL_CALL;
+ Result.argtype   := specialType;
  Result.argstring := arg;
 end;
 
 
 function TArgRetriever.getCallArgument(var error : TGPUError; arg : String) : TArgGPU;
 begin
- Result.argtype   := GPU_CALL;
+ Result.argtype   := GPU_ARG_CALL;
  Result.argstring := arg;
 end;
 

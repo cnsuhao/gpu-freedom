@@ -61,20 +61,20 @@ begin
      begin
        arg := getArgument(error);
        case arg.argType of
-            GPU_ERROR :  isOK := false; // the error structure contains the error
-            GPU_FLOAT : // a float was detected
-                     isOK := loadExtendedOnStack(arg.argvalue, stk, error); 
+            GPU_ARG_ERROR :  isOK := false; // the error structure contains the error
+            GPU_ARG_FLOAT : // a float was detected
+                     isOK := loadFloatOnStack(arg.argvalue, stk, error); 
                    
-            GPU_STRING : // a string was detected
+            GPU_ARG_STRING : // a string was detected
                      isOK := loadStringOnStack(arg.argstring, stk, error);
-            GPU_BOOLEAN :
-                     isOK := loadBooleanOnStack(arg.value, stk, error);
-            GPU_EXPRESSION :
+            GPU_ARG_BOOLEAN :
+                     isOK := loadBooleanOnStack(arg.argvalue, stk, error);
+            GPU_ARG_EXPRESSION :
                      // we found an expression, we need to recursively call this method
                      isOK := parse(arg.argstring, stk, error);
-            GPU_SPECIAL_CALL :
+            GPU_ARG_SPECIAL_CALL :
                      isOK := speccommands_.execSpecialCommand(arg.argstring, stk, error);            
-            GPU_CALL :
+            GPU_ARG_CALL :
                    begin
                      isOK := plugman_.method_exists(arg.argstring, pluginName, error);
 					 if isOK then
