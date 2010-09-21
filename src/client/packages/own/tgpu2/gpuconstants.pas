@@ -11,7 +11,7 @@ const
   DEFAULT_THREADS = 3;   // default number of threads in TGPU2.pas
   MAX_THREADS     = 16;  // maximum number of allowed threads in TGPU2.pas
 
-  MAX_STACK_PARAMS   = 128;          // Maximum size of Stack in Virtual Machine
+  MAX_STACK_PARAMS   = 256;          // Maximum size of Stack in Virtual Machine
                                      // changes in this value or in TStack structure
                                      // require recompilation of all plugins
                                      

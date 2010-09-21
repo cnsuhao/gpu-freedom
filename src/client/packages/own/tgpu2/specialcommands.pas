@@ -169,13 +169,10 @@ end;
 function TSpecialCommand.execPluginCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
 var str, pluginName : String;
 begin
-     (arg='plugin.list') or (arg='plugin.isloaded') or (arg='plugin.which') or (arg='plugin.isable') then
-   
   Result := false;
   if (arg='plugin.list') then  
           begin
-          
-            Result := true;
+            Result := plugman_.getPluginList(stk, error);
             Exit;
           end;
   

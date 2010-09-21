@@ -36,6 +36,7 @@ type
     function  loadOne(pluginName : String; var error : TGPUError)  : Boolean;
     function  discardOne(pluginName : String; var error : TGPUError)  : Boolean;
 	function  isAlreadyLoaded(pluginName : String)  : Boolean;
+    function  getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
     
     // calls the method, and passes the stack to the method
     function method_execute(name : String, var Stk : TStack; var error : TGPUError) : Boolean;
@@ -115,11 +116,29 @@ end;
 
 function  TPluginManager.isAlreadyLoaded(pluginName : String)  : Boolean;
 begin
- Result := false;
  CS_.Enter;
+ Result := false;
  for i:=1 to plugidx_ do
      if plugs_i[i].plugname=pluginName then
 	    Result := true;
+ CS_.Leave;
+end;
+
+function TPluginManager.getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
+begin
+ CS_.Enter;
+ Result := false;
+ for i:=1 to plugidx_ do
+     if plugs_i[i].callplug^.isloaded() then
+       begin
+         if (not pushStr(plugs[i].plugname, stk, error)) then
+                begin
+                  CS_.Leave;
+                  Exit;
+                end;
+              
+	   end;
+ Result := true;
  CS_.Leave;
 end;
 
