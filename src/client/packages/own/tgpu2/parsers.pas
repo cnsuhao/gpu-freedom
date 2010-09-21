@@ -6,15 +6,14 @@ uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands;
 
 type TGPUParser = class(TObject);
  public 
-   constructor Create(var plugman : TPluginManager; var meth : TMethodController; 
-                      var specCommands : TSpecialCommand;
-                      var job : TJob; threadId : Longint);
+   constructor Create(var core :TGPU2Core; var job : TJob; threadId : Longint);
    destructor Destroy();
    
    function parse() : Boolean; overload;  
    function parse(jobStr : String; var stk : TStack; var error : TGPUError) : Boolean; overload;
    
  private
+   core_           : TGPU2Core;
    plugman_        : TPluginManager;
    methController_ : TMethodController;
    speccommands_   : TSpecialCommand;  
@@ -25,12 +24,13 @@ end;
 
 implementation
 
-constructor TGPUParser.Create(var plugman : TPluginManager; var meth : TMethodController; var specCommands : TSpecialCommand; var job : TJob; threadId : Longint);
+constructor TGPUParser.Create(var core : TGPU2Core; var job : TJob; threadId : Longint);
 begin
   inherited Create();
-  plugMan_ := plugman;
-  methController_ := meth;
-  speccommands_ := specCommands;
+  core_    := core;
+  plugMan_ := core_getPluginManager();
+  methController_ := core.getMethController();
+  speccommands_ := core.getSpecCommands();
   job_ := job;
   thrdId_ := threadId;
 end;

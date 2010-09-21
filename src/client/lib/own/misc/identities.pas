@@ -19,6 +19,7 @@ type
     Region,
     NodeId,
     IP,
+	localIP,
     OS,
     Version:   string;
     Port : Longint; //TCP/IP Port
@@ -26,7 +27,7 @@ type
     MHz,
     RAM,
     GigaFlops : Longint
-    isSMP,               // the computer is a SMP computer with more than 1 CPUs
+    isSMP,               // the computer is a SMP computer with more than 1 CPU case box
     isHT,                // the CPU has HyperThreading feature
     is64bit,              // the CPU is a 64 bit cpu
     isWineEmulator : Boolean;

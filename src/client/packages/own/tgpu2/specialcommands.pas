@@ -1,30 +1,62 @@
 unit specialcommands;
-
+{
+  Special commands are commands on the GPU stack that due to technical
+  reasons cannot be executed in plugins. They need to be executed
+  by the GPU core
+}
 interface
 
 uses identities, gpuconstants;
 
 type TSpecialCommand = class(TObject)
  public
-   constructor Create(var plugman : TPluginManager; var meth : TMethodController);
+   constructor Create(var core : TGPU2Core);
    function isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
    //function execSpecialCommand(arg : String; var error : TGPUError) : boolean
  private
+   core_    : TGPU2Core;
    plugman_ : TPluginManager;
    meth_    : TMethodController;   
 end;
 
-constructor Create(var plugman : TPluginManager; var meth : TMethodController);
+constructor Create(var core : TGPU2Core);
 begin
-  plugman_ := plugman;
-  meth_    := meth;
+ inherited Create();
+  core_    := core;
+  plugman_ := core_.getPluginManager();
+  meth_    := core_.getMethController();
 end;
 
 implementation
 
 function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
 begin
-  //TODO: define this
+  Result := false;
+  specialType := GPU_ARG_UNKNOWN;
+  if (arg='user.id') or (arg='user.name') or (arg='user.email') or (arg='user.homepage_url')   then
+      begin
+	    specialType := GPU_SPECIAL_CALL_USER;
+	    Result := true;
+	  end
+  else
+  if (arg='node.name') or (arg='node.team') or (arg='node.country') or (arg='node.region')  or
+     (arg='node.id') or (arg='node.ip') or (arg='node.os') or (arg='node.version')  or
+	 (arg='node.accept') or (arg='node.mhz') or (arg='node.ram') or (arg='node.gflops')  or
+	 (arg='node.issmp') or (arg='node.isht') or (arg='node.is64bit') or (arg='node.iswine')  or
+	 (arg='node.isscreensaver') or (arg='node.cpus') or (arg='node.uptime') or (arg='node.totuptime') or 
+	 (arg='node.processor') or (arg='node.localip') or (arg='node.lon') or (arg='node.lat') then
+      begin
+	    specialType := GPU_SPECIAL_CALL_NODE;
+	    Result := true;
+	  end
+  else
+  if (arg='thread.sleep')  then
+      begin
+        specialType := GPU_SPECIAL_CALL_THREAD;
+	    Result := true;
+      end
+  else	  
+  
 end;
 
 

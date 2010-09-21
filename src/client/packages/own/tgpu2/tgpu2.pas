@@ -40,6 +40,11 @@ type
     function  isIdle() : Boolean;
     function  hasResources() : Boolean;
     function  getCurrentThreads() : Longint;
+	
+	// helper structures
+	function getPluginManger()   : TPluginManager;
+	function getMethController() : TMethodController;
+	function getSpecCommands() : TSpecialCommand;
     
   private
     max_threads_, 
@@ -67,7 +72,7 @@ begin
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
   CS_ := TCriticalSection.Create();
-  speccommands_ := TSpecialCommand.Create(plugman_, methController_);
+  speccommands_ := TSpecialCommand.Create(self);
   for i:=1 to MAX_THREADS do slots_[i] := nil;
 end;
 
@@ -75,6 +80,21 @@ destructor TGPUCore2.Destroy();
 begin
   CS_.Free;
   inherited;
+end;
+
+function TGPUCore2.getPluginManger()   : TPluginManager;
+begin
+ Result := plugman_;
+end;
+
+function TGPUCore2.getMethController() : TMethodController;
+begin
+ Result := methController_;
+end;
+
+function TGPUCore2.getSpecCommands() : TSpecialCommand;
+begin
+ Result := speccommands_;
 end;
 
 
@@ -113,7 +133,7 @@ begin
             end;
   
   Inc(current_threads_);  
-  slots_[slot] := TComputationThread.Create(plugman_, methController_, speccomands_, job, slot); 
+  slots_[slot] := TComputationThread.Create(self, job, slot); 
   
   Return := true;
   CS_.Leave;

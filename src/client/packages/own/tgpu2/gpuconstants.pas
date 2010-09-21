@@ -44,6 +44,7 @@ const
   UNKNOWN_STACK_TYPE       = 'UNKNOWN STACK TYPE';
   
   // constants used in argretrievers.pas and parsers.pas
+  GPU_ARG_UNKNOWN      = 0;
   GPU_ARG_CALL         = 10;
   GPU_ARG_STRING       = 20;
   GPU_ARG_FLOAT        = 30;
@@ -56,6 +57,7 @@ const
   GPU_ARG_SPECIAL_CALL_USER     = 90;
   GPU_ARG_SPECIAL_CALL_THREAD   = 100;
   GPU_ARG_SPECIAL_CALL_RESULT   = 110;
+  GPU_ARG_SPECIAL_CALL_CORE     = 120;
   
   GPU_ARG_ERROR        = 999;
   
