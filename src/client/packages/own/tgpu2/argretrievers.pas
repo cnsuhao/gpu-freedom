@@ -7,6 +7,10 @@ The object TArgRetrieve allows to iterate over the arguments of the command
 with hasArguments() and getArgument().
 
 It is used by the TGPUParser to parse the arguments
+
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 interface
 

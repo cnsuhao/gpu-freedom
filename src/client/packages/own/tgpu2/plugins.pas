@@ -1,5 +1,12 @@
 unit plugins;
-
+{
+ This unit manages dynamic links libraries and the object TPlugin in plugin.pas
+  which encapsulates one of them.
+  
+    (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
+}
 interface
 
 uses

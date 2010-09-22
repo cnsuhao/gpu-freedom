@@ -5,6 +5,10 @@ unit methodcontrollers;
  by one thread at a time. Two threads cannot be
  in the same DLL function. This should increase stability
  of the plugin mechanism
+ 
+   (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 interface
 

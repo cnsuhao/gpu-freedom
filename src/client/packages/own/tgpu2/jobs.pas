@@ -23,6 +23,10 @@ unit jobs;
   TGPUTella in gpu_main_form.pas listens. TGPUTella is the main
   form window and these events help to keep the job list updated.
   
+   (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
+  
 }
 interface
 

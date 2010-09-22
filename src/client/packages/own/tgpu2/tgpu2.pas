@@ -11,6 +11,10 @@
   
   It encapsulates the MethodController, which makes sure that the same function
   inside a plugin is not called concurrently, for increased stability.
+  
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
     
 }
 unit TGPU2;
@@ -24,7 +28,7 @@ type
   TGPUCore2 = class(TObject)
   public
 
-    constructor Create(var plugman : TPluginManager; var meth : TMethodController);
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController; var resColl : TResultCollector);
     destructor  Destroy();
     
     // computes  a job if there are available threads
@@ -45,6 +49,7 @@ type
 	function getPluginManger()   : TPluginManager;
 	function getMethController() : TMethodController;
 	function getSpecCommands()   : TSpecialCommand;
+    function getResultCollector(): TResultCollector;
     
   private
     max_threads_, 
@@ -53,6 +58,7 @@ type
     plugman_        : TPluginManager;
     methController_ : TMethodController;
     speccommands_   : TSpecialCommand;
+    rescoll_        : TResultCollector;
     // TODO: define a ResultCollector
     CS_             : TCriticalSection;
     
@@ -63,12 +69,13 @@ type
   
 implementation
 
-constructor TGPUCore2.Create(var plugman : TPluginManager; var meth : TMethodController);
+constructor TGPUCore2.Create(var plugman : TPluginManager; var meth : TMethodController; var resColl : TResultCollector);
 var i : Longint;
 begin
   inherited Create();
   plugman_ := plugman;
   methController_ := meth;
+  rescoll_ := resColl;
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
   CS_ := TCriticalSection.Create();
@@ -96,6 +103,11 @@ function TGPUCore2.getSpecCommands() : TSpecialCommand;
 begin
  Result := speccommands_;
 end;
+
+function getResultCollector(): TResultCollector;
+begin
+ Result := rescoll_;
+end; 
 
 
 function TGPUCore2.findAvailableSlot() : Longint;

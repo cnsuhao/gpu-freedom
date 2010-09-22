@@ -1,4 +1,12 @@
 unit parser;
+{
+ The parser reads a GPU string and converts into a stack by executing the sequence of 
+ commands on the string.
+
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
+}
 
 interface
 

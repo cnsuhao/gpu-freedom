@@ -2,6 +2,10 @@ unit computationthreads
 {
     ComputationThread is a thread which executes stored in
     job.job.
+    
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 interface
 

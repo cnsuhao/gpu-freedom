@@ -6,6 +6,9 @@
   TStack is the internal structure used by plugins to communicate
   with the GPU core.
    
+   (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 unit stacks;
 
@@ -52,19 +55,6 @@ type
 
 type TDescFunction = function : String;
      PDescFunction = ^TDescFunction;
-
-// TODO: move this in collectresults
-type   {here we collect results, computing average and so on}
-  TGPUCollectResult = record
-    TotalTime: TDateTime;
-    FirstResult,
-    LastResult: TGPUFloat;
-    N:        : Longint;
-    Sum,                    {with sum and N we can compute average}
-    Min,
-    Max,
-    Avg    : TGPUFloat;  
-  end;
 
 // initialization and conversion functions
 function initStack(var stk : TStack);

@@ -2,6 +2,10 @@ unit gpuconstants;
 {
   In this class constants for the GPU core v2 are defined.
   Error codes and important parameters can be found here as well.
+  
+   (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 interface
 
@@ -15,7 +19,8 @@ const
                                      // changes in this value or in TStack structure
                                      // require recompilation of all plugins
                                      
-  MAX_COLLECTING_IDS = 128;          // Maximum number of Jobs we keep also average track
+  MAX_RESULTS = 128;          // Maximum number of jobs we keep track
+  MAX_RESULTS_FOR_ID = 64;   // Maximum number of job results we remember for an id
 
   QUOTE              = Chr(39);      // alias for apostrophe, ', used in argretrievers.pas
   
@@ -67,6 +72,8 @@ const
   GPU_ARG_SPECIAL_CALL_CORE     = 120;
   
   GPU_ARG_ERROR        = 999;
+  
+  INF = 1.0/0.0; // used to retrieve minimums
   
   
 

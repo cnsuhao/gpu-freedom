@@ -10,6 +10,10 @@ unit pluginmanager
  It can find functions inside the DLL, and execute them.
  It can retrieve a list of loaded plugins and tell if a particular
  plugin is loaded or not. 
+ 
+   (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 
 interface

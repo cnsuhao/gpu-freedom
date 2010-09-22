@@ -3,6 +3,10 @@ unit specialcommands;
   Special commands are commands on the GPU stack that due to technical
   reasons cannot be executed in plugins. They need to be executed
   by the GPU core
+  
+    (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
 }
 interface
 
@@ -26,6 +30,7 @@ type TSpecialCommand = class(TObject)
    core_    : TGPU2Core;
    plugman_ : TPluginManager;
    meth_    : TMethodController;   
+   rescoll_ : TResultCollector;
 end;
 
 implementation
@@ -36,6 +41,7 @@ begin
   core_    := core;
   plugman_ := core_.getPluginManager();
   meth_    := core_.getMethController();
+  rescoll_ := core_.getResultCollector();
 end;
 
 function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
