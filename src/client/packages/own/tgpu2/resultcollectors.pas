@@ -18,9 +18,9 @@ type
     totalTime: TDateTime;
     
     // circular buffers to store res
-    resStr    : array[1..MAX_RESULTS_FOR_ID] of String;
+    resStr     : array[1..MAX_RESULTS_FOR_ID] of String;
     resFloat   : array[1..MAX_RESULTS_FOR_ID] of TGPUFloat;
-    isSingleFloat : array[1..MAX_RESULTS_FOR_ID] of Boolean;
+    isFloat    : array[1..MAX_RESULTS_FOR_ID] of Boolean;
     idx : Longint; // index of circular buffer
     
     N                         // number of res
@@ -31,6 +31,8 @@ type
     avg,
 	variance,
     stddev    : TGPUFloat;  
+	
+	overrun : Boolean; // if there are more than MAX_RESULTS_FOR_ID
   end;
   
   
@@ -81,15 +83,17 @@ begin
     begin
       resStr[j] := '';
       resFloat[j] := 0;
-      isSingleFloat[j] := false;
+      isFloat[j] := false;
     end;
   
   res[i].N := 0;
+  res[i].N_float := 0;
   res[i].sum := 0;
   res[i].min := INF;
   res[i].max := -INF;
   res[i].avg := 0;
   res[i].stddev := 0; 
+  res[i].overrun := false; 
 end;
 
 function TResultCollector.findJobId(jobId : String) : Longint;
@@ -143,21 +147,21 @@ begin
   if (stk.Idx=1) and (stk.stkType(1)=GPU_FLOAT_STKTYPE) then
       begin
        res[i].resFloat := stk.stack[stk.Idx];
-       res[i].isSingleFloat := true;
+       res[i].isFloat := true;
       end;
     else
-      res[i].isSingleFloat := false;    
+      res[i].isFloat := false;    
    
    // updating averages, sum, n, etc.
    Inc(res[i].N);
-   if (res[i].N>MAX_RESULTS_FOR_JOB_ID) then res[i].N:=MAX_RESULTS_FOR_JOB_ID;
+   res[i].overrun := (res[i].N>MAX_RESULTS_FOR_JOB_ID);
    
    res[i].N_float := 0;
    res[i].sum := 0;
    res[i].min := INF;
    res[i].max := -INF;
    for j:=1 to MAX_RESULTS_FOR_JOB_ID do
-      if res[i].isSingleFloat[j] then 
+      if res[i].isFloat[j] then 
        begin 
         Inc(res[i].N_float);
         res[i].sum := res[i].sum + res[i].resFloat[j];
@@ -170,10 +174,11 @@ begin
    res[i].variance := 0;
    // variance and standard deviation
    for j:=1 to MAX_RESULTS_FOR_JOB_ID do
-      if res[i].isSingleFloat[j] then 
+      if res[i].isFloat[j] then 
          begin
            res[i].variance := res[i].variance + Math.Sqr(res[i].resFloat[j]-res[i].avg);
          end;
+   res[i].variance := res[i].variance/res[i].N_float;	 
    res[i].stddev := Math.sqrt(res[i].variance);	 
    CS_.Leave;
 end;

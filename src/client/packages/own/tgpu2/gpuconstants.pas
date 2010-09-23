@@ -53,6 +53,8 @@ const
   COULD_NOT_LOAD_PLUGIN       = 'COULD NOT LOAD PLUGIN';
   COULD_NOT_DISCARD_PLUGIN_ID = 13;
   COULD_NOT_DISCARD_PLUGIN    = 'COULD NOT DISCARD PLUGIN';
+  STILL_NO_RESULTS_ID         = 14;
+  STILL_NO_RESULTS            = 'STILL NO RESULTS';
   
   
   // constants used in argretrievers.pas and parsers.pas

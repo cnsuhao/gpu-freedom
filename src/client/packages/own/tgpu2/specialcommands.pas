@@ -4,7 +4,7 @@ unit specialcommands;
   reasons cannot be executed in plugins. They need to be executed
   by the GPU core
   
-    (c) by 2002-2010 the GPU Development Team
+  (c) by 2002-2010 the GPU Development Team
   (c) by 2010 HB9TVM
   This unit is released under GNU Public License (GPL)
 }
@@ -27,10 +27,10 @@ type TSpecialCommand = class(TObject)
 
 
  private
-   core_    : TGPU2Core;
-   plugman_ : TPluginManager;
-   meth_    : TMethodController;   
-   rescoll_ : TResultCollector;
+   core_         : TGPU2Core;
+   plugman_      : TPluginManager;
+   meth_         : TMethodController;   
+   rescollector_ : TResultCollector;
 end;
 
 implementation
@@ -38,10 +38,10 @@ implementation
 constructor Create(var core : TGPU2Core);
 begin
  inherited TSpecialCommand.Create();
-  core_    := core;
-  plugman_ := core_.getPluginManager();
-  meth_    := core_.getMethController();
-  rescoll_ := core_.getResultCollector();
+  core_         := core;
+  plugman_      := core_.getPluginManager();
+  meth_         := core_.getMethController();
+  rescollector_ := core_.getResultCollector();
 end;
 
 function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
@@ -93,8 +93,10 @@ begin
 	    Result := true;      
      end
   else
-  if (arg='result.last') or (arg='result.first') or (arg='result.avg') or (arg='result.n') or
-     (arg='result.stddev') or (arg='result.variance') or (arg='result.history') then
+  if (arg='result.last') or (arg='result.avg') or (arg='result.n') or (arg='result.nfloat') or
+     (arg='result.sum') or (arg='result.min') or (arg='result.max') or (arg='result.first') or
+     (arg='result.stddev') or (arg='result.variance') or (arg='result.history') or
+	 (arg='result.overrun') then
      begin
         specialType := GPU_SPECIAL_CALL_RESULT;
 	    Result := true;
@@ -210,9 +212,55 @@ begin
 end;
 
 function execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+var coll  : TResultCollection;
+    jobId : String;
+	i     : Longint;
 begin
+   Result := false;
+   Result := popStr(jobId, stk, error);
+   if not Result then Exit;
+
+   coll := rescollector_.getResultCollection(jobId, rescoll);
+   if (coll.idx = 0) then
+        begin
+		  error.errorId  := STILL_NO_RESULTS_ID;
+		  error.errorMsg := STILL_NO_RESULTS;
+		  error.errorArg := '(JobId: '+jobId+')');
+		  Exit;
+		end;
+		
+   if (arg='result.last') then
+       begin
+	      if coll.isFloat[coll.idx] then
+		    pushFloat(coll.resFloat[coll.idx], stk, error)
+		  else
+            pushStr(coll.resStr[coll.idx], stk, error);		  
+	   end
+   else
+   if (arg='result.first') then
+       begin
+	      if coll.isFloat[1] then
+		    Result := pushFloat(coll.resFloat[1], stk, error)
+		  else
+            Result := pushStr(coll.resStr[1], stk, error);		  
+	   end
+   else 
+   if (arg='result.history') then
+       begin
+	     for i:=1 to coll.idx do 
+		   Result := pushStr(coll.resStr[i], stk, error);
+	   end
+   else	   
+   if (arg='result.avg') then Result := pushFloat(coll[i].avg, stk, error) else   
+   if (arg='result.n') then Result := pushFloat(coll[i].N, stk, error) else   
+   if (arg='result.nfloat') then Result := pushFloat(coll[i].N_float, stk, error) else   
+   if (arg='result.sum') then Result := pushFloat(coll[i].N, stk, error) else   
+   if (arg='result.min') then Result := pushFloat(coll[i].min, stk, error) else		   
+   if (arg='result.max') then Result := pushFloat(coll[i].max, stk, error) else
+   if (arg='result.stddev') then Result := pushFloat(coll[i].stddev, stk, error) else
+   if (arg='result.variance') then Result := pushFloat(coll[i].variance, stk, error) else
+   if (arg='result.overrun') then Result := pushBoolean(coll[i].overrun, stk, error) 
+  else
     raise Exception.Create('Result argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
-end;
-
-
+  
 end.
