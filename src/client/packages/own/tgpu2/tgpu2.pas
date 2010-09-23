@@ -28,7 +28,7 @@ type
   TGPUCore2 = class(TObject)
   public
 
-    constructor Create(var plugman : TPluginManager; var meth : TMethodController; var resColl : TResultCollector);
+    constructor Create(var plugman : TPluginManager);
     destructor  Destroy();
     
     // computes  a job if there are available threads
@@ -55,11 +55,13 @@ type
     max_threads_, 
 	   threads_running : Longint;
     is_idle_        : Boolean;
+	
+	// core components
     plugman_        : TPluginManager;
     methController_ : TMethodController;
     speccommands_   : TSpecialCommand;
     rescoll_        : TResultCollector;
-    // TODO: define a ResultCollector
+   
     CS_             : TCriticalSection;
     
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
@@ -69,22 +71,30 @@ type
   
 implementation
 
-constructor TGPUCore2.Create(var plugman : TPluginManager; var meth : TMethodController; var resColl : TResultCollector);
+constructor TGPUCore2.Create(var plugman : TPluginManager);
 var i : Longint;
 begin
   inherited Create();
   plugman_ := plugman;
-  methController_ := meth;
+  methController_ := TMethodController.Create();
   rescoll_ := resColl;
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
   CS_ := TCriticalSection.Create();
-  speccommands_ := TSpecialCommand.Create(self);
+  
+  speccommands_   := TSpecialCommand.Create(self);
+  methController_ := TMethodController.Create();
+  rescoll_        := TResulCollector.Create();
+  
   for i:=1 to MAX_THREADS do slots_[i] := nil;
 end;
 
 destructor TGPUCore2.Destroy();
 begin
+  speccommands_.Free;
+  methController_.Free;
+  rescoll_.Free;
+  
   CS_.Free;
   inherited;
 end;
