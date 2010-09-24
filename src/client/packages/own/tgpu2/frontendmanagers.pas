@@ -48,8 +48,10 @@ type TRegisterQueue = class(TObject)
 	  destructor Destroy();
 	  
 	  procedure registerJob(var reg : TRegisterInfo);
+	  procedure unregisterJob(jobID : String; formName : String);
       function findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
 	  function findMultipleRI4Job(jobId : String; var reg : TRegisterInfo; var start : Longint) : Boolean;
+	  function getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
         
     private
       queue_ : Array [1..QUEUE_SIZE] of TRegisterInfo;
@@ -122,6 +124,21 @@ begin
   queue[idx_]_.typeId := reg.contacttype;
 end;
 
+procedure unregisterJob(jobID : String; formName : String);
+var i : Longint;
+begin
+  CS_.Enter;
+  for i:=1 to QUEUE_SIZE do
+     if (queue_[i].jobId=jobId) and (queue_[i].formName=formName) then
+	    begin
+		  initQueueCell(i);
+		  CS_.Leave;
+		  Exit;
+		end;
+  
+  CS_.Leave;
+end;
+
 function TRegisterQueue.findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
 begin
   Result := findMultipleRI4Job(jobId, reg, 1);
@@ -143,6 +160,21 @@ begin
 		 end;   
   CS_.Leave;  
 end; 
+
+function TRegisterQueue.getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
+begin
+  Result := true;
+  CS_.Enter;
+  for i:=1 to QUEUE_SIZE do
+     if (queue_[i].jobId <>'') and Result then
+	    begin
+		  Result := pushStr(queue_[i].jobId, stk, error);
+		  Result := pushStr(queue_[i].formname, stk, error);
+		  Result := pushStr(queue_[i].fullname, stk, error);
+		end;
+  
+  CS_.Leave;
+end;      
 
 constructor TFrontendManager.Create();
 begin
@@ -168,7 +200,7 @@ begin
  Result := broadcastQ;
 end;
 
-function prepareRegisterInfo4Core(jobId : String) : TRegisterInfo;
+function TFrontendManager.prepareRegisterInfo4Core(jobId : String) : TRegisterInfo;
 begin
   Result.jobID := jobId;
   Result.IP := '';
@@ -181,7 +213,7 @@ begin
   Result.typeId := ct_None;
 end;
 
-function prepareRegisterInfo4UdpFrontend(jobId, IP : String; port : Longint; executable, form, fullname : String) : TRegisterInfo;
+function TFrontendManager.prepareRegisterInfo4UdpFrontend(jobId, IP : String; port : Longint; executable, form, fullname : String) : TRegisterInfo;
 begin
   Result.jobID := jobId;
   Result.IP := IP;
@@ -194,7 +226,7 @@ begin
   Result.typeId := ct_UDP_IP;
 end;
 
-function prepareRegisterInfo4FileFrontend(jobId, path, filename : String; executable, form, fullname : String) : TRegisterInfo;
+function TFrontendManager.prepareRegisterInfo4FileFrontend(jobId, path, filename : String; executable, form, fullname : String) : TRegisterInfo;
 begin
   Result.jobID := jobId;
   Result.IP := '';

@@ -59,6 +59,7 @@ type TDescFunction = function : String;
 // initialization and conversion functions
 function initStack(var stk : TStack);
 function stackToStr(var stk : Stack; var error : TGPUError) : String;
+function gpuTypeToStr(gputype : Longint) : String;
 
 // check functions
 function maxStackReached(var stk : TStack; var error : TGPUError) : Boolean; 
@@ -168,6 +169,20 @@ begin
 	 else Result := true;  
 end;
 
+function gpuTypeToStr(gputype : Longint) : String
+begin
+ if (gputype = GPU_FLOAT_STKTYPE) then
+    Result := 'float'
+ else
+ if (gputype = GPU_BOOLEAN_STKTYPE) then
+    Result := 'boolean'
+ else
+ if (gputype = GPU_FLOAT_STKTYPE) then
+    Result := 'string'
+ else
+   raise Exception.Create('Unknown type in gpuTypeToStr (stacks.pas)');
+end;
+
 function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackType; var error : TGPUError) : Boolean;
 var i : Longint;
 begin
@@ -179,7 +194,8 @@ begin
 		    begin
 			  error.errorID  := WRONG_TYPE_PARAMETERS_ID;
 			  error.errorMsg := WRONG_TYPE_PARAMETERS;
-			  error.errorArg := 'Required type: '+IntToStr(types[i])+' but stack type was: '+IntToStr(stk.stkType[stk.Idx-required+i]);
+			  error.errorArg := 'Required type for parameter '+IntToStr(i)+' was '+gpuTypeToStr(types[i])
+			                    + ' but type on stack was '+gpuTypeToStr(stk.stkType[stk.Idx-required+i]);
 			  Exit;
 			end;
 	  end;

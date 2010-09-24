@@ -10,7 +10,7 @@ unit specialcommands;
 }
 interface
 
-uses identities, gpuconstants;
+uses identities, gpuconstants, pluginmanager, frontendmanagers;
 
 type TSpecialCommand = class(TObject)
  public
@@ -31,6 +31,7 @@ type TSpecialCommand = class(TObject)
    plugman_      : TPluginManager;
    meth_         : TMethodController;   
    rescollector_ : TResultCollector;
+   frontman_     : TFrontendManager;
 end;
 
 implementation
@@ -42,6 +43,7 @@ begin
   plugman_      := core_.getPluginManager();
   meth_         := core_.getMethController();
   rescollector_ := core_.getResultCollector();
+  frontman_     := core_.getFrontendManager();
 end;
 
 function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
@@ -74,7 +76,7 @@ begin
       end
   else	  
   if (arg='core.threads') or (arg='core.maxthreads') or (arg='core.isidle') or (arg='core.hasresources') or
-     (arg='core.version')  then
+     (arg='core.version') or (arg='core.registeredjobs') then
       begin
         specialType := GPU_SPECIAL_CALL_CORE;
 	    Result := true;
@@ -87,7 +89,8 @@ begin
 	    Result := true;      
       end
   else
-  if (arg='frontend.register') or (arg='frontend.unregister') or (arg='frontend.list') then 
+  if (arg='frontend.udp.register') or (arg='frontend.files.register') or 
+     (arg='frontend.unregister') or (arg='frontend.list') then 
      begin
         specialType := GPU_SPECIAL_CALL_FRONTEND;
 	    Result := true;      
@@ -165,11 +168,12 @@ end;
 function TSpecialCommand.execCoreCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
 begin
   Result := false;  
-  if (arg='core.threads')      then Result := pushFloat(core_.getCurrentThreads(), stk, error) else
-  if (arg='core.maxthreads')   then Result := pushFloat(core_.getMaxThreads(), stk, error) else
-  if (arg='core.isidle')       then Result := pushBool(core_.isIdle(), stk, error) else
-  if (arg='core.hasresources') then Result := pushBool(core_.hasResources(), stk, error) else
-  if (arg='core.version')      then Result := pushStr(GPU_CORE_VERSION, stk, error) else
+  if (arg='core.threads')        then Result := pushFloat(core_.getCurrentThreads(), stk, error) else
+  if (arg='core.maxthreads')     then Result := pushFloat(core_.getMaxThreads(), stk, error) else
+  if (arg='core.isidle')         then Result := pushBool(core_.isIdle(), stk, error) else
+  if (arg='core.hasresources')   then Result := pushBool(core_.hasResources(), stk, error) else
+  if (arg='core.version')        then Result := pushStr(GPU_CORE_VERSION, stk, error) else
+  if (arg='core.registeredjobs') then Result := frontman_.getStandardQueue().getRegisteredList(stk, error) else
     raise Exception.Create('Core argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   Result := true;   
 end;
@@ -206,12 +210,7 @@ begin
     raise Exception.Create('Plugin argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
 end;
 
-function execFrontendCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
-begin
-    raise Exception.Create('Frontend argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
-end;
-
-function execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+function TSpecialCommand.execResultCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
 var coll  : TResultCollection;
     jobId : String;
 	i     : Longint;
@@ -251,16 +250,90 @@ begin
 		   Result := pushStr(coll.resStr[i], stk, error);
 	   end
    else	   
-   if (arg='result.avg') then Result := pushFloat(coll[i].avg, stk, error) else   
-   if (arg='result.n') then Result := pushFloat(coll[i].N, stk, error) else   
-   if (arg='result.nfloat') then Result := pushFloat(coll[i].N_float, stk, error) else   
-   if (arg='result.sum') then Result := pushFloat(coll[i].N, stk, error) else   
-   if (arg='result.min') then Result := pushFloat(coll[i].min, stk, error) else		   
-   if (arg='result.max') then Result := pushFloat(coll[i].max, stk, error) else
-   if (arg='result.stddev') then Result := pushFloat(coll[i].stddev, stk, error) else
+   if (arg='result.avg')      then Result := pushFloat(coll[i].avg, stk, error) else   
+   if (arg='result.n')        then Result := pushFloat(coll[i].N, stk, error) else   
+   if (arg='result.nfloat')   then Result := pushFloat(coll[i].N_float, stk, error) else   
+   if (arg='result.sum')      then Result := pushFloat(coll[i].N, stk, error) else   
+   if (arg='result.min')      then Result := pushFloat(coll[i].min, stk, error) else		   
+   if (arg='result.max')      then Result := pushFloat(coll[i].max, stk, error) else
+   if (arg='result.stddev')   then Result := pushFloat(coll[i].stddev, stk, error) else
    if (arg='result.variance') then Result := pushFloat(coll[i].variance, stk, error) else
-   if (arg='result.overrun') then Result := pushBoolean(coll[i].overrun, stk, error) 
+   if (arg='result.overrun')  then Result := pushBoolean(coll[i].overrun, stk, error) 
   else
     raise Exception.Create('Result argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   
 end.
+
+function TSpecialCommand.execFrontendCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean
+var 
+  broadcast : TRegisterQueue;
+  regInfo   : TRegisterInfo;
+  types     : TGPUTypes;
+  
+  jobId, 
+  IP, 
+  path, filename, 
+  executable, form, fullname : String;
+  
+  port : Longint;
+  
+begin
+  Result := false;
+  broadcast := frontman_.getBroadcastQueue();
+  if (arg='frontend.udp.register') then
+	     begin
+		   types[1]:= GPU_STRING_STKTYPE;   types[2]:= GPU_STRING_STKTYPE;
+		   types[3]:= GPU_FLOAT_STKTYPE;    types[4]:= GPU_STRING_STKTYPE;
+		   types[5]:= GPU_STRING_STKTYPE;   types[6]:= GPU_STRING_STKTYPE;
+		   Result := typeOfParametersCorrect(6, stk,  types, error);
+		   if Result then 
+		     begin
+			   popStr(fullname   , stk, error);
+			   popStr(form       , stk, error);
+			   popStr(executable , stk, error);
+			   popFloat(port     , stk, error);
+			   popStr(IP         , stk, error);
+			   popStr(jobId      , stk, error);
+		       regInfo := frontman_.prepareRegisterInfo4UdpFrontend(jobId, IP, Round(port), executable, form, fullname);
+			   broadcast.registerJob(regInfo);
+			 end;  
+		 end
+    else
+	  if (arg='frontend.files.register') then
+	     begin
+		   types[1]:= GPU_STRING_STKTYPE;   types[2]:= GPU_STRING_STKTYPE;
+		   types[3]:= GPU_STRING_STKTYPE;   types[4]:= GPU_STRING_STKTYPE;
+		   types[5]:= GPU_STRING_STKTYPE;   types[6]:= GPU_STRING_STKTYPE;
+		   Result := typeOfParametersCorrect(6, stk,  types, error);
+		   if Result then 
+		     begin
+			   popStr(fullname   , stk, error);
+			   popStr(form       , stk, error);
+			   popStr(executable , stk, error);
+			   popStr(path       , stk, error);
+			   popStr(filename   , stk, error);
+			   popStr(jobId      , stk, error);
+		       regInfo := frontman_.prepareRegisterInfo4FileFrontend(jobId, path, filename, executable, form, fullname);
+			   broadcast.registerJob(regInfo);
+			 end;  
+		 end
+    else
+	if (arg='frontend.unregister') then
+	   begin
+	     types[1]:= GPU_STRING_STKTYPE;   types[2]:= GPU_STRING_STKTYPE;
+		 Result := typeOfParametersCorrect(2, stk,  types, error);
+		 if Result then 
+		      begin
+                popStr(form, stk, error);
+			    popStr(jobId, stk, error);
+			    broadcast.unregisterJob(jobId, form);
+              end;			  
+	   end
+ 	else
+    if (arg='frontend.list') then
+       Result := broadcast.getRegisteredList(stk, error);
+    else	   
+    raise Exception.Create('Frontend argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
+  Result := true;	
+end;
+
