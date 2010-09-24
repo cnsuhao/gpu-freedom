@@ -46,10 +46,11 @@ type
     function  getCurrentThreads() : Longint;
 	
 	// helper structures
-	function getPluginManger()   : TPluginManager;
-	function getMethController() : TMethodController;
-	function getSpecCommands()   : TSpecialCommand;
-    function getResultCollector(): TResultCollector;
+	function getPluginManger()    : TPluginManager;
+	function getMethController()  : TMethodController;
+	function getSpecCommands()    : TSpecialCommand;
+    function getResultCollector() : TResultCollector;
+	function getFrontendManager() : TFrontendManager;
     
   private
     max_threads_, 
@@ -61,6 +62,7 @@ type
     methController_ : TMethodController;
     speccommands_   : TSpecialCommand;
     rescoll_        : TResultCollector;
+	frontman_       : TFrontendManager;
    
     CS_             : TCriticalSection;
     
@@ -85,6 +87,7 @@ begin
   speccommands_   := TSpecialCommand.Create(self);
   methController_ := TMethodController.Create();
   rescoll_        := TResulCollector.Create();
+  frontman_       := TFrontendManager.Create();
   
   for i:=1 to MAX_THREADS do slots_[i] := nil;
 end;
@@ -94,7 +97,7 @@ begin
   speccommands_.Free;
   methController_.Free;
   rescoll_.Free;
-  
+  frontman_.Free;
   CS_.Free;
   inherited;
 end;
@@ -114,10 +117,15 @@ begin
  Result := speccommands_;
 end;
 
-function getResultCollector(): TResultCollector;
+function TGPUCore2.getResultCollector(): TResultCollector;
 begin
  Result := rescoll_;
 end; 
+
+function TGPUCore2.getFrontendManager() : TFrontendManager;
+begin
+ Result := frontman_;
+end;
 
 
 function TGPUCore2.findAvailableSlot() : Longint;
