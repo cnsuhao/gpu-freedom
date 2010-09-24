@@ -1,4 +1,4 @@
-unit pluginmanager
+unit pluginmanagers;
 {
  The PluginManager handles a linked list of Plugins, which are DLLs
  containing computational algorithms. DLLs are a collection of
