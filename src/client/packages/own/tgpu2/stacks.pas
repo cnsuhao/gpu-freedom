@@ -7,7 +7,7 @@
   with the GPU core.
    
   (c) by 2002-2010 the GPU Development Team
-  (c) by 2010 HB9TVM, Freedom Light my Fire
+  (c) by 2010 HB9TVM, "freedom light my fire!"
   This unit is released under GNU Public License (GPL)
 }
 unit stacks;
@@ -51,7 +51,7 @@ type
   PStack = ^TStack;
   
 type
-  TDllFunction = function(var stk: TStack): boolean;
+  TDllFunction = function(var stk: TStack; var error : TGPUError): boolean;
   PDllFunction = ^TDllFunction;
 
 

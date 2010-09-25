@@ -11,14 +11,15 @@ unit pluginmanagers;
  It can retrieve a list of loaded plugins and tell if a particular
  plugin is loaded or not. 
  
-   (c) by 2002-2010 the GPU Development Team
+  (c) by 2002-2010 the GPU Development Team
   (c) by 2010 HB9TVM
   This unit is released under GNU Public License (GPL)
 }
 
 interface
 
-uses SysUtils, stacks, plugins, SyncObjs;
+uses SysUtils, SyncObjs,
+     stacks, plugins, gpuconstants;
 
 const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
       MAX_HASH    = 64;  // how many function calls we hash for faster retrieval
@@ -39,25 +40,27 @@ type
     procedure discardAll();
     function  loadOne(pluginName : String; var error : TGPUError)  : Boolean;
     function  discardOne(pluginName : String; var error : TGPUError)  : Boolean;
-	function  isAlreadyLoaded(pluginName : String)  : Boolean;
+    function  isAlreadyLoaded(pluginName : String)  : Boolean;
     function  getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
-    
+
     // calls the method, and passes the stack to the method
-    function method_execute(name : String, var Stk : TStack; var error : TGPUError) : Boolean;
+    function method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
     // checks if the method exists, returns the plugin name if found
     function method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
     
    private
-     path_, extension    : String;
-     plugs_              : array[1..MAX_PLUGINS] of PPlugins;
+     path_, extension_   : String;
+     plugs_              : array[1..MAX_PLUGINS] of PPlugin;
      hash_               : array[1..MAX_HASH] of THashPlugin;
-     plugsidx_, hashidx_ : Longint;  // indexes for the arrays above
+     plugidx_, hashidx_  : Longint;  // indexes for the arrays above
+
+     CS_ : TCriticalSection;
+
      function  load(pluginName : String)  : Boolean;
-	 procedure register_hash(funcName : String; plugin : PPlugin);
-	 procedure addNotFoundError(var error : TGPUError);
-	 function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
+     procedure register_hash(funcName : String; plugin : PPlugin);
+     procedure addNotFoundError(name : String; var error : TGPUError);
+     function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
      
-	 CS_ : TCriticalSection;
 end;
 
 
@@ -96,7 +99,7 @@ begin
   CS_.Enter;
   if plugidx_<>0 then raise Exception.Create('Please call discardAll() first');
 
-  retval := FindFirst(path_+SEPARATOR+'*.' + extension_, faAnyFile, SRec);
+  retval := FindFirst(path_+PathDelim+'*.' + extension_, faAnyFile, SRec);
   while retval = 0 do
    begin
      if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
@@ -119,23 +122,25 @@ begin
 end;
 
 function  TPluginManager.isAlreadyLoaded(pluginName : String)  : Boolean;
+var i : Longint;
 begin
  CS_.Enter;
  Result := false;
  for i:=1 to plugidx_ do
-     if plugs_i[i].plugname=pluginName then
+     if plugs_[i]^.getName()=pluginName then
 	    Result := true;
  CS_.Leave;
 end;
 
 function TPluginManager.getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
+var i : Longint;
 begin
  CS_.Enter;
  Result := false;
  for i:=1 to plugidx_ do
-     if plugs_i[i].callplug^.isloaded() then
+     if plugs_[i]^.isloaded() then
        begin
-         if (not pushStr(plugs[i].plugname, stk, error)) then
+         if (not pushStr(plugs_[i]^.getName(), stk, error)) then
                 begin
                   CS_.Leave;
                   Exit;
@@ -152,14 +157,14 @@ begin
  // remember on the hash where we found the function call
  Inc(hashidx_);
  if (hashidx_>MAX_HASH) then hashidx_ := 1;
- hash_[i].method   := name;
- hash_[i].callplug := plugin;
- hash_[i].plugname := plugin^.getName();
+ hash_[hashidx_].method   := funcName;
+ hash_[hashidx_].callplug := plugin;
+ hash_[hashidx_].plugname := plugin^.getName();
  CS_.Leave;
 end;
 
 
-procedure TPluginManager.addNotFoundError(var error : TGPUError);
+procedure TPluginManager.addNotFoundError(name : String; var error : TGPUError);
 begin
   // we did not find the method, we report it as an error
   error.ErrorID := METHOD_NOT_FOUND_ID;
@@ -171,7 +176,7 @@ function TPluginManager.retrievePlugin(funcname : String; var plugname : String;
 var i : Longint;
 begin
  Result := false;
- if Trim(name)='' then Exit;
+ if Trim(funcName)='' then Exit;
  
  CS_.Enter;
  // check if we have the method call in the hash table
@@ -184,42 +189,42 @@ begin
 			   plugname := hash_[i].plugname;
 			   Result := true;
 			   CS_.Leave;
-               Exit;
-	         end;		  
+                           Exit;
+	     end;
          end;
     
  // go through the list and call the method, register to hash if we found the plugin
  for i:=1 to plugidx_ do
      begin
-       if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(name)) then
+       if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(funcName)) then
           begin
-            register_hash(name, plugs_[i]);
+                        register_hash(funcName, plugs_[i]);
 			p := plugs_[i];
 			plugName :=  plugs_[i]^.getName();
 			Result := true;
-            CS_.Leave;
+                        CS_.Leave;
 			Exit;
           end;
      end;
   
- addNotFound(error : TError);
+ addNotFoundError(funcName, error);
  CS_.Leave;
 end;
 
-function TPluginManager.method_execute(name : String, var Stk : TStack; var error : TGPUError) : Boolean;
+function TPluginManager.method_execute(name : String; var Stk : TStack; var error : TGPUError) : Boolean;
 var plugname : String;
     p        : PPlugin;
 begin
  Result := retrievePlugin(name, plugname, p, error);
  if Result then
-      p^.method_execute(name, stk, error);
+      Result := p^.method_execute(name, stk, error);
 end;
 
-function method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
-var plugname : String;
+function TPluginManager.method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
+var
     p        : PPlugin;
 begin
- p:=nil; // not used
+ p := nil; // not used
  Result := retrievePlugin(name, plugname, p, error);
 end; 
 
@@ -234,7 +239,7 @@ begin
        begin
          if (not plugs_[i]^.isloaded()) then
             begin           
-             Result := plugs_[i].load();
+             Result := plugs_[i]^.load();
              CS_.Leave;
 			 Exit;
             end; 
@@ -251,15 +256,15 @@ begin
   CS_.Leave;
 end;
 
-function  TPluginManager.discardOne(pluginName : String; var error : TGPUError);
+function TPluginManager.discardOne(pluginName : String; var error : TGPUError): Boolean;
 var i : Longint;
 begin
  CS_.Enter;
  Result := false;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
-    if plugs_[i]^.getName() = pluginName and
-         (plugs_[i]^.isloaded()) then
+    if (plugs_[i]^.getName() = pluginName) and
+         plugs_[i]^.isloaded() then
            begin 
               Result := plugs_[i]^.discard();
               if not Result then

@@ -3,7 +3,7 @@ unit plugins;
  This unit manages dynamic links libraries and the object TPlugin in plugin.pas
   which encapsulates one of them.
   
-    (c) by 2002-2010 the GPU Development Team
+  (c) by 2002-2010 the GPU Development Team
   (c) by 2010 HB9TVM
   This unit is released under GNU Public License (GPL)
 }
@@ -29,7 +29,7 @@ type
      // check if  a method is present in this dll
      function method_exists(name : String) : Boolean;
      // calls the method, and passes the stack to the method
-     function method_execute(name : String; var stk : TStack) : Boolean;
+     function method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
      // helper function to retrieve the pointer to the method call
      function method_pointer(name : String) : PDllFunction;
      
@@ -105,12 +105,12 @@ begin
 end;
 
 // calls the method, and passes the stack to the method
-function TPlugin.method_execute(name : String; var Stk : TStack) : Boolean;
+function TPlugin.method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
 var theFunction : PDllFunction;
 begin
     theFunction := method_pointer(name);
     if Assigned(theFunction) then
-      Result := theFunction^(Stk);
+      Result := theFunction^(stk, error);
 end;     
 
 function TPlugin.getDescription(field : String) : String;
