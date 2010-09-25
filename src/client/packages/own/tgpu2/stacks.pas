@@ -6,22 +6,24 @@
   TStack is the internal structure used by plugins to communicate
   with the GPU core.
    
-   (c) by 2002-2010 the GPU Development Team
-  (c) by 2010 HB9TVM
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM, Freedom Light my Fire
   This unit is released under GNU Public License (GPL)
 }
 unit stacks;
 
 interface
 
+uses gpuconstants, formatsets,
+     SysUtils;
+
 const
     GPU_FLOAT_STKTYPE   = 10;
-	GPU_BOOLEAN_STKTYPE = 20;
-	GPU_STRING_STKTYPE  = 30;
+    GPU_BOOLEAN_STKTYPE = 20;
+    GPU_STRING_STKTYPE  = 30;
   
 type TGPUFloat = Extended;  // type for floats on stack
-type TGPUType  = Longint;   // type for id identifing types on stack
-type TGPUStackType = Array [1..MAX_STACK_PARAMS] of TGPUType;
+type TGPUStackTypes = Array [1..MAX_STACK_PARAMS] of Longint;
 
 type TGPUError = record
     ErrorID : Longint;
@@ -33,7 +35,7 @@ type
   TStack = record
     stack    : Array [1..MAX_STACK_PARAMS] of TGPUFloat;
     strStack : Array [1..MAX_STACK_PARAMS] of String;
-    stkType  : TGPUStackType;
+    stkType  : TGPUStackTypes;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
     
@@ -51,21 +53,21 @@ type
 type
   TDllFunction = function(var stk: TStack): boolean;
   PDllFunction = ^TDllFunction;
-type
+
 
 type TDescFunction = function : String;
-     PDescFunction = ^TDescFunction;
+type PDescFunction = ^TDescFunction;
 
 // initialization and conversion functions
-function initStack(var stk : TStack);
-function stackToStr(var stk : Stack; var error : TGPUError) : String;
-function gpuTypeToStr(gputype : Longint) : String;
+procedure initStack(var stk : TStack);
+function  stackToStr(var stk : TStack; var error : TGPUError) : String;
+function  gpuTypeToStr(gputype : Longint) : String;
 
 // check functions
 function maxStackReached(var stk : TStack; var error : TGPUError) : Boolean; 
-function isEmptyStack(var stk : stk : TStack) : Boolean;
+function isEmptyStack(var stk : TStack) : Boolean;
 function enoughParametersOnStack(required : Longint; var stk : TStack; var error : TGPUError) : Boolean;
-function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackType; var error : TGPUError) : Boolean;
+function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackTypes; var error : TGPUError) : Boolean;
 
 // loading stuff on stack
 function pushStr  (str : String; var stk : TStack; var error : TGPUError) : Boolean;
@@ -75,21 +77,21 @@ function pushBool (b : boolean; var Stk : TStack; var error : TGPUError) : Boole
 // checking stack types
 function isGPUFloat  (i : Longint; var stk : TStack) : Boolean;
 function isGPUBoolean(i : Longint; var stk : TStack) : Boolean;
-function isGPUString (i : Longint, var stk : TStack) : Boolean;
+function isGPUString (i : Longint; var stk : TStack) : Boolean;
 
 // popping stuff from stack
-function popFloat(var float : TGPUFloat; var stk : Stack; var error : TGPUError) : Boolean;
-function popBool (var b : Boolean; var stk : Stack; var error : TGPUError) : Boolean;
-function popStr  (var str : String; var stk : Stack; var error : TGPUError) : Boolean;
+function popFloat(var float : TGPUFloat; var stk : TStack; var error : TGPUError) : Boolean;
+function popBool (var b : Boolean; var stk : TStack; var error : TGPUError) : Boolean;
+function popStr  (var str : String; var stk : TStack; var error : TGPUError) : Boolean;
 
 
 implementation
 
-function initStack(var stk : TStack);
+procedure initStack(var stk : TStack);
 var i : Longint;
 begin
  stk.Idx := 0; // to have it empty
- for i:=1 to MAX_STACK_PARAM do
+ for i:=1 to MAX_STACK_PARAMS do
    begin
      stk.Stack[i] := 0;
      stk.StrStack[i] := '';
@@ -98,7 +100,7 @@ begin
 
 end;
 
-function stackToStr(var stk : Stack; var error : TGPUError) : String;
+function stackToStr(var stk : TStack; var error : TGPUError) : String;
 var i : Longint;
     str : String;
 begin
@@ -111,19 +113,19 @@ begin
              str := str + ', '+ QUOTE + stk.StrStack[i] + QUOTE;             
            end
          else
-		 if stk.stkType[i]=GPU_FLOAT_STKTYPE then
-         begin
-		   // we need to add a float
-           str := str + ', ' + FloatToStr(stk.Stack[i], formatSet.fs);
-		 end
-		 else
-		 if stk.stkType[i]=GPU_BOOLEAN_STKTYPE then
+	   if stk.stkType[i]=GPU_FLOAT_STKTYPE then
+           begin
+	   // we need to add a float
+           str := str + ', ' + FloatToStr(stk.Stack[i]);
+	   end
+	 else
+	   if stk.stkType[i]=GPU_BOOLEAN_STKTYPE then
            begin
              if stk.Stack[i]>0 then
-			   str := str + ', true';
+			   str := str + ', true'
 			 else
-               str := str + ', false';			 
-           end;
+                           str := str + ', false';
+           end
          else
            begin
 		     // in this way we mantain backward compatibility
@@ -169,7 +171,7 @@ begin
 	 else Result := true;  
 end;
 
-function gpuTypeToStr(gputype : Longint) : String
+function gpuTypeToStr(gputype : Longint) : String;
 begin
  if (gputype = GPU_FLOAT_STKTYPE) then
     Result := 'float'
@@ -183,7 +185,7 @@ begin
    raise Exception.Create('Unknown type in gpuTypeToStr (stacks.pas)');
 end;
 
-function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackType; var error : TGPUError) : Boolean;
+function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackTypes; var error : TGPUError) : Boolean;
 var i : Longint;
 begin
   Result := false;
@@ -220,7 +222,7 @@ begin
                  end;              
 end;
 
-function pushFloat(ext : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushFloat(float : TGPUFloat; var stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -228,7 +230,7 @@ begin
  hasErrors := maxStackReached(stk, error); 
  if not hasErrors then
                  begin                     
-                   Stk.Stack[stk.Idx] := ext;
+                   Stk.Stack[stk.Idx] := float;
                    Stk.StrStack[stk.Idx] := '';
                    Stk.stkType[stk.Idx] := GPU_FLOAT_STKTYPE;
                    Result := true;
@@ -253,7 +255,7 @@ begin
 end;
 
 
-function isEmptyStack(var stk : stk : TStack) : Boolean;
+function isEmptyStack(var stk : TStack) : Boolean;
 begin
  Result := (stk.Idx = 0);
 end;
@@ -267,17 +269,17 @@ end;
 function isGPUBoolean(i : Longint; var stk : TStack) : Boolean;
 begin
  if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUBoolean ('+IntToStr(i)+')');
- Result := (stk.stkType[i]=GPU_FLOAT_BOOLEAN);
+ Result := (stk.stkType[i]=GPU_BOOLEAN_STKTYPE);
 end;
 
-function isGPUString(i : Longint, var stk : TStack) : Boolean;
+function isGPUString(i : Longint; var stk : TStack) : Boolean;
 begin
  if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUString ('+IntToStr(i)+')');
  Result := (stk.stkType[i]=GPU_STRING_STKTYPE);
 end;
 
-function popFloat(var float : TGPUFloat; var stk : Stack; var error : TGPUError) : Boolean;
-var types : TGPUTypes;
+function popFloat(var float : TGPUFloat; var stk : TStack; var error : TGPUError) : Boolean;
+var types : TGPUStackTypes;
 begin
   Result  := false;
   types[1]:= GPU_FLOAT_STKTYPE;
@@ -287,8 +289,8 @@ begin
   Result := true;
 end;
 
-function popBool(var b : Boolean; var stk : Stack; var error : TGPUError) : Boolean;
-var types : TGPUTypes;
+function popBool(var b : Boolean; var stk : TStack; var error : TGPUError) : Boolean;
+var types : TGPUStackTypes;
 begin
   Result  := false;
   types[1]:= GPU_BOOLEAN_STKTYPE;
@@ -298,8 +300,8 @@ begin
   Result := true;
 end;
 
-function popString(var str : String; var stk : Stack; var error : TGPUError) : Boolean;
-var types : TGPUTypes;
+function popStr(var str : String; var stk : TStack; var error : TGPUError) : Boolean;
+var types : TGPUStackTypes;
 begin
   Result  := false;
   types[1]:= GPU_STRING_STKTYPE;
