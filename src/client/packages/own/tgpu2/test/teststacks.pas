@@ -5,7 +5,8 @@ unit teststacks;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, stacks;
+  Classes, SysUtils, fpcunit, testutils, testregistry,
+  stacks;
 
 type
 
@@ -14,7 +15,9 @@ type
     procedure SetUp; override; 
     procedure TearDown; override; 
   published
-    procedure TestHookUp; 
+    procedure TestHookUp;
+  private
+    stk_ : TStack;
   end; 
 
 implementation
@@ -26,7 +29,7 @@ end;
 
 procedure TTestStack.SetUp; 
 begin
-
+  InitStack(stk_);
 end; 
 
 procedure TTestStack.TearDown; 

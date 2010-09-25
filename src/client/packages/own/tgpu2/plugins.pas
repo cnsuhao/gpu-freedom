@@ -29,7 +29,7 @@ type
      // check if  a method is present in this dll
      function method_exists(name : String) : Boolean;
      // calls the method, and passes the stack to the method
-     function method_execute(name : String, var Stk : TStack) : Boolean;
+     function method_execute(name : String; var stk : TStack) : Boolean;
      // helper function to retrieve the pointer to the method call
      function method_pointer(name : String) : PDllFunction;
      
@@ -62,11 +62,11 @@ end;
 
 function TPlugin.load() : Boolean;
 var
-   buf:    array [0..1024] of char;
-   filename := String;
+   buf      : array [0..1024] of char;
+   filename : String;
 begin
   lib_ := 0;
-  filename := path_+SEPARATOR+name_+'.'+extension_;
+  filename := path_+PathDelim+name_+'.'+extension_;
   if FileExists(filename) then 
      lib_ := LoadLibrary(StrPCopy(buf, filename));
   isloaded_ := (lib_<>0);
@@ -95,7 +95,7 @@ var
  buf: array [0..144] of char;
 begin
   if (not isloaded_) then Result := nil
-  else Result := GetProcAddress(dll_, StrPCopy(buf, Arg));
+  else Result := GetProcAddress(lib_, StrPCopy(buf, name));
 end;
 
 // check if  a method is present in this dll
@@ -105,7 +105,7 @@ begin
 end;
 
 // calls the method, and passes the stack to the method
-function TPlugin.method_execute(name : String, var Stk : TStack) : Boolean;
+function TPlugin.method_execute(name : String; var Stk : TStack) : Boolean;
 var theFunction : PDllFunction;
 begin
     theFunction := method_pointer(name);
@@ -115,17 +115,14 @@ end;
 
 function TPlugin.getDescription(field : String) : String;
 var theFunction : PDescFunction;
-    resFunc : String;
+    buf         : array [0..144] of char;
+
 begin
   Result := '';
-  theFunction := GetProcAddress(dll_, StrPCopy(buf, field);
+  theFunction := GetProcAddress(lib_, StrPCopy(buf, field));
   // get description
   if Assigned(theFunction) then
-      begin
-        ResFunc := theFunction^();
-        if ResFunc <> nil then
-          Result := ResFunc;
-      end;
+        Result := theFunction^();
 
 end;
 

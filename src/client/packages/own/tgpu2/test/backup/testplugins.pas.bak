@@ -1,15 +1,15 @@
-unit teststacks;
+unit testplugins;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, stacks;
+  Classes, SysUtils, fpcunit, testutils, testregistry; 
 
 type
 
-  TTestStack= class(TTestCase)
+  TTestPlugin= class(TTestCase)
   protected
     procedure SetUp; override; 
     procedure TearDown; override; 
@@ -19,23 +19,23 @@ type
 
 implementation
 
-procedure TTestStack.TestHookUp; 
+procedure TTestPlugin.TestHookUp; 
 begin
   Fail('Write your own test'); 
 end; 
 
-procedure TTestStack.SetUp; 
+procedure TTestPlugin.SetUp; 
 begin
 
 end; 
 
-procedure TTestStack.TearDown; 
+procedure TTestPlugin.TearDown; 
 begin
 
 end; 
 
 initialization
 
-  RegisterTest(TTestStack); 
+  RegisterTest(TTestPlugin); 
 end.
 
