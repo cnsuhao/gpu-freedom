@@ -51,8 +51,8 @@
         <Filename Value="teststacks.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="teststacks"/>
-        <CursorPos X="24" Y="75"/>
-        <TopLine Value="50"/>
+        <CursorPos X="5" Y="98"/>
+        <TopLine Value="84"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
@@ -60,8 +60,8 @@
       <Unit2>
         <Filename Value="..\stacks.pas"/>
         <UnitName Value="stacks"/>
-        <CursorPos X="52" Y="214"/>
-        <TopLine Value="186"/>
+        <CursorPos X="30" Y="156"/>
+        <TopLine Value="147"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>

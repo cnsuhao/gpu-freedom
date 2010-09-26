@@ -87,7 +87,16 @@ begin
 end; 
 
 procedure TTestStack.TestOverrun;
+var i : Longint;
 begin
+  InitStack(stk_);
+  for i:=1 to MAX_STACK_PARAMS do
+    pushFloat(i, stk_, error_);
+
+  AssertEquals('Max stack is not reached', false, maxStackReached(stk_, error_));
+
+  //pushStr('Overrun', stk_, error_);
+
 
 end;
 
