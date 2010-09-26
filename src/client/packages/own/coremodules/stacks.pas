@@ -18,6 +18,7 @@ uses gpuconstants, formatsets,
      SysUtils;
 
 const
+    GPU_NO_STKTYPE      = 0;     // dummy if not typed
     GPU_FLOAT_STKTYPE   = 10;
     GPU_BOOLEAN_STKTYPE = 20;
     GPU_STRING_STKTYPE  = 30;
@@ -99,7 +100,7 @@ begin
    begin
      stk.Stack[i] := 0;
      stk.StrStack[i] := '';
-     stk.stkType[i] := GPU_FLOAT_STKTYPE;
+     stk.stkType[i] := GPU_NO_STKTYPE;
    end;
 
 end;
@@ -165,13 +166,13 @@ end;
 function enoughParametersOnStack(required : Longint; var stk : TStack; var error : TGPUError) : Boolean;
 begin
  Result := false;
- if (required<1) or (required>MAX_STACK_PARAMS) then raise Exception.Create('Required parameter out of range in enoughParametersOnStack ('+IntToStr(required)+')');
+ if (required<0) or (required>MAX_STACK_PARAMS) then raise Exception.Create('Required parameter out of range in enoughParametersOnStack ('+IntToStr(required)+')');
  if stk.Idx<required then
        begin
 	    error.errorID  := NOT_ENOUGH_PARAMETERS_ID;
-		error.errorMsg := NOT_ENOUGH_PARAMETERS;
-		error.errorArg := 'Required: '+IntToStr(required)+' Available: '+IntToStr(stk.Idx);
-	   end
+	    error.errorMsg := NOT_ENOUGH_PARAMETERS;
+	    error.errorArg := 'Required: '+IntToStr(required)+' Available: '+IntToStr(stk.Idx);
+       end
 	 else Result := true;  
 end;
 
