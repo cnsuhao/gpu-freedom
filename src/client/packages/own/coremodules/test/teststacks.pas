@@ -18,13 +18,19 @@ type
     procedure TestHookUp;
   private
     stk_ : TStack;
+    error_ : TGPUError;
   end; 
 
 implementation
 
 procedure TTestStack.TestHookUp; 
 begin
-  Fail('Write your own test'); 
+  pushStr('test', stk_, error_);
+  pushFloat(123456, stk_, error_);
+  pushBool(true, stk_, error_);
+
+  WriteLn(StackToStr(stk_, error_));
+  ReadLn;
 end; 
 
 procedure TTestStack.SetUp; 

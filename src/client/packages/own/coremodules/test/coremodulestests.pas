@@ -1,10 +1,10 @@
-program fpcunittests;
+program coremodulestests;
 
 {$mode objfpc}{$H+}
 
 uses
   Classes, consoletestrunner,
-  teststacks, testplugins, testpluginmanagers, testargretrievers, coremodules;
+  teststacks, testplugins, testpluginmanagers, testargretrievers;
 
 type
 
@@ -18,7 +18,7 @@ type
 var
   Application: TMyTestRunner;
 
-{$IFDEF WINDOWS}{$R fpcunittests.rc}{$ENDIF}
+{$IFDEF WINDOWS}{$R coremodulestests.rc}{$ENDIF}
 
 begin
   Application := TMyTestRunner.Create(nil);
