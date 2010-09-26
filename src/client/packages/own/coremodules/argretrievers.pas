@@ -18,9 +18,9 @@ uses SysUtils,
      stacks, plugins, utils, formatsets, gpuconstants, specialcommands;
 
 type TArgGPU = record
-     argtype : ShortInt;
+     argtype   : TGPUArgType;
      argvalue  : TGPUFloat;
-     argstring : String;
+     argstring : TGPUString;
 end;
 
 type TArgRetriever = class(TObject)
@@ -45,7 +45,7 @@ type TArgRetriever = class(TObject)
    function getExpressionArgument(openbracket : String; var error : TGPUError) : TArgGPU;
 
    function getOtherArgument(var error : TGPUError) : TArgGPU;
-   function getSpecialArgument(var error : TGPUError; arg : String; specialType : Longint) : TArgGPU;
+   function getSpecialArgument(var error : TGPUError; arg : String; specialType : TGPUArgType) : TArgGPU;
    function getBooleanArgument(var error : TGPUError;arg : String) : TArgGPU;
    function getCallArgument(var error : TGPUError; arg : String) : TArgGPU;
    
@@ -219,7 +219,7 @@ end;
 function TArgRetriever.getOtherArgument(var error : TGPUError) : TArgGPU;
 var arg,
     lowerarg : String;
-	specialType : Longint;
+    specialType : TGPUArgType;
 begin
   arg := Trim(ExtractParam(toparse_, ','));
   lowerarg := lowercase(arg);
@@ -241,7 +241,7 @@ begin
 end;
 
 
-function TArgRetriever.getSpecialArgument(var error : TGPUError; arg : String; specialType : Longint) : TArgGPU;
+function TArgRetriever.getSpecialArgument(var error : TGPUError; arg : String; specialType : TGPUArgType) : TArgGPU;
 begin
  Result.argtype   := specialType;
  Result.argstring := arg;

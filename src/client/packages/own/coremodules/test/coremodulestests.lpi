@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -41,9 +41,9 @@
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
-        <CursorPos X="34" Y="29"/>
+        <CursorPos X="26" Y="5"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -51,8 +51,8 @@
         <Filename Value="teststacks.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="teststacks"/>
-        <CursorPos X="57" Y="11"/>
-        <TopLine Value="1"/>
+        <CursorPos X="17" Y="27"/>
+        <TopLine Value="25"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
@@ -60,9 +60,9 @@
       <Unit2>
         <Filename Value="..\stacks.pas"/>
         <UnitName Value="stacks"/>
-        <CursorPos X="60" Y="54"/>
-        <TopLine Value="56"/>
-        <EditorIndex Value="2"/>
+        <CursorPos X="11" Y="167"/>
+        <TopLine Value="143"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -97,9 +97,11 @@
       <Unit7>
         <Filename Value="testplugins.pas"/>
         <UnitName Value="testplugins"/>
-        <CursorPos X="10" Y="9"/>
+        <CursorPos X="16" Y="6"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="..\plugins.pas"/>
@@ -118,23 +120,29 @@
       <Unit10>
         <Filename Value="testpluginmanagers.pas"/>
         <UnitName Value="testpluginmanagers"/>
-        <CursorPos X="17" Y="9"/>
+        <CursorPos X="18" Y="8"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="testargretrievers.pas"/>
         <UnitName Value="testargretrievers"/>
-        <CursorPos X="16" Y="9"/>
+        <CursorPos X="1" Y="22"/>
         <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\argretrievers.pas"/>
         <UnitName Value="argretrievers"/>
-        <CursorPos X="20" Y="229"/>
-        <TopLine Value="197"/>
+        <CursorPos X="105" Y="244"/>
+        <TopLine Value="218"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\..\..\..\lib\own\misc\utils.pas"/>
@@ -153,9 +161,11 @@
       <Unit15>
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
-        <CursorPos X="29" Y="50"/>
-        <TopLine Value="34"/>
+        <CursorPos X="86" Y="58"/>
+        <TopLine Value="41"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
@@ -196,9 +206,11 @@
       <Unit21>
         <Filename Value="..\gpuparsers.pas"/>
         <UnitName Value="gpuparsers"/>
-        <CursorPos X="53" Y="129"/>
-        <TopLine Value="109"/>
+        <CursorPos X="37" Y="65"/>
+        <TopLine Value="64"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\gpuconstants.pas"/>
@@ -215,7 +227,7 @@
         <UsageCount Value="10"/>
       </Unit23>
     </Units>
-    <JumpHistory Count="2" HistoryIndex="1">
+    <JumpHistory Count="9" HistoryIndex="8">
       <Position1>
         <Filename Value="teststacks.pas"/>
         <Caret Line="33" Column="10" TopLine="12"/>
@@ -224,6 +236,34 @@
         <Filename Value="teststacks.pas"/>
         <Caret Line="30" Column="11" TopLine="14"/>
       </Position2>
+      <Position3>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="32" Column="78" TopLine="16"/>
+      </Position3>
+      <Position4>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="9" Column="23" TopLine="3"/>
+      </Position4>
+      <Position5>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="32" Column="102" TopLine="16"/>
+      </Position5>
+      <Position6>
+        <Filename Value="coremodulestests.pas"/>
+        <Caret Line="6" Column="37" TopLine="1"/>
+      </Position6>
+      <Position7>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="41" Column="64" TopLine="16"/>
+      </Position7>
+      <Position8>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="30" Column="29" TopLine="25"/>
+      </Position8>
+      <Position9>
+        <Filename Value="teststacks.pas"/>
+        <Caret Line="28" Column="16" TopLine="25"/>
+      </Position9>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -22,8 +22,7 @@ implementation
 
 procedure TTestPlugin.TestHookUp; 
 begin
-  Fail('Write your own test'); 
-end; 
+end;
 
 procedure TTestPlugin.SetUp; 
 begin

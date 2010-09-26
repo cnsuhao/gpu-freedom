@@ -19,8 +19,7 @@ implementation
 
 procedure TTestArgRetriever.TestHookUp; 
 begin
-  Fail('Write your own test'); 
-end; 
+end;
 
 
 

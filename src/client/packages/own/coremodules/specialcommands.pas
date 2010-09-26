@@ -20,7 +20,7 @@ type TSpecialCommand = class(TObject)
                       var res : TResultCollector; var frontman : TFrontendManager);
    destructor  Destroy();
 
-   function isSpecialCommand(arg : String; var specialType : Longint) : boolean;
+   function isSpecialCommand(arg : String; var specialType : TGPUArgType) : boolean;
    
    function execUserCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
    function execNodeCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
@@ -55,7 +55,7 @@ begin
   inherited;
 end;
 
-function TSpecialCommand.isSpecialCommand(arg : String; var specialType : Longint) : boolean;
+function TSpecialCommand.isSpecialCommand(arg : String; var specialType : TGPUArgType) : boolean;
 begin
   Result := false;
   specialType := GPU_ARG_UNKNOWN;

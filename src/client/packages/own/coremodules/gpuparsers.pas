@@ -67,7 +67,7 @@ begin
 end;
 
 function TGPUParser.parse(jobStr : String; var stk : TStack; var error : TGPUError): Boolean; overload;
-var arg    : TArgGPU;
+var arg          : TArgGPU;
     argRetriever : TArgRetriever;
     isOK         : Boolean;
     pluginName   : String;

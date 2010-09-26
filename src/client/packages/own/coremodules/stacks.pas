@@ -22,8 +22,12 @@ const
     GPU_BOOLEAN_STKTYPE = 20;
     GPU_STRING_STKTYPE  = 30;
   
-type TGPUFloat = Extended;  // type for floats on stack
-type TGPUStackTypes = Array [1..MAX_STACK_PARAMS] of Longint;
+type TGPUFloat  = Extended;  // type for floats on stack
+type TGPUString = String;    // type for strings on stack
+type TGPUBoolean = Boolean;  // type for booleans on stack
+type TGPUArgType = Longint; // type distinguishing types on stack
+
+type TGPUStackTypes = Array [1..MAX_STACK_PARAMS] of TGPUArgType;
 
 type TGPUError = record
     ErrorID : Longint;
@@ -34,7 +38,7 @@ end;
 type
   TStack = record
     stack    : Array [1..MAX_STACK_PARAMS] of TGPUFloat;
-    strStack : Array [1..MAX_STACK_PARAMS] of String;
+    strStack : Array [1..MAX_STACK_PARAMS] of TGPUString;
     stkType  : TGPUStackTypes;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
@@ -61,7 +65,7 @@ type PDescFunction = ^TDescFunction;
 // initialization and conversion functions
 procedure initStack(var stk : TStack);
 function  stackToStr(var stk : TStack; var error : TGPUError) : String;
-function  gpuTypeToStr(gputype : Longint) : String;
+function  gpuTypeToStr(gputype : TGPUArgType) : String;
 
 // check functions
 function maxStackReached(var stk : TStack; var error : TGPUError) : Boolean; 
@@ -70,9 +74,9 @@ function enoughParametersOnStack(required : Longint; var stk : TStack; var error
 function typeOfParametersCorrect(required : Longint; var stk : TStack; var types : TGPUStackTypes; var error : TGPUError) : Boolean;
 
 // loading stuff on stack
-function pushStr  (str : String; var stk : TStack; var error : TGPUError) : Boolean;
+function pushStr  (str : TGPUString; var stk : TStack; var error : TGPUError) : Boolean;
 function pushFloat(float : TGPUFloat; var Stk : TStack; var error : TGPUError) : Boolean;
-function pushBool (b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushBool (b : TGPUBoolean; var Stk : TStack; var error : TGPUError) : Boolean;
 
 // checking stack types
 function isGPUFloat  (i : Longint; var stk : TStack) : Boolean;
@@ -81,8 +85,8 @@ function isGPUString (i : Longint; var stk : TStack) : Boolean;
 
 // popping stuff from stack
 function popFloat(var float : TGPUFloat; var stk : TStack; var error : TGPUError) : Boolean;
-function popBool (var b : Boolean; var stk : TStack; var error : TGPUError) : Boolean;
-function popStr  (var str : String; var stk : TStack; var error : TGPUError) : Boolean;
+function popBool (var b : TGPUBoolean; var stk : TStack; var error : TGPUError) : Boolean;
+function popStr  (var str : TGPUString; var stk : TStack; var error : TGPUError) : Boolean;
 
 
 implementation
@@ -171,7 +175,7 @@ begin
 	 else Result := true;  
 end;
 
-function gpuTypeToStr(gputype : Longint) : String;
+function gpuTypeToStr(gputype : TGPUArgType) : String;
 begin
  if (gputype = GPU_FLOAT_STKTYPE) then
     Result := 'float'
@@ -207,7 +211,7 @@ end;
 
 
 
-function pushStr(str : String; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushStr(str : TGPUString; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -237,7 +241,7 @@ begin
                  end;              
 end;
 
-function pushBool(b : boolean; var Stk : TStack; var error : TGPUError) : Boolean;
+function pushBool(b : TGPUBoolean; var Stk : TStack; var error : TGPUError) : Boolean;
 var hasErrors : Boolean;
     value     : TGPUFloat;
 begin
@@ -289,7 +293,7 @@ begin
   Result := true;
 end;
 
-function popBool(var b : Boolean; var stk : TStack; var error : TGPUError) : Boolean;
+function popBool(var b : TGPUBoolean; var stk : TStack; var error : TGPUError) : Boolean;
 var types : TGPUStackTypes;
 begin
   Result  := false;
@@ -300,7 +304,7 @@ begin
   Result := true;
 end;
 
-function popStr(var str : String; var stk : TStack; var error : TGPUError) : Boolean;
+function popStr(var str : TGPUString; var stk : TStack; var error : TGPUError) : Boolean;
 var types : TGPUStackTypes;
 begin
   Result  := false;
