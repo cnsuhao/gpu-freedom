@@ -10,9 +10,11 @@ unit gpuparsers;
 
 interface
 
-uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands;
+uses SysUtils,
+     argretrievers, stacks, pluginmanagers, methodcontrollers, specialcommands,
+     resultcollectors, frontendmanagers, jobs, gpuconstants;
 
-type TGPUParser = class(TObject);
+type TGPUParser = class(TObject)
  public 
    constructor Create(var plugman : TPluginManager; var meth : TMethodController;
                       var res : TResultCollector; var frontman : TFrontendManager;
@@ -41,10 +43,10 @@ constructor TGPUParser.Create(var plugman : TPluginManager; var meth : TMethodCo
 begin
   inherited Create();
   plugMan_        := plugman;
-  methController_ := meth_;
+  methController_ := meth;
   rescoll_        := res;
   frontman_       := frontman_;
-  speccommands_   := TSpecialCommands.Create(plugman_, methController_, rescoll_, frontman_);
+  speccommands_   := TSpecialCommand.Create(plugman_, methController_, rescoll_, frontman_);
   job_ := job;
   thrdId_ := threadId;
 end;
@@ -56,27 +58,27 @@ begin
 end;
 
 
-procedure TGPUParser.parse() : Boolean;; overload;
+function TGPUParser.parse() : Boolean; overload;
 begin
    Result := parse(job_.job, job_.Stack, job_.error);
-   job_.hasError := (job._error.ErrorId>0);
+   job_.hasError := (job_.error.ErrorId>0);
    
    if (Result<>job_.hasError) then raise Exception.Create('Internal error in TGPUParser.Parse()!');
 end;
 
-procedure TGPUParser.parse(jobStr : String; var stk : TStack; var error : TGPUError); overload;
-var arg    : TGPUArg;
+function TGPUParser.parse(jobStr : String; var stk : TStack; var error : TGPUError): Boolean; overload;
+var arg    : TArgGPU;
     argRetriever : TArgRetriever;
     isOK         : Boolean;
-	pluginName   : String;
+    pluginName   : String;
 begin
-  Result := False;
-  argRetriever := TArgRetriever.Create(jobStr);
-  hasErrors := false;
+  Result       := False;
+  argRetriever := TArgRetriever.Create(jobStr, speccommands_);
+  isOk         := true;
   
-  while (argRetriever_.hasArguments() and (isOK)) do
+  while (argRetriever.hasArguments() and (isOK)) do
      begin
-       arg := getArgument(error);
+       arg := argRetriever.getArgument(error);
        case arg.argType of
        
             GPU_ARG_ERROR :  isOK := false; // the error structure contains the error
@@ -86,7 +88,7 @@ begin
             GPU_ARG_STRING : // a string was detected
                      isOK := pushStr(arg.argstring, stk, error);
             GPU_ARG_BOOLEAN :
-                     isOK := pushBool(arg.argvalue, stk, error);
+                     isOK := pushBool((arg.argvalue>0), stk, error);
             GPU_ARG_EXPRESSION :
                      // we found an expression, we need to recursively call this method
                      isOK := parse(arg.argstring, stk, error);
@@ -112,8 +114,8 @@ begin
 					      begin
 						    methController_.registerMethodCall(arg.argstring, pluginName, thrdID_);
 							try
-							  isOK := plugman_.method_execute(arg.argstring, pluginName, error);
-							except (Exception e)
+							  isOK := plugman_.method_execute(arg.argstring, stk, error);
+							except (e : Exception)
 							  error.errorID := PLUGIN_THREW_EXCEPTION_ID;
 							  error.errorMsg := PLUGIN_THREW_EXCEPTION;
 							  error.errorArg := e.Message;

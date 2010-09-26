@@ -11,7 +11,7 @@ interface
 
 uses  Classes,
       jobs, methodcontrollers, pluginmanager, resultcollectors, frontendmanagers,
-      parsers;
+      gpuparsers;
 
 type
   TComputationThread = class(TThread)

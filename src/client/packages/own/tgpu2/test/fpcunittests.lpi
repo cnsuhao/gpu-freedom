@@ -42,7 +42,7 @@
         <UnitName Value="fpcunittests"/>
         <CursorPos X="78" Y="7"/>
         <TopLine Value="1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
       </Unit0>
       <Unit1>
         <Filename Value="teststacks.pas"/>
@@ -50,7 +50,7 @@
         <UnitName Value="teststacks"/>
         <CursorPos X="53" Y="27"/>
         <TopLine Value="1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\stacks.pas"/>
@@ -58,7 +58,7 @@
         <CursorPos X="60" Y="54"/>
         <TopLine Value="24"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -132,9 +132,9 @@
         <Filename Value="..\argretrievers.pas"/>
         <UnitName Value="argretrievers"/>
         <CursorPos X="20" Y="229"/>
-        <TopLine Value="213"/>
+        <TopLine Value="4"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -150,7 +150,7 @@
         <CursorPos X="15" Y="35"/>
         <TopLine Value="31"/>
         <EditorIndex Value="11"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
@@ -159,13 +159,13 @@
         <CursorPos X="29" Y="50"/>
         <TopLine Value="34"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
-        <CursorPos X="14" Y="14"/>
+        <CursorPos X="10" Y="14"/>
         <TopLine Value="1"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="16"/>
@@ -187,7 +187,7 @@
         <CursorPos X="1" Y="59"/>
         <TopLine Value="19"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="32"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -210,11 +210,11 @@
       </Unit20>
       <Unit21>
         <Filename Value="..\gpuparsers.pas"/>
-        <UnitName Value="gpuparser"/>
-        <CursorPos X="16" Y="1"/>
-        <TopLine Value="1"/>
+        <UnitName Value="gpuparsers"/>
+        <CursorPos X="78" Y="118"/>
+        <TopLine Value="102"/>
         <EditorIndex Value="8"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
@@ -225,123 +225,127 @@
         <UsageCount Value="9"/>
       </Unit22>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="206" Column="83" TopLine="190"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="216" Column="81" TopLine="200"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="217" Column="12" TopLine="202"/>
-      </Position3>
-      <Position4>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="223" Column="53" TopLine="215"/>
-      </Position4>
-      <Position5>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="232" Column="23" TopLine="215"/>
-      </Position5>
-      <Position6>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="236" Column="43" TopLine="220"/>
-      </Position6>
-      <Position7>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="270" Column="54" TopLine="254"/>
-      </Position7>
-      <Position8>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="274" Column="5" TopLine="258"/>
-      </Position8>
-      <Position9>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="280" Column="19" TopLine="264"/>
-      </Position9>
-      <Position10>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="287" Column="19" TopLine="269"/>
-      </Position10>
-      <Position11>
-        <Filename Value="..\specialcommands.pas"/>
-        <Caret Line="343" Column="57" TopLine="316"/>
-      </Position11>
-      <Position12>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="18" Column="71" TopLine="11"/>
-      </Position12>
-      <Position13>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="36" Column="13" TopLine="30"/>
-      </Position13>
-      <Position14>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="97" Column="62" TopLine="81"/>
-      </Position14>
-      <Position15>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="128" Column="56" TopLine="112"/>
-      </Position15>
-      <Position16>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="165" Column="50" TopLine="149"/>
-      </Position16>
-      <Position17>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="193" Column="27" TopLine="1"/>
-      </Position17>
-      <Position18>
-        <Filename Value="..\argretrievers.pas"/>
-        <Caret Line="217" Column="24" TopLine="213"/>
-      </Position18>
-      <Position19>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="10" Column="18" TopLine="1"/>
-      </Position19>
-      <Position20>
+      </Position1>
+      <Position2>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="13" Column="45" TopLine="1"/>
-      </Position20>
-      <Position21>
+      </Position2>
+      <Position3>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="3" Column="3" TopLine="3"/>
-      </Position21>
-      <Position22>
+      </Position3>
+      <Position4>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="13" Column="58" TopLine="1"/>
-      </Position22>
-      <Position23>
+      </Position4>
+      <Position5>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="2" Column="50" TopLine="1"/>
-      </Position23>
-      <Position24>
+      </Position5>
+      <Position6>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="53" Column="100" TopLine="35"/>
-      </Position24>
-      <Position25>
+      </Position6>
+      <Position7>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="77" Column="78" TopLine="49"/>
-      </Position25>
-      <Position26>
+      </Position7>
+      <Position8>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="13" Column="81" TopLine="1"/>
-      </Position26>
-      <Position27>
+      </Position8>
+      <Position9>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="60" Column="17" TopLine="37"/>
-      </Position27>
-      <Position28>
+      </Position9>
+      <Position10>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="47" Column="1" TopLine="32"/>
-      </Position28>
-      <Position29>
+      </Position10>
+      <Position11>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="71" Column="40" TopLine="55"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\computationthreads.pas"/>
+        <Caret Line="14" Column="14" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="30" Column="35" TopLine="1"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="15" Column="33" TopLine="1"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="14" Column="46" TopLine="4"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="45" Column="26" TopLine="29"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="1" Column="37" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="13" Column="43" TopLine="1"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="60" Column="38" TopLine="44"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="63" Column="27" TopLine="47"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="13" Column="15" TopLine="1"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="69" Column="93" TopLine="46"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="70" Column="21" TopLine="42"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="76" Column="53" TopLine="60"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="75" Column="16" TopLine="61"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="79" Column="22" TopLine="63"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="66" Column="12" TopLine="65"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="15" Column="60" TopLine="1"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="91" Column="40" TopLine="75"/>
       </Position29>
+      <Position30>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="117" Column="60" TopLine="101"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
