@@ -4,7 +4,7 @@ program fpcunittests;
 
 uses
   Classes, consoletestrunner,
-  teststacks, testplugins, testpluginmanagers, testargretrievers;
+  teststacks, testplugins, testpluginmanagers, testargretrievers, coremodules;
 
 type
 

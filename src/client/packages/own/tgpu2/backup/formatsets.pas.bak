@@ -1,0 +1,41 @@
+unit formatsets;
+{
+ TFormatSet is used to override system specific international settings,
+ so that GPU across continents can communicate time stamps, floating
+ point numbers and dates. The German standard is used.
+
+}
+interface
+
+uses SysUtils;
+
+{to make GPU independent of OS format settings in
+ control panel - international settings}
+
+
+type TFormatSet = class(TObject)
+   public
+     fs :  TFormatSettings;
+     constructor Create;
+end;
+
+
+var
+  formatSet : TFormatSet;
+
+implementation
+
+constructor TFormatSet.Create;
+begin
+  inherited Create;
+  GetLocaleFormatSettings(1031, fs);  {1031 German_standard}
+  fs.DecimalSeparator := '.';
+  fs.TimeSeparator    := ':';
+  fs.DateSeparator    := '.';
+end;
+
+initialization
+  formatSet := TFormatSet.Create();
+end.
+
+

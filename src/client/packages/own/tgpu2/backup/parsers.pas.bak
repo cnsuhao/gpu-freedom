@@ -10,8 +10,7 @@ unit parser;
 
 interface
 
-uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands,
-     coremodules;
+uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands;
 
 type TGPUParser = class(TObject);
  public 

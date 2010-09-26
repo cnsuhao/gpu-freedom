@@ -11,7 +11,7 @@ unit specialcommands;
 interface
 
 uses identities, gpuconstants, pluginmanagers, frontendmanagers,
-     methodcontrollers, resultcollectors;
+     methodcontrollers;
 
 type TSpecialCommand = class(TObject)
  public

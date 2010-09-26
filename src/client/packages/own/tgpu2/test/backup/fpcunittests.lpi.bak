@@ -8,7 +8,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="8"/>
+      <ActiveEditorIndexAtStart Value="9"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -35,15 +35,15 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="18">
+    <Units Count="22">
       <Unit0>
         <Filename Value="fpcunittests.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fpcunittests"/>
-        <CursorPos X="65" Y="7"/>
+        <CursorPos X="78" Y="7"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -53,7 +53,7 @@
         <CursorPos X="53" Y="27"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -61,8 +61,8 @@
         <UnitName Value="stacks"/>
         <CursorPos X="60" Y="54"/>
         <TopLine Value="24"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="19"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -70,7 +70,7 @@
         <UnitName Value="common"/>
         <CursorPos X="16" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\frontendmanagers.pas"/>
@@ -78,7 +78,7 @@
         <CursorPos X="23" Y="206"/>
         <TopLine Value="181"/>
         <EditorIndex Value="5"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -86,8 +86,8 @@
         <UnitName Value="formatsets"/>
         <CursorPos X="1" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="16"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="20"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -95,8 +95,8 @@
         <UnitName Value="testutils"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="14"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="18"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -104,8 +104,8 @@
         <UnitName Value="testplugins"/>
         <CursorPos X="10" Y="9"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="13"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="17"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -113,8 +113,8 @@
         <UnitName Value="plugins"/>
         <CursorPos X="84" Y="32"/>
         <TopLine Value="12"/>
-        <EditorIndex Value="12"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="16"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -122,8 +122,8 @@
         <UnitName Value="pluginmanagers"/>
         <CursorPos X="43" Y="266"/>
         <TopLine Value="250"/>
-        <EditorIndex Value="10"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -131,8 +131,8 @@
         <UnitName Value="testpluginmanagers"/>
         <CursorPos X="17" Y="9"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="11"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -141,7 +141,7 @@
         <CursorPos X="16" Y="9"/>
         <TopLine Value="1"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -150,7 +150,7 @@
         <CursorPos X="71" Y="18"/>
         <TopLine Value="11"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -158,8 +158,8 @@
         <UnitName Value="utils"/>
         <CursorPos X="5" Y="28"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="9"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="13"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
@@ -168,25 +168,25 @@
         <CursorPos X="25" Y="29"/>
         <TopLine Value="14"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
-        <CursorPos X="70" Y="13"/>
-        <TopLine Value="1"/>
+        <CursorPos X="41" Y="14"/>
+        <TopLine Value="3"/>
         <EditorIndex Value="6"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
-        <CursorPos X="25" Y="1"/>
+        <CursorPos X="62" Y="46"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -194,131 +194,168 @@
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="40" Y="126"/>
         <TopLine Value="97"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit17>
+      <Unit18>
+        <Filename Value="..\coremodules.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="coremodules"/>
+        <CursorPos X="53" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="..\tgpu2.pas"/>
+        <UnitName Value="TGPU2"/>
+        <CursorPos X="14" Y="78"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="..\resultcollectors.pas"/>
+        <UnitName Value="resultcollectors"/>
+        <CursorPos X="15" Y="15"/>
+        <TopLine Value="11"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\parsers.pas"/>
+        <UnitName Value="parser"/>
+        <CursorPos X="34" Y="24"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit21>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="99" Column="10" TopLine="74"/>
+        <Caret Line="147" Column="49" TopLine="131"/>
       </Position1>
       <Position2>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="62" Column="13" TopLine="33"/>
+        <Caret Line="152" Column="19" TopLine="136"/>
       </Position2>
       <Position3>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="65" Column="39" TopLine="51"/>
+        <Caret Line="13" Column="25" TopLine="1"/>
       </Position3>
       <Position4>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="73" Column="52" TopLine="57"/>
+        <Caret Line="164" Column="25" TopLine="141"/>
       </Position4>
       <Position5>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="88" Column="10" TopLine="72"/>
+        <Caret Line="170" Column="17" TopLine="157"/>
       </Position5>
       <Position6>
         <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="101" Column="12" TopLine="85"/>
+        <Caret Line="79" Column="15" TopLine="51"/>
       </Position6>
       <Position7>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="125" Column="9" TopLine="101"/>
-      </Position7>
-      <Position8>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="43" Column="9" TopLine="19"/>
-      </Position8>
-      <Position9>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="125" Column="36" TopLine="109"/>
-      </Position9>
-      <Position10>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="128" Column="26" TopLine="115"/>
-      </Position10>
-      <Position11>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="147" Column="49" TopLine="131"/>
-      </Position11>
-      <Position12>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="152" Column="19" TopLine="136"/>
-      </Position12>
-      <Position13>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="13" Column="25" TopLine="1"/>
-      </Position13>
-      <Position14>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="164" Column="25" TopLine="141"/>
-      </Position14>
-      <Position15>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="170" Column="17" TopLine="157"/>
-      </Position15>
-      <Position16>
-        <Filename Value="..\frontendmanagers.pas"/>
-        <Caret Line="79" Column="15" TopLine="51"/>
-      </Position16>
-      <Position17>
         <Filename Value="..\specialcommands.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
-      </Position17>
-      <Position18>
+      </Position7>
+      <Position8>
         <Filename Value="..\computationthreads.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="16" Column="34" TopLine="1"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="15" Column="34" TopLine="1"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="16" Column="14" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="25" Column="55" TopLine="9"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="80" Column="45" TopLine="64"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="25" Column="54" TopLine="17"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="72" Column="45" TopLine="56"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="74" Column="30" TopLine="58"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\methodcontrollers.pas"/>
+        <Caret Line="43" Column="16" TopLine="15"/>
       </Position18>
       <Position19>
         <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="84" Column="14" TopLine="59"/>
       </Position19>
       <Position20>
         <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="16" Column="34" TopLine="1"/>
+        <Caret Line="122" Column="29" TopLine="97"/>
       </Position20>
       <Position21>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="15" Column="34" TopLine="1"/>
+        <Filename Value="..\computationthreads.pas"/>
+        <Caret Line="1" Column="25" TopLine="1"/>
       </Position21>
       <Position22>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="16" Column="14" TopLine="1"/>
+        <Filename Value="..\computationthreads.pas"/>
+        <Caret Line="12" Column="15" TopLine="1"/>
       </Position22>
       <Position23>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="25" Column="55" TopLine="9"/>
+        <Filename Value="..\computationthreads.pas"/>
+        <Caret Line="13" Column="45" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="80" Column="45" TopLine="64"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="4" Column="18" TopLine="1"/>
       </Position24>
       <Position25>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="25" Column="54" TopLine="17"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="9" Column="45" TopLine="1"/>
       </Position25>
       <Position26>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="72" Column="45" TopLine="56"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="41" Column="93" TopLine="17"/>
       </Position26>
       <Position27>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="74" Column="30" TopLine="58"/>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="13" Column="63" TopLine="3"/>
       </Position27>
       <Position28>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="43" Column="16" TopLine="15"/>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="14" Column="23" TopLine="1"/>
       </Position28>
       <Position29>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="84" Column="14" TopLine="59"/>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="40" Column="79" TopLine="37"/>
       </Position29>
       <Position30>
-        <Filename Value="..\methodcontrollers.pas"/>
-        <Caret Line="122" Column="29" TopLine="97"/>
+        <Filename Value="..\resultcollectors.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

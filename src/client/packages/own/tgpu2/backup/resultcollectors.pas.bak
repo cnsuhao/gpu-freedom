@@ -23,7 +23,7 @@ type
     isFloat    : array[1..MAX_RESULTS_FOR_ID] of Boolean;
     idx : Longint; // index of circular buffer
     
-    N,                         // number of res
+    N                         // number of res
     N_float : Longint         // number of single floats
     sum,                      // with sum and N_float we can compute average
     min,

@@ -22,7 +22,7 @@ unit TGPU2;
 interface
 
 uses SyncObjs,
-     jobs, computationthreads, stacks, tgpuconstants, pluginmanagers, coremodules;
+     jobs, computationthreads, stacks, tgpuconstants, pluginmanagers;
 
 type
   TGPUCore2 = class(TObject)
@@ -47,14 +47,12 @@ type
 
   private
     max_threads_, 
-    threads_running : Longint;
+	   threads_running : Longint;
     is_idle_        : Boolean;
-
+    CS_             : TCriticalSection;
+    
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
-
-    core_         : TCoreModules;
-    CS_           : TCriticalSection;
-
+    
     function findAvailableSlot() : Longint;
   end;
   
@@ -68,14 +66,12 @@ begin
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
   CS_ := TCriticalSection.Create();
-  core_ := TCoreModules.Create();
   
   for i:=1 to MAX_THREADS do slots_[i] := nil;
 end;
 
 destructor TGPUCore2.Destroy();
 begin
-  core_.Free;
   CS_.Free;
   inherited;
 end;

@@ -10,13 +10,13 @@ unit computationthreads;
 interface
 
 uses  Classes,
-      jobs, methodcontrollers, pluginmanager, coremodules;
+      jobs, methodcontrollers, pluginmanager;
 
 type
   TComputationThread = class(TThread)
    public
       
-    constructor Create(var core : TCoreModules; var job : TJob; threadId : Longint);
+    constructor Create(var core : TGPU2Core; var job : TJob; threadId : Longint);
     function    isJobDone : Boolean;
 	  
 	  
@@ -27,14 +27,14 @@ type
     procedure SyncOnJobFinished;
 	  
    private
-      job_done_      : Boolean;
+      job_done_    : Boolean; 
       // input parameters
 	  // the job which needs to be computed
-      job_           :  TJob;
+      job_            :  TJob;
 	  // thread id for GPU component
       thrdID_        : Longint;
-      // helper structures
-      core_          : TCoreModules;
+ 	  // helper structures
+	  core_           : TGPU2Core
       // if the thread is finished, job done is set to finish
       jobDone_: boolean;
    end;	  
@@ -43,7 +43,7 @@ end;
 
 implementation
 
-constructor TComputationThread.Create(var core : TCoreModules; var job : TJob; threadId : Longint);
+constructor TComputationThread.Create(var core : TGPU2Core; var job : TJob; threadId : Longint);
 begin
   inherited Create(true);
   
