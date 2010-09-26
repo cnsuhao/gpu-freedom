@@ -33,8 +33,8 @@ type TArgRetriever = class(TObject)
    
  private
    job_,
-   toparse_   : String;
-   speccomands_ : TSpecialCommand;
+   toparse_      : String;
+   speccommands_ : TSpecialCommand;
    
    procedure deleteComma; 
    function getBracketArgument(openbracket, closebracket : String; 
@@ -94,7 +94,7 @@ begin
      Result := getStringArgument(error)
  else    
  // if it is a number
- if (ordchar>=48 and ordchar<=57) or startchar='.'
+ if ((ordchar>=48) and (ordchar<=57)) or (startchar='.') then
      Result := getFloatArgument(error)
  else
  if (startchar = '{') or (startchar = '(')  then
@@ -125,7 +125,7 @@ begin
     i := 2;
     arg := '';
 
-    while (bracketCount <> 0) and (i <= Length(S)) do
+    while (bracketCount <> 0) and (i <= Length(toparse_)) do
     begin
       if toparse_[i] = openbracket then
         Inc(BracketCount)
@@ -162,7 +162,7 @@ begin
  while (toparse_[i] <> QUOTE) and (i <= Length(toparse_)) do
       Inc(i);
 
- if (i=Length(toparse_) and toparse_[i]<>QUOTE then
+ if (i=Length(toparse_)) and (toparse_[i]<>QUOTE) then
      begin
        // quote is not closed
        Result.argtype := GPU_ARG_ERROR;
@@ -190,7 +190,7 @@ var arg : String;
 begin
  arg := ExtractParam(toparse_, ','); 
  try
-   float := StrToFloat(arg, formatSet.fs);
+   float := StrToFloat(arg);
  except
    Result.argtype := GPU_ARG_ERROR;
    error.ErrorID  := COULD_NOT_PARSE_FLOAT_ID;

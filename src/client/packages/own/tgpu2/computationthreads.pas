@@ -16,7 +16,8 @@ type
   TComputationThread = class(TThread)
    public
       
-    constructor Create(var core : TCoreModules; var job : TJob; threadId : Longint);
+    constructor Create(var core : TCoreModules;
+                       var job : TJob; threadId : Longint);
     function    isJobDone : Boolean;
 	  
 	  

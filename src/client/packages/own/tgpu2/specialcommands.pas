@@ -20,7 +20,7 @@ type TSpecialCommand = class(TObject)
                       var res : TResultCollector; var frontman : TFrontendManager);
    destructor  Destroy();
 
-   function isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
+   function isSpecialCommand(arg : String; var specialType : Longint) : boolean;
    
    function execUserCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
    function execNodeCommand(arg : String; var stk : TStack; var error : TGPUError) : boolean;
@@ -41,7 +41,7 @@ end;
 implementation
 
 constructor TSpecialCommand.Create(var plugman : TPluginManager; var meth : TMethodController;
-                   var res : TResultCollector; var frontman : TFrontendManager);
+                                   var res : TResultCollector; var frontman : TFrontendManager);
 begin
  inherited Create();
   plugman_      := plugman;
@@ -55,7 +55,7 @@ begin
   inherited;
 end;
 
-function TSpecialCommand.isSpecialCommmand(arg : String; var specialType : Longint) : boolean;
+function TSpecialCommand.isSpecialCommand(arg : String; var specialType : Longint) : boolean;
 begin
   Result := false;
   specialType := GPU_ARG_UNKNOWN;
@@ -284,7 +284,7 @@ var
   path, filename, 
   executable, form, fullname : String;
   
-  port : Longint;
+  port : TGPUFloat;
   
 begin
   Result := false;
@@ -303,7 +303,7 @@ begin
 			   popFloat(port     , stk, error);
 			   popStr(IP         , stk, error);
 			   popStr(jobId      , stk, error);
-		       regInfo := frontman_.prepareRegisterInfo4UdpFrontend(jobId, IP, Round(port), executable, form, fullname);
+		           regInfo := frontman_.prepareRegisterInfo4UdpFrontend(jobId, IP, Round(port), executable, form, fullname);
 			   broadcast.registerJob(regInfo);
 			 end;  
 		 end
@@ -340,9 +340,10 @@ begin
 	   end
  	else
     if (arg='frontend.list') then
-       Result := broadcast.getRegisteredList(stk, error);
+       Result := broadcast.getRegisteredList(stk, error)
     else	   
     raise Exception.Create('Frontend argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   Result := true;	
 end;
 
+end.
