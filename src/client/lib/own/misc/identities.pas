@@ -26,7 +26,7 @@ type
     AcceptIncoming : Boolean; // if a node is able to accept incoming connections
     MHz,
     RAM,
-    GigaFlops : Longint
+    GigaFlops : Longint;
     isSMP,               // the computer is a SMP computer with more than 1 CPU case box
     isHT,                // the CPU has HyperThreading feature
     is64bit,              // the CPU is a 64 bit cpu

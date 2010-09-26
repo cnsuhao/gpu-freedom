@@ -1,4 +1,4 @@
-unit computationthreads
+unit computationthreads;
 {
     ComputationThread is a thread which executes stored in
     job.job.

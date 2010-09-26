@@ -10,7 +10,7 @@ unit specialcommands;
 }
 interface
 
-uses identities, gpuconstants, pluginmanager, frontendmanagers;
+uses identities, gpuconstants, pluginmanager, frontendmanagers, tgpu2;
 
 type TSpecialCommand = class(TObject)
  public

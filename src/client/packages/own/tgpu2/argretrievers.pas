@@ -14,7 +14,8 @@ It is used by the TGPUParser to parse the arguments
 }
 interface
 
-uses SysUtils, stacks, plugins, utils, common, gpuconstants;
+uses SysUtils,
+     stacks, plugins, utils, formatsets, gpuconstants, specialcommands;
 
 type TArgGPU = record
      argtype : ShortInt;
@@ -22,7 +23,7 @@ type TArgGPU = record
      argstring : String;
 end;
 
-type TArgRetriever = class(TObject);
+type TArgRetriever = class(TObject)
  public 
    constructor Create(job : String; var speccommands : TSpecialCommand);
    function getJob() : String;

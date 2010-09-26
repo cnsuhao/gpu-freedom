@@ -10,7 +10,8 @@ unit frontendmanagers;
 }
 interface
 
-uses gpuconstants;
+uses SyncObjs, SysUtils,
+     gpuconstants, stacks;
 
 const
   QUEUE_SIZE = 120;
@@ -26,7 +27,7 @@ type
   
 type
   TRegisterInfo = record
-    jobID,               // jobID the frontend sent to GPU Core
+        jobID,               // jobID the frontend sent to GPU Core
 	                     // used for lookup
 	
 	IP : String;         // if contact type is ct_Port_IP
@@ -37,9 +38,9 @@ type
 	
 	executable,
 	formname,
-    fullname	: String;   // information on process name and form name
+        fullname	: String;   // information on process name and form name
 	
-    typeID:  TContactType;
+        typeID:  TContactType;
   end;  
 
 type TRegisterQueue = class(TObject)
@@ -54,28 +55,28 @@ type TRegisterQueue = class(TObject)
 	  function getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
         
     private
-      queue_ : Array [1..QUEUE_SIZE] of TRegisterInfo;
+          queue_ : Array [1..QUEUE_SIZE] of TRegisterInfo;
 	  idx_   : Longint; // index on queue_
 	  CS_    : TCriticalSection;
 	  
-	  function initQueueCell(i : Longint);
+	  procedure initQueueCell(i : Longint);
 end;
 
-type TFrontendManager = class(TObject);
+type TFrontendManager = class(TObject)
    public
-      constructor Create();
+          constructor Create();
 	  destructor Destroy;
 	  
 	  function getStandardQueue() : TRegisterQueue;
 	  function getBroadcastQueue() : TRegisterQueue;
 	  
-	  function prepareRegisterInfo4Core(jobId : String;) : TRegisterInfo;
+	  function prepareRegisterInfo4Core(jobId : String) : TRegisterInfo;
 	  function prepareRegisterInfo4UdpFrontend(jobId, IP : String; port : Longint; executable, form, fullname : String) : TRegisterInfo;
 	  function prepareRegisterInfo4FileFrontend(jobId, path, filename : String; executable, form, fullname : String) : TRegisterInfo;
 	  
    private
-      standardQ  : TRegisterQueue;
-	  broadcastQ : TRegisterQueue;
+          standardQ_  : TRegisterQueue;
+	  broadcastQ_ : TRegisterQueue;
 end;
 
 implementation
@@ -84,7 +85,7 @@ constructor TRegisterQueue.Create();
 var i : Longint;
 begin
   inherited;
-  CS_.TCriticalSection.Create();
+  CS_ := TCriticalSection.Create();
   for i:=1 to QUEUE_SIZE do
     initQueueCell(i);
 end;
@@ -95,17 +96,17 @@ begin
   inherited;
 end;
 
-function TRegisterQueue.initQueueCell(i : Longint);
+procedure TRegisterQueue.initQueueCell(i : Longint);
 begin
-  queue[i_.jobID := '';
-  queue[i]_.IP := '';
-  queue[i]_.port := 0;
-  queue[i]_.path := '';
-  queue[i]_.filename := '';
-  queue[i]_.executable := '';
-  queue[i]_.formname := '';
-  queue[i]_.fullname := '';
-  queue[i]_.typeId := ct_None;
+  queue_[i].jobID := '';
+  queue_[i].IP := '';
+  queue_[i].port := 0;
+  queue_[i].path := '';
+  queue_[i].filename := '';
+  queue_[i].executable := '';
+  queue_[i].formname := '';
+  queue_[i].fullname := '';
+  queue_[i].typeId := ct_None;
 end;
 
 procedure TRegisterQueue.registerJob(var reg : TRegisterInfo);
@@ -113,18 +114,18 @@ begin
   Inc(idx_);
   if (idx_>QUEUE_SIZE) then idx_ := 1;
 
-  queue[idx_]_.jobID := reg.jobId;
-  queue[idx_]_.IP := reg.IP;
-  queue[idx_]_.port := reg.port;
-  queue[idx_]_.path := reg.path;
-  queue[idx_]_.filename := reg.filename;
-  queue[idx_]_.executable := reg.executable;
-  queue[idx_]_.formname := reg.formname;
-  queue[idx_]_.fullname := reg.fullname;
-  queue[idx_]_.typeId := reg.contacttype;
+  queue_[idx_].jobID := reg.jobId;
+  queue_[idx_].IP := reg.IP;
+  queue_[idx_].port := reg.port;
+  queue_[idx_].path := reg.path;
+  queue_[idx_].filename := reg.filename;
+  queue_[idx_].executable := reg.executable;
+  queue_[idx_].formname := reg.formname;
+  queue_[idx_].fullname := reg.fullname;
+  queue_[idx_].typeId := reg.typeId;
 end;
 
-procedure unregisterJob(jobID : String; formName : String);
+procedure TRegisterQueue.unregisterJob(jobID : String; formName : String);
 var i : Longint;
 begin
   CS_.Enter;
@@ -140,28 +141,33 @@ begin
 end;
 
 function TRegisterQueue.findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
+var start : Longint;
 begin
-  Result := findMultipleRI4Job(jobId, reg, 1);
+  start  := 1;
+  Result := findMultipleRI4Job(jobId, reg, start);
 end;
 
 function TRegisterQueue.findMultipleRI4Job(jobId : String; var reg : TRegisterInfo; var start : Longint) : Boolean;
+var i : Longint;
 begin
-  Result := false,
+  Result := false;
   if (start<1) then Exit;
   if (start>QUEUE_SIZE) then raise Exception.Create('findMultipleRI4Job called with start argument outside QUEUE_SIZE');
   if (Trim(jobId)='') then raise Exception.Create('jobId was empty in findMultipleRI4Job');
   CS_.Enter;
   for i:=start to QUEUE_SIZE do
      if (queue_[i].jobId = jobId) then
-	     begin
+	         begin
 		   reg := queue_[i];
-           Result := true;
+                   Result := true;
 		   CS_.Leave;
+                   Exit;
 		 end;   
   CS_.Leave;  
 end; 
 
 function TRegisterQueue.getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
+var i : Longint;
 begin
   Result := true;
   CS_.Enter;
@@ -180,24 +186,24 @@ constructor TFrontendManager.Create();
 begin
   inherited;
   standardQ_ := TRegisterQueue.Create();
-  broadcastQ := TRegisterQueue.Create();
+  broadcastQ_ := TRegisterQueue.Create();
 end;
 
 destructor TFrontendManager.Destroy;
 begin
-  standardQ.Free;
-  broadcastQ.Free;
+  standardQ_.Free;
+  broadcastQ_.Free;
   inherited;
 end;
 
 function TFrontendManager.getStandardQueue() : TRegisterQueue;
 begin
- Result := standardQ;
+ Result := standardQ_;
 end;
 
 function TFrontendManager.getBroadcastQueue() : TRegisterQueue;
 begin
- Result := broadcastQ;
+ Result := broadcastQ_;
 end;
 
 function TFrontendManager.prepareRegisterInfo4Core(jobId : String) : TRegisterInfo;

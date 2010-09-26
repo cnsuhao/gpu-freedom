@@ -12,8 +12,8 @@ unit methodcontrollers;
 }
 interface
 
-uses stacks, computationthreads,
-     SysUtils, Classes, gpuconstants, SyncObjs;
+uses SysUtils, Classes, SyncObjs,
+     stacks, gpuconstants;
 
 
 type TMethodController = class(TObject)
@@ -22,7 +22,7 @@ type TMethodController = class(TObject)
    destructor Destroy();
       
    procedure registerMethodCall(funcName, plugName : String; threadId : Longint);
-   procedure unregisterMethodCall(threadId : Longint) : Boolean;
+   procedure unregisterMethodCall(threadId : Longint);
    
    function isAlreadyCalled(funcName : String) : Boolean;
    
@@ -39,8 +39,8 @@ type TMethodController = class(TObject)
    procedure clear();
 
  private
-   method_calls : Array[1..MAX_THREADS] of String;
-   plugin_names : Array[1..MAX_THREADS] of String;
+   method_call_ : Array[1..MAX_THREADS] of String;
+   plugin_name_ : Array[1..MAX_THREADS] of String;
    CS_ : TCriticalSection;
    concurrently_allowed_ : TStringList;
 end;
@@ -69,10 +69,10 @@ begin
   // exception to the rule: if the function is allowed to run
  // concurrently, we simply do not register the function, such that the
  // FunctionCallController is out of order for that particular functions
-  if not (concurrently_allowed_.IndexOf(Name)>-1) then
+  if not (concurrently_allowed_.IndexOf(funcName)>-1) then
     begin  
-     method_call[threadId] := funcName;
-     plugin_names_[threadId] := plugName;
+     method_call_[threadId]  := funcName;
+     plugin_name_[threadId] := plugName;
     end; 
   CS_.Leave;
 end;
@@ -81,7 +81,7 @@ procedure TMethodController.unregisterMethodCall(threadId : Longint);
 begin
   CS_.Enter;
   method_call_[threadId] := '';
-  plugin_names_[threadId] := '';
+  plugin_name_[threadId] := '';
   CS_.Leave;  
 end;
 
@@ -112,18 +112,18 @@ begin
  Result := plugin_name_[threadId];
 end;
 
-procedure allowRunningFunctionConcurrently(funcName : String);
+procedure TMethodController.allowRunningFunctionConcurrently(funcName : String);
 begin
  CS_.Enter;
  concurrently_allowed_.Add(funcName);
  CS_.Leave;
 end;
 
-procedure clear();
+procedure TMethodController.clear();
 var i : Longint;
 begin
- for i:=1 to MAX_THREADS do method_calls_[i] := '';
- for i:=1 to MAX_THREADS do plugin_names_[i] := '';
+ for i:=1 to MAX_THREADS do method_call_[i] := '';
+ for i:=1 to MAX_THREADS do plugin_name_[i] := '';
 end;
 
 end.
