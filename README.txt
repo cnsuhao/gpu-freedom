@@ -77,7 +77,7 @@ File Tree structure for this package, codenamed freedom follows:
 
      /packages     components for GPU
        /own        own components developed by the project
-          /tgpu    TGPU component used in core to manage plugins
+          /coremodules    Core modules used by core component under client/core
        /ext        external packages
 
 
