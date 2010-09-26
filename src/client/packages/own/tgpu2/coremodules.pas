@@ -18,7 +18,6 @@ type TCoreModules = class(TObject)
     // helper structures
     function getPluginManager()   : TPluginManager;
     function getMethController()  : TMethodController;
-    function getSpecCommands()    : TSpecialCommand;
     function getResultCollector() : TResultCollector;
     function getFrontendManager() : TFrontendManager;
     function getThreadManager()   : TThreadManager;
@@ -26,7 +25,7 @@ type TCoreModules = class(TObject)
     // core components
     plugman_        : TPluginManager;
     methController_ : TMethodController;
-    speccommands_   : TSpecialCommand;
+    //speccommands_   : TSpecialCommand;
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
     threadman_      : TThreadManager;
@@ -41,12 +40,10 @@ begin
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
    threadman_      := TThreadManager.Create();
-   speccommands_   := TSpecialCommands.Create(plugman_, methController_, rescoll_, frontman_, threadman_);
 end;
 
 destructor TCoreModules.Destroy;
 begin
-  speccommands_.Free;
   methController_.Free;
   rescoll_.Free;
   frontman_.Free;
@@ -59,10 +56,6 @@ begin
  Result := methController_;
 end;
 
-function TCoreModules.getSpecCommands() : TSpecialCommand;
-begin
- Result := speccommands_;
-end;
 
 function TCoreModules.getResultCollector(): TResultCollector;
 begin

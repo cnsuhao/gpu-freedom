@@ -1,4 +1,4 @@
-unit parser;
+unit gpuparsers;
 {
  The parser reads a GPU string and converts into a stack by executing the sequence of 
  commands on the string.
@@ -10,22 +10,24 @@ unit parser;
 
 interface
 
-uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands,
-     coremodules;
+uses argretrievers, stacks, pluginmanager, methodcontrollers, specialcommands;
 
 type TGPUParser = class(TObject);
  public 
-   constructor Create(var core : TCoreModules; var job : TJob; threadId : Longint);
+   constructor Create(var plugman : TPluginManager; var meth : TMethodController;
+                      var res : TResultCollector; var frontman : TFrontendManager;
+                      var job : TJob; threadId : Longint);
    destructor Destroy();
    
    function parse() : Boolean; overload;  
    function parse(jobStr : String; var stk : TStack; var error : TGPUError) : Boolean; overload;
    
  private
-   core_           : TCoreModules;
    plugman_        : TPluginManager;
    methController_ : TMethodController;
-   speccommands_   : TSpecialCommand;  
+   rescoll_        : TResultCollector;
+   frontman_       : TFrontendManager;
+   speccommands_   : TSpecialCommand;
    thrdId_         : Longint;
    job_            : TJob;
 end;
@@ -33,13 +35,16 @@ end;
 
 implementation
 
-constructor TGPUParser.Create(var core : TGPU2Core; var job : TJob; threadId : Longint);
+constructor TGPUParser.Create(var plugman : TPluginManager; var meth : TMethodController;
+                              var res : TResultCollector; var frontman : TFrontendManager;
+                              var job : TJob; threadId : Longint);
 begin
   inherited Create();
-  core_    := core;
-  plugMan_ := core_getPluginManager();
-  methController_ := core.getMethController();
-  speccommands_ := core.getSpecCommands();
+  plugMan_        := plugman;
+  methController_ := meth_;
+  rescoll_        := res;
+  frontman_       := frontman_;
+  speccommands_   := TSpecialCommands.Create(plugman_, methController_, rescoll_, frontman_);
   job_ := job;
   thrdId_ := threadId;
 end;
@@ -47,6 +52,7 @@ end;
 destructor TGPUParser.Destroy();
 begin
   inherited;
+  speccommands_.Free;
 end;
 
 

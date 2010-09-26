@@ -10,14 +10,16 @@ unit computationthreads;
 interface
 
 uses  Classes,
-      jobs, methodcontrollers, pluginmanager, coremodules;
+      jobs, methodcontrollers, pluginmanager, resultcollectors, frontendmanagers,
+      parsers;
 
 type
   TComputationThread = class(TThread)
    public
       
-    constructor Create(var core : TCoreModules;
-                       var job : TJob; threadId : Longint);
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController;
+                       var res : TResultCollector; var frontman : TFrontendManager;
+                       var job : TJob; thrdId : Longint);
     function    isJobDone : Boolean;
 	  
 	  
@@ -35,23 +37,31 @@ type
 	  // thread id for GPU component
       thrdID_        : Longint;
       // helper structures
-      core_          : TCoreModules;
+      plugman_        : TPluginManager;
+      methController_ : TMethodController;
+      rescoll_        : TResultCollector;
+      frontman_       : TFrontendManager;
+
       // if the thread is finished, job done is set to finish
       jobDone_: boolean;
    end;	  
 
-end;
-
 implementation
 
-constructor TComputationThread.Create(var core : TCoreModules; var job : TJob; threadId : Longint);
+constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController;
+                                      var res : TResultCollector; var frontman : TFrontendManager;
+                                      var job : TJob; thrdId : Longint);
 begin
   inherited Create(true);
   
   jobDone_ := false;
-  core_ := core;
   job_ := job;
-  thrdId_ := threadId;
+  thrdId_ := thrdId;
+
+  plugman_ := plugman;
+  methController_ := meth;
+  rescoll_ := res;
+  frontman_ := frontman;
 end;
 
 function  TComputationThread.isJobDone : Boolean;
@@ -59,11 +69,11 @@ begin
   Result := jobDone_;
 end;
 
-procedure  TComputationThread.Execute; override;
+procedure  TComputationThread.Execute;
 var parser : TGPUParser;
 begin
  syncOnJobCreated;
- parser := TGPUParser.Create(core_, job_, thrdId_);
+ parser := TGPUParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
  parser.parse();
  parser.Free;
  syncOnJobFinished;

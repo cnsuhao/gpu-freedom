@@ -20,7 +20,8 @@ type
   TThreadManager = class(TObject)
   public
 
-    constructor Create();
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController;
+                       var res : TResultCollector; var frontman : TFrontendManager);
     destructor  Destroy();
     
     // computes  a job if there are available threads
@@ -45,6 +46,10 @@ type
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
 
     CS_           : TCriticalSection;
+    plugman_      : TPluginManager;
+    meth_         : TMethodController;
+    rescollector_ : TResultCollector;
+    frontman_     : TFrontendManager;
 
     function findAvailableSlot() : Longint;
     procedure updateCoreIdentity;
@@ -52,7 +57,8 @@ type
   
 implementation
 
-constructor TThreadManager.Create();
+constructor TThreadManager.Create(var plugman : TPluginManager; var meth : TMethodController;
+                                  var res : TResultCollector; var frontman : TFrontendManager);
 var i : Longint;
 begin
   inherited Create();
@@ -62,6 +68,11 @@ begin
 
   CS_ := TCriticalSection.Create();
   for i:=1 to MAX_THREADS do slots_[i] := nil;
+
+  plugman_      := plugman;
+  meth_         := meth;
+  rescollector_ := res;
+  frontman_     := frontman;
 
   updateCoreIdentity;
 end;
@@ -110,7 +121,7 @@ begin
             end;
   
   Inc(current_threads_);  
-  slots_[slot] := TComputationThread.Create(self, job, slot); 
+  slots_[slot] := TComputationThread.Create(plugman_, meth_, rescollector_, frontman_, job, slot);
   updateCoreIdentity;
 
   Return := true;
