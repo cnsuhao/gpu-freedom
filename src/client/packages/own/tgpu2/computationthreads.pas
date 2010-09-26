@@ -23,13 +23,13 @@ type
    protected
     procedure Execute; override;
     
- 	procedure SyncOnJobCreated;
+    procedure SyncOnJobCreated;
     procedure SyncOnJobFinished;
 	  
    private
       job_done_      : Boolean;
       // input parameters
-	  // the job which needs to be computed
+      // the job which needs to be computed
       job_           :  TJob;
 	  // thread id for GPU component
       thrdID_        : Longint;

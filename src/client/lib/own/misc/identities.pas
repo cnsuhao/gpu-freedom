@@ -51,12 +51,20 @@ type
      homepage_url : String;
   end;
 
+type
+  TCoreIdentity = record
+     threads,
+     maxthreads : Longint;
+
+     isIdle,
+     hasResources : Boolean;
+  end;
 
 
 var
   MyGPUID  : TGPUIdentity;
   MyUserID : TUserIdentity;
-
+  MyCoreID : TCoreIdentity;
 implementation
 
 

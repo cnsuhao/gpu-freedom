@@ -1,34 +1,26 @@
 {
-  TGPU2 class is the main class which is the core of the core of GPU itself.
-
-  It  keeps track of MAX_THREADS slots which can contain a running
+  Threadmanagers keeps track of MAX_THREADS slots which can contain a running
   ComputationThread. A new ComputationThread can be created on a slot
   by using the Compute(...) method after defining a TJob structure. 
   This class is the only class which can istantiate a new ComputationThread.
-  
-  TGPU2 component encapsulates the PluginManager which manages Plugins
-  which contain the computational algorithms.
-  
-  It encapsulates the MethodController, which makes sure that the same function
-  inside a plugin is not called concurrently, for increased stability.
-  
+
   (c) by 2002-2010 the GPU Development Team
   (c) by 2010 HB9TVM
   This unit is released under GNU Public License (GPL)
     
 }
-unit TGPU2;
+unit threadmanagers;
 
 interface
 
 uses SyncObjs,
-     jobs, computationthreads, stacks, tgpuconstants, pluginmanagers, coremodules;
+     jobs, computationthreads, gpuconstants, identities;
 
 type
-  TGPUCore2 = class(TObject)
+  TThreadManager = class(TObject)
   public
 
-    constructor Create(var plugman : TPluginManager);
+    constructor Create();
     destructor  Destroy();
     
     // computes  a job if there are available threads
@@ -52,28 +44,29 @@ type
 
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
 
-    core_         : TCoreModules;
     CS_           : TCriticalSection;
 
     function findAvailableSlot() : Longint;
+    procedure updateCoreIdentity;
   end;
   
 implementation
 
-constructor TGPUCore2.Create(var plugman : TPluginManager);
+constructor TThreadManager.Create();
 var i : Longint;
 begin
   inherited Create();
 
   max_threads_ := DEFAULT_THREADS;
   current_threads_ := 0;
+
   CS_ := TCriticalSection.Create();
-  core_ := TCoreModules.Create();
-  
   for i:=1 to MAX_THREADS do slots_[i] := nil;
+
+  updateCoreIdentity;
 end;
 
-destructor TGPUCore2.Destroy();
+destructor TThreadManager.Destroy();
 begin
   core_.Free;
   CS_.Free;
@@ -82,7 +75,7 @@ end;
 
 
 
-function TGPUCore2.findAvailableSlot() : Longint;
+function TThreadManager.findAvailableSlot() : Longint;
 var i : Longint;
 begin
   Result := -1;
@@ -95,7 +88,7 @@ begin
        end;
 end;
 
-function TGPUCore2.Compute(job: TJob): boolean;
+function TThreadManager.Compute(job: TJob): boolean;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -113,23 +106,25 @@ begin
    if slot=-1 then
             begin
               CS_.Leave;
-              throw new Exception.Create('Internal error in tgpu2.pas, slot is -1');
+              throw new Exception.Create('Internal error in threadmanagers.pas, slot is -1');
             end;
   
   Inc(current_threads_);  
   slots_[slot] := TComputationThread.Create(self, job, slot); 
-  
+  updateCoreIdentity;
+
   Return := true;
   CS_.Leave;
 end;
 
 
-procedure TGPUCore2.ClearFinishedThreads;
+procedure TThreadManager.ClearFinishedThreads;
 var i : Longint;
 begin
   // here we traverse the complete array
   // as the number of threads can change dynamically
-  for i:=1 to MAX_THREADS do 
+  CS_.Enter;
+  for i:=1 to MAX_THREADS do
     if (slots_[i] <> nil) and slots_[i].isJobDone() then
     begin
       slots_[i].WaitFor;
@@ -137,34 +132,44 @@ begin
       FreeAndNil(slots_[i]);
       Dec(current_threads_);
     end;                             
-
-end;
-
-procedure TGPUCore2.setMaxThreads(x: Longint);
-begin
-  CS_.Enter;
-  max_threads_ := x;
+  updateCoreIdentity;
   CS_.Leave;
 end;
 
-function  TGPUCore2.getMaxThreads() : Longint;
+procedure TThreadManager.setMaxThreads(x: Longint);
+begin
+  CS_.Enter;
+  max_threads_ := x;
+  updateCoreIdentity;
+  CS_.Leave;
+end;
+
+function  TThreadManager.getMaxThreads() : Longint;
 begin
  Result := max_threads_;
 end;
 
-function  TGPUCore2.isIdle() : Boolean;
+function  TThreadManager.isIdle() : Boolean;
 begin
  Result := (current_threads_ = 0);
 end;
 
-function  TGPUCore2.getCurrentThreads : Longint;
+function  TThreadManager.getCurrentThreads : Longint;
 begin
  Result := current_threads_;
 end;
 
-function  TGPUCore2.hasResources() : Boolean;
+function  TThreadManager.hasResources() : Boolean;
 begin
    Result := (current_threads_<max_threads_);
+end;
+
+procedure TThreadManager.updateCoreIdentity;
+begin
+  myCoreId.maxthreads := max_threads_;
+  myCoreId.threads := current_threads_;
+  myCoreId.isIdle  := isIdle();
+  myCoreId.hasResources := hasResources();
 end;
 
 end;

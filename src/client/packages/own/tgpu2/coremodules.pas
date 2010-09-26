@@ -7,20 +7,21 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers;
+  frontendmanagers, threadmanagers;
 
 implementation
 
 type TCoreModules = class(TObject)
-    constructor Create(var plugman : TPluginManager);
+    constructor Create(path, extension : String);
     destructor Destroy;
 
     // helper structures
-    function getPluginManager()    : TPluginManager;
+    function getPluginManager()   : TPluginManager;
     function getMethController()  : TMethodController;
     function getSpecCommands()    : TSpecialCommand;
     function getResultCollector() : TResultCollector;
     function getFrontendManager() : TFrontendManager;
+    function getThreadManager()   : TThreadManager;
 
     // core components
     plugman_        : TPluginManager;
@@ -28,17 +29,19 @@ type TCoreModules = class(TObject)
     speccommands_   : TSpecialCommand;
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
+    threadman_      : TThreadManager;
 end;
 
 
-constructor TCoreModules.Create(var plugman : TPluginManager);
+constructor TCoreModules.Create(path, extension : String);
 begin
    inherited;
-   plugman_ := plugman;
+   plugman_        := TPluginManager.Create(path, extension);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
-   speccommands_   := TSpecialCommands.Create(plugman_, methController_, rescoll_, frontman_);
+   threadman_      := TThreadManager.Create();
+   speccommands_   := TSpecialCommands.Create(plugman_, methController_, rescoll_, frontman_, threadman_);
 end;
 
 destructor TCoreModules.Destroy;
@@ -47,6 +50,7 @@ begin
   methController_.Free;
   rescoll_.Free;
   frontman_.Free;
+  threadman_.Free;
   inherited;
 end;
 
@@ -75,6 +79,10 @@ begin
  Result := plugman_;
 end;
 
+function getThreadManager()   : TThreadManager;
+begin
+ Result := threadman_;
+end;
 
 end;
 
