@@ -1,20 +1,20 @@
+unit threadmanagers;
 {
   Threadmanagers keeps track of MAX_THREADS slots which can contain a running
   ComputationThread. A new ComputationThread can be created on a slot
-  by using the Compute(...) method after defining a TJob structure. 
+  by using the Compute(...) method after defining a TJob structure.
   This class is the only class which can istantiate a new ComputationThread.
 
   (c) by 2002-2010 the GPU Development Team
   (c) by 2010 HB9TVM
   This unit is released under GNU Public License (GPL)
-    
-}
-unit threadmanagers;
 
+}
 interface
 
-uses SyncObjs,
-     jobs, computationthreads, gpuconstants, identities;
+uses SyncObjs, SysUtils,
+     jobs, computationthreads, gpuconstants, identities, pluginmanagers,
+     methodcontrollers, resultcollectors, frontendmanagers;
 
 type
   TThreadManager = class(TObject)
@@ -25,7 +25,8 @@ type
     destructor  Destroy();
     
     // computes  a job if there are available threads
-    function Compute(Job: TJob): boolean;
+    // returns threadId if created, -1 if not
+    function Compute(Job: TJob): Longint;
     
     // at regular intervals, this method needs to be called by the core
     procedure ClearFinishedThreads;
@@ -40,8 +41,8 @@ type
 
   private
     max_threads_, 
-    threads_running : Longint;
-    is_idle_        : Boolean;
+    current_threads_ : Longint;
+    is_idle_         : Boolean;
 
     slots_        : Array[1..MAX_THREADS] of TComputationThread;
 
@@ -79,7 +80,6 @@ end;
 
 destructor TThreadManager.Destroy();
 begin
-  core_.Free;
   CS_.Free;
   inherited;
 end;
@@ -92,23 +92,23 @@ begin
   Result := -1;
   // we look for slots only until max_threads_ which can change dynamically
   for i:=1 to max_threads_ do 
-    if slots[i]=nil then
+    if slots_[i]=nil then
        begin
          Result := i;
          Exit;
        end;
 end;
 
-function TThreadManager.Compute(job: TJob): boolean;
+function TThreadManager.Compute(job: TJob): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
-  Result := false;
+  Result := -1;
   if not hasResources() then 
        begin
-        Job.ErrorID  := NO_AVAILABLE_THREADS_ID;
-        Job.ErrorMsg := NO_AVAILABLE_THREADS;
-        Job.ErrorArg := 'All slots ('+IntToStr(max_threads_)+') are full.';
+        Job.error.ErrorID  := NO_AVAILABLE_THREADS_ID;
+        Job.error.ErrorMsg := NO_AVAILABLE_THREADS;
+        Job.error.ErrorArg := 'All slots ('+IntToStr(max_threads_)+') are full.';
         CS_.Leave;
         Exit;
        end; 
@@ -117,14 +117,14 @@ begin
    if slot=-1 then
             begin
               CS_.Leave;
-              throw new Exception.Create('Internal error in threadmanagers.pas, slot is -1');
+              raise Exception.Create('Internal error in threadmanagers.pas, slot is -1');
             end;
   
   Inc(current_threads_);  
   slots_[slot] := TComputationThread.Create(plugman_, meth_, rescollector_, frontman_, job, slot);
   updateCoreIdentity;
 
-  Return := true;
+  Result := slot;
   CS_.Leave;
 end;
 
@@ -139,7 +139,6 @@ begin
     if (slots_[i] <> nil) and slots_[i].isJobDone() then
     begin
       slots_[i].WaitFor;
-      slots_[i].JobForThread.Free;
       FreeAndNil(slots_[i]);
       Dec(current_threads_);
     end;                             
@@ -183,5 +182,5 @@ begin
   myCoreId.hasResources := hasResources();
 end;
 
-end;
+end.
   

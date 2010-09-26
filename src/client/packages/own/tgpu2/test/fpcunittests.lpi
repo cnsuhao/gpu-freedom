@@ -8,7 +8,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="8"/>
+      <ActiveEditorIndexAtStart Value="10"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -35,7 +35,7 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="23">
+    <Units Count="24">
       <Unit0>
         <Filename Value="fpcunittests.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -74,7 +74,7 @@
         <CursorPos X="23" Y="206"/>
         <TopLine Value="1"/>
         <EditorIndex Value="5"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -110,8 +110,8 @@
         <UnitName Value="pluginmanagers"/>
         <CursorPos X="43" Y="266"/>
         <TopLine Value="21"/>
-        <EditorIndex Value="10"/>
-        <UsageCount Value="16"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -149,7 +149,7 @@
         <UnitName Value="identities"/>
         <CursorPos X="15" Y="35"/>
         <TopLine Value="31"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit14>
@@ -165,9 +165,9 @@
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
-        <CursorPos X="10" Y="14"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="7"/>
+        <CursorPos X="10" Y="80"/>
+        <TopLine Value="63"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -177,26 +177,26 @@
         <CursorPos X="40" Y="126"/>
         <TopLine Value="2"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\coremodules.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodules"/>
-        <CursorPos X="1" Y="59"/>
-        <TopLine Value="19"/>
-        <EditorIndex Value="9"/>
-        <UsageCount Value="33"/>
+        <CursorPos X="5" Y="78"/>
+        <TopLine Value="49"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\threadmanagers.pas"/>
         <UnitName Value="threadmanagers"/>
-        <CursorPos X="86" Y="124"/>
-        <TopLine Value="100"/>
+        <CursorPos X="5" Y="185"/>
+        <TopLine Value="15"/>
         <EditorIndex Value="6"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
@@ -211,9 +211,9 @@
       <Unit21>
         <Filename Value="..\gpuparsers.pas"/>
         <UnitName Value="gpuparsers"/>
-        <CursorPos X="78" Y="118"/>
-        <TopLine Value="102"/>
-        <EditorIndex Value="8"/>
+        <CursorPos X="53" Y="129"/>
+        <TopLine Value="109"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit21>
@@ -224,127 +224,136 @@
         <TopLine Value="44"/>
         <UsageCount Value="9"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="..\jobs.pas"/>
+        <UnitName Value="jobs"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="25"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit23>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="10" Column="18" TopLine="1"/>
+        <Filename Value="..\gpuparsers.pas"/>
+        <Caret Line="127" Column="71" TopLine="97"/>
       </Position1>
       <Position2>
         <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="13" Column="45" TopLine="1"/>
+        <Caret Line="14" Column="10" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="3" Column="3" TopLine="3"/>
+        <Caret Line="76" Column="34" TopLine="60"/>
       </Position3>
       <Position4>
         <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="13" Column="58" TopLine="1"/>
+        <Caret Line="13" Column="46" TopLine="1"/>
       </Position4>
       <Position5>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="2" Column="50" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="124" Column="86" TopLine="100"/>
       </Position5>
       <Position6>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="53" Column="100" TopLine="35"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="18" Column="60" TopLine="7"/>
       </Position6>
       <Position7>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="77" Column="78" TopLine="49"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="12" Column="3" TopLine="1"/>
       </Position7>
       <Position8>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="13" Column="81" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="17" Column="41" TopLine="1"/>
       </Position8>
       <Position9>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="60" Column="17" TopLine="37"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="44" Column="22" TopLine="41"/>
       </Position9>
       <Position10>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="47" Column="1" TopLine="32"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="82" Column="3" TopLine="66"/>
       </Position10>
       <Position11>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="71" Column="40" TopLine="55"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="127" Column="17" TopLine="98"/>
       </Position11>
       <Position12>
-        <Filename Value="..\computationthreads.pas"/>
-        <Caret Line="14" Column="14" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="109" Column="13" TopLine="93"/>
       </Position12>
       <Position13>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="30" Column="35" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="111" Column="19" TopLine="93"/>
       </Position13>
       <Position14>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="15" Column="33" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="113" Column="63" TopLine="95"/>
       </Position14>
       <Position15>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="14" Column="46" TopLine="4"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="15" Column="25" TopLine="1"/>
       </Position15>
       <Position16>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="45" Column="26" TopLine="29"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="120" Column="20" TopLine="104"/>
       </Position16>
       <Position17>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="1" Column="37" TopLine="1"/>
+        <Filename Value="..\threadmanagers.pas"/>
+        <Caret Line="142" Column="7" TopLine="126"/>
       </Position17>
       <Position18>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="13" Column="43" TopLine="1"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="59" Column="1" TopLine="19"/>
       </Position18>
       <Position19>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="60" Column="38" TopLine="44"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="37" Column="22" TopLine="21"/>
       </Position19>
       <Position20>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="63" Column="27" TopLine="47"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="42" Column="91" TopLine="26"/>
       </Position20>
       <Position21>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="13" Column="15" TopLine="1"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="51" Column="23" TopLine="51"/>
       </Position21>
       <Position22>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="69" Column="93" TopLine="46"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position22>
       <Position23>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="70" Column="21" TopLine="42"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="14" Column="17" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="76" Column="53" TopLine="60"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="35" Column="24" TopLine="19"/>
       </Position24>
       <Position25>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="75" Column="16" TopLine="61"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="45" Column="23" TopLine="19"/>
       </Position25>
       <Position26>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="79" Column="22" TopLine="63"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="54" Column="21" TopLine="38"/>
       </Position26>
       <Position27>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="66" Column="12" TopLine="65"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="60" Column="21" TopLine="38"/>
       </Position27>
       <Position28>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="15" Column="60" TopLine="1"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="65" Column="21" TopLine="38"/>
       </Position28>
       <Position29>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="91" Column="40" TopLine="75"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="70" Column="21" TopLine="51"/>
       </Position29>
       <Position30>
-        <Filename Value="..\gpuparsers.pas"/>
-        <Caret Line="117" Column="60" TopLine="101"/>
+        <Filename Value="..\coremodules.pas"/>
+        <Caret Line="75" Column="21" TopLine="51"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

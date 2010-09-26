@@ -10,7 +10,7 @@ unit computationthreads;
 interface
 
 uses  Classes,
-      jobs, methodcontrollers, pluginmanager, resultcollectors, frontendmanagers,
+      jobs, methodcontrollers, pluginmanagers, resultcollectors, frontendmanagers,
       gpuparsers;
 
 type
@@ -77,7 +77,7 @@ begin
  parser.parse();
  parser.Free;
  syncOnJobFinished;
- jobDone := true;
+ jobDone_ := true;
 end;
 
 

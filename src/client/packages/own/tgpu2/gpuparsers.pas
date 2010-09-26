@@ -115,12 +115,16 @@ begin
 						    methController_.registerMethodCall(arg.argstring, pluginName, thrdID_);
 							try
 							  isOK := plugman_.method_execute(arg.argstring, stk, error);
-							except (e : Exception)
-							  error.errorID := PLUGIN_THREW_EXCEPTION_ID;
-							  error.errorMsg := PLUGIN_THREW_EXCEPTION;
-							  error.errorArg := e.Message;
-							  isOK := false;
-							end;
+							except
+                                                          on e : Exception do
+                                                            begin
+							     error.errorID := PLUGIN_THREW_EXCEPTION_ID;
+							     error.errorMsg := PLUGIN_THREW_EXCEPTION;
+							     error.errorArg := e.Message;
+							     isOK := false;
+
+                                                            end;
+                                                        end; // except
 							methController_.unregisterMethodCall(thrdID_);
 						  end;
 

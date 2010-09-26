@@ -11,7 +11,7 @@ uses
 
 implementation
 
-type TCoreModules = class(TObject)
+type TCoreModule = class(TObject)
     constructor Create(path, extension : String);
     destructor Destroy;
 
@@ -32,17 +32,17 @@ type TCoreModules = class(TObject)
 end;
 
 
-constructor TCoreModules.Create(path, extension : String);
+constructor TCoreModule.Create(path, extension : String);
 begin
-   inherited;
+   inherited Create();
    plugman_        := TPluginManager.Create(path, extension);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
-   threadman_      := TThreadManager.Create();
+   threadman_      := TThreadManager.Create(plugman_, methController_, rescoll_, frontman_);
 end;
 
-destructor TCoreModules.Destroy;
+destructor TCoreModule.Destroy;
 begin
   methController_.Free;
   rescoll_.Free;
@@ -51,32 +51,30 @@ begin
   inherited;
 end;
 
-function TCoreModules.getMethController() : TMethodController;
+function TCoreModule.getMethController() : TMethodController;
 begin
  Result := methController_;
 end;
 
 
-function TCoreModules.getResultCollector(): TResultCollector;
+function TCoreModule.getResultCollector(): TResultCollector;
 begin
  Result := rescoll_;
 end;
 
-function TCoreModules.getFrontendManager() : TFrontendManager;
+function TCoreModule.getFrontendManager() : TFrontendManager;
 begin
  Result := frontman_;
 end;
 
-function TCoreModules.getPluginManager()   : TPluginManager;
+function TCoreModule.getPluginManager()   : TPluginManager;
 begin
  Result := plugman_;
 end;
 
-function getThreadManager()   : TThreadManager;
+function TCoreModule.getThreadManager()   : TThreadManager;
 begin
  Result := threadman_;
-end;
-
 end;
 
 end.
