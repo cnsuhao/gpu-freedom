@@ -14,6 +14,8 @@ type
   published
     procedure TestBasics;
     procedure TestSpaces;
+    procedure TestExpressions;
+    procedure TestRecursiveExprs;
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -71,6 +73,44 @@ begin
   checkArguments(argRetr);
   argRetr.Free;
 end;
+
+procedure TTestArgRetriever.TestExpressions;
+var
+    arg     : TArgStk;
+    error   : TStkError;
+    argRetr : TArgRetriever;
+begin
+  clearError(error);
+  argRetr := TArgRetriever.Create(' ( 1,  1,  add), {3,  2,   mul} ');
+  arg := argRetr.getArgument(error);
+  AssertEquals('First argument is expression type', STK_ARG_EXPRESSION, arg.argtype);
+  AssertEquals('First argument value', ' 1,  1,  add', arg.argstring);
+
+  arg := argRetr.getArgument(error);
+  AssertEquals('Second argument is expression type', STK_ARG_EXPRESSION, arg.argtype);
+  AssertEquals('Second argument value', '3,  2,   mul', arg.argstring);
+  argRetr.Free;
+end;
+
+procedure TTestArgRetriever.TestRecursiveExprs;
+var
+    arg     : TArgStk;
+    error   : TStkError;
+    argRetr : TArgRetriever;
+begin
+  clearError(error);
+  argRetr := TArgRetriever.Create(' ( 1,  1, (2, 3, mul), add), { ( 3,  2) , {1,2,3,(2,3) },   mul} ');
+  arg := argRetr.getArgument(error);
+  AssertEquals('First argument is expression type', STK_ARG_EXPRESSION, arg.argtype);
+  AssertEquals('First argument value', ' 1,  1, (2, 3, mul), add', arg.argstring);
+
+  arg := argRetr.getArgument(error);
+  AssertEquals('Second argument is expression type', STK_ARG_EXPRESSION, arg.argtype);
+  AssertEquals('Second argument value', ' ( 3,  2) , {1,2,3,(2,3) },   mul', arg.argstring);
+  argRetr.Free;
+
+end;
+
 
 procedure TTestArgRetriever.SetUp;
 begin

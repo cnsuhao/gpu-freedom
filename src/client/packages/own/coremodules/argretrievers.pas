@@ -152,7 +152,7 @@ begin
 
     if bracketCount = 0 then
     begin
-      arg := Copy(toparse_, 2, i - 2);
+      arg := Copy(toparse_, 2, i - 3); // i is at length+1, additionally we remove the brackets
       // i-1 because we increment when we find
       // the right closing bracket
       Delete(toparse_, 1, i - 1);
