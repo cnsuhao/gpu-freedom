@@ -1,4 +1,4 @@
-unit gpuparsers;
+unit jobparsers;
 {
  The parser reads a GPU string and converts into a stack by executing the sequence of 
  commands on the string.
@@ -14,7 +14,7 @@ uses SysUtils,
      argretrievers, stacks, pluginmanagers, methodcontrollers, specialcommands,
      resultcollectors, frontendmanagers, jobs, gpuconstants;
 
-type TGPUParser = class(TObject)
+type TJobParser = class(TObject)
  public 
    constructor Create(var plugman : TPluginManager; var meth : TMethodController;
                       var res : TResultCollector; var frontman : TFrontendManager;
@@ -37,7 +37,7 @@ end;
 
 implementation
 
-constructor TGPUParser.Create(var plugman : TPluginManager; var meth : TMethodController;
+constructor TJobParser.Create(var plugman : TPluginManager; var meth : TMethodController;
                               var res : TResultCollector; var frontman : TFrontendManager;
                               var job : TJob; threadId : Longint);
 begin
@@ -51,23 +51,23 @@ begin
   thrdId_ := threadId;
 end;
 
-destructor TGPUParser.Destroy();
+destructor TJobParser.Destroy();
 begin
   inherited;
   speccommands_.Free;
 end;
 
 
-function TGPUParser.parse() : Boolean; overload;
+function TJobParser.parse() : Boolean; overload;
 begin
    Result := parse(job_.job, job_.stack);
    job_.hasError := (job_.stack.error.ErrorId>0);
    
-   if (Result<>job_.hasError) then raise Exception.Create('Internal error in TGPUParser.Parse()!');
+   if (Result<>job_.hasError) then raise Exception.Create('Internal error in TJobParser.Parse()!');
 end;
 
-function TGPUParser.parse(jobStr : String; var stk : TStack): Boolean; overload;
-var arg          : TArgGPU;
+function TJobParser.parse(jobStr : String; var stk : TStack): Boolean; overload;
+var arg          : TArgStk;
     argRetriever : TArgRetriever;
     isOK         : Boolean;
     pluginName   : String;

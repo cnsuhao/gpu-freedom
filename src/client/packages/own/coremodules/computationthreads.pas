@@ -11,7 +11,7 @@ interface
 
 uses  Classes,
       jobs, methodcontrollers, pluginmanagers, resultcollectors, frontendmanagers,
-      gpuparsers;
+      jobparsers;
 
 type
   TComputationThread = class(TThread)
@@ -70,10 +70,10 @@ begin
 end;
 
 procedure  TComputationThread.Execute;
-var parser : TGPUParser;
+var parser : TJobParser;
 begin
  syncOnJobCreated;
- parser := TGPUParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
+ parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
  parser.parse();
  parser.Free;
  syncOnJobFinished;

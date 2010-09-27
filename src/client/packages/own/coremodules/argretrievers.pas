@@ -17,7 +17,7 @@ interface
 uses SysUtils,
      stacks, plugins, utils, formatsets, gpuconstants, specialcommands;
 
-type TArgGPU = record
+type TArgStk = record
      argtype   : TStkArgType;
      argvalue  : TStkFloat;
      argstring : TStkString;
@@ -29,7 +29,7 @@ type TArgRetriever = class(TObject)
    function getJob() : String;
    
    function hasArguments() : Boolean;
-   function getArgument(var error : TStkError) : TArgGPU;
+   function getArgument(var error : TStkError) : TArgStk;
    
  private
    job_,
@@ -39,15 +39,15 @@ type TArgRetriever = class(TObject)
    procedure deleteComma; 
    function getBracketArgument(openbracket, closebracket : String; 
                                errorID : Longint; errorMsg : String; 
-                               var error : TStkError) : TArgGPU;
-   function getStringArgument(var error : TStkError) : TArgGPU;
-   function getFloatArgument(var error : TStkError) : TArgGPU;
-   function getExpressionArgument(openbracket : String; var error : TStkError) : TArgGPU;
+                               var error : TStkError) : TArgStk;
+   function getStringArgument(var error : TStkError) : TArgStk;
+   function getFloatArgument(var error : TStkError) : TArgStk;
+   function getExpressionArgument(openbracket : String; var error : TStkError) : TArgStk;
 
-   function getOtherArgument(var error : TStkError) : TArgGPU;
-   function getSpecialArgument(var error : TStkError; arg : TStkString; specialType : TStkArgType) : TArgGPU;
-   function getBooleanArgument(var error : TStkError;arg : TStkString) : TArgGPU;
-   function getCallArgument(var error : TStkError; arg : TStkString) : TArgGPU;
+   function getOtherArgument(var error : TStkError) : TArgStk;
+   function getSpecialArgument(var error : TStkError; arg : TStkString; specialType : TStkArgType) : TArgStk;
+   function getBooleanArgument(var error : TStkError;arg : TStkString) : TArgStk;
+   function getCallArgument(var error : TStkError; arg : TStkString) : TArgStk;
    
 end;
 
@@ -71,7 +71,7 @@ begin
   Result := toparse_<> '';
 end;
 
-function TArgRetriever.getArgument(var error : TStkError) : TArgGPU;
+function TArgRetriever.getArgument(var error : TStkError) : TArgStk;
 var startchar : Char;
     ordchar   : ShortInt;
 begin
@@ -113,7 +113,7 @@ begin
 end;
 
 function TArgRetriever.getBracketArgument(openbracket, closebracket : String; errorID : Longint; errorMsg : String; 
-                            var error : TStkError) : TArgGPU;
+                            var error : TStkError) : TArgStk;
 var 
    bracketCount, i : Longint;
    arg : String;
@@ -154,7 +154,7 @@ begin
     end;
 end;
 
-function TArgRetriever.getStringArgument(var error : TStkError) : TArgGPU;
+function TArgRetriever.getStringArgument(var error : TStkError) : TArgStk;
 var i : Longint;
     arg : String;
 begin
@@ -184,7 +184,7 @@ begin
  Result.argstring := arg;
 end;
 
-function TArgRetriever.getFloatArgument(var error : TStkError) : TArgGPU;
+function TArgRetriever.getFloatArgument(var error : TStkError) : TArgStk;
 var arg   : String;
     float : TStkFloat;
 begin
@@ -203,7 +203,7 @@ begin
  Result.argvalue := float;
 end;
 
-function TArgRetriever.getExpressionArgument(openbracket : String; var error : TStkError) : TArgGPU;
+function TArgRetriever.getExpressionArgument(openbracket : String; var error : TStkError) : TArgStk;
 begin
   if openbracket='{' then
      Result := getBracketArgument('{', '}', 
@@ -216,7 +216,7 @@ end;
 
 
 
-function TArgRetriever.getOtherArgument(var error : TStkError) : TArgGPU;
+function TArgRetriever.getOtherArgument(var error : TStkError) : TArgStk;
 var arg,
     lowerarg    : TStkString;
     specialType : TStkArgType;
@@ -232,7 +232,7 @@ begin
   Result := getCallArgument(error, arg);  
 end;
 
-function TArgRetriever.getBooleanArgument(var error : TStkError; arg : TStkString) : TArgGPU;
+function TArgRetriever.getBooleanArgument(var error : TStkError; arg : TStkString) : TArgStk;
 var value : TStkFloat;
 begin
  if (arg='true') then value := 1 else value := 0;
@@ -241,14 +241,14 @@ begin
 end;
 
 
-function TArgRetriever.getSpecialArgument(var error : TStkError; arg : TStkString; specialType : TStkArgType) : TArgGPU;
+function TArgRetriever.getSpecialArgument(var error : TStkError; arg : TStkString; specialType : TStkArgType) : TArgStk;
 begin
  Result.argtype   := specialType;
  Result.argstring := arg;
 end;
 
 
-function TArgRetriever.getCallArgument(var error : TStkError; arg : TStkString) : TArgGPU;
+function TArgRetriever.getCallArgument(var error : TStkError; arg : TStkString) : TArgStk;
 begin
  Result.argtype   := STK_ARG_CALL;
  Result.argstring := arg;
