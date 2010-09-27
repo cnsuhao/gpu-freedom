@@ -90,6 +90,14 @@ function popFloat(var float : TStkFloat; var stk : TStack) : Boolean;
 function popBool (var b : TStkBoolean; var stk : TStack) : Boolean;
 function popStr  (var str : TStkString; var stk : TStack) : Boolean;
 
+// getting stuff from stack, without moving stack.idx
+function idxInRange(idx : Longint; oneOrZero : Longint; var stk : TStack) : Boolean;
+function getFloat(i : Longint; var stk : TStack) : TStkFloat;
+function getBool (i : Longint; var stk : TStack) : TStkBoolean;
+function getStr  (i : Longint; var stk : TStack) : TStkString;
+
+// moving stack index
+function mvIdx(var stk : TStack; offset : Longint) : Boolean;
 
 implementation
 
@@ -268,20 +276,26 @@ end;
 
 function isStkFloat(i : Longint; var stk : TStack) : Boolean;
 begin
- if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUFloat ('+IntToStr(i)+')');
- Result := (stk.stkType[i]=FLOAT_STKTYPE);
+ if idxInRange(i, 1, stk) then
+    Result := (stk.stkType[i]=FLOAT_STKTYPE)
+ else
+    Result := false;
 end;
 
 function isStkBoolean(i : Longint; var stk : TStack) : Boolean;
 begin
- if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUBoolean ('+IntToStr(i)+')');
- Result := (stk.stkType[i]=BOOLEAN_STKTYPE);
+ if idxInRange(i, 1, stk) then
+   Result := (stk.stkType[i]=BOOLEAN_STKTYPE)
+ else
+   Result := false;
 end;
 
 function isStkString(i : Longint; var stk : TStack) : Boolean;
 begin
- if (i<1) or (i>MAX_STACK_PARAMS) then raise Exception.Create('Index out of range in isGPUString ('+IntToStr(i)+')');
- Result := (stk.stkType[i]=STRING_STKTYPE);
+ if idxInRange(i, 1, stk) then
+   Result := (stk.stkType[i]=STRING_STKTYPE)
+ else
+   Result := false;
 end;
 
 function popFloat(var float : TStkFloat; var stk : TStack) : Boolean;
@@ -315,6 +329,55 @@ begin
   str := stk.strStack[stk.Idx];
   Dec(stk.Idx);
   Result := true;
+end;
+
+
+function idxInRange(idx : Longint; oneOrZero : Longint; var stk : TStack) : Boolean;
+begin
+  Result := true;
+  if (idx<oneOrZero) or (idx>stk.idx) then
+        begin
+           Result := false;
+           stk.error.errorID  := INDEX_OUT_OF_RANGE_ID;
+           stk.error.errorMsg := INDEX_OUT_OF_RANGE;
+           stk.error.errorArg := 'Index was '+IntToStr(idx)+' but has to be between '+IntToStr(oneOrZero)+' and '+IntToStr(stk.idx);
+        end;
+end;
+
+
+// getting stuff from stack
+function getFloat(i : Longint; var stk : TStack) : TStkFloat;
+begin
+ if isStkFloat(i, stk) then
+    Result := stk.Stack[i]
+ else
+    raise Exception.Create('Problem in getFloat(..) called with parameter i:='+IntToStr(i));
+end;
+
+function getBool (i : Longint; var stk : TStack) : TStkBoolean;
+begin
+ if isStkBoolean(i, stk) then
+  Result := (stk.Stack[i]>0)
+ else
+    raise Exception.Create('Problem in getBool(...) called with parameter i:='+IntToStr(i));
+end;
+
+function getStr  (i : Longint; var stk : TStack) : TStkString;
+begin
+ if isStkString(i, stk) then
+  Result :=  stk.strStack[stk.Idx]
+ else
+    raise Exception.Create('Problem in getString(...) called with parameter i:='+IntToStr(i));
+end;
+
+function mvIdx(var stk : TStack; offset : Longint) : Boolean;
+begin
+ Result := false;
+ if idxInRange(stk.idx+offset, 0, stk) then
+     begin
+       stk.idx := stk.idx+offset;
+       Result := true;
+     end;
 end;
 
 end.

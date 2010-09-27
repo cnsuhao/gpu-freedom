@@ -57,6 +57,8 @@ const
   STILL_NO_RESULTS            = 'STILL NO RESULTS';
   MAX_NUMBER_OF_PLUGINS_REACHED_ID = 15;
   MAX_NUMBER_OF_PLUGINS_REACHED    = 'MAXIMUM NUMBER OF PLUGINS REACHED';
+  INDEX_OUT_OF_RANGE_ID    = 16;
+  INDEX_OUT_OF_RANGE       = 'INDEX OUT OF RANGE';
   
   
   // constants used in argretrievers.pas and parsers.pas
