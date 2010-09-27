@@ -43,12 +43,12 @@ type
     JobID:   string;
     JobSlot: integer;
 
-    Stack: TStack;
+    stack: TStack;
     Job,                 // this contains the job itself
     JobResult : string;  // this contains the result of the computation
     
-    hasError : Boolean;  // there is an error in the Job structure
-    error    : TGPUError;
+    hasError : Boolean;  // there is an error in the Job structure,
+                         // on stack.error
 
     ComputedTime: TDateTime;
   end;

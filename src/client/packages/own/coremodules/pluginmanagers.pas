@@ -36,17 +36,17 @@ type
     constructor Create(Path, Extension : String);
     destructor  Destroy();
     
-    procedure loadAll();
+    procedure loadAll(var error : TStkError);
     procedure discardAll();
-    function  loadOne(pluginName : String; var error : TGPUError)  : Boolean;
-    function  discardOne(pluginName : String; var error : TGPUError)  : Boolean;
+    function  loadOne(pluginName : String; var error : TStkError)  : Boolean;
+    function  discardOne(pluginName : String; var error : TStkError)  : Boolean;
     function  isAlreadyLoaded(pluginName : String)  : Boolean;
-    function  getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
+    function  getPluginList(var stk : TStack) : Boolean;
 
     // calls the method, and passes the stack to the method
-    function method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
+    function method_execute(name : String; var stk : TStack) : Boolean;
     // checks if the method exists, returns the plugin name if found
-    function method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
+    function method_exists(name : String; var plugName : String; var error : TStkError) : Boolean;
     
    private
      path_, extension_   : String;
@@ -56,10 +56,10 @@ type
 
      CS_ : TCriticalSection;
 
-     function  load(pluginName : String)  : Boolean;
+     function  load(pluginName : String;  var error : TStkError)  : Boolean;
      procedure register_hash(funcName : String; plugin : PPlugin);
-     procedure addNotFoundError(name : String; var error : TGPUError);
-     function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
+     procedure addNotFoundError(name : String; var error : TStkError);
+     function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TStkError) : Boolean;
      
 end;
 
@@ -92,9 +92,10 @@ begin
   CS_.free;
 end;
 
-procedure TPluginManager.loadAll();
+procedure TPluginManager.loadAll(var error : TStkError);
 var retval  : integer;
-    SRec:   TSearchRec;
+    SRec    :   TSearchRec;
+    isOk    : Boolean;
 begin
   CS_.Enter;
   if plugidx_<>0 then raise Exception.Create('Please call discardAll() first');
@@ -102,8 +103,12 @@ begin
   retval := FindFirst(path_+PathDelim+'*.' + extension_, faAnyFile, SRec);
   while retval = 0 do
    begin
+     if not isOk then continue;
+
      if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
-        load(SRec.Name);
+        isOk := load(SRec.Name, error);
+
+     retval := FindNext(SRec);
    end;
   CS_.Leave;  
 end;
@@ -132,7 +137,7 @@ begin
  CS_.Leave;
 end;
 
-function TPluginManager.getPluginList(var stk : TStack; var error : TGPUError) : Boolean;
+function TPluginManager.getPluginList(var stk : TStack) : Boolean;
 var i : Longint;
 begin
  CS_.Enter;
@@ -140,7 +145,7 @@ begin
  for i:=1 to plugidx_ do
      if plugs_[i]^.isloaded() then
        begin
-         if (not pushStr(plugs_[i]^.getName(), stk, error)) then
+         if (not pushStr(plugs_[i]^.getName(), stk)) then
                 begin
                   CS_.Leave;
                   Exit;
@@ -164,7 +169,7 @@ begin
 end;
 
 
-procedure TPluginManager.addNotFoundError(name : String; var error : TGPUError);
+procedure TPluginManager.addNotFoundError(name : String; var error : TStkError);
 begin
   // we did not find the method, we report it as an error
   error.ErrorID := METHOD_NOT_FOUND_ID;
@@ -172,7 +177,7 @@ begin
   error.ErrorArg := name;  
 end;
 
-function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TGPUError) : Boolean;
+function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TStkError) : Boolean;
 var i : Longint;
 begin
  Result := false;
@@ -211,16 +216,16 @@ begin
  CS_.Leave;
 end;
 
-function TPluginManager.method_execute(name : String; var Stk : TStack; var error : TGPUError) : Boolean;
+function TPluginManager.method_execute(name : String; var Stk : TStack) : Boolean;
 var plugname : String;
     p        : PPlugin;
 begin
- Result := retrievePlugin(name, plugname, p, error);
+ Result := retrievePlugin(name, plugname, p, stk.error);
  if Result then
-      Result := p^.method_execute(name, stk, error);
+      Result := p^.method_execute(name, stk);
 end;
 
-function TPluginManager.method_exists(name : String; var plugName : String; var error : TGPUError) : Boolean;
+function TPluginManager.method_exists(name : String; var plugName : String; var error : TStkError) : Boolean;
 var
     p        : PPlugin;
 begin
@@ -228,7 +233,7 @@ begin
  Result := retrievePlugin(name, plugname, p, error);
 end; 
 
-function  TPluginManager.loadOne(pluginName : String; var error : TGPUError)  : Boolean;
+function  TPluginManager.loadOne(pluginName : String; var error : TStkError)  : Boolean;
 var i : Longint;
     plug : TPlugin;
 begin
@@ -246,7 +251,7 @@ begin
        end;
   
   // this plugin is new then
-  Result := load(pluginName);
+  Result := load(pluginName, error);
   if not Result then
        begin
         error.errorID  := COULD_NOT_LOAD_PLUGIN_ID;
@@ -256,7 +261,7 @@ begin
   CS_.Leave;
 end;
 
-function TPluginManager.discardOne(pluginName : String; var error : TGPUError): Boolean;
+function TPluginManager.discardOne(pluginName : String; var error : TStkError): Boolean;
 var i : Longint;
 begin
  CS_.Enter;
@@ -280,7 +285,7 @@ begin
  CS_.Leave;	   
 end; 
 
-function  TPluginManager.load(pluginName : String) : Boolean;
+function  TPluginManager.load(pluginName : String; var error : TStkError) : Boolean;
 var plug : TPlugin;
 begin
  Result := False;
@@ -293,7 +298,10 @@ begin
        begin
         Dec(plugidx_);
         plug.discard();
-        raise Exception.Create('Maximum number of plugins reached in pluginmanager.pas!');
+
+        error.errorId  := MAX_NUMBER_OF_PLUGINS_REACHED_ID;
+        error.errorMsg := MAX_NUMBER_OF_PLUGINS_REACHED;
+        error.errorArg := '('+IntToStr(MAX_PLUGINS)+')';
        end;
      plugs_[plugidx_] := @plug;  
     end;

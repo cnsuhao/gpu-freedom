@@ -106,9 +106,9 @@ begin
   Result := -1;
   if not hasResources() then 
        begin
-        Job.error.ErrorID  := NO_AVAILABLE_THREADS_ID;
-        Job.error.ErrorMsg := NO_AVAILABLE_THREADS;
-        Job.error.ErrorArg := 'All slots ('+IntToStr(max_threads_)+') are full.';
+        Job.stack.error.ErrorID  := NO_AVAILABLE_THREADS_ID;
+        Job.stack.error.ErrorMsg := NO_AVAILABLE_THREADS;
+        Job.stack.error.ErrorArg := 'All slots ('+IntToStr(max_threads_)+') are full.';
         CS_.Leave;
         Exit;
        end; 

@@ -52,7 +52,7 @@ type TRegisterQueue = class(TObject)
 	  procedure unregisterJob(jobID : String; formName : String);
       function findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
 	  function findMultipleRI4Job(jobId : String; var reg : TRegisterInfo; var start : Longint) : Boolean;
-	  function getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
+	  function getRegisteredList(var stk : TStack) : Boolean;
         
     private
           queue_ : Array [1..QUEUE_SIZE] of TRegisterInfo;
@@ -166,7 +166,7 @@ begin
   CS_.Leave;  
 end; 
 
-function TRegisterQueue.getRegisteredList(var stk : TStack; var error : TGPUError) : Boolean;
+function TRegisterQueue.getRegisteredList(var stk : TStack) : Boolean;
 var i : Longint;
 begin
   Result := true;
@@ -174,9 +174,9 @@ begin
   for i:=1 to QUEUE_SIZE do
      if (queue_[i].jobId <>'') and Result then
 	    begin
-		  Result := pushStr(queue_[i].jobId, stk, error);
-		  Result := pushStr(queue_[i].formname, stk, error);
-		  Result := pushStr(queue_[i].fullname, stk, error);
+		  Result := pushStr(queue_[i].jobId, stk);
+		  Result := pushStr(queue_[i].formname, stk);
+		  Result := pushStr(queue_[i].fullname, stk);
 		end;
   
   CS_.Leave;

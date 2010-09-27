@@ -29,7 +29,7 @@ type
      // check if  a method is present in this dll
      function method_exists(name : String) : Boolean;
      // calls the method, and passes the stack to the method
-     function method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
+     function method_execute(name : String; var stk : TStack) : Boolean;
      // helper function to retrieve the pointer to the method call
      function method_pointer(name : String) : PDllFunction;
      
@@ -105,12 +105,12 @@ begin
 end;
 
 // calls the method, and passes the stack to the method
-function TPlugin.method_execute(name : String; var stk : TStack; var error : TGPUError) : Boolean;
+function TPlugin.method_execute(name : String; var stk : TStack) : Boolean;
 var theFunction : PDllFunction;
 begin
     theFunction := method_pointer(name);
     if Assigned(theFunction) then
-      Result := theFunction^(stk, error);
+      Result := theFunction^(stk);
 end;     
 
 function TPlugin.getDescription(field : String) : String;

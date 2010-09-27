@@ -20,7 +20,7 @@ type
     
     // circular buffers to store res
     resStr     : array[1..MAX_RESULTS_FOR_ID] of String;
-    resFloat   : array[1..MAX_RESULTS_FOR_ID] of TGPUFloat;
+    resFloat   : array[1..MAX_RESULTS_FOR_ID] of TStkFloat;
     isFloat    : array[1..MAX_RESULTS_FOR_ID] of Boolean;
     idx : Longint; // index of circular buffer
     
@@ -31,9 +31,9 @@ type
     max,
     avg,
     variance,
-    stddev    : TGPUFloat;  
+    stddev    : TStkFloat;
 	
-	overrun : Boolean; // if there are more than MAX_RESULTS_FOR_ID
+    overrun : Boolean; // if there are more than MAX_RESULTS_FOR_ID
   end;
   
   
@@ -43,7 +43,7 @@ type TResultCollector = class(TObject)
     destructor Destroy;
     
     function getResultCollection(jobId : String; var rescoll : TResultCollection) : Boolean;
-    function registerResult(jobId : String; var stk : TStack; var error : TGPUError) : Boolean;
+    function registerResult(jobId : String; var stk : TStack) : Boolean;
   private
     // circular buffer to store result collections
     res     : array[1..MAX_RESULTS] of TResultCollection;    
@@ -124,11 +124,11 @@ begin
     end;
 end;
 
-function TResultCollector.registerResult(jobId : String; var stk : TStack; var error : TGPUError) : Boolean;
+function TResultCollector.registerResult(jobId : String; var stk : TStack) : Boolean;
 var i, j : Longint;
 begin
   Result := false;
-  if error.errorId>0 then Exit; // errors are not registered
+  if stk.error.errorId>0 then Exit; // errors are not registered
   CS_.Enter;
   i := findJobId(jobId);
   if (i<0) then
@@ -145,8 +145,8 @@ begin
   if res[i].idx>MAX_RESULTS_FOR_ID then res[i].idx:=1;
   
   // storing of the job
-  res[i].resStr[res[i].idx] := stackToStr(stk, error);
-  if (stk.Idx=1) and (stk.stkType[1]=GPU_FLOAT_STKTYPE) then
+  res[i].resStr[res[i].idx] := stackToStr(stk);
+  if (stk.Idx=1) and (stk.stkType[1]=FLOAT_STKTYPE) then
       begin
        res[i].resFloat[res[i].idx] := stk.stack[stk.Idx];
        res[i].isFloat[res[i].idx] := true;
