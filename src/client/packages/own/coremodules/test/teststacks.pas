@@ -18,6 +18,12 @@ type
     procedure TestBasics;
     procedure TestOverrun;
 
+    procedure TestFloats;
+    procedure TestBooleans;
+    procedure TestStrings;
+    procedure TestIndexes;
+
+
   private
     stk_   : TStack;
   end;
@@ -74,6 +80,12 @@ begin
   types[1] := FLOAT_STKTYPE;
   AssertEquals('Type of parameters has to be incorrect', false, typeOfParametersCorrect(1, stk_, types));
 
+  str := getStr(1, stk_);
+  AssertEquals('Content of string has to be', 'test', str);
+  float := getFloat(2, stk_);
+  AssertEquals('Content of string has to be', 123456, float);
+  b := getBool(3, stk_);
+  AssertEquals('Content of b has to be', true, b);
 
   popBool(b, stk_);
   AssertEquals('Popping boolean', true, b);
@@ -94,9 +106,39 @@ begin
 
   AssertEquals('Max stack is not reached', false, maxStackReached(stk_));
 
-  //pushStr('Overrun', stk_, error_);
+  pushStr('Overrun', stk_);
+  AssertEquals('Overrun error', TOO_MANY_ARGUMENTS_ID, stk_.error.errorId);
+  AssertEquals('Stk.idx stays at ', MAX_STACK_PARAMS, stk_.idx);
+  clearError(stk_.error);
+  AssertEquals('No error', NO_ERROR_ID, stk_.error.errorId);
 
+  pushFloat(123456, stk_);
+  AssertEquals('Overrun error', TOO_MANY_ARGUMENTS_ID, stk_.error.errorId);
+  AssertEquals('Stk.idx stays at ', MAX_STACK_PARAMS, stk_.idx);
+  clearError(stk_.error);
+  AssertEquals('No error', NO_ERROR_ID, stk_.error.errorId);
 
+  pushBool(false, stk_);
+  AssertEquals('Overrun error', TOO_MANY_ARGUMENTS_ID, stk_.error.errorId);
+  AssertEquals('Stk.idx stays at ', MAX_STACK_PARAMS, stk_.idx);
+  clearError(stk_.error);
+  AssertEquals('No error', NO_ERROR_ID, stk_.error.errorId);
+end;
+
+procedure TTestStack.TestFloats;
+begin
+end;
+
+procedure TTestStack.TestBooleans;
+begin
+end;
+
+procedure TTestStack.TestStrings;
+begin
+end;
+
+procedure TTestStack.TestIndexes;
+begin
 end;
 
 procedure TTestStack.SetUp; 

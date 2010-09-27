@@ -66,6 +66,8 @@ type PDescFunction = ^TDescFunction;
 
 // initialization and conversion functions
 procedure initStack(var stk : TStack);
+procedure clearError(var error : TStkError);
+
 function  stackToStr(var stk : TStack) : String;
 function  stkTypeToStr(stktype : TStkArgType) : String;
 
@@ -111,7 +113,14 @@ begin
      stk.StrStack[i] := '';
      stk.stkType[i] := NO_STKTYPE;
    end;
+ clearError(stk.error);
+end;
 
+procedure clearError(var error : TStkError);
+begin
+  error.errorId :=  NO_ERROR_ID;
+  error.errorMsg := NO_ERROR;
+  error.errorArg := '';
 end;
 
 function stackToStr(var stk : TStack) : String;
@@ -365,7 +374,7 @@ end;
 function getStr  (i : Longint; var stk : TStack) : TStkString;
 begin
  if isStkString(i, stk) then
-  Result :=  stk.strStack[stk.Idx]
+  Result :=  stk.strStack[i]
  else
     raise Exception.Create('Problem in getString(...) called with parameter i:='+IntToStr(i));
 end;
