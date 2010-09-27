@@ -25,7 +25,9 @@ end;
 
 type TArgRetriever = class(TObject)
  public 
-   constructor Create(job : String; var speccommands : TSpecialCommand);
+   constructor Create(job : String); overload;
+   constructor Create(job : String; var speccommands : TSpecialCommand); overload;
+   destructor Destroy();
    function getJob() : String;
    
    function hasArguments() : Boolean;
@@ -54,11 +56,23 @@ end;
 
 implementation
 
-constructor TArgRetriever.Create(job : String; var speccommands : TSpecialCommand);
+constructor TArgRetriever.Create(job : String); overload;
 begin
+ inherited Create();
  job_ := Trim(job);
  toparse_ := job_;
+ speccommands_ := nil;
+end;
+
+constructor TArgRetriever.Create(job : String; var speccommands : TSpecialCommand); overload;
+begin
+ Create(job);
  speccommands_ := speccommands;
+end;
+
+destructor TArgRetriever.Destroy();
+begin
+ if Assigned(speccommands_) then speccommands_.Free;
 end;
 
 function TArgRetriever.getJob() : String;
@@ -76,7 +90,8 @@ var startchar : Char;
     ordchar   : ShortInt;
 begin
  if toparse_= '' then raise Exception.Create('getArgument() called when there are no arguments!');
- 
+ toparse_ := Trim(toparse_);
+
  startchar := toparse_[1];
  ordchar := Ord(startchar);
  if startchar = ',' then
@@ -94,7 +109,7 @@ begin
      Result := getStringArgument(error)
  else    
  // if it is a number
- if ((ordchar>=48) and (ordchar<=57)) or (startchar='.') then
+ if (ordchar>=Ord('0')) and (ordchar<=Ord('9')) then
      Result := getFloatArgument(error)
  else
  if (startchar = '{') or (startchar = '(')  then
@@ -107,7 +122,7 @@ end;
 procedure TArgRetriever.deleteComma();
 begin
  //delete an eventual comma
- TrimLeft(toparse_);
+ toparse_ := TrimLeft(toparse_);
  if Pos(',', toparse_) = 1 then
       Delete(toparse_, 1, 1);
 end;
@@ -159,7 +174,7 @@ var i : Longint;
     arg : String;
 begin
  i := 2;
- while (toparse_[i] <> QUOTE) and (i <= Length(toparse_)) do
+ while (toparse_[i] <> QUOTE) and (i < Length(toparse_)) do
       Inc(i);
 
  if (i=Length(toparse_)) and (toparse_[i]<>QUOTE) then
@@ -175,7 +190,7 @@ begin
  if (i=2) then
    arg := '' // empty string
  else   
-   arg := Copy(toparse_, 2, i-1);
+   arg := Copy(toparse_, 2, i-2); // copy takes the number of chars not an index
  
  Delete(toparse_, 1, i);
  deleteComma();
@@ -226,7 +241,7 @@ begin
   if (lowerarg='true') or (lowerarg='false') then
       Result := getBooleanArgument(error, lowerarg)
   else    
-  if speccommands_.isSpecialCommand(arg, specialType) then
+  if Assigned(speccommands_) and speccommands_.isSpecialCommand(arg, specialType) then
       Result := getSpecialArgument(error, arg, specialType)
   else
   Result := getCallArgument(error, arg);  

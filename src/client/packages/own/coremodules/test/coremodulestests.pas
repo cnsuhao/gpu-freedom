@@ -5,7 +5,7 @@ program coremodulestests;
 uses
   Classes, consoletestrunner,
   teststacks, testplugins, testpluginmanagers, testargretrievers,
-  gpuparsers, threadmanagers, computationthreads, coremodules;
+  jobparsers, threadmanagers, computationthreads, coremodules;
 
 type
 
