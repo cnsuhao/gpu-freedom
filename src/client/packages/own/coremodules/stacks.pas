@@ -93,7 +93,7 @@ function popBool (var b : TStkBoolean; var stk : TStack) : Boolean;
 function popStr  (var str : TStkString; var stk : TStack) : Boolean;
 
 // getting stuff from stack, without moving stack.idx
-function idxInRange(idx : Longint; oneOrZero : Longint; var stk : TStack) : Boolean;
+function idxInRange(idx : Longint; var stk : TStack) : Boolean;
 function getFloat(i : Longint; var stk : TStack) : TStkFloat;
 function getBool (i : Longint; var stk : TStack) : TStkBoolean;
 function getStr  (i : Longint; var stk : TStack) : TStkString;
@@ -285,7 +285,7 @@ end;
 
 function isStkFloat(i : Longint; var stk : TStack) : Boolean;
 begin
- if idxInRange(i, 1, stk) then
+ if idxInRange(i, stk) then
     Result := (stk.stkType[i]=FLOAT_STKTYPE)
  else
     Result := false;
@@ -293,7 +293,7 @@ end;
 
 function isStkBoolean(i : Longint; var stk : TStack) : Boolean;
 begin
- if idxInRange(i, 1, stk) then
+ if idxInRange(i, stk) then
    Result := (stk.stkType[i]=BOOLEAN_STKTYPE)
  else
    Result := false;
@@ -301,7 +301,7 @@ end;
 
 function isStkString(i : Longint; var stk : TStack) : Boolean;
 begin
- if idxInRange(i, 1, stk) then
+ if idxInRange(i, stk) then
    Result := (stk.stkType[i]=STRING_STKTYPE)
  else
    Result := false;
@@ -341,15 +341,15 @@ begin
 end;
 
 
-function idxInRange(idx : Longint; oneOrZero : Longint; var stk : TStack) : Boolean;
+function idxInRange(idx : Longint; var stk : TStack) : Boolean;
 begin
   Result := true;
-  if (idx<oneOrZero) or (idx>stk.idx) then
+  if (idx<1) or (idx>stk.idx) then
         begin
            Result := false;
            stk.error.errorID  := INDEX_OUT_OF_RANGE_ID;
            stk.error.errorMsg := INDEX_OUT_OF_RANGE;
-           stk.error.errorArg := 'Index was '+IntToStr(idx)+' but has to be between '+IntToStr(oneOrZero)+' and '+IntToStr(stk.idx);
+           stk.error.errorArg := 'Index was '+IntToStr(idx)+' but has to be between 1 and '+IntToStr(stk.idx);
         end;
 end;
 
@@ -380,13 +380,22 @@ begin
 end;
 
 function mvIdx(var stk : TStack; offset : Longint) : Boolean;
+var newidx : Longint;
 begin
  Result := false;
- if idxInRange(stk.idx+offset, 0, stk) then
-     begin
-       stk.idx := stk.idx+offset;
-       Result := true;
-     end;
+ newidx := stk.idx+offset;
+ if (newidx<0) or (newidx>MAX_STACK_PARAMS) then
+        begin
+           Result := false;
+           stk.error.errorID  := INDEX_OUT_OF_RANGE_ID;
+           stk.error.errorMsg := INDEX_OUT_OF_RANGE;
+           stk.error.errorArg := 'Index was '+IntToStr(newidx)+' but has to be between 0 and '+IntToStr(MAX_STACK_PARAMS);
+        end
+      else
+        begin
+         stk.idx := newidx;
+         Result := true;
+        end;
 end;
 
 end.

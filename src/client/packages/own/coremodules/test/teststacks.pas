@@ -22,6 +22,7 @@ type
     procedure TestBooleans;
     procedure TestStrings;
     procedure TestIndexes;
+    procedure TestHugeString;
 
 
   private
@@ -126,20 +127,108 @@ begin
 end;
 
 procedure TTestStack.TestFloats;
+var float : TStkFloat;
+    i     : Longint;
 begin
+ InitStack(stk_);
+ pushFloat(12.3456, stk_);
+ pushFloat(3.1415926535, stk_);
+ pushFloat(15.31E5, stk_);
+ pushFloat(10E-20, stk_);
+ pushFloat(0.6, stk_);
+ pushFloat(0.35, stk_);
+ pushFloat(7/100, stk_);
+
+ popFloat(float, stk_);
+ AssertEquals('Popping float, quotient', float, 7/100);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, %', float, 0.35);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, .', float, 0.6);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, E-', float, 10E-20);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, E1', float, 15.31E5);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, Pi', float, 3.1415926535);
+ popFloat(float, stk_);
+ AssertEquals('Popping float, float', float, 12.3456);
+
+ for i:=1 to MAX_STACK_PARAMS do
+     pushFloat(i, stk_);
+
+ for i:=MAX_STACK_PARAMS downto 1 do
+     begin
+        popFloat(float, stk_);
+        AssertEquals('Popping float, i', i, float);
+     end;
+
+
 end;
 
 procedure TTestStack.TestBooleans;
+
+    procedure testBools(bool : TStkBoolean);
+    var i : Longint;
+        b : TStkBoolean;
+    begin
+      for i:=1 to MAX_STACK_PARAMS do
+        pushBool(bool, stk_);
+
+      for i:=1 to MAX_STACK_PARAMS do
+        begin
+         popBool(b, stk_);
+         AssertEquals('Popping boolean', bool, b);
+        end;
+    end;
+
 begin
+  InitStack(stk_);
+  testBools(true);
+  testBools(false);
 end;
 
 procedure TTestStack.TestStrings;
+var str : TStkString;
+    i   : Longint;
 begin
+  InitStack(stk_);
+  for i:=1 to MAX_STACK_PARAMS do
+     pushStr(IntToStr(i), stk_);
+
+ for i:=MAX_STACK_PARAMS downto 1 do
+     begin
+        popStr(str, stk_);
+        AssertEquals('Popping string, i', IntToStr(i), str);
+     end;
+
 end;
 
 procedure TTestStack.TestIndexes;
+var i : Longint;
 begin
+ InitStack(stk_);
+ for i:=1 to MAX_STACK_PARAMS do
+   begin
+     mvIdx(stk_, i);
+     AssertEquals('StkIndex moved to i', i, stk_.idx);
+     mvIdx(stk_, -i);
+     AssertEquals('StkIndex moved back to 0', 0, stk_.idx);
+   end;
 end;
+
+procedure TTestStack.TestHugeString;
+var str, str2 : TStkString;
+    i         : Longint;
+begin
+    for i:=1 to 100 do
+      str := str + '0123456789';
+
+    pushStr(str, stk_);
+    popStr(str2, stk_);
+    AssertEquals('Hugestring with 1000 chars', str, str2);
+end;
+
 
 procedure TTestStack.SetUp; 
 begin
