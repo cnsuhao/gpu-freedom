@@ -21,6 +21,7 @@ type TArgStk = record
      argtype   : TStkArgType;
      argvalue  : TStkFloat;
      argstring : TStkString;
+     argptr    : TStkPointer;
 end;
 
 type TArgRetriever = class(TObject)
@@ -44,6 +45,7 @@ type TArgRetriever = class(TObject)
                                var error : TStkError) : TArgStk;
    function getStringArgument(var error : TStkError) : TArgStk;
    function getFloatArgument(var error : TStkError) : TArgStk;
+   function getPointerArgument(var error : TStkError) : TArgStk;
    function getExpressionArgument(openbracket : String; var error : TStkError) : TArgStk;
 
    function getOtherArgument(var error : TStkError) : TArgStk;
@@ -114,6 +116,9 @@ begin
  else
  if (startchar = '{') or (startchar = '(')  then
      Result := getExpressionArgument(startchar, error)
+ else
+ if (startchar = '@') then
+     Result := getPointerArgument(error)
  else    
  // it has to be something else
      Result := getOtherArgument(error);
@@ -131,7 +136,7 @@ function TArgRetriever.getBracketArgument(openbracket, closebracket : String; er
                             var error : TStkError) : TArgStk;
 var 
    bracketCount, i : Longint;
-   arg : String;
+   arg : TStkString;
 begin
     
     //string begins with bracket, we will return an argument
@@ -159,6 +164,7 @@ begin
       deleteComma();
       Result.argtype := STK_ARG_EXPRESSION;
       Result.argstring := arg;
+      Result.argptr := 0;
     end
     else {problem in brackets}
     begin
@@ -170,8 +176,8 @@ begin
 end;
 
 function TArgRetriever.getStringArgument(var error : TStkError) : TArgStk;
-var i : Longint;
-    arg : String;
+var i   : Longint;
+    arg : TStkString;
 begin
  i := 2;
  while (toparse_[i] <> QUOTE) and (i < Length(toparse_)) do
@@ -197,10 +203,11 @@ begin
  
  Result.argtype   := STK_ARG_STRING;
  Result.argstring := arg;
+ Result.argptr := 0;
 end;
 
 function TArgRetriever.getFloatArgument(var error : TStkError) : TArgStk;
-var arg   : String;
+var arg   : TStkString;
     float : TStkFloat;
 begin
  arg := ExtractParam(toparse_, ','); 
@@ -216,6 +223,34 @@ begin
  
  Result.argtype  := STK_ARG_FLOAT;
  Result.argvalue := float;
+ Result.argptr := 0;
+end;
+
+function TArgRetriever.getPointerArgument(var error : TStkError) : TArgStk;
+var arg,
+    ptrType      : TStkString;
+    ptr          : TStkPointer;
+begin
+ ptrType := ''; // untyped pointers are default
+ Delete(toparse_, 1, 1); // removing @
+ arg := ExtractParam(toparse_, ',');
+ if Pos(':', arg)>1 then  //>1 because at least one char is needed
+       ptrType := Trim(ExtractParam(arg, ':'));
+
+ try
+   ptr := StrToInt(arg);
+ except
+   Result.argtype := STK_ARG_ERROR;
+   error.ErrorID  := COULD_NOT_PARSE_POINTER_ID;
+   error.ErrorMsg := COULD_NOT_PARSE_POINTER;
+   error.ErrorArg := arg;
+   Exit;
+ end;
+
+ Result.argtype   := STK_ARG_POINTER;
+ Result.argptr    := ptr;
+ Result.argvalue  := 0;
+ Result.argstring := ptrType;
 end;
 
 function TArgRetriever.getExpressionArgument(openbracket : String; var error : TStkError) : TArgStk;
@@ -253,6 +288,7 @@ begin
  if (arg='true') then value := 1 else value := 0;
  Result.argtype   := STK_ARG_BOOLEAN;
  Result.argvalue  := value;
+ Result.argptr    := 0;
 end;
 
 
@@ -260,6 +296,7 @@ function TArgRetriever.getSpecialArgument(var error : TStkError; arg : TStkStrin
 begin
  Result.argtype   := specialType;
  Result.argstring := arg;
+ Result.argptr    := 0;
 end;
 
 
@@ -267,6 +304,7 @@ function TArgRetriever.getCallArgument(var error : TStkError; arg : TStkString) 
 begin
  Result.argtype   := STK_ARG_CALL;
  Result.argstring := arg;
+ Result.argptr    := 0;
 end;
 
 

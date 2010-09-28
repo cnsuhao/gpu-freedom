@@ -18,14 +18,18 @@ uses stkconstants, formatsets,
      SysUtils;
 
 const
-    NO_STKTYPE      = 0;     // dummy if not typed
-    FLOAT_STKTYPE   = 10;
-    BOOLEAN_STKTYPE = 20;
-    STRING_STKTYPE  = 30;
-  
+    NO_STKTYPE            = 0;     // dummy if not typed
+    FLOAT_STKTYPE         = 10;
+    BOOLEAN_STKTYPE       = 20;
+    STRING_STKTYPE        = 30;
+    POINTER_STKTYPE       = 40;
+
 type TStkFloat  = Extended;  // type for floats on stack
 type TStkString = String;    // type for strings on stack
 type TStkBoolean = Boolean;  // type for booleans on stack
+type TStkPointer = PtrUInt; // 32-bit or 64-bit according to processor
+                           // see http://wiki.freepascal.org/Integer
+
 type TStkArgType = Longint; // type distinguishing types on stack
 
 type TStkTypes = Array [1..MAX_STACK_PARAMS] of TStkArgType;
@@ -40,6 +44,7 @@ type
   TStack = record
     stack    : Array [1..MAX_STACK_PARAMS] of TStkFloat;
     strStack : Array [1..MAX_STACK_PARAMS] of TStkString;
+    ptrStack : Array [1..MAX_STACK_PARAMS] of TStkPointer;
     stkType  : TStkTypes;
     Idx      : Longint;     //  Index on Stack where Operations take place
                             //  if Idx is 0 the stack is empty
@@ -81,22 +86,28 @@ function typeOfParametersCorrect(required : Longint; var stk : TStack; var types
 function pushStr  (str : TStkString; var stk : TStack) : Boolean;
 function pushFloat(float : TStkFloat; var Stk : TStack) : Boolean;
 function pushBool (b : TStkBoolean; var Stk : TStack) : Boolean;
+function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean;
+
 
 // checking stack types
-function isStkFloat  (i : Longint; var stk : TStack) : Boolean;
-function isStkBoolean(i : Longint; var stk : TStack) : Boolean;
-function isStkString (i : Longint; var stk : TStack) : Boolean;
+function isStkFloat   (i : Longint; var stk : TStack) : Boolean;
+function isStkBoolean (i : Longint; var stk : TStack) : Boolean;
+function isStkString  (i : Longint; var stk : TStack) : Boolean;
+function isStkPointer (i : Longint; var typePtr : TStkString; var stk : TStack) : Boolean;
 
 // popping stuff from stack
 function popFloat(var float : TStkFloat; var stk : TStack) : Boolean;
 function popBool (var b : TStkBoolean; var stk : TStack) : Boolean;
 function popStr  (var str : TStkString; var stk : TStack) : Boolean;
+function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean;
+
 
 // getting stuff from stack, without moving stack.idx
 function idxInRange(idx : Longint; var stk : TStack) : Boolean;
 function getFloat(i : Longint; var stk : TStack) : TStkFloat;
 function getBool (i : Longint; var stk : TStack) : TStkBoolean;
 function getStr  (i : Longint; var stk : TStack) : TStkString;
+function getPtr  (i : Longint; var typePtr : TStkString; var stk : TStack) : TStkPointer;
 
 // moving stack index
 function mvIdx(var stk : TStack; offset : Longint) : Boolean;
@@ -142,12 +153,20 @@ begin
            str := str + ', ' + FloatToStr(stk.Stack[i]);
 	   end
 	 else
-	   if stk.stkType[i]=BOOLEAN_STKTYPE then
+         if stk.stkType[i]=BOOLEAN_STKTYPE then
            begin
              if stk.Stack[i]>0 then
 			   str := str + ', true'
 			 else
                            str := str + ', false';
+           end
+         else
+         if stk.stkType[i]=POINTER_STKTYPE then
+           begin
+             if stk.strStack[i]<>'' then
+               str := str + ', @'+stk.strStack[i]+':'+IntToStr(stk.ptrStack[i])
+             else // untyped pointer
+	       str := str + ', @'+IntToStr(stk.ptrStack[i]);
            end
          else
            begin
@@ -205,6 +224,9 @@ begin
  if (stktype = FLOAT_STKTYPE) then
     Result := 'string'
  else
+ if (stktype = POINTER_STKTYPE) then
+    Result := 'pointer'
+ else
    raise Exception.Create('Unknown type in stkTypeToStr (stacks.pas)');
 end;
 
@@ -240,6 +262,7 @@ begin
                  begin                     
                    Stk.Stack[stk.Idx] := 0;
                    Stk.StrStack[stk.Idx] := str;
+                   Stk.PtrStack[stk.Idx] := 0;
                    Stk.stkType[stk.Idx] := STRING_STKTYPE;
                    Result := true;
                  end;              
@@ -255,6 +278,7 @@ begin
                  begin                     
                    Stk.Stack[stk.Idx] := float;
                    Stk.StrStack[stk.Idx] := '';
+                   Stk.PtrStack[stk.Idx] := 0;
                    Stk.stkType[stk.Idx] := FLOAT_STKTYPE;
                    Result := true;
                  end;              
@@ -272,9 +296,27 @@ begin
                  begin                     
                    Stk.Stack[stk.Idx] := value;
                    Stk.StrStack[stk.Idx] := '';
+                   Stk.PtrStack[stk.Idx] := 0;
                    Stk.stkType[stk.Idx] := BOOLEAN_STKTYPE;
                    Result := true;
                  end;              
+end;
+
+
+function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean;
+var hasErrors : Boolean;
+begin
+ Result := false;
+ Inc(stk.Idx);
+ hasErrors := maxStackReached(stk);
+ if not hasErrors then
+                 begin
+                   Stk.Stack[stk.Idx] := 0;
+                   Stk.StrStack[stk.Idx] := typePtr;
+                   Stk.PtrStack[stk.Idx] := ptr;
+                   Stk.stkType[stk.Idx] := POINTER_STKTYPE;
+                   Result := true;
+                 end;
 end;
 
 
@@ -307,6 +349,18 @@ begin
    Result := false;
 end;
 
+function isStkPointer (i : Longint; var typePtr : TStkString; var stk : TStack) : Boolean;
+begin
+ typePtr := '';
+ if idxInRange(i, stk) then
+  begin
+   Result  := (stk.stkType[i]=POINTER_STKTYPE);
+   typePtr :=  stk.strStack[i];
+  end
+ else
+    Result  := false;
+end;
+
 function popFloat(var float : TStkFloat; var stk : TStack) : Boolean;
 var types : TStkTypes;
 begin
@@ -336,6 +390,18 @@ begin
   types[1]:= STRING_STKTYPE;
   if not typeOfParametersCorrect(1, stk,  types) then Exit;
   str := stk.strStack[stk.Idx];
+  Dec(stk.Idx);
+  Result := true;
+end;
+
+function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean;
+var types : TStkTypes;
+begin
+  Result  := false;
+  types[1]:= POINTER_STKTYPE;
+  if not typeOfParametersCorrect(1, stk,  types) then Exit;
+  ptr := stk.ptrStack[stk.Idx];
+  typePtr := stk.strStack[stk.Idx];
   Dec(stk.Idx);
   Result := true;
 end;
@@ -376,7 +442,15 @@ begin
  if isStkString(i, stk) then
   Result :=  stk.strStack[i]
  else
-    raise Exception.Create('Problem in getString(...) called with parameter i:='+IntToStr(i));
+    raise Exception.Create('Problem in getStr(...) called with parameter i:='+IntToStr(i));
+end;
+
+function getPtr  (i : Longint; var typePtr : TStkString; var stk : TStack) : TStkPointer;
+begin
+ if isStkPointer(i, typePtr, stk) then
+    Result :=  stk.ptrStack[i]
+ else
+    raise Exception.Create('Problem in getPtr(...) called with parameter i:='+IntToStr(i));
 end;
 
 function mvIdx(var stk : TStack; offset : Longint) : Boolean;

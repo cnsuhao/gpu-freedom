@@ -89,6 +89,8 @@ begin
                      isOK := pushStr(arg.argstring, stk);
             STK_ARG_BOOLEAN :
                      isOK := pushBool((arg.argvalue>0), stk);
+            STK_ARG_POINTER :
+                     isOK := pushPtr(arg.argptr, arg.argstring, stk);
             STK_ARG_EXPRESSION :
                      // we found an expression, we need to recursively call this method
                      isOK := parse(arg.argstring, stk);
