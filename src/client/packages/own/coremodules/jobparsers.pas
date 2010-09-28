@@ -12,7 +12,7 @@ interface
 
 uses SysUtils,
      argretrievers, stacks, pluginmanagers, methodcontrollers, specialcommands,
-     resultcollectors, frontendmanagers, jobs, gpuconstants;
+     resultcollectors, frontendmanagers, jobs, stkconstants;
 
 type TJobParser = class(TObject)
  public 

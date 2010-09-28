@@ -13,7 +13,7 @@ unit threadmanagers;
 interface
 
 uses SyncObjs, SysUtils,
-     jobs, computationthreads, gpuconstants, identities, pluginmanagers,
+     jobs, computationthreads, stkconstants, identities, pluginmanagers,
      methodcontrollers, resultcollectors, frontendmanagers;
 
 type

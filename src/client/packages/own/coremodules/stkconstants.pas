@@ -1,4 +1,4 @@
-unit gpuconstants;
+unit stkconstants;
 {
   In this class constants for the GPU core v2 are defined.
   Error codes and important parameters can be found here as well.

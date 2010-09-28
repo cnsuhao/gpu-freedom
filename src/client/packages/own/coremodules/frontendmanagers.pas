@@ -11,7 +11,7 @@ unit frontendmanagers;
 interface
 
 uses SyncObjs, SysUtils,
-     gpuconstants, stacks;
+     stkconstants, stacks;
 
 const
   QUEUE_SIZE = 120;

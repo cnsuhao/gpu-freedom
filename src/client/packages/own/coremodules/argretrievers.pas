@@ -15,7 +15,7 @@ It is used by the TGPUParser to parse the arguments
 interface
 
 uses SysUtils,
-     stacks, plugins, utils, formatsets, gpuconstants, specialcommands;
+     stacks, plugins, utils, formatsets, stkconstants, specialcommands;
 
 type TArgStk = record
      argtype   : TStkArgType;

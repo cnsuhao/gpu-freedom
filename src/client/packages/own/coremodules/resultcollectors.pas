@@ -9,7 +9,7 @@ unit resultcollectors;
 interface
 
 uses SyncObjs,
-     gpuconstants, stacks;
+     stkconstants, stacks;
 
 type   
   TResultCollection = record

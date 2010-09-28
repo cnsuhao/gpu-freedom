@@ -11,7 +11,7 @@ unit specialcommands;
 interface
 
 uses SysUtils,
-     stacks, identities, gpuconstants, pluginmanagers, frontendmanagers,
+     stacks, identities, stkconstants, pluginmanagers, frontendmanagers,
      methodcontrollers, resultcollectors;
 
 type TSpecialCommand = class(TObject)

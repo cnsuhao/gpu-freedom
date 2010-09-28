@@ -19,7 +19,7 @@ unit pluginmanagers;
 interface
 
 uses SysUtils, SyncObjs,
-     stacks, plugins, gpuconstants;
+     stacks, plugins, stkconstants;
 
 const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
       MAX_HASH    = 64;  // how many function calls we hash for faster retrieval

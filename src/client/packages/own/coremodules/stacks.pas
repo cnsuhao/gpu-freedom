@@ -14,7 +14,7 @@ unit stacks;
 
 interface
 
-uses gpuconstants, formatsets,
+uses stkconstants, formatsets,
      SysUtils;
 
 const

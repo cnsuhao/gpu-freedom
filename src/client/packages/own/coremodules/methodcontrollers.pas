@@ -13,7 +13,7 @@ unit methodcontrollers;
 interface
 
 uses SysUtils, Classes, SyncObjs,
-     stacks, gpuconstants;
+     stacks, stkconstants;
 
 
 type TMethodController = class(TObject)

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  argretrievers, gpuconstants, stacks;
+  argretrievers, stkconstants, stacks;
 
 type
 
