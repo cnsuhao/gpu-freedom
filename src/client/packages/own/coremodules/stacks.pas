@@ -73,7 +73,7 @@ type PDescFunction = ^TDescFunction;
 procedure initStack(var stk : TStack);
 procedure clearError(var error : TStkError);
 
-function  stackToStr(var stk : TStack) : String;
+function  stkToStr(var stk : TStack) : String;
 function  stkTypeToStr(stktype : TStkArgType) : String;
 
 // check functions
@@ -86,7 +86,8 @@ function typeOfParametersCorrect(required : Longint; var stk : TStack; var types
 function pushStr  (str : TStkString; var stk : TStack) : Boolean;
 function pushFloat(float : TStkFloat; var Stk : TStack) : Boolean;
 function pushBool (b : TStkBoolean; var Stk : TStack) : Boolean;
-function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean;
+function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean;  overload;
+function pushPtr  (ptr : TStkPointer; var Stk : TStack) : Boolean;  overload;
 
 
 // checking stack types
@@ -99,8 +100,8 @@ function isStkPointer (i : Longint; var typePtr : TStkString; var stk : TStack) 
 function popFloat(var float : TStkFloat; var stk : TStack) : Boolean;
 function popBool (var b : TStkBoolean; var stk : TStack) : Boolean;
 function popStr  (var str : TStkString; var stk : TStack) : Boolean;
-function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean;
-
+function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean; overload;
+function popPtr  (var ptr : TStkPointer; var stk : TStack) : Boolean; overload;
 
 // getting stuff from stack, without moving stack.idx
 function idxInRange(idx : Longint; var stk : TStack) : Boolean;
@@ -134,7 +135,7 @@ begin
   error.errorArg := '';
 end;
 
-function stackToStr(var stk : TStack) : String;
+function stkToStr(var stk : TStack) : String;
 var i   : Longint;
     str : String;
 begin
@@ -303,7 +304,7 @@ begin
 end;
 
 
-function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean;
+function pushPtr  (ptr : TStkPointer; typePtr : TStkString; var Stk : TStack) : Boolean; overload;
 var hasErrors : Boolean;
 begin
  Result := false;
@@ -319,6 +320,10 @@ begin
                  end;
 end;
 
+function pushPtr  (ptr : TStkPointer; var stk : TStack) : Boolean;  overload;
+begin
+ Result := pushPtr(ptr, '', stk);
+end;
 
 function isEmptyStack(var stk : TStack) : Boolean;
 begin
@@ -394,7 +399,7 @@ begin
   Result := true;
 end;
 
-function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean;
+function popPtr  (var ptr : TStkPointer; var typePtr : TStkString; var stk : TStack) : Boolean; overload;
 var types : TStkTypes;
 begin
   Result  := false;
@@ -406,6 +411,11 @@ begin
   Result := true;
 end;
 
+function popPtr  (var ptr : TStkPointer; var stk : TStack) : Boolean; overload;
+var str: TStkString;
+begin
+  popPtr(ptr, str, stk);
+end;
 
 function idxInRange(idx : Longint; var stk : TStack) : Boolean;
 begin

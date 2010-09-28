@@ -16,6 +16,7 @@ type
     procedure TestSpaces;
     procedure TestExpressions;
     procedure TestRecursiveExprs;
+    procedure TestPointers;
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -108,9 +109,33 @@ begin
   AssertEquals('Second argument is expression type', STK_ARG_EXPRESSION, arg.argtype);
   AssertEquals('Second argument value', ' ( 3,  2) , {1,2,3,(2,3) },   mul', arg.argstring);
   argRetr.Free;
-
 end;
 
+procedure TTestArgRetriever.TestPointers;
+var
+    arg     : TArgStk;
+    error   : TStkError;
+    argRetr : TArgRetriever;
+begin
+  clearError(error);
+  argRetr := TArgRetriever.Create(' @TClima:123456,    @2345, @TWorld:17171717 ');
+  arg := argRetr.getArgument(error);
+  AssertEquals('First argument is pointer type', STK_ARG_POINTER, arg.argtype);
+  AssertEquals('First argument value', 123456, arg.argptr);
+  AssertEquals('First argument class type', 'TClima', arg.argstring);
+
+  arg := argRetr.getArgument(error);
+  AssertEquals('Second argument is pointer type', STK_ARG_POINTER, arg.argtype);
+  AssertEquals('Second argument value', 2345, arg.argptr);
+  AssertEquals('Second argument class type', '', arg.argstring);
+
+  arg := argRetr.getArgument(error);
+  AssertEquals('Third argument is pointer type', STK_ARG_POINTER, arg.argtype);
+  AssertEquals('Third argument value', 17171717, arg.argptr);
+  AssertEquals('Third argument class type', 'TWorld', arg.argstring);
+
+  argRetr.Free;
+end;
 
 procedure TTestArgRetriever.SetUp;
 begin

@@ -23,6 +23,7 @@ type
     procedure TestStrings;
     procedure TestIndexes;
     procedure TestHugeString;
+    procedure TestPointers;
 
 
   private
@@ -43,7 +44,7 @@ begin
   pushStr('test', stk_);
   pushFloat(123456, stk_);
   pushBool(true, stk_);
-  AssertEquals('Loading things on stack', QUOTE+'test'+QUOTE+', 123456, true', StackToStr(stk_));
+  AssertEquals('Loading things on stack', QUOTE+'test'+QUOTE+', 123456, true', StkToStr(stk_));
 
   AssertEquals('Stack index should be 3', 3, stk_.idx);
   AssertEquals('First param should be string', true, isStkString(1, stk_));
@@ -229,6 +230,46 @@ begin
     AssertEquals('Hugestring with 1000 chars', str, str2);
 end;
 
+
+procedure TTestStack.TestPointers;
+var ptr     : TStkPointer;
+    ptrType : TStkString;
+    res     : Boolean;
+begin
+  InitStack(stk_);
+  AssertEquals('Stack index should be 0', 0, stk_.idx);
+
+  pushPtr(123456, 'TWorld', stk_);
+  pushPtr(151515, 'TClima', stk_);
+  pushPtr(654321, stk_); // untyped pointer
+  AssertEquals('StkToStr for pointers', '@TWorld:123456, @TClima:151515, @654321', StkToStr(stk_));
+
+  res := isStkPointer(1, ptrType, stk_);
+  AssertEquals('First param is Pointer', true, res);
+  AssertEquals('First param is pointer typed to', 'TWorld', ptrType);
+
+  res := isStkPointer(2, ptrType, stk_);
+  AssertEquals('Second param is Pointer', true, res);
+  AssertEquals('Second param is pointer typed to', 'TClima', ptrType);
+
+  res := isStkPointer(3, ptrType, stk_);
+  AssertEquals('Third param is Pointer', true, res);
+  AssertEquals('Third param is untyped pointer', '', ptrType);
+
+  popPtr(ptr, ptrType, stk_);
+  AssertEquals('Third param is pointing at', 654321, ptr);
+  AssertEquals('Third param is untyped pointer', '', ptrType);
+
+  popPtr(ptr, ptrType, stk_);
+  AssertEquals('Second param is pointing at', 151515, ptr);
+  AssertEquals('Second param is of type ', 'TClima', ptrType);
+
+  popPtr(ptr, ptrType, stk_);
+  AssertEquals('First param is pointing at', 123456, ptr);
+  AssertEquals('First param is of type ', 'TWorld', ptrType);
+
+  AssertEquals('Stack index should be 0', 0, stk_.idx);
+end;
 
 procedure TTestStack.SetUp; 
 begin

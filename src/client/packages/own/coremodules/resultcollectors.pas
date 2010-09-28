@@ -145,7 +145,7 @@ begin
   if res[i].idx>MAX_RESULTS_FOR_ID then res[i].idx:=1;
   
   // storing of the job
-  res[i].resStr[res[i].idx] := stackToStr(stk);
+  res[i].resStr[res[i].idx] := stkToStr(stk);
   if (stk.Idx=1) and (stk.stkType[1]=FLOAT_STKTYPE) then
       begin
        res[i].resFloat[res[i].idx] := stk.stack[stk.Idx];
