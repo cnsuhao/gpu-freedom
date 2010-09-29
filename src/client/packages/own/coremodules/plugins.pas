@@ -33,7 +33,7 @@ type
      // helper function to retrieve the pointer to the method call
      function method_pointer(name : String) : PDllFunction;
      
-     function getDescription(field : String) : String;
+     function getDescription(field : String) : TStkString;
  
  protected
      path_,
@@ -95,7 +95,7 @@ var
  buf: array [0..144] of char;
 begin
   if (not isloaded_) then Result := nil
-  else Result := GetProcAddress(lib_, StrPCopy(buf, name));
+  else Result := GetProcedureAddress(lib_, StrPCopy(buf, name));
 end;
 
 // check if  a method is present in this dll
@@ -110,20 +110,19 @@ var theFunction : PDllFunction;
 begin
     theFunction := method_pointer(name);
     if Assigned(theFunction) then
-      Result := theFunction^(stk);
+      Result := TDllFunction(theFunction)(stk);
 end;     
 
-function TPlugin.getDescription(field : String) : String;
+function TPlugin.getDescription(field : String) : TStkString;
 var theFunction : PDescFunction;
     buf         : array [0..144] of char;
 
 begin
   Result := '';
-  theFunction := GetProcAddress(lib_, StrPCopy(buf, field));
+  theFunction := GetProcedureAddress(lib_, StrPCopy(buf, field));
   // get description
   if Assigned(theFunction) then
-        Result := theFunction^();
-
+        Result := TDescFunction(theFunction)();
 end;
 
 function TPlugin.getName() : String;

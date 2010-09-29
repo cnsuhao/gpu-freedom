@@ -74,7 +74,7 @@ begin
 end;
 
 
-function checkFloatParams(nbParams : Longint; stk : TStack) : Boolean;
+function checkFloatParams(nbParams : Longint; var stk : TStack) : Boolean;
 var types : TStkTypes;
 begin
  //if (nbParams<1) or (nbParams>3) then raise Exception.Create('basic: Internal error in checkFloatParams');
@@ -84,13 +84,13 @@ begin
  Result  :=typeOfParametersCorrect(nbParams, stk, types);
 end;
 
-function retrieveFloatParam(var a : TStkFloat; stk : TStack) : Boolean;
+function retrieveFloatParam(var a : TStkFloat; var stk : TStack) : Boolean;
 begin
  Result := checkFloatParams(1, stk);
  if Result then popFloat(a, stk) else a := 0;
 end;
 
-function retrieveFloatParams(var a : TStkFloat; var b: TStkFloat; stk : TStack) : Boolean;
+function retrieveFloatParams(var a : TStkFloat; var b: TStkFloat; var stk : TStack) : Boolean;
 begin
  Result := checkFloatParams(2, stk);
  if Result then
@@ -105,7 +105,7 @@ begin
     end;
 end;
 
-function retrieve3FloatParams(var a : TStkFloat; var b: TStkFloat; var c : TStkFloat; stk : TStack) : Boolean;
+function retrieve3FloatParams(var a : TStkFloat; var b: TStkFloat; var c : TStkFloat; var stk : TStack) : Boolean;
 begin
  Result := checkFloatParams(3, stk);
  if Result then

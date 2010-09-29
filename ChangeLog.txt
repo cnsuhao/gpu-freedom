@@ -1,4 +1,8 @@
-19.9.2010-21.9.2010
+22.9.2010-29.9.2010 git
+milestone reached:
+The FPC unit test framework loaded plugin basic, the plugin computed 1+1
+
+19.9.2010-21.9.2010 git
 - almost entire GPU core rewritten under
  /src/client/packages/own/tgpu2
 - much better error handling than previous code

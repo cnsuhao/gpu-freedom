@@ -75,6 +75,7 @@ type PDescFunction = ^TDescFunction;
 
 // initialization and conversion functions
 procedure initStack(var stk : TStack);
+procedure clearStk(var stk : TStack);
 procedure clearError(var error : TStkError);
 
 function  stkToStr(var stk : TStack) : String;
@@ -130,6 +131,11 @@ begin
      stk.stkType[i] := NO_STKTYPE;
    end;
  clearError(stk.error);
+end;
+
+procedure clearStk(var stk : TStack);
+begin
+  initStack(stk);
 end;
 
 procedure clearError(var error : TStkError);
