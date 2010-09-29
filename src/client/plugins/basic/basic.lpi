@@ -35,10 +35,10 @@
       <Unit0>
         <Filename Value="basic.dpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="11" Y="20"/>
+        <CursorPos X="52" Y="38"/>
         <TopLine Value="18"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -47,7 +47,7 @@
         <CursorPos X="49" Y="423"/>
         <TopLine Value="404"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -70,7 +70,7 @@
         <CursorPos X="26" Y="13"/>
         <TopLine Value="1"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -79,7 +79,7 @@
         <CursorPos X="20" Y="122"/>
         <TopLine Value="94"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -93,10 +93,10 @@
         <Filename Value="..\..\lib\own\misc\logger.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="logger"/>
-        <CursorPos X="12" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="45" Y="126"/>
+        <TopLine Value="104"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit7>
     </Units>
