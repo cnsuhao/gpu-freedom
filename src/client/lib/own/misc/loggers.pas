@@ -1,4 +1,4 @@
-unit logger;
+unit loggers;
 {
  A simple, but functional logger
 
@@ -9,7 +9,7 @@ unit logger;
 }
 interface
 
-uses SysUtils, syncobjs;
+uses SysUtils, FileUtil, syncobjs;
 
 const
    LVL_FATAL    = 50;
@@ -30,8 +30,8 @@ type TLogger = class(TObject)
     procedure setLogLevel(loglevel : Longint);
     function  getLogLevel : Longint;
     function  logLvlToStr(level : Longint) : String;
-    procedure log(severity : Longint; logStr : String); overload
-    procedure log(logStr : String); overload
+    procedure log(severity : Longint; logStr : String); overload;
+    procedure log(logStr : String); overload;
 
   private
     current_log_level_ : Longint;
@@ -108,21 +108,22 @@ begin
   end;
 end;
 
-procedure TLogger.log(logStr : String); overload
+procedure TLogger.log(logStr : String); overload;
 begin
   log(LVL_INFO, logStr);
 end;
 
-procedure TLogger.log(severity : Longint; logStr : String); overload
+procedure TLogger.log(severity : Longint; logStr : String); overload;
 var backup : Boolean;
 begin
   if severity<current_log_level_ then Exit;
   CS_.Enter;
-  backup := FileSize(full_name_)>max_file_size;
+  backup := FileSize(full_name_)>max_filesize_;
   if backup then
        CopyFile(full_name_, path_+PathDelim+filename_backup_);
+
   try
-   AssignFile(F_, fullname_);
+   AssignFile(F_, full_name_);
    if backup then Rewrite(F_) else Append(F_);
    WriteLn(F_, DateToStr(now)+' '+logLvlToStr(severity)+'> '+logStr);
   finally

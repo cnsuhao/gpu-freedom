@@ -31,7 +31,7 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, threadmanagers;
+  frontendmanagers, threadmanagers, loggers;
 
 implementation
 
@@ -45,6 +45,7 @@ type TCoreModule = class(TObject)
     function getResultCollector() : TResultCollector;
     function getFrontendManager() : TFrontendManager;
     function getThreadManager()   : TThreadManager;
+    function getLogger()          : TLogger;
 
     // core components
     plugman_        : TPluginManager;
@@ -53,13 +54,15 @@ type TCoreModule = class(TObject)
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
     threadman_      : TThreadManager;
+    logger_         : TLogger;
 end;
 
 
 constructor TCoreModule.Create(path, extension : String);
 begin
    inherited Create();
-   plugman_        := TPluginManager.Create(path, extension);
+   logger_         := TLogger.Create(path+PathDelim+'logs', 'core.log');
+   plugman_        := TPluginManager.Create(path+PathDelim+'plugins', extension);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
@@ -72,6 +75,7 @@ begin
   rescoll_.Free;
   frontman_.Free;
   threadman_.Free;
+  logger_.Free;
   inherited;
 end;
 
@@ -99,6 +103,11 @@ end;
 function TCoreModule.getThreadManager()   : TThreadManager;
 begin
  Result := threadman_;
+end;
+
+function TCoreModule.getLogger()          : TLogger;
+begin
+ Result := logger_;
 end;
 
 end.
