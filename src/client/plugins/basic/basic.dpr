@@ -46,5 +46,8 @@ exports total;
 exports stddev;
 exports variance;
 
+exports montecarlo_pi;
+exports random_walk;
+
 begin
 end.

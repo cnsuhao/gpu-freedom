@@ -48,6 +48,10 @@ function variance(var stk: TStack): boolean;
 
 function pop(var stk: TStack): boolean;
 
+function montecarlo_pi(var stk: TStack): boolean;
+function random_walk(var stk: TStack): boolean;
+
+
 // switches 2 last numbers on the stack
 function switch(var stk: TStack): boolean;
 
@@ -380,5 +384,56 @@ begin
         pushFloat(a, stk);
       end;
 end;
+
+function montecarlo_pi(var stk: TStack): boolean;
+var a, x, y : TStkFloat;
+    nbthrows, i, count : Longint;
+begin
+  Result := retrieveFloatParam(a, stk);
+  if not Result then Exit;
+  nbthrows := System.trunc(a);
+  Result := nbthrows>0;
+  if not Result then Exit;
+
+  count:=0;
+  for i:=1 to nbthrows do
+     begin
+       x := random(1);
+       y := random(1);
+       if (System.sqrt(x*x+y*y)<=1) then Inc(count);
+     end;
+
+  pushFloat(count/i, stk);
+end;
+
+
+function random_walk(var stk: TStack): boolean;
+var steps, length,
+    dir_x, dir_y, dir_length,
+    walk_x, walk_y : TStkFloat;
+    i : Longint;
+begin
+ Result := retrieveFloatParams(steps, length, stk);
+ if not Result then Exit;
+
+ walk_x := 0; walk_y := 0;
+ for i:=1 to System.trunc(steps) do
+     begin
+       dir_x := random(1);
+       dir_y := random(1);
+       dir_length := System.sqrt(dir_x*dir_x+dir_y*dir_y);
+       // normalize and multiply with length
+       dir_x := dir_x/dir_length*length;
+       dir_y := dir_y/dir_length*length;
+
+       walk_x := walk_x + dir_x;
+       walk_y := walk_y + dir_y;
+     end;
+
+ pushFloat(walk_x, stk);
+ pushFloat(walk_y, stk);
+end;
+
+
 
 end.
