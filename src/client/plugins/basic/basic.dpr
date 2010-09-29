@@ -4,7 +4,8 @@ uses  basicdll in 'basicdll.pas';
 
 {$R *.RES}
 exports description;
-exports weblinktoplugin;
+exports weburl;
+exports stkversion;
 
 exports  add;
 exports  sub;

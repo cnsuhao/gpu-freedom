@@ -18,11 +18,15 @@ uses stkconstants, formatsets,
      SysUtils;
 
 const
+    STACK_VERSION         = '1.0';  // stack version, as changes need plugins recompiled
+
     NO_STKTYPE            = 0;     // dummy if not typed
     FLOAT_STKTYPE         = 10;
     BOOLEAN_STKTYPE       = 20;
     STRING_STKTYPE        = 30;
     POINTER_STKTYPE       = 40;
+
+
 
 type TStkFloat  = Extended;  // type for floats on stack
 type TStkString = String;    // type for strings on stack
@@ -66,7 +70,7 @@ type
   PDllFunction = ^TDllFunction;
 
 
-type TDescFunction = function : String;
+type TDescFunction = function : TStkString;
 type PDescFunction = ^TDescFunction;
 
 // initialization and conversion functions

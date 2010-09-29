@@ -10,7 +10,7 @@ unit stkconstants;
 interface
 
 const
-  GPU_CORE_VERSION = '1.0.0';
+  GPU_CORE_VERSION = '1.0';
 
   DEFAULT_THREADS = 3;   // default number of threads in TGPU2.pas
   MAX_THREADS     = 16;  // maximum number of allowed threads in TGPU2.pas

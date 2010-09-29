@@ -3,536 +3,371 @@ unit basicdll;
 
 interface
 
-uses Definitions, Math;
+uses stacks;
 
-function description: PChar;
-function weblinktoplugin: PChar;
+function description: TStkString;
+function weblinktoplugin: TStkString;
+function stkversion: TStkString;
 
-function add(var stk: TStack): boolean; stdcall;
-function sub(var stk: TStack): boolean; stdcall;
-function mul(var stk: TStack): boolean; stdcall;
-function dvd(var stk: TStack): boolean; stdcall;
+function add(var stk: TStack): boolean;
+function sub(var stk: TStack): boolean;
+function mul(var stk: TStack): boolean;
+function dvd(var stk: TStack): boolean;
 
-function sqrt(var stk: TStack): boolean; stdcall;
-function sqr(var stk: TStack): boolean; stdcall;
-function exp(var stk: TStack): boolean; stdcall;
-function ln(var stk: TStack): boolean; stdcall;
+function sqrt(var stk: TStack): boolean;
+function sqr(var stk: TStack): boolean;
+function exp(var stk: TStack): boolean;
+function ln(var stk: TStack): boolean;
 // trigonometry
-function sin(var stk: TStack): boolean; stdcall;
-function cos(var stk: TStack): boolean; stdcall;
-function tan(var stk: TStack): boolean; stdcall;
-function arcsin(var stk: TStack): boolean; stdcall;
-function arccos(var stk: TStack): boolean; stdcall;
-function arctan(var stk: TStack): boolean; stdcall;
+function sin(var stk: TStack): boolean;
+function cos(var stk: TStack): boolean;
+function tan(var stk: TStack): boolean;
+function arcsin(var stk: TStack): boolean;
+function arccos(var stk: TStack): boolean;
+function arctan(var stk: TStack): boolean;
 
-function pow(var stk: TStack): boolean; stdcall;
-function powmod(var stk: TStack): boolean; stdcall;
+function pow(var stk: TStack): boolean;
+function powmod(var stk: TStack): boolean;
 
-function less(var stk: TStack): boolean; stdcall;
-function greater(var stk: TStack): boolean; stdcall;
-function equal(var stk: TStack): boolean; stdcall;
+function less(var stk: TStack): boolean;
+function greater(var stk: TStack): boolean;
+function equal(var stk: TStack): boolean;
 
-function trunc(var stk: TStack): boolean; stdcall;
-function round(var stk: TStack): boolean; stdcall;
+function trunc(var stk: TStack): boolean;
+function round(var stk: TStack): boolean;
 
-function initrnd(var stk: TStack): boolean; stdcall;
-function rnd(var stk: TStack): boolean; stdcall;
-function rndg(var stk: TStack): boolean; stdcall;
+function initrnd(var stk: TStack): boolean;
+function rnd(var stk: TStack): boolean;
+function rndg(var stk: TStack): boolean;
 
-function average(var stk: TStack): boolean; stdcall;
-function total(var stk: TStack): boolean; stdcall;
-function stddev(var stk: TStack): boolean; stdcall;
-function variance(var stk: TStack): boolean; stdcall;
+function average(var stk: TStack): boolean;
+function total(var stk: TStack): boolean;
+function stddev(var stk: TStack): boolean;
+function variance(var stk: TStack): boolean;
 
-function pop(var stk: TStack): boolean; stdcall;
+function pop(var stk: TStack): boolean;
 
 // switches 2 last numbers on the stack
-function switch(var stk: TStack): boolean; stdcall;
+function switch(var stk: TStack): boolean;
 
 
 implementation
 
-var
-  RandomSeed: longint;
 
- {function DisplayMsg(s:String):Boolean;stdcall;
- begin
-  ShowMessage(s);
-  Result := True;
- end;}
-
-function description: PChar;
+function stkversion : TStkString;
 begin
-  Result := PChar('Basic.dll contains the most used functions in GPU like ' +
+  Result := STACK_VERSION;
+end;
+
+function description: TStkString;
+begin
+  Result := 'Basic.dll contains the most used functions in GPU like ' +
     ' add, sub, mul, dvd, exp, pow, powmod, sqr, sqrt, less, greater, equal, '+
     'trunc, round, pop, average, equal, rnd, rndg, switch, total, stddev, variance... '+
-	'Routines in this plugin are intended for simple computations and as support for more complex plugins.');
-	
-	
+	'Routines in this plugin are intended for simple computations and as support for more complex plugins.';
 end;
 
-function weblinktoplugin: PChar;
+function weburl: TStkString;
 begin
-  Result := PChar('http://gpu.sourceforge.net/virtual.php');
+  Result := 'http://gpu.sourceforge.net/virtual.php';
 end;
 
-function add(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function checkFloatParams(nbParams : Longint; stk : TStack) : Boolean;
+var types : TStkTypes;
 begin
-  Result := False;
-  Idx    := stk.StIdx; {this should speed up and also made the code more readable}
-
-  {check if enough parameter}
-  if Idx < 2 then
-    Exit;
-
-  Stk.Stack[Idx - 1] := Stk.Stack[Idx - 1] + Stk.Stack[Idx];
-
-  {never forget to set the Idx right at the end}
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ if (nbParams<1) or (nbParams>3) then raise Exception.Create('basic: Internal error in checkFloatParams');
+ types[1]:=FLOAT_STKTYPE;
+ types[2]:=FLOAT_STKTYPE;
+ types[3]:=FLOAT_STKTYPE;
+ Result  :=typeOfParametersCorrect(nbParams, stk, types);
 end;
 
-
-function sub(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function retrieveFloatParam(var a : TStkFloat; stk : TStack) : Boolean;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  Stk.Stack[Idx - 1] := Stk.Stack[Idx - 1] - Stk.Stack[Idx];
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := checkFloatParams(1, stk);
+ if Result then popFloat(a, stk) else a := 0;
 end;
 
-
-function mul(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function retrieveFloatParams(var a : TStkFloat; var b: TStkFloat; stk : TStack) : Boolean;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  Stk.Stack[Idx - 1] := Stk.Stack[Idx - 1] * Stk.Stack[Idx];
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := checkFloatParams(2, stk);
+ if Result then
+    begin
+      popFloat(b, stk)
+      popFloat(a, stk);
+    end
+ else
+    begin
+      a := 0;
+      b := 0;
+    end;
 end;
 
-function dvd(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function retrieve3FloatParams(var a : TStkFloat; var b: TStkFloat; var c : TStkFloat; stk : TStack) : Boolean;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  Stk.Stack[Idx - 1] := Stk.Stack[Idx - 1] / Stk.Stack[Idx];
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := checkFloatParams(3, stk);
+ if Result then
+    begin
+      popFloat(c, stk)
+      popFloat(b, stk)
+      popFloat(a, stk);
+    end
+ else
+    begin
+      a := 0;
+      b := 0;
+      c := 0;
+    end;
 end;
 
-function sqrt(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function add(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-
-  Stk.Stack[Idx] := System.sqrt(Stk.Stack[Idx]);
-
-  Result := True;
+  Result := retrieveFloatParams(a, b, stk);
+  if Result then pushFloat(a+b, stk);
 end;
 
-function sqr(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function sub(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-
-  Stk.Stack[Idx] := System.sqr(Stk.Stack[Idx]);
-
-  Result := True;
+  Result := retrieveFloatParams(a, b, stk);
+  if Result then pushFloat(a-b, stk);
 end;
 
-function exp(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function mul(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-
-  Stk.Stack[Idx] := System.exp(Stk.Stack[Idx]);
-
-  Result := True;
+  Result := retrieveFloatParams(a, b, stk);
+  if Result then pushFloat(a*b, stk);
 end;
 
-
-function ln(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function dvd(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-
-  Stk.Stack[Idx] := System.ln(Stk.Stack[Idx]);
-
-  Result := True;
+  Result := retrieveFloatParams(a, b, stk);
+  if Result then pushFloat(a/b, stk);
 end;
 
-function sin(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function sqrt(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := System.sin(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.sqrt(a), stk);
 end;
 
-function cos(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function sqr(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := System.cos(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.sqr(a), stk);
 end;
 
-function tan(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function exp(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := Math.tan(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.exp(a), stk);
 end;
 
-function arcsin(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function ln(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := Math.arcsin(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.ln(a), stk);
 end;
 
-function arccos(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function sin(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := Math.ArcCos(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.sin(a), stk);
 end;
 
-function arctan(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function cos(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  Stk.Stack[Idx] := System.ArcTan(Stk.Stack[Idx]);
-  Result := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.cos(a), stk);
 end;
 
-function pow(var stk: TStack): boolean; stdcall;
-var
-  Idx, Count: integer;
-  temp: extended;
+function tan(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  temp := 1;
-  for Count := 1 to System.Trunc(Stk.Stack[Idx]) do
-  begin
-    temp := temp * Stk.Stack[Idx - 1];
-  end;
-
-  Stk.Stack[Idx - 1] := temp;
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.tan(a), stk);
 end;
 
-function powmod(var stk: TStack): boolean; stdcall;
-var
-  Idx:    integer;
-  Count:  integer;
-  temp:   extended;
-  temp2:  integer;
-  Modulo: integer;
+function arcsin(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 3 then
-    Exit;
-
-  Modulo := System.Trunc(Stk.Stack[Idx]);
-  temp2  := 1;
-  for Count := 1 to System.Trunc(Stk.Stack[Idx - 1]) do
-  begin
-    temp2 := temp2 * System.Trunc(Stk.Stack[Idx - 2]) mod Modulo;
-  end;
-  Stk.Stack[Idx - 2] := temp2;
-
-  stk.StIdx := Idx - 2;
-  Result    := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.arcsin(a), stk);
 end;
 
-
-function less(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function arccos(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  if (Stk.Stack[Idx - 1] < Stk.Stack[Stk.StIdx]) then
-    Stk.Stack[Idx - 1] := 1  {first arg is less than second arg}
-  else
-    Stk.Stack[Idx - 1] := 0;
-  {first arg is equal or more than second arg}
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.arccos(a), stk);
 end;
 
-function greater(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function arctan(var stk: TStack): boolean;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  if (Stk.Stack[Idx - 1] > Stk.Stack[Stk.StIdx]) then
-    Stk.Stack[Idx - 1] := 1  {first arg is less than second arg}
-  else
-    Stk.Stack[Idx - 1] := 0;
-  {first arg is equal or more than second arg}
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.arctan(a), stk);
 end;
 
-function equal(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function pow(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-
-  if (Stk.Stack[Idx - 1] = Stk.Stack[Stk.StIdx]) then
-    Stk.Stack[Idx - 1] := 1  {first arg is less than second arg}
-  else
-    Stk.Stack[Idx - 1] := 0;
-  {first arg is equal or more than second arg}
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+ Result := retrieveFloatParams(a, b, stk);
+ if Result then pushFloat(System.Power(a, b), stk);
 end;
 
-
-function trunc(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function powmod(var stk: TStack): boolean;
+var basis, exponential, modulo,
+    value : TStkFloat;
+    i     : Longint;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
+  Result := retrieve3FloatParams(basis, exponential, modulo, stk);
+  if not Result then Exit;
 
-  stk.Stack[Idx] := System.Trunc(stk.Stack[Idx]);
-
-  Result := True;
+  value := 1;
+  for i:=1 to Trunc(exponential) do
+    value := value*basis mod modulo;
+  Result := pushFloat(value, stk);
 end;
 
 
-function round(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function less(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
+ Result := retrieveFloatParams(a, b, stk);
+ if Result then pushBool(a<b, stk);
+end;
 
-  stk.Stack[Idx] := System.Round(stk.Stack[Idx]);
+function greater(var stk: TStack): boolean;
+var a, b : TStkFloat;
+begin
+ Result := retrieveFloatParams(a, b, stk);
+ if Result then pushBool(a>b, stk);
+end;
 
-  Result := True;
+function equal(var stk: TStack): boolean;
+var a, b : TStkFloat;
+begin
+ Result := retrieveFloatParams(a, b, stk);
+ if Result then pushBool(a=b, stk);
 end;
 
 
-function initrnd(var stk: TStack): boolean; stdcall;
+function trunc(var stk: TStack): boolean;
+var a : TStkFloat;
+begin
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.trunc(a), stk);
+end;
+
+
+function round(var stk: TStack): boolean;
+var a : TStkFloat;
+begin
+ Result := retrieveFloatParam(a, stk);
+ if Result then pushFloat(System.round(a), stk);
+end;
+
+
+function initrnd(var stk: TStack): boolean;
 begin
   Randomize;
-  RandomSeed := RandSeed;
   Result     := True;
 end;
 
-function rnd(var stk: TStack): boolean; stdcall;
+function rnd(var stk: TStack): boolean;
 begin
-  Result := False;
-  if Stk.StIdx < MAXSTACK then
-    Inc(Stk.StIdx)
-  else
-    Exit;
-  RandSeed   := RandomSeed;
-  Stk.Stack[Stk.StIdx] := Random;
-  RandomSeed := RandSeed;
-  Result     := True;
+  Result := pushFloat(Random(), stk);
 end;
 
-function rndg(var stk: TStack): boolean; stdcall;
+function rndg(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
-  Result := False;
-  if Stk.StIdx < 2 then
-    Exit;
-  RandSeed   := RandomSeed;
-  Stk.Stack[Stk.StIdx - 1] := Math.RandG(Stk.Stack[Stk.StIdx - 1], Stk.Stack[Stk.StIdx]);
-  Stk.StIdx  := Stk.StIdx - 1;
-  RandomSeed := RandSeed;
-  Result     := True;
+  Result := retrieveFloatParams(a, b, stk);
+  if Result then pushFloat(Math.randG(a, b));
 end;
 
 
-function total(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
-  i  : longint;
-  tot: Double;
+procedure retrieveTotAndAvg(var tot, avg : TStkFloat; var stk : TStack);
+var i, count   : Longint;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then Exit;
-
   tot := 0;
-  For i := 1 to Idx  do
-  	tot := tot + Stk.Stack[i];
-  Stk.Stack[1] := tot;
-  Stk.StIdx := 1;
-  {never forget to set the Idx right at the end}
-  Result    := True;
+  count := 0;
+  for i:=1 to stk.idx do
+    if stk.stkType=FLOAT_STKTYPE then
+     begin
+      tot := tot + getFloat(i, stk);
+      Inc(count);
+     end;
+  if count>0 then avg:=tot/count else avg:=0;
 end;
 
-function average(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+
+function total(var stk: TStack): boolean;
+var tot, avg : TStkFloat;
 begin
-  Idx    := stk.StIdx;
-  Result := total(stk);
-  Stk.Stack[1] := Stk.Stack[1] / Idx;
+  retrieveTotAndAvg(tot, avg, stk);
+  initStack(stk);
+  Result := pushFloat(tot, stk);
 end;
 
-
-function variance(var stk: TStack): boolean; stdcall;
-var
-  Idx, i  : longint;
-  total, average: Extended;
+function average(var stk: TStack): boolean;
+var tot, avg : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx; {this should speed up and also made the code more readable}
-
-  {check if enough parameter}
-  if Idx < 1 then
-    Exit;
-
-  total := 0;
-  For i := 1 to Idx  do
-  	total := total + Stk.Stack[i];
-  average := total/idx;
-  total := 0;
-  For i := 1 to Idx  do
-  	total := total + System.sqr(Stk.Stack[i]-average);
-
-
-  Stk.Stack[1] := total/Idx;
-  Stk.StIdx := 1;
-  {never forget to set the Idx right at the end}
-  Result    := True;
+  retrieveTotAndAvg(tot, avg, stk);
+  initStack(stk);
+  Result := pushFloat(avg, stk);
 end;
 
-function stddev(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
-  i  : longint;
-  total, average: Extended;
+
+function variance(var stk: TStack): boolean;
+var tot, avg, variance : TStkFloat;
+begin
+ retrieveTotAndAvg(tot, avg, stk);
+ variance := 0;
+ for i:=1 to stk.idx do
+   if stk.stkType=FLOAT_STKTYPE then
+      variance := variance + System.sqr(getFloat(i, stk)-avg);
+
+  initStack(stk);
+  Result := pushFloat(variance, stk);
+end;
+
+function stddev(var stk: TStack): boolean;
 begin
   Result := variance(stk);
   Stk.Stack[1] := System.sqrt(Stk.Stack[1]);
 end;
 
 
-function pop(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
+function pop(var stk: TStack): boolean;
 begin
- if Stk.StIdx > 0 then Stk.StIdx := Stk.StIdx - 1;
- Result := True;
+ Result := mvIdx(stk, -1);
 end;
 
-function switch(var stk: TStack): boolean; stdcall;
-var
-  Idx: integer;
-  tmpExtended : Extended;
-  tmpPChar : PChar;
+function switch(var stk: TStack): boolean;
+var a, b : TStkFloat;
 begin
- Result := False;
- if Stk.StIdx < 2 then
-    Exit;
- 
- // switch numbers 
- tmpExtended := Stk.Stack[Stk.StIdx ];
- Stk.Stack[Stk.StIdx ] := Stk.Stack[Stk.StIdx - 1];
- Stk.Stack[Stk.StIdx - 1] := tmpExtended;
-
- // switch PChars
- tmpPChar := Stk.PCharStack[Stk.StIdx ];
- Stk.PCharStack[Stk.StIdx ] := Stk.PCharStack[Stk.StIdx - 1];
- Stk.PCharStack[Stk.StIdx - 1] := tmpPChar;
- Result := True;
+ Result := retrieveFloatParams(a, b, stk);
+ if Result then
+      begin
+        pushFloat(b);
+        pushFloat(a);
+      end;
 end;
 
 end.
