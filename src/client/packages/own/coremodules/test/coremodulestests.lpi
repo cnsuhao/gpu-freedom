@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,15 +36,15 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="25">
+    <Units Count="26">
       <Unit0>
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
         <CursorPos X="26" Y="5"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="35"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -54,7 +54,7 @@
         <CursorPos X="5" Y="98"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -62,8 +62,8 @@
         <UnitName Value="stacks"/>
         <CursorPos X="30" Y="156"/>
         <TopLine Value="147"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="16"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -97,10 +97,10 @@
       <Unit7>
         <Filename Value="testplugins.pas"/>
         <UnitName Value="testplugins"/>
-        <CursorPos X="16" Y="6"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="12"/>
+        <CursorPos X="29" Y="68"/>
+        <TopLine Value="48"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -108,22 +108,26 @@
         <UnitName Value="plugins"/>
         <CursorPos X="60" Y="27"/>
         <TopLine Value="4"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\pluginmanagers.pas"/>
         <UnitName Value="pluginmanagers"/>
-        <CursorPos X="43" Y="266"/>
-        <TopLine Value="234"/>
+        <CursorPos X="99" Y="300"/>
+        <TopLine Value="294"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="testpluginmanagers.pas"/>
         <UnitName Value="testpluginmanagers"/>
         <CursorPos X="18" Y="8"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="12"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -131,8 +135,8 @@
         <UnitName Value="testargretrievers"/>
         <CursorPos X="1" Y="22"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="12"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -140,8 +144,8 @@
         <UnitName Value="argretrievers"/>
         <CursorPos X="105" Y="244"/>
         <TopLine Value="212"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="16"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -163,8 +167,8 @@
         <UnitName Value="specialcommands"/>
         <CursorPos X="86" Y="58"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="9"/>
-        <UsageCount Value="17"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
@@ -185,10 +189,10 @@
         <Filename Value="..\coremodules.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodules"/>
-        <CursorPos X="1" Y="112"/>
-        <TopLine Value="82"/>
+        <CursorPos X="89" Y="65"/>
+        <TopLine Value="48"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -231,12 +235,21 @@
         <UnitName Value="loggers"/>
         <CursorPos X="19" Y="44"/>
         <TopLine Value="18"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="..\stkconstants.pas"/>
+        <UnitName Value="stkconstants"/>
+        <CursorPos X="28" Y="64"/>
+        <TopLine Value="41"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit25>
     </Units>
-    <JumpHistory Count="26" HistoryIndex="25">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="teststacks.pas"/>
         <Caret Line="33" Column="10" TopLine="12"/>
@@ -341,6 +354,18 @@
         <Filename Value="..\coremodules.pas"/>
         <Caret Line="110" Column="20" TopLine="79"/>
       </Position26>
+      <Position27>
+        <Filename Value="..\pluginmanagers.pas"/>
+        <Caret Line="327" Column="43" TopLine="295"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\pluginmanagers.pas"/>
+        <Caret Line="22" Column="44" TopLine="20"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\pluginmanagers.pas"/>
+        <Caret Line="316" Column="85" TopLine="291"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

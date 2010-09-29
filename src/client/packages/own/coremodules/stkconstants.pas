@@ -61,7 +61,10 @@ const
   INDEX_OUT_OF_RANGE       = 'INDEX OUT OF RANGE';
   COULD_NOT_PARSE_POINTER_ID = 17;
   COULD_NOT_PARSE_POINTER    = 'COULD NOT PARSE POINTER';
-  
+  STACK_VERSION_MISMATCH_ID = 18;
+  STACK_VERSION_MISMATCH    = 'STACK VERSION MISMATCH';
+
+
   // constants used in argretrievers.pas and parsers.pas
   STK_ARG_UNKNOWN      = 0;
   STK_ARG_CALL         = 10;

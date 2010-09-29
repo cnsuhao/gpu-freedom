@@ -19,7 +19,7 @@ unit pluginmanagers;
 interface
 
 uses SysUtils, SyncObjs,
-     stacks, plugins, stkconstants;
+     stacks, plugins, stkconstants, loggers;
 
 const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
       MAX_HASH    = 64;  // how many function calls we hash for faster retrieval
@@ -33,7 +33,7 @@ end;
 type
   TPluginManager = class(TObject)
    public  
-    constructor Create(Path, Extension : String);
+    constructor Create(Path, Extension : String; logger : TLogger);
     destructor  Destroy();
     
     procedure loadAll(var error : TStkError);
@@ -55,6 +55,7 @@ type
      plugidx_, hashidx_  : Longint;  // indexes for the arrays above
 
      CS_ : TCriticalSection;
+     logger_ : TLogger;
 
      function  load(pluginName : String;  var error : TStkError)  : Boolean;
      procedure register_hash(funcName : String; plugin : PPlugin);
@@ -67,11 +68,12 @@ end;
 
 implementation
 
-constructor TPluginManager.Create(Path, Extension : String);
+constructor TPluginManager.Create(Path, Extension : String; logger : TLogger);
 var i : Longint;
 begin
   inherited Create();
   CS_ := TCriticalSection.Create;
+  logger_ := logger;
   path_ := Path;
   extension_ := Extension;
   plugidx_ := 0;
@@ -246,7 +248,7 @@ begin
             begin           
              Result := plugs_[i]^.load();
              CS_.Leave;
-			 Exit;
+	     Exit;
             end; 
        end;
   
@@ -287,6 +289,7 @@ end;
 
 function  TPluginManager.load(pluginName : String; var error : TStkError) : Boolean;
 var plug : TPlugin;
+    plugVersion : String;
 begin
  Result := False;
  plug := TPlugin.Create(path_, pluginName, extension_);
@@ -298,11 +301,24 @@ begin
        begin
         Dec(plugidx_);
         plug.discard();
-
         error.errorId  := MAX_NUMBER_OF_PLUGINS_REACHED_ID;
         error.errorMsg := MAX_NUMBER_OF_PLUGINS_REACHED;
         error.errorArg := '('+IntToStr(MAX_PLUGINS)+')';
+        logger_.log(LVL_SEVERE, 'Maximum number of plugins reached '+error.errorArg);
+        Exit;
        end;
+     plugVersion := plug.getDescription('stkversion');
+     if STACK_VERSION<>plugVersion then
+       begin
+        error.errorId  := STACK_VERSION_MISMATCH_ID;
+        error.errorMsg := STACK_VERSION_MISMATCH;
+        error.errorArg := 'v'+Plug.getName()+'='+plugVersion+' vCore='+STACK_VERSION;
+        logger_.log(LVL_SEVERE, 'Stack version mismatch in plugin: '+error.errorArg);
+        Dec(plugidx_);
+        plug.discard();
+        Exit;
+       end;
+
      plugs_[plugidx_] := @plug;  
     end;
   Result := plug.isLoaded();   

@@ -24,6 +24,8 @@ procedure TTestPlugin.TestBasicPlugin;
 var plugin : TPlugin;
     appPath : String;
     stk     : TStack;
+
+    piMonte : TStkFloat;
 begin
  AppPath := ExtractFilePath(ParamStr(0));
  plugin  := TPlugin.Create(AppPath+PathDelim+'plugins','basic','dll');
@@ -58,6 +60,12 @@ begin
  AssertEquals('Call to dvd', true, plugin.method_execute('dvd', stk));
  AssertEquals('5/3 is', 5/3, getFloat(1, stk));
 
+ clearStk(stk);
+ pushFloat(1E6, stk);
+ AssertEquals('Call to montecarlo_pi', true, plugin.method_execute('montecarlo_pi', stk));
+ popFloat(piMonte, stk);
+ AssertEquals('Pi between 3.0 and 3.2', true, (piMonte>=3) and (piMonte<=3.2));
+ WriteLn(FloatToStr(piMonte));
 
  AssertEquals('Discarding plugin', true, plugin.discard());
 end;
