@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="6"/>
+      <ActiveEditorIndexAtStart Value="5"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -97,7 +97,7 @@
       <Unit7>
         <Filename Value="testplugins.pas"/>
         <UnitName Value="testplugins"/>
-        <CursorPos X="29" Y="68"/>
+        <CursorPos X="45" Y="63"/>
         <TopLine Value="48"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="13"/>
@@ -233,8 +233,8 @@
       <Unit24>
         <Filename Value="..\..\..\..\lib\own\misc\loggers.pas"/>
         <UnitName Value="loggers"/>
-        <CursorPos X="19" Y="44"/>
-        <TopLine Value="18"/>
+        <CursorPos X="19" Y="74"/>
+        <TopLine Value="58"/>
         <EditorIndex Value="5"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -249,7 +249,7 @@
         <Loaded Value="True"/>
       </Unit25>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="teststacks.pas"/>
         <Caret Line="33" Column="10" TopLine="12"/>
@@ -366,6 +366,10 @@
         <Filename Value="..\pluginmanagers.pas"/>
         <Caret Line="316" Column="85" TopLine="291"/>
       </Position29>
+      <Position30>
+        <Filename Value="..\..\..\..\lib\own\misc\loggers.pas"/>
+        <Caret Line="75" Column="18" TopLine="54"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -71,6 +71,9 @@ begin
   max_filesize_ := maxfilesize;
   full_name_ := path+ PathDelim + filename;
 
+  if not DirectoryExists(path_) then
+    MkDir(path_);
+
   if not FileExists(full_name_) then
     begin
      AssignFile(F_, full_name_);
