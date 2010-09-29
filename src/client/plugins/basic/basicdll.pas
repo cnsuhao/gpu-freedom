@@ -3,11 +3,12 @@ unit basicdll;
 
 interface
 
-uses stacks;
+uses stacks,
+     Math;
 
 function description: TStkString;
-function weblinktoplugin: TStkString;
-function stkversion: TStkString;
+function weburl     : TStkString;
+function stkversion : TStkString;
 
 function add(var stk: TStack): boolean;
 function sub(var stk: TStack): boolean;
@@ -76,7 +77,7 @@ end;
 function checkFloatParams(nbParams : Longint; stk : TStack) : Boolean;
 var types : TStkTypes;
 begin
- if (nbParams<1) or (nbParams>3) then raise Exception.Create('basic: Internal error in checkFloatParams');
+ //if (nbParams<1) or (nbParams>3) then raise Exception.Create('basic: Internal error in checkFloatParams');
  types[1]:=FLOAT_STKTYPE;
  types[2]:=FLOAT_STKTYPE;
  types[3]:=FLOAT_STKTYPE;
@@ -94,7 +95,7 @@ begin
  Result := checkFloatParams(2, stk);
  if Result then
     begin
-      popFloat(b, stk)
+      popFloat(b, stk);
       popFloat(a, stk);
     end
  else
@@ -109,8 +110,8 @@ begin
  Result := checkFloatParams(3, stk);
  if Result then
     begin
-      popFloat(c, stk)
-      popFloat(b, stk)
+      popFloat(c, stk);
+      popFloat(b, stk);
       popFloat(a, stk);
     end
  else
@@ -199,48 +200,51 @@ function tan(var stk: TStack): boolean;
 var a : TStkFloat;
 begin
  Result := retrieveFloatParam(a, stk);
- if Result then pushFloat(System.tan(a), stk);
+ if Result then pushFloat(Math.tan(a), stk);
 end;
 
 function arcsin(var stk: TStack): boolean;
 var a : TStkFloat;
 begin
  Result := retrieveFloatParam(a, stk);
- if Result then pushFloat(System.arcsin(a), stk);
+ if Result then pushFloat(Math.arcsin(a), stk);
 end;
 
 function arccos(var stk: TStack): boolean;
 var a : TStkFloat;
 begin
  Result := retrieveFloatParam(a, stk);
- if Result then pushFloat(System.arccos(a), stk);
+ if Result then pushFloat(Math.arccos(a), stk);
 end;
 
 function arctan(var stk: TStack): boolean;
 var a : TStkFloat;
 begin
  Result := retrieveFloatParam(a, stk);
- if Result then pushFloat(System.arctan(a), stk);
+ if Result then pushFloat(Math.cotan(a), stk);
 end;
 
 function pow(var stk: TStack): boolean;
 var a, b : TStkFloat;
 begin
  Result := retrieveFloatParams(a, b, stk);
- if Result then pushFloat(System.Power(a, b), stk);
+ if Result then pushFloat(Math.Power(a, b), stk);
 end;
 
 function powmod(var stk: TStack): boolean;
-var basis, exponential, modulo,
-    value : TStkFloat;
-    i     : Longint;
+var basis, exponential, modulo : TStkFloat;
+    b,e,m,
+    value, i   : Longint;
 begin
   Result := retrieve3FloatParams(basis, exponential, modulo, stk);
   if not Result then Exit;
 
   value := 1;
-  for i:=1 to Trunc(exponential) do
-    value := value*basis mod modulo;
+  b := System.trunc(basis);
+  e := System.trunc(exponential);
+  m := System.trunc(modulo);
+  for i:=1 to e do
+    value := value*b mod m;
   Result := pushFloat(value, stk);
 end;
 
@@ -298,7 +302,7 @@ function rndg(var stk: TStack): boolean;
 var a, b : TStkFloat;
 begin
   Result := retrieveFloatParams(a, b, stk);
-  if Result then pushFloat(Math.randG(a, b));
+  if Result then pushFloat(Math.randg(a, b), stk);
 end;
 
 
@@ -308,7 +312,7 @@ begin
   tot := 0;
   count := 0;
   for i:=1 to stk.idx do
-    if stk.stkType=FLOAT_STKTYPE then
+    if stk.stkType[i]=FLOAT_STKTYPE then
      begin
       tot := tot + getFloat(i, stk);
       Inc(count);
@@ -335,16 +339,23 @@ end;
 
 
 function variance(var stk: TStack): boolean;
-var tot, avg, variance : TStkFloat;
+var tot, avg, vr : TStkFloat;
+    i, count : Longint;
 begin
  retrieveTotAndAvg(tot, avg, stk);
- variance := 0;
+ vr := 0;
+ count := 0;
  for i:=1 to stk.idx do
-   if stk.stkType=FLOAT_STKTYPE then
-      variance := variance + System.sqr(getFloat(i, stk)-avg);
-
+   if stk.stkType[i]=FLOAT_STKTYPE then
+      begin
+        vr := vr + System.sqr(getFloat(i, stk)-avg);
+        Inc(count);
+      end;
   initStack(stk);
-  Result := pushFloat(variance, stk);
+  if count>0 then
+    Result := pushFloat(vr/count, stk)
+  else
+    Result := pushFloat(0, stk);
 end;
 
 function stddev(var stk: TStack): boolean;
@@ -365,8 +376,8 @@ begin
  Result := retrieveFloatParams(a, b, stk);
  if Result then
       begin
-        pushFloat(b);
-        pushFloat(a);
+        pushFloat(b, stk);
+        pushFloat(a, stk);
       end;
 end;
 
