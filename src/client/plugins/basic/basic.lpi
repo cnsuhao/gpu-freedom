@@ -12,7 +12,7 @@
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -31,20 +31,20 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="basic.dpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="11" Y="20"/>
         <TopLine Value="18"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="basicdll.pas"/>
         <UnitName Value="basicdll"/>
-        <CursorPos X="17" Y="414"/>
+        <CursorPos X="49" Y="423"/>
         <TopLine Value="404"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="13"/>
@@ -69,7 +69,7 @@
         <UnitName Value="stkconstants"/>
         <CursorPos X="26" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -78,7 +78,7 @@
         <UnitName Value="stacks"/>
         <CursorPos X="20" Y="122"/>
         <TopLine Value="94"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -89,6 +89,16 @@
         <TopLine Value="395"/>
         <UsageCount Value="10"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="..\..\lib\own\misc\logger.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="logger"/>
+        <CursorPos X="12" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit7>
     </Units>
     <JumpHistory Count="18" HistoryIndex="17">
       <Position1>

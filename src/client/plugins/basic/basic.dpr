@@ -1,6 +1,6 @@
 library basic;
 
-uses  basicdll in 'basicdll.pas';
+uses  basicdll in 'basicdll.pas', logger;
 
 {$R *.RES}
 exports description;
