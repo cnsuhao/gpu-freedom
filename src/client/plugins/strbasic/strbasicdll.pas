@@ -3,7 +3,7 @@ unit strbasicdll;
 
 interface
 
-uses SysUtils, stacks;
+uses SysUtils, stacks, formatsets;
 
 function description    : TStkString;
 function weburl         : TStkString;
@@ -40,195 +40,122 @@ begin
   Result := STACK_VERSION;
 end;
 
-function concat(var stk: TStack): boolean;
-var
-  Idx: integer;
-  tmp: string;
-  l:   integer;
+function checkStringParams(nbParams : Longint; var stk : TStack) : Boolean;
+var types : TStkTypes;
 begin
-  Result := False;
-  Idx    := stk.StIdx; {this should speed up and also made the code more readable}
+ types[1]:=STRING_STKTYPE;
+ types[2]:=STRING_STKTYPE;
+ Result  :=typeOfParametersCorrect(nbParams, stk, types);
+end;
 
-  {check if enough parameter}
-  if Idx < 2 then
-    Exit;
+function retrieveStringParam(var a : TStkString; var stk : TStack) : Boolean;
+begin
+ Result := checkStringParams(1, stk);
+ if Result then popStr(a, stk) else a := '';
+end;
 
-  {check that both parameters are strings}
-  if not (Stk.Stack[Idx - 1] = INF) then
-    Exit;
-  if not (Stk.Stack[Idx] = INF) then
-    Exit;
+function retrieveStringParams(var a : TStkString; var b: TStkString; var stk : TStack) : Boolean;
+begin
+ Result := checkStringParams(2, stk);
+ if Result then
+    begin
+      popStr(b, stk);
+      popStr(a, stk);
+    end
+ else
+    begin
+      a := '';
+      b := '';
+    end;
+end;
 
-  tmp := StrPas(Stk.PCharStack[Idx - 1]) + StrPas(Stk.PCharStack[Idx]);
-
-
-  Stk.QCharStack[Idx - 1] := Str2PChar(tmp);
-
-  {never forget to set the Idx right at the end}
-  stk.StIdx := Idx - 1;
-  Result    := True;
+function concat(var stk: TStack): boolean;
+var a, b : TStkString;
+begin
+  Result := retrieveStringParams(a, b, stk);
+  if Result then pushStr(a+b, stk);
 end;
 
 function substr(var stk: TStack): boolean;
-var
-  Idx, position: integer;
+var a, b : TStkString;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then
-    Exit;
-  if not (Stk.Stack[Idx - 1] = INF) then
-    Exit;
-  if not (Stk.Stack[Idx] = INF) then
-    Exit;
-
-  position := Pos(StrPas(Stk.PCharStack[Idx - 1]),
-    StrPas(Stk.PCharStack[Idx]));
-
-  Stk.Stack[Idx - 1] := position;
-  //Stk.PCharStack[Idx-1] := nil;
-
-  stk.StIdx := Idx - 1;
-  Result    := True;
+  Result := retrieveStringParams(a, b, stk);
+  if Result then pushFloat(Pos(a, b), stk);
 end;
 
 function copy(var stk: TStack): boolean;
-var
-  Idx:    integer;
-  tmp, S: string;
+var a, b : TStkFloat;
+    s : TStkString;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 3 then
-    Exit;
-  if not (Stk.Stack[Idx - 2] = INF) then
-    Exit;
-  if (Stk.Stack[Idx - 1] = INF) then
-    Exit;
-  if (Stk.Stack[Idx] = INF) then
-    Exit;
-
-  S   := StrPas(Stk.PCharStack[Idx - 2]);
-  tmp := System.Copy(S, Trunc(Stk.Stack[Idx - 1]),
-    Trunc(Stk.Stack[Idx]));
-
-  Stk.Stack[Idx - 2]      := INF;
-  Stk.QCharStack[Idx - 2] := Str2PChar(tmp);
-
-  stk.StIdx := Idx - 2;
-  Result    := True;
+ types[1]:=STRING_STKTYPE;
+ types[2]:=FLOAT_STKTYPE;
+ types[3]:=FLOAT_STKTYPE;
+ Result  :=typeOfParametersCorrect(3, stk, types);
+ if Result then
+      begin
+        popFloat(b, stk);
+        popFloat(a, stk);
+        popStr(s, stk);
+        pushStr(Copy(s, trunc(a), trunc(b)), stk);
+      end;
 end;
 
 function Delete(var stk: TStack): boolean;
-var
-  Idx:    integer;
-  tmp, S: string;
+var a, b : TStkFloat;
+    s : TStkString;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 3 then
-    Exit;
-  if not (Stk.Stack[Idx - 2] = INF) then
-    Exit;
-  if (Stk.Stack[Idx - 1] = INF) then
-    Exit;
-  if (Stk.Stack[Idx] = INF) then
-    Exit;
-
-  S := StrPas(Stk.PCharStack[Idx - 2]);
-  System.Delete(S,
-    Trunc(Stk.Stack[Idx - 1]),
-    Trunc(Stk.Stack[Idx]));
-
-  tmp := S;
-  Stk.Stack[Idx - 2] := INF;
-  Stk.QCharStack[Idx - 2] := Str2PChar(tmp);
-
-  stk.StIdx := Idx - 2;
-  Result    := True;
+ types[1]:=STRING_STKTYPE;
+ types[2]:=FLOAT_STKTYPE;
+ types[3]:=FLOAT_STKTYPE;
+ Result  :=typeOfParametersCorrect(3, stk, types);
+ if Result then
+      begin
+        popFloat(b, stk);
+        popFloat(a, stk);
+        popStr(s, stk);
+        pushStr(Delete(s, trunc(a), trunc(b)), stk);
+      end;
 end;
 
 function insert(var stk: TStack): boolean;
-var
-  Idx:    integer;
-  tmp, S: string;
+var s1, s2 : TStkString;
+    a      : TStkFloat;
+
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 3 then
-    Exit;
-  if not (Stk.Stack[Idx - 2] = INF) then
-    Exit;
-  if not (Stk.Stack[Idx - 1] = INF) then
-    Exit;
-  if (Stk.Stack[Idx] = INF) then
-    Exit;
+ types[1]:=STRING_STKTYPE;
+ types[2]:=STRING_STKTYPE;
+ types[3]:=FLOAT_STKTYPE;
+ Result  :=typeOfParametersCorrect(3, stk, types);
+ if Result then
+      begin
+        popFloat(a, stk);
+        popStr(s2, stk);
+        popStr(s1, stk);
+        pushStr(Insert(s1, s2, trunc(a), stk);
+      end;
 
-  S := StrPas(Stk.PCharStack[Idx - 1]);
-  System.Insert(StrPas(Stk.PCharStack[Idx - 2]),
-    S,
-    Trunc(Stk.Stack[Idx]));
-
-  tmp := S;
-  Stk.Stack[Idx - 2] := INF;
-  Stk.QCharStack[Idx - 2] := Str2PChar(tmp);
-
-  stk.StIdx := Idx - 2;
-  Result    := True;
 end;
 
 function length(var stk: TStack): boolean;
-var
-  idx: integer;
+var s : TStkString;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then
-    Exit;
-  if not (Stk.Stack[Idx] = INF) then Exit;
-
-  Stk.Stack[Idx] := System.Length(StrPas(Stk.PCharStack[Idx]));
-  //Stk.PCharStack[Idx] := nil;
-
-  Result := True;
+  Result := retrieveStringParam(s, stk);
+  if Result then pushFloat(trunc(length(s)), stk);
 end;
 
 function tostr(var stk: TStack): boolean;
-var
-  idx: integer;
-  FormatSet : TFormatSet;
+var a : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 1 then Exit;
-  if (Stk.Stack[Idx] = INF) then Exit;
-
-
-  Stk.PCharStack[Idx] := PChar(FloatToStr(Stk.Stack[Idx],FormatSet.fs));
-  Stk.Stack[Idx] := INF;
-
-  Result := True;
+  Result := popFloat(a, stk);
+  if Result then pushStr(FloatToStr(a), stk);
 end;
 
 function compare(var stk: TStack): boolean;
-var
-  idx: integer;
-  str1, str2 : String;
+var str1, str2 : TStkFloat;
 begin
-  Result := False;
-  Idx    := stk.StIdx;
-  if Idx < 2 then Exit;
-  if not (Stk.Stack[Idx] = INF) then Exit;
-  if not (Stk.Stack[Idx-1] = INF) then Exit;
-
-  str1 := StrPas(Stk.PCharStack[Idx]);
-  str2 := StrPas(Stk.PCharStack[Idx-1]);
-
-  if (str1=str2) then Stk.Stack[Idx-1] :=1 else Stk.Stack[Idx-1] := 0;
-
-  Stk.StIdx := Stk.StIdx - 1;
-
-  Result := True;
+ Result := retrieveStringParams(str1, str2, stk);
+ if result then
+     pushBool(str1=str2, stk);
 end;
 
 
