@@ -62,7 +62,7 @@ constructor TCoreModule.Create(path, extension : String);
 begin
    inherited Create();
    logger_         := TLogger.Create(path+PathDelim+'logs', 'core.log');
-   plugman_        := TPluginManager.Create(path+PathDelim+'plugins', extension, logger_);
+   plugman_        := TPluginManager.Create(path+PathDelim+'plugins'+PathDelim+'lib', extension, logger_);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();

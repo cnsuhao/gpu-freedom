@@ -28,7 +28,7 @@ var plugin : TPlugin;
     piMonte : TStkFloat;
 begin
  AppPath := ExtractFilePath(ParamStr(0));
- plugin  := TPlugin.Create(AppPath+PathDelim+'plugins','basic','dll');
+ plugin  := TPlugin.Create(AppPath+PathDelim+'plugins/lib','basic','dll');
  AssertEquals('Plugin is not loaded', false, plugin.isloaded());
  AssertEquals('Loading plugin', true, plugin.load());
  AssertEquals('Plugin is loaded', true, plugin.isloaded());
@@ -65,7 +65,6 @@ begin
  AssertEquals('Call to montecarlo_pi', true, plugin.method_execute('montecarlo_pi', stk));
  popFloat(piMonte, stk);
  AssertEquals('Pi between 3.0 and 3.2', true, (piMonte>=3) and (piMonte<=3.2));
- WriteLn(FloatToStr(piMonte));
 
  AssertEquals('Discarding plugin', true, plugin.discard());
 end;

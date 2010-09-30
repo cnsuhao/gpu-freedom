@@ -1,5 +1,11 @@
 unit basicdll;
+{
+  This library defines basic routines for GPU.
 
+  (c) by 2002-2010 the GPU Development Team
+  (c) by 2010 HB9TVM
+  This unit is released under GNU Public License (GPL)
+}
 
 interface
 
@@ -398,12 +404,12 @@ begin
   count:=0;
   for i:=1 to nbthrows do
      begin
-       x := random(1);
-       y := random(1);
+       x := random();
+       y := random();
        if (System.sqrt(x*x+y*y)<=1) then Inc(count);
      end;
 
-  pushFloat(count/i, stk);
+  pushFloat(count/nbthrows*4, stk);
 end;
 
 
@@ -419,8 +425,8 @@ begin
  walk_x := 0; walk_y := 0;
  for i:=1 to System.trunc(steps) do
      begin
-       dir_x := random(1);
-       dir_y := random(1);
+       dir_x := random();
+       dir_y := random();
        dir_length := System.sqrt(dir_x*dir_x+dir_y*dir_y);
        // normalize and multiply with length
        dir_x := dir_x/dir_length*length;

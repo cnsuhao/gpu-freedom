@@ -40,9 +40,9 @@ File Tree structure for this package, codenamed freedom follows:
    /logs        logfiles for core
    /languages   languages for core and extensions
    /plugins     plugins come here, managed by core
-      /libs     plugin as compiled libraries
-      /executables external executables
-	  /jars     Java archives
+      /lib      plugin as compiled libraries
+      /exe      external executables
+      /jar      Java archives
    /temp        temporary directory for general use
    /workunits   directory for workunits
       /incoming incoming workunits
