@@ -9,6 +9,11 @@ Freepascal/Lazarus
 
 Base setup
 ----------
+Client is separated into Client GUI and Client core.
+Client core has ability to run in background or with interactive console shell.
+Client GUI includes a 3D OpenGL netmapper and chat window, job submission and job results windows.
+Client GUI asks at startup for user and node configuration details which will be reported to superserver
+
 Client has one home GPU II server
 It announces itself to the home GPU II server (each two minutes)
 It retrieves a list of other available GPU II servers from the home server
@@ -28,7 +33,7 @@ Jobs: ability to send GPU jobs with broadcast or target node flag from webserver
 Network presence: like it is done now in filedistributor, additionally, clients can retrieve
  information from multiple GPU II servers one after the other
 
-TGPU component to handle GPU jobs loaded with DLLs (most plugins and frontends compatible with GPU I)
+TCoreModule component to handle GPU jobs loaded with libraries (most plugins and frontends compatible with GPU I)
 TXmlJobs component to handle XML work units
 Trayicon minimize
 

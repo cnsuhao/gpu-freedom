@@ -17,11 +17,13 @@ Programming languages
 ---------------------
 core, mainapp and screensaver in Freepascal/Lazarus
 server in PHP&mySQL
-plugins and frontends in Freepascal/C/C++/Java 
+plugins and frontends in Freepascal/C/C++/Java and executables targeting the platform on which GPU II runs
 
 Targeted platform
 -----------------
-client will run on Windows, Linux and MacOSX and Windows (everywhere where Lazarus runs)
+client GUI will run on Windows, Linux and MacOSX and Windows (everywhere where Lazarus runs)
+client core will run on Windows, Linux and MacOSX and Windows (everywhere where freepascal runs),
+ it will also feature an interative console similar to Mutella
 server will run on Windows, Linux, MacOSX, several Unix flavors (everywhere where PHP/mySQL run on Apache)
 
 File Tree structure for this package, codenamed freedom follows:
@@ -37,7 +39,10 @@ File Tree structure for this package, codenamed freedom follows:
    /extensions  data for plugins and frontends
    /logs        logfiles for core
    /languages   languages for core and extensions
-   /plugins     dll of plugins come here, loaded by core
+   /plugins     plugins come here, managed by core
+      /libs     plugin as compiled libraries
+      /executables external executables
+	  /jars     Java archives
    /temp        temporary directory for general use
    /workunits   directory for workunits
       /incoming incoming workunits
@@ -52,6 +57,7 @@ File Tree structure for this package, codenamed freedom follows:
 
 /docs documentation for gpu_freedom
   /dev   documentation for developers
+    /fpcunit documentation regarding fpcunit framework for unit testing (port of JUnit in FPC)
   /users documentation for users
 
 /install
@@ -68,7 +74,8 @@ File Tree structure for this package, codenamed freedom follows:
        /simclimate Climate simulation frontend
 
      /plugins      source code for plugins
-       /basic      plugin containg basic routines like add and mul
+       /basic      plugin containg basic routines for floats
+	   /strbasic   plugin containg simple routines for strings
  
      /lib          libraries for GPU
        /own        own libraries developed by the project
@@ -86,7 +93,8 @@ File Tree structure for this package, codenamed freedom follows:
    /cluster  source code for cluster management of clients
    /db    scripts to create the database schema
    /jobqueue  source code managing the job queue
-   /supercluster   source code to manage cluster of servers
+   /supercluster   source code to inform parent server, so that
+                   servers can be organized hierarchically in a tree
    /workunits  source code to manage workunits
  
     
