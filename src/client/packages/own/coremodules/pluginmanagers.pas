@@ -19,7 +19,7 @@ unit pluginmanagers;
 interface
 
 uses SysUtils, SyncObjs,
-     stacks, plugins, stkconstants, loggers;
+     stacks, plugins, stkconstants, loggers, utils;
 
 const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
       MAX_HASH    = 64;  // how many function calls we hash for faster retrieval
@@ -100,8 +100,9 @@ begin
 end;
 
 procedure TPluginManager.loadAll(var error : TStkError);
-var retval  : integer;
-    SRec    :   TSearchRec;
+var retval    : Longint;
+    SRec      : TSearchRec;
+    filename  : String;
 begin
   CS_.Enter;
   if plugidx_<>0 then raise Exception.Create('Please call discardAll() first');
@@ -109,12 +110,14 @@ begin
   retval := FindFirst(path_+PathDelim+'*.' + extension_, faAnyFile, SRec);
   while retval = 0 do
    begin
-
+     filename := SRec.Name;
+     filename := ExtractParam(filename, '.'); // removing extension
      if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
-        load(SRec.Name, error);
+        load(filename, error);
 
      retval := FindNext(SRec);
    end;
+  logger_.log('All plugins loaded.');
   CS_.Leave;  
 end;
 
@@ -130,6 +133,7 @@ begin
   end; 
  plugidx_ := 0;
  clearHash();
+ logger_.log('All plugins discarded.');
  CS_.Leave;
 end;
 
@@ -140,7 +144,6 @@ begin
  Result := false;
  for i:=1 to plugidx_ do
     begin
-     logger_.log(IntToStr(i));
      if plugs_[i].isloaded() and
         (plugs_[i].getName()=pluginName) then
 	    Result := true;
@@ -331,7 +334,7 @@ begin
        end;
 
      plugs_[plugidx_] := plug;
-     logger_.log('Plugin '+plugs_[plugidx_].getName()+' loaded at slot '+IntToStr(plugidx_));
+     logger_.log('Plugin '+plugs_[plugidx_].getName()+' loaded at slot '+IntToStr(plugidx_)+'.');
     end;
   Result := plug.isLoaded();   
 end;
