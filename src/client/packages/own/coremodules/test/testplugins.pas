@@ -16,6 +16,7 @@ type
     procedure TearDown; override; 
   published
     procedure TestBasicPlugin;
+    procedure TestStrBasicPlugin;
   end; 
 
 implementation
@@ -68,6 +69,71 @@ begin
 
  AssertEquals('Discarding plugin', true, plugin.discard());
 end;
+
+
+procedure  TTestPlugin.TestStrBasicPlugin;
+var AppPath : String;
+    plugin  : TPlugin;
+    stk     : TStack;
+    str,
+    str2    : TStkString;
+    a       : TStkFloat;
+    i       : Longint;
+begin
+ AppPath := ExtractFilePath(ParamStr(0));
+ plugin  := TPlugin.Create(AppPath+PathDelim+'plugins/lib','strbasic','dll');
+ AssertEquals('Plugin is not loaded', false, plugin.isloaded());
+ AssertEquals('Loading plugin', true, plugin.load());
+ AssertEquals('Plugin is loaded', true, plugin.isloaded());
+ AssertEquals('Method concat exists', true, plugin.method_exists('concat'));
+ AssertEquals('Method asdfsadfsdf does not exist', false, plugin.method_exists('asdfsadfsdf'));
+ AssertEquals('Method stkversion exists', true, plugin.method_exists('stkversion'));
+ AssertEquals('Stkversion matches', STACK_VERSION, plugin.getDescription('stkversion'));
+
+ clearStk(stk);
+ pushStr('freedom ', stk);
+ pushStr('light my fire', stk);
+ AssertEquals('Call to concat', true, plugin.method_execute('concat', stk));
+ popStr(str, stk);
+ AssertEquals('Concat is', 'freedom light my fire', str);
+
+ clearStk(stk);
+ pushStr('cadabra', stk);
+ pushStr('abracadabra', stk);
+ AssertEquals('Call substr', true, plugin.method_execute('substr', stk));
+ popFloat(a, stk);
+ AssertEquals('Pos of cadabra is', 5, a);
+
+ clearStk(stk);
+ pushStr('computational ', stk);
+ pushStr('gpu is revolution', stk);
+ pushFloat(8, stk);
+ AssertEquals('Call to insert', true, plugin.method_execute('insert', stk));
+ popStr(str, stk);
+ AssertEquals('Insert is', 'gpu is computational revolution', str);
+
+ clearStk(stk);
+ pushStr('gpu is not good', stk);
+ pushFloat(8, stk);
+ pushFloat(4, stk);
+ AssertEquals('Call to delete', true, plugin.method_execute('delete', stk));
+ popStr(str, stk);
+ AssertEquals('Delete is', 'gpu is good', str);
+
+
+ // testing a huge string
+ clearStk(stk);
+ str  := '';
+ str2 := '';
+ pushStr(str, stk);
+ for i:=1 to 1000 do
+      begin
+
+      end;
+
+ AssertEquals('Discarding plugin', true, plugin.discard());
+end;
+
 
 procedure TTestPlugin.SetUp; 
 begin
