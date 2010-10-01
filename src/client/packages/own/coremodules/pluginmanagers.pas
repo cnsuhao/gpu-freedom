@@ -195,6 +195,7 @@ function TPluginManager.retrievePlugin(funcname : String; var plugname : String;
 var i : Longint;
 begin
  Result := false;
+ plugName := '';
  if Trim(funcName)='' then Exit;
  
  CS_.Enter;
