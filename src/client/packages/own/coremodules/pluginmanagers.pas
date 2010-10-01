@@ -40,7 +40,7 @@ type
     procedure discardAll();
     function  loadOne(pluginName : String; var error : TStkError)  : Boolean;
     function  discardOne(pluginName : String; var error : TStkError)  : Boolean;
-    function  isAlreadyLoaded(pluginName : String)  : Boolean;
+    function  isLoaded(pluginName : String)  : Boolean;
     function  getPluginList(var stk : TStack) : Boolean;
 
     // calls the method, and passes the stack to the method
@@ -97,7 +97,6 @@ end;
 procedure TPluginManager.loadAll(var error : TStkError);
 var retval  : integer;
     SRec    :   TSearchRec;
-    isOk    : Boolean;
 begin
   CS_.Enter;
   if plugidx_<>0 then raise Exception.Create('Please call discardAll() first');
@@ -105,10 +104,9 @@ begin
   retval := FindFirst(path_+PathDelim+'*.' + extension_, faAnyFile, SRec);
   while retval = 0 do
    begin
-     if not isOk then continue;
 
      if (SRec.Attr and (faDirectory or faVolumeID)) = 0 then
-        isOk := load(SRec.Name, error);
+        load(SRec.Name, error);
 
      retval := FindNext(SRec);
    end;
@@ -128,14 +126,18 @@ begin
  CS_.Leave;
 end;
 
-function  TPluginManager.isAlreadyLoaded(pluginName : String)  : Boolean;
+function  TPluginManager.isLoaded(pluginName : String)  : Boolean;
 var i : Longint;
 begin
  CS_.Enter;
  Result := false;
  for i:=1 to plugidx_ do
-     if plugs_[i]^.getName()=pluginName then
+    begin
+     logger_.log(IntToStr(i));
+     if plugs_[i]^.isloaded() and
+        (plugs_[i]^.getName()=pluginName) then
 	    Result := true;
+    end;
  CS_.Leave;
 end;
 
@@ -145,7 +147,7 @@ begin
  CS_.Enter;
  Result := false;
  for i:=1 to plugidx_ do
-     if plugs_[i]^.isloaded() then
+     if TPlugin(plugs_[i]).isloaded() then
        begin
          if (not pushStr(plugs_[i]^.getName(), stk)) then
                 begin
@@ -279,10 +281,12 @@ begin
                    error.errorID  := COULD_NOT_DISCARD_PLUGIN_ID;
                    error.errorMsg := COULD_NOT_DISCARD_PLUGIN;
                    error.errorArg := '('+pluginName+'.'+extension_+')';
+  		   CS_.Leave;
+		   Exit;
                   end;
-			  CS_.Leave;
-			  Exit;
+               logger_.log('Plugin '+plugs_[i]^.getName()+' discarded');
            end;
+
  Result := true;
  CS_.Leave;	   
 end; 
@@ -319,7 +323,8 @@ begin
         Exit;
        end;
 
-     plugs_[plugidx_] := @plug;  
+     plugs_[plugidx_] := @plug;
+     logger_.log('Plugin '+plugs_[plugidx_]^.getName()+' loaded at slot '+IntToStr(plugidx_));
     end;
   Result := plug.isLoaded();   
 end;

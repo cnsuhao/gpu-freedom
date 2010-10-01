@@ -204,7 +204,7 @@ begin
   
   if (arg='plugin.load') then      Result := plugman_.loadOne(str, stk.error) else
   if (arg='plugin.discard') then   Result := plugman_.discardOne(str, stk.error) else
-  if (arg='plugin.isloaded') then  Result := pushBool(plugman_.isAlreadyLoaded(str), stk) else
+  if (arg='plugin.isloaded') then  Result := pushBool(plugman_.isLoaded(str), stk) else
   // tells which plugin implements a given function
   if (arg='plugin.which') then
         begin  

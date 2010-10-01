@@ -18,7 +18,7 @@ const
    LVL_INFO     = 20;
    LVL_DEBUG    = 10;
 
-   LVL_DEFAULT = LVL_WARNING;
+   LVL_DEFAULT = LVL_INFO;
 
 type TLogger = class(TObject)
   public
@@ -113,7 +113,7 @@ end;
 
 procedure TLogger.log(logStr : String); overload;
 begin
-  log(LVL_INFO, logStr);
+  log(LVL_DEFAULT, logStr);
 end;
 
 procedure TLogger.log(severity : Longint; logStr : String); overload;
@@ -128,7 +128,7 @@ begin
   try
    AssignFile(F_, full_name_);
    if backup then Rewrite(F_) else Append(F_);
-   WriteLn(F_, DateToStr(now)+' '+logLvlToStr(severity)+'> '+logStr);
+   WriteLn(F_, DateToStr(now)+' '+TimeToStr(now)+' '+logLvlToStr(severity)+'> '+logStr);
   finally
     CloseFile(F_);
   end;
