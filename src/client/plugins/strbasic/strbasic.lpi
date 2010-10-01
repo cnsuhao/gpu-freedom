@@ -5,6 +5,7 @@
     <Version Value="6"/>
     <General>
       <MainUnit Value="0"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <ActiveEditorIndexAtStart Value="1"/>
     </General>
@@ -25,31 +26,107 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="2">
+    <Units Count="4">
       <Unit0>
         <Filename Value="strbasic.dpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="1" Y="5"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="strbasicdll.pas"/>
         <UnitName Value="strbasicdll"/>
-        <CursorPos X="1" Y="237"/>
-        <TopLine Value="205"/>
+        <CursorPos X="16" Y="5"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="..\basic\basicdll.pas"/>
+        <UnitName Value="basicdll"/>
+        <CursorPos X="5" Y="116"/>
+        <TopLine Value="74"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\packages\own\coremodules\stacks.pas"/>
+        <UnitName Value="stacks"/>
+        <CursorPos X="1" Y="67"/>
+        <TopLine Value="67"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="12" HistoryIndex="11">
+      <Position1>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="158" Column="24" TopLine="129"/>
+      </Position1>
+      <Position2>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="178" Column="12" TopLine="134"/>
+      </Position2>
+      <Position3>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="100" Column="26" TopLine="78"/>
+      </Position3>
+      <Position4>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="6" Column="44" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="95" Column="53" TopLine="78"/>
+      </Position5>
+      <Position6>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="6" Column="34" TopLine="1"/>
+      </Position6>
+      <Position7>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="155" Column="24" TopLine="115"/>
+      </Position7>
+      <Position8>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="118" Column="46" TopLine="97"/>
+      </Position8>
+      <Position9>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="137" Column="41" TopLine="115"/>
+      </Position9>
+      <Position10>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="147" Column="41" TopLine="125"/>
+      </Position10>
+      <Position11>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="158" Column="28" TopLine="136"/>
+      </Position11>
+      <Position12>
+        <Filename Value="strbasicdll.pas"/>
+        <Caret Line="5" Column="6" TopLine="1"/>
+      </Position12>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>
     <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\..\..\..\src\client\packages\own\coremodules\"/>
+      <UnitOutputDirectory Value="..\..\..\..\bin\plugins\lib"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <Linking>
       <Options>
         <ExecutableType Value="Library"/>

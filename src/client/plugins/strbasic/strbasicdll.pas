@@ -1,6 +1,5 @@
 unit strbasicdll;
 
-
 interface
 
 uses SysUtils, stacks, formatsets;
@@ -84,8 +83,9 @@ begin
 end;
 
 function copy(var stk: TStack): boolean;
-var a, b : TStkFloat;
-    s : TStkString;
+var a, b  : TStkFloat;
+    s     : TStkString;
+    types : TStkTypes;
 begin
  types[1]:=STRING_STKTYPE;
  types[2]:=FLOAT_STKTYPE;
@@ -96,13 +96,14 @@ begin
         popFloat(b, stk);
         popFloat(a, stk);
         popStr(s, stk);
-        pushStr(Copy(s, trunc(a), trunc(b)), stk);
+        pushStr(System.Copy(s, trunc(a), trunc(b)), stk);
       end;
 end;
 
 function Delete(var stk: TStack): boolean;
-var a, b : TStkFloat;
-    s : TStkString;
+var a, b  : TStkFloat;
+    s     : TStkString;
+    types : TStkTypes;
 begin
  types[1]:=STRING_STKTYPE;
  types[2]:=FLOAT_STKTYPE;
@@ -113,14 +114,15 @@ begin
         popFloat(b, stk);
         popFloat(a, stk);
         popStr(s, stk);
-        pushStr(Delete(s, trunc(a), trunc(b)), stk);
+        System.Delete(s, trunc(a), trunc(b));
+        pushStr(s, stk);
       end;
 end;
 
 function insert(var stk: TStack): boolean;
 var s1, s2 : TStkString;
     a      : TStkFloat;
-
+    types  : TStkTypes;
 begin
  types[1]:=STRING_STKTYPE;
  types[2]:=STRING_STKTYPE;
@@ -131,7 +133,8 @@ begin
         popFloat(a, stk);
         popStr(s2, stk);
         popStr(s1, stk);
-        pushStr(Insert(s1, s2, trunc(a), stk);
+        System.Insert(s1, s2, trunc(a));
+        pushStr(s2, stk);
       end;
 
 end;
@@ -140,7 +143,7 @@ function length(var stk: TStack): boolean;
 var s : TStkString;
 begin
   Result := retrieveStringParam(s, stk);
-  if Result then pushFloat(trunc(length(s)), stk);
+  if Result then pushFloat(trunc(System.length(s)), stk);
 end;
 
 function tostr(var stk: TStack): boolean;
@@ -151,7 +154,7 @@ begin
 end;
 
 function compare(var stk: TStack): boolean;
-var str1, str2 : TStkFloat;
+var str1, str2 : TStkString;
 begin
  Result := retrieveStringParams(str1, str2, stk);
  if result then
@@ -162,7 +165,7 @@ end;
 
 function cleanstack(var stk: TStack): boolean;
 begin
- cleanStk(stk);
+ clearStk(stk);
 end;
 
 
