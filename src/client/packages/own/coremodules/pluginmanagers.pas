@@ -27,7 +27,7 @@ const MAX_PLUGINS = 128;  // how many plugins we can load at maximum
 type THashPlugin = record
      method,
      plugname : String;
-     callplug : PPlugin;
+     callplug : TPlugin;
 end;
       
 type
@@ -50,17 +50,18 @@ type
     
    private
      path_, extension_   : String;
-     plugs_              : array[1..MAX_PLUGINS] of PPlugin;
+     plugs_              : array[1..MAX_PLUGINS] of TPlugin;
      hash_               : array[1..MAX_HASH] of THashPlugin;
      plugidx_, hashidx_  : Longint;  // indexes for the arrays above
 
      CS_ : TCriticalSection;
      logger_ : TLogger;
 
+     procedure clearHash;
      function  load(pluginName : String;  var error : TStkError)  : Boolean;
-     procedure register_hash(funcName : String; plugin : PPlugin);
+     procedure register_hash(funcName : String; var plugin : TPlugin);
      procedure addNotFoundError(name : String; var error : TStkError);
-     function  retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TStkError) : Boolean;
+     function  retrievePlugin(funcname : String; var plugname : String; var p : TPlugin; var error : TStkError) : Boolean;
      
 end;
 
@@ -69,7 +70,6 @@ end;
 implementation
 
 constructor TPluginManager.Create(Path, Extension : String; logger : TLogger);
-var i : Longint;
 begin
   inherited Create();
   CS_ := TCriticalSection.Create;
@@ -77,13 +77,7 @@ begin
   path_ := Path;
   extension_ := Extension;
   plugidx_ := 0;
-  for i :=1 to MAX_PLUGINS do plugs_[i] := nil;
-  for i :=1 to MAX_HASH do 
-     begin
-       hash_[i].method := '';
-       hash_[i].callplug := nil;
-     end;
-  
+  clearHash();
 end;
 
 
@@ -92,6 +86,17 @@ var i : Longint;
 begin
   discardAll();
   CS_.free;
+end;
+
+procedure TPluginManager.clearHash();
+var i : Longint;
+begin
+  for i :=1 to MAX_PLUGINS do plugs_[i] := nil;
+  for i :=1 to MAX_HASH do
+     begin
+       hash_[i].method := '';
+       hash_[i].callplug := nil;
+     end;
 end;
 
 procedure TPluginManager.loadAll(var error : TStkError);
@@ -119,10 +124,12 @@ begin
  CS_.Enter;
  for i:=1 to plugidx_ do
   begin
-   plugs_[i]^.discard();
-   plugs_[i]^.Free;
+   plugs_[i].discard();
+   plugs_[i].Free;
+   plugs_[i]:= nil;
   end; 
  plugidx_ := 0;
+ clearHash();
  CS_.Leave;
 end;
 
@@ -134,8 +141,8 @@ begin
  for i:=1 to plugidx_ do
     begin
      logger_.log(IntToStr(i));
-     if plugs_[i]^.isloaded() and
-        (plugs_[i]^.getName()=pluginName) then
+     if plugs_[i].isloaded() and
+        (plugs_[i].getName()=pluginName) then
 	    Result := true;
     end;
  CS_.Leave;
@@ -149,7 +156,7 @@ begin
  for i:=1 to plugidx_ do
      if TPlugin(plugs_[i]).isloaded() then
        begin
-         if (not pushStr(plugs_[i]^.getName(), stk)) then
+         if (not pushStr(plugs_[i].getName(), stk)) then
                 begin
                   CS_.Leave;
                   Exit;
@@ -160,7 +167,7 @@ begin
  CS_.Leave;
 end;
 
-procedure TPluginManager.register_hash(funcName : String; plugin : PPlugin);
+procedure TPluginManager.register_hash(funcName : String; var plugin : TPlugin);
 begin
  CS_.Enter;
  // remember on the hash where we found the function call
@@ -168,7 +175,7 @@ begin
  if (hashidx_>MAX_HASH) then hashidx_ := 1;
  hash_[hashidx_].method   := funcName;
  hash_[hashidx_].callplug := plugin;
- hash_[hashidx_].plugname := plugin^.getName();
+ hash_[hashidx_].plugname := plugin.getName();
  CS_.Leave;
 end;
 
@@ -181,7 +188,7 @@ begin
   error.ErrorArg := name;  
 end;
 
-function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : PPlugin; var error : TStkError) : Boolean;
+function TPluginManager.retrievePlugin(funcname : String; var plugname : String; var p : TPlugin; var error : TStkError) : Boolean;
 var i : Longint;
 begin
  Result := false;
@@ -192,7 +199,7 @@ begin
  for i:=1 to MAX_HASH do
       if (hash_[i].method=funcname) then
          begin
-           if hash_[i].callplug^.isloaded then
+           if hash_[i].callplug.isloaded then
              begin 
 			   p := hash_[i].callplug;
 			   plugname := hash_[i].plugname;
@@ -205,11 +212,11 @@ begin
  // go through the list and call the method, register to hash if we found the plugin
  for i:=1 to plugidx_ do
      begin
-       if (plugs_[i]^.isloaded() and plugs_[i]^.method_exists(funcName)) then
+       if (plugs_[i].isloaded() and plugs_[i].method_exists(funcName)) then
           begin
                         register_hash(funcName, plugs_[i]);
 			p := plugs_[i];
-			plugName :=  plugs_[i]^.getName();
+			plugName :=  plugs_[i].getName();
 			Result := true;
                         CS_.Leave;
 			Exit;
@@ -222,16 +229,16 @@ end;
 
 function TPluginManager.method_execute(name : String; var Stk : TStack) : Boolean;
 var plugname : String;
-    p        : PPlugin;
+    p        : TPlugin;
 begin
  Result := retrievePlugin(name, plugname, p, stk.error);
  if Result then
-      Result := p^.method_execute(name, stk);
+      Result := p.method_execute(name, stk);
 end;
 
 function TPluginManager.method_exists(name : String; var plugName : String; var error : TStkError) : Boolean;
 var
-    p        : PPlugin;
+    p        : TPlugin;
 begin
  p := nil; // not used
  Result := retrievePlugin(name, plugname, p, error);
@@ -244,11 +251,11 @@ begin
  CS_.Enter;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
-    if plugs_[i]^.getName() = pluginName then
+    if plugs_[i].getName() = pluginName then
        begin
-         if (not plugs_[i]^.isloaded()) then
+         if (not plugs_[i].isloaded()) then
             begin           
-             Result := plugs_[i]^.load();
+             Result := plugs_[i].load();
              CS_.Leave;
 	     Exit;
             end; 
@@ -272,10 +279,10 @@ begin
  Result := false;
  // we check first if the plugin is already loaded once
  for i :=1 to plugidx_ do
-    if (plugs_[i]^.getName() = pluginName) and
-         plugs_[i]^.isloaded() then
+    if (plugs_[i].getName() = pluginName) and
+         plugs_[i].isloaded() then
            begin 
-              Result := plugs_[i]^.discard();
+              Result := plugs_[i].discard();
               if not Result then
                   begin
                    error.errorID  := COULD_NOT_DISCARD_PLUGIN_ID;
@@ -284,7 +291,7 @@ begin
   		   CS_.Leave;
 		   Exit;
                   end;
-               logger_.log('Plugin '+plugs_[i]^.getName()+' discarded');
+               logger_.log('Plugin '+plugs_[i].getName()+' discarded');
            end;
 
  Result := true;
@@ -323,8 +330,8 @@ begin
         Exit;
        end;
 
-     plugs_[plugidx_] := @plug;
-     logger_.log('Plugin '+plugs_[plugidx_]^.getName()+' loaded at slot '+IntToStr(plugidx_));
+     plugs_[plugidx_] := plug;
+     logger_.log('Plugin '+plugs_[plugidx_].getName()+' loaded at slot '+IntToStr(plugidx_));
     end;
   Result := plug.isLoaded();   
 end;

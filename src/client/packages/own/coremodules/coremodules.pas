@@ -50,7 +50,6 @@ type TCoreModule = class(TObject)
     // core components
     plugman_        : TPluginManager;
     methController_ : TMethodController;
-    //speccommands_   : TSpecialCommand;
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
     threadman_      : TThreadManager;
@@ -61,7 +60,7 @@ end;
 constructor TCoreModule.Create(path, extension : String);
 begin
    inherited Create();
-   logger_         := TLogger.Create(path+PathDelim+'logs', 'core.log');
+   logger_         := TLogger.Create(path+PathDelim+'logs', 'core.log', 'core.old', LVL_DEFAULT, 1024*1024);
    plugman_        := TPluginManager.Create(path+PathDelim+'plugins'+PathDelim+'lib', extension, logger_);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();

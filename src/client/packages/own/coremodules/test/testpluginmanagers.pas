@@ -31,16 +31,15 @@ begin
   AssertEquals('Loading basic plugin', true, plugman_.loadOne('basic', error));
   AssertEquals('No error while loading plugin', true, error.errorId=0);
   AssertEquals('Basic plugin is loaded', true, plugman_.isLoaded('basic'));
-  //AssertEquals('asdfasf plugin is not loaded', false, plugman_.isLoaded('asdfasf'));
+  AssertEquals('asdfasf plugin is not loaded', false, plugman_.isLoaded('asdfasf'));
 
-  {
   plugman_.discardAll();
   plugman_.loadAll(error);
   AssertEquals('No error while loading plugins', 0, error.errorID);
   AssertEquals('basic plugin is loaded', true, plugman_.isLoaded('basic'));
   AssertEquals('strbasic plugin is loaded', true, plugman_.isLoaded('strbasic'));
   AssertEquals('asdfasdffsd plugin is not loaded', false, plugman_.isLoaded('asdfasdffsd'));
-  }
+
 end;
 
 procedure TTestPluginManager.SetUp; 
