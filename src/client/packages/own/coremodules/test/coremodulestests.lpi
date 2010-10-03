@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="13"/>
+      <ActiveEditorIndexAtStart Value="9"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,12 +36,12 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="30">
+    <Units Count="31">
       <Unit0>
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
-        <CursorPos X="104" Y="7"/>
+        <CursorPos X="69" Y="8"/>
         <TopLine Value="1"/>
         <EditorIndex Value="9"/>
         <UsageCount Value="40"/>
@@ -62,7 +62,7 @@
         <UnitName Value="stacks"/>
         <CursorPos X="30" Y="156"/>
         <TopLine Value="147"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -144,7 +144,7 @@
         <UnitName Value="argretrievers"/>
         <CursorPos X="105" Y="244"/>
         <TopLine Value="212"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="17"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -167,7 +167,7 @@
         <UnitName Value="specialcommands"/>
         <CursorPos X="86" Y="58"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -183,7 +183,7 @@
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="23" Y="131"/>
         <TopLine Value="103"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit17>
@@ -207,7 +207,7 @@
       <Unit20>
         <Filename Value="..\resultcollectors.pas"/>
         <UnitName Value="resultcollectors"/>
-        <CursorPos X="34" Y="141"/>
+        <CursorPos X="48" Y="135"/>
         <TopLine Value="116"/>
         <EditorIndex Value="13"/>
         <UsageCount Value="14"/>
@@ -287,6 +287,16 @@
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit29>
+      <Unit30>
+        <Filename Value="testfrontendmanagers.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="testfrontendmanagers"/>
+        <CursorPos X="18" Y="36"/>
+        <TopLine Value="11"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit30>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
