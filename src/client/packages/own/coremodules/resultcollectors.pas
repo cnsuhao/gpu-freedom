@@ -44,6 +44,7 @@ type TResultCollector = class(TObject)
     
     function getResultCollection(jobId : String; var rescoll : TResultCollection) : Boolean;
     function registerResult(jobId : String; var stk : TStack) : Boolean;
+    function findJobId(jobId : String) : Longint;
   private
     // circular buffer to store result collections
     res     : array[1..MAX_RESULTS] of TResultCollection;    
@@ -51,7 +52,6 @@ type TResultCollector = class(TObject)
     CS_ : TCriticalSection;
 
     procedure initResultCollection(i : Longint);
-    function findJobId(jobId : String) : Longint;
 
 end;
 
@@ -138,6 +138,7 @@ begin
            if (resIdx_>MAX_RESULTS) then resIdx_:=1;
            i:=resIdx_;
            initResultCollection(i);
+           res[i].jobId := jobId;
          end;
   
   // now we know that the job will be stored in res[i]  but where exactly? same game:
