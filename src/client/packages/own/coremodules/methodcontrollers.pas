@@ -39,7 +39,9 @@ type TMethodController = class(TObject)
    procedure clear();
 
  private
-   method_call_ : Array[1..MAX_THREADS] of String;
+   method_call_ : Array[1..MAX_THREADS] of String; // this contains calls only if registered
+   method_name_ : Array[1..MAX_THREADS] of String; // this always contains call names even if allowed
+                                                   // concurrently
    plugin_name_ : Array[1..MAX_THREADS] of String;
    CS_ : TCriticalSection;
    concurrently_allowed_ : TStringList;
@@ -66,20 +68,23 @@ end;
 procedure TMethodController.registerMethodCall(funcName, plugName : String; threadId : Longint);
 begin
   CS_.Enter;
+  method_name_[threadId]  := funcName;
+  plugin_name_[threadId]  := plugName;
   // exception to the rule: if the function is allowed to run
  // concurrently, we simply do not register the function, such that the
  // FunctionCallController is out of order for that particular functions
   if not (concurrently_allowed_.IndexOf(funcName)>-1) then
-    begin  
-     method_call_[threadId]  := funcName;
-     plugin_name_[threadId] := plugName;
-    end; 
+     method_call_[threadId]  := funcName
+  else
+     method_call_[threadId]  := '';
+
   CS_.Leave;
 end;
 
 procedure TMethodController.unregisterMethodCall(threadId : Longint);
 begin
   CS_.Enter;
+  method_name_[threadId] := '';
   method_call_[threadId] := '';
   plugin_name_[threadId] := '';
   CS_.Leave;  
@@ -103,7 +108,7 @@ end;
 function TMethodController.getMethodCall(threadId : Longint) : String;
 begin
   // these are merely informative. Therefore no critical section thing
-  Result := method_call_[threadId];
+  Result := method_name_[threadId];
 end;
 
 function TMethodController.getPluginName(threadId : Longint) : String;
@@ -115,7 +120,8 @@ end;
 procedure TMethodController.allowRunningFunctionConcurrently(funcName : String);
 begin
  CS_.Enter;
- concurrently_allowed_.Add(funcName);
+ if not (concurrently_allowed_.IndexOf(funcName)>-1) then
+   concurrently_allowed_.Add(funcName);
  CS_.Leave;
 end;
 
@@ -123,6 +129,7 @@ procedure TMethodController.clear();
 var i : Longint;
 begin
  for i:=1 to MAX_THREADS do method_call_[i] := '';
+ for i:=1 to MAX_THREADS do method_name_[i] := '';
  for i:=1 to MAX_THREADS do plugin_name_[i] := '';
 end;
 
