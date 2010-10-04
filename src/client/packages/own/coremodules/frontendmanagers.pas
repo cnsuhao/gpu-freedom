@@ -50,7 +50,7 @@ type TRegisterQueue = class(TObject)
 	  
 	  procedure registerJob(var reg : TRegisterInfo);
 	  procedure unregisterJob(jobID : String; formName : String);
-      function findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
+          function findRI4Job(jobId : String; var reg : TRegisterInfo) : Boolean;
 	  function findMultipleRI4Job(jobId : String; var reg : TRegisterInfo; var start : Longint) : Boolean;
 	  function getRegisteredList(var stk : TStack) : Boolean;
         
@@ -160,9 +160,12 @@ begin
 	         begin
 		   reg := queue_[i];
                    Result := true;
+                   start  := i+1;
+                   if (start>QUEUE_SIZE) then start := 0;
 		   CS_.Leave;
                    Exit;
-		 end;   
+		 end;
+  start := 0;
   CS_.Leave;  
 end; 
 
@@ -215,7 +218,7 @@ begin
   Result.filename := '';
   Result.executable := 'gpucore.exe';
   Result.formname := 'TGPUCore';
-  Result.fullname := 'GPU core v'+GPU_CORE_VERSION;
+  Result.fullname := 'GPU core v'+CORE_VERSION;
   Result.typeId := ct_None;
 end;
 

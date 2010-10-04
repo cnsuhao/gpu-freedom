@@ -181,7 +181,7 @@ begin
   if (arg='core.maxthreads')     then Result := pushFloat(myCoreId.maxthreads, stk) else
   if (arg='core.isidle')         then Result := pushBool(myCoreId.isIdle, stk) else
   if (arg='core.hasresources')   then Result := pushBool(myCoreId.hasResources, stk) else
-  if (arg='core.version')        then Result := pushStr(GPU_CORE_VERSION, stk) else
+  if (arg='core.version')        then Result := pushStr(CORE_VERSION, stk) else
   if (arg='core.registeredjobs') then Result := frontman_.getStandardQueue().getRegisteredList(stk) else
     raise Exception.Create('Core argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   Result := true;   
