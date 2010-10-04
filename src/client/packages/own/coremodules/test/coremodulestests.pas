@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 program coremodulestests;
 
 {$mode objfpc}{$H+}
@@ -63,4 +62,4 @@ begin
   Application.Run;
   Application.Free;
 end.
->>>>>>> 173fac63421045f2cc8043d4d8c5cf4ea0f56519
+

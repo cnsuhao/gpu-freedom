@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 unit specialcommands;
 {
   Special commands are commands on the GPU stack that due to technical
@@ -698,4 +697,4 @@ begin
 end;
 
 end.
->>>>>>> 173fac63421045f2cc8043d4d8c5cf4ea0f56519
+

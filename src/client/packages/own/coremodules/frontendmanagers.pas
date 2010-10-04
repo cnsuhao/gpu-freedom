@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 unit frontendmanagers;
 {
  This units manages the registering of jobIds
@@ -504,4 +503,3 @@ end;
 
 end.
 
->>>>>>> 173fac63421045f2cc8043d4d8c5cf4ea0f56519
