@@ -62,8 +62,12 @@ function TJobParser.parse() : Boolean; overload;
 begin
    Result := parse(job_.job, job_.stack);
    job_.hasError := (job_.stack.error.ErrorId>0);
-   
-   if (Result<>job_.hasError) then raise Exception.Create('Internal error in TJobParser.Parse()!');
+   if (not job_.hasError) then
+        job_.jobResult := stkToStr(job_.stack)
+      else
+        job_.jobResult := IntToStr(job_.stack.error.ErrorID)+': '+job_.stack.error.errorMsg+' - '+
+                          job_.stack.error.errorArg;
+   if Result<>(not job_.hasError) then raise Exception.Create('Internal error in TJobParser.Parse()!');
 end;
 
 function TJobParser.parse(jobStr : String; var stk : TStack): Boolean; overload;

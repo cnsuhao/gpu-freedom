@@ -171,6 +171,7 @@ end;
 
 function testexception(var stk: TStack): boolean;
 begin
+ Result := false;
  raise Exception.Create('This exception should not block the entire Virtual Machine');
 end;
 
