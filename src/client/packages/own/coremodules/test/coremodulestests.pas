@@ -6,8 +6,8 @@ uses
   Classes, consoletestrunner,
   teststacks, testplugins, testpluginmanagers, testargretrievers,
   testmethodcontrollers, testresultcollectors, testfrontendmanagers,
-  testjobparsers, threadmanagers, computationthreads, coremodules,
-  testspecialcommands;
+  testjobparsers, threadmanagers, coremodules,
+  testspecialcommands, testcomputationthreads;
 
 type
 
@@ -26,7 +26,7 @@ var
 begin
   Application := TMyTestRunner.Create(nil);
   Application.Initialize;
-  Application.Title := 'FPCUnit Console test runner';
+  Application.Title := 'FPCUnit Console test runner for Core Modules';
   Application.Run;
   Application.Free;
 end.
