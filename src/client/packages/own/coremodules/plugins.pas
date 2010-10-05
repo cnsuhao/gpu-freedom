@@ -10,7 +10,7 @@ unit plugins;
 interface
 
 uses
-  SysUtils, stacks, dynlibs;
+  SysUtils, stacks, stkconstants, dynlibs;
 
 type
   PPlugin = ^TPlugin;
@@ -108,9 +108,22 @@ end;
 function TPlugin.method_execute(name : String; var stk : TStack) : Boolean;
 var theFunction : PDllFunction;
 begin
+    Result := false;
     theFunction := method_pointer(name);
     if Assigned(theFunction) then
-      Result := TDllFunction(theFunction)(stk);
+       begin
+        try
+         Result := TDllFunction(theFunction)(stk);
+	except
+           on e : Exception do
+             begin
+	       stk.error.errorID := PLUGIN_THREW_EXCEPTION_ID;
+	       stk.error.errorMsg := PLUGIN_THREW_EXCEPTION;
+	       stk.error.errorArg := e.Message;
+	       Result := false;
+             end;
+        end; // except
+       end; // if
 end;     
 
 function TPlugin.getDescription(field : String) : TStkString;

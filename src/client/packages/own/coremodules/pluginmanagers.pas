@@ -42,6 +42,7 @@ type
     function  discardOne(pluginName : String; var error : TStkError)  : Boolean;
     function  isLoaded(pluginName : String)  : Boolean;
     function  getPluginList(var stk : TStack) : Boolean;
+    function  getPlugin(name : String) : TPlugin;
 
     // calls the method, and passes the stack to the method
     function method_execute(name : String; var stk : TStack) : Boolean;
@@ -167,6 +168,25 @@ begin
               
 	   end;
  Result := true;
+ CS_.Leave;
+end;
+
+function  TPluginManager.getPlugin(name : String) : TPlugin;
+var i : Longint;
+begin
+ CS_.Enter;
+ Result := nil;
+ for i:=1 to plugidx_ do
+     if TPlugin(plugs_[i]).isloaded() then
+       begin
+         if plugs_[i].getName()=name then
+                begin
+                  Result := plugs_[i];
+                  CS_.Leave;
+                  Exit;
+                end;
+
+	   end;
  CS_.Leave;
 end;
 

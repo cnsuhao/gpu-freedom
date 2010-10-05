@@ -116,25 +116,13 @@ begin
             STK_ARG_CALL :
                    begin
                      isOK := plugman_.method_exists(arg.argstring, pluginName, stk.error);
-					 if isOK then
-					      begin
-						    methController_.registerMethodCall(arg.argstring, pluginName, thrdID_);
-							try
-							  isOK := plugman_.method_execute(arg.argstring, stk);
-							except
-                                                          on e : Exception do
-                                                            begin
-							     stk.error.errorID := PLUGIN_THREW_EXCEPTION_ID;
-							     stk.error.errorMsg := PLUGIN_THREW_EXCEPTION;
-							     stk.error.errorArg := e.Message;
-							     isOK := false;
-
-                                                            end;
-                                                        end; // except
-							methController_.unregisterMethodCall(thrdID_);
-						  end;
-
-                   end;				   
+		     if isOK then
+		        begin
+		         methController_.registerMethodCall(arg.argstring, pluginName, thrdID_);
+ 			 isOK := plugman_.method_execute(arg.argstring, stk);
+                         methController_.unregisterMethodCall(thrdID_);
+			end;
+                   end;
        
        end; // case
      
