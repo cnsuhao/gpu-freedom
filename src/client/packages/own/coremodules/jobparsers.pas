@@ -22,8 +22,7 @@ type TJobParser = class(TObject)
    destructor Destroy();
    
    function parse() : Boolean; overload;  
-   function parse(jobStr : String; var stk : TStack) : Boolean; overload;
-   
+
  private
    plugman_        : TPluginManager;
    methController_ : TMethodController;
@@ -32,6 +31,8 @@ type TJobParser = class(TObject)
    speccommands_   : TSpecialCommand;
    thrdId_         : Longint;
    job_            : TJob;
+
+   function parse(jobStr : String; var stk : TStack) : Boolean; overload;
 end;
 
 
@@ -60,6 +61,10 @@ end;
 
 function TJobParser.parse() : Boolean; overload;
 begin
+   clearStk(job_.stack);
+   job_.hasError:=false;
+   job_.jobResult := '';
+
    Result := parse(job_.job, job_.stack);
    job_.hasError := (job_.stack.error.ErrorId>0);
    if (not job_.hasError) then
@@ -67,6 +72,7 @@ begin
       else
         job_.jobResult := IntToStr(job_.stack.error.ErrorID)+': '+job_.stack.error.errorMsg+' - '+
                           job_.stack.error.errorArg;
+
    if Result<>(not job_.hasError) then raise Exception.Create('Internal error in TJobParser.Parse()!');
 end;
 

@@ -18,6 +18,7 @@ type
     procedure TearDown; override;
   published
     procedure TestJobParserFloats;
+    procedure TestJobParserStrings;
     procedure TestJobParserException;
 
   private
@@ -37,8 +38,6 @@ implementation
 procedure TTestJobParser.execJob(job : String);
 var jparser : TJobParser;
 begin
- clearStk(job_.stack);
- job_.hasError:=false;
  job_.Job := job;
  jparser := TJobParser.Create(plugman_, meth_, res_, frontman_, job_, 1);
  jparser.parse();
@@ -59,6 +58,18 @@ begin
  execJob('49, sqrt');
  popFloat(float, job_.stack);
  AssertEquals('sqrt of 49 is', 7, float);
+
+ execJob('2, 3, mul, 4, add, 10, dvd, 1, sub');
+ popFloat(float, job_.stack);
+ AssertEquals('result is', 0, float);
+end;
+
+procedure TTestJobParser.TestJobParserStrings;
+var str : TStkString;
+begin
+ execJob(QUOTE+'freedom light '+QUOTE+','+QUOTE+'my fire'+QUOTE+',concat');
+ popStr(str, job_.stack);
+ AssertEquals('Concat is', 'freedom light my fire', str);
 end;
 
 procedure TTestJobParser.TestJobParserException;
