@@ -36,7 +36,7 @@ procedure TTestComputationThread.execJob(job : String);
 var cthread : TComputationThread;
 begin
  job_.Job := job;
- cthread := TJobParser.Create(plugman_, meth_, res_, frontman_, job_, 1);
+ cthread := TComputationThread.Create(plugman_, meth_, res_, frontman_, job_, 1);
  while (not cthread.isJobDone) do Sleep(100);
  cthread.Free;
 end;
@@ -44,7 +44,12 @@ end;
 procedure TTestComputationThread.TestComputationThread;
 begin
  execJob('1,1,add');
- Assert
+ AssertEquals('1+1 is','2', job_.JobResult);
+
+ execJob('2,3,mul');
+ AssertEquals('2*3 is','6', job_.JobResult);
+
+ execJob('3600000, random_walk');
 end;
 
 procedure TTestComputationThread.SetUp; 
