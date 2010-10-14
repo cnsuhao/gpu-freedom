@@ -6,8 +6,8 @@ uses
   Classes, consoletestrunner,
   teststacks, testplugins, testpluginmanagers, testargretrievers,
   testmethodcontrollers, testresultcollectors, testfrontendmanagers,
-  testjobparsers, threadmanagers, coremodules,
-  testspecialcommands, testcomputationthreads;
+  testjobparsers, coremodules,
+  testspecialcommands, testcomputationthreads, testthreadmanagers;
 
 type
 
