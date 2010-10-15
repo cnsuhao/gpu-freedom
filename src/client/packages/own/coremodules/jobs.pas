@@ -30,7 +30,7 @@ unit jobs;
 }
 interface
 
-uses Classes, stacks;
+uses Classes, SysUtils, stacks;
 
 type
   TNotifyEvent = procedure(Sender: TObject) of object;
@@ -40,17 +40,25 @@ type
   public
     OnCreated, OnProgress, OnFinished, OnError: TNotifyEvent;
 
-    JobID:   string;
-    JobSlot: integer;
+    JobID     : String;
+    JobSlot   : Longint;
 
-    stack: TStack;
+    stack     : TStack;
+
     Job,                 // this contains the job itself
-    JobResult : string;  // this contains the result of the computation
+    JobResult : String;  // this contains the result of the computation
     
-    hasError : Boolean;  // there is an error in the Job structure,
+    hasError  : Boolean;  // there is an error in the Job structure,
                          // on stack.error
+    startTime,
+    stopTime,
+    ComputedTime : TDateTime;
 
-    ComputedTime: TDateTime;
+    constructor Create(); overload;
+    constructor Create(jobStr : String); overload;
+
+    procedure clear();
+    destructor Destroy;
   end;
 
 type
@@ -61,5 +69,35 @@ type
   end;
 
 implementation
+
+constructor TJob.Create();
+begin
+  Create('');
+end;
+
+constructor TJob.Create(jobStr : String);
+begin
+  inherited Create;
+  clear();
+  job := jobStr;
+end;
+
+procedure TJob.clear();
+begin
+  JobID   := '';
+  JobSlot := -1;
+  clearStk(stack);
+  job := '';
+  jobResult := '';
+  hasError  := false;
+  startTime := now();
+  stopTime := now();
+  computedTime := 0;
+end;
+
+destructor TJob.Destroy;
+begin
+  inherited Destroy;
+end;
 
 end.

@@ -1,3 +1,7 @@
+30.9.2010-15.10.2010 git
+milestone reached:
+coremodules package (=tgpu2 component) passes all FPC unit tests.
+
 22.9.2010-29.9.2010 git
 milestone reached:
 The FPC unit test framework loaded plugin basic, the plugin computed 1+1
