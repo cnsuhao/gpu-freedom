@@ -36,9 +36,10 @@ File Tree structure for this package, codenamed freedom follows:
       /input    input jobs come here
       /loading  jobs being processed by core
       /output   result of jobs comes here
-   /extensions  data for plugins and frontends
    /logs        logfiles for core
-   /languages   languages for core and extensions
+   /languages   localization directory
+      /mainapp    language for main application
+      /extensions language for extensions	  
    /plugins     plugins come here, managed by core
       /lib      plugin as compiled libraries
       /exe      external executables
@@ -49,6 +50,9 @@ File Tree structure for this package, codenamed freedom follows:
       /staged   workunits being processed
       /outgoing workunits which need upload to server
    /data    data for general use
+      /core        data for core, including core.db which is sqllite3 database
+	               and is used for communication between mainapp and core
+      /extensions  data for plugins and frontends
       /planet      data on earth planet on elevation and population
       /textures    textures for general OpenGL use
         /solarysystem textures of solarsystem
