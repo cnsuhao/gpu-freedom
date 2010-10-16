@@ -95,12 +95,13 @@ File Tree structure for this package, codenamed freedom follows:
  
      /lib          libraries for GPU
        /own        own libraries developed by the project
-         /simclimate  logic of simclimate extension
+         /simclimate   logic of simclimate extension
+         /coremodules  Core modules used by core component under client/core
+         /filetransfer File transfer threads and download manager used by client/core
        /ext        external libraries
 
      /packages     components for GPU
        /own        own components developed by the project
-          /coremodules    Core modules used by core component under client/core
        /ext        external packages
           /lnet    lnet library available at http://sourceforge.net/projects/lazarus-ccr/files/lNet/
 		           for http download and file transfer

@@ -22,7 +22,6 @@ type
                        var job : TJob; thrdId : Longint);
     function    isJobDone : Boolean;
 	  
-	  
    protected
     procedure Execute; override;
     
