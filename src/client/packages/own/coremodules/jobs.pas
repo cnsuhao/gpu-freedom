@@ -1,6 +1,6 @@
 unit jobs;
 {
-  In order to create a new ComputationThread via TGPU::Compute()
+  In order to create a new ComputationThread via TThreadManager::Compute()
   one needs first to define a TJob structure which encapsulates
   all information needed to perform a task.
   
@@ -58,6 +58,7 @@ type
     constructor Create(jobStr : String); overload;
 
     procedure clear();
+    procedure setEndTime();
     destructor Destroy;
   end;
 
@@ -93,6 +94,12 @@ begin
   startTime := now();
   stopTime := now();
   computedTime := 0;
+end;
+
+procedure TJob.setEndTime();
+begin
+  stopTime := now();
+  computedTime := stopTime-startTime;
 end;
 
 destructor TJob.Destroy;

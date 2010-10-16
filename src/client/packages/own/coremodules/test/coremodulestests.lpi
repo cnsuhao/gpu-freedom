@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="14"/>
+      <ActiveEditorIndexAtStart Value="12"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -62,7 +62,7 @@
         <UnitName Value="stacks"/>
         <CursorPos X="30" Y="156"/>
         <TopLine Value="147"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="19"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -77,8 +77,8 @@
         <Filename Value="..\frontendmanagers.pas"/>
         <UnitName Value="frontendmanagers"/>
         <CursorPos X="58" Y="164"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="15"/>
+        <TopLine Value="132"/>
+        <EditorIndex Value="17"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -146,7 +146,7 @@
         <UnitName Value="argretrievers"/>
         <CursorPos X="105" Y="244"/>
         <TopLine Value="212"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="20"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -169,23 +169,25 @@
         <UnitName Value="specialcommands"/>
         <CursorPos X="86" Y="58"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="21"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
-        <CursorPos X="10" Y="80"/>
-        <TopLine Value="63"/>
+        <CursorPos X="36" Y="71"/>
+        <TopLine Value="42"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\methodcontrollers.pas"/>
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="23" Y="131"/>
         <TopLine Value="100"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit17>
@@ -211,7 +213,7 @@
         <UnitName Value="resultcollectors"/>
         <CursorPos X="48" Y="135"/>
         <TopLine Value="116"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -232,9 +234,11 @@
       <Unit23>
         <Filename Value="..\jobs.pas"/>
         <UnitName Value="jobs"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="38" Y="102"/>
+        <TopLine Value="72"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit23>
       <Unit24>
         <Filename Value="..\..\..\..\lib\own\misc\loggers.pas"/>
@@ -273,8 +277,8 @@
       <Unit28>
         <Filename Value="..\jobparsers.pas"/>
         <UnitName Value="jobparsers"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="22" Y="76"/>
+        <TopLine Value="54"/>
         <EditorIndex Value="11"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -285,7 +289,7 @@
         <UnitName Value="testresultcollectors"/>
         <CursorPos X="65" Y="47"/>
         <TopLine Value="19"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit29>
@@ -295,7 +299,7 @@
         <UnitName Value="testfrontendmanagers"/>
         <CursorPos X="43" Y="50"/>
         <TopLine Value="27"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit30>

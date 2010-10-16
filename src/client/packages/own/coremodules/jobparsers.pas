@@ -73,6 +73,8 @@ begin
         job_.jobResult := IntToStr(job_.stack.error.ErrorID)+': '+job_.stack.error.errorMsg+' - '+
                           job_.stack.error.errorArg;
 
+   job_.setEndTime();
+
    if Result<>(not job_.hasError) then raise Exception.Create('Internal error in TJobParser.Parse()!');
 end;
 
