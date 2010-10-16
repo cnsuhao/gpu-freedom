@@ -18,14 +18,19 @@ It announces itself to the home GPU II server (each two minutes)
 It retrieves a list of other available GPU II servers from the home server
 
 Client core has bindings to curlpas library (libcurl binding) to communicate with server.
+
 Client core has sqlite bindings to implement:
 - logs of chats
 - logs of computed jobs, results of jobs
 - implement Rene Tegel's idea of distributed wan database
 - implement Rene Tegel's search engine
-Could sqlite used to communicate with Client GUI, e.g. via lock files?
+- Sqlite will be used to communicate with Client GUI, e.g. via lock files? According to
+ http://www.sqlite.org/faq.html#q5 this should be feasible :-). On windows shares it is unreliable,
+  but we will use only on the same machine.
+ 
+
 Sqlite is chosen instead of MySQL or PostgreSQL as we would like to have clients which can be installed
- in one click setup.
+ in one click setup. 
  
 Client GUI could include a sql console to query the sqllite db and a telnet client to communicate with gpu core.
 This would be quite geekish, but only for advanced users.

@@ -1,6 +1,11 @@
 16.10.2010 git
 - added nanobit's WAN db and search engine idea with sqllite bindings
  on GPU core in GPU II specs.txt file
+- sqlite confirmed to be used as communication layer between GUI and core,
+ and eventually also frontends :-)
+see also http://www.sqlite.org/faq.html#q5 this should be feasible :-)
+- computedtime calculation in jobs.pas
+ 
 
 30.9.2010-15.10.2010 git
 milestone reached:
