@@ -8,12 +8,11 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=""/>
-      <ActiveWindowIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
       <Language Value=""/>
       <CharSet Value=""/>
-      <StringTable Comments="" CompanyName="" FileDescription="" FileVersion="0.0.0.0" InternalName="" LegalCopyright="" LegalTrademarks="" OriginalFilename="" ProductName="" ProductVersion=""/>
     </VersionInfo>
     <PublishOptions>
       <Version Value="2"/>
@@ -41,8 +40,8 @@
         <Filename Value="telnet.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="telnet"/>
-        <TopLine Value="1"/>
         <CursorPos X="47" Y="15"/>
+        <TopLine Value="1"/>
         <UsageCount Value="20"/>
       </Unit0>
       <Unit1>
@@ -51,33 +50,31 @@
         <ComponentName Value="FormMain"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="main"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="0"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="72"/>
         <CursorPos X="1" Y="87"/>
+        <TopLine Value="72"/>
+        <EditorIndex Value="0"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="../../console/ltelnet/ltclient.pp"/>
         <UnitName Value="ltclient"/>
-        <TopLine Value="1"/>
         <CursorPos X="27" Y="6"/>
+        <TopLine Value="1"/>
         <UsageCount Value="10"/>
       </Unit2>
       <Unit3>
         <Filename Value="../../../lazaruspackage/lnetcomponents.pas"/>
         <UnitName Value="lNetComponents"/>
-        <TopLine Value="56"/>
         <CursorPos X="38" Y="69"/>
+        <TopLine Value="56"/>
         <UsageCount Value="10"/>
       </Unit3>
       <Unit4>
         <Filename Value="../../../lib/ltelnet.pp"/>
         <UnitName Value="lTelnet"/>
-        <TopLine Value="101"/>
         <CursorPos X="16" Y="114"/>
+        <TopLine Value="101"/>
         <UsageCount Value="10"/>
       </Unit4>
     </Units>
