@@ -1,7 +1,6 @@
 GPU II
 ------
 
-
 GPU II Client
 -------------
 
@@ -10,20 +9,33 @@ Freepascal/Lazarus
 Base setup
 ----------
 Client is separated into Client GUI and Client core.
-Client core has ability to run in background or with interactive console shell.
+Client core has ability to run in background or (either with interactive console shell or via telnet).
 Client GUI includes a 3D OpenGL netmapper and chat window, job submission and job results windows.
 Client GUI asks at startup for user and node configuration details which will be reported to superserver
 
-Client has one home GPU II server
+Client core has one home GPU II server
 It announces itself to the home GPU II server (each two minutes)
 It retrieves a list of other available GPU II servers from the home server
 
+Client core has bindings to curlpas library (libcurl binding) to communicate with server.
+Client core has sqlite bindings to implement:
+- logs of chats
+- logs of computed jobs, results of jobs
+- implement Rene Tegel's idea of distributed wan database
+- implement Rene Tegel's search engine
+Could sqlite used to communicate with Client GUI, e.g. via lock files?
+Sqlite is chosen instead of MySQL or PostgreSQL as we would like to have clients which can be installed
+ in one click setup.
+ 
+Client GUI could include a sql console to query the sqllite db and a telnet client to communicate with gpu core.
+This would be quite geekish, but only for advanced users.
 
 Functionality:
 --------------
 
 Chat: integrated browser to server which redirects to home GPU II server which redirects to IRC channel
 http://wiki.lazarus.freepascal.org/Webbrowser
+or completely implemented by GPU project
 
 Netmapper: Lazuarus OpenGLControl showing rotated earth with geolocated IPs retrieved from all webserver
 
@@ -34,6 +46,8 @@ Network presence: like it is done now in filedistributor, additionally, clients 
  information from multiple GPU II servers one after the other
 
 TCoreModule component to handle GPU jobs loaded with libraries (most plugins and frontends compatible with GPU I)
+(already implemented under /src/client/packages/own/coremodules)
+
 TXmlJobs component to handle XML work units
 Trayicon minimize
 

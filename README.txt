@@ -52,6 +52,11 @@ File Tree structure for this package, codenamed freedom follows:
       /planet      data on earth planet on elevation and population
       /textures    textures for general OpenGL use
         /solarysystem textures of solarsystem
+   /linux-x86-32   libraries for linux support on x86, 32 bit
+   /linux-x86-64   libraries for linux support on x86, 64 bit
+   /macosx         libraries for macosx support
+   /win32          libraries for windows support, 32 bit
+   /win64          libraries for windows support, 64 bit
 
 /dcu  compiled units for the client
 

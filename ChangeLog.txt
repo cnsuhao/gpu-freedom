@@ -1,3 +1,7 @@
+16.10.2010 git
+- added nanobit's WAN db and search engine idea with sqllite bindings
+ on GPU core in GPU II specs.txt file
+
 30.9.2010-15.10.2010 git
 milestone reached:
 coremodules package (=tgpu2 component) passes all FPC unit tests.
