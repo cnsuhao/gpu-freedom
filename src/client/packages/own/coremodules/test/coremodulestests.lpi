@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="12"/>
+      <ActiveEditorIndexAtStart Value="21"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,7 +36,7 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="31">
+    <Units Count="32">
       <Unit0>
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
@@ -44,7 +44,7 @@
         <CursorPos X="74" Y="26"/>
         <TopLine Value="1"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -54,15 +54,15 @@
         <CursorPos X="5" Y="98"/>
         <TopLine Value="66"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="41"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\stacks.pas"/>
         <UnitName Value="stacks"/>
-        <CursorPos X="30" Y="156"/>
-        <TopLine Value="147"/>
-        <EditorIndex Value="19"/>
+        <CursorPos X="35" Y="21"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="21"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -78,7 +78,7 @@
         <UnitName Value="frontendmanagers"/>
         <CursorPos X="58" Y="164"/>
         <TopLine Value="132"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="19"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -117,8 +117,8 @@
       <Unit9>
         <Filename Value="..\pluginmanagers.pas"/>
         <UnitName Value="pluginmanagers"/>
-        <CursorPos X="57" Y="210"/>
-        <TopLine Value="178"/>
+        <CursorPos X="12" Y="346"/>
+        <TopLine Value="331"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
@@ -146,7 +146,7 @@
         <UnitName Value="argretrievers"/>
         <CursorPos X="105" Y="244"/>
         <TopLine Value="212"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="22"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -169,7 +169,7 @@
         <UnitName Value="specialcommands"/>
         <CursorPos X="86" Y="58"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="21"/>
+        <EditorIndex Value="23"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -178,7 +178,7 @@
         <UnitName Value="computationthreads"/>
         <CursorPos X="36" Y="71"/>
         <TopLine Value="42"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="18"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -187,7 +187,7 @@
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="23" Y="131"/>
         <TopLine Value="100"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="20"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit17>
@@ -198,22 +198,24 @@
         <CursorPos X="1" Y="31"/>
         <TopLine Value="12"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\threadmanagers.pas"/>
         <UnitName Value="threadmanagers"/>
         <CursorPos X="5" Y="185"/>
-        <TopLine Value="153"/>
+        <TopLine Value="75"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\resultcollectors.pas"/>
         <UnitName Value="resultcollectors"/>
         <CursorPos X="48" Y="135"/>
         <TopLine Value="116"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="16"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -234,7 +236,7 @@
       <Unit23>
         <Filename Value="..\jobs.pas"/>
         <UnitName Value="jobs"/>
-        <CursorPos X="38" Y="102"/>
+        <CursorPos X="24" Y="101"/>
         <TopLine Value="72"/>
         <EditorIndex Value="12"/>
         <UsageCount Value="10"/>
@@ -252,8 +254,8 @@
       <Unit25>
         <Filename Value="..\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
-        <CursorPos X="28" Y="64"/>
-        <TopLine Value="41"/>
+        <CursorPos X="39" Y="26"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="4"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
@@ -289,8 +291,8 @@
         <UnitName Value="testresultcollectors"/>
         <CursorPos X="65" Y="47"/>
         <TopLine Value="19"/>
-        <EditorIndex Value="13"/>
-        <UsageCount Value="22"/>
+        <EditorIndex Value="15"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit29>
       <Unit30>
@@ -299,132 +301,137 @@
         <UnitName Value="testfrontendmanagers"/>
         <CursorPos X="43" Y="50"/>
         <TopLine Value="27"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="21"/>
+        <EditorIndex Value="17"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit30>
+      <Unit31>
+        <Filename Value="testthreadmanagers.pas"/>
+        <UnitName Value="testthreadmanagers"/>
+        <CursorPos X="44" Y="19"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit31>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="9" Column="16" TopLine="5"/>
+        <Caret Line="63" Column="82" TopLine="34"/>
       </Position1>
       <Position2>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="61" Column="63" TopLine="47"/>
+        <Caret Line="212" Column="26" TopLine="196"/>
       </Position2>
       <Position3>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="171" Column="36" TopLine="155"/>
+        <Caret Line="227" Column="44" TopLine="63"/>
       </Position3>
       <Position4>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="195" Column="32" TopLine="179"/>
+        <Caret Line="225" Column="17" TopLine="211"/>
       </Position4>
       <Position5>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="63" Column="82" TopLine="34"/>
+        <Caret Line="229" Column="18" TopLine="213"/>
       </Position5>
       <Position6>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="212" Column="26" TopLine="196"/>
+        <Caret Line="234" Column="17" TopLine="221"/>
       </Position6>
       <Position7>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="227" Column="44" TopLine="63"/>
+        <Caret Line="251" Column="33" TopLine="231"/>
       </Position7>
       <Position8>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="225" Column="17" TopLine="211"/>
+        <Caret Line="304" Column="47" TopLine="272"/>
       </Position8>
       <Position9>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="229" Column="18" TopLine="213"/>
+        <Caret Line="326" Column="26" TopLine="300"/>
       </Position9>
       <Position10>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="234" Column="17" TopLine="221"/>
+        <Caret Line="118" Column="37" TopLine="56"/>
       </Position10>
       <Position11>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="251" Column="33" TopLine="231"/>
+        <Caret Line="113" Column="46" TopLine="97"/>
       </Position11>
       <Position12>
         <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="304" Column="47" TopLine="272"/>
+        <Caret Line="115" Column="18" TopLine="89"/>
       </Position12>
       <Position13>
-        <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="326" Column="26" TopLine="300"/>
+        <Filename Value="testpluginmanagers.pas"/>
+        <Caret Line="44" Column="66" TopLine="22"/>
       </Position13>
       <Position14>
-        <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="118" Column="37" TopLine="56"/>
+        <Filename Value="testpluginmanagers.pas"/>
+        <Caret Line="43" Column="86" TopLine="27"/>
       </Position14>
       <Position15>
-        <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="113" Column="46" TopLine="97"/>
+        <Filename Value="testpluginmanagers.pas"/>
+        <Caret Line="44" Column="17" TopLine="27"/>
       </Position15>
       <Position16>
-        <Filename Value="..\pluginmanagers.pas"/>
-        <Caret Line="115" Column="18" TopLine="89"/>
+        <Filename Value="testpluginmanagers.pas"/>
+        <Caret Line="45" Column="86" TopLine="29"/>
       </Position16>
       <Position17>
         <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="44" Column="66" TopLine="22"/>
+        <Caret Line="33" Column="1" TopLine="29"/>
       </Position17>
       <Position18>
         <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="43" Column="86" TopLine="27"/>
+        <Caret Line="73" Column="17" TopLine="47"/>
       </Position18>
       <Position19>
         <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="44" Column="17" TopLine="27"/>
+        <Caret Line="23" Column="7" TopLine="11"/>
       </Position19>
       <Position20>
-        <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="45" Column="86" TopLine="29"/>
-      </Position20>
-      <Position21>
-        <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="33" Column="1" TopLine="29"/>
-      </Position21>
-      <Position22>
-        <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="73" Column="17" TopLine="47"/>
-      </Position22>
-      <Position23>
-        <Filename Value="testpluginmanagers.pas"/>
-        <Caret Line="23" Column="7" TopLine="11"/>
-      </Position23>
-      <Position24>
         <Filename Value="testmethodcontrollers.pas"/>
         <Caret Line="34" Column="75" TopLine="3"/>
-      </Position24>
-      <Position25>
+      </Position20>
+      <Position21>
         <Filename Value="..\methodcontrollers.pas"/>
         <Caret Line="77" Column="1" TopLine="54"/>
-      </Position25>
-      <Position26>
+      </Position21>
+      <Position22>
         <Filename Value="testresultcollectors.pas"/>
         <Caret Line="48" Column="74" TopLine="23"/>
-      </Position26>
-      <Position27>
+      </Position22>
+      <Position23>
         <Filename Value="testresultcollectors.pas"/>
         <Caret Line="27" Column="32" TopLine="6"/>
-      </Position27>
-      <Position28>
+      </Position23>
+      <Position24>
         <Filename Value="..\frontendmanagers.pas"/>
         <Caret Line="53" Column="10" TopLine="1"/>
-      </Position28>
-      <Position29>
+      </Position24>
+      <Position25>
         <Filename Value="..\frontendmanagers.pas"/>
         <Caret Line="55" Column="30" TopLine="39"/>
-      </Position29>
-      <Position30>
+      </Position25>
+      <Position26>
         <Filename Value="testfrontendmanagers.pas"/>
         <Caret Line="43" Column="42" TopLine="27"/>
-      </Position30>
+      </Position26>
+      <Position27>
+        <Filename Value="..\pluginmanagers.pas"/>
+        <Caret Line="7" Column="14" TopLine="1"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\stkconstants.pas"/>
+        <Caret Line="13" Column="24" TopLine="1"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\stkconstants.pas"/>
+        <Caret Line="64" Column="16" TopLine="48"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
