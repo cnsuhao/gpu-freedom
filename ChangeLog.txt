@@ -5,6 +5,8 @@
  and eventually also frontends :-)
 see also http://www.sqlite.org/faq.html#q5 this should be feasible :-)
 - computedtime calculation in jobs.pas
+- created skeleton for sqllite database used to communicate between GUI and
+ core
  
 
 30.9.2010-15.10.2010 git
