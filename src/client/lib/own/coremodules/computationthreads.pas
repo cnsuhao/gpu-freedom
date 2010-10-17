@@ -11,17 +11,16 @@ interface
 
 uses  Classes,
       jobs, methodcontrollers, pluginmanagers, resultcollectors, frontendmanagers,
-      jobparsers;
+      jobparsers, managedthreads;
 
 type
-  TComputationThread = class(TThread)
+  TComputationThread = class(TManagedThread)
    public
       
     constructor Create(var plugman : TPluginManager; var meth : TMethodController;
                        var res : TResultCollector; var frontman : TFrontendManager;
                        var job : TJob; thrdId : Longint);
-    function    isJobDone : Boolean;
-	  
+
    protected
     procedure Execute; override;
     
@@ -29,7 +28,6 @@ type
     procedure SyncOnJobFinished;
 	  
    private
-      job_done_      : Boolean;
       // input parameters
       // the job which needs to be computed
       job_           :  TJob;
@@ -40,10 +38,7 @@ type
       methController_ : TMethodController;
       rescoll_        : TResultCollector;
       frontman_       : TFrontendManager;
-
-      // if the thread is finished, job done is set to finish
-      jobDone_: boolean;
-   end;	  
+   end;
 
 implementation
 
@@ -51,9 +46,7 @@ constructor TComputationThread.Create(var plugman : TPluginManager; var meth : T
                                       var res : TResultCollector; var frontman : TFrontendManager;
                                       var job : TJob; thrdId : Longint);
 begin
-  inherited Create(false);
-  jobDone_ := false;
-
+  inherited Create;
   job_ := job;
   thrdId_ := thrdId;
 
@@ -63,10 +56,6 @@ begin
   frontman_ := frontman;
 end;
 
-function  TComputationThread.isJobDone : Boolean;
-begin
-  Result := jobDone_;
-end;
 
 procedure  TComputationThread.Execute;
 var parser : TJobParser;
@@ -76,7 +65,8 @@ begin
  parser.parse();
  parser.Free;
  syncOnJobFinished;
- jobDone_ := true;
+ done_ := true;
+ erroneous_ := job_.hasError;
 end;
 
 

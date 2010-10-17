@@ -16,15 +16,13 @@ interface
 
 uses
   sysutils, strutils, lnet, lhttp, lHTTPUtil, lnetSSL,
-  loggers;
+  loggers, managedthreads;
 
 
-type TDownloadThread = class(TThread)
+type TDownloadThread = class(TManagedThread)
  public
    constructor Create(url, targetPath, var logger : TLogger); overload;
    constructor Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
-   function    isDone()     : Boolean;
-   function    isErroneus() : Boolean;
    function    getTargetFileName() : String;
 
    // handlers for TLHTTPClient events
@@ -40,9 +38,6 @@ type TDownloadThread = class(TThread)
 
  private
     procedure getLogHeader : String;
-
-    done_,
-    erroneous_  : Boolean;
 
     url_,
     targetPath_,
@@ -70,9 +65,7 @@ end;
 constructor TDownloadThread.Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
 var index : Longint;
 begin
-  inherited Create(false);
-  done_ := false;
-  erroneous := false;
+  inherited Create();
 
   url_ := url;
   targetPath_ := targetParth;
@@ -89,17 +82,6 @@ begin
   end;
 
   logger_ := logger;
-end;
-
-function  TDownloadThread.isDone()     : Boolean;
-begin
- Result := done_;
-end;
-
-
-function  TDownloadThread.isErroneus() : Boolean;
-begin
- Result := erroneous_;
 end;
 
 function  TDownloadThread.getTargetFileName() : String;
@@ -171,7 +153,7 @@ end;
 
 procedure TDownloadThread.ClientError(const Msg: string; aSocket: TLSocket);
 begin
-  erroneous := true;
+  erroneous_ := true;
   logger_.log(LVL_WARNING, getLogHeader+'Error: '+Msg);
 end;
 

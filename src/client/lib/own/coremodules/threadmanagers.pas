@@ -136,7 +136,7 @@ begin
   // as the number of threads can change dynamically
   CS_.Enter;
   for i:=1 to MAX_THREADS do
-    if (slots_[i] <> nil) and slots_[i].isJobDone() then
+    if (slots_[i] <> nil) and slots_[i].isDone() then
     begin
       slots_[i].WaitFor;
       FreeAndNil(slots_[i]);

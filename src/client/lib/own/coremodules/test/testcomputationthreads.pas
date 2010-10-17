@@ -37,7 +37,7 @@ var cthread : TComputationThread;
 begin
  job_.Job := job;
  cthread := TComputationThread.Create(plugman_, meth_, res_, frontman_, job_, 1);
- while (not cthread.isJobDone) do Sleep(100);
+ while (not cthread.isDone) do Sleep(100);
  cthread.Free;
 end;
 
