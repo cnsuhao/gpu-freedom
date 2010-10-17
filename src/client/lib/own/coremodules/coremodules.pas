@@ -31,7 +31,7 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, threadmanagers, loggers;
+  frontendmanagers, compthreadmanagers, loggers;
 
 implementation
 
@@ -40,19 +40,19 @@ type TCoreModule = class(TObject)
     destructor Destroy;
 
     // helper structures
-    function getPluginManager()   : TPluginManager;
-    function getMethController()  : TMethodController;
-    function getResultCollector() : TResultCollector;
-    function getFrontendManager() : TFrontendManager;
-    function getThreadManager()   : TThreadManager;
-    function getLogger()          : TLogger;
+    function getPluginManager()     : TPluginManager;
+    function getMethController()    : TMethodController;
+    function getResultCollector()   : TResultCollector;
+    function getFrontendManager()   : TFrontendManager;
+    function getCompThreadManager() : TCompThreadManager;
+    function getLogger()            : TLogger;
 
     // core components
     plugman_        : TPluginManager;
     methController_ : TMethodController;
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
-    threadman_      : TThreadManager;
+    compthreadman_  : TCompThreadManager;
     logger_         : TLogger;
 end;
 
@@ -65,7 +65,7 @@ begin
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
-   threadman_      := TThreadManager.Create(plugman_, methController_, rescoll_, frontman_);
+   compthreadman_  := TCompThreadManager.Create(plugman_, methController_, rescoll_, frontman_);
 end;
 
 destructor TCoreModule.Destroy;
@@ -73,7 +73,7 @@ begin
   methController_.Free;
   rescoll_.Free;
   frontman_.Free;
-  threadman_.Free;
+  compthreadman_.Free;
   logger_.Free;
   inherited;
 end;
@@ -99,9 +99,9 @@ begin
  Result := plugman_;
 end;
 
-function TCoreModule.getThreadManager()   : TThreadManager;
+function TCoreModule.getCompThreadManager()   : TCompThreadManager;
 begin
- Result := threadman_;
+ Result := compthreadman_;
 end;
 
 function TCoreModule.getLogger()          : TLogger;

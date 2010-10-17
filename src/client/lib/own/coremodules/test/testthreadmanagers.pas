@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   computationthreads, pluginmanagers, methodcontrollers,
   loggers, resultcollectors, frontendmanagers, specialcommands,
-  jobs, stacks, threadmanagers;
+  jobs, stacks, compthreadmanagers;
 
 type
 
@@ -26,7 +26,7 @@ type
     frontman_  : TFrontendManager;
     spec_      : TSpecialCommand;
     job_       : TJob;
-    threadman_ : TThreadManager;
+    threadman_ : TCompThreadManager;
   end; 
 
 implementation
@@ -52,7 +52,7 @@ begin
  frontman_       := TFrontendManager.Create();
  spec_           := TSpecialCommand.Create(plugman_, meth_, res_, frontman_);
  job_            := TJob.Create();
- threadman_      := TThreadManager.Create(plugman_, meth_, res_, frontman_);
+ threadman_      := TCompThreadManager.Create(plugman_, meth_, res_, frontman_);
 end;
 
 procedure TTestThreadManager.TearDown; 

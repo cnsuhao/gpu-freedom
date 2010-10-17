@@ -12,8 +12,9 @@ interface
 const
   CORE_VERSION = '1.0.0';
 
-  DEFAULT_THREADS = 3;   // default number of threads in TGPU2.pas
-  MAX_THREADS     = 16;  // maximum number of allowed threads in TGPU2.pas
+  DEFAULT_COMP_THREADS    = 3;   // default number of computation threads
+  DEFAULT_DOWN_THREADS    = 6;   // default number of download threads
+  MAX_MANAGED_THREADS     = 16;  // maximum number of managed threads in ThreadManager
 
   MAX_STACK_PARAMS   = 256;          // Maximum size of Stack in Virtual Machine
                                      // changes in this value or in TStack structure

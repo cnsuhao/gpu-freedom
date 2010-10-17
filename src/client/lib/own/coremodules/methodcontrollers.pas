@@ -39,10 +39,10 @@ type TMethodController = class(TObject)
    procedure clear();
 
  private
-   method_call_ : Array[1..MAX_THREADS] of String; // this contains calls only if registered
-   method_name_ : Array[1..MAX_THREADS] of String; // this always contains call names even if allowed
-                                                   // concurrently
-   plugin_name_ : Array[1..MAX_THREADS] of String;
+   method_call_ : Array[1..MAX_MANAGED_THREADS] of String; // this contains calls only if registered
+   method_name_ : Array[1..MAX_MANAGED_THREADS] of String; // this always contains call names even if allowed
+                                                       // concurrently
+   plugin_name_ : Array[1..MAX_MANAGED_THREADS] of String;
    CS_ : TCriticalSection;
    concurrently_allowed_ : TStringList;
 end;
@@ -95,7 +95,7 @@ var i : Longint;
 begin
   CS_.Enter;
   Result := true;
-  for i:=1 to MAX_THREADS do
+  for i:=1 to MAX_MANAGED_THREADS do
      if (method_call_[i] = funcName) then
          begin
            CS_.Leave;
@@ -128,9 +128,9 @@ end;
 procedure TMethodController.clear();
 var i : Longint;
 begin
- for i:=1 to MAX_THREADS do method_call_[i] := '';
- for i:=1 to MAX_THREADS do method_name_[i] := '';
- for i:=1 to MAX_THREADS do plugin_name_[i] := '';
+ for i:=1 to MAX_MANAGED_THREADS do method_call_[i] := '';
+ for i:=1 to MAX_MANAGED_THREADS do method_name_[i] := '';
+ for i:=1 to MAX_MANAGED_THREADS do plugin_name_[i] := '';
 end;
 
 end.
