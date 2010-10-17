@@ -1,6 +1,6 @@
 unit compthreadmanagers;
 {
-  Threadmanagers keeps track of MAX_THREADS slots which can contain a running
+  CompThreadmanagers keeps track of MAX_MANAGED_THREADS slots which can contain a running
   ComputationThread. A new ComputationThread can be created on a slot
   by using the Compute(...) method after defining a TJob structure.
   This class is the only class which can istantiate a new ComputationThread.

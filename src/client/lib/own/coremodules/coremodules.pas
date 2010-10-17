@@ -31,7 +31,7 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, compthreadmanagers, loggers;
+  frontendmanagers, compthreadmanagers, downloadthreadmanagers, loggers;
 
 implementation
 
@@ -45,6 +45,7 @@ type TCoreModule = class(TObject)
     function getResultCollector()   : TResultCollector;
     function getFrontendManager()   : TFrontendManager;
     function getCompThreadManager() : TCompThreadManager;
+    function getDownThreadManager() : TDownloadThreadManager;
     function getLogger()            : TLogger;
 
     // core components
@@ -54,6 +55,7 @@ type TCoreModule = class(TObject)
     frontman_       : TFrontendManager;
     compthreadman_  : TCompThreadManager;
     logger_         : TLogger;
+    downthreadman_  : TDownloadThreadManager;
 end;
 
 
@@ -66,6 +68,7 @@ begin
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
    compthreadman_  := TCompThreadManager.Create(plugman_, methController_, rescoll_, frontman_);
+   downthreadman_  := TDownloadThreadManager.Create(logger_);
 end;
 
 destructor TCoreModule.Destroy;
@@ -74,6 +77,7 @@ begin
   rescoll_.Free;
   frontman_.Free;
   compthreadman_.Free;
+  downthreadman_.Free;
   logger_.Free;
   inherited;
 end;
@@ -107,6 +111,11 @@ end;
 function TCoreModule.getLogger()          : TLogger;
 begin
  Result := logger_;
+end;
+
+function TCoreModule.getDownThreadManager() : TDownloadThreadManager;
+begin
+ Result := downthreadman_;
 end;
 
 end.
