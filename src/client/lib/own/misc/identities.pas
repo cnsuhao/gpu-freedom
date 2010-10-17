@@ -52,7 +52,7 @@ type
   end;
 
 type
-  TCoreIdentity = record
+  TThreadManagerStatus = record
      threads,
      maxthreads : Longint;
 
@@ -62,9 +62,11 @@ type
 
 
 var
-  MyGPUID  : TGPUIdentity;
-  MyUserID : TUserIdentity;
-  MyCoreID : TCoreIdentity;
+  MyGPUID      : TGPUIdentity;
+  MyUserID     : TUserIdentity;
+  MyCoreCompID : TThreadManagerStatus;
+  MyCoreDownID : TThreadManagerStatus;
+
 implementation
 
 

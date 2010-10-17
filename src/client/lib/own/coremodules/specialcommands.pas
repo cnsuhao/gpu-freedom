@@ -177,10 +177,10 @@ end;
 function TSpecialCommand.execCoreCommand(arg : String; var stk : TStack) : boolean;
 begin
   Result := false;  
-  if (arg='core.threads')        then Result := pushFloat(myCoreID.threads, stk) else
-  if (arg='core.maxthreads')     then Result := pushFloat(myCoreId.maxthreads, stk) else
-  if (arg='core.isidle')         then Result := pushBool(myCoreId.isIdle, stk) else
-  if (arg='core.hasresources')   then Result := pushBool(myCoreId.hasResources, stk) else
+  if (arg='core.threads')        then Result := pushFloat(myCoreCompID.threads, stk) else
+  if (arg='core.maxthreads')     then Result := pushFloat(myCoreCompId.maxthreads, stk) else
+  if (arg='core.isidle')         then Result := pushBool(myCoreCompId.isIdle, stk) else
+  if (arg='core.hasresources')   then Result := pushBool(myCoreCompId.hasResources, stk) else
   if (arg='core.version')        then Result := pushStr(CORE_VERSION, stk) else
   if (arg='core.stkversion')     then Result := pushStr(STACK_VERSION, stk) else
   if (arg='core.registeredjobs') then Result := frontman_.getStandardQueue().getRegisteredList(stk) else

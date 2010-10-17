@@ -140,16 +140,20 @@
       <Unit14>
         <Filename Value="..\..\misc\identities.pas"/>
         <UnitName Value="identities"/>
-        <CursorPos X="15" Y="35"/>
-        <TopLine Value="31"/>
+        <CursorPos X="3" Y="69"/>
+        <TopLine Value="41"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
-        <CursorPos X="86" Y="58"/>
-        <TopLine Value="41"/>
+        <CursorPos X="68" Y="183"/>
+        <TopLine Value="165"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\computationthreads.pas"/>
@@ -182,8 +186,8 @@
       <Unit19>
         <Filename Value="..\compthreadmanagers.pas"/>
         <UnitName Value="compthreadmanagers"/>
-        <CursorPos X="16" Y="53"/>
-        <TopLine Value="28"/>
+        <CursorPos X="13" Y="96"/>
+        <TopLine Value="70"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
@@ -228,7 +232,7 @@
         <UnitName Value="stkconstants"/>
         <CursorPos X="71" Y="16"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -272,8 +276,8 @@
       <Unit31>
         <Filename Value="testthreadmanagers.pas"/>
         <UnitName Value="testthreadmanagers"/>
-        <CursorPos X="83" Y="24"/>
-        <TopLine Value="1"/>
+        <CursorPos X="95" Y="49"/>
+        <TopLine Value="38"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
@@ -302,7 +306,7 @@
         <UnitName Value="testcomputationthreads"/>
         <CursorPos X="88" Y="27"/>
         <TopLine Value="25"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="11"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit34>
@@ -316,7 +320,7 @@
         <Loaded Value="True"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="21" HistoryIndex="20">
       <Position1>
         <Filename Value="..\managedthreads.pas"/>
         <Caret Line="27" Column="22" TopLine="3"/>
@@ -393,6 +397,14 @@
         <Filename Value="..\compthreadmanagers.pas"/>
         <Caret Line="31" Column="37" TopLine="11"/>
       </Position19>
+      <Position20>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="58" Column="86" TopLine="41"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\compthreadmanagers.pas"/>
+        <Caret Line="53" Column="16" TopLine="28"/>
+      </Position21>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
