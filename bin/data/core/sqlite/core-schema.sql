@@ -1,29 +1,38 @@
 CREATE TABLE tbchat (
    id int primary key,
+   externalid int,
    msg text,
    user varchar(32),
    create_dt text,
    usertime_dt text,
-   channel varchar(32)
+   channel varchar(32),
+   server_id int
+);
+
+CREATE TABLE tbjob (
+   id int primary key,
+   requestid int,
+   jobid text,
+   job text,
+   status int,
+   workunitincoming text,
+   workunitoutgoing text,
+   islocal boolean,
+   server_id int,
+   create_dt text
 );
 
 CREATE TABLE tbjobqueue (
    id int primary key,
-   jobid text,
-   job text,
-   workunitincoming text,
-   workunitoutgoing text,
-   create_dt text
+   job_id int
 );
 
 CREATE TABLE tbjobresult (
    id int primary key,
-   jobid text,
-   job text,
+   job_id int,
    result text,
-   workunit_incoming text,
-   workunit_outgoing text,
-   iserroneus numeric,
+   iserroneus boolean,
+   reported boolean,
    errorid int,
    errormsg text,
    errorarg text,
@@ -31,7 +40,8 @@ CREATE TABLE tbjobresult (
 );
 
 CREATE TABLE tbnode (
-   id int primary key,   
+   id int primary key,
+   defaultserver_id int,   
    nodeid text,
    nodename text,
    country text,
@@ -41,12 +51,13 @@ CREATE TABLE tbnode (
    localip text,
    os text,
    version text,
-   acceptincoming numeric,
+   acceptincoming boolean,
    gigaflops int,
    ram int,
    mhz int,
    nbcpus int,
-   isonline numeric,
+   online boolean,
+   updated boolean,
    uptime real,
    totaluptime real,
    cputype text,
@@ -54,6 +65,23 @@ CREATE TABLE tbnode (
    latitude real,
    create_dt text,
    update_dt text
+);
+
+CREATE TABLE tbserver (
+   id int primary key,
+   externalid int,
+   serverurl text,
+   chatchannel varchar(32),
+   version varchar(32),
+   online boolean,
+   updated boolean,
+   defaultsrv boolean,
+   superserver boolean,
+   lon real,
+   lat real,
+   distance real,
+   activenodes int,
+   jobinqueue int
 );
 
 CREATE TABLE tbwanparameter (
