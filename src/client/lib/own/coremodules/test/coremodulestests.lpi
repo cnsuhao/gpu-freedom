@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="3"/>
+      <ActiveEditorIndexAtStart Value="9"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -140,7 +140,7 @@
       <Unit14>
         <Filename Value="..\..\misc\identities.pas"/>
         <UnitName Value="identities"/>
-        <CursorPos X="3" Y="69"/>
+        <CursorPos X="15" Y="68"/>
         <TopLine Value="41"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="17"/>
@@ -149,8 +149,8 @@
       <Unit15>
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
-        <CursorPos X="68" Y="183"/>
-        <TopLine Value="165"/>
+        <CursorPos X="65" Y="185"/>
+        <TopLine Value="170"/>
         <EditorIndex Value="9"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
@@ -186,7 +186,7 @@
       <Unit19>
         <Filename Value="..\compthreadmanagers.pas"/>
         <UnitName Value="compthreadmanagers"/>
-        <CursorPos X="13" Y="96"/>
+        <CursorPos X="43" Y="74"/>
         <TopLine Value="70"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="18"/>
@@ -320,7 +320,7 @@
         <Loaded Value="True"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="23" HistoryIndex="22">
       <Position1>
         <Filename Value="..\managedthreads.pas"/>
         <Caret Line="27" Column="22" TopLine="3"/>
@@ -405,6 +405,14 @@
         <Filename Value="..\compthreadmanagers.pas"/>
         <Caret Line="53" Column="16" TopLine="28"/>
       </Position21>
+      <Position22>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="183" Column="68" TopLine="165"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\compthreadmanagers.pas"/>
+        <Caret Line="76" Column="85" TopLine="70"/>
+      </Position23>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -85,7 +85,9 @@ begin
       end
   else	  
   if (arg='core.threads') or (arg='core.maxthreads') or (arg='core.isidle') or (arg='core.hasresources') or
-     (arg='core.version') or (arg='core.registeredjobs') or (arg='core.stkversion') then
+     (arg='core.version') or (arg='core.registeredjobs') or (arg='core.stkversion') or
+     (arg='core.downloads') or (arg='core.maxdownloads')
+     then
       begin
             specialType := STK_ARG_SPECIAL_CALL_CORE;
 	    Result := true;
@@ -177,10 +179,12 @@ end;
 function TSpecialCommand.execCoreCommand(arg : String; var stk : TStack) : boolean;
 begin
   Result := false;  
-  if (arg='core.threads')        then Result := pushFloat(myCoreCompID.threads, stk) else
-  if (arg='core.maxthreads')     then Result := pushFloat(myCoreCompId.maxthreads, stk) else
-  if (arg='core.isidle')         then Result := pushBool(myCoreCompId.isIdle, stk) else
-  if (arg='core.hasresources')   then Result := pushBool(myCoreCompId.hasResources, stk) else
+  if (arg='core.threads')        then Result := pushFloat(TMCompStatus.threads, stk) else
+  if (arg='core.maxthreads')     then Result := pushFloat(TMCompStatus.maxthreads, stk) else
+  if (arg='core.downloads')      then Result := pushFloat(TMDownStatus.threads, stk) else
+  if (arg='core.maxdownloads')   then Result := pushFloat(TMDownStatus.maxthreads, stk) else
+  if (arg='core.isidle')         then Result := pushBool(TMCompStatus.isIdle, stk) else
+  if (arg='core.hasresources')   then Result := pushBool(TMCompStatus.hasResources, stk) else
   if (arg='core.version')        then Result := pushStr(CORE_VERSION, stk) else
   if (arg='core.stkversion')     then Result := pushStr(STACK_VERSION, stk) else
   if (arg='core.registeredjobs') then Result := frontman_.getStandardQueue().getRegisteredList(stk) else

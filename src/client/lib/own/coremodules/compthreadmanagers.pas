@@ -90,10 +90,10 @@ end;
 
 procedure TCompThreadManager.updateStatus;
 begin
-  myCoreCompId.maxthreads := max_threads_;
-  myCoreCompId.threads := current_threads_;
-  myCoreCompId.isIdle  := isIdle();
-  myCoreCompId.hasResources := hasResources();
+  TMCompStatus.maxthreads := max_threads_;
+  TMCompStatus.threads := current_threads_;
+  TMCompStatus.isIdle  := isIdle();
+  TMCompStatus.hasResources := hasResources();
 end;
 
 end.
