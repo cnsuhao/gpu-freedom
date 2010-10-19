@@ -12,7 +12,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="1"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -31,17 +31,26 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="1">
+    <Units Count="2">
       <Unit0>
         <Filename Value="testhttp.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="testhttp"/>
-        <CursorPos X="30" Y="6"/>
-        <TopLine Value="1"/>
+        <CursorPos X="8" Y="40"/>
+        <TopLine Value="11"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="..\..\..\..\..\own\coremodules\downloadthreads.pas"/>
+        <UnitName Value="downloadthreads"/>
+        <CursorPos X="46" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit1>
     </Units>
     <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
