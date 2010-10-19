@@ -1,4 +1,4 @@
-unit downloadthreads;
+unit lnetdownloadthreads;
 {
   DownloadThread is a thread which downloads a file
   via HTTP and stores it in targetfile under directory
@@ -19,7 +19,7 @@ uses
   loggers, managedthreads;
 
 
-type TDownloadThread = class(TManagedThread)
+type TLNETDownloadThread = class(TManagedThread)
  public
    constructor Create(url, targetPath : String; var logger : TLogger); overload;
    constructor Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
@@ -57,12 +57,12 @@ end;
 
 implementation
 
-constructor TDownloadThread.Create(url, targetPath : String; var logger : TLogger); overload;
+constructor TLNETDownloadThread.Create(url, targetPath : String; var logger : TLogger); overload;
 begin
   Create(url, targetPath, '', logger);
 end;
 
-constructor TDownloadThread.Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
+constructor TLNETDownloadThread.Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
 var index : Longint;
 begin
   inherited Create();
@@ -84,12 +84,12 @@ begin
   logger_ := logger;
 end;
 
-function  TDownloadThread.getTargetFileName() : String;
+function  TLNETDownloadThread.getTargetFileName() : String;
 begin
   Result := targetPath_+PathDelim+targetFile_;
 end;
 
-procedure TDownloadThread.execute();
+procedure TLNETDownloadThread.execute();
 var index : Longint;
     AltFileName : String;
 begin
@@ -146,24 +146,24 @@ begin
   logger_.log(LVL_INFO, getLogHeader+'Execute method finished');
 end;
 
-function TDownloadThread.getLogHeader : String;
+function TLNETDownloadThread.getLogHeader : String;
 begin
  Result := 'DownloadThread ['+targetFile_+']> ';
 end;
 
-procedure TDownloadThread.ClientError(const Msg: AnsiString; aSocket: TLSocket);
+procedure TLNETDownloadThread.ClientError(const Msg: AnsiString; aSocket: TLSocket);
 begin
   erroneous_ := true;
   logger_.log(LVL_WARNING, getLogHeader+'Error: '+Msg);
 end;
 
-procedure TDownloadThread.ClientDisconnect(ASocket: TLSocket);
+procedure TLNETDownloadThread.ClientDisconnect(ASocket: TLSocket);
 begin
   logger_.log(LVL_DEBUG, getLogHeader+'Disconnected.');
   done_ := true;
 end;
 
-procedure TDownloadThread.ClientDoneInput(ASocket: TLHTTPClientSocket);
+procedure TLNETDownloadThread.ClientDoneInput(ASocket: TLHTTPClientSocket);
 begin
   logger_.log(LVL_DEBUG, getLogHeader+'Closing outputfile and disconnecting socket...');
   close(OutputFile_);
@@ -171,14 +171,14 @@ begin
   logger_.log(LVL_DEBUG, getLogHeader+'Closing outputfile and disconnecting socket done.');
 end;
 
-function TDownloadThread.ClientInput(ASocket: TLHTTPClientSocket;
+function TLNETDownloadThread.ClientInput(ASocket: TLHTTPClientSocket;
   ABuffer: pchar; ASize: Integer): Integer;
 begin
   blockwrite(outputfile_, ABuffer^, ASize, Result);
   logger_.log(LVL_DEBUG, getLogHeader+IntToStr(ASize) + 'bytes received...');
 end;
 
-procedure TDownloadThread.ClientProcessHeaders(ASocket: TLHTTPClientSocket);
+procedure TLNETDownloadThread.ClientProcessHeaders(ASocket: TLHTTPClientSocket);
 begin
   logger_.log(LVL_DEBUG, getLogHeader+'Response: '+IntToStr(HTTPStatusCodes[ASocket.ResponseStatus])+' '+
     ASocket.ResponseReason+', data...');
