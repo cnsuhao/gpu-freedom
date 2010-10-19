@@ -22,6 +22,9 @@ type
     function download(url, targetPath, targetFilename : String): Longint;
     procedure updateStatus; virtual;
 
+    procedure setMaxThreads(x: Longint);
+    procedure clearFinishedThreads;
+
   private
     logger_ : TLogger;
 
@@ -74,6 +77,18 @@ begin
   TMDownStatus.threads := current_threads_;
   TMDownStatus.isIdle  := isIdle();
   TMDownStatus.hasResources := hasResources();
+end;
+
+procedure TDownloadThreadManager.setMaxThreads(x: Longint);
+begin
+  inherited setMaxThreads(x);
+  updateStatus();
+end;
+
+procedure TDownloadThreadManager.clearFinishedThreads;
+begin
+  inherited clearFinishedThreads;
+  updateStatus();
 end;
 
 end.
