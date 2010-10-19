@@ -2,17 +2,17 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="\"/>
-    <Version Value="7"/>
+    <Version Value="6"/>
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
-        <LRSInOutputDirectory Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="2"/>
+      <ActiveEditorIndexAtStart Value="1"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -44,8 +44,8 @@
       <Unit1>
         <Filename Value="basicdll.pas"/>
         <UnitName Value="basicdll"/>
-        <CursorPos X="41" Y="423"/>
-        <TopLine Value="400"/>
+        <CursorPos X="6" Y="12"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="14"/>
         <Loaded Value="True"/>
@@ -69,18 +69,14 @@
         <UnitName Value="stkconstants"/>
         <CursorPos X="8" Y="9"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\..\packages\own\coremodules\stacks.pas"/>
         <UnitName Value="stacks"/>
         <CursorPos X="20" Y="122"/>
         <TopLine Value="122"/>
-        <EditorIndex Value="4"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="..\..\..\..\..\..\lazarus\fpc\2.2.2\source\rtl\objpas\math.pp"/>
@@ -102,12 +98,10 @@
         <UnitName Value="testplugins"/>
         <CursorPos X="48" Y="52"/>
         <TopLine Value="34"/>
-        <EditorIndex Value="2"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit8>
     </Units>
-    <JumpHistory Count="18" HistoryIndex="17">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="basicdll.pas"/>
         <Caret Line="224" Column="37" TopLine="202"/>
@@ -180,13 +174,21 @@
         <Filename Value="basicdll.pas"/>
         <Caret Line="434" Column="25" TopLine="406"/>
       </Position18>
+      <Position19>
+        <Filename Value="basicdll.pas"/>
+        <Caret Line="423" Column="41" TopLine="400"/>
+      </Position19>
+      <Position20>
+        <Filename Value="basicdll.pas"/>
+        <Caret Line="12" Column="6" TopLine="1"/>
+      </Position20>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\..\packages\own\coremodules\"/>
+      <OtherUnitFiles Value="..\..\lib\own\coremodules\"/>
       <UnitOutputDirectory Value="..\..\..\..\bin\plugins\lib"/>
     </SearchPaths>
     <Parsing>

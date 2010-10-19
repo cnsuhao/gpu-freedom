@@ -2,12 +2,10 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="\"/>
-    <Version Value="7"/>
+    <Version Value="6"/>
     <General>
-      <Flags>
-        <LRSInOutputDirectory Value="False"/>
-      </Flags>
       <MainUnit Value="0"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <ActiveEditorIndexAtStart Value="1"/>
     </General>
@@ -52,7 +50,7 @@
         <UnitName Value="basicdll"/>
         <CursorPos X="5" Y="116"/>
         <TopLine Value="84"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -61,9 +59,7 @@
         <UnitName Value="stacks"/>
         <CursorPos X="1" Y="67"/>
         <TopLine Value="67"/>
-        <EditorIndex Value="2"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit3>
     </Units>
     <JumpHistory Count="12" HistoryIndex="11">
@@ -121,7 +117,7 @@
     <Version Value="8"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\..\..\..\src\client\packages\own\coremodules\"/>
+      <OtherUnitFiles Value="..\..\..\..\src\client\lib\own\coremodules\"/>
       <UnitOutputDirectory Value="..\..\..\..\bin\plugins\lib"/>
     </SearchPaths>
     <Parsing>

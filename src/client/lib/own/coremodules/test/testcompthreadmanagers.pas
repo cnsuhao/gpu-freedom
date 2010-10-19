@@ -1,4 +1,4 @@
-unit testthreadmanagers;
+unit testcompthreadmanagers;
 
 {$mode objfpc}{$H+}
 
@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   computationthreads, pluginmanagers, methodcontrollers,
   loggers, resultcollectors, frontendmanagers, specialcommands,
-  jobs, stacks, threadmanagers;
+  jobs, stacks, compthreadmanagers;
 
 type
 
@@ -29,7 +29,7 @@ type
     job3_,
     job4_,
     job5_      : TJob;
-    threadman_ : TThreadManager;
+    threadman_ : TCompThreadManager;
   end; 
 
 implementation
@@ -102,7 +102,7 @@ begin
  job3_           := TJob.Create();
  job4_           := TJob.Create();
  job5_           := TJob.Create();
- threadman_      := TThreadManager.Create(plugman_, meth_, res_, frontman_);
+ threadman_      := TCompThreadManager.Create(plugman_, meth_, res_, frontman_);
 end;
 
 procedure TTestThreadManager.TearDown; 
