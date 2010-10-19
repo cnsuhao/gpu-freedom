@@ -15,6 +15,8 @@ begin
   if Trim(Paramstr(3))<>'' then
            HTTP.ProxyPort := ParamStr(3);
 
+  HTTP.UserAgent := 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
+  WriteLn('User Agent: '+HTTP.UserAgent);
 
   l := TStringList.create;
   try
