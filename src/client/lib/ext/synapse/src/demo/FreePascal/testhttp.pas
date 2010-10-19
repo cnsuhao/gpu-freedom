@@ -3,13 +3,19 @@
 Program testhttp;
 
 uses
-  httpsend, classes;
+  httpsend, classes, Sysutils;
 
 var
   HTTP: THTTPSend;
   l: tstringlist;
 begin
   HTTP := THTTPSend.Create;
+  if Trim(Paramstr(2))<>'' then
+           HTTP.ProxyHost := ParamStr(2);
+  if Trim(Paramstr(3))<>'' then
+           HTTP.ProxyPort := ParamStr(3);
+
+
   l := TStringList.create;
   try
     if not HTTP.HTTPMethod('GET', Paramstr(1)) then
