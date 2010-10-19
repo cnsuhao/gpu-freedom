@@ -4,9 +4,9 @@ unit downloadthreads;
   via HTTP and stores it in targetfile under directory
   targetDir.
 
-  This file is build with fpget as template, which belongs to the
-  lnet project under http://lnet.wordpress.com/
-  It uses LNet to download the file via HTTP.
+  This file is build with testhttp as template
+   which is part of the Synapse library
+  available under /src/client/lib/ext/synapse.
 
   (c) by 2002-2010 the GPU Development Team
   This unit is released under GNU Public License (GPL)
@@ -15,23 +15,15 @@ unit downloadthreads;
 interface
 
 uses
-  sysutils, strutils, lnet, lhttp, lHTTPUtil, lnetSSL,
+  sysutils, strutils, httpsend, Classes,
   loggers, managedthreads;
 
 
 type TDownloadThread = class(TManagedThread)
  public
-   constructor Create(url, targetPath : String; var logger : TLogger); overload;
-   constructor Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
+   constructor Create(url, targetPath, proxy, port : String; var logger : TLogger); overload;
+   constructor Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger); overload;
    function    getTargetFileName() : String;
-
-   // handlers for TLHTTPClient events
-   procedure ClientDisconnect(ASocket: TLSocket);
-   procedure ClientDoneInput(ASocket: TLHTTPClientSocket);
-   procedure ClientError(const Msg: AnsiString; aSocket: TLSocket);
-   function ClientInput(ASocket: TLHTTPClientSocket; ABuffer: pchar;
-      ASize: Integer): Integer;
-   procedure ClientProcessHeaders(ASocket: TLHTTPClientSocket);
 
  protected
     procedure Execute; override;
@@ -41,28 +33,23 @@ type TDownloadThread = class(TManagedThread)
 
     url_,
     targetPath_,
-    targetFile_ : String;
+    targetFile_,
+    proxy_,
+    port_       : String;
     logger_     : TLogger;
 
-    host_,
-    uri_        : AnsiString;
-    port_       : Word;
-    useSSL_     : Boolean;
-
-    HttpClient_ : TLHTTPClient;
-    SSLSession_ : TLSSLSession;
     OutputFile_ : file;
 end;
 
 
 implementation
 
-constructor TDownloadThread.Create(url, targetPath : String; var logger : TLogger); overload;
+constructor TDownloadThread.Create(url, targetPath, proxy, port : String; var logger : TLogger); overload;
 begin
-  Create(url, targetPath, '', logger);
+  Create(url, targetPath, '', proxy, port, logger);
 end;
 
-constructor TDownloadThread.Create(url, targetPath, targetFilename : String; var logger : TLogger); overload;
+constructor TDownloadThread.Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger); overload;
 var index : Longint;
 begin
   inherited Create();
@@ -70,6 +57,8 @@ begin
   url_ := url;
   targetPath_ := targetPath;
   targetFile_ := targetFileName;
+  proxy_ := proxy;
+  port_ := port;
 
   if Trim(targetFile_)='' then
   begin
@@ -90,12 +79,11 @@ begin
 end;
 
 procedure TDownloadThread.execute();
-var index : Longint;
+var index       : Longint;
     AltFileName : String;
+    Http        : THTTPSend;
 begin
-  UseSSL_ := DecomposeURL(URL_, Host_, URI_, Port_);
-  logger_.log(LVL_INFO, getLogHeader+'Host: '+Host_+' URI: '+URI_+' Port: '+IntToStr(Port_));
-
+  logger_.log(LVL_DEBUG, getLogHeader+'Execute method started.');
   if FileExists(targetPath_+PathDelim+targetFile_) then
   begin
     index := 2;
@@ -107,81 +95,35 @@ begin
     targetFile_ := AltFileName;
   end;
 
-  try
-    assign(OutputFile_, targetPath_+PathDelim+targetFile_);
-    rewrite(OutputFile_, 1);
-  except
-    CloseFile(OutputFile_);
-    done_ := true;
-    erroneous_ := true;
-    logger_.log(LVL_SEVERE, getLogHeader+'Serious problem in opening target file '+targetPath_+PathDelim+targetFile_);
-    Exit;
-  end;
-
-  HttpClient_ := TLHTTPClient.Create(nil);
-
-  SSLSession_ := TLSSLSession.Create(HttpClient_);
-  SSLSession_.SSLActive := UseSSL_;
-
-  HttpClient_.Session := SSLSession_;
-  HttpClient_.Host := Host_;
-  HttpClient_.Method := hmGet;
-  HttpClient_.Port := Port_;
-  HttpClient_.URI := URI_;
-  HttpClient_.Timeout := 1;
-  HttpClient_.OnDisconnect := @self.ClientDisconnect;
-  HttpClient_.OnDoneInput := @self.ClientDoneInput;
-  HttpClient_.OnError := @self.ClientError;
-  HttpClient_.OnInput := @self.ClientInput;
-  HttpClient_.OnProcessHeaders := @self.ClientProcessHeaders;
-  HttpClient_.SendRequest;
-  done_ := false;
+  HTTP := THTTPSend.Create;
+  //HTTP.Document := targetPath_+PathDelim+targetFile_;
+  if Trim(proxy_)<>'' then HTTP.ProxyHost := proxy_;
+  if Trim(port_)<>'' then HTTP.ProxyPort := port_;
+  //HTTP.Timeout := 20;
+  HTTP.UserAgent := 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
+  logger_.log(LVL_DEBUG, getLogHeader+'User agent is '+HTTP.UserAgent);
 
   try
-   while not done_ do
-    HttpClient_.CallAction;
+    if not HTTP.HTTPMethod('GET', Paramstr(1)) then
+      begin
+	logger_.log(LVL_SEVERE, getLogHeader+Http.Resultcode);
+      end
+    else
+      begin
+        logger_.log(LVL_DEBUG+getLogHeader+'HTTP Result was '+Http.Resultcode+' '+Http.Resultstring);
+        logger_.log(LVL_DEBUG, Http.headers.text);
+        logger_.log(LVL_INFO, 'New file created at '+Http.Document);
+     end;
   finally
-    HttpClient_.Free;
+    HTTP.Free;
   end;
-  logger_.log(LVL_INFO, getLogHeader+'Execute method finished');
+
+  logger_.log(LVL_DEBUG, getLogHeader+'Execute method finished.');
 end;
 
 function TDownloadThread.getLogHeader : String;
 begin
  Result := 'DownloadThread ['+targetFile_+']> ';
-end;
-
-procedure TDownloadThread.ClientError(const Msg: AnsiString; aSocket: TLSocket);
-begin
-  erroneous_ := true;
-  logger_.log(LVL_WARNING, getLogHeader+'Error: '+Msg);
-end;
-
-procedure TDownloadThread.ClientDisconnect(ASocket: TLSocket);
-begin
-  logger_.log(LVL_DEBUG, getLogHeader+'Disconnected.');
-  done_ := true;
-end;
-
-procedure TDownloadThread.ClientDoneInput(ASocket: TLHTTPClientSocket);
-begin
-  logger_.log(LVL_DEBUG, getLogHeader+'Closing outputfile and disconnecting socket...');
-  close(OutputFile_);
-  ASocket.Disconnect;
-  logger_.log(LVL_DEBUG, getLogHeader+'Closing outputfile and disconnecting socket done.');
-end;
-
-function TDownloadThread.ClientInput(ASocket: TLHTTPClientSocket;
-  ABuffer: pchar; ASize: Integer): Integer;
-begin
-  blockwrite(outputfile_, ABuffer^, ASize, Result);
-  logger_.log(LVL_DEBUG, getLogHeader+IntToStr(ASize) + 'bytes received...');
-end;
-
-procedure TDownloadThread.ClientProcessHeaders(ASocket: TLHTTPClientSocket);
-begin
-  logger_.log(LVL_DEBUG, getLogHeader+'Response: '+IntToStr(HTTPStatusCodes[ASocket.ResponseStatus])+' '+
-    ASocket.ResponseReason+', data...');
 end;
 
 
