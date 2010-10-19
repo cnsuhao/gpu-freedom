@@ -22,11 +22,14 @@ type
     function download(url, targetPath, targetFilename : String): Longint;
     procedure updateStatus; virtual;
 
+    procedure setProxy(proxy, port : String);
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
 
   private
     logger_ : TLogger;
+    proxy_,
+    port_   : String;
 
   end;
   
@@ -36,6 +39,8 @@ constructor TDownloadThreadManager.Create(var logger : TLogger);
 begin
   inherited Create(DEFAULT_DOWN_THREADS);
   logger_ := logger;
+  proxy_ := '';
+  port_ := '';
   updateStatus;
 end;
 
@@ -44,6 +49,13 @@ begin
   inherited;
 end;
 
+procedure TDownloadThreadManager.setProxy(proxy, port : String);
+begin
+ CS_.Enter;
+ proxy_ := proxy;
+ port_ := port;
+ CS_.Leave;
+end;
 
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint;
 var slot : Longint;
@@ -64,7 +76,7 @@ begin
             end;
   
   Inc(current_threads_);  
-  slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, logger_);
+  slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, proxy_, port_, logger_);
   updateStatus;
 
   Result := slot;
