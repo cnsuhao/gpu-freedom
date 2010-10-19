@@ -30,6 +30,9 @@ type
 
     procedure updateStatus; virtual;
 
+    procedure setMaxThreads(x: Longint);
+    procedure clearFinishedThreads;
+
   private
     plugman_      : TPluginManager;
     meth_         : TMethodController;
@@ -94,6 +97,18 @@ begin
   TMCompStatus.threads := current_threads_;
   TMCompStatus.isIdle  := isIdle();
   TMCompStatus.hasResources := hasResources();
+end;
+
+procedure TCompThreadManager.setMaxThreads(x: Longint);
+begin
+  inherited setMaxThreads(x);
+  updateStatus();
+end;
+
+procedure TCompThreadManager.clearFinishedThreads;
+begin
+  inherited clearFinishedThreads;
+  updateStatus();
 end;
 
 end.

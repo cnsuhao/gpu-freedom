@@ -101,7 +101,6 @@ begin
       FreeAndNil(slots_[i]);
       Dec(current_threads_);
     end;                             
-  updateStatus;
   CS_.Leave;
 end;
 
@@ -109,7 +108,6 @@ procedure TThreadManager.setMaxThreads(x: Longint);
 begin
   CS_.Enter;
   max_threads_ := x;
-  updateStatus;
   CS_.Leave;
 end;
 

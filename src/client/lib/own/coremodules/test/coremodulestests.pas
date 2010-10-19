@@ -8,7 +8,7 @@ uses
   testmethodcontrollers, testresultcollectors, testfrontendmanagers,
   testjobparsers, coremodules,
   testspecialcommands, testcomputationthreads, testcompthreadmanagers,
-  managedthreads;
+  managedthreads, testdownloadthreads;
 
 type
 
