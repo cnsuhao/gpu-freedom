@@ -114,7 +114,7 @@ begin
     CloseFile(OutputFile_);
     done_ := true;
     erroneous_ := true;
-    logger_.log(LVL_SEVERE, getLogHeader+'Serious problem in opening target file '+targetFile_);
+    logger_.log(LVL_SEVERE, getLogHeader+'Serious problem in opening target file '+targetPath_+PathDelim+targetFile_);
     Exit;
   end;
 
@@ -128,7 +128,7 @@ begin
   HttpClient_.Method := hmGet;
   HttpClient_.Port := Port_;
   HttpClient_.URI := URI_;
-  HttpClient_.Timeout := -1;
+  HttpClient_.Timeout := 1;
   HttpClient_.OnDisconnect := @self.ClientDisconnect;
   HttpClient_.OnDoneInput := @self.ClientDoneInput;
   HttpClient_.OnError := @self.ClientError;
