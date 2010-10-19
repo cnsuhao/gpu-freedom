@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="2"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,15 +36,15 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="40">
       <Unit0>
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
         <CursorPos X="22" Y="11"/>
         <TopLine Value="3"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="47"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -53,7 +53,7 @@
         <UnitName Value="teststacks"/>
         <CursorPos X="5" Y="98"/>
         <TopLine Value="68"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="48"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\stacks.pas"/>
@@ -144,7 +144,7 @@
         <UnitName Value="identities"/>
         <CursorPos X="15" Y="68"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit14>
@@ -153,7 +153,7 @@
         <UnitName Value="specialcommands"/>
         <CursorPos X="85" Y="175"/>
         <TopLine Value="170"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -162,7 +162,7 @@
         <UnitName Value="computationthreads"/>
         <CursorPos X="9" Y="69"/>
         <TopLine Value="54"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -171,7 +171,7 @@
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="26" Y="133"/>
         <TopLine Value="106"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit17>
@@ -181,8 +181,8 @@
         <UnitName Value="coremodules"/>
         <CursorPos X="41" Y="93"/>
         <TopLine Value="92"/>
-        <EditorIndex Value="10"/>
-        <UsageCount Value="46"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -190,7 +190,7 @@
         <UnitName Value="downloadthreadmanagers"/>
         <CursorPos X="12" Y="57"/>
         <TopLine Value="38"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit19>
@@ -234,7 +234,7 @@
         <UnitName Value="stkconstants"/>
         <CursorPos X="71" Y="16"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -265,7 +265,7 @@
         <UnitName Value="testresultcollectors"/>
         <CursorPos X="65" Y="47"/>
         <TopLine Value="19"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="29"/>
       </Unit29>
       <Unit30>
         <Filename Value="testfrontendmanagers.pas"/>
@@ -273,7 +273,7 @@
         <UnitName Value="testfrontendmanagers"/>
         <CursorPos X="43" Y="50"/>
         <TopLine Value="27"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
       </Unit30>
       <Unit31>
         <Filename Value="testthreadmanagers.pas"/>
@@ -289,7 +289,7 @@
         <CursorPos X="27" Y="25"/>
         <TopLine Value="9"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit32>
       <Unit33>
@@ -306,7 +306,7 @@
         <UnitName Value="testcomputationthreads"/>
         <CursorPos X="88" Y="27"/>
         <TopLine Value="25"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit34>
@@ -315,7 +315,7 @@
         <UnitName Value="threadmanagers"/>
         <CursorPos X="1" Y="67"/>
         <TopLine Value="49"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit35>
@@ -333,7 +333,7 @@
         <UnitName Value="compthreadmanagers"/>
         <CursorPos X="1" Y="35"/>
         <TopLine Value="14"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit37>
@@ -342,10 +342,19 @@
         <UnitName Value="testhttp"/>
         <CursorPos X="35" Y="23"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit38>
+      <Unit39>
+        <Filename Value="testcompthreadmanagers.pas"/>
+        <UnitName Value="testcompthreadmanagers"/>
+        <CursorPos X="23" Y="68"/>
+        <TopLine Value="38"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit39>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
