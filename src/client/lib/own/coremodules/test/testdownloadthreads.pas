@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  downloadthreads, loggers;
+  downloadthreads, loggers, testconstants;
 
 type
 
@@ -28,7 +28,7 @@ begin
   logger_.setLogLevel(LVL_DEBUG);
   if FileExists(path+'index.html') then DeleteFile(path+'index.html');
 
-  downThread_ := TDownloadThread.Create('http://www.google.ch/index.html', path, 'index.html', '', '', logger_);
+  downThread_ := TDownloadThread.Create('http://www.google.ch/index.html', path, 'index.html', PROXY_HOST, PROXY_PORT, logger_);
 
   while not downThread_.isDone() do Sleep(100);
 
