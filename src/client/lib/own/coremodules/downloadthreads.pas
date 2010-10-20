@@ -16,7 +16,7 @@ interface
 
 uses
   sysutils, strutils, httpsend, Classes,
-  loggers, managedthreads;
+  loggers, managedthreads, stkconstants;
 
 
 type TDownloadThread = class(TManagedThread)
@@ -84,10 +84,12 @@ begin
   end;
 
   HTTP := THTTPSend.Create;
+  HTTP.Timeout   := HTTP_DOWNLOAD_TIMEOUT;
+  HTTP.UserAgent := HTTP_USER_AGENT;
+
   if Trim(proxy_)<>'' then HTTP.ProxyHost := proxy_;
   if Trim(port_)<>'' then HTTP.ProxyPort := port_;
-  //HTTP.Timeout := 20;
-  //HTTP.UserAgent := 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
+
   logger_.log(LVL_DEBUG, getLogHeader+'User agent is '+HTTP.UserAgent);
 
   try
