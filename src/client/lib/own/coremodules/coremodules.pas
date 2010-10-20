@@ -47,7 +47,7 @@ type TCoreModule = class(TObject)
     function getCompThreadManager() : TCompThreadManager;
     function getDownThreadManager() : TDownloadThreadManager;
     function getLogger()            : TLogger;
-
+  private
     // core components
     plugman_        : TPluginManager;
     methController_ : TMethodController;

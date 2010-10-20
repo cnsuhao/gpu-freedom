@@ -29,14 +29,14 @@ type TDownloadThread = class(TManagedThread)
     procedure Execute; override;
 
  private
-    function getLogHeader : String;
-
     url_,
     targetPath_,
     targetFile_,
     proxy_,
     port_       : String;
     logger_     : TLogger;
+
+    function getLogHeader : String;
 end;
 
 
