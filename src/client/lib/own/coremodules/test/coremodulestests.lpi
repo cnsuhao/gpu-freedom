@@ -9,7 +9,7 @@
       <Title Value="coremodulestests"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="11"/>
+      <ActiveEditorIndexAtStart Value="5"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -41,7 +41,7 @@
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
-        <CursorPos X="22" Y="11"/>
+        <CursorPos X="1" Y="9"/>
         <TopLine Value="3"/>
         <EditorIndex Value="5"/>
         <UsageCount Value="48"/>
@@ -180,7 +180,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodules"/>
         <CursorPos X="10" Y="50"/>
-        <TopLine Value="32"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="11"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>

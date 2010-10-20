@@ -3,6 +3,9 @@ program coremodulestests;
 {$mode objfpc}{$H+}
 
 uses
+{$ifdef unix}
+   cthreads,
+ {$endif}
   Classes, consoletestrunner,
   teststacks, testplugins, testpluginmanagers, testargretrievers,
   testmethodcontrollers, testresultcollectors, testfrontendmanagers,
