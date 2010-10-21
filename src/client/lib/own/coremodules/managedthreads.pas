@@ -5,6 +5,9 @@ unit managedthreads;
 interface
 
 uses
+{$ifdef unix}
+   cthreads,
+ {$endif}
   Classes, SysUtils;
 
 type TManagedThread = class(TThread)

@@ -26,11 +26,6 @@ client core will run on Windows, Linux and MacOSX and Windows (everywhere where 
  it will also feature an interative console similar to Mutella
 server will run on Windows, Linux, MacOSX, several Unix flavors (everywhere where PHP/mySQL run on Apache)
 
-How to compile core
--------------------
-In Lazarus, open first in Menu Package -> Install Lazarus Package (.lpk) and choose
- in directory \src\client\packages\ext\lnet\lazaruspackage the file lnetvisual.lpk
- Click on the install button to install this package.
  
 
 File Tree structure for this package, codenamed freedom follows:
@@ -99,12 +94,11 @@ File Tree structure for this package, codenamed freedom follows:
          /coremodules  Core modules used by core component under client/core
          /filetransfer File transfer threads and download manager used by client/core
        /ext        external libraries
+         /synapse  ararat synapse library for Internet connections by Lukas Gebauer
 
      /packages     components for GPU
        /own        own components developed by the project
        /ext        external packages
-          /lnet    lnet library available at http://sourceforge.net/projects/lazarus-ccr/files/lNet/
-		           for http download and file transfer
 
 /server  Server source code
    /chat  source code implementing chat
