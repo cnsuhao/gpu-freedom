@@ -11,7 +11,7 @@ uses
   testmethodcontrollers, testresultcollectors, testfrontendmanagers,
   testjobparsers, coremodules,
   testspecialcommands, testcomputationthreads, testcompthreadmanagers,
-  managedthreads, testdownloadthreads;
+  managedthreads, testdownloadthreads, testdownloadthreadmanagers;
 
 type
 
