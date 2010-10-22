@@ -18,11 +18,15 @@ uses
   sysutils, strutils, httpsend, Classes,
   loggers, managedthreads, stkconstants;
 
+type  TDownloadFinishedEvent = procedure(var stream : TMemoryStream) of object;
+type  PDownloadFinishedEvent = ^TDownloadFinishedEvent;
 
 type TDownloadThread = class(TManagedThread)
  public
+   onFinished : TDownloadFinishedEvent;
+
    constructor Create(url, targetPath, proxy, port : String; var logger : TLogger); overload;
-   constructor Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger); overload;
+   constructor Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger; saveFile : Boolean); overload;
    function    getTargetFileName() : String;
 
  protected
@@ -35,6 +39,7 @@ type TDownloadThread = class(TManagedThread)
     proxy_,
     port_       : String;
     logger_     : TLogger;
+    saveFile_   : Boolean;
 
     function getLogHeader : String;
 end;
@@ -44,19 +49,21 @@ implementation
 
 constructor TDownloadThread.Create(url, targetPath, proxy, port : String; var logger : TLogger); overload;
 begin
-  Create(url, targetPath, '', proxy, port, logger);
+  Create(url, targetPath, '', proxy, port, logger, true);
 end;
 
-constructor TDownloadThread.Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger); overload;
+constructor TDownloadThread.Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger; saveFile : Boolean); overload;
 begin
   inherited Create();
 
+  onFinished := nil;
   logger_ := logger;
   url_ := url;
   targetPath_ := targetPath;
   targetFile_ := targetFileName;
   proxy_ := proxy;
   port_ := port;
+  saveFile_ := saveFile;
 end;
 
 function  TDownloadThread.getTargetFileName() : String;
@@ -103,8 +110,17 @@ begin
         logger_.log(LVL_DEBUG, getLogHeader+'HTTP Result was '+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
         logger_.log(LVL_DEBUG, getLogHeader+'HTTP Header is ');
         logger_.log(LVL_DEBUG, Http.headers.text);
-        HTTP.Document.SaveToFile(targetPath_+targetFile_);
-        logger_.log(LVL_INFO, 'New file created at '+targetPath_+targetFile_);
+        if saveFile_ then
+          begin
+           HTTP.Document.SaveToFile(targetPath_+targetFile_);
+           logger_.log(LVL_INFO, 'New file created at '+targetPath_+targetFile_);
+          end
+            else
+             begin
+              logger_.log(LVL_DEBUG, 'No file created, waiting for callback function to retrieve document ');
+              if not Terminated and Assigned(onFinished) then
+                onFinished(HTTP.Document);
+             end;
      end;
   finally
     HTTP.Free;
