@@ -102,4 +102,24 @@ CREATE TABLE tbparameter (
    update_dt text
 );
 
+CREATE TABLE tbsynchronize
+(
+  projectname text,
+  update_dt text,
+  update_user text,
+  update_type text,
+  versionnr int primary key,
+  branchname text,
+  description text,
+  update_fromversion int,
+  update_fromsource text,
+  schemaname text,
+  dbtype text
+);
+
+
+INSERT INTO tbsynchronize (PROJECTNAME, VERSIONNR, BRANCHNAME, UPDATE_USER, UPDATE_TYPE, SCHEMANAME, DBTYPE)
+VALUES ('deltasql-Server', 1, 'HEAD', 'INTERNAL', 'deltasql-server', '', 'sqlite');
+
+
 
