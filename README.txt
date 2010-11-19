@@ -92,7 +92,8 @@ File Tree structure for this package, codenamed freedom follows:
        /own        own libraries developed by the project
          /simclimate   logic of simclimate extension
          /coremodules  Core modules used by core component under client/core
-         /filetransfer File transfer threads and download manager used by client/core
+         /misc         units for general purpose (like logger)
+         /coredb       sqlite database management units
        /ext        external libraries
          /synapse  ararat synapse library for Internet connections by Lukas Gebauer
 
