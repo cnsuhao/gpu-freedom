@@ -127,8 +127,8 @@ begin
   dataset_.FieldByName('updated').AsBoolean := true;
   dataset_.FieldByName('uptime').AsFloat := row.uptime;
   dataset_.FieldByName('totaluptime').AsFloat := row.totaluptime;
-  dataset_.FieldByName('latitude').AsDateTime := row.latitude;
-  dataset_.FieldByName('longitude').AsDateTime := row.longitude;
+  dataset_.FieldByName('latitude').AsFloat := row.latitude;
+  dataset_.FieldByName('longitude').AsFloat := row.longitude;
 
   if updated then
     dataset_.FieldByName('update_dt').AsDateTime := Now
