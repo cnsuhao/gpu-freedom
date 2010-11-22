@@ -31,8 +31,9 @@ constructor TDbCoreTable.Create(filename, tablename, primarykey : String);
 begin
   inherited Create;
 
-  dataset_.filename  := filename;
-  dataset_.TableName := tablename;
+  dataset_ := TSqlite3Dataset.Create(nil);
+  dataset_.filename   := filename;
+  dataset_.tablename  := tablename;
   dataset_.PrimaryKey := primarykey;
 end;
 
