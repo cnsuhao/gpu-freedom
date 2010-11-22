@@ -7,7 +7,7 @@ unit nodetable;
 }
 interface
 
-uses sqlite3ds, coretable;
+uses sqlite3ds, db, coretable, SysUtils;
 
 
 type TDbNodeRow = record
@@ -17,7 +17,7 @@ type TDbNodeRow = record
     nodename,
     country,
     region,
-    ip               : String
+    ip               : String;
     port             : Longint;
     localip,
     os,
@@ -39,9 +39,9 @@ end;
 
 type TDbNodeTable = class(TDbCoreTable)
   public
-    constructor Create(filename);
+    constructor Create(filename : String);
 
-    function insertOrUpdate(row : TDbNodeRow);
+    procedure insertOrUpdate(row : TDbNodeRow);
 
   private
     procedure createDbTable();
@@ -49,7 +49,7 @@ type TDbNodeTable = class(TDbCoreTable)
 
 implementation
 
-constructor TDbNodeTable.Create(filename);
+constructor TDbNodeTable.Create(filename : String);
 begin
   inherited Create(filename, 'tbnode', 'id');
   createDbTable();
@@ -92,7 +92,7 @@ begin
   end; {with}
 end;
 
-function TDbNodeTable.insertOrUpdate(row : TDbNodeRow);
+procedure TDbNodeTable.insertOrUpdate(row : TDbNodeRow);
 var options : TLocateOptions;
     updated : Boolean;
 begin
@@ -131,16 +131,16 @@ begin
   dataset_.FieldByName('longitude').AsDateTime := row.longitude;
 
   if updated then
-    dataset_.FieldByName('update_dt').AsDateTime := Now();
+    dataset_.FieldByName('update_dt').AsDateTime := Now
   else
     begin
-      dataset_.FieldByName('create_dt').AsDateTime := Now();
-      dataset_.FieldByName('update_dt').AsDateTime := nil;
+      dataset_.FieldByName('create_dt').AsDateTime := Now;
+      //dataset_.FieldByName('update_dt').AsDateTime := nil;
     end;
 
 
   dataset_.Post;
-  datset_.ApplyUpdates;
+  dataset_.ApplyUpdates;
 end;
 
 

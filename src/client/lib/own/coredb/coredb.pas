@@ -8,7 +8,7 @@ interface
 
 uses nodetable;
 
-type TCoreDb = object
+type TCoreDb = class(TObject)
    public
     constructor Create(filename : String);
     destructor Destroy;
@@ -21,24 +21,23 @@ end;
 
 implementation
 
-constructor Create(filename : String);
+constructor TCoreDb.Create(filename : String);
 begin
   inherited Create;
 
   nodetable_ := TDbNodeTable.Create(filename);
 end;
 
-destructor Destroy;
+destructor TCoreDb.Destroy;
 begin
-
   nodetable_.Free;
   inherited Destroy;
 end;
 
-function getNodeTable : TDbNodeTable;
+function TCoreDb.getNodeTable : TDbNodeTable;
 begin
   Result := nodetable_;
 end;
 
 
-end;
+end.
