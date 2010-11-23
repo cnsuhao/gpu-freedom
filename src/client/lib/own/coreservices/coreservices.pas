@@ -14,7 +14,7 @@ uses
 
 type TCoreService = class(TObject)
   public
-    constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager; appPath : String);
+    constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager; logger : TLogger);
 
     function isEnabled : Boolean;
 
@@ -22,7 +22,7 @@ type TCoreService = class(TObject)
     enabled_ : Boolean;
     downMan_ : TDownloadThreadManager;
     servMan_ : TServerManager;
-    appPath_ : String;
+    logger_  : TLogger;
 end;
 
 
@@ -37,13 +37,13 @@ end;
 
 implementation
 
-constructor TCoreService.Create(downMan : TDownloadThreadManager; servMan : TServerManager; appPath : String);
+constructor TCoreService.Create(downMan : TDownloadThreadManager; servMan : TServerManager; logger : TLogger);
 begin
   inherited Create;
   enabled_ := true;
   downMan_ := downMan;
   servMan_ := servMan;
-  appPath_ := appPath;
+  logger_  := logger;
 end;
 
 
