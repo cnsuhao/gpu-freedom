@@ -20,6 +20,7 @@ type
     destructor  Destroy();
 
     function download(url, targetPath, targetFilename : String): Longint; overload;
+    function download(url : String; onFinished, onError : TDownloadFinishedEvent): Longint; overload;
     function download(url, targetPath, targetFilename : String;
                       onFinished, onError : TDownloadFinishedEvent): Longint; overload;
     procedure updateStatus; virtual;
@@ -62,6 +63,11 @@ end;
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint; overload;
 begin
   Result := download(url, targetPath, targetFileName, nil, nil);
+end;
+
+function TDownloadThreadManager.download(url : String; onFinished, onError : TDownloadFinishedEvent): Longint; overload;
+begin
+  Result := download(url, '', '', onFinished, onError);
 end;
 
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String;

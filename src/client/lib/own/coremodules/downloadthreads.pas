@@ -82,7 +82,7 @@ begin
   logger_.log(LVL_DEBUG, getLogHeader+'Execute method started.');
   logger_.log(LVL_DEBUG, getLogHeader+'Retrieving data from URL: '+url_);
 
-  if FileExists(targetPath_+targetFile_) then
+  if saveFile_ and FileExists(targetPath_+targetFile_) then
   begin
     index := 2;
     repeat
