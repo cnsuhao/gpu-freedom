@@ -24,6 +24,7 @@ type  PDownloadFinishedEvent = ^TDownloadFinishedEvent;
 type TDownloadThread = class(TManagedThread)
  public
    onFinished : TDownloadFinishedEvent;
+   onError    : TDownloadFinishedEvent;
 
    constructor Create(url, targetPath, proxy, port : String; var logger : TLogger); overload;
    constructor Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger; saveFile : Boolean); overload;
@@ -57,6 +58,7 @@ begin
   inherited Create();
 
   onFinished := nil;
+  onError := nil;
   logger_ := logger;
   url_ := url;
   targetPath_ := targetPath;
@@ -75,6 +77,7 @@ procedure TDownloadThread.execute();
 var index       : Longint;
     AltFileName : String;
     Http        : THTTPSend;
+    dummy       : TMemoryStream;
 begin
   logger_.log(LVL_DEBUG, getLogHeader+'Execute method started.');
   logger_.log(LVL_DEBUG, getLogHeader+'Retrieving data from URL: '+url_);
@@ -117,16 +120,33 @@ begin
           end
             else
              begin
-              logger_.log(LVL_DEBUG, 'No file created, waiting for callback function to retrieve document ');
-              if not Terminated and Assigned(onFinished) then
-                onFinished(HTTP.Document);
+              logger_.log(LVL_DEBUG, 'No file created.');
+              if Assigned(onFinished) then
+                  begin
+                   logger_.log(LVL_DEBUG, 'Calling callback function OnFinished...');
+                   onFinished(HTTP.Document);
+                   logger_.log(LVL_DEBUG, 'Callback OnFinished over.');
+                  end;
              end;
      end;
-  finally
-    HTTP.Free;
-    done_ := true;
+
+  except
+    on E : Exception do
+      begin
+       erroneous_ := true;
+       logger_.log(LVL_SEVERE, 'Exception '+E.Message+' thrown.');
+      end;
   end;
 
+  if erroneous_ and Assigned(onError) then
+                  begin
+                   logger_.log(LVL_DEBUG, 'Calling callback function OnError...');
+                   dummy := nil;
+                   onError(dummy);
+                   logger_.log(LVL_DEBUG, 'Callback OnError over.');
+                  end;
+  HTTP.Free;
+  done_ := true;
   logger_.log(LVL_DEBUG, getLogHeader+'Execute method finished.');
 end;
 

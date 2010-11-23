@@ -21,7 +21,7 @@ type
 
     function download(url, targetPath, targetFilename : String): Longint; overload;
     function download(url, targetPath, targetFilename : String;
-                      onFinished : TDownloadFinishedEvent): Longint; overload;
+                      onFinished, onError : TDownloadFinishedEvent): Longint; overload;
     procedure updateStatus; virtual;
 
     procedure setProxy(proxy, port : String);
@@ -61,11 +61,11 @@ end;
 
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint; overload;
 begin
-  Result := download(url, targetPath, targetFileName, nil);
+  Result := download(url, targetPath, targetFileName, nil, nil);
 end;
 
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String;
-         onFinished : TDownloadFinishedEvent): Longint; overload;
+         onFinished, onError : TDownloadFinishedEvent): Longint; overload;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -86,6 +86,7 @@ begin
   Inc(current_threads_);  
   slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, proxy_, port_, logger_, (onFinished=nil));
   TDownloadThread(slots_[slot]).onFinished := onFinished;
+  TDownloadThread(slots_[slot]).onError    := onError;
   updateStatus;
 
   Result := slot;
