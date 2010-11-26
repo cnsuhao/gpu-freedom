@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="6"/>
+    <General>
+      <MainUnit Value="0"/>
+      <TargetFileExt Value=".exe"/>
+      <ActiveEditorIndexAtStart Value="3"/>
+    </General>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="FPCUnitConsoleRunner"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="9">
+      <Unit0>
+        <Filename Value="coreservicestest.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="coreservicestest"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="testreceiveservices.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="testreceiveservices"/>
+        <CursorPos X="18" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="..\servicemanagers.pas"/>
+        <UnitName Value="servicemanagers"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\servermanagers.pas"/>
+        <UnitName Value="servermanagers"/>
+        <CursorPos X="26" Y="75"/>
+        <TopLine Value="40"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\..\..\..\backup\fileschanged.txt"/>
+        <CursorPos X="20" Y="8"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\coreservices.pas"/>
+        <UnitName Value="coreservices"/>
+        <CursorPos X="49" Y="13"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <UnitName Value="receivenodeservices"/>
+        <CursorPos X="21" Y="45"/>
+        <TopLine Value="23"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\coremodules\downloadthreadmanagers.pas"/>
+        <UnitName Value="downloadthreadmanagers"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\coremodules\downloadthreads.pas"/>
+        <UnitName Value="downloadthreads"/>
+        <CursorPos X="69" Y="21"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit8>
+    </Units>
+    <JumpHistory Count="16" HistoryIndex="15">
+      <Position1>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="11" Column="33" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="66" Column="26" TopLine="24"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\coreservices.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="38" Column="42" TopLine="1"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="14" Column="26" TopLine="1"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="110" Column="5" TopLine="67"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="14" Column="47" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="43" Column="101" TopLine="21"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="48" Column="109" TopLine="21"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="40" Column="41" TopLine="18"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="46" Column="21" TopLine="23"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="40" Column="20" TopLine="23"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="46" Column="22" TopLine="23"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\receivenodeservices.pas"/>
+        <Caret Line="40" Column="20" TopLine="23"/>
+      </Position16>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="8"/>
+    <PathDelim Value="\"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\;..\..\coredb\;..\..\coremodules\;..\..\misc\"/>
+      <UnitOutputDirectory Value="..\..\..\..\..\..\bin"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

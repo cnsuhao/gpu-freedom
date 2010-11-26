@@ -10,7 +10,7 @@ unit coreservices;
 interface
 
 uses
- downloadthreadmanagers, servermanagers;
+ downloadthreadmanagers, servermanagers, loggers;
 
 type TCoreService = class(TObject)
   public

@@ -10,18 +10,18 @@ unit receivenodeservices;
 }
 interface
 
-uses coreservices, downloadthreadmanagers, servermanagers, nodetable, loggers,
-     XMLRead, DOM;
+uses coreservices, downloadthreadmanagers, downloadthreads, servermanagers,
+     nodetable, loggers, XMLRead, DOM, objects;
 
 type TReceiveNodeService = class(TReceiveService)
  public
   constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager;
                      fnodetable : TDbNodeTable; logger : TLogger);
 
-  procedure receive(); virtual; override;
+  procedure receive(); virtual;
 
-  procedure onError : TDownloadFinishedEvent;
-  procedure onFinished : TDownloadFinishedEvent;
+  procedure onError    (var stream : TMemoryStream);
+  procedure onFinished (var stream : TMemoryStream);
  private
    nodetable_ : TDbNodeTable;
 end;
@@ -35,25 +35,30 @@ begin
  nodetable_ := fnodetable;
 end;
 
-procedure TReceiveNodeService.receive(); virtual; override;
+procedure TReceiveNodeService.receive();
+var procOnFinished,
+    procOnError : TDownloadFinishedEvent;
 begin
   if not enabled_ then Exit;
   enabled_ := false;
 
-  if downMan_.download(servMan_.getServerUrl()+'/list_computers_online_xml.php', self.onFinished, self.onError) = -1 then
+  procOnFinished := @self.onFinished;
+  procOnError    := @self.onError;
+
+  if downMan_.download(servMan_.getServerUrl()+'/list_computers_online_xml.php', procOnFinished, procOnError ) = -1 then
       begin
         enabled_ := true;
         Exit;
       end;
 end;
 
-procedure onError : TDownloadFinishedEvent;
+procedure TReceiveNodeService.onError(var stream : TMemoryStream);
 begin
  enabled_ := true;
 end;
 
 
-procedure onFinished : TDownloadFinishedEvent;
+procedure TReceiveNodeService.onFinished(var stream : TMemoryStream);
 var xmldoc : TXMLDocument;
     nodes,
     node   : TDOMNode;
@@ -107,4 +112,4 @@ begin
  logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
 
-end;
+end.

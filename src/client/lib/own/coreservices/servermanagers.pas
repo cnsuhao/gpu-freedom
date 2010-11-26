@@ -8,7 +8,7 @@ unit servermanagers;
 }
 interface
 
-uses SyncObjs, Sysutils;
+uses SyncObjs, Sysutils, Classes;
 
 type TServerManager = class(TObject)
    public
@@ -47,7 +47,7 @@ begin
   cs_.Free;
 end;
 
-function getServerUrl : String;
+function TServerManager.getServerUrl : String;
 begin
   cs_.Enter;
   Result := urls_.Strings[count_];
@@ -56,14 +56,14 @@ begin
   cs_.Leave;
 end;
 
-function getDefaultServerUrl : String;
+function TServerManager.getDefaultServerUrl : String;
 begin
   cs_.Enter;
   Result := urls_.Strings[defaultserver_];
   cs_.Leave;
 end;
 
-procedure reloadServers();
+procedure TServerManager.reloadServers();
 begin
  cs_.Enter;
  //TODO: implement it
@@ -72,7 +72,7 @@ begin
  verify();
 end;
 
-procedure verify();
+procedure TServerManager.verify();
 begin
   if urls_.Count = 0 then
      raise Exception.Create('TServerManager.Create: url_ is empty');
