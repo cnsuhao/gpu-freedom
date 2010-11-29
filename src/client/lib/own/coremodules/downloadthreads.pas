@@ -58,10 +58,23 @@ begin
 end;
 
 procedure TDownloadThread.execute();
+var AltFilename : String;
+    index       : Longint;
 begin
-   erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
-                                    proxy_, port_,
-                                    'DownloadThread ['+targetFile_+']> ', logger_);
+  if FileExists(targetPath_+targetFile_) then
+  begin
+    index := 2;
+    repeat
+      AltFileName := targetFile_ + '.' + IntToStr(index);
+      inc(index);
+    until not FileExists(targetPath_+AltFileName);
+    logger_.log(LVL_WARNING, '"'+targetFile_+'" exists, writing to "'+AltFileName+'"');
+    targetFile_ := AltFileName;
+  end;
+
+  erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
+                                   proxy_, port_,
+                                   'DownloadThread ['+targetFile_+']> ', logger_);
    done_ := true;
 end;
 
