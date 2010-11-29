@@ -19,10 +19,8 @@ type
     constructor Create(var logger : TLogger);
     destructor  Destroy();
 
-    function download(url, targetPath, targetFilename : String): Longint; overload;
-    function download(url : String; onFinished, onError : TDownloadFinishedEvent): Longint; overload;
-    function download(url, targetPath, targetFilename : String;
-                      onFinished, onError : TDownloadFinishedEvent): Longint; overload;
+    function download(url, targetPath, targetFilename : String): Longint;
+
     procedure updateStatus; virtual;
 
     procedure setProxy(proxy, port : String);
@@ -60,18 +58,8 @@ begin
  CS_.Leave;
 end;
 
-function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint; overload;
-begin
-  Result := download(url, targetPath, targetFileName, nil, nil);
-end;
 
-function TDownloadThreadManager.download(url : String; onFinished, onError : TDownloadFinishedEvent): Longint; overload;
-begin
-  Result := download(url, '', '', onFinished, onError);
-end;
-
-function TDownloadThreadManager.download(url, targetPath, targetFilename : String;
-         onFinished, onError : TDownloadFinishedEvent): Longint; overload;
+function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -90,9 +78,7 @@ begin
             end;
   
   Inc(current_threads_);  
-  slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, proxy_, port_, logger_, (onFinished=nil));
-  TDownloadThread(slots_[slot]).onFinished := onFinished;
-  TDownloadThread(slots_[slot]).onError    := onError;
+  slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, proxy_, port_, logger_);
   updateStatus;
 
   Result := slot;
