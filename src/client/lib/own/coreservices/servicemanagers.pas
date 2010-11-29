@@ -8,47 +8,47 @@ unit servicemanagers;
 interface
 
 uses
-  downloadthreadmanagers, servermanagers, dbtablemanagers, loggers,
+  servermanagers, dbtablemanagers, loggers,
   receivenodeservices;
 
 type TServiceManager = class(TObject)
    public
-    constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager;
-                       tableMan : TDbTableManager; logger : TLogger);
+    constructor Create(servMan : TServerManager;
+                       tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
     destructor Destroy;
 
-    function getReceivenodeservice() : TReceiveNodeService;
+    function createReceivenodeservice() : TReceiveNodeServiceThread;
 
    private
-     receivenodeservice_ : TReceiveNodeService;
 
-     downMan_  : TDownloadThreadManager;
      servMan_  : TServerManager;
      tableMan_ : TDbTableManager;
-     logger_   : TLogger
+     logger_   : TLogger;
+     proxy_,
+     port_     : String;
 
 end;
 
 implementation
 
-constructor TServiceManager.Create(downMan : TDownloadThreadManager; servMan : TServerManager;
-                                   tableMan : TDbTableManager; logger : TLogger);
+constructor TServiceManager.Create(servMan : TServerManager;
+                                   tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
 begin
- downMan_  := downMan;
  servMan_  := servMan;
  tableMan_ := tableMan_;
  logger_   := logger_;
 
- receivenodeservice_ := TReceiveNodeService.Create(downMan_, servMan_, tableMan_.getNodeTable(); logger_);
+ proxy_    := proxy;
+ port_     := port;
 end;
 
 destructor TServiceManager.Destroy;
 begin
-  receivenodeservice_.Free;
 end;
 
-function TServiceManager.getReceivenodeservice() : TReceiveNodeService;
+function TServiceManager.createReceivenodeservice() : TReceiveNodeServiceThread;
 begin
- Result := receivenodeservice_;
+ Result := TReceiveNodeServiceThread.Create(servMan_, proxy_, port_, tableMan_.getNodeTable(), logger_);
 end;
+
 end.

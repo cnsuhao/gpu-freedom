@@ -10,62 +10,50 @@ unit receivenodeservices;
 }
 interface
 
-uses coreservices, downloadthreadmanagers, downloadthreads, servermanagers,
-     nodetable, loggers, XMLRead, DOM, objects;
+uses coreservices, servermanagers,
+     nodetable, loggers, downloadutils,
+     XMLRead, DOM, Classes, SysUtils;
 
-type TReceiveNodeService = class(TReceiveService)
+type TReceiveNodeServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager;
+  constructor Create(servMan : TServerManager; proxy, port : String;
                      fnodetable : TDbNodeTable; logger : TLogger);
+ protected
+    procedure Execute; override;
 
-  procedure receive(); virtual;
-
-  procedure onError    (var stream : TMemoryStream);
-  procedure onFinished (var stream : TMemoryStream);
  private
    nodetable_ : TDbNodeTable;
 end;
 
 implementation
 
-constructor TReceiveNodeService.Create(downMan : TDownloadThreadManager; servMan : TServerManager;
+constructor TReceiveNodeServiceThread.Create(servMan : TServerManager; proxy, port : String;
                                        fnodetable : TDbNodeTable; logger : TLogger);
 begin
- inherited Create(downMan, servMan, logger);
+ inherited Create(servMan, proxy, port, logger);
  nodetable_ := fnodetable;
 end;
 
-procedure TReceiveNodeService.receive();
-var procOnFinished,
-    procOnError : TDownloadFinishedEvent;
-begin
-  if not enabled_ then Exit;
-  enabled_ := false;
 
-  procOnFinished := @self.onFinished;
-  procOnError    := @self.onError;
-
-  if downMan_.download(servMan_.getServerUrl()+'/list_computers_online_xml.php', procOnFinished, procOnError ) = -1 then
-      begin
-        enabled_ := true;
-        Exit;
-      end;
-end;
-
-procedure TReceiveNodeService.onError(var stream : TMemoryStream);
-begin
- enabled_ := true;
-end;
-
-
-procedure TReceiveNodeService.onFinished(var stream : TMemoryStream);
+procedure TReceiveNodeServiceThread.Execute;
 var xmldoc : TXMLDocument;
     nodes,
     node   : TDOMNode;
     j      : Longint;
     dbnode : TDbNodeRow;
+    stream : TMemoryStream;
+    port   : String;
 begin
- ReadXML(xmldoc, stream);
+ erroneous_ := downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+               proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
+ if erroneous_ then
+      begin
+        done_ := true;
+        Exit;
+      end;
+
+ //TODO: check this call
+ //ReadXML(xmldoc, stream);
 
  nodes := xmldoc.DocumentElement.FirstChild;
  logger_.log(LVL_DEBUG, 'Parsing of XML started...');
@@ -74,7 +62,7 @@ begin
         try
           for j := 0 to (nodes.ChildNodes.Count - 1) do
              begin
-               node := nodes.ChildNodes.Item[i];
+               node := nodes.ChildNodes.Item[j];
 
                dbnode.nodeid :=node.FindNode('nodeid').TextContent;
                //TODO: dbnode.defaultserver_id
@@ -82,21 +70,23 @@ begin
                dbnode.country :=node.FindNode('country').TextContent;
                dbnode.region :=node.FindNode('region').TextContent;
                dbnode.ip :=node.FindNode('ip').TextContent;
-               dbnode.port :=node.FindNode('port').TextContent;
+               port := node.FindNode('port').TextContent;
+               if port='' then port:='0';
+               dbnode.port :=StrToInt(port);
                dbnode.localip :=node.FindNode('localip').TextContent;
                dbnode.os :=node.FindNode('os').TextContent;
                dbnode.cputype :=node.FindNode('cputype').TextContent;
                dbnode.version :=node.FindNode('version').TextContent;
-               dbnode.acceptincoming :=node.FindNode('acceptincoming').TextContent;
-               dbnode.gigaflops :=node.FindNode('gigaflops').TextContent;
-               dbnode.ram :=node.FindNode('ram').TextContent;
-               dbnode.mhz :=node.FindNode('mhz').TextContent;
-               dbnode.nbcpus :=node.FindNode('nbcpus').TextContent;
+               dbnode.acceptincoming :=(node.FindNode('acceptincoming').TextContent='true');
+               dbnode.gigaflops :=StrToInt(node.FindNode('gigaflops').TextContent);
+               dbnode.ram :=StrToInt(node.FindNode('ram').TextContent);
+               dbnode.mhz :=StrToInt(node.FindNode('mhz').TextContent);
+               dbnode.nbcpus :=StrToInt(node.FindNode('nbcpus').TextContent);
                dbnode.online := true; //TODO: check if this is correct
-               dbnode.uptime :=node.FindNode('uptime').TextContent;
-               dbnode.totaluptime :=node.FindNode('totaluptime').TextContent;
-               dbnode.longitude :=node.FindNode('longitude').TextContent;
-               dbnode.latitude :=node.FindNode('latitude').TextContent;
+               dbnode.uptime :=StrToFloatDef(node.FindNode('uptime').TextContent, 0);
+               dbnode.totaluptime :=StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
+               dbnode.longitude :=StrToFloatDef(node.FindNode('longitude').TextContent, 0);
+               dbnode.latitude :=StrToFloatDef(node.FindNode('latitude').TextContent, 0);
 
                nodetable_.insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, 'Added <'+dbnode.nodename+'> to tbnode table.');
@@ -104,11 +94,13 @@ begin
           except
            on E : Exception do
               begin
+                erroneous_ := true;
                 logger_.log(LVL_SEVERE, 'Exception catched: '+E.Message);
               end;
+          end; // except
     end;  // if
 
- enabled_ := true;
+ done_ := true;
  logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
 

@@ -10,46 +10,36 @@ unit coreservices;
 interface
 
 uses
- downloadthreadmanagers, servermanagers, loggers;
+  managedthreads, servermanagers, loggers;
 
-type TCoreService = class(TObject)
+type TCoreServiceThread = class(TManagedThread)
   public
-    constructor Create(downMan : TDownloadThreadManager; servMan : TServerManager; logger : TLogger);
-
-    function isEnabled : Boolean;
+    constructor Create(servMan : TServerManager; proxy, port : String; logger : TLogger);
 
   protected
-    enabled_ : Boolean;
-    downMan_ : TDownloadThreadManager;
     servMan_ : TServerManager;
     logger_  : TLogger;
+    proxy_,
+    port_    : String;
 end;
 
 
-type TReceiveService = class(TCoreService)
-  procedure receive(); virtual; abstract;
+type TReceiveServiceThread = class(TCoreServiceThread)
 end;
 
-type TTransmitService = class(TCoreService)
-  procedure transmit(); virtual; abstract;
+type TTransmitServiceThread = class(TCoreServiceThread)
 end;
 
 
 implementation
 
-constructor TCoreService.Create(downMan : TDownloadThreadManager; servMan : TServerManager; logger : TLogger);
+constructor TCoreServiceThread.Create(servMan : TServerManager; proxy, port : String; logger : TLogger);
 begin
   inherited Create;
-  enabled_ := true;
-  downMan_ := downMan;
   servMan_ := servMan;
   logger_  := logger;
-end;
-
-
-function TCoreService.isEnabled : Boolean;
-begin
- Result := enabled_;
+  proxy_   := proxy;
+  port_    := port;
 end;
 
 
