@@ -42,7 +42,7 @@ implementation
 
 constructor TDownloadThread.Create(url, targetPath, targetFilename, proxy, port : String; var logger : TLogger);
 begin
-  inherited Create();
+  inherited Create(false); //running
 
   logger_ := logger;
   url_ := url;

@@ -46,7 +46,7 @@ constructor TComputationThread.Create(var plugman : TPluginManager; var meth : T
                                       var res : TResultCollector; var frontman : TFrontendManager;
                                       var job : TJob; thrdId : Longint);
 begin
-  inherited Create;
+  inherited Create(false); // running
   job_ := job;
   thrdId_ := thrdId;
 

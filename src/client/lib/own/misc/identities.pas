@@ -64,8 +64,9 @@ type
 var
   MyGPUID      : TGPUIdentity;
   MyUserID     : TUserIdentity;
-  TMCompStatus : TThreadManagerStatus;
-  TMDownStatus : TThreadManagerStatus;
+  TMCompStatus    : TThreadManagerStatus;
+  TMDownStatus    : TThreadManagerStatus;
+  TMServiceStatus : TThreadManagerStatus;
 
 implementation
 

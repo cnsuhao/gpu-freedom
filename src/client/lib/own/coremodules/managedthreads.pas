@@ -12,7 +12,7 @@ uses
 
 type TManagedThread = class(TThread)
  public
-   constructor Create();
+   constructor Create(waiting : Boolean);
    function    isDone()     : Boolean;
    function    isErroneus() : Boolean;
 
@@ -23,9 +23,9 @@ end;
 
 implementation
 
-constructor TManagedThread.Create();
+constructor TManagedThread.Create(waiting : Boolean);
 begin
- inherited Create(false);
+ inherited Create(waiting);
  done_ := false;
  erroneous_ := false;
 end;

@@ -35,7 +35,7 @@ implementation
 
 constructor TCoreServiceThread.Create(servMan : TServerManager; proxy, port : String; logger : TLogger);
 begin
-  inherited Create;
+  inherited Create(true); // suspended
   servMan_ := servMan;
   logger_  := logger;
   proxy_   := proxy;
