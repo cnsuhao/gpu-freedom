@@ -1,6 +1,7 @@
 unit servicemanagers;
  {
-   TServiceManager handles all services available to the GPU core.servicemanagers
+   TServiceThreadManager handles all services available to the GPU core.servicemanagers
+   and is a TThreadManager descendant
 
    (c) by 2010 HB9TVM and the GPU Team
 }
@@ -8,47 +9,76 @@ unit servicemanagers;
 interface
 
 uses
-  servermanagers, dbtablemanagers, loggers,
-  receivenodeservices;
+  threadmanagers, coreservices, identities, Sysutils;
 
-type TServiceManager = class(TObject)
+type TServiceThreadManager = class(TThreadManager)
    public
-    constructor Create(servMan : TServerManager;
-                       tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
+    constructor Create(maxThreads : Longint);
     destructor Destroy;
 
-    function createReceivenodeservice() : TReceiveNodeServiceThread;
+    function launch(serviceThread : TCoreServiceThread): Longint;
 
-   private
-
-     servMan_  : TServerManager;
-     tableMan_ : TDbTableManager;
-     logger_   : TLogger;
-     proxy_,
-     port_     : String;
-
+    procedure setMaxThreads(x: Longint);
+    procedure clearFinishedThreads;
+    procedure updateStatus; virtual;
 end;
 
 implementation
 
-constructor TServiceManager.Create(servMan : TServerManager;
-                                   tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
+constructor TServiceThreadManager.Create(maxThreads : Longint);
 begin
- servMan_  := servMan;
- tableMan_ := tableMan_;
- logger_   := logger_;
-
- proxy_    := proxy;
- port_     := port;
+  inherited Create(maxThreads);
 end;
 
-destructor TServiceManager.Destroy;
+destructor TServiceThreadManager.Destroy;
 begin
 end;
 
-function TServiceManager.createReceivenodeservice() : TReceiveNodeServiceThread;
+
+function TServiceThreadManager.launch(serviceThread : TCoreServiceThread): Longint;
+var slot : Longint;
 begin
- Result := TReceiveNodeServiceThread.Create(servMan_, proxy_, port_, tableMan_.getNodeTable(), logger_);
+  CS_.Enter;
+  Result := -1;
+  if not hasResources() then
+       begin
+        CS_.Leave;
+        Exit;
+       end;
+
+   slot := findAvailableSlot;
+   if slot=-1 then
+            begin
+              CS_.Leave;
+              raise Exception.Create('Internal error in servicemanagers.pas, slot is -1');
+            end;
+
+  Inc(current_threads_);
+  slots_[slot] := serviceThread;
+  updateStatus;
+
+  Result := slot;
+  serviceThread.Resume();
+  CS_.Leave;
 end;
 
+procedure TServiceThreadManager.updateStatus;
+begin
+  TMServiceStatus.maxthreads := max_threads_;
+  TMServiceStatus.threads := current_threads_;
+  TMServiceStatus.isIdle  := isIdle();
+  TMServiceStatus.hasResources := hasResources();
+end;
+
+procedure TServiceThreadManager.setMaxThreads(x: Longint);
+begin
+  inherited setMaxThreads(x);
+  updateStatus();
+end;
+
+procedure TServiceThreadManager.clearFinishedThreads;
+begin
+  inherited clearFinishedThreads;
+  updateStatus();
+end;
 end.
