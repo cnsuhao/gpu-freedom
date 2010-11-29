@@ -52,8 +52,7 @@ begin
         Exit;
       end;
 
- //TODO: check this call
- //ReadXML(xmldoc, stream);
+ ReadXMLFile(xmldoc, stream);
 
  nodes := xmldoc.DocumentElement.FirstChild;
  logger_.log(LVL_DEBUG, 'Parsing of XML started...');

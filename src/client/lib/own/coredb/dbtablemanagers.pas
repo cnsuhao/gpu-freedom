@@ -16,6 +16,9 @@ type TDbTableManager = class(TObject)
     constructor Create(filename : String);
     destructor Destroy;
 
+    procedure openAll();
+    procedure closeAll();
+
     function getNodeTable() : TDbNodeTable;
 
     nodetable_ : TDbNodeTable;
@@ -34,6 +37,15 @@ begin
  nodetable_.Free;
 end;
 
+procedure TDbTableManager.openAll();
+begin
+  nodetable_.Open;
+end;
+
+procedure TDbTableManager.closeAll();
+begin
+  nodetable_.Close;
+end;
 
 function TDbTableManager.getNodeTable() : TDbNodeTable;
 begin

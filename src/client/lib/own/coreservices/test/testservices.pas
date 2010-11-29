@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
-  loggers, dbtablemanagers;
+  loggers, dbtablemanagers, receivenodeservices;
 
 type
 
@@ -24,9 +24,10 @@ type
     serverMan_   : TServerManager;
     tableMan_    : TDbTableManager;
 
-    path_        : String;
-    logger_      : TLogger;
-    urls_        : TStringList;
+    path_          : String;
+    logger_        : TLogger;
+    urls_          : TStringList;
+    rcvnodeThread_ : TReceiveNodeServiceThread;
 
   end; 
 
@@ -34,8 +35,16 @@ implementation
 
 procedure TTestServices.TestReceiveService;
 begin
+  rcvnodeThread_ := srvFactory_.createReceiveNodeService();
+  serviceMan_.launch(rcvnodeThread_);
 
+  while not serviceMan_.isIdle() do
+      begin
+        Sleep(150);
+        serviceMan_.clearFinishedThreads();
+      end;
 
+  rcvnodeThread_.Free;
 end; 
 
 procedure TTestServices.SetUp;
@@ -46,7 +55,9 @@ begin
   urls_           := TStringList.Create;
   urls_.add('http://www.gpu-grid.net/file_distributor');
   serverMan_      := TServerManager.Create(urls_, 0);
-  tableMan_       := TDbTableManager.Create(path_+'\core.db');
+  tableMan_       := TDbTableManager.Create(path_+PathDelim+'core.db');
+  tableMan_.openAll();
+
 
   serviceMan_  := TServiceThreadManager.Create(3);
   srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_);
@@ -54,6 +65,7 @@ end;
 
 procedure TTestServices.TearDown;
 begin
+ tableMan_.closeAll();
  serviceMan_.Free;
  srvFactory_.Free;
  tableMan_.Free;
