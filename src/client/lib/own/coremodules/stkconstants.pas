@@ -89,13 +89,6 @@ const
   
   INF = 1.0/0.0; // used to retrieve minimums
 
-
-  // Download constants
-  HTTP_DOWNLOAD_TIMEOUT = 10000; // 10 seconds
-  HTTP_USER_AGENT = 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
-  
-  
-
 implementation
 
 

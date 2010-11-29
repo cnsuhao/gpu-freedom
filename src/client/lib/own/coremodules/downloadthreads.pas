@@ -15,8 +15,7 @@ unit downloadthreads;
 interface
 
 uses
-  sysutils, strutils, httpsend, Classes,
-  loggers, managedthreads, stkconstants;
+  managedthreads, downloadutils, loggers, sysutils;
 
 
 type TDownloadThread = class(TManagedThread)
@@ -35,7 +34,6 @@ type TDownloadThread = class(TManagedThread)
     port_       : String;
     logger_     : TLogger;
 
-    function getLogHeader : String;
 end;
 
 
@@ -60,66 +58,11 @@ begin
 end;
 
 procedure TDownloadThread.execute();
-var index       : Longint;
-    AltFileName : String;
-    Http        : THTTPSend;
 begin
-  logger_.log(LVL_DEBUG, getLogHeader+'Execute method started.');
-  logger_.log(LVL_DEBUG, getLogHeader+'Retrieving data from URL: '+url_);
-
-  if FileExists(targetPath_+targetFile_) then
-  begin
-    index := 2;
-    repeat
-      AltFileName := targetFile_ + '.' + IntToStr(index);
-      inc(index);
-    until not FileExists(targetPath_+AltFileName);
-    logger_.log(LVL_WARNING, getLogHeader+'"'+targetFile_+'" exists, writing to "'+AltFileName+'"');
-    targetFile_ := AltFileName;
-  end;
-
-  HTTP := THTTPSend.Create;
-  HTTP.Timeout   := HTTP_DOWNLOAD_TIMEOUT;
-  HTTP.UserAgent := HTTP_USER_AGENT;
-
-  if Trim(proxy_)<>'' then HTTP.ProxyHost := proxy_;
-  if Trim(port_)<>'' then HTTP.ProxyPort := port_;
-
-  logger_.log(LVL_DEBUG, getLogHeader+'User agent is '+HTTP.UserAgent);
-
-  try
-    if not HTTP.HTTPMethod('GET', url_) then
-      begin
-	logger_.log(LVL_SEVERE, 'HTTP Error '+getLogHeader+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
-        erroneous_ := true;
-      end
-    else
-      begin
-        logger_.log(LVL_DEBUG, getLogHeader+'HTTP Result was '+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
-        logger_.log(LVL_DEBUG, getLogHeader+'HTTP Header is ');
-        logger_.log(LVL_DEBUG, Http.headers.text);
-        HTTP.Document.SaveToFile(targetPath_+targetFile_);
-        logger_.log(LVL_INFO, 'New file created at '+targetPath_+targetFile_);
-
-      end;
-
-  except
-    on E : Exception do
-      begin
-       erroneous_ := true;
-       logger_.log(LVL_SEVERE, 'Exception '+E.Message+' thrown.');
-      end;
-  end;
-
-  HTTP.Free;
-  done_ := true;
-  logger_.log(LVL_DEBUG, getLogHeader+'Execute method finished.');
+   erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
+                                    proxy_, port_,
+                                    'DownloadThread ['+targetFile_+']> ', logger_);
+   done_ := true;
 end;
-
-function TDownloadThread.getLogHeader : String;
-begin
- Result := 'DownloadThread ['+targetFile_+']> ';
-end;
-
 
 end.
