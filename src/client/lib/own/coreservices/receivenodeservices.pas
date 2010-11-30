@@ -49,9 +49,9 @@ begin
  if erroneous_ then
       begin
         done_ := true;
-        Exit;
-      end;
-
+      end
+ else
+ begin
  ReadXMLFile(xmldoc, stream);
 
  nodes := xmldoc.DocumentElement.FirstChild;
@@ -101,6 +101,7 @@ begin
 
  done_ := true;
  logger_.log(LVL_DEBUG, 'Parsing of XML over.');
+ end; // erroneous = false
 end;
 
 end.

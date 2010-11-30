@@ -35,8 +35,8 @@ constructor TServiceFactory.Create(servMan : TServerManager;
                                    tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
 begin
  servMan_  := servMan;
- tableMan_ := tableMan_;
- logger_   := logger_;
+ tableMan_ := tableMan;
+ logger_   := logger;
 
  proxy_    := proxy;
  port_     := port;
