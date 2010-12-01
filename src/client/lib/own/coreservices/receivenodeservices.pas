@@ -23,6 +23,8 @@ type TReceiveNodeServiceThread = class(TReceiveServiceThread)
 
  private
    nodetable_ : TDbNodeTable;
+
+   procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
@@ -35,28 +37,17 @@ begin
 end;
 
 
-procedure TReceiveNodeServiceThread.Execute;
-var xmldoc : TXMLDocument;
+procedure TReceiveNodeServiceThread.parseXml(var xmldoc : TXMLDocument);
+var
+    dbnode : TDbNodeRow;
     nodes,
     node   : TDOMNode;
     j      : Longint;
-    dbnode : TDbNodeRow;
-    stream : TMemoryStream;
     port   : String;
 begin
- erroneous_ := downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
-               proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
- if erroneous_ then
-      begin
-        done_ := true;
-      end
- else
- begin
- ReadXMLFile(xmldoc, stream);
-
- nodes := xmldoc.DocumentElement.FirstChild;
- logger_.log(LVL_DEBUG, 'Parsing of XML started...');
- if Assigned(nodes) then
+  nodes := xmldoc.DocumentElement.FirstChild;
+  logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+  if Assigned(nodes) then
     begin
         try
           for j := 0 to (nodes.ChildNodes.Count - 1) do
@@ -94,14 +85,40 @@ begin
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, 'Exception catched: '+E.Message);
+                logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched: '+E.Message);
               end;
           end; // except
-    end;  // if
+     end;  // if  Assigned(nodes)
 
+   logger_.log(LVL_DEBUG, 'Parsing of XML over.');
+end;
+
+procedure TReceiveNodeServiceThread.Execute;
+var xmldoc : TXMLDocument;
+    stream : TMemoryStream;
+begin
+ stream := TMemoryStream.Create;
+ erroneous_ := downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+               proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
+ {
+ if not erroneous_ then
+ begin
+  try
+    ReadXMLFile(xmldoc, stream);
+  except
+     on E : Exception do
+        begin
+           erroneous_ := true;
+           logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched: '+E.Message);
+        end;
+  end; // except
+
+  if not erroenous_ then parseXml(xmldoc);
+ end;
+ }
+
+ if stream<>nil then stream.Free else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
  done_ := true;
- logger_.log(LVL_DEBUG, 'Parsing of XML over.');
- end; // erroneous = false
 end;
 
 end.

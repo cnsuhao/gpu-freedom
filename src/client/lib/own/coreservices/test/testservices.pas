@@ -44,8 +44,7 @@ begin
         serviceMan_.clearFinishedThreads();
       end;
 
-  rcvnodeThread_.Free;
-end; 
+end;
 
 procedure TTestServices.SetUp;
 begin
