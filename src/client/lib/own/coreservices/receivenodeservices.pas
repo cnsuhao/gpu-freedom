@@ -45,8 +45,8 @@ var
     j      : Longint;
     port   : String;
 begin
-  nodes := xmldoc.DocumentElement.FirstChild;
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+  nodes := xmldoc.DocumentElement.FirstChild;
   if Assigned(nodes) then
     begin
         try
@@ -85,7 +85,7 @@ begin
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched: '+E.Message);
+                logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in parseXML: '+E.Message);
               end;
           end; // except
      end;  // if  Assigned(nodes)
@@ -98,9 +98,9 @@ var xmldoc : TXMLDocument;
     stream : TMemoryStream;
 begin
  stream := TMemoryStream.Create;
- erroneous_ := downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+ erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
                proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
- {
+
  if not erroneous_ then
  begin
   try
@@ -109,13 +109,13 @@ begin
      on E : Exception do
         begin
            erroneous_ := true;
-           logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched: '+E.Message);
+           logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in Execute: '+E.Message);
         end;
   end; // except
 
-  if not erroenous_ then parseXml(xmldoc);
+  if not erroneous_ then parseXml(xmldoc);
  end;
- }
+
 
  if stream<>nil then stream.Free else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
  done_ := true;
