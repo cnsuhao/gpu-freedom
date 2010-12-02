@@ -40,20 +40,16 @@ end;
 procedure TReceiveNodeServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
     dbnode : TDbNodeRow;
-    nodes,
     node   : TDOMNode;
-    j      : Longint;
     port   : String;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
-  nodes := xmldoc.DocumentElement.FirstChild;
-  if Assigned(nodes) then
+  node := xmldoc.DocumentElement.FirstChild;
+
+  while Assigned(node) do
     begin
         try
-          for j := 0 to (nodes.ChildNodes.Count - 1) do
              begin
-               node := nodes.ChildNodes.Item[j];
-
                dbnode.nodeid :=node.FindNode('nodeid').TextContent;
                //TODO: dbnode.defaultserver_id
                dbnode.nodename :=node.FindNode('processor').TextContent;
@@ -63,21 +59,20 @@ begin
                port := node.FindNode('port').TextContent;
                if port='' then port:='0';
                dbnode.port :=StrToInt(port);
-               dbnode.localip :=node.FindNode('localip').TextContent;
-               dbnode.os :=node.FindNode('os').TextContent;
+               //TODO: EAccessViolation dbnode.localip :=node.FindNode('localip').TextContent;
+               dbnode.os :=node.FindNode('operatingsystem').TextContent;
                dbnode.cputype :=node.FindNode('cputype').TextContent;
                dbnode.version :=node.FindNode('version').TextContent;
-               dbnode.acceptincoming :=(node.FindNode('acceptincoming').TextContent='true');
-               dbnode.gigaflops :=StrToInt(node.FindNode('gigaflops').TextContent);
+               dbnode.acceptincoming :=(node.FindNode('accept').TextContent='1');
+               dbnode.gigaflops :=StrToInt(node.FindNode('speed').TextContent);
                dbnode.ram :=StrToInt(node.FindNode('ram').TextContent);
                dbnode.mhz :=StrToInt(node.FindNode('mhz').TextContent);
-               dbnode.nbcpus :=StrToInt(node.FindNode('nbcpus').TextContent);
+               //dbnode.nbcpus :=StrToInt(node.FindNode('cpus').TextContent); empty
                dbnode.online := true; //TODO: check if this is correct
                dbnode.uptime :=StrToFloatDef(node.FindNode('uptime').TextContent, 0);
-               dbnode.totaluptime :=StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
-               dbnode.longitude :=StrToFloatDef(node.FindNode('longitude').TextContent, 0);
-               dbnode.latitude :=StrToFloatDef(node.FindNode('latitude').TextContent, 0);
-
+               dbnode.totaluptime :=StrToFloatDef(node.FindNode('totuptime').TextContent, 0);
+               dbnode.longitude :=StrToFloatDef(node.FindNode('geolocation_x').TextContent, 0);
+               dbnode.latitude :=StrToFloatDef(node.FindNode('geolocation_y').TextContent, 0);
                nodetable_.insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, 'Added <'+dbnode.nodename+'> to tbnode table.');
              end;
@@ -88,7 +83,9 @@ begin
                 logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in parseXML: '+E.Message);
               end;
           end; // except
-     end;  // if  Assigned(nodes)
+
+       node := node.NextSibling;
+     end;  // while Assigned(node)
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
@@ -98,12 +95,14 @@ var xmldoc : TXMLDocument;
     stream : TMemoryStream;
 begin
  stream := TMemoryStream.Create;
- erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+ //TODO: add some random seed to avoid proxy caching
+ erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?1254',
                proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
 
  if not erroneous_ then
  begin
   try
+    xmldoc := TXMLDocument.Create();
     ReadXMLFile(xmldoc, stream);
   except
      on E : Exception do
@@ -114,6 +113,7 @@ begin
   end; // except
 
   if not erroneous_ then parseXml(xmldoc);
+  xmldoc.Free;
  end;
 
 
