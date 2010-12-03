@@ -91,17 +91,21 @@ begin
 end;
 
 procedure TReceiveNodeServiceThread.Execute;
-var xmldoc : TXMLDocument;
-    stream : TMemoryStream;
+var xmldoc    : TXMLDocument;
+    stream    : TMemoryStream;
+    proxyseed : String;
 begin
- stream := TMemoryStream.Create;
- //TODO: add some random seed to avoid proxy caching
- erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?1254',
+ stream  := TMemoryStream.Create;
+
+ proxyseed  := getProxySeed;
+ logger_.log(LVL_DEBUG, 'Proxy seed is: '+proxyseed);
+ erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?randomseed='+proxyseed,
                proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
 
  if not erroneous_ then
  begin
   try
+    stream.Position := 0; // to avoid Document root is missing exception
     xmldoc := TXMLDocument.Create();
     ReadXMLFile(xmldoc, stream);
   except
@@ -117,7 +121,8 @@ begin
  end;
 
 
- if stream<>nil then stream.Free else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
+ if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
+
  done_ := true;
 end;
 

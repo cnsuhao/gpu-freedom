@@ -15,6 +15,9 @@ function downloadToFile(url, targetPath, targetFile, proxy, port, logHeader : St
 function downloadToStream(url, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 function downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 
+procedure convertLFtoCRLF(var instream, outstream : TMemoryStream; var logger : TLogger);
+function getProxySeed : String;
+
 implementation
 
 function downloadToFile(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
@@ -34,6 +37,7 @@ function downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHea
 var
     Http        : THTTPSend;
     saveFile    : Boolean;
+    temp        : TMemoryStream;
 begin
   Result   := true;
   saveFile := (stream = nil);
@@ -84,5 +88,38 @@ begin
   logger.log(LVL_DEBUG, logHeader+'Execute method finished.');
 end;
 
+
+procedure convertLFtoCRLF(var instream, outstream : TMemoryStream; var logger : TLogger);
+var i, size : Int64;
+    by      : Byte;
+    str     : AnsiString;
+begin
+  logger.log(LVL_DEBUG, 'Performing LFtoCRLF conversion');
+  size := instream.getSize;
+  logger.log(LVL_DEBUG, 'Stream size: '+IntToStr(size));
+  instream.Position := 0;
+
+  i:=0;
+  while(i<size) do
+     begin
+       by := instream.readByte();
+       if (by=10) then
+          begin
+            outstream.writeByte(13); // CR
+            outstream.writeByte(10);  // LF
+          end
+       else
+          outstream.WriteByte(by);
+       i := i + 1;
+     end;
+
+  outstream.Position := 0;
+  logger.log(LVL_DEBUG, 'LFtoCRLF conversion over');
+end;
+
+function getProxySeed : String;
+begin
+  Result := IntToStr(Trunc(Random*10000));
+end;
 
 end.

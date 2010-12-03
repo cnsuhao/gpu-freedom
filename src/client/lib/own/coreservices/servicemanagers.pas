@@ -28,6 +28,7 @@ implementation
 constructor TServiceThreadManager.Create(maxThreads : Longint);
 begin
   inherited Create(maxThreads);
+  Randomize; // call to randomize for downlodutils.getProxySeed
 end;
 
 destructor TServiceThreadManager.Destroy;
