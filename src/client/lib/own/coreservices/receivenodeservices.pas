@@ -74,7 +74,7 @@ begin
                dbnode.longitude :=StrToFloatDef(node.FindNode('geolocation_x').TextContent, 0);
                dbnode.latitude :=StrToFloatDef(node.FindNode('geolocation_y').TextContent, 0);
                nodetable_.insertOrUpdate(dbnode);
-               logger_.log(LVL_DEBUG, 'Added <'+dbnode.nodename+'> to tbnode table.');
+               logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbnode table.');
              end;
           except
            on E : Exception do

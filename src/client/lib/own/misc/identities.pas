@@ -17,9 +17,12 @@ type
     Team,
     Country,
     Region,
+    Street,
+    City,
+    Zip,
     NodeId,
     IP,
-	localIP,
+    localIP,
     OS,
     Version:   string;
     Port : Longint; //TCP/IP Port
@@ -39,6 +42,10 @@ type
 
     Longitude,
     Latitude : Extended;
+
+    max_computations,
+    max_services,
+    max_downloads : Longint;
   end;
   
 type 
@@ -62,8 +69,8 @@ type
 
 
 var
-  MyGPUID      : TGPUIdentity;
-  MyUserID     : TUserIdentity;
+  MyGPUID         : TGPUIdentity;
+  MyUserID        : TUserIdentity;
   TMCompStatus    : TThreadManagerStatus;
   TMDownStatus    : TThreadManagerStatus;
   TMServiceStatus : TThreadManagerStatus;

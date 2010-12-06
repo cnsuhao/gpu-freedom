@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
-  loggers, dbtablemanagers, receivenodeservices;
+  loggers, dbtablemanagers, receivenodeservices, coreconfigurations;
 
 type
 
