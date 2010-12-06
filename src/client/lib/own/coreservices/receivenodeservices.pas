@@ -16,8 +16,8 @@ uses coreservices, servermanagers,
 
 type TReceiveNodeServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(servMan : TServerManager; proxy, port : String;
-                     nodetable : TDbNodeTable; logger : TLogger);
+  constructor Create(var servMan : TServerManager; proxy, port : String;
+                     nodetable : TDbNodeTable; var logger : TLogger);
  protected
     procedure Execute; override;
 
@@ -29,8 +29,8 @@ end;
 
 implementation
 
-constructor TReceiveNodeServiceThread.Create(servMan : TServerManager; proxy, port : String;
-                                             nodetable : TDbNodeTable; logger : TLogger);
+constructor TReceiveNodeServiceThread.Create(var servMan : TServerManager; proxy, port : String;
+                                             nodetable : TDbNodeTable; var logger : TLogger);
 begin
  inherited Create(servMan, proxy, port, logger);
  nodetable_ := nodetable;

@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
-  loggers, dbtablemanagers, receivenodeservices, coreconfigurations;
+  loggers, dbtablemanagers, receivenodeservices, transmitnodeservices,
+  coreconfigurations;
 
 type
 
@@ -16,34 +17,48 @@ type
     procedure SetUp; override; 
     procedure TearDown; override; 
   published
-    procedure TestReceiveService;
+    procedure TestReceiveNodeService;
+    procedure TestTransmitNodeService;
 
   private
     serviceMan_  : TServiceThreadManager;
     srvFactory_  : TServiceFactory;
     serverMan_   : TServerManager;
     tableMan_    : TDbTableManager;
+    conf_        : TCoreConfiguration;
 
     path_          : String;
     logger_        : TLogger;
     urls_          : TStringList;
-    rcvnodeThread_ : TReceiveNodeServiceThread;
 
+    procedure waitForCompletion();
   end; 
 
 implementation
 
-procedure TTestServices.TestReceiveService;
+procedure TTestServices.waitForCompletion();
 begin
-  rcvnodeThread_ := srvFactory_.createReceiveNodeService();
-  serviceMan_.launch(rcvnodeThread_);
-
   while not serviceMan_.isIdle() do
       begin
         Sleep(150);
         serviceMan_.clearFinishedThreads();
       end;
+end;
 
+procedure TTestServices.TestReceiveNodeService;
+var rcvnodeThread : TReceiveNodeServiceThread;
+begin
+  rcvnodeThread := srvFactory_.createReceiveNodeService();
+  serviceMan_.launch(rcvnodeThread);
+  waitForCompletion();
+end;
+
+procedure TTestServices.TestTransmitNodeService;
+var trxnodeThread : TTransmitNodeServiceThread;
+begin
+  trxnodeThread := srvFactory_.createTransmitNodeService();
+  serviceMan_.launch(trxnodeThread);
+  waitForCompletion();
 end;
 
 procedure TTestServices.SetUp;
@@ -56,14 +71,16 @@ begin
   serverMan_      := TServerManager.Create(urls_, 0);
   tableMan_       := TDbTableManager.Create(path_+PathDelim+'core.db');
   tableMan_.openAll();
-
+  conf_           := TCoreConfiguration.Create(path_, 'core.ini');
+  conf_.loadConfiguration();
 
   serviceMan_  := TServiceThreadManager.Create(3);
-  srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_);
+  srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_, conf_);
 end; 
 
 procedure TTestServices.TearDown;
 begin
+ conf_.Free;
  tableMan_.closeAll();
  serviceMan_.Free;
  srvFactory_.Free;

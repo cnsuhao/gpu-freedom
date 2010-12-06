@@ -14,7 +14,7 @@ uses
 
 type TCoreServiceThread = class(TManagedThread)
   public
-    constructor Create(servMan : TServerManager; proxy, port : String; logger : TLogger);
+    constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
 
   protected
     servMan_ : TServerManager;
@@ -33,7 +33,7 @@ end;
 
 implementation
 
-constructor TCoreServiceThread.Create(servMan : TServerManager; proxy, port : String; logger : TLogger);
+constructor TCoreServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
 begin
   inherited Create(true); // suspended
   servMan_ := servMan;

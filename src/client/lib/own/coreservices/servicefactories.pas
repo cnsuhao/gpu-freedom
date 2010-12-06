@@ -1,6 +1,6 @@
 unit servicefactories;
  {
-   TServiceManager handles all services available to the GPU core.servicemanagers
+   TServiceManager creates all services available to the GPU core.servicemanagers
 
    (c) by 2010 HB9TVM and the GPU Team
 }
@@ -9,15 +9,16 @@ interface
 
 uses
   servermanagers, dbtablemanagers, loggers,
-  receivenodeservices;
+  receivenodeservices, transmitnodeservices, coreconfigurations;
 
 type TServiceFactory = class(TObject)
    public
-    constructor Create(servMan : TServerManager;
-                       tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
+    constructor Create(var servMan : TServerManager;
+                       var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
     destructor Destroy;
 
-    function createReceiveNodeService() : TReceiveNodeServiceThread;
+    function createReceiveNodeService()  : TReceiveNodeServiceThread;
+    function createTransmitNodeService() : TTransmitNodeServiceThread;
 
    private
 
@@ -26,13 +27,14 @@ type TServiceFactory = class(TObject)
      logger_   : TLogger;
      proxy_,
      port_     : String;
+     conf_     : TCoreConfiguration;
 
 end;
 
 implementation
 
-constructor TServiceFactory.Create(servMan : TServerManager;
-                                   tableMan : TDbTableManager; proxy, port : String; logger : TLogger);
+constructor TServiceFactory.Create(var servMan : TServerManager;
+                                   var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
 begin
  servMan_  := servMan;
  tableMan_ := tableMan;
@@ -40,6 +42,7 @@ begin
 
  proxy_    := proxy;
  port_     := port;
+ conf_     := conf;
 end;
 
 destructor TServiceFactory.Destroy;
@@ -50,5 +53,12 @@ function TServiceFactory.createReceiveNodeService() : TReceiveNodeServiceThread;
 begin
  Result := TReceiveNodeServiceThread.Create(servMan_, proxy_, port_, tableMan_.getNodeTable(), logger_);
 end;
+
+function TServiceFactory.createTransmitNodeService() : TTransmitNodeServiceThread;
+begin
+ Result := TTransmitNodeServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
+end;
+
+
 
 end.
