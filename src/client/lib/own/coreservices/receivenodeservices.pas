@@ -17,7 +17,7 @@ uses coreservices, servermanagers,
 type TReceiveNodeServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(servMan : TServerManager; proxy, port : String;
-                     fnodetable : TDbNodeTable; logger : TLogger);
+                     nodetable : TDbNodeTable; logger : TLogger);
  protected
     procedure Execute; override;
 
@@ -30,10 +30,10 @@ end;
 implementation
 
 constructor TReceiveNodeServiceThread.Create(servMan : TServerManager; proxy, port : String;
-                                       fnodetable : TDbNodeTable; logger : TLogger);
+                                             nodetable : TDbNodeTable; logger : TLogger);
 begin
  inherited Create(servMan, proxy, port, logger);
- nodetable_ := fnodetable;
+ nodetable_ := nodetable;
 end;
 
 
@@ -98,7 +98,6 @@ begin
  stream  := TMemoryStream.Create;
 
  proxyseed  := getProxySeed;
- logger_.log(LVL_DEBUG, 'Proxy seed is: '+proxyseed);
  erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?randomseed='+proxyseed,
                proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
 
