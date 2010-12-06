@@ -8,7 +8,7 @@ unit dbtablemanagers;
 
 interface
 
-uses nodetable;
+uses nodetables;
 
 
 type TDbTableManager = class(TObject)

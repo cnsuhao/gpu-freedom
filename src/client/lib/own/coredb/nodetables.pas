@@ -1,4 +1,4 @@
-unit nodetable;
+unit nodetables;
 {
    TDbNodeTable contains the client nodes seen on the GPU network
    active and inactive
@@ -7,7 +7,7 @@ unit nodetable;
 }
 interface
 
-uses sqlite3ds, db, coretable, SysUtils;
+uses sqlite3ds, db, coretables, SysUtils;
 
 
 type TDbNodeRow = record

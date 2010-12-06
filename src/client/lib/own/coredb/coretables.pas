@@ -1,4 +1,4 @@
-unit coretable;
+unit coretables;
 {
    TDbCoreTable is the ancenstor of all tables in the core database
    The tables are stored in a file in sqlite format.

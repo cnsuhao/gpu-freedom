@@ -11,7 +11,7 @@ unit receivenodeservices;
 interface
 
 uses coreservices, servermanagers,
-     nodetable, loggers, downloadutils,
+     nodetables, loggers, downloadutils,
      XMLRead, DOM, Classes, SysUtils;
 
 type TReceiveNodeServiceThread = class(TReceiveServiceThread)
