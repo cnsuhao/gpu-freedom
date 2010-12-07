@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receivenodeservices, transmitnodeservices,
-  coreconfigurations;
+  receiveserverservices, coreconfigurations;
 
 type
 
@@ -68,7 +68,7 @@ begin
   logger_.setLogLevel(LVL_DEBUG);
   urls_           := TStringList.Create;
   urls_.add('http://www.gpu-grid.net/file_distributor');
-  serverMan_      := TServerManager.Create(urls_, 0);
+  serverMan_      := TServerManager.Create(urls_, 0, 0);
   tableMan_       := TDbTableManager.Create(path_+PathDelim+'core.db');
   tableMan_.openAll();
   conf_           := TCoreConfiguration.Create(path_, 'core.ini');

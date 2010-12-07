@@ -12,16 +12,18 @@ uses SyncObjs, Sysutils, Classes;
 
 type TServerManager = class(TObject)
    public
-    constructor Create(urls : TStringList; defaultserver : Longint);
+    constructor Create(urls : TStringList; defaultserver, superserver : Longint);
     destructor Destroy;
 
     function getServerUrl : String;
     function getDefaultServerUrl : String;
+    function getSuperServerUrl : String;
 
     procedure reloadServers();
 
    private
     defaultserver_ : Longint;
+    superserver_   : Longint;
     urls_  : TStringList;
     cs_    : TCriticalSection;
     count_ : Longint;
@@ -31,11 +33,12 @@ end;
 
 implementation
 
-constructor TServerManager.Create(urls : TStringList; defaultserver : Longint);
+constructor TServerManager.Create(urls : TStringList; defaultserver, superserver : Longint);
 begin
   inherited Create;
   urls_ := urls;
   defaultserver_ := defaultserver;
+  superserver_ := superserver;
   cs_ := TCriticalSection.Create();
   count_ := 0;
 
@@ -62,6 +65,14 @@ begin
   Result := urls_.Strings[defaultserver_];
   cs_.Leave;
 end;
+
+function TServerManager.getSuperServerUrl : String;
+begin
+  cs_.Enter;
+  Result := urls_.Strings[superserver_];
+  cs_.Leave;
+end;
+
 
 procedure TServerManager.reloadServers();
 begin

@@ -1,8 +1,8 @@
-unit receivenodeservices;
+unit receiveserverservices;
 {
 
-  This unit receives a list of active XML nodes from GPU II servers
-   and stores it in the TDbNodeTable object.receivenodeservices
+  This unit receives a list of active servers from GPU II superserver
+   and stores it in the TDbServerTable object.
 
   (c) 2010 by HB9TVM and the GPU Team
   This code is licensed under the GPL
@@ -11,41 +11,41 @@ unit receivenodeservices;
 interface
 
 uses coreservices, servermanagers,
-     nodetables, loggers, downloadutils,
+     servertables, loggers, downloadutils,
      XMLRead, DOM, Classes, SysUtils;
 
-type TReceiveNodeServiceThread = class(TReceiveServiceThread)
+type TReceiveServerServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; proxy, port : String;
-                     nodetable : TDbNodeTable; var logger : TLogger);
+                     servertable : TDbServerTable; var logger : TLogger);
  protected
     procedure Execute; override;
 
  private
-   nodetable_ : TDbNodeTable;
+   servertable_ : TDbServerTable;
 
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
 
-constructor TReceiveNodeServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                             nodetable : TDbNodeTable; var logger : TLogger);
+constructor TReceiveServerServiceThread.Create(var servMan : TServerManager; proxy, port : String;
+                                             servertable : TDbServerTable; var logger : TLogger);
 begin
  inherited Create(servMan, proxy, port, logger);
- nodetable_ := nodetable;
+ servertable_ := servertable;
 end;
 
 
-procedure TReceiveNodeServiceThread.parseXml(var xmldoc : TXMLDocument);
+procedure TReceiveServerServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbnode : TDbNodeRow;
+    dbnode : TDbServerRow;
     node   : TDOMNode;
     port   : String;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
-
+  {
   while Assigned(node) do
     begin
         try
@@ -87,11 +87,13 @@ begin
 
        node := node.NextSibling;
      end;  // while Assigned(node)
-
+   }
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
 
-procedure TReceiveNodeServiceThread.Execute;
+
+
+procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
     stream    : TMemoryStream;
     proxyseed : String;
@@ -99,8 +101,8 @@ begin
  stream  := TMemoryStream.Create;
 
  proxyseed  := getProxySeed;
- erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?randomseed='+proxyseed,
-               proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
+ erroneous_ := not downloadToStream(servMan_.getSuperServerUrl()+'/supercluster/get_servers.php?randomseed='+proxyseed,
+               proxy_, port_, '[TReceiveServerServiceThread]> ', logger_, stream);
 
  if not erroneous_ then
  begin
@@ -112,24 +114,26 @@ begin
      on E : Exception do
         begin
            erroneous_ := true;
-           logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in Execute: '+E.Message);
+           logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Exception catched in Execute: '+E.Message);
         end;
   end; // except
 
   if not erroneous_ then
     begin
-     nodetable_.execSQL('UPDATE tbnode set updated=0;');
+     servertable_.execSQL('UPDATE tbserver set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
-        nodetable_.execSQL('UPDATE tbnode set online=updated;');
+       servertable_.execSQL('UPDATE tbserver set online=updated;');
     end;
   xmldoc.Free;
  end;
 
 
- if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
+ if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receiveserverservices.pas, stream is nil');
 
  done_ := true;
 end;
+
+
 
 end.
