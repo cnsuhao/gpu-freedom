@@ -80,6 +80,8 @@ CREATE TABLE tbserver (
    lon real,
    lat real,
    distance real,
+   uptime real,
+   totaluptime real,
    activenodes int,
    jobinqueue int
 );
