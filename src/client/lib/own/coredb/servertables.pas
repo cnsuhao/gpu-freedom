@@ -12,6 +12,7 @@ uses sqlite3ds, db, coretables, SysUtils;
 type TDbServerRow = record
     id : Longint;
     externalid       : Longint;
+    servername,
     serverurl,
     chatchannel,
     version          : String;
@@ -56,6 +57,7 @@ begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('externalid', ftInteger);
+      FieldDefs.Add('servername', ftString);
       FieldDefs.Add('serverurl', ftString);
       FieldDefs.Add('chatchannel', ftString);
       FieldDefs.Add('version', ftString);
@@ -95,6 +97,7 @@ begin
     end;
 
   dataset_.FieldByName('externalid').AsInteger := row.externalid;
+  dataset_.FieldByName('servername').AsString := row.servername;
   dataset_.FieldByName('serverurl').AsString := row.serverurl;
   dataset_.FieldByName('chatchannel').AsString := row.chatchannel;
   dataset_.FieldByName('version').AsString := row.version;

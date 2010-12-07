@@ -70,6 +70,7 @@ CREATE TABLE tbnode (
 CREATE TABLE tbserver (
    id int primary key,
    externalid int,
+   servername text,
    serverurl text,
    chatchannel varchar(32),
    version varchar(32),

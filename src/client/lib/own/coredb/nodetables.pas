@@ -96,6 +96,7 @@ procedure TDbNodeTable.insertOrUpdate(row : TDbNodeRow);
 var options : TLocateOptions;
     updated : Boolean;
 begin
+  options := [];
   if dataset_.Locate('nodeid', row.nodeid, options) then
     begin
       dataset_.Edit;
