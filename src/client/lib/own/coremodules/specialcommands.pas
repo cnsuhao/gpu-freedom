@@ -86,7 +86,7 @@ begin
   else	  
   if (arg='core.threads') or (arg='core.maxthreads') or (arg='core.isidle') or (arg='core.hasresources') or
      (arg='core.version') or (arg='core.registeredjobs') or (arg='core.stkversion') or
-     (arg='core.downloads') or (arg='core.maxdownloads')
+     (arg='core.downloads') or (arg='core.maxdownloads') or (arg='core.services') or (arg='core.maxservices')
      then
       begin
             specialType := STK_ARG_SPECIAL_CALL_CORE;
@@ -183,6 +183,8 @@ begin
   if (arg='core.maxthreads')     then Result := pushFloat(TMCompStatus.maxthreads, stk) else
   if (arg='core.downloads')      then Result := pushFloat(TMDownStatus.threads, stk) else
   if (arg='core.maxdownloads')   then Result := pushFloat(TMDownStatus.maxthreads, stk) else
+  if (arg='core.services')       then Result := pushFloat(TMServiceStatus.threads, stk) else
+  if (arg='core.maxservices')    then Result := pushFloat(TMServiceStatus.maxthreads, stk) else
   if (arg='core.isidle')         then Result := pushBool(TMCompStatus.isIdle, stk) else
   if (arg='core.hasresources')   then Result := pushBool(TMCompStatus.hasResources, stk) else
   if (arg='core.version')        then Result := pushStr(CORE_VERSION, stk) else

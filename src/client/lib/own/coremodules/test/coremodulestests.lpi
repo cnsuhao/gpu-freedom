@@ -2,14 +2,14 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="\"/>
-    <Version Value="7"/>
+    <Version Value="6"/>
     <General>
       <MainUnit Value="0"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="coremodulestests"/>
-      <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="6"/>
+      <ActiveEditorIndexAtStart Value="5"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,16 +36,14 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="41">
+    <Units Count="43">
       <Unit0>
         <Filename Value="coremodulestests.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coremodulestests"/>
         <CursorPos X="66" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="48"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="52"/>
       </Unit0>
       <Unit1>
         <Filename Value="teststacks.pas"/>
@@ -53,7 +51,7 @@
         <UnitName Value="teststacks"/>
         <CursorPos X="5" Y="98"/>
         <TopLine Value="68"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="52"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\stacks.pas"/>
@@ -143,17 +141,17 @@
         <Filename Value="..\..\misc\identities.pas"/>
         <UnitName Value="identities"/>
         <CursorPos X="15" Y="68"/>
-        <TopLine Value="38"/>
-        <EditorIndex Value="13"/>
+        <TopLine Value="32"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
-        <CursorPos X="85" Y="175"/>
-        <TopLine Value="170"/>
-        <EditorIndex Value="14"/>
+        <CursorPos X="68" Y="187"/>
+        <TopLine Value="157"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -161,19 +159,15 @@
         <Filename Value="..\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
         <CursorPos X="9" Y="69"/>
-        <TopLine Value="54"/>
-        <EditorIndex Value="7"/>
+        <TopLine Value="40"/>
         <UsageCount Value="18"/>
-        <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\methodcontrollers.pas"/>
         <UnitName Value="methodcontrollers"/>
         <CursorPos X="26" Y="133"/>
-        <TopLine Value="100"/>
-        <EditorIndex Value="10"/>
+        <TopLine Value="84"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\coremodules.pas"/>
@@ -181,18 +175,14 @@
         <UnitName Value="coremodules"/>
         <CursorPos X="10" Y="50"/>
         <TopLine Value="14"/>
-        <EditorIndex Value="12"/>
-        <UsageCount Value="47"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="51"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\downloadthreadmanagers.pas"/>
         <UnitName Value="downloadthreadmanagers"/>
-        <CursorPos X="12" Y="57"/>
-        <TopLine Value="38"/>
-        <EditorIndex Value="8"/>
+        <CursorPos X="99" Y="81"/>
+        <TopLine Value="55"/>
         <UsageCount Value="19"/>
-        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\resultcollectors.pas"/>
@@ -232,10 +222,10 @@
       <Unit25>
         <Filename Value="..\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
-        <CursorPos X="71" Y="16"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="14"/>
+        <CursorPos X="39" Y="86"/>
+        <TopLine Value="45"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit25>
       <Unit26>
@@ -257,7 +247,9 @@
         <UnitName Value="jobparsers"/>
         <CursorPos X="22" Y="76"/>
         <TopLine Value="54"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit28>
       <Unit29>
         <Filename Value="testresultcollectors.pas"/>
@@ -265,7 +257,7 @@
         <UnitName Value="testresultcollectors"/>
         <CursorPos X="65" Y="47"/>
         <TopLine Value="19"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="33"/>
       </Unit29>
       <Unit30>
         <Filename Value="testfrontendmanagers.pas"/>
@@ -273,7 +265,7 @@
         <UnitName Value="testfrontendmanagers"/>
         <CursorPos X="43" Y="50"/>
         <TopLine Value="27"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="32"/>
       </Unit30>
       <Unit31>
         <Filename Value="testthreadmanagers.pas"/>
@@ -286,19 +278,19 @@
         <Filename Value="..\managedthreads.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="managedthreads"/>
-        <CursorPos X="68" Y="23"/>
+        <CursorPos X="38" Y="23"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="0"/>
-        <UsageCount Value="26"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit32>
       <Unit33>
         <Filename Value="..\downloadthreads.pas"/>
         <UnitName Value="downloadthreads"/>
-        <CursorPos X="5" Y="17"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="12"/>
+        <CursorPos X="12" Y="71"/>
+        <TopLine Value="29"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit33>
       <Unit34>
@@ -306,185 +298,191 @@
         <UnitName Value="testcomputationthreads"/>
         <CursorPos X="88" Y="27"/>
         <TopLine Value="25"/>
-        <EditorIndex Value="16"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit34>
       <Unit35>
         <Filename Value="..\threadmanagers.pas"/>
         <UnitName Value="threadmanagers"/>
         <CursorPos X="1" Y="67"/>
         <TopLine Value="49"/>
-        <EditorIndex Value="11"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit35>
       <Unit36>
         <Filename Value="testdownloadthreads.pas"/>
         <UnitName Value="testdownloadthreads"/>
-        <CursorPos X="103" Y="31"/>
-        <TopLine Value="9"/>
-        <EditorIndex Value="2"/>
+        <CursorPos X="127" Y="31"/>
+        <TopLine Value="1"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\compthreadmanagers.pas"/>
         <UnitName Value="compthreadmanagers"/>
         <CursorPos X="1" Y="35"/>
         <TopLine Value="14"/>
-        <EditorIndex Value="9"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\..\..\ext\synapse\src\demo\FreePascal\testhttp.pas"/>
         <UnitName Value="testhttp"/>
         <CursorPos X="35" Y="23"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="5"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit38>
       <Unit39>
         <Filename Value="testcompthreadmanagers.pas"/>
         <UnitName Value="testcompthreadmanagers"/>
         <CursorPos X="23" Y="68"/>
         <TopLine Value="42"/>
-        <EditorIndex Value="4"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit39>
       <Unit40>
         <Filename Value="testconstants.pas"/>
         <UnitName Value="testconstants"/>
-        <CursorPos X="104" Y="6"/>
+        <CursorPos X="3" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit40>
+      <Unit41>
+        <Filename Value="..\..\..\..\..\..\..\backup\fileschanged.txt"/>
+        <CursorPos X="16" Y="4"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="..\..\misc\downloadutils.pas"/>
+        <UnitName Value="downloadutils"/>
+        <CursorPos X="104" Y="57"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit42>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="149" Column="9" TopLine="131"/>
+        <Caret Line="78" Column="18" TopLine="63"/>
       </Position1>
       <Position2>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="62" Column="25" TopLine="47"/>
+        <Caret Line="48" Column="21" TopLine="38"/>
       </Position2>
       <Position3>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="71" Column="26" TopLine="56"/>
+        <Caret Line="97" Column="91" TopLine="82"/>
       </Position3>
       <Position4>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="76" Column="28" TopLine="61"/>
+        <Caret Line="117" Column="27" TopLine="102"/>
       </Position4>
       <Position5>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="78" Column="18" TopLine="63"/>
+        <Caret Line="123" Column="49" TopLine="108"/>
       </Position5>
       <Position6>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="48" Column="21" TopLine="38"/>
+        <Caret Line="31" Column="42" TopLine="19"/>
       </Position6>
       <Position7>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="97" Column="91" TopLine="82"/>
+        <Caret Line="154" Column="55" TopLine="139"/>
       </Position7>
       <Position8>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="117" Column="27" TopLine="102"/>
+        <Caret Line="177" Column="25" TopLine="154"/>
       </Position8>
       <Position9>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="123" Column="49" TopLine="108"/>
+        <Caret Line="130" Column="3" TopLine="100"/>
       </Position9>
       <Position10>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="31" Column="42" TopLine="19"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position10>
       <Position11>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="154" Column="55" TopLine="139"/>
+        <Caret Line="67" Column="52" TopLine="50"/>
       </Position11>
       <Position12>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="177" Column="25" TopLine="154"/>
+        <Caret Line="109" Column="64" TopLine="94"/>
       </Position12>
       <Position13>
-        <Filename Value="..\downloadthreadmanagers.pas"/>
-        <Caret Line="20" Column="65" TopLine="2"/>
+        <Filename Value="..\downloadthreads.pas"/>
+        <Caret Line="113" Column="88" TopLine="98"/>
       </Position13>
       <Position14>
-        <Filename Value="..\coremodules.pas"/>
-        <Caret Line="118" Column="27" TopLine="89"/>
+        <Filename Value="..\downloadthreads.pas"/>
+        <Caret Line="109" Column="38" TopLine="98"/>
       </Position14>
       <Position15>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="130" Column="3" TopLine="100"/>
+        <Caret Line="113" Column="32" TopLine="98"/>
       </Position15>
       <Position16>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="102" Column="1" TopLine="1"/>
       </Position16>
       <Position17>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="67" Column="52" TopLine="50"/>
+        <Caret Line="78" Column="7" TopLine="69"/>
       </Position17>
       <Position18>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="109" Column="64" TopLine="94"/>
+        <Caret Line="86" Column="31" TopLine="67"/>
       </Position18>
       <Position19>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="113" Column="88" TopLine="98"/>
+        <Caret Line="103" Column="32" TopLine="85"/>
       </Position19>
       <Position20>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="109" Column="38" TopLine="98"/>
+        <Caret Line="106" Column="8" TopLine="88"/>
       </Position20>
       <Position21>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="113" Column="32" TopLine="98"/>
+        <Caret Line="17" Column="35" TopLine="1"/>
       </Position21>
       <Position22>
-        <Filename Value="..\downloadthreadmanagers.pas"/>
-        <Caret Line="95" Column="1" TopLine="65"/>
+        <Filename Value="..\..\misc\downloadutils.pas"/>
+        <Caret Line="77" Column="41" TopLine="25"/>
       </Position22>
       <Position23>
-        <Filename Value="testdownloadthreads.pas"/>
-        <Caret Line="40" Column="43" TopLine="15"/>
+        <Filename Value="..\..\misc\downloadutils.pas"/>
+        <Caret Line="27" Column="67" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="102" Column="1" TopLine="1"/>
+        <Filename Value="..\..\misc\downloadutils.pas"/>
+        <Caret Line="14" Column="52" TopLine="3"/>
       </Position24>
       <Position25>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="78" Column="7" TopLine="69"/>
+        <Caret Line="29" Column="30" TopLine="16"/>
       </Position25>
       <Position26>
         <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="86" Column="31" TopLine="67"/>
+        <Caret Line="18" Column="51" TopLine="16"/>
       </Position26>
       <Position27>
-        <Filename Value="coremodulestests.pas"/>
-        <Caret Line="27" Column="74" TopLine="1"/>
+        <Filename Value="..\downloadthreads.pas"/>
+        <Caret Line="57" Column="29" TopLine="29"/>
       </Position27>
       <Position28>
-        <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="103" Column="32" TopLine="85"/>
+        <Filename Value="..\managedthreads.pas"/>
+        <Caret Line="23" Column="68" TopLine="1"/>
       </Position28>
       <Position29>
-        <Filename Value="..\downloadthreads.pas"/>
-        <Caret Line="106" Column="8" TopLine="88"/>
+        <Filename Value="..\specialcommands.pas"/>
+        <Caret Line="175" Column="85" TopLine="170"/>
       </Position29>
       <Position30>
-        <Filename Value="..\coremodules.pas"/>
-        <Caret Line="93" Column="41" TopLine="92"/>
+        <Filename Value="..\managedthreads.pas"/>
+        <Caret Line="15" Column="23" TopLine="1"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
@@ -493,9 +491,14 @@
     <PathDelim Value="\"/>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)\"/>
-      <OtherUnitFiles Value="..\;..\..\..\..\lib\own\misc\;..\..\..\..\lib\ext\synapse\src\lib\"/>
+      <OtherUnitFiles Value="..\;..\..\..\..\lib\own\misc\;..\..\..\..\lib\ext\synapse\src\lib\;..\;..\..\..\..\lib\own\coreservices\"/>
       <UnitOutputDirectory Value="..\..\..\..\..\..\bin"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <Other>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
