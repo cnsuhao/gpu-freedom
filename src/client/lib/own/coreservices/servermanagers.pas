@@ -41,7 +41,7 @@ begin
   defaultserver_ := defaultserver;
   superserver_ := superserver;
   cs_ := TCriticalSection.Create();
-  count_ := 0;
+  count_ := defaultserver; //TODO: change it back to 0 when servers setup is more complete
   servertable_ := servertable;
 
   verify();
