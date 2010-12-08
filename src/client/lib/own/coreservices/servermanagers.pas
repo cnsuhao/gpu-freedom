@@ -8,11 +8,11 @@ unit servermanagers;
 }
 interface
 
-uses SyncObjs, Sysutils, Classes;
+uses SyncObjs, Sysutils, Classes, servertables;
 
 type TServerManager = class(TObject)
    public
-    constructor Create(urls : TStringList; defaultserver, superserver : Longint);
+    constructor Create(urls : TStringList; defaultserver, superserver : Longint; servertable : TDbServerTable);
     destructor Destroy;
 
     function getServerUrl : String;
@@ -24,16 +24,17 @@ type TServerManager = class(TObject)
    private
     defaultserver_ : Longint;
     superserver_   : Longint;
-    urls_  : TStringList;
-    cs_    : TCriticalSection;
-    count_ : Longint;
+    urls_          : TStringList;
+    cs_            : TCriticalSection;
+    count_         : Longint;
+    servertable_   : TDbServerTable;
 
     procedure verify();
 end;
 
 implementation
 
-constructor TServerManager.Create(urls : TStringList; defaultserver, superserver : Longint);
+constructor TServerManager.Create(urls : TStringList; defaultserver, superserver : Longint; servertable : TDbServerTable);
 begin
   inherited Create;
   urls_ := urls;
@@ -41,6 +42,7 @@ begin
   superserver_ := superserver;
   cs_ := TCriticalSection.Create();
   count_ := 0;
+  servertable_ := servertable;
 
   verify();
 end;
