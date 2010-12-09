@@ -10,7 +10,7 @@ unit coreservices;
 interface
 
 uses
-  managedthreads, servermanagers, loggers;
+  managedthreads, servermanagers, loggers, downloadutils, XMLRead, DOM, Classes, SysUtils;
 
 type TCoreServiceThread = class(TManagedThread)
   public
@@ -23,12 +23,16 @@ type TCoreServiceThread = class(TManagedThread)
     port_    : String;
 end;
 
+type TTransmitServiceThread = class(TCoreServiceThread)
+   procedure transmit(url, logHeader : String; noargs : Boolean);
+end;
+
 
 type TReceiveServiceThread = class(TCoreServiceThread)
+   procedure receive(url, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+   procedure finish(logHeader, logSuccess : String; var xmldoc : TXmlDocument);
 end;
 
-type TTransmitServiceThread = class(TCoreServiceThread)
-end;
 
 
 implementation
@@ -42,5 +46,71 @@ begin
   port_    := port;
 end;
 
+procedure TTransmitServiceThread.transmit(url, logHeader : String; noargs : Boolean);
+var
+    stream    : TMemoryStream;
+begin
+ stream  := TMemoryStream.Create;
+ erroneous_ := not downloadToStream(url+getProxyArg(noargs),
+               proxy_, port_, logHeader, logger_, stream);
+
+ if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE,
+         logHeader+'Internal error in coreservices.pas, stream is nil');
+ if erroneous_ then
+   logger_.log(LVL_SEVERE, logHeader+'Transmission failed :-(')
+ else
+   logger_.log(LVL_INFO, logHeader+'Transmission succesfull :-)');
+
+ done_ := true;
+end;
+
+
+procedure TReceiveServiceThread.receive(url, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+var
+    stream    : TMemoryStream;
+begin
+ xmldoc := TXMLDocument.Create();
+ stream  := TMemoryStream.Create;
+ erroneous_ := not downloadToStream(url+getProxyArg(noargs),
+               proxy_, port_, logHeader, logger_, stream);
+
+ if stream=nil then
+  begin
+   logger_.log(LVL_SEVERE, logHeader+'Internal error in coreservices.pas, stream is nil');
+   erroneous_ := true;
+  end;
+
+ if not erroneous_ then
+ begin
+  try
+    stream.Position := 0; // to avoid Document root is missing exception
+    ReadXMLFile(xmldoc, stream);
+  except
+     on E : Exception do
+        begin
+           erroneous_ := true;
+           logger_.log(LVL_SEVERE, logHeader+'Exception catched in Execute: '+E.Message);
+        end;
+  end; // except
+  end; // if not erroneous
+  if stream<>nil then stream.Free;
+end;
+
+procedure TReceiveServiceThread.finish(logHeader, logSuccess : String; var xmldoc : TXmlDocument);
+begin
+ if xmldoc=nil then
+   begin
+    logger_.log(LVL_SEVERE, logHeader+'xmldoc is nil in finalize');
+    erroneous_ := true;
+   end
+ else
+    xmldoc.Free;
+
+ if erroneous_ then
+    logger_.log(LVL_SEVERE, logHeader+'Service finished but ERRONEOUS flag set :-(')
+ else
+   logger_.log(LVL_INFO, logHeader+logSuccess);
+ done_ := true;
+end;
 
 end.

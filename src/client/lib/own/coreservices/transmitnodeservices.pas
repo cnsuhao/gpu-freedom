@@ -2,7 +2,7 @@ unit transmitnodeservices;
 
 interface
 
-uses coreconfigurations, coreservices, downloadutils, synacode, stkconstants,
+uses coreconfigurations, coreservices, synacode, stkconstants,
      servermanagers, loggers, identities, SysUtils, Classes;
 
 
@@ -62,21 +62,8 @@ end;
 
 
 procedure TTransmitNodeServiceThread.Execute;
-var
-    stream    : TMemoryStream;
-    proxyseed : String;
 begin
- stream  := TMemoryStream.Create;
- proxyseed  := getProxySeed;
- erroneous_ := not downloadToStream(servMan_.getDefaultServerUrl()+'/report_nodeinfo.php?randomseed='+proxyseed+'&'+getReportString,
-               proxy_, port_, '[TTransmitNodeServiceThread]> ', logger_, stream);
-
- if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
- if erroneous_ then
-   logger_.log(LVL_SEVERE, '[TTransmitNodeServiceThread]> Thread finished but ERRONEOUS flag set :-(')
- else
-   logger_.log(LVL_INFO, '[TTransmitNodeServiceThread]> Our status transmitted to default server succesfully :-)');
- done_ := true;
+ transmit(servMan_.getDefaultServerUrl()+'/report_nodeinfo.php?'+getReportString, '[TTransmitNodeServiceThread]> ', false);
 end;
 
 

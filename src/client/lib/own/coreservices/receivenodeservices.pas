@@ -11,8 +11,7 @@ unit receivenodeservices;
 interface
 
 uses coreservices, servermanagers,
-     nodetables, loggers, downloadutils,
-     XMLRead, DOM, Classes, SysUtils;
+     nodetables, loggers, Classes, SysUtils, DOM;
 
 type TReceiveNodeServiceThread = class(TReceiveServiceThread)
  public
@@ -93,46 +92,19 @@ end;
 
 procedure TReceiveNodeServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    stream    : TMemoryStream;
-    proxyseed : String;
 begin
- stream  := TMemoryStream.Create;
-
- proxyseed  := getProxySeed;
- erroneous_ := not downloadToStream(servMan_.getServerUrl()+'/list_computers_online_xml.php?randomseed='+proxyseed,
-               proxy_, port_, '[TReceiveNodeServiceThread]> ', logger_, stream);
+ receive(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+         '[TReceiveNodeServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
- begin
-  try
-    stream.Position := 0; // to avoid Document root is missing exception
-    xmldoc := TXMLDocument.Create();
-    ReadXMLFile(xmldoc, stream);
-  except
-     on E : Exception do
-        begin
-           erroneous_ := true;
-           logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in Execute: '+E.Message);
-        end;
-  end; // except
-
-  if not erroneous_ then
     begin
      nodetable_.execSQL('UPDATE tbnode set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
         nodetable_.execSQL('UPDATE tbnode set online=updated;');
     end;
-  xmldoc.Free;
- end;
 
-
- if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
- if erroneous_ then
-    logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Thread finished but ERRONEOUS flag set :-(')
- else
-   logger_.log(LVL_INFO, '[TReceiveNodeServiceThread]> tbnode table updated with success :-)');
- done_ := true;
+ finish('[TReceiveNodeServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
 end;
 
 end.

@@ -12,7 +12,7 @@ interface
 
 uses coreservices, servermanagers,
      servertables, loggers, downloadutils, coreconfigurations, geoutils,
-     XMLRead, DOM, Classes, SysUtils;
+     Classes, SysUtils, DOM;
 
 type TReceiveServerServiceThread = class(TReceiveServiceThread)
  public
@@ -94,30 +94,10 @@ end;
 
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    stream    : TMemoryStream;
-    proxyseed : String;
 begin
- stream  := TMemoryStream.Create;
-
- proxyseed  := getProxySeed;
- erroneous_ := not downloadToStream(servMan_.getSuperServerUrl()+'/supercluster/get_servers.php?randomseed='+proxyseed,
-               proxy_, port_, '[TReceiveServerServiceThread]> ', logger_, stream);
-
+ receive(servMan_.getSuperServerUrl()+'/supercluster/get_servers.php',
+         '[TReceiveServerServiceThread]> ', xmldoc, true);
  if not erroneous_ then
- begin
-  try
-    stream.Position := 0; // to avoid Document root is missing exception
-    xmldoc := TXMLDocument.Create();
-    ReadXMLFile(xmldoc, stream);
-  except
-     on E : Exception do
-        begin
-           erroneous_ := true;
-           logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Exception catched in Execute: '+E.Message);
-        end;
-  end; // except
-
-  if not erroneous_ then
     begin
      servertable_.execSQL('UPDATE tbserver set updated=0;');
      parseXml(xmldoc);
@@ -130,17 +110,8 @@ begin
         servMan_.reloadServers();
        end;
     end;
-  xmldoc.Free;
- end;
 
-
- if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Internal error in receiveserverservices.pas, stream is nil');
- if erroneous_ then
-   logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Thread finished but ERRONEOUS flag set :-(')
- else
-   logger_.log(LVL_INFO, '[TReceiveServerServiceThread]> tbserver table updated with success :-)');
-
- done_ := true;
+ finish('[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
 end;
 
 

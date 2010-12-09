@@ -16,7 +16,7 @@ function downloadToStream(url, proxy, port, logHeader : String; var logger : TLo
 function downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 
 procedure convertLFtoCRLF(var instream, outstream : TMemoryStream; var logger : TLogger);
-function getProxySeed : String;
+function getProxyArg(noargs : Boolean) : String;
 
 implementation
 
@@ -116,9 +116,12 @@ begin
   logger.log(LVL_DEBUG, 'LFtoCRLF conversion over');
 end;
 
-function getProxySeed : String;
+function getProxyArg(noargs : Boolean) : String;
 begin
-  Result := IntToStr(Trunc(Random*10000));
+ if noargs then
+   Result := '?randomseed='+IntToStr(Trunc(Random*10000))
+ else
+   Result := '&randomseed='+IntToStr(Trunc(Random*10000));
 end;
 
 end.
