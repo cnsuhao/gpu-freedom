@@ -11,7 +11,7 @@ unit receiveserverservices;
 interface
 
 uses coreservices, servermanagers,
-     servertables, loggers, downloadutils, coreconfigurations,
+     servertables, loggers, downloadutils, coreconfigurations, geoutils,
      XMLRead, DOM, Classes, SysUtils;
 
 type TReceiveServerServiceThread = class(TReceiveServiceThread)
@@ -43,9 +43,10 @@ end;
 
 procedure TReceiveServerServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbrow  : TDbServerRow;
-    node   : TDOMNode;
-    port   : String;
+    dbrow    : TDbServerRow;
+    node     : TDOMNode;
+    port     : String;
+
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
@@ -54,26 +55,26 @@ begin
     begin
         try
              begin
-               dbrow.externalid  :=StrToInt(node.FindNode('externalid').TextContent);
-               dbrow.servername  :=node.FindNode('servername').TextContent;
-               dbrow.serverurl   :=node.FindNode('serverurl').TextContent;
-               dbrow.chatchannel :=node.FindNode('chatchannel').TextContent;
-               dbrow.version     :=node.FindNode('version').TextContent;
-               dbrow.online        := true;
-               dbrow.updated       := true;
-               dbrow.defaultsrv    := false;
-               dbrow.superserver :=node.FindNode('superserver').TextContent='true';
-               dbrow.uptime      :=StrToFloatDef(node.FindNode('uptime').TextContent, 0);
-               dbrow.totaluptime :=StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
-               dbrow.longitude   :=StrToFloatDef(node.FindNode('longitude').TextContent, 0);
-               dbrow.latitude    :=StrToFloatDef(node.FindNode('latitude').TextContent, 0);
-               dbrow.distance    := 0; // TODO: compute correct distance
-                                       // TODO: assign minimal distance to default server
-               dbrow.activenodes :=StrToInt(node.FindNode('activenodes').TextContent);
-               dbrow.jobsinqueue :=StrToInt(node.FindNode('jobsinqueue').TextContent);
+               dbrow.externalid  := StrToInt(node.FindNode('externalid').TextContent);
+               dbrow.servername  := node.FindNode('servername').TextContent;
+               dbrow.serverurl   := node.FindNode('serverurl').TextContent;
+               dbrow.chatchannel := node.FindNode('chatchannel').TextContent;
+               dbrow.version     := node.FindNode('version').TextContent;
+               dbrow.online      := true;
+               dbrow.updated     := true;
+               dbrow.defaultsrv  := false;
+               dbrow.superserver := node.FindNode('superserver').TextContent='true';
+               dbrow.uptime      := StrToFloatDef(node.FindNode('uptime').TextContent, 0);
+               dbrow.totaluptime := StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
+               dbrow.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
+               dbrow.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
+               dbrow.distance    := getDistanceOnEarthSphere(dbrow.longitude, dbrow.latitude,
+                                                             conf_.getGPUIdentity.Longitude, conf_.getGPUIdentity.Latitude);
+               dbrow.activenodes := StrToInt(node.FindNode('activenodes').TextContent);
+               dbrow.jobsinqueue := StrToInt(node.FindNode('jobsinqueue').TextContent);
 
                servertable_.insertOrUpdate(dbrow);
-               logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table.');
+               logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table (distance: '+FloatToStr(dbrow.distance)+').');
              end;
           except
            on E : Exception do
@@ -123,6 +124,8 @@ begin
      if not erroneous_ then
        begin
         servertable_.execSQL('UPDATE tbserver set online=updated;');
+        servertable_.execSQL('UPDATE tbserver set defaultsrv=0;');
+        servertable_.execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
         servMan_.reloadServers();
        end;
     end;

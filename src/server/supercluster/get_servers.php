@@ -8,8 +8,8 @@
     <superserver>true</superserver>
     <uptime>1.3</uptime>
     <totaluptime>15.24</totaluptime>
-    <longitude>30</longitude>
-    <latitude>45</latitude>
+    <longitude>6</longitude>
+    <latitude>-170</latitude>
     <activenodes>13</activenodes>
     <jobsinqueue>3</jobsinqueue>
  </server>
@@ -23,9 +23,25 @@
     <superserver>false</superserver>
     <uptime>0.2</uptime>
     <totaluptime>10.6</totaluptime>
-    <longitude>-15</longitude>
+    <longitude>-150</longitude>
     <latitude>17</latitude>
     <activenodes>7</activenodes>
     <jobsinqueue>12</jobsinqueue>
  </server>
+
+ <server>
+    <externalid>3</externalid>
+    <servername>Filedistributor</servername>
+    <serverurl>http://www.gpu-grid.net/file_distributor</serverurl>
+    <chatchannel>filedist</chatchannel>
+    <version>1.0.0</version>
+    <superserver>false</superserver>
+    <uptime>159</uptime>
+    <totaluptime>600</totaluptime>
+    <longitude>45</longitude>
+    <latitude>6</latitude>
+    <activenodes>10</activenodes>
+    <jobsinqueue>600</jobsinqueue>
+ </server>
+
 </servers>
