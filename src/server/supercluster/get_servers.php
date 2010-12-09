@@ -9,7 +9,7 @@
     <uptime>1.3</uptime>
     <totaluptime>15.24</totaluptime>
     <longitude>6</longitude>
-    <latitude>-170</latitude>
+    <latitude>-70</latitude>
     <activenodes>13</activenodes>
     <jobsinqueue>3</jobsinqueue>
  </server>
@@ -38,8 +38,8 @@
     <superserver>false</superserver>
     <uptime>159</uptime>
     <totaluptime>600</totaluptime>
-    <longitude>45</longitude>
-    <latitude>6</latitude>
+    <longitude>7</longitude>
+    <latitude>45</latitude>
     <activenodes>10</activenodes>
     <jobsinqueue>600</jobsinqueue>
  </server>

@@ -126,6 +126,7 @@ begin
         servertable_.execSQL('UPDATE tbserver set online=updated;');
         servertable_.execSQL('UPDATE tbserver set defaultsrv=0;');
         servertable_.execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
+        servertable_.getDS().RefetchData;
         servMan_.reloadServers();
        end;
     end;
@@ -134,6 +135,10 @@ begin
 
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Internal error in receiveserverservices.pas, stream is nil');
+ if erroneous_ then
+   logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Thread finished but ERRONEOUS flag set :-(')
+ else
+   logger_.log(LVL_INFO, '[TReceiveServerServiceThread]> tbserver table updated with success :-)');
 
  done_ := true;
 end;

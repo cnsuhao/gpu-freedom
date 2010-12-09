@@ -72,6 +72,10 @@ begin
                proxy_, port_, '[TTransmitNodeServiceThread]> ', logger_, stream);
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
+ if erroneous_ then
+   logger_.log(LVL_SEVERE, '[TTransmitNodeServiceThread]> Thread finished but ERRONEOUS flag set :-(')
+ else
+   logger_.log(LVL_INFO, '[TTransmitNodeServiceThread]> Our status transmitted to default server succesfully :-)');
  done_ := true;
 end;
 

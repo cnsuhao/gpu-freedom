@@ -11,6 +11,7 @@ type TCoreConfiguration = class(TObject)
 
   function getGPUIdentity  : TGPUIdentity;
   function getUserIdentity : TUserIdentity;
+  function getConfIdentity : TConfIdentity;
 
   procedure loadConfiguration();
   procedure saveConfiguration();
@@ -57,6 +58,11 @@ begin
  Result := myUserID;
 end;
 
+function TCoreConfiguration.getConfIdentity : TConfIdentity;
+begin
+ Result := myConfID;
+end;
+
 procedure TCoreConfiguration.loadConfiguration();
 begin
   CS_.Enter;
@@ -91,10 +97,6 @@ begin
 
       Longitude              := ini_.ReadFloat('core','longitude',7);
       Latitude               := ini_.ReadFloat('core','latitude',45);
-
-      max_computations       := ini_.ReadInteger('core','max_computations',3);
-      max_services           := ini_.ReadInteger('core','max_services',3);
-      max_downloads          := ini_.ReadInteger('core','max_downloads',3);
    end;
 
  with myUserID do
@@ -105,6 +107,15 @@ begin
       email         := ini_.ReadString('user','email','testuser@test.com');
       realname      := ini_.ReadString('user','realname','Paul Smith');
       homepage_url  := ini_.ReadString('user','homepage_url','http://www.gpu-grid.net');
+ end;
+
+ with myConfID do
+ begin
+      max_computations        := ini_.ReadInteger('configuration','max_computations',3);
+      max_services            := ini_.ReadInteger('configuration','max_services',3);
+      max_downloads           := ini_.ReadInteger('configuration','max_downloads',3);
+
+      default_superserver_url := ini_.ReadString('configuration','default_superserver_url','http://www.gpu-grid.net/superserver');
  end;
  CS_.Leave;
 end;

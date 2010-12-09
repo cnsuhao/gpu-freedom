@@ -42,7 +42,7 @@ begin
   Result   := true;
   saveFile := (stream = nil);
   logger.log(LVL_DEBUG, logHeader+'Execute method started.');
-  logger.log(LVL_DEBUG, logHeader+'Retrieving data from URL: '+url);
+  logger.log(LVL_INFO, logHeader+'Retrieving data from URL: '+url);
 
   HTTP := THTTPSend.Create;
   HTTP.Timeout   := HTTP_DOWNLOAD_TIMEOUT;
@@ -72,7 +72,7 @@ begin
            else
             begin
                HTTP.Document.SaveToStream(stream);
-               logger.log(LVL_INFO, logHeader+'New stream created');
+               logger.log(LVL_DEBUG, logHeader+'New stream created');
             end;
       end;
 
@@ -85,7 +85,6 @@ begin
   end;
 
   HTTP.Free;
-  logger.log(LVL_DEBUG, logHeader+'Execute method finished.');
 end;
 
 

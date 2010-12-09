@@ -13,6 +13,7 @@ uses
 type
 
   TTestServices = class(TTestCase)
+
   protected
     procedure SetUp; override; 
     procedure TearDown; override; 
@@ -30,12 +31,12 @@ type
 
     path_          : String;
     logger_        : TLogger;
-    urls_          : TStringList;
 
     procedure waitForCompletion();
   end; 
 
 implementation
+
 
 procedure TTestServices.waitForCompletion();
 begin
@@ -74,16 +75,17 @@ end;
 procedure TTestServices.SetUp;
 begin
   path_           := ExtractFilePath(ParamStr(0));
+
   logger_         := TLogger.Create(path_+'logs', 'services.log');
   logger_.setLogLevel(LVL_DEBUG);
-  urls_           := TStringList.Create;
-  urls_.add('http://www.gpu-grid.net/superserver');
-  urls_.add('http://www.gpu-grid.net/file_distributor');
   tableMan_       := TDbTableManager.Create(path_+PathDelim+'core.db');
   tableMan_.openAll();
-  serverMan_      := TServerManager.Create(urls_, 1, 0, tableMan_.getServerTable());
   conf_           := TCoreConfiguration.Create(path_, 'core.ini');
   conf_.loadConfiguration();
+
+  serverMan_      := TServerManager.Create(conf_,
+                                           tableMan_.getServerTable(),
+                                           logger_);
 
   serviceMan_  := TServiceThreadManager.Create(3);
   srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_, conf_);
@@ -98,7 +100,6 @@ begin
  tableMan_.Free;
  serverMan_.Free;
  logger_.Free;
- urls_.Free;
 end; 
 
 initialization

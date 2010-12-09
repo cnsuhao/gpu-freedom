@@ -39,9 +39,9 @@ end;
 
 procedure TReceiveNodeServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbnode : TDbNodeRow;
-    node   : TDOMNode;
-    port   : String;
+    dbnode   : TDbNodeRow;
+    node     : TDOMNode;
+    port     : String;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
@@ -128,7 +128,10 @@ begin
 
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Internal error in receivenodeservices.pas, stream is nil');
-
+ if erroneous_ then
+    logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Thread finished but ERRONEOUS flag set :-(')
+ else
+   logger_.log(LVL_INFO, '[TReceiveNodeServiceThread]> tbnode table updated with success :-)');
  done_ := true;
 end;
 

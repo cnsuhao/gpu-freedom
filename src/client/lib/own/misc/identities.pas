@@ -42,10 +42,6 @@ type
 
     Longitude,
     Latitude : Extended;
-
-    max_computations,
-    max_services,
-    max_downloads : Longint;
   end;
   
 type 
@@ -57,6 +53,14 @@ type
      realname,
      homepage_url : String;
   end;
+
+type TConfIdentity = record
+    max_computations,
+    max_services,
+    max_downloads : Longint;
+
+    default_superserver_url : String;
+end;
 
 type
   TThreadManagerStatus = record
@@ -71,6 +75,7 @@ type
 var
   MyGPUID         : TGPUIdentity;
   MyUserID        : TUserIdentity;
+  MyConfID        : TConfIdentity;
   TMCompStatus    : TThreadManagerStatus;
   TMDownStatus    : TThreadManagerStatus;
   TMServiceStatus : TThreadManagerStatus;
