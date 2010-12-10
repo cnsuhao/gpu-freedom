@@ -8,5 +8,6 @@
  <receive_channels_each>120</receive_channels_each>
  <transmit_channels_each>120</transmit_channels_each>
  <receive_chat_each>45</receive_chat_each>
+ <purge_server_after_failures>30<purge_server_after_failures>
 </communication>
 </parameters>

@@ -60,6 +60,16 @@ type TConfIdentity = record
     max_downloads : Longint;
 
     default_superserver_url : String;
+
+    receive_servers_each,
+    receive_nodes_each,
+    transmit_node_each,
+    receive_jobs_each,
+    transmit_jobs_each,
+    receive_channels_each,
+    transmit_channels_each,
+    receive_chat_each,
+    purge_server_after_failures : Longint;
 end;
 
 type

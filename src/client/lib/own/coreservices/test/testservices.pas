@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receivenodeservices, transmitnodeservices,
-  receiveserverservices, coreconfigurations;
+  receiveserverservices, receiveparamservices, coreconfigurations;
 
 type
 
@@ -18,6 +18,7 @@ type
     procedure SetUp; override; 
     procedure TearDown; override; 
   published
+    procedure TestReceiveParamService;
     procedure TestReceiveServerService;
     procedure TestReceiveNodeService;
     procedure TestTransmitNodeService;
@@ -46,6 +47,15 @@ begin
         serviceMan_.clearFinishedThreads();
       end;
 end;
+
+procedure TTestServices.TestReceiveParamService;
+var rcvparamThread : TReceiveParamServiceThread;
+begin
+  rcvparamThread := srvFactory_.createReceiveParamService();
+  serviceMan_.launch(rcvparamThread);
+  waitForCompletion();
+end;
+
 
 procedure TTestServices.TestReceiveServerService;
 var rcvserverThread : TReceiveServerServiceThread;

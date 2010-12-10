@@ -111,11 +111,21 @@ begin
 
  with myConfID do
  begin
-      max_computations        := ini_.ReadInteger('configuration','max_computations',3);
-      max_services            := ini_.ReadInteger('configuration','max_services',3);
-      max_downloads           := ini_.ReadInteger('configuration','max_downloads',3);
+      max_computations        := ini_.ReadInteger('local','max_computations',3);
+      max_services            := ini_.ReadInteger('local','max_services',3);
+      max_downloads           := ini_.ReadInteger('local','max_downloads',3);
 
-      default_superserver_url := ini_.ReadString('configuration','default_superserver_url','http://www.gpu-grid.net/superserver');
+      default_superserver_url := ini_.ReadString('local','default_superserver_url','http://www.gpu-grid.net/superserver');
+
+      receive_servers_each   := ini_.ReadInteger('global','receive_servers_each',14400);
+      receive_nodes_each     := ini_.ReadInteger('global','receive_nodes_each',120);
+      transmit_node_each     := ini_.ReadInteger('global','transmit_node_each',180);
+      receive_jobs_each      := ini_.ReadInteger('global','receive_jobs_each',120);
+      transmit_jobs_each     := ini_.ReadInteger('global','transmit_jobs_each',120);
+      receive_channels_each  := ini_.ReadInteger('global','receive_channels_each',120);
+      transmit_channels_each := ini_.ReadInteger('global','transmit_channels_each',120);
+      receive_chat_each      := ini_.ReadInteger('global','receive_chat_each',45);
+      purge_server_after_failures := ini_.ReadInteger('global','purge_server_after_failures',30);
  end;
  CS_.Leave;
 end;
@@ -123,50 +133,6 @@ end;
 procedure TCoreConfiguration.saveConfiguration();
 begin
   CS_.Enter;
-  {
-  with myGPUID do
-    begin
-      NodeName
-      Team
-      Country
-      Region
-      NodeId
-      IP
-      localIP
-      OS
-      Version
-      Port
-      AcceptIncoming
-      MHz
-      RAM
-      GigaFlops
-      isSMP
-      isHT
-      is64bit
-      isWineEmulator
-      isRunningAsScreensaver
-      nbCPUs
-      Uptime
-      TotalUptime
-      CPUType
-
-      Longitude
-      Latitude
-
-      max_computations
-      max_services
-      max_downloads
-  end;
-
-  with myUserID do
-      userid
-      username
-      password
-      email
-      realname
-      homepage_url
-  end;
-  }
   CS_.Leave;
 end;
 

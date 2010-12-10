@@ -10,7 +10,8 @@ interface
 uses
   servermanagers, dbtablemanagers, loggers,
   receivenodeservices, transmitnodeservices,
-  receiveserverservices, coreconfigurations;
+  receiveserverservices, receiveparamservices,
+  coreconfigurations;
 
 type TServiceFactory = class(TObject)
    public
@@ -21,6 +22,7 @@ type TServiceFactory = class(TObject)
     function createReceiveNodeService()    : TReceiveNodeServiceThread;
     function createTransmitNodeService()   : TTransmitNodeServiceThread;
     function createReceiveServerService()  : TReceiveServerServiceThread;
+    function createReceiveParamService()   : TReceiveParamServiceThread;
 
    private
 
@@ -64,6 +66,11 @@ end;
 function TServiceFactory.createReceiveServerService()  : TReceiveServerServiceThread;
 begin
   Result := TReceiveServerServiceThread.Create(servMan_, proxy_, port_, tableMan_.getServerTable(), logger_, conf_);
+end;
+
+function TServiceFactory.createReceiveParamService() : TReceiveParamServiceThread;
+begin
+ Result := TReceiveParamServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
 end;
 
 
