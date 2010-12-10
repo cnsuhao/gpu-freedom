@@ -14,21 +14,32 @@ uses
 
 type TCoreServiceThread = class(TManagedThread)
   public
+    constructor Create(var logger : TLogger);
+
+  protected
+    logger_  : TLogger;
+end;
+
+type TCommServiceThread = class(TCoreServiceThread)
+  public
     constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
 
   protected
     servMan_ : TServerManager;
-    logger_  : TLogger;
     proxy_,
     port_    : String;
 end;
 
-type TTransmitServiceThread = class(TCoreServiceThread)
+
+type TInternalServiceThread = class(TCoreServiceThread)
+end;
+
+type TTransmitServiceThread = class(TCommServiceThread)
    procedure transmit(url, logHeader : String; noargs : Boolean);
 end;
 
 
-type TReceiveServiceThread = class(TCoreServiceThread)
+type TReceiveServiceThread = class(TCommServiceThread)
    procedure receive(url, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
    procedure finish(logHeader, logSuccess : String; var xmldoc : TXmlDocument);
 end;
@@ -37,14 +48,20 @@ end;
 
 implementation
 
-constructor TCoreServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
+constructor TCoreServiceThread.Create(var logger : TLogger);
 begin
   inherited Create(true); // suspended
-  servMan_ := servMan;
   logger_  := logger;
+end;
+
+constructor TCommServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
+begin
+  inherited Create(logger);
+  servMan_ := servMan;
   proxy_   := proxy;
   port_    := port;
 end;
+
 
 procedure TTransmitServiceThread.transmit(url, logHeader : String; noargs : Boolean);
 var
