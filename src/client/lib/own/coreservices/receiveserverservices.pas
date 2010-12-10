@@ -72,6 +72,7 @@ begin
                                                              conf_.getGPUIdentity.Longitude, conf_.getGPUIdentity.Latitude);
                dbrow.activenodes := StrToInt(node.FindNode('activenodes').TextContent);
                dbrow.jobsinqueue := StrToInt(node.FindNode('jobsinqueue').TextContent);
+               dbrow.failures    := 0;
 
                servertable_.insertOrUpdate(dbrow);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table (distance: '+FloatToStr(dbrow.distance)+').');
@@ -95,7 +96,7 @@ end;
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive(servMan_.getSuperServerUrl()+'/supercluster/get_servers.php',
+ receive(servMan_.getSuperServerUrl(), '/supercluster/get_servers.php',
          '[TReceiveServerServiceThread]> ', xmldoc, true);
  if not erroneous_ then
     begin
@@ -106,12 +107,11 @@ begin
         servertable_.execSQL('UPDATE tbserver set online=updated;');
         servertable_.execSQL('UPDATE tbserver set defaultsrv=0;');
         servertable_.execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
-        servertable_.getDS().RefetchData;
         servMan_.reloadServers();
        end;
     end;
 
- finish('[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
+ finishReceive(servMan_.getSuperServerUrl(), '[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
 end;
 
 

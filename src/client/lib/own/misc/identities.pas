@@ -59,6 +59,8 @@ type TConfIdentity = record
     max_services,
     max_downloads : Longint;
 
+    proxy,
+    port,
     default_superserver_url : String;
 
     receive_servers_each,

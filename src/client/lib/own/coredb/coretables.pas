@@ -56,6 +56,7 @@ end;
 procedure TDbCoreTable.execSQL(sql : String);
 begin
  dataset_.execSQL(sql);
+ dataset_.RefetchData;
 end;
 
 end.

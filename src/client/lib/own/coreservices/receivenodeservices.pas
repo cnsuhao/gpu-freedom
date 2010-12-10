@@ -92,8 +92,10 @@ end;
 
 procedure TReceiveNodeServiceThread.Execute;
 var xmldoc    : TXMLDocument;
+    url       : String;
 begin
- receive(servMan_.getServerUrl()+'/list_computers_online_xml.php',
+ url := servMan_.getServerUrl();
+ receive(url, '/list_computers_online_xml.php',
          '[TReceiveNodeServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
@@ -104,7 +106,7 @@ begin
         nodetable_.execSQL('UPDATE tbnode set online=updated;');
     end;
 
- finish('[TReceiveNodeServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
+ finishReceive(url, '[TReceiveNodeServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
 end;
 
 end.

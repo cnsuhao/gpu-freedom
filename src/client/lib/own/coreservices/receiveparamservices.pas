@@ -71,13 +71,13 @@ end;
 procedure TReceiveParamServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive(servMan_.getSuperServerUrl()+'/supercluster/get_parameters.php',
+ receive(servMan_.getSuperServerUrl(), '/supercluster/get_parameters.php',
          '[TReceiveParamServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
      parseXml(xmldoc);
 
- finish('[TReceiveParamServiceThread]> ', 'Service retrieved global parameters from superserver succesfully :-)', xmldoc);
+ finishReceive(servMan_.getSuperServerUrl(), '[TReceiveParamServiceThread]> ', 'Service retrieved global parameters from superserver succesfully :-)', xmldoc);
 end;
 
 

@@ -1,13 +1,17 @@
-CREATE TABLE tbchat (
+CREATE TABLE tbchannel (
    id int primary key,
    externalid int,
-   msg text,
+   content text,
    user varchar(32),
+   nodename varchar(32),
+   nodeid text,
    create_dt text,
    usertime_dt text,
-   channel varchar(32),
+   channame varchar(32),
+   chantype varchar(32),
    server_id int
 );
+
 
 CREATE TABLE tbjob (
    id int primary key,
@@ -84,6 +88,7 @@ CREATE TABLE tbserver (
    uptime real,
    totaluptime real,
    activenodes int,
+   failures int,
    jobinqueue int
 );
 

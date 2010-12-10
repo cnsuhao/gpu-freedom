@@ -63,7 +63,8 @@ end;
 
 procedure TTransmitNodeServiceThread.Execute;
 begin
- transmit(servMan_.getDefaultServerUrl()+'/report_nodeinfo.php?'+getReportString, '[TTransmitNodeServiceThread]> ', false);
+ transmit(servMan_.getDefaultServerUrl(),'/report_nodeinfo.php?'+getReportString, '[TTransmitNodeServiceThread]> ', false);
+ finishComm(servMan_.getDefaultServerUrl(),  '[TTransmitNodeServiceThread]> ', 'Own status transmitted :-)');
 end;
 
 

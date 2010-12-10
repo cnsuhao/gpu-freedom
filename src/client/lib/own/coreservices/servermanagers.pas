@@ -22,6 +22,7 @@ type TServerManager = class(TObject)
     function getSuperServerUrl : String;
 
     procedure reloadServers();
+    procedure increaseFailures(url : String);
 
    private
     defaultserver_ : Longint;
@@ -137,6 +138,16 @@ begin
  count_ := defaultserver_;
  cs_.Leave;
  verify();
+end;
+
+procedure TServerManager.increaseFailures(url : String);
+begin
+ cs_.Enter;
+ if servertable_.increaseFailures(url) then
+       logger_.log(LVL_DEBUG, 'TServermanager> Increased failure number for url: '+url)
+     else
+       logger_.log(LVL_SEVERE, 'TServermanager> Could not increase failure number for url: '+url);
+ cs_.Leave;
 end;
 
 procedure TServerManager.verify();

@@ -26,7 +26,8 @@ type TDbServerRow = record
     latitude,
     distance         : Real;
     activenodes,
-    jobsinqueue       : Longint;
+    jobsinqueue,
+    failures         : Longint;
 end;
 
 
@@ -35,6 +36,8 @@ type TDbServerTable = class(TDbCoreTable)
     constructor Create(filename : String);
 
     procedure insertOrUpdate(row : TDbServerRow);
+
+    function  increaseFailures(url : String) : Boolean;
 
   private
     procedure createDbTable();
@@ -72,6 +75,7 @@ begin
       FieldDefs.Add('distance', ftFloat);
       FieldDefs.Add('activenodes', ftInteger);
       FieldDefs.Add('jobinqueue', ftInteger);
+      FieldDefs.Add('failures', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
       FieldDefs.Add('update_dt', ftDateTime);
       CreateTable;
@@ -112,6 +116,7 @@ begin
   dataset_.FieldByName('distance').AsFloat := row.distance;
   dataset_.FieldByName('activenodes').AsInteger := row.activenodes;
   dataset_.FieldByName('jobinqueue').AsInteger := row.jobsinqueue;
+  dataset_.FieldByName('failures').AsInteger := row.failures;
 
   if updated then
     dataset_.FieldByName('update_dt').AsDateTime := Now
@@ -124,6 +129,24 @@ begin
 
   dataset_.Post;
   dataset_.ApplyUpdates;
+end;
+
+function  TDbServerTable.increaseFailures(url : String) : Boolean;
+var options  : TLocateOptions;
+    failures : Longint;
+begin
+ options := [];
+  if dataset_.Locate('serverurl', url, options) then
+      begin
+        failures := dataset_.FieldByName('failures').AsInteger;
+        Inc(failures);
+        dataset_.Edit;
+        dataset_.FieldByName('failures').AsInteger := failures+1;
+        dataset_.Post;
+        dataset_.ApplyUpdates;
+      end
+    else
+      Result := false;
 end;
 
 end.

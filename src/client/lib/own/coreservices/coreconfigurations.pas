@@ -115,7 +115,9 @@ begin
       max_services            := ini_.ReadInteger('local','max_services',3);
       max_downloads           := ini_.ReadInteger('local','max_downloads',3);
 
-      default_superserver_url := ini_.ReadString('local','default_superserver_url','http://www.gpu-grid.net/superserver');
+      proxy                   := ini_.ReadString('communication','proxy','');
+      port                    := ini_.ReadString('communication','port','');
+      default_superserver_url := ini_.ReadString('communication','default_superserver_url','http://www.gpu-grid.net/superserver');
 
       receive_servers_each   := ini_.ReadInteger('global','receive_servers_each',14400);
       receive_nodes_each     := ini_.ReadInteger('global','receive_nodes_each',120);

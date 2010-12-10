@@ -28,6 +28,8 @@ type TCommServiceThread = class(TCoreServiceThread)
     servMan_ : TServerManager;
     proxy_,
     port_    : String;
+    procedure finishComm(url, logHeader, logSuccess : String);
+
 end;
 
 
@@ -35,13 +37,13 @@ type TInternalServiceThread = class(TCoreServiceThread)
 end;
 
 type TTransmitServiceThread = class(TCommServiceThread)
-   procedure transmit(url, logHeader : String; noargs : Boolean);
+   procedure transmit(url, request, logHeader : String; noargs : Boolean);
 end;
 
 
 type TReceiveServiceThread = class(TCommServiceThread)
-   procedure receive(url, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
-   procedure finish(logHeader, logSuccess : String; var xmldoc : TXmlDocument);
+   procedure receive(url, request, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+   procedure finishReceive(url, logHeader, logSuccess : String; var xmldoc : TXmlDocument);
 end;
 
 
@@ -63,32 +65,27 @@ begin
 end;
 
 
-procedure TTransmitServiceThread.transmit(url, logHeader : String; noargs : Boolean);
+procedure TTransmitServiceThread.transmit(url, request, logHeader : String; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin
  stream  := TMemoryStream.Create;
- erroneous_ := not downloadToStream(url+getProxyArg(noargs),
+ erroneous_ := not downloadToStream(url+request+getProxyArg(noargs),
                proxy_, port_, logHeader, logger_, stream);
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE,
          logHeader+'Internal error in coreservices.pas, stream is nil');
- if erroneous_ then
-   logger_.log(LVL_SEVERE, logHeader+'Transmission failed :-(')
- else
-   logger_.log(LVL_INFO, logHeader+'Transmission succesfull :-)');
-
  done_ := true;
 end;
 
 
-procedure TReceiveServiceThread.receive(url, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+procedure TReceiveServiceThread.receive(url, request, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin
  xmldoc := TXMLDocument.Create();
  stream  := TMemoryStream.Create;
- erroneous_ := not downloadToStream(url+getProxyArg(noargs),
+ erroneous_ := not downloadToStream(url+request+getProxyArg(noargs),
                proxy_, port_, logHeader, logger_, stream);
 
  if stream=nil then
@@ -113,7 +110,20 @@ begin
   if stream<>nil then stream.Free;
 end;
 
-procedure TReceiveServiceThread.finish(logHeader, logSuccess : String; var xmldoc : TXmlDocument);
+procedure TCommServiceThread.finishComm(url, logHeader, logSuccess : String);
+begin
+ if erroneous_ then
+    begin
+     servMan_.increaseFailures(url);
+     logger_.log(LVL_SEVERE, logHeader+'Service finished but ERRONEOUS flag set :-(')
+    end
+ else
+   logger_.log(LVL_INFO, logHeader+logSuccess);
+ done_ := true;
+end;
+
+
+procedure TReceiveServiceThread.finishReceive(url, logHeader, logSuccess : String; var xmldoc : TXmlDocument);
 begin
  if xmldoc=nil then
    begin
@@ -123,11 +133,7 @@ begin
  else
     xmldoc.Free;
 
- if erroneous_ then
-    logger_.log(LVL_SEVERE, logHeader+'Service finished but ERRONEOUS flag set :-(')
- else
-   logger_.log(LVL_INFO, logHeader+logSuccess);
- done_ := true;
+ finishComm(url, logHeader, logSuccess);
 end;
 
 end.
