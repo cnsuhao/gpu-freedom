@@ -2,14 +2,16 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="\"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
       <MainUnit Value="0"/>
-      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="coremodulestests"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="5"/>
+      <ActiveEditorIndexAtStart Value="4"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -141,8 +143,8 @@
         <Filename Value="..\..\misc\identities.pas"/>
         <UnitName Value="identities"/>
         <CursorPos X="15" Y="68"/>
-        <TopLine Value="32"/>
-        <EditorIndex Value="5"/>
+        <TopLine Value="44"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit14>
@@ -150,8 +152,8 @@
         <Filename Value="..\specialcommands.pas"/>
         <UnitName Value="specialcommands"/>
         <CursorPos X="68" Y="187"/>
-        <TopLine Value="157"/>
-        <EditorIndex Value="3"/>
+        <TopLine Value="163"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -223,8 +225,8 @@
         <Filename Value="..\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
         <CursorPos X="39" Y="86"/>
-        <TopLine Value="45"/>
-        <EditorIndex Value="8"/>
+        <TopLine Value="62"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -247,7 +249,7 @@
         <UnitName Value="jobparsers"/>
         <CursorPos X="22" Y="76"/>
         <TopLine Value="54"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit28>
@@ -280,7 +282,7 @@
         <UnitName Value="managedthreads"/>
         <CursorPos X="38" Y="23"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit32>
@@ -288,7 +290,7 @@
         <Filename Value="..\downloadthreads.pas"/>
         <UnitName Value="downloadthreads"/>
         <CursorPos X="12" Y="71"/>
-        <TopLine Value="29"/>
+        <TopLine Value="47"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
@@ -340,7 +342,7 @@
         <UnitName Value="testconstants"/>
         <CursorPos X="3" Y="14"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit40>
@@ -348,17 +350,15 @@
         <Filename Value="..\..\..\..\..\..\..\backup\fileschanged.txt"/>
         <CursorPos X="16" Y="4"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="None"/>
       </Unit41>
       <Unit42>
         <Filename Value="..\..\misc\downloadutils.pas"/>
         <UnitName Value="downloadutils"/>
         <CursorPos X="104" Y="57"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
+        <TopLine Value="33"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit42>
@@ -491,7 +491,7 @@
     <PathDelim Value="\"/>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)\"/>
-      <OtherUnitFiles Value="..\;..\..\..\..\lib\own\misc\;..\..\..\..\lib\ext\synapse\src\lib\;..\;..\..\..\..\lib\own\coreservices\"/>
+      <OtherUnitFiles Value="..\;..\..\..\..\lib\own\misc\;..\..\..\..\lib\ext\synapse\src\lib\;..\..\..\..\lib\own\coreservices\"/>
       <UnitOutputDirectory Value="..\..\..\..\..\..\bin"/>
     </SearchPaths>
     <Parsing>
