@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="2"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,14 +28,14 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="5">
+    <Units Count="10">
       <Unit0>
         <Filename Value="strbasic.dpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="1" Y="5"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -52,7 +52,7 @@
         <UnitName Value="basicdll"/>
         <CursorPos X="5" Y="116"/>
         <TopLine Value="92"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -72,6 +72,51 @@
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="None"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="..\..\lib\own\misc\identities.pas"/>
+        <UnitName Value="identities"/>
+        <CursorPos X="8" Y="46"/>
+        <TopLine Value="22"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\lib\own\coreservices\receiveserverservices.pas"/>
+        <UnitName Value="receiveserverservices"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\lib\own\coreservices\receivenodeservices.pas"/>
+        <UnitName Value="receivenodeservices"/>
+        <CursorPos X="43" Y="60"/>
+        <TopLine Value="39"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\lib\own\coredb\nodetables.pas"/>
+        <UnitName Value="nodetables"/>
+        <CursorPos X="31" Y="37"/>
+        <TopLine Value="18"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\..\bin\data\core\sqlite\core-schema.sql"/>
+        <CursorPos X="16" Y="72"/>
+        <TopLine Value="56"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="SQL"/>
+      </Unit9>
     </Units>
     <JumpHistory Count="12" HistoryIndex="11">
       <Position1>

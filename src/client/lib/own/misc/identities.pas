@@ -24,17 +24,14 @@ type
     IP,
     localIP,
     OS,
-    Version:   string;
-    Port : Longint; //TCP/IP Port
+    Version,
+    Port : String;
     AcceptIncoming : Boolean; // if a node is able to accept incoming connections
     MHz,
     RAM,
-    GigaFlops : Longint;
-    isSMP,               // the computer is a SMP computer with more than 1 CPU case box
-    isHT,                // the CPU has HyperThreading feature
-    is64bit,              // the CPU is a 64 bit cpu
-    isWineEmulator : Boolean;
-    isRunningAsScreensaver : Boolean;
+    GigaFlops,
+    bits         : Longint;
+    isScreensaver : Boolean;
     nbCPUs: Longint;
     Uptime,
     TotalUptime : Double;
@@ -59,9 +56,12 @@ type TConfIdentity = record
     max_services,
     max_downloads : Longint;
 
+    run_only_when_idle : boolean;
+
     proxy,
     port,
-    default_superserver_url : String;
+    default_superserver_url,
+    default_server_name      : String;
 
     receive_servers_each,
     receive_nodes_each,

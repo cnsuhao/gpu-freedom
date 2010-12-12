@@ -80,23 +80,20 @@ begin
       localIP   := ini_.ReadString('core','localip','localip');
       OS        := ini_.ReadString('core','os','test os');
       Version   := ini_.ReadString('core','version','1.0.0');
-      Port      := ini_.ReadInteger('core','port',1234);
+      Port      := ini_.ReadString('core','port','1234');
       AcceptIncoming := ini_.ReadBool('core','acceptincoming',false);
       MHz            := ini_.ReadInteger('core','mhz',1000);
       RAM            := ini_.ReadInteger('core','ram',512);
       GigaFlops      := ini_.ReadInteger('core','gigaflops',1);
-      isSMP          := ini_.ReadBool('core','issmp',false);
-      isHT           := ini_.ReadBool('core','isht',false);
-      is64bit        := ini_.ReadBool('core','is64bit',false);
-      isWineEmulator := ini_.ReadBool('core','iswineemulator',false);
-      isRunningAsScreensaver := ini_.ReadBool('core','isrunningasscreensaver',false);
-      nbCPUs                 := ini_.ReadInteger('core','nbcpus',1);
-      Uptime                 := ini_.ReadFloat('core','uptime',0);
-      TotalUptime            := ini_.ReadFloat('core','totaluptime',0);
-      CPUType                := ini_.ReadString('core','cputype','AMD');
+      bits           := ini_.ReadInteger('core','bits',32);
+      isScreensaver  := ini_.ReadBool('core','isrscreensaver',false);
+      nbCPUs         := ini_.ReadInteger('core','nbcpus',1);
+      Uptime         := ini_.ReadFloat('core','uptime',0);
+      TotalUptime    := ini_.ReadFloat('core','totaluptime',0);
+      CPUType        := ini_.ReadString('core','cputype','AMD');
 
-      Longitude              := ini_.ReadFloat('core','longitude',7);
-      Latitude               := ini_.ReadFloat('core','latitude',45);
+      Longitude      := ini_.ReadFloat('core','longitude',7);
+      Latitude       := ini_.ReadFloat('core','latitude',45);
    end;
 
  with myUserID do
@@ -115,9 +112,12 @@ begin
       max_services            := ini_.ReadInteger('local','max_services',3);
       max_downloads           := ini_.ReadInteger('local','max_downloads',3);
 
+      run_only_when_idle      := ini_.ReadBool('local','run_only_when_idle',true);
+
       proxy                   := ini_.ReadString('communication','proxy','');
       port                    := ini_.ReadString('communication','port','');
       default_superserver_url := ini_.ReadString('communication','default_superserver_url','http://www.gpu-grid.net/superserver');
+      default_server_name     := ini_.ReadString('communication', 'default_server_name','Altos');
 
       receive_servers_each   := ini_.ReadInteger('global','receive_servers_each',14400);
       receive_nodes_each     := ini_.ReadInteger('global','receive_nodes_each',120);

@@ -109,6 +109,7 @@ begin
      if ds.FieldValues['defaultsrv']=true then
          begin
           defaultserver_ := i;
+          conf_.getConfIdentity.default_server_name:=ds.FieldValues['servername'];
           logger_.log(LVL_DEBUG, 'TServermanager> ^ is defaultserver');
          end;
      ds.Next;

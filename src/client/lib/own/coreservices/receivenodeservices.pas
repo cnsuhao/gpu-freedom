@@ -49,30 +49,32 @@ begin
     begin
         try
              begin
-               dbnode.nodeid :=node.FindNode('nodeid').TextContent;
-               //TODO: dbnode.defaultserver_id
-               dbnode.nodename :=node.FindNode('processor').TextContent;
-               dbnode.country :=node.FindNode('country').TextContent;
-               dbnode.region :=node.FindNode('region').TextContent;
-               dbnode.ip :=node.FindNode('ip').TextContent;
-               port := node.FindNode('port').TextContent;
-               if port='' then port:='0';
-               dbnode.port :=StrToInt(port);
-               //TODO: EAccessViolation dbnode.localip :=node.FindNode('localip').TextContent;
-               dbnode.os :=node.FindNode('operatingsystem').TextContent;
-               dbnode.cputype :=node.FindNode('cputype').TextContent;
-               dbnode.version :=node.FindNode('version').TextContent;
-               dbnode.acceptincoming :=(node.FindNode('accept').TextContent='1');
-               dbnode.gigaflops :=StrToInt(node.FindNode('speed').TextContent);
-               dbnode.ram :=StrToInt(node.FindNode('ram').TextContent);
-               dbnode.mhz :=StrToInt(node.FindNode('mhz').TextContent);
-               //dbnode.nbcpus :=StrToInt(node.FindNode('cpus').TextContent); empty
-               dbnode.online := true;
+               dbnode.nodeid            := node.FindNode('nodeid').TextContent;
+               dbnode.defaultservername := node.FindNode('defaultservername').TextContent;
+               dbnode.nodename          := node.FindNode('nodename').TextContent;
+               dbnode.country           := node.FindNode('country').TextContent;
+               dbnode.region            := node.FindNode('region').TextContent;
+               dbnode.city              := node.FindNode('city').TextContent;
+               dbnode.zip               := node.FindNode('zip').TextContent;
+               dbnode.ip                := node.FindNode('ip').TextContent;
+               dbnode.port              := node.FindNode('port').TextContent;
+               dbnode.localip           := node.FindNode('localip').TextContent;
+               dbnode.os                := node.FindNode('os').TextContent;
+               dbnode.cputype           := node.FindNode('cputype').TextContent;
+               dbnode.version           := node.FindNode('version').TextContent;
+               dbnode.acceptincoming    := (node.FindNode('acceptincoming').TextContent='true');
+               dbnode.gigaflops    := StrToInt(node.FindNode('gigaflops').TextContent);
+               dbnode.ram          := StrToInt(node.FindNode('ram').TextContent);
+               dbnode.mhz          := StrToInt(node.FindNode('mhz').TextContent);
+               dbnode.nbcpus       := StrToInt(node.FindNode('nbcpus').TextContent);
+               dbnode.bits         := StrToInt(node.FindNode('bits').TextContent);
+               dbnode.online  := true;
                dbnode.updated := true;
-               dbnode.uptime :=StrToFloatDef(node.FindNode('uptime').TextContent, 0);
-               dbnode.totaluptime :=StrToFloatDef(node.FindNode('totuptime').TextContent, 0);
-               dbnode.longitude :=StrToFloatDef(node.FindNode('geolocation_x').TextContent, 0);
-               dbnode.latitude :=StrToFloatDef(node.FindNode('geolocation_y').TextContent, 0);
+               dbnode.uptime      := StrToFloatDef(node.FindNode('uptime').TextContent, 0);
+               dbnode.totaluptime := StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
+               dbnode.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
+               dbnode.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
+               dbnode.userid      := node.FindNode('userid').TextContent;
                nodetable_.insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbnode table.');
              end;

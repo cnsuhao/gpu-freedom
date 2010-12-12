@@ -68,11 +68,11 @@ begin
   else
   if (arg='node.name') or (arg='node.team') or (arg='node.country') or (arg='node.region')  or
      (arg='node.id') or (arg='node.ip') or (arg='node.os') or (arg='node.version')  or
-	 (arg='node.accept') or (arg='node.mhz') or (arg='node.ram') or (arg='node.gflops')  or
-	 (arg='node.issmp') or (arg='node.isht') or (arg='node.is64bit') or (arg='node.iswine')  or
-	 (arg='node.isscreensaver') or (arg='node.cpus') or (arg='node.uptime') or (arg='node.totuptime') or 
-	 (arg='node.cputype') or (arg='node.localip') or (arg='node.longitude') or (arg='node.latitude') or
-     (arg='node.port') then
+     (arg='node.accept') or (arg='node.mhz') or (arg='node.ram') or (arg='node.gflops')  or
+     (arg='node.bits') or
+     (arg='node.isscreensaver') or (arg='node.cpus') or (arg='node.uptime') or (arg='node.totuptime') or
+     (arg='node.cputype') or (arg='node.localip') or (arg='node.longitude') or (arg='node.latitude') or
+     (arg='node.port') or (arg='node.defaultserver') or (arg='node.proxy') then
       begin
 	    specialType := STK_ARG_SPECIAL_CALL_NODE;
 	    Result := true;
@@ -140,18 +140,15 @@ begin
   if (arg='node.region')        then Result := pushStr(MyGPUID.region, stk) else
   if (arg='node.id')            then Result := pushStr(MyGPUID.nodeid, stk) else
   if (arg='node.ip')            then Result := pushStr(MyGPUID.ip, stk) else
-  if (arg='node.port')          then Result := pushFloat(MyGPUID.port, stk) else
+  if (arg='node.port')          then Result := pushStr(MyGPUID.port, stk) else
   if (arg='node.os')            then Result := pushStr(MyGPUID.os, stk) else
   if (arg='node.version')       then Result := pushStr(MyGPUID.version, stk) else
   if (arg='node.accept')        then Result := pushBool(MyGPUID.acceptincoming, stk) else
   if (arg='node.mhz')           then Result := pushFloat(MyGPUID.mhz, stk) else
   if (arg='node.ram')           then Result := pushFloat(MyGPUID.ram, stk) else
   if (arg='node.gflops')        then Result := pushFloat(MyGPUID.gigaflops, stk) else
-  if (arg='node.issmp')         then Result := pushBool(MyGPUID.issmp, stk) else
-  if (arg='node.isht')          then Result := pushBool(MyGPUID.isht, stk) else
-  if (arg='node.is64bit')       then Result := pushBool(MyGPUID.is64bit, stk) else
-  if (arg='node.iswine')        then Result := pushBool(MyGPUID.iswineemulator, stk) else
-  if (arg='node.isscreensaver') then Result := pushBool(MyGPUID.isrunningasscreensaver, stk) else
+  if (arg='node.bits')          then Result := pushFloat(MyGPUID.bits, stk) else
+  if (arg='node.isscreensaver') then Result := pushBool(MyGPUID.isscreensaver, stk) else
   if (arg='node.cpus')          then Result := pushFloat(MyGPUID.nbcpus, stk) else
   if (arg='node.uptime')        then Result := pushFloat(MyGPUID.uptime, stk) else
   if (arg='node.totuptime')     then Result := pushFloat(MyGPUID.totaluptime, stk) else
@@ -159,6 +156,9 @@ begin
   if (arg='node.localip')       then Result := pushStr(MyGPUID.localip, stk) else
   if (arg='node.longitude')     then Result := pushFloat(MyGPUID.longitude, stk) else
   if (arg='node.latitude')      then Result := pushFloat(MyGPUID.latitude, stk) else
+  if (arg='node.defaultserver') then Result := pushStr(MyConfID.default_server_name, stk) else
+  if (arg='node.proxy')         then Result := pushStr(MyConfID.proxy+':'+MyConfID.port, stk) else
+
     raise Exception.Create('Node argument '+QUOTE+arg+QUOTE+' not registered in specialcommands.pas');
   Result := true;
 end;
