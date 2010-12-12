@@ -92,6 +92,7 @@ File Tree structure for this package, codenamed freedom follows:
        /own        own libraries developed by the project
          /simclimate   logic of simclimate extension
          /coremodules  Core modules used by core component under client/core
+		 /coreservices Core services used by core component to download/transmit data to servers
          /misc         units for general purpose (like logger)
          /coredb       sqlite database management units
        /ext        external libraries
@@ -102,7 +103,7 @@ File Tree structure for this package, codenamed freedom follows:
        /ext        external packages
 
 /server  Server source code
-   /chat  source code implementing chat
+   /channels  source code implementing channels (chat is also a channel)
    /cluster  source code for cluster management of clients
    /db    scripts to create the database schema
    /jobqueue  source code managing the job queue
