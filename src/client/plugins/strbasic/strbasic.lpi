@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -28,7 +28,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="strbasic.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -41,7 +41,7 @@
       <Unit1>
         <Filename Value="strbasicdll.pas"/>
         <UnitName Value="strbasicdll"/>
-        <CursorPos X="16" Y="5"/>
+        <CursorPos X="44" Y="16"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="10"/>
@@ -52,7 +52,7 @@
         <UnitName Value="basicdll"/>
         <CursorPos X="5" Y="116"/>
         <TopLine Value="92"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -63,6 +63,15 @@
         <TopLine Value="67"/>
         <UsageCount Value="10"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="..\..\..\..\ChangeLog.txt"/>
+        <CursorPos X="37" Y="3"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="None"/>
+      </Unit4>
     </Units>
     <JumpHistory Count="12" HistoryIndex="11">
       <Position1>

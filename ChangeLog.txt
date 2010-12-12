@@ -1,3 +1,7 @@
+16.10.2010-12.12.2010 git
+- milestone reached: implemented several services under /core/services
+ which store data in sqlite database
+
 16.10.2010 git
 - added nanobit's WAN db and search engine idea with sqllite bindings
  on GPU core in GPU II specs.txt file
