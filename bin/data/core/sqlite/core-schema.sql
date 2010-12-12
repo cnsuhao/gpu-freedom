@@ -45,13 +45,14 @@ CREATE TABLE tbjobresult (
 
 CREATE TABLE tbnode (
    id int primary key,
-   defaultservername text,
    nodeid text,
    nodename text,
+   defaultservername text,
    country text,
    region text,
    city text,
    zip text,
+   description text,
    ip text,
    port text,
    localip text,
@@ -72,6 +73,7 @@ CREATE TABLE tbnode (
    userid text,
    longitude real,
    latitude real,
+   description text,
    create_dt text,
    update_dt text
 );

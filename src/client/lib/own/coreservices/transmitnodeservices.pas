@@ -62,6 +62,7 @@ begin
  rep := rep+'team='+encodeURL(gid.team)+'&';
  rep := rep+'userid='+encodeURL(uid.userid)+'&';
  rep := rep+'defaultservername='+encodeURL(cid.default_server_name)+'&';
+ rep := rep+'description='+encodeURL(gid.description)+'&';
 
  logger_.log(LVL_DEBUG, '[TTransmitNodeServiceThread]> Reporting string is:');
  logger_.log(LVL_DEBUG, rep);

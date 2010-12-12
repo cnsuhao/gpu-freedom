@@ -14,13 +14,14 @@ interface
 type
   TGPUIdentity = record
     NodeName,
+    NodeId,
     Team,
     Country,
     Region,
     Street,
     City,
     Zip,
-    NodeId,
+    description,
     IP,
     localIP,
     OS,

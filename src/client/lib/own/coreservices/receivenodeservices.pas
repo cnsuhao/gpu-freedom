@@ -56,6 +56,7 @@ begin
                dbnode.region            := node.FindNode('region').TextContent;
                dbnode.city              := node.FindNode('city').TextContent;
                dbnode.zip               := node.FindNode('zip').TextContent;
+               dbnode.description       := node.FindNode('description').TextContent;
                dbnode.ip                := node.FindNode('ip').TextContent;
                dbnode.port              := node.FindNode('port').TextContent;
                dbnode.localip           := node.FindNode('localip').TextContent;

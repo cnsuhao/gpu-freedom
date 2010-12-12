@@ -75,6 +75,7 @@ begin
       Street    := ini_.ReadString('core','street','street');
       City      := ini_.ReadString('core','city','city');
       Zip       := ini_.ReadString('core','zip','zip');
+      description := ini_.ReadString('core','description','');
       NodeId    := ini_.ReadString('core','nodeid','nodeid');
       IP        := ini_.ReadString('core','ip','ip');
       localIP   := ini_.ReadString('core','localip','localip');

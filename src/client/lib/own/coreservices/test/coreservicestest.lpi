@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="7"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -41,7 +41,7 @@
         <Filename Value="coreservicestest.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coreservicestest"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
       </Unit0>
       <Unit1>
         <Filename Value="testservices.pas"/>
@@ -50,7 +50,7 @@
         <CursorPos X="19" Y="18"/>
         <TopLine Value="17"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -88,7 +88,7 @@
       <Unit6>
         <Filename Value="..\receivenodeservices.pas"/>
         <UnitName Value="receivenodeservices"/>
-        <CursorPos X="62" Y="58"/>
+        <CursorPos X="70" Y="59"/>
         <TopLine Value="45"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="15"/>
@@ -152,8 +152,8 @@
       <Unit14>
         <Filename Value="..\..\misc\identities.pas"/>
         <UnitName Value="identities"/>
-        <CursorPos X="33" Y="59"/>
-        <TopLine Value="10"/>
+        <CursorPos X="17" Y="24"/>
+        <TopLine Value="7"/>
         <EditorIndex Value="14"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -204,8 +204,8 @@
       <Unit20>
         <Filename Value="..\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <CursorPos X="24" Y="122"/>
-        <TopLine Value="103"/>
+        <CursorPos X="60" Y="78"/>
+        <TopLine Value="69"/>
         <EditorIndex Value="12"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -213,16 +213,16 @@
       <Unit21>
         <Filename Value="..\..\coredb\nodetables.pas"/>
         <UnitName Value="nodetables"/>
-        <CursorPos X="50" Y="128"/>
-        <TopLine Value="117"/>
+        <CursorPos X="66" Y="131"/>
+        <TopLine Value="120"/>
         <EditorIndex Value="13"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\..\..\..\..\bin\data\core\sqlite\core-schema.sql"/>
-        <CursorPos X="120" Y="41"/>
-        <TopLine Value="37"/>
+        <CursorPos X="21" Y="55"/>
+        <TopLine Value="48"/>
         <EditorIndex Value="15"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -240,8 +240,8 @@
       <Unit24>
         <Filename Value="..\transmitnodeservices.pas"/>
         <UnitName Value="transmitnodeservices"/>
-        <CursorPos X="37" Y="46"/>
-        <TopLine Value="38"/>
+        <CursorPos X="1" Y="66"/>
+        <TopLine Value="50"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>

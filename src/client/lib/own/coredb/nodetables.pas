@@ -19,6 +19,7 @@ type TDbNodeRow = record
     region,
     city,
     zip,
+    description,
     ip,
     port,
     localip,
@@ -77,6 +78,7 @@ begin
       FieldDefs.Add('region', ftString);
       FieldDefs.Add('city', ftString);
       FieldDefs.Add('zip', ftString);
+      FieldDefs.Add('description', ftString);
       FieldDefs.Add('ip', ftString);
       FieldDefs.Add('port', ftString);
       FieldDefs.Add('localip', ftString);
@@ -126,6 +128,7 @@ begin
   dataset_.FieldByName('region').AsString := row.region;
   dataset_.FieldByName('city').AsString := row.city;
   dataset_.FieldByName('zip').AsString := row.zip;
+  dataset_.FieldByName('description').AsString := row.description;
   dataset_.FieldByName('ip').AsString := row.ip;
   dataset_.FieldByName('port').AsString := row.port;
   dataset_.FieldByName('localip').AsString := row.localip;
