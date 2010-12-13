@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="4"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,21 +36,21 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="30">
+    <Units Count="32">
       <Unit0>
         <Filename Value="coreservicestest.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coreservicestest"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
       </Unit0>
       <Unit1>
         <Filename Value="testservices.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="testservices"/>
-        <CursorPos X="14" Y="78"/>
-        <TopLine Value="68"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="33"/>
+        <CursorPos X="74" Y="93"/>
+        <TopLine Value="82"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -63,9 +63,11 @@
       <Unit3>
         <Filename Value="..\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
-        <CursorPos X="48" Y="112"/>
-        <TopLine Value="100"/>
-        <UsageCount Value="15"/>
+        <CursorPos X="19" Y="131"/>
+        <TopLine Value="107"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\..\..\..\..\..\..\backup\fileschanged.txt"/>
@@ -77,10 +79,10 @@
       <Unit5>
         <Filename Value="..\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <CursorPos X="1" Y="145"/>
-        <TopLine Value="122"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="14"/>
+        <CursorPos X="29" Y="125"/>
+        <TopLine Value="67"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -114,9 +116,11 @@
       <Unit10>
         <Filename Value="..\..\misc\downloadutils.pas"/>
         <UnitName Value="downloadutils"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="79" Y="75"/>
+        <TopLine Value="55"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\..\coremodules\test\testconstants.pas"/>
@@ -129,9 +133,9 @@
         <Filename Value="..\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
         <CursorPos X="91" Y="58"/>
-        <TopLine Value="48"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="15"/>
+        <TopLine Value="41"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -174,8 +178,8 @@
         <UnitName Value="dbtablemanagers"/>
         <CursorPos X="54" Y="56"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -188,9 +192,11 @@
       <Unit20>
         <Filename Value="..\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <CursorPos X="60" Y="78"/>
-        <TopLine Value="69"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="1" Y="11"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\..\coredb\nodetables.pas"/>
@@ -226,7 +232,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="26"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit25>
       <Unit26>
@@ -235,38 +241,54 @@
         <CursorPos X="45" Y="52"/>
         <TopLine Value="40"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\transmitclientservices.pas"/>
         <UnitName Value="transmitclientservices"/>
-        <CursorPos X="57" Y="75"/>
-        <TopLine Value="56"/>
+        <CursorPos X="53" Y="60"/>
+        <TopLine Value="53"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\receiveclientservices.pas"/>
         <UnitName Value="receiveclientservices"/>
         <CursorPos X="15" Y="109"/>
-        <TopLine Value="91"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="77"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit28>
       <Unit29>
         <Filename Value="..\..\coredb\coredb.pas"/>
         <UnitName Value="coredb"/>
         <CursorPos X="42" Y="37"/>
-        <TopLine Value="18"/>
-        <EditorIndex Value="7"/>
+        <TopLine Value="5"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="..\receiveserverservices.pas"/>
+        <UnitName Value="receiveserverservices"/>
+        <CursorPos X="40" Y="15"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
-      </Unit29>
+      </Unit30>
+      <Unit31>
+        <Filename Value="..\receiveparamservices.pas"/>
+        <UnitName Value="receiveparamservices"/>
+        <CursorPos X="40" Y="7"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit31>
     </Units>
-    <JumpHistory Count="6" HistoryIndex="5">
+    <JumpHistory Count="17" HistoryIndex="16">
       <Position1>
         <Filename Value="..\coreservices.pas"/>
         <Caret Line="128" Column="10" TopLine="120"/>
@@ -291,6 +313,50 @@
         <Filename Value="testservices.pas"/>
         <Caret Line="70" Column="14" TopLine="60"/>
       </Position6>
+      <Position7>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="121" Column="27" TopLine="99"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="12" Column="37" TopLine="1"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\servermanagers.pas"/>
+        <Caret Line="5" Column="60" TopLine="1"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\transmitclientservices.pas"/>
+        <Caret Line="75" Column="57" TopLine="56"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\transmitclientservices.pas"/>
+        <Caret Line="66" Column="1" TopLine="42"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\transmitclientservices.pas"/>
+        <Caret Line="36" Column="1" TopLine="23"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\transmitclientservices.pas"/>
+        <Caret Line="62" Column="31" TopLine="49"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\transmitclientservices.pas"/>
+        <Caret Line="58" Column="63" TopLine="34"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\receiveserverservices.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\receiveserverservices.pas"/>
+        <Caret Line="72" Column="88" TopLine="60"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\receiveparamservices.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position17>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

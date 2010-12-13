@@ -12,7 +12,7 @@ interface
 
 uses coreservices, servermanagers,
      servertables, loggers, downloadutils, coreconfigurations, geoutils,
-     Classes, SysUtils, DOM;
+     Classes, SysUtils, DOM, identities;
 
 type TReceiveServerServiceThread = class(TReceiveServiceThread)
  public
@@ -69,7 +69,7 @@ begin
                dbrow.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbrow.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
                dbrow.distance    := getDistanceOnEarthSphere(dbrow.longitude, dbrow.latitude,
-                                                             conf_.getGPUIdentity.Longitude, conf_.getGPUIdentity.Latitude);
+                                                             myGPUId.Longitude, myGPUId.Latitude);
                dbrow.activenodes := StrToInt(node.FindNode('activenodes').TextContent);
                dbrow.jobsinqueue := StrToInt(node.FindNode('jobsinqueue').TextContent);
                dbrow.failures    := 0;

@@ -9,10 +9,6 @@ type TCoreConfiguration = class(TObject)
   constructor Create(path, filename : String);
   destructor Destroy;
 
-  function getGPUIdentity  : TGPUIdentity;
-  function getUserIdentity : TUserIdentity;
-  function getConfIdentity : TConfIdentity;
-
   procedure loadConfiguration();
   procedure saveConfiguration();
 
@@ -46,22 +42,6 @@ begin
  inherited Destroy;
 end;
 
-
-function TCoreConfiguration.getGPUIdentity  : TGPUIdentity;
-begin
- Result := myGPUID;
-end;
-
-
-function TCoreConfiguration.getUserIdentity : TUserIdentity;
-begin
- Result := myUserID;
-end;
-
-function TCoreConfiguration.getConfIdentity : TConfIdentity;
-begin
- Result := myConfID;
-end;
 
 procedure TCoreConfiguration.loadConfiguration();
 begin

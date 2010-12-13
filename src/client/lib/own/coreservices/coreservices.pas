@@ -76,7 +76,6 @@ begin
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE,
          logHeader+'Internal error in coreservices.pas, stream is nil');
- done_ := true;
 end;
 
 

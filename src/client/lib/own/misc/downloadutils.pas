@@ -64,7 +64,19 @@ begin
         logger.log(LVL_DEBUG, logHeader+'HTTP Result was '+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
         logger.log(LVL_DEBUG, logHeader+'HTTP Header is ');
         logger.log(LVL_DEBUG, Http.headers.text);
-        if saveFile then
+        if (Http.Resultcode<>200) then
+         begin
+           if (Http.Resultcode=404) then logger.log(LVL_SEVERE, 'Page not found.')
+           else
+           if (Http.Resultcode=403) then logger.log(LVL_SEVERE, 'Access to page forbidden.')
+           else
+           if (Http.Resultcode=503) then logger.log(LVL_SEVERE, 'Service unavailable. Server overloaded')
+           else
+             logger.log(LVL_SEVERE, 'Strange HTTP result code, unusual!!!! ('+Http.Resultstring+')');
+           Result := false;
+         end
+        else
+         if saveFile then
             begin
                HTTP.Document.SaveToFile(targetPath+targetFile);
                logger.log(LVL_INFO, logHeader+'New file created at '+targetPath+targetFile);

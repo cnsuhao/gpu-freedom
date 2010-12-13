@@ -9,7 +9,7 @@ unit servermanagers;
 interface
 
 uses SyncObjs, Sysutils, Classes, servertables, sqlite3ds, loggers,
-     coreconfigurations;
+     coreconfigurations, identities;
 
 type TServerManager = class(TObject)
    public
@@ -109,7 +109,7 @@ begin
      if ds.FieldValues['defaultsrv']=true then
          begin
           defaultserver_ := i;
-          conf_.getConfIdentity.default_server_name:=ds.FieldValues['servername'];
+          myConfID.default_server_name:=ds.FieldValues['servername'];
           logger_.log(LVL_DEBUG, 'TServermanager> ^ is defaultserver');
          end;
      ds.Next;
@@ -118,10 +118,10 @@ begin
 
  if (i=0) then
       begin
-        urls_.add(conf_.getConfIdentity.default_superserver_url);
+        urls_.add(myConfID.default_superserver_url);
         defaultserver_ := 0;
         superserver_ := 0;
-        logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+conf_.getConfIdentity.default_superserver_url);
+        logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
       end;
 
  if superserver_=-1 then

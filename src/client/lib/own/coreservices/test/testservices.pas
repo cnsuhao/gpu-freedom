@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
-  receiveserverservices, receiveparamservices, coreconfigurations;
+  receiveserverservices, receiveparamservices, coreconfigurations,
+  identities;
 
 type
 
@@ -92,7 +93,6 @@ begin
   tableMan_.openAll();
   conf_           := TCoreConfiguration.Create(path_, 'core.ini');
   conf_.loadConfiguration();
-
   serverMan_      := TServerManager.Create(conf_,
                                            tableMan_.getServerTable(),
                                            logger_);

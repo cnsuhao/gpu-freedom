@@ -4,7 +4,7 @@ interface
 
 uses coreservices, servermanagers,
      nodetables, loggers, coreconfigurations,
-     Classes, SysUtils, DOM;
+     Classes, SysUtils, DOM, identities;
 
 type TReceiveParamServiceThread = class(TReceiveServiceThread)
  public
@@ -41,7 +41,7 @@ begin
     begin
         try
              begin
-              with conf_.getConfIdentity do
+              with myConfId do
                begin
                  receive_servers_each  := StrToInt(param.FindNode('receive_servers_each').TextContent);
                  receive_nodes_each    := StrToInt(param.FindNode('receive_nodes_each').TextContent);
