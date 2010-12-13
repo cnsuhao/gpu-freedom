@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
-  loggers, dbtablemanagers, receivenodeservices, transmitnodeservices,
+  loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices, coreconfigurations;
 
 type
@@ -20,8 +20,8 @@ type
   published
     procedure TestReceiveParamService;
     procedure TestReceiveServerService;
-    procedure TestReceiveNodeService;
-    procedure TestTransmitNodeService;
+    procedure TestReceiveClientService;
+    procedure TestTransmitClientService;
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -66,19 +66,19 @@ begin
 end;
 
 
-procedure TTestServices.TestReceiveNodeService;
-var rcvnodeThread : TReceiveNodeServiceThread;
+procedure TTestServices.TestReceiveClientService;
+var rcvclientThread : TReceiveClientServiceThread;
 begin
-  rcvnodeThread := srvFactory_.createReceiveNodeService();
-  serviceMan_.launch(rcvnodeThread);
+  rcvclientThread := srvFactory_.createReceiveClientService();
+  serviceMan_.launch(rcvclientThread);
   waitForCompletion();
 end;
 
-procedure TTestServices.TestTransmitNodeService;
-var trxnodeThread : TTransmitNodeServiceThread;
+procedure TTestServices.TestTransmitClientService;
+var trxclientThread : TTransmitClientServiceThread;
 begin
-  trxnodeThread := srvFactory_.createTransmitNodeService();
-  serviceMan_.launch(trxnodeThread);
+  trxclientThread := srvFactory_.createTransmitClientService();
+  serviceMan_.launch(trxclientThread);
   waitForCompletion();
 end;
 

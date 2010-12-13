@@ -8,7 +8,7 @@ unit dbtablemanagers;
 
 interface
 
-uses nodetables, servertables;
+uses clienttables, servertables;
 
 
 type TDbTableManager = class(TObject)
@@ -19,10 +19,10 @@ type TDbTableManager = class(TObject)
     procedure openAll();
     procedure closeAll();
 
-    function getNodeTable() : TDbNodeTable;
+    function getClientTable() : TDbClientTable;
     function getServerTable() : TDbServerTable;
 
-    nodetable_    : TDbNodeTable;
+    clienttable_    : TDbClientTable;
     servertable_  : TDbServerTable;
 end;
 
@@ -30,32 +30,32 @@ implementation
 
 constructor TDbTableManager.Create(filename : String);
 begin
-  nodetable_   := TDbNodeTable.Create(filename);
+  clienttable_ := TDbClientTable.Create(filename);
   servertable_ := TDbServerTable.Create(filename);
 end;
 
 
 destructor TDbTableManager.Destroy;
 begin
- nodetable_.Free;
+ clienttable_.Free;
  servertable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
 begin
-  nodetable_.Open;
+  clienttable_.Open;
   servertable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
 begin
-  nodetable_.Close;
+  clienttable_.Close;
   servertable_.Close;
 end;
 
-function TDbTableManager.getNodeTable() : TDbNodeTable;
+function TDbTableManager.getClientTable() : TDbClientTable;
 begin
-  Result := nodetable_;
+  Result := clienttable_;
 end;
 
 function TDbTableManager.getServerTable() : TDbServerTable;

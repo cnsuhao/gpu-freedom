@@ -1,8 +1,8 @@
-unit receivenodeservices;
+unit receiveclientservices;
 {
 
   This unit receives a list of active XML nodes from GPU II servers
-   and stores it in the TDbNodeTable object.receivenodeservices
+   and stores it in the TDbClientTable object.receivenodeservices
 
   (c) 2010 by HB9TVM and the GPU Team
   This code is licensed under the GPL
@@ -11,34 +11,34 @@ unit receivenodeservices;
 interface
 
 uses coreservices, servermanagers,
-     nodetables, loggers, Classes, SysUtils, DOM;
+     clienttables, loggers, Classes, SysUtils, DOM;
 
-type TReceiveNodeServiceThread = class(TReceiveServiceThread)
+type TReceiveClientServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; proxy, port : String;
-                     nodetable : TDbNodeTable; var logger : TLogger);
+                     clienttable : TDbClientTable; var logger : TLogger);
  protected
     procedure Execute; override;
 
  private
-   nodetable_ : TDbNodeTable;
+   clienttable_ : TDbClientTable;
 
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
 
-constructor TReceiveNodeServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                             nodetable : TDbNodeTable; var logger : TLogger);
+constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; proxy, port : String;
+                                               clienttable : TDbClientTable; var logger : TLogger);
 begin
  inherited Create(servMan, proxy, port, logger);
- nodetable_ := nodetable;
+ clienttable_ := clienttable;
 end;
 
 
-procedure TReceiveNodeServiceThread.parseXml(var xmldoc : TXMLDocument);
+procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbnode   : TDbNodeRow;
+    dbnode   : TDbClientRow;
     node     : TDOMNode;
     port     : String;
 begin
@@ -76,14 +76,14 @@ begin
                dbnode.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbnode.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
                dbnode.userid      := node.FindNode('userid').TextContent;
-               nodetable_.insertOrUpdate(dbnode);
+               clienttable_.insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbnode table.');
              end;
           except
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveNodeServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, '[TReceiveClientServiceThread]> Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -93,23 +93,23 @@ begin
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
 
-procedure TReceiveNodeServiceThread.Execute;
+procedure TReceiveClientServiceThread.Execute;
 var xmldoc    : TXMLDocument;
     url       : String;
 begin
  url := servMan_.getServerUrl();
- receive(url, '/list_computers_online_xml.php',
-         '[TReceiveNodeServiceThread]> ', xmldoc, true);
+ receive(url, '/list_clients_online_xml.php',
+         '[TReceiveClientServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
     begin
-     nodetable_.execSQL('UPDATE tbnode set updated=0;');
+     clienttable_.execSQL('UPDATE tbnode set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
-        nodetable_.execSQL('UPDATE tbnode set online=updated;');
+        clienttable_.execSQL('UPDATE tbnode set online=updated;');
     end;
 
- finishReceive(url, '[TReceiveNodeServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
+ finishReceive(url, '[TReceiveClientServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
 end;
 
 end.

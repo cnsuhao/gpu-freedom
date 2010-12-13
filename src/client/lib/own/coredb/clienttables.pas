@@ -1,6 +1,6 @@
-unit nodetables;
+unit clienttables;
 {
-   TDbNodeTable contains the client nodes seen on the GPU network
+   TDbClientTable contains the client nodes seen on the GPU network
    active and inactive
 
    (c) by 2010 HB9TVM and the GPU Team
@@ -10,7 +10,7 @@ interface
 uses sqlite3ds, db, coretables, SysUtils;
 
 
-type TDbNodeRow = record
+type TDbClientRow = record
     id : Longint;
     defaultservername,
     nodeid,
@@ -45,11 +45,11 @@ type TDbNodeRow = record
 end;
 
 
-type TDbNodeTable = class(TDbCoreTable)
+type TDbClientTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
-    procedure insertOrUpdate(row : TDbNodeRow);
+    procedure insertOrUpdate(row : TDbClientRow);
 
   private
     procedure createDbTable();
@@ -57,13 +57,13 @@ type TDbNodeTable = class(TDbCoreTable)
 
 implementation
 
-constructor TDbNodeTable.Create(filename : String);
+constructor TDbClientTable.Create(filename : String);
 begin
-  inherited Create(filename, 'tbnode', 'id');
+  inherited Create(filename, 'tbclient', 'id');
   createDbTable();
 end;
 
-procedure TDbNodeTable.createDbTable();
+procedure TDbClientTable.createDbTable();
 begin
  with dataset_ do
   begin
@@ -105,7 +105,7 @@ begin
   end; {with}
 end;
 
-procedure TDbNodeTable.insertOrUpdate(row : TDbNodeRow);
+procedure TDbClientTable.insertOrUpdate(row : TDbClientRow);
 var options : TLocateOptions;
     updated : Boolean;
 begin

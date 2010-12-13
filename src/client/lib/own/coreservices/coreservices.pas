@@ -38,6 +38,7 @@ end;
 
 type TTransmitServiceThread = class(TCommServiceThread)
    procedure transmit(url, request, logHeader : String; noargs : Boolean);
+   procedure finishTransmit(url, logHeader, logSuccess : String);
 end;
 
 
@@ -135,5 +136,11 @@ begin
 
  finishComm(url, logHeader, logSuccess);
 end;
+
+procedure TTransmitServiceThread.finishTransmit(url, logHeader, logSuccess : String);
+begin
+ finishComm(url, logHeader, logSuccess);
+end;
+
 
 end.

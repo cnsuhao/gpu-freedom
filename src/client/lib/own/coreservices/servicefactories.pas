@@ -9,7 +9,7 @@ interface
 
 uses
   servermanagers, dbtablemanagers, loggers,
-  receivenodeservices, transmitnodeservices,
+  receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
   coreconfigurations;
 
@@ -19,8 +19,8 @@ type TServiceFactory = class(TObject)
                        var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
     destructor Destroy;
 
-    function createReceiveNodeService()    : TReceiveNodeServiceThread;
-    function createTransmitNodeService()   : TTransmitNodeServiceThread;
+    function createReceiveClientService()  : TReceiveClientServiceThread;
+    function createTransmitClientService() : TTransmitClientServiceThread;
     function createReceiveServerService()  : TReceiveServerServiceThread;
     function createReceiveParamService()   : TReceiveParamServiceThread;
 
@@ -53,14 +53,14 @@ destructor TServiceFactory.Destroy;
 begin
 end;
 
-function TServiceFactory.createReceiveNodeService() : TReceiveNodeServiceThread;
+function TServiceFactory.createReceiveClientService() : TReceiveClientServiceThread;
 begin
- Result := TReceiveNodeServiceThread.Create(servMan_, proxy_, port_, tableMan_.getNodeTable(), logger_);
+ Result := TReceiveClientServiceThread.Create(servMan_, proxy_, port_, tableMan_.getClientTable(), logger_);
 end;
 
-function TServiceFactory.createTransmitNodeService() : TTransmitNodeServiceThread;
+function TServiceFactory.createTransmitClientService() : TTransmitClientServiceThread;
 begin
- Result := TTransmitNodeServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
+ Result := TTransmitClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
 end;
 
 function TServiceFactory.createReceiveServerService()  : TReceiveServerServiceThread;

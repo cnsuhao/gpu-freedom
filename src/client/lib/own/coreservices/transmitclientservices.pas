@@ -1,4 +1,4 @@
-unit transmitnodeservices;
+unit transmitclientservices;
 
 interface
 
@@ -6,7 +6,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
      servermanagers, loggers, identities, SysUtils, Classes;
 
 
-type TTransmitNodeServiceThread = class(TTransmitServiceThread)
+type TTransmitClientServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration);
@@ -22,14 +22,14 @@ end;
 
 implementation
 
-constructor TTransmitNodeServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                                              var conf : TCoreConfiguration);
+constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
+                                                var conf : TCoreConfiguration);
 begin
  inherited Create(servMan, proxy, port, logger);
  conf_ := conf;
 end;
 
-function TTransmitNodeServiceThread.getReportString : String;
+function TTransmitClientServiceThread.getReportString : String;
 var rep : String;
     uid : TUserIdentity;
     gid : TGPUIdentity;
@@ -64,16 +64,16 @@ begin
  rep := rep+'defaultservername='+encodeURL(cid.default_server_name)+'&';
  rep := rep+'description='+encodeURL(gid.description)+'&';
 
- logger_.log(LVL_DEBUG, '[TTransmitNodeServiceThread]> Reporting string is:');
+ logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Reporting string is:');
  logger_.log(LVL_DEBUG, rep);
  Result := rep;
 end;
 
 
-procedure TTransmitNodeServiceThread.Execute;
+procedure TTransmitClientServiceThread.Execute;
 begin
- transmit(servMan_.getDefaultServerUrl(),'/report_nodeinfo.php?'+getReportString, '[TTransmitNodeServiceThread]> ', false);
- finishComm(servMan_.getDefaultServerUrl(),  '[TTransmitNodeServiceThread]> ', 'Own status transmitted :-)');
+ transmit(servMan_.getDefaultServerUrl(),'/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
+ finishTransmit(servMan_.getDefaultServerUrl(),  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
 end;
 
 
