@@ -11,7 +11,7 @@ CREATE TABLE `tbnode` (
 `port` VARCHAR( 32 ) NULL ,
 `localip` VARCHAR( 32 ) NULL ,
 `os` VARCHAR( 32 ) NOT NULL ,
-`version` VARCHAR( 16 ) NOT NULL;
+`version` VARCHAR( 16 ) NOT NULL,
 `acceptincoming` INT NOT NULL DEFAULT '0',
 `gigaflops` INT NOT NULL,
 `ram` INT NOT NULL,
@@ -26,6 +26,6 @@ CREATE TABLE `tbnode` (
 `userid` VARCHAR( 32 ) NOT NULL ,
 `description` VARCHAR( 256 ) NULL ,
 `cputype` VARCHAR( 64 ) NULL,
-`create_dt` DATETIME NOT NULL;
-`update_dt` DATETIME NULL;
+`create_dt` DATETIME NOT NULL,
+`update_dt` DATETIME NULL
 ) ENGINE = MYISAM ;
