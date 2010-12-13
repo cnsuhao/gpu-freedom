@@ -103,12 +103,17 @@ File Tree structure for this package, codenamed freedom follows:
        /ext        external packages
 
 /server  Server source code
-   /channels  source code implementing channels (chat is also a channel)
+   /channel  source code implementing channels (chat is also a channel)
    /cluster  source code for cluster management of clients
-   /db    scripts to create the database schema
+   /conf     server configuration
+   /db       sql  scripts to create the database schema
    /jobqueue  source code managing the job queue
+   /wustorage where workunits are stored
+      /delivery    workunits ready for delivery
+      /received    computed workunits received from clients
    /supercluster   source code to inform parent server, so that
                    servers can be organized hierarchically in a tree
+   /utils      php scripts for general use
    /workunits  source code to manage workunits
  
     
