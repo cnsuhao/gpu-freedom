@@ -1,4 +1,4 @@
-CREATE TABLE `tbnode` (
+CREATE TABLE `tbclient` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `nodeid` VARCHAR( 32 ) NOT NULL ,
 `nodename` VARCHAR( 32 ) NOT NULL ,

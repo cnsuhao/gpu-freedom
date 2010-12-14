@@ -3,7 +3,8 @@
 $username="gpuuser";
 $password="";
 $database="gpu_server";
+$dbserver="localhost";
 
 // cluster settings
-$max_online_nodes_xml=200;
+$max_online_clients_xml=200;
 ?>
