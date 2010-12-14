@@ -8,8 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
-  receiveserverservices, receiveparamservices, coreconfigurations,
-  identities;
+  receiveserverservices, receiveparamservices, coreconfigurations;
 
 type
 

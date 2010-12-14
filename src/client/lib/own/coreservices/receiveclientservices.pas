@@ -76,8 +76,9 @@ begin
                dbnode.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbnode.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
                dbnode.userid      := node.FindNode('userid').TextContent;
+               dbnode.team        := node.FindNode('team').TextContent;
                clienttable_.insertOrUpdate(dbnode);
-               logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbnode table.');
+               logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbclient table.');
              end;
           except
            on E : Exception do

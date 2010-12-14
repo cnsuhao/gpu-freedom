@@ -37,7 +37,8 @@ type TDbClientRow = record
     isScreensaver,
     online,
     updated          : Boolean;
-    userid           : String;
+    userid,
+    team             : String;
     uptime,
     totaluptime      : TDateTime;
     longitude,
@@ -98,6 +99,7 @@ begin
       FieldDefs.Add('longitude', ftFloat);
       FieldDefs.Add('latitude', ftFloat);
       FieldDefs.Add('userid', ftString);
+      FieldDefs.Add('team', ftString);
       FieldDefs.Add('create_dt', ftDateTime);
       FieldDefs.Add('update_dt', ftDateTime);
       CreateTable;
@@ -148,6 +150,7 @@ begin
   dataset_.FieldByName('latitude').AsFloat := row.latitude;
   dataset_.FieldByName('longitude').AsFloat := row.longitude;
   dataset_.FieldByName('userid').AsString := row.userid;
+  dataset_.FieldByName('team').AsString := row.team;
 
   if updated then
     dataset_.FieldByName('update_dt').AsDateTime := Now

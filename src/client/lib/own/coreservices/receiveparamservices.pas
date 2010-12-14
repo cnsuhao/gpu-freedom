@@ -3,7 +3,7 @@ unit receiveparamservices;
 interface
 
 uses coreservices, servermanagers,
-     nodetables, loggers, coreconfigurations,
+     loggers, coreconfigurations,
      Classes, SysUtils, DOM, identities;
 
 type TReceiveParamServiceThread = class(TReceiveServiceThread)
