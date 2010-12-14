@@ -24,6 +24,7 @@ CREATE TABLE `tbclient` (
 `longitude` DOUBLE NOT NULL ,
 `latitude` DOUBLE NOT NULL ,
 `userid` VARCHAR( 32 ) NOT NULL ,
+`team` VARCHAR( 64 ) NOT NULL ,
 `description` VARCHAR( 256 ) NULL ,
 `cputype` VARCHAR( 64 ) NULL,
 `create_dt` DATETIME NOT NULL,

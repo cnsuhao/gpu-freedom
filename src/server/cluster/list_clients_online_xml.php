@@ -54,6 +54,7 @@ while ($i<$num) {
   $longitude         = mysql_result($result,$i,"longitude");
   $latitude          = mysql_result($result,$i,"latitude");    
   $userid            = mysql_result($result,$i,"userid");
+  $team              = mysql_result($result,$i,"team");
   $description       = mysql_result($result,$i,"description");
   $cputype           = mysql_result($result,$i,"cputype");;
   $created           = mysql_result($result,$i,"create_dt");
@@ -91,6 +92,7 @@ while ($i<$num) {
     echo "  <longitude>$longitude</longitude>\n";
     echo "  <latitude>$latitude</latitude>\n";
 	echo "  <userid>$userid</userid>\n";
+	echo "  <team>$team</team>\n";
     echo "  <description>$description</description>\n";
     echo "  <cputype>$cputype</cputype>\n";
     echo "  <create_dt>$created</create_dt>\n";

@@ -1,66 +1,43 @@
 <?php
 /*
- This class is touched regularly by GPU nodes.
- This class creates computer entries, if they not already exist.
+ This class is touched regularly by GPU clients.
+ This class creates entries in TBCLIENT, if they not already exist.
  If the computer entry already exists, information like uptime,
  statistics, external IP, if the node is able to get incoming connections,
- how many free connections it has, country, team are collected.
+ how many free connections it has, country, team are updated.
  
- FD server stores also a last updated information for each computer
+ GPU server stores also a last updated information for each computer
  
- This information is then used in get_connection_list.php to compile a list
- of nodes likely to be good for another node which still does not have
- any connections
+ This information is then used in list_computers_online_xml.php to compile a list
+ of currently active nodes.
 
 */
-$processor 		 = $_GET['processor'];
+
+$nodename 		 = $_GET['nodename'];
 $nodeid          = $_GET['nodeid'];
 $country   		 = $_GET['country'];
+$region   		 = $_GET['region'];
+$city   		 = $_GET['city'];
+$zip   		     = $_GET['zip'];
 $uptime    		 = $_GET['uptime'];
-$totuptime 		 = $_GET['totuptime'];
+$totaluptime     = $_GET['totaluptime'];
 $ip        		 = $_GET['ip'];
+$localip         = $_GET['localip'];
 $port            = $_GET['port'];
 $acceptincoming  = $_GET['acceptincoming'];
 $cputype         = $_GET['cputype'];
 $mhz		     = $_GET['mhz'];
 $ram             = $_GET['ram'];
-$operatingsystem = $_GET['os'];
-$freeconn        = $_GET['freeconn'];
-$maxconn         = $_GET['maxconn'];
-$clientversion   = $_GET['version'];
+$gigaflops       = $_GET['gigaflops'];
+$bits            = $_GET['bits'];
+$os              = $_GET['os'];
+$longitude       = $_GET['longitude'];
+$latitude        = $_GET['latitude'];
+$version         = $_GET['version'];
 $team            = $_GET['team'];
-
-$lon             = $_GET['lon'];
-$lat             = $_GET['lat'];
-if ($lon=="") $lon=0;
-if ($lat=="") $lat=0;
-
-// gpu processor
-$speed            = $_GET['speed'];
-$abarth           = $_GET['abarth'];
-$threads          = $_GET['threads'];
-$inqueue          = $_GET['inqueue'];
-$tdown            = $_GET['tdown'];
-$tup              = $_GET['tup'];
-$listenip         = $_GET['listenip'];
-$terra            = $_GET['terra'];
-$crawlo           = $_GET['crawlo'];
-if ($crawlo=="") $crawlo=0;
-if ($terra=="")  $terra=0;
-
-$ips              = $_GET['ips'];
-
-$ip1        		 = $_GET['ip1'];
-$ip2        		 = $_GET['ip2'];
-$ip3        		 = $_GET['ip3'];
-$ip4        		 = $_GET['ip4'];
-$ip5        		 = $_GET['ip5'];
-$ip6        		 = $_GET['ip6'];
-$ip7        		 = $_GET['ip7'];
-$ip8        		 = $_GET['ip8'];
-$ip9        		 = $_GET['ip9'];
-$ip10        		= $_GET['ip10'];
-
+$userid          = $_GET['userid'];
+$defaultservername = $_GET['defaultservername'];
+$description       = $_GET['description'];
 
 if ($nodeid=="") exit;
 
