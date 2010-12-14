@@ -41,15 +41,11 @@ $description       = $_GET['description'];
 
 if ($nodeid=="") exit;
 
-include("utils/utils.inc.php");
-include("report_nodeinfo.inc.php");
+include("report_client.inc.php");
 
-$processorid = report_nodeinfo($processor, $nodeid, $ip, $port, ""/*region*/, $country, $uptime, $totuptime, $acceptincoming,
-                               $cputype, $mhz, $ram, $operatingsystem, $freeconn, $maxconn, $clientversion, $team, $lon, $lat);
-
-if (threads!="")							   
- report_gpu_nodeinfo($processorid, $speed, $abarth, $threads, $inqueue, $tdown, $tup, 
-                    $ips, $ip1, $ip2, $ip3, $ip4, $ip5, $ip6, $ip7, $ip8, $ip9, $ip10,
-                    $abarth, $listenip, $terra, $crawlo);
+$id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
+                        $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
+						$bits, $os, $longitude, $latitude, $version, $team, $userid, $defaultservername,
+						$description);
 							   
 ?>

@@ -45,7 +45,7 @@ with myGPUID do
   rep := rep+'ip='+encodeURL(ip)+'&';
   rep := rep+'localip='+encodeURL(localip)+'&';
   rep := rep+'port='+encodeURL(port)+'&';
-  rep := rep+'acceptincoming='+encodeURL('false')+'&';
+  rep := rep+'acceptincoming='+encodeURL('0')+'&';
   rep := rep+'cputype='+encodeURL(cputype)+'&';
   rep := rep+'mhz='+encodeURL(IntToStr(mhz))+'&';
   rep := rep+'ram='+encodeURL(IntToStr(ram))+'&';
