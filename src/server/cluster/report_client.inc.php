@@ -1,5 +1,5 @@
 <?php
-$id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
+function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
 						$bits, $os, $longitude, $latitude, $version, $team, $userid, $defaultservername,
 						$description) {
