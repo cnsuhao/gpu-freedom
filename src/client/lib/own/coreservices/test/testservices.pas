@@ -86,9 +86,12 @@ procedure TTestServices.SetUp;
 begin
   path_           := ExtractFilePath(ParamStr(0));
 
+  if not DirectoryExists(path_+'logs') then
+     CreateDir(path_+'logs');
   logger_         := TLogger.Create(path_+'logs', 'services.log');
   logger_.setLogLevel(LVL_DEBUG);
-  tableMan_       := TDbTableManager.Create(path_+PathDelim+'core.db');
+
+  tableMan_       := TDbTableManager.Create(path_+'core.db');
   tableMan_.openAll();
   conf_           := TCoreConfiguration.Create(path_, 'core.ini');
   conf_.loadConfiguration();
@@ -98,16 +101,16 @@ begin
 
   serviceMan_  := TServiceThreadManager.Create(3);
   srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_, conf_);
-end; 
+end;
 
 procedure TTestServices.TearDown;
 begin
- conf_.Free;
  tableMan_.closeAll();
  serviceMan_.Free;
  srvFactory_.Free;
  tableMan_.Free;
  serverMan_.Free;
+ conf_.Free;
  logger_.Free;
 end; 
 
