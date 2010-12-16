@@ -11,29 +11,29 @@ const
   HTTP_USER_AGENT = 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
 
 
-function downloadToFile(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
-function downloadToStream(url, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
-function downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function downloadToFile(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
+function downloadToStream(url : AnsiString; proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function downloadToFileOrStream(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 
 procedure convertLFtoCRLF(var instream, outstream : TMemoryStream; var logger : TLogger);
 function getProxyArg(noargs : Boolean) : String;
 
 implementation
 
-function downloadToFile(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
+function downloadToFile(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
 var dummy : TMemoryStream;
 begin
  dummy := nil;
  Result := downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHeader, logger, dummy);
 end;
 
-function downloadToStream(url, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function downloadToStream(url : AnsiString; proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 begin
  Result := downloadToFileOrStream(url, '', '', proxy, port, logHeader, logger, stream);
 end;
 
 
-function downloadToFileOrStream(url, targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function downloadToFileOrStream(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 var
     Http        : THTTPSend;
     saveFile    : Boolean;

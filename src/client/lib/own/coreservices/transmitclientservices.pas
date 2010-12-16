@@ -15,7 +15,7 @@ type TTransmitClientServiceThread = class(TTransmitServiceThread)
 
  private
     conf_ : TCoreConfiguration;
-    function getReportString : String;
+    function getReportString : AnsiString;
 end;
 
 
@@ -29,8 +29,8 @@ begin
  conf_ := conf;
 end;
 
-function TTransmitClientServiceThread.getReportString : String;
-var rep : String;
+function TTransmitClientServiceThread.getReportString : AnsiString;
+var rep : AnsiString;
 begin
 with myGPUID do
  begin
@@ -58,7 +58,7 @@ with myGPUID do
   rep := rep+'team='+encodeURL(team)+'&';
   rep := rep+'userid='+encodeURL(myUserID.userid)+'&';
   rep := rep+'defaultservername='+encodeURL(myConfId.default_server_name)+'&';
-  rep := rep+'description='+encodeURL(description)+'&';
+  rep := rep+'description='+encodeURL(description);//+'&';
 end;
 
  logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Reporting string is:');

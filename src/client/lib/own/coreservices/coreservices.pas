@@ -37,13 +37,13 @@ type TInternalServiceThread = class(TCoreServiceThread)
 end;
 
 type TTransmitServiceThread = class(TCommServiceThread)
-   procedure transmit(url, request, logHeader : String; noargs : Boolean);
+   procedure transmit(url : String; request : AnsiString; logHeader : String; noargs : Boolean);
    procedure finishTransmit(url, logHeader, logSuccess : String);
 end;
 
 
 type TReceiveServiceThread = class(TCommServiceThread)
-   procedure receive(url, request, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+   procedure receive(url : String; request : AnsiString; logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
    procedure finishReceive(url, logHeader, logSuccess : String; var xmldoc : TXmlDocument);
 end;
 
@@ -66,7 +66,7 @@ begin
 end;
 
 
-procedure TTransmitServiceThread.transmit(url, request, logHeader : String; noargs : Boolean);
+procedure TTransmitServiceThread.transmit(url : String; request : AnsiString; logHeader : String; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin
@@ -79,7 +79,7 @@ begin
 end;
 
 
-procedure TReceiveServiceThread.receive(url, request, logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+procedure TReceiveServiceThread.receive(url : String; request : AnsiString; logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin

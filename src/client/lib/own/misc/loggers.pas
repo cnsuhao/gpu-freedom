@@ -30,8 +30,8 @@ type TLogger = class(TObject)
     procedure setLogLevel(loglevel : Longint);
     function  getLogLevel : Longint;
     function  logLvlToStr(level : Longint) : String;
-    procedure log(severity : Longint; logStr : String); overload;
-    procedure log(logStr : String); overload;
+    procedure log(severity : Longint; logStr : AnsiString); overload;
+    procedure log(logStr : AnsiString); overload;
 
   private
     current_log_level_ : Longint;
@@ -111,12 +111,12 @@ begin
   end;
 end;
 
-procedure TLogger.log(logStr : String); overload;
+procedure TLogger.log(logStr : AnsiString); overload;
 begin
   log(LVL_DEFAULT, logStr);
 end;
 
-procedure TLogger.log(severity : Longint; logStr : String); overload;
+procedure TLogger.log(severity : Longint; logStr : AnsiString); overload;
 var backup : Boolean;
 begin
   if severity<current_log_level_ then Exit;
