@@ -99,18 +99,18 @@ var xmldoc    : TXMLDocument;
     url       : String;
 begin
  url := servMan_.getServerUrl();
- receive(url, '/list_clients_online_xml.php',
+ receive(url, '/cluster/list_clients_online_xml.php',
          '[TReceiveClientServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
     begin
-     clienttable_.execSQL('UPDATE tbnode set updated=0;');
+     clienttable_.execSQL('UPDATE tbclient set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
-        clienttable_.execSQL('UPDATE tbnode set online=updated;');
+        clienttable_.execSQL('UPDATE tbclient set online=updated;');
     end;
 
- finishReceive(url, '[TReceiveClientServiceThread]> ', 'Service updated table TBNODE succesfully :-)', xmldoc);
+ finishReceive(url, '[TReceiveClientServiceThread]> ', 'Service updated table TBCLIENT succesfully :-)', xmldoc);
 end;
 
 end.

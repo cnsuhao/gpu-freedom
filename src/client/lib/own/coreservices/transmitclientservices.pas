@@ -69,7 +69,7 @@ end;
 
 procedure TTransmitClientServiceThread.Execute;
 begin
- transmit(servMan_.getDefaultServerUrl(),'/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
+ transmit(servMan_.getDefaultServerUrl(),'/cluster/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
  finishTransmit(servMan_.getDefaultServerUrl(),  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
 end;
 
