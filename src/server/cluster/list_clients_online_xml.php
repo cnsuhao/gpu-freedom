@@ -17,7 +17,8 @@ if ($max_online_nodes_xml=="") {
 
 echo "<nodes>\n";
 
-$mainquery  = "SELECT * from tbclient order by updated desc LIMIT 0, $max_online_nodes_xml"; 
+$mainquery  = "SELECT * from tbclient order by update_dt desc LIMIT 0, 
+$max_online_nodes_xml"; 
 $result=mysql_query($mainquery);
 if ($result!="") {
  $num=mysql_numrows($result);
