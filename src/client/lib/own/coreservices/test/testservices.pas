@@ -20,8 +20,8 @@ type
   published
     procedure TestReceiveParamService;
     procedure TestReceiveServerService;
-    procedure TestReceiveClientService;
     procedure TestTransmitClientService;
+    procedure TestReceiveClientService;
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -65,6 +65,13 @@ begin
   waitForCompletion();
 end;
 
+procedure TTestServices.TestTransmitClientService;
+var trxclientThread : TTransmitClientServiceThread;
+begin
+  trxclientThread := srvFactory_.createTransmitClientService();
+  serviceMan_.launch(trxclientThread);
+  waitForCompletion();
+end;
 
 procedure TTestServices.TestReceiveClientService;
 var rcvclientThread : TReceiveClientServiceThread;
@@ -74,13 +81,6 @@ begin
   waitForCompletion();
 end;
 
-procedure TTestServices.TestTransmitClientService;
-var trxclientThread : TTransmitClientServiceThread;
-begin
-  trxclientThread := srvFactory_.createTransmitClientService();
-  serviceMan_.launch(trxclientThread);
-  waitForCompletion();
-end;
 
 procedure TTestServices.SetUp;
 begin

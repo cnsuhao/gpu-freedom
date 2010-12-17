@@ -73,7 +73,7 @@ begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('nodeid', ftString);
-      FieldDefs.Add('defaultservername', ftInteger);
+      FieldDefs.Add('defaultservername', ftString);
       FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('country', ftString);
       FieldDefs.Add('region', ftString);

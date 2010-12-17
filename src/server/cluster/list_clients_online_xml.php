@@ -23,6 +23,7 @@ if ($result!="") {
  $num=mysql_numrows($result);
 } else $num=0; 
 
+
 $date = time();
 
 $i=0;
@@ -64,7 +65,6 @@ while ($i<$num) {
   ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})", $updated, $regs);
   $updated_php = mktime ($regs[4],$regs[5],$regs[6],$regs[2],$regs[3],$regs[1]);
 
-
   if (($date-$updated_php)<=$update_interval) {
     echo "<node>\n";
     echo "  <id>$id</id>\n";
@@ -86,7 +86,7 @@ while ($i<$num) {
     echo "  <ram>$ram</ram>\n";
     echo "  <nbcpus>$nbcpus</nbcpus>\n";
     echo "  <bits>$bits</bits>\n";
-    echo "  <iscreensaver>$isscreensaver</isscreensaver>\n";
+    echo "  <isscreensaver>$isscreensaver</isscreensaver>\n";
     echo "  <uptime>$uptime</uptime>\n";
     echo "  <totaluptime>$totaluptime</totaluptime>\n";
     echo "  <longitude>$longitude</longitude>\n";
