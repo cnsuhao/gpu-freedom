@@ -1,19 +1,17 @@
 <html>
 <title>
-GPU File Distributor - Search Among Computers
+GPU Server - Search Among Clients
 </title>
 <body>
+<img src="../images/gpu-inverse.jpg" border="0"><br>
+
 <?php
-include("conf/config.inc.php");
-include("utils/utils.inc.php");
-include("head.inc.php");
-$rights = $_COOKIE["rights"];
+include("../conf/config.inc.php");
+include("../utils/utils.inc.php");
 
-// load current settings
-
-$cookie_processor=$_COOKIE['search_processor'];
+$cookie_nodename=$_COOKIE['search_nodename'];
 $cookie_cputype=$_COOKIE['search_cputype'];
-$cookie_opsys=$_COOKIE['search_opsys'];
+$cookie_os=$_COOKIE['search_os'];
 $cookie_country=$_COOKIE['search_country'];
 $cookie_mhzfrom=$_COOKIE['search_mhzfrom'];
 $cookie_mhzto=$_COOKIE['search_mhzto'];
@@ -28,11 +26,11 @@ $cookie_toversion=$_COOKIE['search_toversion'];
 ?>
 
 <h3>Search Among Computers</h3>
-<form name="searchscripts" id="searchscripts" method="post" action="search_computers_store_cookies.php">
+<form name="searchscripts" id="searchscripts" method="post" action="search_clients_store_cookies.php">
 <table>
 <tr>
-<td><b>Processor (node name):</b></td> <td><input type="text" name="processor" 
-                                           value="<?php echo "$cookie_processor"; ?>" size="40">
+<td><b>Client name:</b></td> <td><input type="text" name="nodename" 
+                                           value="<?php echo "$cookie_nodename"; ?>" size="40">
 
 </td>
 </tr>
@@ -42,8 +40,8 @@ $cookie_toversion=$_COOKIE['search_toversion'];
 </td>
 </tr>
 <tr>
-<td><b>Operating System:</b></td> <td><input type="text" name="opsys" 
-                                            value="<?php echo "$cookie_opsys"; ?>" size="40">
+<td><b>Operating System:</b></td> <td><input type="text" name="os" 
+                                            value="<?php echo "$cookie_os"; ?>" size="40">
  </td>
 </tr>
 <tr>
@@ -73,30 +71,10 @@ $cookie_toversion=$_COOKIE['search_toversion'];
  To: <input type="text" name="totuptimeto" value="<?php echo "$cookie_totuptimeto"; ?>" size="8"></td>
 </td>
 </tr>
-<?php
-// not implemented yet
-/*
-<tr>
-<td><b>Version number</b></td> 
-<td>From: <input type="text" name="fromversion" value="<?php echo "$cookie_fromversion"; ?>" size="8">
- To: <input type="text" name="toversion" value="<?php echo "$cookie_toversion"; ?>" size="8"></td>
-</td>
-</tr>
-*/
-// not implemented yet
-/*
-<tr><td><b>Only online nodes:</b></td>
-<td>
-<input name="onlyonline" type="checkbox" value="1" />
-</td>
-</tr>
-*/
-?>
-
 </table>
 <input type="Submit">  <a href="search_cancel.php">Cancel Search</a><br><br>
 <p>
-<a href="list_computers.php">Back to List Computers</a>
+<a href="list_clients.php">Back to List Clients</a>
 </p>
 </form>
 </body>

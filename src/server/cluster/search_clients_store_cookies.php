@@ -1,9 +1,9 @@
 <?php
-   include("utils/utils.inc.php");
+   include("../utils/utils.inc.php");
    
-   $processor=$_POST['processor'];
+   $nodename=$_POST['nodename'];
    $cputype=$_POST['cputype'];
-   $opsys=$_POST['opsys'];
+   $os=$_POST['os'];
    $country=$_POST['country'];
    $mhzfrom=$_POST['mhzfrom'];
    $mhzto=$_POST['mhzto'];
@@ -20,10 +20,10 @@
    $entriesoffset = 0;
    js_cookie("entriesoffset", $entriesoffset);
   
-   js_cookie("search_processor", $processor);
-   js_cookie("search_cputype", $cputype);
+   js_cookie("search_nodename", $nodename);
+   js_cookie("search_os", $os);
    
-   js_cookie("search_opsys", $opsys);
+   js_cookie("search_cputype", $cputype);
    js_cookie("search_country",   $country);
      
    js_cookie("search_mhzfrom", $mhzfrom);
@@ -38,6 +38,5 @@
    js_cookie("search_fromversion", $fromversion);
    js_cookie("search_toversion", $toversion);
 
-   js_cookie("search_onlyonline", $onlyonline);   
-   js_redirect("list_computers.php");
+   js_redirect("list_clients.php");
 ?>
