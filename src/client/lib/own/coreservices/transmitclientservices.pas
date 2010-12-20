@@ -57,7 +57,6 @@ with myGPUID do
   rep := rep+'version='+encodeURL('1.0.0')+'&';
   rep := rep+'team='+encodeURL(team)+'&';
   rep := rep+'userid='+encodeURL(myUserID.userid)+'&';
-  rep := rep+'defaultservername='+encodeURL(myConfId.default_server_name)+'&';
   rep := rep+'description='+encodeURL(description);//+'&';
 end;
 

@@ -11,8 +11,8 @@ uses sqlite3ds, db, coretables, SysUtils;
 
 
 type TDbClientRow = record
-    id : Longint;
-    defaultservername,
+    id,
+    server_id : Longint;
     nodeid,
     nodename,
     country,
@@ -73,7 +73,7 @@ begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('nodeid', ftString);
-      FieldDefs.Add('defaultservername', ftString);
+      FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('country', ftString);
       FieldDefs.Add('region', ftString);
@@ -123,7 +123,7 @@ begin
       updated := false;
     end;
 
-  dataset_.FieldByName('defaultservername').AsString := row.defaultservername;
+  dataset_.FieldByName('server_id').AsInteger := row.server_id;
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('country').AsString := row.country;
