@@ -68,9 +68,11 @@ end;
 
 
 procedure TTransmitClientServiceThread.Execute;
+var srv : TServerRecord;
 begin
- transmit(servMan_.getDefaultServerUrl(),'/cluster/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
- finishTransmit(servMan_.getDefaultServerUrl(),  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
+ servMan_.getDefaultServerUrl(srv);
+ transmit(srv, '/cluster/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
+ finishTransmit(srv,  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
 end;
 
 

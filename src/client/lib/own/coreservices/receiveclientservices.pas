@@ -96,10 +96,10 @@ end;
 
 procedure TReceiveClientServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    url       : String;
+    srv       : TServerRecord;
 begin
- url := servMan_.getServerUrl();
- receive(url, '/cluster/list_clients_online_xml.php',
+ servMan_.getServerUrl(srv);
+ receive(srv, '/cluster/list_clients_online_xml.php',
          '[TReceiveClientServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
@@ -110,7 +110,7 @@ begin
         clienttable_.execSQL('UPDATE tbclient set online=updated;');
     end;
 
- finishReceive(url, '[TReceiveClientServiceThread]> ', 'Service updated table TBCLIENT succesfully :-)', xmldoc);
+ finishReceive(srv, '[TReceiveClientServiceThread]> ', 'Service updated table TBCLIENT succesfully :-)', xmldoc);
 end;
 
 end.

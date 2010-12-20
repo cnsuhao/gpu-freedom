@@ -95,8 +95,10 @@ end;
 
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
+    srv       : TServerRecord;
 begin
- receive(servMan_.getSuperServerUrl(), '/supercluster/get_servers.php',
+ servMan_.getSuperServerUrl(srv);
+ receive(srv, '/supercluster/get_servers.php',
          '[TReceiveServerServiceThread]> ', xmldoc, true);
  if not erroneous_ then
     begin
@@ -111,7 +113,7 @@ begin
        end;
     end;
 
- finishReceive(servMan_.getSuperServerUrl(), '[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
+ finishReceive(srv, '[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
 end;
 
 

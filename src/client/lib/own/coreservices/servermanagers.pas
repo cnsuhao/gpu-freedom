@@ -11,30 +11,39 @@ interface
 uses SyncObjs, Sysutils, Classes, servertables, sqlite3ds, loggers,
      coreconfigurations, identities;
 
+const MAX_SERVERS = 300;
+
+type TServerRecord = record
+    id  : Longint;
+    url : String;
+end;
+
 type TServerManager = class(TObject)
    public
     constructor Create(var conf : TCoreConfiguration; servertable : TDbServerTable;
                        var logger : TLogger);
     destructor Destroy;
 
-    function getServerUrl : String;
-    function getDefaultServerUrl : String;
-    function getSuperServerUrl : String;
+    procedure getServerUrl(var srv : TServerRecord);
+    procedure getDefaultServerUrl(var srv : TServerRecord);
+    procedure getSuperServerUrl(var srv : TServerRecord);
 
     procedure reloadServers();
     procedure increaseFailures(url : String);
 
    private
-    defaultserver_ : Longint;
-    superserver_   : Longint;
-    urls_          : TStringList;
-    cs_            : TCriticalSection;
-    count_         : Longint;
-    servertable_   : TDbServerTable;
-    logger_        : TLogger;
-    conf_          : TCoreConfiguration;
+    defaultserver_  : Longint;
+    superserver_    : Longint;
+    cs_             : TCriticalSection;
+    count_,
+    currentServers_ : Longint;
+    servertable_    : TDbServerTable;
+    logger_         : TLogger;
+    conf_           : TCoreConfiguration;
 
-    procedure verify();
+    servers_        : array [1..MAX_SERVERS] of TServerRecord;
+
+    procedure getServer(var srv : TServerRecord; i : Longint);
 end;
 
 implementation
@@ -43,41 +52,45 @@ constructor TServerManager.Create(var conf : TCoreConfiguration; servertable : T
                                   var logger : TLogger);
 begin
   inherited Create;
-  urls_ := TStringList.Create;
   cs_ := TCriticalSection.Create();
   servertable_ := servertable;
   logger_ := logger;
   conf_ := conf;
   reloadServers();
-  verify();
 end;
 
 destructor TServerManager.Destroy;
 begin
-  urls_.Free;
   cs_.Free;
 end;
 
-function TServerManager.getServerUrl : String;
+procedure TServerManager.getServer(var srv : TServerRecord; i : Longint);
+begin
+  srv.url := servers_[i].url;
+  srv.id  := servers_[i].id
+end;
+
+procedure TServerManager.getServerUrl(var srv : TServerRecord);
 begin
   cs_.Enter;
-  Result := urls_.Strings[count_];
+  getServer(srv, count_);
   Inc(count_);
-  if (count_)>(urls_.Count-1) then count_ := 0;
+  if count_>currentServers_ then count_ := 1;
   cs_.Leave;
 end;
 
-function TServerManager.getDefaultServerUrl : String;
+
+procedure TServerManager.getDefaultServerUrl(var srv : TServerRecord);
 begin
   cs_.Enter;
-  Result := urls_.Strings[defaultserver_];
+  getServer(srv, defaultserver_);
   cs_.Leave;
 end;
 
-function TServerManager.getSuperServerUrl : String;
+procedure TServerManager.getSuperServerUrl(var srv : TServerRecord);
 begin
   cs_.Enter;
-  Result := urls_.Strings[superserver_];
+  getServer(srv, superserver_);
   cs_.Leave;
 end;
 
@@ -88,18 +101,17 @@ var i  : Longint;
 begin
  cs_.Enter;
  i:=0;
- urls_.Clear;
  defaultserver_ := -1;
  superserver_ := -1;
- count_ := 0;
 
  ds := servertable_.getDS();
  ds.First;
  while not ds.EOF do
     begin
      if not ds.FieldValues['online'] then continue;
-
-     urls_.add(ds.FieldValues['serverurl']);
+     Inc(i);
+     servers_[i].url := ds.FieldValues['serverurl'];
+     servers_[i].id  := ds.FieldValues['id'];
      logger_.log(LVL_DEBUG, 'TServermanager> '+ds.FieldValues['serverurl']);
      if ds.FieldValues['superserver']=true then
         begin
@@ -113,32 +125,32 @@ begin
           logger_.log(LVL_DEBUG, 'TServermanager> ^ is defaultserver');
          end;
      ds.Next;
-     Inc(i);
     end;
 
  if (i=0) then
       begin
-        urls_.add(myConfID.default_superserver_url);
-        defaultserver_ := 0;
-        superserver_ := 0;
+        servers_[1].url := myConfID.default_superserver_url;
+        servers_[1].id := 1;
+        currentServers_ := 1;
         logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
-      end;
+      end
+     else
+       currentServers_ := i;
 
  if superserver_=-1 then
     begin
       logger_.log(LVL_SEVERE, 'TServermanager> Superserver not defined');
-      superserver_ := 0;
+      superserver_ := 1;
     end;
 
  if defaultserver_=-1 then
     begin
       logger_.log(LVL_SEVERE, 'TServermanager> Defaultserver not defined');
-      defaultserver_ := 0;
+      defaultserver_ := 1;
     end;
 
  count_ := defaultserver_;
  cs_.Leave;
- verify();
 end;
 
 procedure TServerManager.increaseFailures(url : String);
@@ -151,14 +163,6 @@ begin
  cs_.Leave;
 end;
 
-procedure TServerManager.verify();
-begin
-  if urls_.Count = 0 then
-     raise Exception.Create('TServerManager: url_ is empty');
-  if defaultserver_ > (urls_.Count-1) then
-      raise Exception.Create('TServerManager: defaultserver is out of range (>'+IntToStr(urls_.Count-1)+')');
-  if superserver_ > (urls_.Count-1) then
-      raise Exception.Create('TServerManager: superserver is out of range (>'+IntToStr(urls_.Count-1)+')');
-end;
+
 
 end.
