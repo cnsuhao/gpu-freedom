@@ -8,7 +8,7 @@ unit dbtablemanagers;
 
 interface
 
-uses clienttables, servertables;
+uses clienttables, servertables, channeltables;
 
 
 type TDbTableManager = class(TObject)
@@ -21,17 +21,20 @@ type TDbTableManager = class(TObject)
 
     function getClientTable() : TDbClientTable;
     function getServerTable() : TDbServerTable;
+    function getChannelTable() : TDbChannelTable;
 
     clienttable_    : TDbClientTable;
-    servertable_  : TDbServerTable;
+    servertable_    : TDbServerTable;
+    chantable_      : TDbChannelTable;
 end;
 
 implementation
 
 constructor TDbTableManager.Create(filename : String);
 begin
-  clienttable_ := TDbClientTable.Create(filename);
   servertable_ := TDbServerTable.Create(filename);
+  clienttable_ := TDbClientTable.Create(filename);
+  chantable_   := TDbChannelTable.Create(filename);
 end;
 
 
@@ -39,18 +42,21 @@ destructor TDbTableManager.Destroy;
 begin
  clienttable_.Free;
  servertable_.Free;
+ chantable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
 begin
   clienttable_.Open;
   servertable_.Open;
+  chantable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
 begin
   clienttable_.Close;
   servertable_.Close;
+  chantable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -62,5 +68,11 @@ function TDbTableManager.getServerTable() : TDbServerTable;
 begin
   Result := servertable_;
 end;
+
+function TDbTableManager.getChannelTable() : TDbChannelTable;
+begin
+  Result := chantable_;
+end;
+
 
 end.
