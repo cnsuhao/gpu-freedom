@@ -33,7 +33,6 @@ while ($i<$num) {
   $id                = mysql_result($result,$i,"id");
   $nodeid            = mysql_result($result,$i,"nodeid"); 
   $nodename          = mysql_result($result,$i,"nodename");
-  $defaultservername = mysql_result($result,$i,"defaultservername");
   $country           = mysql_result($result,$i,"country");
   $region            = mysql_result($result,$i,"region");
   $city              = mysql_result($result,$i,"city");
@@ -70,7 +69,6 @@ while ($i<$num) {
     echo "  <id>$id</id>\n";
 	echo "  <nodeid>$nodeid</nodeid>\n";
     echo "  <nodename>$nodename</nodename>\n";   
-    echo "  <defaultservername>$defaultservername</defaultservername>\n";   	
     echo "  <country>$country</country>\n";
     echo "  <region>$region</region>\n";
     echo "  <city>$city</city>\n";

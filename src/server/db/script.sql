@@ -2,7 +2,6 @@ CREATE TABLE `tbclient` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `nodeid` VARCHAR( 32 ) NOT NULL ,
 `nodename` VARCHAR( 32 ) NOT NULL ,
-`defaultservername` VARCHAR( 32 ) NOT NULL ,
 `country` VARCHAR( 32 ) NOT NULL ,
 `region` VARCHAR( 32 ) NULL ,
 `city` VARCHAR( 32 ) NULL ,
