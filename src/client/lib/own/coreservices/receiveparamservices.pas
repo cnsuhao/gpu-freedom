@@ -72,7 +72,7 @@ procedure TReceiveParamServiceThread.Execute;
 var xmldoc    : TXMLDocument;
     srv       : TServerRecord;
 begin
- servMan_.getSuperServerUrl(srv);
+ servMan_.getSuperServer(srv);
  receive(srv, '/supercluster/get_parameters.php',
          '[TReceiveParamServiceThread]> ', xmldoc, true);
 

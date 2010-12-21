@@ -10,7 +10,7 @@ interface
 uses sqlite3ds, db, coretables, SysUtils;
 
 type TDbServerRow = record
-    id : Longint;
+    id,
     externalid       : Longint;
     servername,
     serverurl,

@@ -1,6 +1,6 @@
 unit servicefactories;
  {
-   TServiceManager creates all services available to the GPU core.servicemanagers
+   TServiceFactory creates all services available to the GPU core.servicemanagers
 
    (c) by 2010 HB9TVM and the GPU Team
 }
@@ -11,7 +11,7 @@ uses
   servermanagers, dbtablemanagers, loggers,
   receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
-  coreconfigurations;
+  receivechannelservices, coreconfigurations;
 
 type TServiceFactory = class(TObject)
    public
@@ -23,6 +23,8 @@ type TServiceFactory = class(TObject)
     function createTransmitClientService() : TTransmitClientServiceThread;
     function createReceiveServerService()  : TReceiveServerServiceThread;
     function createReceiveParamService()   : TReceiveParamServiceThread;
+    function createReceiveChannelService(var srv : TServerRecord;
+                                         channame, chantype : String) : TReceiveChannelServiceThread;
 
    private
 
@@ -73,7 +75,11 @@ begin
  Result := TReceiveParamServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
 end;
 
-
+function TServiceFactory.createReceiveChannelService(var srv : TServerRecord;
+                                     channame, chantype : String) : TReceiveChannelServiceThread;
+begin
+  Result := TReceiveChannelServiceThread.Create(servMan_, proxy_, port_, tableMan_, logger_, srv, channame, chantype);
+end;
 
 
 end.

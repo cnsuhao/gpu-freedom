@@ -19,6 +19,7 @@ type TDbChannelRow = record
     channame,
     chantype      : String;
     server_id     : Longint;
+    create_dt,
     usertime_dt   : TDateTime;
 end;
 
@@ -78,7 +79,7 @@ begin
   dataset_.FieldByName('channame').AsString := row.channame;
   dataset_.FieldByName('chantype').AsString := row.chantype;
   dataset_.FieldByName('server_id').AsInteger := row.server_id;
-  dataset_.FieldByName('create_dt').AsDateTime := Now;
+  dataset_.FieldByName('create_dt').AsDateTime := row.create_dt;
   dataset_.FieldByName('usertime_dt').AsDateTime := row.usertime_dt;
 
   dataset_.Post;

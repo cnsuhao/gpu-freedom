@@ -14,8 +14,9 @@ uses SyncObjs, Sysutils, Classes, servertables, sqlite3ds, loggers,
 const MAX_SERVERS = 300;
 
 type TServerRecord = record
-    id  : Longint;
-    url : String;
+    id          : Longint;
+    url,
+    chatchannel : String;
 end;
 
 type TServerManager = class(TObject)
@@ -24,9 +25,9 @@ type TServerManager = class(TObject)
                        var logger : TLogger);
     destructor Destroy;
 
-    procedure getServerUrl(var srv : TServerRecord);
-    procedure getDefaultServerUrl(var srv : TServerRecord);
-    procedure getSuperServerUrl(var srv : TServerRecord);
+    procedure getServer(var srv : TServerRecord);
+    procedure getDefaultServer(var srv : TServerRecord);
+    procedure getSuperServer(var srv : TServerRecord);
 
     procedure reloadServers();
     procedure increaseFailures(url : String);
@@ -43,7 +44,7 @@ type TServerManager = class(TObject)
 
     servers_        : array [1..MAX_SERVERS] of TServerRecord;
 
-    procedure getServer(var srv : TServerRecord; i : Longint);
+    procedure getServerInternal(var srv : TServerRecord; i : Longint);
 end;
 
 implementation
@@ -64,33 +65,33 @@ begin
   cs_.Free;
 end;
 
-procedure TServerManager.getServer(var srv : TServerRecord; i : Longint);
+procedure TServerManager.getServerInternal(var srv : TServerRecord; i : Longint);
 begin
   srv.url := servers_[i].url;
   srv.id  := servers_[i].id
 end;
 
-procedure TServerManager.getServerUrl(var srv : TServerRecord);
+procedure TServerManager.getServer(var srv : TServerRecord);
 begin
   cs_.Enter;
-  getServer(srv, count_);
+  getServerInternal(srv, count_);
   Inc(count_);
   if count_>currentServers_ then count_ := 1;
   cs_.Leave;
 end;
 
 
-procedure TServerManager.getDefaultServerUrl(var srv : TServerRecord);
+procedure TServerManager.getDefaultServer(var srv : TServerRecord);
 begin
   cs_.Enter;
-  getServer(srv, defaultserver_);
+  getServerInternal(srv, defaultserver_);
   cs_.Leave;
 end;
 
-procedure TServerManager.getSuperServerUrl(var srv : TServerRecord);
+procedure TServerManager.getSuperServer(var srv : TServerRecord);
 begin
   cs_.Enter;
-  getServer(srv, superserver_);
+  getServerInternal(srv, superserver_);
   cs_.Leave;
 end;
 
@@ -110,8 +111,9 @@ begin
     begin
      if not ds.FieldValues['online'] then continue;
      Inc(i);
-     servers_[i].url := ds.FieldValues['serverurl'];
-     servers_[i].id  := ds.FieldValues['id'];
+     servers_[i].url         := ds.FieldValues['serverurl'];
+     servers_[i].id          := ds.FieldValues['id'];
+     servers_[i].chatchannel := ds.FieldValues['chatchannel'];
      logger_.log(LVL_DEBUG, 'TServermanager> '+ds.FieldValues['serverurl']);
      if ds.FieldValues['superserver']=true then
         begin
@@ -130,7 +132,8 @@ begin
  if (i=0) then
       begin
         servers_[1].url := myConfID.default_superserver_url;
-        servers_[1].id := 1;
+        servers_[1].id := 0;
+        servers_[1].chatchannel := '';
         currentServers_ := 1;
         logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
       end

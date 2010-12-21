@@ -15,7 +15,7 @@ type TTransmitClientServiceThread = class(TTransmitServiceThread)
 
  private
     conf_ : TCoreConfiguration;
-    function getReportString : AnsiString;
+    function getPHPArguments() : AnsiString;
 end;
 
 
@@ -29,7 +29,7 @@ begin
  conf_ := conf;
 end;
 
-function TTransmitClientServiceThread.getReportString : AnsiString;
+function TTransmitClientServiceThread.getPHPArguments() : AnsiString;
 var rep : AnsiString;
 begin
 with myGPUID do
@@ -69,8 +69,8 @@ end;
 procedure TTransmitClientServiceThread.Execute;
 var srv : TServerRecord;
 begin
- servMan_.getDefaultServerUrl(srv);
- transmit(srv, '/cluster/report_client.php?'+getReportString, '[TTransmitClientServiceThread]> ', false);
+ servMan_.getDefaultServer(srv);
+ transmit(srv, '/cluster/report_client.php?'+getPHPArguments(), '[TTransmitClientServiceThread]> ', false);
  finishTransmit(srv,  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
 end;
 

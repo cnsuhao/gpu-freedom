@@ -40,7 +40,6 @@ procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument; var sr
 var
     dbnode   : TDbClientRow;
     node     : TDOMNode;
-    port     : String;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
@@ -98,7 +97,7 @@ procedure TReceiveClientServiceThread.Execute;
 var xmldoc    : TXMLDocument;
     srv       : TServerRecord;
 begin
- servMan_.getServerUrl(srv);
+ servMan_.getServer(srv);
  receive(srv, '/cluster/list_clients_online_xml.php',
          '[TReceiveClientServiceThread]> ', xmldoc, true);
 

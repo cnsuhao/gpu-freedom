@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
-  receiveserverservices, receiveparamservices, coreconfigurations;
+  receiveserverservices, receiveparamservices,
+  receivechannelservices, coreconfigurations;
 
 type
 
@@ -22,6 +23,8 @@ type
     procedure TestReceiveServerService;
     procedure TestTransmitClientService;
     procedure TestReceiveClientService;
+    procedure TestReceiveChannelService;
+
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -81,6 +84,15 @@ begin
   waitForCompletion();
 end;
 
+procedure TTestServices.TestReceiveChannelService;
+var thread : TReceiveChannelServiceThread;
+    srv    : TServerRecord;
+begin
+  serverMan_.getSuperServer(srv);
+  thread := srvFactory_.createReceiveChannelService(srv, 'Altos', 'CHAT');
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
 
 procedure TTestServices.SetUp;
 begin

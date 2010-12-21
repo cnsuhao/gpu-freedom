@@ -97,7 +97,7 @@ procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
     srv       : TServerRecord;
 begin
- servMan_.getSuperServerUrl(srv);
+ servMan_.getSuperServer(srv);
  receive(srv, '/supercluster/get_servers.php',
          '[TReceiveServerServiceThread]> ', xmldoc, true);
  if not erroneous_ then
