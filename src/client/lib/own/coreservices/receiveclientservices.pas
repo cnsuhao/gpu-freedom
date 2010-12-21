@@ -23,7 +23,7 @@ type TReceiveClientServiceThread = class(TReceiveServiceThread)
  private
    clienttable_ : TDbClientTable;
 
-   procedure parseXml(var xmldoc : TXMLDocument);
+   procedure parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord);
 end;
 
 implementation
@@ -36,7 +36,7 @@ begin
 end;
 
 
-procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument);
+procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord);
 var
     dbnode   : TDbClientRow;
     node     : TDOMNode;
@@ -50,7 +50,7 @@ begin
         try
              begin
                dbnode.nodeid            := node.FindNode('nodeid').TextContent;
-               dbnode.defaultservername := node.FindNode('defaultservername').TextContent;
+               dbnode.server_id         := srv.id;
                dbnode.nodename          := node.FindNode('nodename').TextContent;
                dbnode.country           := node.FindNode('country').TextContent;
                dbnode.region            := node.FindNode('region').TextContent;
@@ -105,7 +105,7 @@ begin
  if not erroneous_ then
     begin
      clienttable_.execSQL('UPDATE tbclient set updated=0;');
-     parseXml(xmldoc);
+     parseXml(xmldoc, srv);
      if not erroneous_ then
         clienttable_.execSQL('UPDATE tbclient set online=updated;');
     end;
