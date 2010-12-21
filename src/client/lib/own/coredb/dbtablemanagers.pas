@@ -8,7 +8,7 @@ unit dbtablemanagers;
 
 interface
 
-uses clienttables, servertables, channeltables;
+uses clienttables, servertables, channeltables, retrievedtables;
 
 
 type TDbTableManager = class(TObject)
@@ -22,10 +22,12 @@ type TDbTableManager = class(TObject)
     function getClientTable() : TDbClientTable;
     function getServerTable() : TDbServerTable;
     function getChannelTable() : TDbChannelTable;
+    function getRetrievedTable() : TDbRetrievedTable;
 
     clienttable_    : TDbClientTable;
     servertable_    : TDbServerTable;
     chantable_      : TDbChannelTable;
+    retrtable_      : TDbRetrievedTable;
 end;
 
 implementation
@@ -35,6 +37,7 @@ begin
   servertable_ := TDbServerTable.Create(filename);
   clienttable_ := TDbClientTable.Create(filename);
   chantable_   := TDbChannelTable.Create(filename);
+  retrtable_   := TDbRetrievedTable.Create(filename);
 end;
 
 
@@ -43,6 +46,7 @@ begin
  clienttable_.Free;
  servertable_.Free;
  chantable_.Free;
+ retrtable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -50,6 +54,7 @@ begin
   clienttable_.Open;
   servertable_.Open;
   chantable_.Open;
+  retrtable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -57,6 +62,7 @@ begin
   clienttable_.Close;
   servertable_.Close;
   chantable_.Close;
+  retrtable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -72,6 +78,11 @@ end;
 function TDbTableManager.getChannelTable() : TDbChannelTable;
 begin
   Result := chantable_;
+end;
+
+function TDbTableManager.getRetrievedTable() : TDbRetrievedTable;
+begin
+  Result := retrtable_;
 end;
 
 
