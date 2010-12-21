@@ -12,6 +12,15 @@ CREATE TABLE tbchannel (
    server_id int
 );
 
+CREATE TABLE tbretrieved (
+   id int primary key,
+   lastmsg int,
+   msgtype text,
+   server_id int,
+   create_dt text,
+   update_dt text
+)
+
 
 CREATE TABLE tbjob (
    id int primary key,
@@ -43,11 +52,11 @@ CREATE TABLE tbjobresult (
    create_dt text
 );
 
-CREATE TABLE tbnode (
+CREATE TABLE tbclient (
    id int primary key,
    nodeid text,
    nodename text,
-   defaultservername text,
+   server_id int,
    country text,
    region text,
    city text,
