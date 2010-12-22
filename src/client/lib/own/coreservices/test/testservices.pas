@@ -9,7 +9,8 @@ uses
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
-  receivechannelservices, coreconfigurations;
+  receivechannelservices, transmitchannelservices,
+  coreconfigurations;
 
 type
 
@@ -24,7 +25,7 @@ type
     procedure TestTransmitClientService;
     procedure TestReceiveClientService;
     procedure TestReceiveChannelService;
-
+    procedure TestTransmitChannelService;
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -93,6 +94,18 @@ begin
   serviceMan_.launch(thread);
   waitForCompletion();
 end;
+
+procedure TTestServices.TestTransmitChannelService;
+var thread : TTransmitChannelServiceThread;
+    srv    : TServerRecord;
+begin
+  serverMan_.getSuperServer(srv);
+  thread := srvFactory_.createTransmitChannelService(srv, 'Altos', 'CHAT', 'hello world :-)');
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
+
+
 
 procedure TTestServices.SetUp;
 begin

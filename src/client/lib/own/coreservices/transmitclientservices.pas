@@ -44,8 +44,8 @@ with myGPUID do
   rep := rep+'region='+encodeURL(region)+'&';
   rep := rep+'city='+encodeURL(city)+'&';
   rep := rep+'zip='+encodeURL(zip)+'&';
-  rep := rep+'uptime='+encodeURL(FloatToStr(uptime))+'&';
-  rep := rep+'totaluptime='+encodeURL(FloatToStr(totaluptime))+'&';
+  rep := rep+'uptime='+encodeURL(FloatToStr(uptime))+'&';           //TODO: FloatToStr with formatset
+  rep := rep+'totaluptime='+encodeURL(FloatToStr(totaluptime))+'&'; //TODO: FloatToStr with formatset
   rep := rep+'ip='+encodeURL(ip)+'&';
   rep := rep+'localip='+encodeURL(localip)+'&';
   rep := rep+'port='+encodeURL(port)+'&';
@@ -56,8 +56,8 @@ with myGPUID do
   rep := rep+'gigaflops='+encodeURL(IntToStr(GigaFlops))+'&';
   rep := rep+'bits='+encodeURL(IntToStr(bits))+'&';
   rep := rep+'os='+encodeURL(os)+'&';
-  rep := rep+'longitude='+encodeURL(FloatToStr(longitude))+'&';
-  rep := rep+'latitude='+encodeURL(FloatToStr(latitude))+'&';
+  rep := rep+'longitude='+encodeURL(FloatToStr(longitude))+'&';  //TODO: FloatToStr with formatset
+  rep := rep+'latitude='+encodeURL(FloatToStr(latitude))+'&';    //TODO: FloatToStr with formatset
   rep := rep+'version='+encodeURL('1.0.0')+'&';
   rep := rep+'team='+encodeURL(team)+'&';
   rep := rep+'userid='+encodeURL(myUserID.userid)+'&';

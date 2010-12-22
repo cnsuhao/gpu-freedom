@@ -11,7 +11,8 @@ uses
   servermanagers, dbtablemanagers, loggers,
   receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
-  receivechannelservices, coreconfigurations;
+  receivechannelservices, transmitchannelservices,
+  coreconfigurations;
 
 type TServiceFactory = class(TObject)
    public
@@ -25,6 +26,9 @@ type TServiceFactory = class(TObject)
     function createReceiveParamService()   : TReceiveParamServiceThread;
     function createReceiveChannelService(var srv : TServerRecord;
                                          channame, chantype : String) : TReceiveChannelServiceThread;
+    function createTransmitChannelService(var srv : TServerRecord;
+                                          channame, chantype : String;
+                                          content : AnsiString) : TTransmitChannelServiceThread;
 
    private
 
@@ -78,7 +82,14 @@ end;
 function TServiceFactory.createReceiveChannelService(var srv : TServerRecord;
                                      channame, chantype : String) : TReceiveChannelServiceThread;
 begin
-  Result := TReceiveChannelServiceThread.Create(servMan_, proxy_, port_, tableMan_, logger_, srv, channame, chantype);
+  Result := TReceiveChannelServiceThread.Create(servMan_, proxy_, port_, tableMan_, logger_, conf_, srv, channame, chantype);
+end;
+
+function TServiceFactory.createTransmitChannelService(var srv : TServerRecord;
+                                                      channame, chantype : String;
+                                                      content : AnsiString) : TTransmitChannelServiceThread;
+begin
+ Result := TTransmitChannelServiceThread.Create(servMan_, proxy_, port_, logger_, tableMan_.getChannelTable(), conf_, srv, channame, chantype, content);
 end;
 
 

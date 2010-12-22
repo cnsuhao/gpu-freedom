@@ -9,14 +9,15 @@ unit receivechannelservices;
 }
 interface
 
-uses coreservices, servermanagers,
+uses coreservices, servermanagers, coreconfigurations,
      channeltables, retrievedtables, dbtablemanagers,
-     loggers, Classes, SysUtils, DOM;
+     loggers, identities, Classes, SysUtils, DOM;
 
 type TReceiveChannelServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan  : TServerManager; proxy, port : String;
                      var tableman : TDbTableManager; var logger : TLogger;
+                     var conf : TCoreConfiguration;
                      var srv : TServerRecord; channame, chantype : String);
  protected
     procedure Execute; override;
@@ -24,6 +25,7 @@ type TReceiveChannelServiceThread = class(TReceiveServiceThread)
  private
    tableman_ : TDbTableManager;
    srv_      : TServerRecord;
+   conf_     : TCoreConfiguration;
    channame_,
    chantype_ : String;
 
@@ -35,6 +37,7 @@ implementation
 
 constructor TReceiveChannelServiceThread.Create(var servMan  : TServerManager; proxy, port : String;
                                                 var tableman : TDbTableManager; var logger : TLogger;
+                                                var conf : TCoreConfiguration;
                                                 var srv : TServerRecord; channame, chantype : String);
 begin
   inherited Create(servMan, proxy, port, logger);
@@ -42,11 +45,13 @@ begin
   srv_      := srv;
   channame_ := channame;
   chantype_ := chantype;
+  conf_     := conf;
 end;
 
 function  TReceiveChannelServiceThread.getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
 begin
- Result := 'chantype='+chantype_+'&channame='+channame_+'&lastmsg='+IntToStr(row.lastmsg);
+ Result :=  'nodeid='+myGPUID.nodeid+
+            '&chantype='+chantype_+'&channame='+channame_+'&lastmsg='+IntToStr(row.lastmsg);
 end;
 
 procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord;
