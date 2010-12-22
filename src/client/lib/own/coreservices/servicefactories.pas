@@ -57,12 +57,12 @@ end;
 
 function TServiceFactory.createReceiveClientService() : TReceiveClientServiceThread;
 begin
- Result := TReceiveClientServiceThread.Create(servMan_, proxy_, port_, tableMan_.getClientTable(), logger_);
+ Result := TReceiveClientServiceThread.Create(servMan_, proxy_, port_, tableMan_.getClientTable(), logger_, conf_);
 end;
 
 function TServiceFactory.createTransmitClientService() : TTransmitClientServiceThread;
 begin
- Result := TTransmitClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
+ Result := TTransmitClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableMan_.getClientTable());
 end;
 
 function TServiceFactory.createReceiveServerService()  : TReceiveServerServiceThread;

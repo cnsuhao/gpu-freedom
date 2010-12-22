@@ -3,19 +3,22 @@ unit transmitclientservices;
 interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
-     servermanagers, loggers, identities, SysUtils, Classes;
+     clienttables, servermanagers, loggers, identities,
+     SysUtils, Classes;
 
 
 type TTransmitClientServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration);
+                     var conf : TCoreConfiguration; clienttable : TDbClientTable);
  protected
   procedure Execute; override;
 
  private
-    conf_ : TCoreConfiguration;
-    function getPHPArguments() : AnsiString;
+    conf_        : TCoreConfiguration;
+    clienttable_ : TDbClientTable;
+    function  getPHPArguments() : AnsiString;
+    procedure insertTransmission(var srv : TServerRecord);
 end;
 
 
@@ -23,10 +26,11 @@ end;
 implementation
 
 constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                                                var conf : TCoreConfiguration);
+                                                var conf : TCoreConfiguration; clienttable : TDbClientTable);
 begin
  inherited Create(servMan, proxy, port, logger);
  conf_ := conf;
+ clienttable_ := clienttable;
 end;
 
 function TTransmitClientServiceThread.getPHPArguments() : AnsiString;
@@ -65,11 +69,50 @@ end;
  Result := rep;
 end;
 
+procedure TTransmitClientServiceThread.insertTransmission(var srv : TServerRecord);
+var row : TDbClientRow;
+begin
+ with myGPUID do
+ begin
+   row.nodeid            := nodeid;
+   row.server_id         := srv.id;
+   row.nodename          := nodename;
+   row.country           := country;
+   row.region            := region;
+   row.city              := city;
+   row.zip               := zip;
+   row.description       := description;
+   row.ip                := ip;
+   row.port              := port;
+   row.localip           := localip;
+   row.os                := os;
+   row.cputype           := cputype;
+   row.version           := version;
+   row.acceptincoming    := acceptincoming;
+   row.gigaflops    := gigaflops;
+   row.ram          := ram;
+   row.mhz          := mhz;
+   row.nbcpus       := nbcpus;
+   row.bits         := bits;
+   row.online  := true;
+   row.updated := true;
+   row.uptime      := uptime;
+   row.totaluptime := totaluptime;
+   row.longitude   := longitude;
+   row.latitude    := latitude;
+   row.userid      := myUserId.userid;
+   row.team        := team;
+  end;
+
+ clienttable_.insertOrUpdate(row);
+ logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Updated or added <'+row.nodename+'> to tbclient table.');
+end;
 
 procedure TTransmitClientServiceThread.Execute;
 var srv : TServerRecord;
 begin
  servMan_.getDefaultServer(srv);
+ insertTransmission(srv);
  transmit(srv, '/cluster/report_client.php?'+getPHPArguments(), '[TTransmitClientServiceThread]> ', false);
  finishTransmit(srv,  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
 end;

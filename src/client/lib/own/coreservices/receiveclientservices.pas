@@ -10,18 +10,20 @@ unit receiveclientservices;
 }
 interface
 
-uses coreservices, servermanagers,
-     clienttables, loggers, Classes, SysUtils, DOM;
+uses coreservices, servermanagers, coreconfigurations,
+     clienttables, identities, loggers, Classes, SysUtils, DOM;
 
 type TReceiveClientServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; proxy, port : String;
-                     clienttable : TDbClientTable; var logger : TLogger);
+                     clienttable : TDbClientTable; var logger : TLogger;
+                     var conf : TCoreconfiguration);
  protected
     procedure Execute; override;
 
  private
    clienttable_ : TDbClientTable;
+   conf_        : TCoreConfiguration;
 
    procedure parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord);
 end;
@@ -29,10 +31,12 @@ end;
 implementation
 
 constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                               clienttable : TDbClientTable; var logger : TLogger);
+                                               clienttable : TDbClientTable; var logger : TLogger;
+                                               var conf : TCoreconfiguration);
 begin
  inherited Create(servMan, proxy, port, logger);
  clienttable_ := clienttable;
+ conf_        := conf;
 end;
 
 
@@ -77,7 +81,7 @@ begin
                dbnode.userid      := node.FindNode('userid').TextContent;
                dbnode.team        := node.FindNode('team').TextContent;
                clienttable_.insertOrUpdate(dbnode);
-               logger_.log(LVL_DEBUG, 'Updated or added <'+dbnode.nodename+'> to tbclient table.');
+               logger_.log(LVL_DEBUG, '[TReceiveClientServiceThread]> Updated or added <'+dbnode.nodename+'> to tbclient table.');
              end;
           except
            on E : Exception do
@@ -98,8 +102,8 @@ var xmldoc    : TXMLDocument;
     srv       : TServerRecord;
 begin
  servMan_.getServer(srv);
- receive(srv, '/cluster/list_clients_online_xml.php',
-         '[TReceiveClientServiceThread]> ', xmldoc, true);
+ receive(srv, '/cluster/list_clients_online_xml.php?nodeid='+myGPUID.NodeId,
+         '[TReceiveClientServiceThread]> ', xmldoc, false);
 
  if not erroneous_ then
     begin
