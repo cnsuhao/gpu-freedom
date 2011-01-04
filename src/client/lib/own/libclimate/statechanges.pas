@@ -18,7 +18,8 @@ implementation
 
 procedure WaterOrIce(var clima : TClima; var w : TWorld; i, j : Longint);
 begin
-    clima.isIce[i][j] := (clima.T_ocean_terr[i][j]<=TPhysConst.kT_ice)
+    clima.isIce[i][j] := (clima.T_ocean_terr[i][j]<=TPhysConst.kT_ice);
+    //if not w.isOcean[i][j] then clima.isIce[i][j] := clima.isIce[i][j] and (clima.water_surface[i][j]>0);
 end;
 
 
