@@ -182,7 +182,7 @@ var i, j : Longint;
 begin
  for j:=0 to 179 do
   for i:=0 to 359 do
-    Dec(clima.rain_times[i][j]);
+    if (clima.rain_times[i][j]>0) then Dec(clima.rain_times[i][j]);
 end;
 
 
