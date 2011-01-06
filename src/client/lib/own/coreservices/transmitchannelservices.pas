@@ -72,7 +72,7 @@ with myGPUID do
   rep := rep+'user='+encodeURL(myUserid.username)+'&';
   rep := rep+'channame='+encodeURL(channame_)+'&';
   rep := rep+'chantype='+encodeURL(chantype_)+'&';
-  rep := rep+'usertime_dt='+encodeURL(FloatToStr(Now))+'&'; //TODO: FloatToStr with formatset
+  rep := rep+'usertime='+encodeURL(FloatToStr(Now))+'&'; //TODO: FloatToStr with formatset
   rep := rep+'content='+encodeURL(content_)+'&';
  end;
 
@@ -85,7 +85,7 @@ end;
 procedure TTransmitChannelServiceThread.Execute;
 begin
  insertTransmission();
- transmit(srv_, '/channel/report_channel.php?'+getPHPArguments(), '[TTransmitChannelServiceThread]> ', false);
+ transmit(srv_, '/channel/report_channel_message.php?'+getPHPArguments(), '[TTransmitChannelServiceThread]> ', false);
  finishTransmit(srv_,  '[TTransmitChannelServiceThread]> ', 'Channel content transmitted :-)');
 end;
 
