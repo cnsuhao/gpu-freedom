@@ -50,8 +50,7 @@ end;
 
 function  TReceiveChannelServiceThread.getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
 begin
- Result :=  'nodeid='+myGPUID.nodeid+
-            '&chantype='+chantype_+'&channame='+channame_+'&lastmsg='+IntToStr(row.lastmsg);
+ Result :=  'lastmsg='+IntToStr(row.lastmsg)+'&chantype='+chantype_+'&channame='+channame_;
 end;
 
 procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord;
@@ -69,7 +68,7 @@ begin
              begin
                dbnode.content           := node.FindNode('content').TextContent;
                dbnode.server_id         := srv.id;
-               dbnode.externalid        := StrToInt(node.FindNode('externalid').TextContent);
+               dbnode.externalid        := StrToInt(node.FindNode('id').TextContent);
                dbnode.nodename          := node.FindNode('nodename').TextContent;
                dbnode.nodeid            := node.FindNode('nodeid').TextContent;
                dbnode.user              := node.FindNode('user').TextContent;
@@ -105,7 +104,7 @@ var xmldoc    : TXMLDocument;
 begin
  tableman_.getRetrievedTable().getRow(row, srv_.id, channame_, chantype_);
 
- receive(srv_, '/channel/get_channel_xml.php?'+getPHPArguments(row),
+ receive(srv_, '/channel/get_channel_messages_xml.php?'+getPHPArguments(row),
          '[TReceiveChannelServiceThread]> ', xmldoc, true);
 
  if not erroneous_ then
