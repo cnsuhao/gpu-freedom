@@ -1,3 +1,4 @@
+
 CREATE TABLE `tbclient` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `nodeid` VARCHAR( 32 ) NOT NULL ,
@@ -36,8 +37,9 @@ CREATE TABLE `tbchannel` (
 `nodeid` VARCHAR( 32 ) NOT NULL ,
 `nodename` VARCHAR( 32 ) NOT NULL ,
 `user` VARCHAR( 32 ) NOT NULL ,
-`channame` VARCHAR( 32 ) NULL ,
-`chantype` VARCHAR( 32 ) NULL ,
+`channame` VARCHAR( 32 ) NOT NULL ,
+`chantype` VARCHAR( 32 ) NOT NULL ,
+`content` VARCHAR( 1024 ) NOT NULL ,
 `ip` VARCHAR( 32 ) NULL ,
 `usertime_dt` DATETIME NULL,
 `create_dt` DATETIME NOT NULL
