@@ -1,5 +1,5 @@
 GPU, a Global Processing Unit
-(c) 2002-2010 the GPU Development Team
+(c) 2002-2011 the GPU Development Team
 
 Most source is under GNU General Public License (see GPL_license.txt).
 The PPL is a modified GPL license to prohibit military use (see PPL_license.txt). 
@@ -21,8 +21,8 @@ plugins and frontends in Freepascal/C/C++/Java and executables targeting the pla
 
 Targeted platform
 -----------------
-client GUI will run on Windows, Linux and MacOSX and Windows (everywhere where Lazarus runs)
-client core will run on Windows, Linux and MacOSX and Windows (everywhere where freepascal runs),
+client GUI will run on Windows, Linux and MacOSX (everywhere where Lazarus runs)
+client core will run on Windows, Linux and MacOSX (everywhere where freepascal runs),
  it will also feature an interative console similar to Mutella
 server will run on Windows, Linux, MacOSX, several Unix flavors (everywhere where PHP/mySQL run on Apache)
 
