@@ -50,7 +50,7 @@ end;
 
 function  TReceiveChannelServiceThread.getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
 begin
- Result :=  'lastmsg='+IntToStr(row.lastmsg)+'&chantype='+chantype_+'&channame='+channame_;
+ Result :=  'nodeid='+myGPUId.NodeId+'&lastmsg='+IntToStr(row.lastmsg)+'&chantype='+chantype_+'&channame='+channame_;
 end;
 
 procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord;
@@ -62,6 +62,7 @@ begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
 
+  row.lastmsg:=0;
   while Assigned(node) do
     begin
         try

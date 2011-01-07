@@ -6,15 +6,16 @@
   
 */
 include("../conf/config.inc.php");
+$nodeid   = $_GET['nodeid'];
 $chantype = $_GET['chantype'];
 $channame = $_GET['channame'];
 $lastmsg  = $_GET['lastmsg'];
-if (($chantype=="") || ($channame=="") || ($lastmsg=="")) die('<b>Parameters not defined</b>');
+if (($chantype=="") || ($channame=="") || ($lastmsg=="") || ($nodeid=="")) die('<b>Parameters not defined</b>');
 
 mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("<b>Error: Unable to select database, please check settings in conf/config.inc.php</b>");
 
-$mainquery  = "SELECT * from tbchannel WHERE id>$lastmsg AND channame='$channame' AND chantype='$chantype';"; 
+$mainquery  = "SELECT * from tbchannel WHERE id>$lastmsg AND channame='$channame' AND chantype='$chantype' AND nodeid<>'$nodeid';"; 
 $result=mysql_query($mainquery);
 if ($result!="") {
  $num=mysql_numrows($result);
