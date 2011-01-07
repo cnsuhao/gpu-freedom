@@ -22,9 +22,9 @@ type TDbRetrievedTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
-    procedure getRow(row : TDbRetrievedRow; server_id : Longint;
+    procedure getRow(var row : TDbRetrievedRow; server_id : Longint;
                      channame, chantype : String);
-    procedure insertOrUpdate(row : TDbRetrievedRow);
+    procedure insertOrUpdate(var row : TDbRetrievedRow);
 
   private
     procedure createDbTable();
@@ -67,7 +67,7 @@ begin
 end;
 
 
-procedure TDbRetrievedTable.getRow(row : TDbRetrievedRow; server_id : Longint;
+procedure TDbRetrievedTable.getRow(var row : TDbRetrievedRow; server_id : Longint;
                                    channame, chantype : String);
 var options : TLocateOptions;
     msgtype : String;
@@ -92,7 +92,7 @@ begin
    row.msgtype := msgtype;
 end;
 
-procedure TDbRetrievedTable.insertOrUpdate(row : TDbRetrievedRow);
+procedure TDbRetrievedTable.insertOrUpdate(var row : TDbRetrievedRow);
 var options : TLocateOptions;
     updated : Boolean;
 begin
@@ -110,6 +110,7 @@ begin
 
   dataset_.FieldByName('lastmsg').AsInteger := row.lastmsg;
   dataset_.FieldByName('msgtype').AsString  := row.msgtype;
+  dataset_.FieldByName('server_id').AsInteger := row.server_id;
   dataset_.FieldByName('create_dt').AsDateTime := row.create_dt;
 
   if updated then

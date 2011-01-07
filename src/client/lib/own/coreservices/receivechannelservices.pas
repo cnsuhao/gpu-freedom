@@ -62,7 +62,6 @@ begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
 
-  row.lastmsg:=0;
   while Assigned(node) do
     begin
         try
@@ -106,7 +105,7 @@ begin
  tableman_.getRetrievedTable().getRow(row, srv_.id, channame_, chantype_);
 
  receive(srv_, '/channel/get_channel_messages_xml.php?'+getPHPArguments(row),
-         '[TReceiveChannelServiceThread]> ', xmldoc, true);
+         '[TReceiveChannelServiceThread]> ', xmldoc, false);
 
  if not erroneous_ then
      parseXml(xmldoc, srv_, row);
