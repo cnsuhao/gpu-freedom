@@ -24,7 +24,7 @@ CREATE TABLE tbretrieved (
 
 CREATE TABLE tbjob (
    id int primary key,
-   requestid int,
+   externalid int,
    jobid text,
    job text,
    status int,
@@ -37,18 +37,21 @@ CREATE TABLE tbjob (
 
 CREATE TABLE tbjobqueue (
    id int primary key,
-   job_id int
+   job_id int,
+   create_dt text
 );
 
 CREATE TABLE tbjobresult (
    id int primary key,
+   externalid int,
    job_id int,
-   result text,
+   jobresult text,
+   workunitresult text,
    iserroneus boolean,
-   reported boolean,
    errorid int,
    errormsg text,
    errorarg text,
+   server_id int,
    create_dt text
 );
 
