@@ -8,7 +8,8 @@ unit dbtablemanagers;
 
 interface
 
-uses clienttables, servertables, channeltables, retrievedtables;
+uses clienttables, servertables, channeltables, retrievedtables,
+     jobtables, jobqueuetables, jobresulttables;
 
 
 type TDbTableManager = class(TObject)
@@ -24,10 +25,17 @@ type TDbTableManager = class(TObject)
     function getChannelTable() : TDbChannelTable;
     function getRetrievedTable() : TDbRetrievedTable;
 
+    function getJobTable() : TDbJobTable;
+    function getJobResultTable() : TDbJobResultTable;
+    function getJobQueueTable() : TDbJobQueueTable;
+
     clienttable_    : TDbClientTable;
     servertable_    : TDbServerTable;
     chantable_      : TDbChannelTable;
     retrtable_      : TDbRetrievedTable;
+    jobtable_       : TDbJobTable;
+    jobresulttable_ : TDbJobResultTable;
+    jobqueuetable_  : TDbJobQueueTable;
 end;
 
 implementation
@@ -38,6 +46,9 @@ begin
   clienttable_ := TDbClientTable.Create(filename);
   chantable_   := TDbChannelTable.Create(filename);
   retrtable_   := TDbRetrievedTable.Create(filename);
+  jobtable_       := TDbJobTable.Create(filename);
+  jobresulttable_ := TDbJobResultTable.Create(filename);
+  jobqueuetable_  := TDbJobQueueTable.Create(filename);
 end;
 
 
@@ -47,6 +58,9 @@ begin
  servertable_.Free;
  chantable_.Free;
  retrtable_.Free;
+ jobtable_.Free;
+ jobresulttable_.Free;
+ jobqueuetable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -55,6 +69,9 @@ begin
   servertable_.Open;
   chantable_.Open;
   retrtable_.Open;
+  jobtable_.Open;
+  jobresulttable_.Open;
+  jobqueuetable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -63,6 +80,9 @@ begin
   servertable_.Close;
   chantable_.Close;
   retrtable_.Close;
+  jobtable_.Close;
+  jobresulttable_.Close;
+  jobqueuetable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -85,5 +105,19 @@ begin
   Result := retrtable_;
 end;
 
+function TDbTableManager.getJobTable() : TDbJobTable;
+begin
+  Result := jobtable_;
+end;
+
+function TDbTableManager.getJobResultTable() : TDbJobResultTable;
+begin
+  Result := jobresulttable_;
+end;
+
+function TDbTableManager.getJobQueueTable() : TDbJobQueueTable;
+begin
+  Result := jobqueuetable_;
+end;
 
 end.
