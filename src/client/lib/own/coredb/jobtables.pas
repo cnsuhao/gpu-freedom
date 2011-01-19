@@ -11,6 +11,15 @@ interface
 
 uses sqlite3ds, db, coretables, SysUtils;
 
+const
+  // for status column
+  JS_NEW             = 10;
+  JS_RUNNING         = 20;
+  JS_ONHOLD          = 30;
+  JS_COMPLETED_OK    = 90;
+  JS_COMPLETED_ERROR = 99;
+
+
 type TDbJobRow = record
    id,
    externalid : Longint;
