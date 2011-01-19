@@ -10,37 +10,30 @@ unit receiveclientservices;
 }
 interface
 
-uses coreservices, servermanagers, coreconfigurations,
-     clienttables, identities, loggers, Classes, SysUtils, DOM;
+uses coreservices, servermanagers, coreconfigurations, clienttables,
+     dbtablemanagers, identities, loggers, Classes, SysUtils, DOM, synacode;
 
 type TReceiveClientServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; proxy, port : String;
-                     clienttable : TDbClientTable; var logger : TLogger;
-                     var conf : TCoreconfiguration);
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
  protected
     procedure Execute; override;
 
  private
-   clienttable_ : TDbClientTable;
-   conf_        : TCoreConfiguration;
-
-   procedure parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord);
+   procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
 
-constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                               clienttable : TDbClientTable; var logger : TLogger;
-                                               var conf : TCoreconfiguration);
+constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, proxy, port, logger);
- clienttable_ := clienttable;
- conf_        := conf;
+ inherited Create(servMan, srv, proxy, port, logger, '[TReceiveClientServiceThread]> ', conf, tableman);
 end;
 
 
-procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord);
+procedure TReceiveClientServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
     dbnode   : TDbClientRow;
     node     : TDOMNode;
@@ -53,7 +46,7 @@ begin
         try
              begin
                dbnode.nodeid            := node.FindNode('nodeid').TextContent;
-               dbnode.server_id         := srv.id;
+               dbnode.server_id         := srv_.id;
                dbnode.nodename          := node.FindNode('nodename').TextContent;
                dbnode.country           := node.FindNode('country').TextContent;
                dbnode.region            := node.FindNode('region').TextContent;
@@ -80,14 +73,14 @@ begin
                dbnode.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
                dbnode.userid      := node.FindNode('userid').TextContent;
                dbnode.team        := node.FindNode('team').TextContent;
-               clienttable_.insertOrUpdate(dbnode);
-               logger_.log(LVL_DEBUG, '[TReceiveClientServiceThread]> Updated or added <'+dbnode.nodename+'> to tbclient table.');
+               tableman_.getClientTable().insertOrUpdate(dbnode);
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added <'+dbnode.nodename+'> to tbclient table.');
              end;
           except
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveClientServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -99,21 +92,18 @@ end;
 
 procedure TReceiveClientServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    srv       : TServerRecord;
 begin
- servMan_.getServer(srv);
- receive(srv, '/cluster/list_clients_online_xml.php?nodeid='+myGPUID.NodeId,
-         '[TReceiveClientServiceThread]> ', xmldoc, false);
+ receive('/cluster/list_clients_online_xml.php?nodeid='+encodeUrl(myGPUID.NodeId), xmldoc, false);
 
  if not erroneous_ then
     begin
-     clienttable_.execSQL('UPDATE tbclient set updated=0;');
-     parseXml(xmldoc, srv);
+     tableMan_.getClientTable().execSQL('UPDATE tbclient set updated=0;');
+     parseXml(xmldoc);
      if not erroneous_ then
-        clienttable_.execSQL('UPDATE tbclient set online=updated;');
+        tableMan_.getClientTable().execSQL('UPDATE tbclient set online=updated;');
     end;
 
- finishReceive(srv, '[TReceiveClientServiceThread]> ', 'Service updated table TBCLIENT succesfully :-)', xmldoc);
+ finishReceive('Service updated table TBCLIENT succesfully :-)', xmldoc);
 end;
 
 end.

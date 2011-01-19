@@ -17,32 +17,22 @@ uses coreservices, servermanagers, jobqueuetables, dbtablemanagers,
 
 type TReceiveJobServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; proxy, port : String;
-                      var tableman : TDbTableManager;
-                     var logger : TLogger; var conf : TCoreConfiguration;
-                     var srv : TServerRecord);
- protected
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
+protected
     procedure Execute; override;
 
- private
-   tableman_      : TDbTableManager;
-   conf_          : TCoreConfiguration;
-   srv_           : TServerRecord;
 
+ private
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
 
-constructor TReceiveJobServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                            var tableman : TDbTableManager;
-                                            var logger : TLogger; var conf : TCoreConfiguration;
-                                            var srv : TServerRecord);
+constructor TReceiveJobServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, proxy, port, logger);
- tableman_ := tableman_;
- conf_ := conf;
- srv_  := srv;
+ inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobServiceThread]> ', conf, tableman);
 end;
 
 
@@ -71,13 +61,13 @@ begin
                dbrow.status      := JS_NEW;
 
                tableman_.getJobTable().insertOrUpdate(dbrow);
-               logger_.log(LVL_DEBUG, 'Updated or added job with jobid: '+dbrow.jobid+' to TBJOB table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobid: '+dbrow.jobid+' to TBJOB table.');
              end;
           except
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveJobServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -92,8 +82,9 @@ end;
 procedure TReceiveJobServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive(srv_, '/cluster/jobqueue/get_jobs.php&nodeid='+encodeURL(myGPUId.NodeId),
-         '[TReceiveJobServiceThread]> ', xmldoc, false);
+ receive('/cluster/jobqueue/get_jobs.php&nodeid='+encodeURL(myGPUId.NodeId),
+         xmldoc, false);
+
  if not erroneous_ then
     begin
      parseXml(xmldoc);
@@ -103,7 +94,7 @@ begin
        end;
     end;
 
- finishReceive(srv_, '[TReceiveJobServiceThread]> ', 'Service updated table TBJOB and TBJOBQUEUE succesfully :-)', xmldoc);
+ finishReceive('Service updated table TBJOB and TBJOBQUEUE succesfully :-)', xmldoc);
 end;
 
 

@@ -3,34 +3,30 @@ unit transmitclientservices;
 interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
-     clienttables, servermanagers, loggers, identities,
+     clienttables, servermanagers, loggers, identities, dbtablemanagers,
      SysUtils, Classes;
 
 
 type TTransmitClientServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; clienttable : TDbClientTable);
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
  protected
   procedure Execute; override;
 
  private
-    conf_        : TCoreConfiguration;
-    clienttable_ : TDbClientTable;
     function  getPHPArguments() : AnsiString;
-    procedure insertTransmission(var srv : TServerRecord);
+    procedure insertTransmission();
 end;
 
 
 
 implementation
 
-constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                                                var conf : TCoreConfiguration; clienttable : TDbClientTable);
+constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, proxy, port, logger);
- conf_ := conf;
- clienttable_ := clienttable;
+ inherited Create(servMan, srv, proxy, port, logger, '[TTransmitClientServiceThread]> ', conf, tableman);
 end;
 
 function TTransmitClientServiceThread.getPHPArguments() : AnsiString;
@@ -64,18 +60,18 @@ with myGPUID do
   rep := rep+'description='+encodeURL(description);//+'&';
 end;
 
- logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Reporting string is:');
+ logger_.log(LVL_DEBUG, logHeader_+'Reporting string is:');
  logger_.log(LVL_DEBUG, rep);
  Result := rep;
 end;
 
-procedure TTransmitClientServiceThread.insertTransmission(var srv : TServerRecord);
+procedure TTransmitClientServiceThread.insertTransmission();
 var row : TDbClientRow;
 begin
  with myGPUID do
  begin
    row.nodeid            := nodeid;
-   row.server_id         := srv.id;
+   row.server_id         := srv_.id;
    row.nodename          := nodename;
    row.country           := country;
    row.region            := region;
@@ -104,17 +100,15 @@ begin
    row.team        := team;
   end;
 
- clienttable_.insertOrUpdate(row);
- logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Updated or added <'+row.nodename+'> to tbclient table.');
+ tableman_.getClientTable().insertOrUpdate(row);
+ logger_.log(LVL_DEBUG, logHeader_+'Updated or added <'+row.nodename+'> to tbclient table.');
 end;
 
 procedure TTransmitClientServiceThread.Execute;
-var srv : TServerRecord;
 begin
- servMan_.getDefaultServer(srv);
- insertTransmission(srv);
- transmit(srv, '/cluster/report_client.php?'+getPHPArguments(), '[TTransmitClientServiceThread]> ', false);
- finishTransmit(srv,  '[TTransmitClientServiceThread]> ', 'Own status transmitted :-)');
+ insertTransmission();
+ transmit('/cluster/report_client.php?'+getPHPArguments(), false);
+ finishTransmit('Own status transmitted :-)');
 end;
 
 

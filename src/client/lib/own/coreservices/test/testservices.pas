@@ -10,6 +10,7 @@ uses
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
+  receivejobservices,
   coreconfigurations;
 
 type
@@ -26,6 +27,7 @@ type
     procedure TestReceiveClientService;
     procedure TestReceiveChannelService;
     procedure TestTransmitChannelService;
+    procedure TestReceiveJobService;
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -54,8 +56,10 @@ end;
 
 procedure TTestServices.TestReceiveParamService;
 var rcvparamThread : TReceiveParamServiceThread;
+    srv            : TServerRecord;
 begin
-  rcvparamThread := srvFactory_.createReceiveParamService();
+  serverMan_.getSuperServer(srv);
+  rcvparamThread := srvFactory_.createReceiveParamService(srv);
   serviceMan_.launch(rcvparamThread);
   waitForCompletion();
 end;
@@ -63,24 +67,30 @@ end;
 
 procedure TTestServices.TestReceiveServerService;
 var rcvserverThread : TReceiveServerServiceThread;
+    srv             : TServerRecord;
 begin
-  rcvserverThread := srvFactory_.createReceiveServerService();
+  serverMan_.getSuperServer(srv);
+  rcvserverThread := srvFactory_.createReceiveServerService(srv);
   serviceMan_.launch(rcvserverThread);
   waitForCompletion();
 end;
 
 procedure TTestServices.TestTransmitClientService;
 var trxclientThread : TTransmitClientServiceThread;
+    srv             : TServerRecord;
 begin
-  trxclientThread := srvFactory_.createTransmitClientService();
+  serverMan_.getDefaultServer(srv);
+  trxclientThread := srvFactory_.createTransmitClientService(srv);
   serviceMan_.launch(trxclientThread);
   waitForCompletion();
 end;
 
 procedure TTestServices.TestReceiveClientService;
 var rcvclientThread : TReceiveClientServiceThread;
+    srv             : TServerRecord;
 begin
-  rcvclientThread := srvFactory_.createReceiveClientService();
+  serverMan_.getDefaultServer(srv);
+  rcvclientThread := srvFactory_.createReceiveClientService(srv);
   serviceMan_.launch(rcvclientThread);
   waitForCompletion();
 end;
@@ -101,6 +111,16 @@ var thread : TTransmitChannelServiceThread;
 begin
   serverMan_.getSuperServer(srv);
   thread := srvFactory_.createTransmitChannelService(srv, 'Altos', 'CHAT', 'hello world :-)');
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
+
+procedure TTestServices.TestReceiveJobService;
+var thread : TReceiveJobServiceThread;
+    srv    : TServerRecord;
+begin
+  serverMan_.getDefaultServer(srv);
+  thread := srvFactory_.createReceiveJobService(srv);
   serviceMan_.launch(thread);
   waitForCompletion();
 end;

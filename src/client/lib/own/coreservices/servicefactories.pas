@@ -21,10 +21,10 @@ type TServiceFactory = class(TObject)
                        var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
     destructor Destroy;
 
-    function createReceiveClientService()  : TReceiveClientServiceThread;
-    function createTransmitClientService() : TTransmitClientServiceThread;
-    function createReceiveServerService()  : TReceiveServerServiceThread;
-    function createReceiveParamService()   : TReceiveParamServiceThread;
+    function createReceiveClientService(var srv : TServerRecord)  : TReceiveClientServiceThread;
+    function createTransmitClientService(var srv : TServerRecord) : TTransmitClientServiceThread;
+    function createReceiveServerService(var srv : TServerRecord)  : TReceiveServerServiceThread;
+    function createReceiveParamService(var srv : TServerRecord)   : TReceiveParamServiceThread;
     function createReceiveChannelService(var srv : TServerRecord;
                                          channame, chantype : String) : TReceiveChannelServiceThread;
     function createTransmitChannelService(var srv : TServerRecord;
@@ -61,42 +61,42 @@ destructor TServiceFactory.Destroy;
 begin
 end;
 
-function TServiceFactory.createReceiveClientService() : TReceiveClientServiceThread;
+function TServiceFactory.createReceiveClientService(var srv : TServerRecord) : TReceiveClientServiceThread;
 begin
- Result := TReceiveClientServiceThread.Create(servMan_, proxy_, port_, tableMan_.getClientTable(), logger_, conf_);
+ Result := TReceiveClientServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createTransmitClientService() : TTransmitClientServiceThread;
+function TServiceFactory.createTransmitClientService(var srv : TServerRecord) : TTransmitClientServiceThread;
 begin
- Result := TTransmitClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableMan_.getClientTable());
+ Result := TTransmitClientServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveServerService()  : TReceiveServerServiceThread;
+function TServiceFactory.createReceiveServerService(var srv : TServerRecord)  : TReceiveServerServiceThread;
 begin
-  Result := TReceiveServerServiceThread.Create(servMan_, proxy_, port_, tableMan_.getServerTable(), logger_, conf_);
+  Result := TReceiveServerServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveParamService() : TReceiveParamServiceThread;
+function TServiceFactory.createReceiveParamService(var srv : TServerRecord) : TReceiveParamServiceThread;
 begin
- Result := TReceiveParamServiceThread.Create(servMan_, proxy_, port_, logger_, conf_);
+ Result := TReceiveParamServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
 function TServiceFactory.createReceiveChannelService(var srv : TServerRecord;
                                      channame, chantype : String) : TReceiveChannelServiceThread;
 begin
-  Result := TReceiveChannelServiceThread.Create(servMan_, proxy_, port_, tableMan_, logger_, conf_, srv, channame, chantype);
+  Result := TReceiveChannelServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, channame, chantype);
 end;
 
 function TServiceFactory.createTransmitChannelService(var srv : TServerRecord;
                                                       channame, chantype : String;
                                                       content : AnsiString) : TTransmitChannelServiceThread;
 begin
- Result := TTransmitChannelServiceThread.Create(servMan_, proxy_, port_, logger_, tableMan_.getChannelTable(), conf_, srv, channame, chantype, content);
+ Result := TTransmitChannelServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, channame, chantype, content);
 end;
 
 function TServiceFactory.createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
 begin
- Result := TReceiveJobServiceThread.Create(servMan_, proxy_, port_, tableMan_, logger_, conf_, srv);
+ Result := TReceiveJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
 

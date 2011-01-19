@@ -11,50 +11,41 @@ interface
 
 uses coreservices, servermanagers, coreconfigurations,
      channeltables, retrievedtables, dbtablemanagers,
-     loggers, identities, Classes, SysUtils, DOM;
+     loggers, identities, Classes, SysUtils, DOM, synacode;
 
 type TReceiveChannelServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan  : TServerManager; proxy, port : String;
-                     var tableman : TDbTableManager; var logger : TLogger;
-                     var conf : TCoreConfiguration;
-                     var srv : TServerRecord; channame, chantype : String);
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager;
+                     channame, chantype : String);
  protected
     procedure Execute; override;
 
  private
-   tableman_ : TDbTableManager;
-   srv_      : TServerRecord;
-   conf_     : TCoreConfiguration;
    channame_,
    chantype_ : String;
 
    function  getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
-   procedure parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord; var row : TDbRetrievedRow);
+   procedure parseXml(var xmldoc : TXMLDocument; var row : TDbRetrievedRow);
 end;
 
 implementation
 
-constructor TReceiveChannelServiceThread.Create(var servMan  : TServerManager; proxy, port : String;
-                                                var tableman : TDbTableManager; var logger : TLogger;
-                                                var conf : TCoreConfiguration;
-                                                var srv : TServerRecord; channame, chantype : String);
+constructor TReceiveChannelServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager;
+                     channame, chantype : String);
 begin
-  inherited Create(servMan, proxy, port, logger);
-  tableman_ := tableman;
-  srv_      := srv;
-  channame_ := channame;
-  chantype_ := chantype;
-  conf_     := conf;
+ inherited Create(servMan, srv, proxy, port, logger, '[TReceiveChannelServiceThread]> ', conf, tableman);
+ channame_ := channame;
+ chantype_ := chantype;
 end;
 
 function  TReceiveChannelServiceThread.getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
 begin
- Result :=  'nodeid='+myGPUId.NodeId+'&lastmsg='+IntToStr(row.lastmsg)+'&chantype='+chantype_+'&channame='+channame_;
+ Result :=  'nodeid='+encodeUrl(myGPUId.NodeId)+'&lastmsg='+IntToStr(row.lastmsg)+'&chantype='+encodeURl(chantype_)+'&channame='+encodeUrl(channame_);
 end;
 
-procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var srv : TServerRecord;
-                                                var row : TDbRetrievedRow);
+procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var row : TDbRetrievedRow);
 var
     dbnode   : TDbChannelRow;
     node     : TDOMNode;
@@ -67,7 +58,7 @@ begin
         try
              begin
                dbnode.content           := node.FindNode('content').TextContent;
-               dbnode.server_id         := srv.id;
+               dbnode.server_id         := srv_.id;
                dbnode.externalid        := StrToInt(node.FindNode('id').TextContent);
                dbnode.nodename          := node.FindNode('nodename').TextContent;
                dbnode.nodeid            := node.FindNode('nodeid').TextContent;
@@ -79,13 +70,13 @@ begin
 
                tableman_.getChannelTable().insert(dbnode);
                if dbnode.externalid>row.lastmsg then row.lastmsg := dbnode.externalid;
-               logger_.log(LVL_DEBUG, 'Updated or added message '+IntToStr(dbnode.id)+' to tbchannel table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added message '+IntToStr(dbnode.id)+' to tbchannel table.');
              end;
           except
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveChannelServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -93,7 +84,7 @@ begin
      end;  // while Assigned(node)
 
    tableMan_.getRetrievedTable.insertOrUpdate(row);
-   logger_.log(LVL_DEBUG, 'Parameter in TBRETRIEVED updated with lastmsg '+IntToStr(row.lastmsg)+', msgtype '+row.msgtype+'.');
+   logger_.log(LVL_DEBUG, logHeader_+'Parameter in TBRETRIEVED updated with lastmsg '+IntToStr(row.lastmsg)+', msgtype '+row.msgtype+'.');
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
 
@@ -104,13 +95,12 @@ var xmldoc    : TXMLDocument;
 begin
  tableman_.getRetrievedTable().getRow(row, srv_.id, channame_, chantype_);
 
- receive(srv_, '/channel/get_channel_messages_xml.php?'+getPHPArguments(row),
-         '[TReceiveChannelServiceThread]> ', xmldoc, false);
+ receive('/channel/get_channel_messages_xml.php?'+getPHPArguments(row), xmldoc, false);
 
  if not erroneous_ then
-     parseXml(xmldoc, srv_, row);
+     parseXml(xmldoc, row);
 
- finishReceive(srv_, '[TReceiveChannelServiceThread]> ', 'Service updated table TBCHANNEL succesfully :-)', xmldoc);
+ finishReceive('Service updated table TBCHANNEL succesfully :-)', xmldoc);
 end;
 
 

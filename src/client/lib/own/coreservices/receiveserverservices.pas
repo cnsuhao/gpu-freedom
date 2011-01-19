@@ -10,36 +10,29 @@ unit receiveserverservices;
 }
 interface
 
-uses coreservices, servermanagers,
+uses coreservices, servermanagers, dbtablemanagers,
      servertables, loggers, downloadutils, coreconfigurations, geoutils,
      Classes, SysUtils, DOM, identities;
 
 type TReceiveServerServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; proxy, port : String;
-                     servertable : TDbServerTable; var logger : TLogger;
-                     var conf : TCoreConfiguration);
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
+
  protected
     procedure Execute; override;
 
  private
-   servertable_ : TDbServerTable;
-   conf_        : TCoreConfiguration;
-
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
 
-constructor TReceiveServerServiceThread.Create(var servMan : TServerManager; proxy, port : String;
-                                               servertable : TDbServerTable; var logger : TLogger;
-                                               var conf : TCoreConfiguration);
+constructor TReceiveServerServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, proxy, port, logger);
- servertable_ := servertable;
- conf_ := conf;
+ inherited Create(servMan, srv, proxy, port, logger, '[TReceiveServerServiceThread]> ', conf, tableman);
 end;
-
 
 procedure TReceiveServerServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
@@ -74,14 +67,14 @@ begin
                dbrow.jobsinqueue := StrToInt(node.FindNode('jobsinqueue').TextContent);
                dbrow.failures    := 0;
 
-               servertable_.insertOrUpdate(dbrow);
+               tableman_.getServerTable().insertOrUpdate(dbrow);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table (distance: '+FloatToStr(dbrow.distance)+').');
              end;
           except
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveServerServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -95,25 +88,22 @@ end;
 
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    srv       : TServerRecord;
 begin
- servMan_.getSuperServer(srv);
- receive(srv, '/supercluster/get_servers.php',
-         '[TReceiveServerServiceThread]> ', xmldoc, true);
+ receive('/supercluster/get_servers.php', xmldoc, true);
  if not erroneous_ then
     begin
-     servertable_.execSQL('UPDATE tbserver set updated=0;');
+     tableman_.getServerTable().execSQL('UPDATE tbserver set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
        begin
-        servertable_.execSQL('UPDATE tbserver set online=updated;');
-        servertable_.execSQL('UPDATE tbserver set defaultsrv=0;');
-        servertable_.execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
+        tableman_.getServerTable().execSQL('UPDATE tbserver set online=updated;');
+        tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=0;');
+        tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
         servMan_.reloadServers();
        end;
     end;
 
- finishReceive(srv, '[TReceiveServerServiceThread]> ', 'Service updated table TBSERVER succesfully :-)', xmldoc);
+ finishReceive('Service updated table TBSERVER succesfully :-)', xmldoc);
 end;
 
 

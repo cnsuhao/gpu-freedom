@@ -2,19 +2,19 @@ unit receiveparamservices;
 
 interface
 
-uses coreservices, servermanagers,
+uses coreservices, servermanagers, dbtablemanagers,
      loggers, coreconfigurations,
      Classes, SysUtils, DOM, identities;
 
 type TReceiveParamServiceThread = class(TReceiveServiceThread)
  public
-   constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                      var conf : TCoreConfiguration);
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
+
  protected
    procedure Execute; override;
 
  private
-   conf_ : TCoreConfiguration;
    procedure parseXml(var xmldoc : TXMLDocument);
 
 end;
@@ -23,11 +23,10 @@ end;
 
 implementation
 
-constructor TReceiveParamServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                                              var conf : TCoreConfiguration);
+constructor TReceiveParamServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                                              var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, proxy, port, logger);
- conf_ := conf;
+ inherited Create(servMan, srv, proxy, port, logger, '[TReceiveParamServiceThread]> ', conf, tableman);
 end;
 
 procedure TReceiveParamServiceThread.parseXml(var xmldoc : TXMLDocument);
@@ -59,7 +58,7 @@ begin
            on E : Exception do
               begin
                 erroneous_ := true;
-                logger_.log(LVL_SEVERE, '[TReceiveParamServiceThread]> Exception catched in parseXML: '+E.Message);
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
           end; // except
 
@@ -70,16 +69,13 @@ end;
 
 procedure TReceiveParamServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    srv       : TServerRecord;
 begin
- servMan_.getSuperServer(srv);
- receive(srv, '/supercluster/get_parameters.php',
-         '[TReceiveParamServiceThread]> ', xmldoc, true);
+ receive('/supercluster/get_parameters.php', xmldoc, true);
 
  if not erroneous_ then
      parseXml(xmldoc);
 
- finishReceive(srv, '[TReceiveParamServiceThread]> ', 'Service retrieved global parameters from superserver succesfully :-)', xmldoc);
+ finishReceive('Service retrieved global parameters from superserver succesfully :-)', xmldoc);
 end;
 
 

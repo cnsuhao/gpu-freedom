@@ -2,23 +2,19 @@ unit transmitchannelservices;
 
 interface
 
-uses coreconfigurations, coreservices, synacode,
+uses coreconfigurations, coreservices, synacode, dbtablemanagers,
      channeltables, servermanagers, loggers, identities,
      SysUtils, Classes;
 
 type TTransmitChannelServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
-                     chantable : TDbChannelTable; var conf : TCoreconfiguration;
-                     var srv : TServerRecord;
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager;
                      channame, chantype : String; content : AnsiString);
  protected
   procedure Execute; override;
 
  private
-    chantable_ : TDbChannelTable;
-    srv_       : TServerRecord;
-    conf_      : TCoreConfiguration;
     content_   : AnsiString;
     channame_,
     chantype_  : String;
@@ -29,17 +25,12 @@ end;
 
 implementation
 
-constructor TTransmitChannelServiceThread.Create(var servMan : TServerManager;
-                   proxy, port : String; var logger : TLogger;
-                   chantable : TDbChannelTable; var conf : TCoreconfiguration;
-                   var srv : TServerRecord;
-                   channame, chantype : String; content : AnsiString);
+constructor TTransmitChannelServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord;
+                     proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager;
+                     channame, chantype : String; content : AnsiString);
 begin
- inherited Create(servMan, proxy, port, logger);
- chantable_ := chantable;
- conf_ := conf;
- srv_ := srv;
-
+ inherited Create(servMan, srv, proxy, port, logger, '[TTransmitChannelServiceThread]> ', conf, tableman);
  content_  := content;
  channame_ := channame;
  chantype_ := chantype;
@@ -58,7 +49,7 @@ begin
   row.chantype          := chantype_;
   row.create_dt         := Now();
   row.usertime_dt       := Now();
-  chantable_.insert(row);
+  tableman_.getChannelTable().insert(row);
   logger_.log(LVL_DEBUG, 'Added message '+IntToStr(row.id)+' to tbchannel table.');
 end;
 
@@ -76,7 +67,7 @@ with myGPUID do
   rep := rep+'content='+encodeURL(content_)+'&';
  end;
 
- logger_.log(LVL_DEBUG, '[TTransmitClientServiceThread]> Reporting string is:');
+ logger_.log(LVL_DEBUG, logHeader_+'Reporting string is:');
  logger_.log(LVL_DEBUG, rep);
  Result := rep;
 end;
@@ -85,8 +76,8 @@ end;
 procedure TTransmitChannelServiceThread.Execute;
 begin
  insertTransmission();
- transmit(srv_, '/channel/report_channel_message.php?'+getPHPArguments(), '[TTransmitChannelServiceThread]> ', false);
- finishTransmit(srv_,  '[TTransmitChannelServiceThread]> ', 'Channel content transmitted :-)');
+ transmit('/channel/report_channel_message.php?'+getPHPArguments(), false);
+ finishTransmit('Channel content transmitted :-)');
 end;
 
 

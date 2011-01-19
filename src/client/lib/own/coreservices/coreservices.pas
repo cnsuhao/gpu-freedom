@@ -10,25 +10,33 @@ unit coreservices;
 interface
 
 uses
-  managedthreads, servermanagers, loggers, downloadutils, XMLRead, DOM, Classes, SysUtils;
+  managedthreads, servermanagers, loggers, downloadutils,
+  dbtablemanagers, coreconfigurations,
+  XMLRead, DOM, Classes, SysUtils;
 
 type TCoreServiceThread = class(TManagedThread)
   public
-    constructor Create(var logger : TLogger);
+    constructor Create(var logger : TLogger; logHeader : String; var conf : TCoreConfiguration; var tableman : TDbTableManager);
 
   protected
-    logger_  : TLogger;
+    logger_    : TLogger;
+    logHeader_ : String;
+    conf_     : TCoreConfiguration;
+    tableman_ : TDbTableManager;
 end;
 
 type TCommServiceThread = class(TCoreServiceThread)
   public
-    constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
+    constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger; logHeader : String;
+                       var conf : TCoreConfiguration; var tableman : TDbTableManager);
 
   protected
-    servMan_ : TServerManager;
+    srv_      : TServerRecord;
+    servMan_  : TServerManager;
     proxy_,
-    port_    : String;
-    procedure finishComm(var srv : TServerRecord; logHeader, logSuccess : String);
+    port_     : String;
+
+    procedure finishComm(logSuccess : String);
 
 end;
 
@@ -37,60 +45,66 @@ type TInternalServiceThread = class(TCoreServiceThread)
 end;
 
 type TTransmitServiceThread = class(TCommServiceThread)
-   procedure transmit(var srv : TServerRecord; request : AnsiString; logHeader : String; noargs : Boolean);
-   procedure finishTransmit(var srv : TServerRecord; logHeader, logSuccess : String);
+   procedure transmit(request : AnsiString; noargs : Boolean);
+   procedure finishTransmit(logSuccess : String);
 end;
 
 
 type TReceiveServiceThread = class(TCommServiceThread)
-   procedure receive(var srv : TServerRecord; request : AnsiString; logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
-   procedure finishReceive(var srv : TServerRecord; logHeader, logSuccess : String; var xmldoc : TXmlDocument);
+   procedure receive(request : AnsiString; var xmldoc : TXmlDocument; noargs : Boolean);
+   procedure finishReceive(logSuccess : String; var xmldoc : TXmlDocument);
 end;
 
 
 
 implementation
 
-constructor TCoreServiceThread.Create(var logger : TLogger);
+constructor TCoreServiceThread.Create(var logger : TLogger; logHeader : String;
+                                      var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
   inherited Create(true); // suspended
   logger_  := logger;
+  logHeader_ := logHeader;
+  conf_     := conf;
+  tableman_ := tableman;
 end;
 
-constructor TCommServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger);
+constructor TCommServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger; logHeader : String;
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
-  inherited Create(logger);
-  servMan_ := servMan;
-  proxy_   := proxy;
-  port_    := port;
+  inherited Create(logger, logHeader, conf, tableman);
+  srv_      := srv;
+  servMan_  := servMan;
+  proxy_    := proxy;
+  port_     := port;
 end;
 
 
-procedure TTransmitServiceThread.transmit(var srv : TServerRecord; request : AnsiString; logHeader : String; noargs : Boolean);
+procedure TTransmitServiceThread.transmit(request : AnsiString; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin
  stream  := TMemoryStream.Create;
- erroneous_ := not downloadToStream(srv.url+request+getProxyArg(noargs),
-               proxy_, port_, logHeader, logger_, stream);
+ erroneous_ := not downloadToStream(srv_.url+request+getProxyArg(noargs),
+               proxy_, port_, logHeader_, logger_, stream);
 
  if stream <>nil then stream.Free  else logger_.log(LVL_SEVERE,
-         logHeader+'Internal error in coreservices.pas, stream is nil');
+         logHeader_+'Internal error in coreservices.pas, stream is nil');
 end;
 
 
-procedure TReceiveServiceThread.receive(var srv : TServerRecord; request : AnsiString; logHeader : String; var xmldoc : TXmlDocument; noargs : Boolean);
+procedure TReceiveServiceThread.receive(request : AnsiString; var xmldoc : TXmlDocument; noargs : Boolean);
 var
     stream    : TMemoryStream;
 begin
  xmldoc := TXMLDocument.Create();
  stream  := TMemoryStream.Create;
- erroneous_ := not downloadToStream(srv.url+request+getProxyArg(noargs),
-               proxy_, port_, logHeader, logger_, stream);
+ erroneous_ := not downloadToStream(srv_.url+request+getProxyArg(noargs),
+               proxy_, port_, logHeader_, logger_, stream);
 
  if stream=nil then
   begin
-   logger_.log(LVL_SEVERE, logHeader+'Internal error in coreservices.pas, stream is nil');
+   logger_.log(LVL_SEVERE, logHeader_+'Internal error in coreservices.pas, stream is nil');
    erroneous_ := true;
   end;
 
@@ -103,42 +117,42 @@ begin
      on E : Exception do
         begin
            erroneous_ := true;
-           logger_.log(LVL_SEVERE, logHeader+'Exception catched in Execute: '+E.Message);
+           logger_.log(LVL_SEVERE, logHeader_+'Exception catched in Execute: '+E.Message);
         end;
   end; // except
   end; // if not erroneous
   if stream<>nil then stream.Free;
 end;
 
-procedure TCommServiceThread.finishComm(var srv : TServerRecord; logHeader, logSuccess : String);
+procedure TCommServiceThread.finishComm(logSuccess : String);
 begin
  if erroneous_ then
     begin
-     servMan_.increaseFailures(srv.url);
-     logger_.log(LVL_SEVERE, logHeader+'Service finished but ERRONEOUS flag set :-(')
+     servMan_.increaseFailures(srv_.url);
+     logger_.log(LVL_SEVERE, logHeader_+'Service finished but ERRONEOUS flag set :-(')
     end
  else
-   logger_.log(LVL_INFO, logHeader+logSuccess);
+   logger_.log(LVL_INFO, logHeader_+logSuccess);
  done_ := true;
 end;
 
 
-procedure TReceiveServiceThread.finishReceive(var srv : TServerRecord; logHeader, logSuccess : String; var xmldoc : TXmlDocument);
+procedure TReceiveServiceThread.finishReceive(logSuccess : String; var xmldoc : TXmlDocument);
 begin
  if xmldoc=nil then
    begin
-    logger_.log(LVL_SEVERE, logHeader+'xmldoc is nil in finalize');
+    logger_.log(LVL_SEVERE, logHeader_+'xmldoc is nil in finalize');
     erroneous_ := true;
    end
  else
     xmldoc.Free;
 
- finishComm(srv, logHeader, logSuccess);
+ finishComm(logSuccess);
 end;
 
-procedure TTransmitServiceThread.finishTransmit(var srv : TServerRecord; logHeader, logSuccess : String);
+procedure TTransmitServiceThread.finishTransmit(logSuccess : String);
 begin
- finishComm(srv, logHeader, logSuccess);
+ finishComm(logSuccess);
 end;
 
 
