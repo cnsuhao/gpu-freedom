@@ -12,8 +12,8 @@ uses
   receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
-  receivejobservices,
-  coreconfigurations;
+  receivejobservices, transmitjobservices,
+  coreconfigurations, jobtables;
 
 type TServiceFactory = class(TObject)
    public
@@ -31,6 +31,7 @@ type TServiceFactory = class(TObject)
                                           channame, chantype : String;
                                           content : AnsiString) : TTransmitChannelServiceThread;
     function createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
+    function createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobRow) : TTransmitJobServiceThread;
 
    private
 
@@ -97,6 +98,11 @@ end;
 function TServiceFactory.createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
 begin
  Result := TReceiveJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+end;
+
+function TServiceFactory.createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobRow) : TTransmitJobServiceThread;
+begin
+ Result := TTransmitJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobrow);
 end;
 
 

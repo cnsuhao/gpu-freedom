@@ -14,10 +14,11 @@ uses sqlite3ds, db, coretables, SysUtils;
 const
   // for status column
   JS_NEW             = 10;
-  JS_RUNNING         = 20;
-  JS_ONHOLD          = 30;
-  JS_COMPLETED_OK    = 90;
-  JS_COMPLETED_ERROR = 99;
+  JS_TRANSMITTED     = 20;
+  JS_RECEIVED        = 30;
+  JS_RUNNING         = 40;
+  JS_ONHOLD          = 50;
+  JS_COMPLETED       = 90;
 
 
 type TDbJobRow = record
@@ -104,7 +105,6 @@ begin
   else
       dataset_.Append;
 
-  dataset_.FieldByName('id').AsInteger := row.id;
   dataset_.FieldByName('externalid').AsInteger := row.externalid;
   dataset_.FieldByName('jobid').AsString := row.jobid;
   dataset_.FieldByName('job').AsString := row.job;
@@ -117,6 +117,8 @@ begin
 
   dataset_.Post;
   dataset_.ApplyUpdates;
+
+  row.id := dataset_.FieldByName('id').AsInteger;
 end;
 
 

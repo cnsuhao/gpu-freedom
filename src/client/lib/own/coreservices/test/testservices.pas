@@ -10,7 +10,7 @@ uses
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
-  receivejobservices,
+  receivejobservices, transmitjobservices, jobtables,
   coreconfigurations;
 
 type
@@ -28,6 +28,7 @@ type
     procedure TestReceiveChannelService;
     procedure TestTransmitChannelService;
     procedure TestReceiveJobService;
+    procedure TestTransmitJobService;
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -121,6 +122,23 @@ var thread : TReceiveJobServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createReceiveJobService(srv);
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
+
+procedure TTestServices.TestTransmitJobService;
+var thread : TTransmitJobServiceThread;
+    srv    : TServerRecord;
+    jobrow : TDbJobRow;
+begin
+  jobrow.job := '1, 1, add';
+  jobrow.jobid := '12345';
+  jobrow.islocal:=false;
+  jobrow.status:=JS_NEW;
+  jobrow.workunitincoming:='pari.txt';
+  jobrow.workunitoutgoing:='para.txt';
+  serverMan_.getDefaultServer(srv);
+  thread := srvFactory_.createTransmitJobService(srv, jobrow);
   serviceMan_.launch(thread);
   waitForCompletion();
 end;

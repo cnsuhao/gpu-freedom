@@ -39,6 +39,7 @@ end;
 procedure TReceiveJobServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
     dbrow    : TDbJobRow;
+    queuerow : TDbJobQueueRow;
     node     : TDOMNode;
     port     : String;
 
@@ -58,10 +59,12 @@ begin
                dbrow.islocal     := false;
                dbrow.server_id   := srv_.id;
                dbrow.create_dt   := Now;
-               dbrow.status      := JS_NEW;
+               dbrow.status      := JS_RECEIVED;
 
                tableman_.getJobTable().insertOrUpdate(dbrow);
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobid: '+dbrow.jobid+' to TBJOB table.');
+               queuerow.job_id := dbrow.id;
+               tableman_.getJobQueueTable().insert(queuerow);
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobid: '+dbrow.jobid+' to TBJOB and to TBJOBQUEUE table.');
              end;
           except
            on E : Exception do
@@ -82,16 +85,12 @@ end;
 procedure TReceiveJobServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/cluster/jobqueue/get_jobs.php&nodeid='+encodeURL(myGPUId.NodeId),
+ receive('/jobqueue/get_jobs.php&nodeid='+encodeURL(myGPUId.NodeId),
          xmldoc, false);
 
  if not erroneous_ then
     begin
      parseXml(xmldoc);
-     if not erroneous_ then
-       begin
-         //TODO: update tbjobqueue
-       end;
     end;
 
  finishReceive('Service updated table TBJOB and TBJOBQUEUE succesfully :-)', xmldoc);
