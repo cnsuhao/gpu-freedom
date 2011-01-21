@@ -31,7 +31,8 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, compthreadmanagers, downloadthreadmanagers, loggers;
+  frontendmanagers, compthreadmanagers, downloadthreadmanagers,
+  uploadthreadmanagers, loggers;
 
 implementation
 
@@ -40,12 +41,14 @@ type TCoreModule = class(TObject)
     destructor Destroy;
 
     // helper structures
-    function getPluginManager()     : TPluginManager;
-    function getMethController()    : TMethodController;
-    function getResultCollector()   : TResultCollector;
-    function getFrontendManager()   : TFrontendManager;
-    function getCompThreadManager() : TCompThreadManager;
-    function getDownThreadManager() : TDownloadThreadManager;
+    function getPluginManager()       : TPluginManager;
+    function getMethController()      : TMethodController;
+    function getResultCollector()     : TResultCollector;
+    function getFrontendManager()     : TFrontendManager;
+    function getCompThreadManager()   : TCompThreadManager;
+    function getDownThreadManager()   : TDownloadThreadManager;
+    function getUploadThreadManager() : TUploadThreadManager;
+
     function getLogger()            : TLogger;
   private
     // core components
@@ -56,6 +59,7 @@ type TCoreModule = class(TObject)
     compthreadman_  : TCompThreadManager;
     logger_         : TLogger;
     downthreadman_  : TDownloadThreadManager;
+    upthreadman_    : TUploadThreadManager;
 end;
 
 
@@ -69,6 +73,7 @@ begin
    frontman_       := TFrontendManager.Create();
    compthreadman_  := TCompThreadManager.Create(plugman_, methController_, rescoll_, frontman_);
    downthreadman_  := TDownloadThreadManager.Create(logger_);
+   upthreadman_    := TUploadThreadManager.Create(logger_);
 end;
 
 destructor TCoreModule.Destroy;
@@ -78,6 +83,7 @@ begin
   frontman_.Free;
   compthreadman_.Free;
   downthreadman_.Free;
+  upthreadman_.Free;
   logger_.Free;
   inherited;
 end;
@@ -117,6 +123,12 @@ function TCoreModule.getDownThreadManager() : TDownloadThreadManager;
 begin
  Result := downthreadman_;
 end;
+
+function TCoreModule.getUploadThreadManager() : TUploadThreadManager;
+begin
+ Result := upthreadman_;
+end;
+
 
 end.
 

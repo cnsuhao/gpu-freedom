@@ -54,7 +54,7 @@ end;
 
 function  TDownloadThread.getTargetFileName() : String;
 begin
-  Result := targetPath_+PathDelim+targetFile_;
+  Result := targetPath_+targetFile_;
 end;
 
 procedure TDownloadThread.execute();

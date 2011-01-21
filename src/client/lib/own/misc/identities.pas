@@ -89,8 +89,10 @@ var
   MyGPUID         : TGPUIdentity;
   MyUserID        : TUserIdentity;
   MyConfID        : TConfIdentity;
+
   TMCompStatus    : TThreadManagerStatus;
   TMDownStatus    : TThreadManagerStatus;
+  TMUploadStatus  : TThreadManagerStatus;
   TMServiceStatus : TThreadManagerStatus;
 
 implementation

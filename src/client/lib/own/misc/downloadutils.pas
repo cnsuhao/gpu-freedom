@@ -17,6 +17,7 @@ function downloadToFileOrStream(url : AnsiString; targetPath, targetFile, proxy,
 
 procedure convertLFtoCRLF(var instream, outstream : TMemoryStream; var logger : TLogger);
 function getProxyArg(noargs : Boolean) : String;
+function parseHttpResult(var HTTP : THTTPSend; var logger : TLogger; logHeader : String) : Boolean;
 
 implementation
 
@@ -33,13 +34,32 @@ begin
 end;
 
 
+function parseHttpResult(var HTTP : THTTPSend; var logger : TLogger; logHeader : String) : Boolean;
+begin
+  Result := true;
+  logger.log(LVL_DEBUG, logHeader+'HTTP Result was '+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
+  logger.log(LVL_DEBUG, logHeader+'HTTP Header is ');
+  logger.log(LVL_DEBUG, Http.headers.text);
+  if (Http.Resultcode<>200) then
+         begin
+           if (Http.Resultcode=404) then logger.log(LVL_SEVERE, 'Page not found.')
+           else
+           if (Http.Resultcode=403) then logger.log(LVL_SEVERE, 'Access to page forbidden.')
+           else
+           if (Http.Resultcode=503) then logger.log(LVL_SEVERE, 'Service unavailable. Server overloaded')
+           else
+             logger.log(LVL_SEVERE, 'Strange HTTP result code, unusual!!!! ('+Http.Resultstring+')');
+           Result := false;
+         end
+end;
+
 function downloadToFileOrStream(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 var
     Http        : THTTPSend;
     saveFile    : Boolean;
     temp        : TMemoryStream;
 begin
-  Result   := true;
+  Result   := false;
   saveFile := (stream = nil);
   logger.log(LVL_DEBUG, logHeader+'Execute method started.');
   logger.log(LVL_INFO, logHeader+'Retrieving data from URL: '+url);
@@ -61,22 +81,10 @@ begin
       end
     else
       begin
-        logger.log(LVL_DEBUG, logHeader+'HTTP Result was '+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
-        logger.log(LVL_DEBUG, logHeader+'HTTP Header is ');
-        logger.log(LVL_DEBUG, Http.headers.text);
-        if (Http.Resultcode<>200) then
+        Result := parseHttpResult(Http, logger, logHeader);
+        if Result then
          begin
-           if (Http.Resultcode=404) then logger.log(LVL_SEVERE, 'Page not found.')
-           else
-           if (Http.Resultcode=403) then logger.log(LVL_SEVERE, 'Access to page forbidden.')
-           else
-           if (Http.Resultcode=503) then logger.log(LVL_SEVERE, 'Service unavailable. Server overloaded')
-           else
-             logger.log(LVL_SEVERE, 'Strange HTTP result code, unusual!!!! ('+Http.Resultstring+')');
-           Result := false;
-         end
-        else
-         if saveFile then
+           if saveFile then
             begin
                HTTP.Document.SaveToFile(targetPath+targetFile);
                logger.log(LVL_INFO, logHeader+'New file created at '+targetPath+targetFile);
@@ -86,7 +94,8 @@ begin
                HTTP.Document.SaveToStream(stream);
                logger.log(LVL_DEBUG, logHeader+'New stream created');
             end;
-      end;
+        end; // if Result
+      end; // if not HTTPMethod
 
   except
     on E : Exception do

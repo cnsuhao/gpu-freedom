@@ -13,44 +13,48 @@ interface
 uses SyncObjs, SysUtils,
      jobs, downloadthreads, stkconstants, identities, threadmanagers, loggers;
 
-type
-  TDownloadThreadManager = class(TThreadManager)
+
+type TCommThreadManager = class(TThreadManager)
   public
     constructor Create(var logger : TLogger);
     destructor  Destroy();
+    procedure setProxy(proxy, port : String);
+
+  protected
+    logger_ : TLogger;
+    proxy_,
+    port_   : String;
+end;
+
+type
+  TDownloadThreadManager = class(TCommThreadManager)
+  public
+    constructor Create(var logger : TLogger);
 
     function download(url, targetPath, targetFilename : String): Longint;
 
     procedure updateStatus; virtual;
 
-    procedure setProxy(proxy, port : String);
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
-
-  private
-    logger_ : TLogger;
-    proxy_,
-    port_   : String;
-
-  end;
+end;
   
 implementation
 
-constructor TDownloadThreadManager.Create(var logger : TLogger);
+constructor TCommThreadManager.Create(var logger : TLogger);
 begin
   inherited Create(DEFAULT_DOWN_THREADS);
   logger_ := logger;
   proxy_ := '';
   port_ := '';
-  updateStatus;
 end;
 
-destructor TDownloadThreadManager.Destroy();
+destructor TCommThreadManager.Destroy();
 begin
   inherited;
 end;
 
-procedure TDownloadThreadManager.setProxy(proxy, port : String);
+procedure TCommThreadManager.setProxy(proxy, port : String);
 begin
  CS_.Enter;
  proxy_ := proxy;
@@ -58,6 +62,11 @@ begin
  CS_.Leave;
 end;
 
+constructor TDownloadThreadManager.Create(var logger : TLogger);
+begin
+ inherited Create(logger);
+ updateStatus;
+end;
 
 function TDownloadThreadManager.download(url, targetPath, targetFilename : String): Longint;
 var slot : Longint;
@@ -74,7 +83,7 @@ begin
    if slot=-1 then
             begin
               CS_.Leave;
-              raise Exception.Create('Internal error in threadmanagers.pas, slot is -1');
+              raise Exception.Create('Internal error in downloadthreadmanagers.pas, slot is -1');
             end;
   
   Inc(current_threads_);  
