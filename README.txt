@@ -115,6 +115,7 @@ File Tree structure for this package, codenamed freedom follows:
    /supercluster   source code to inform parent server, so that
                    servers can be organized hierarchically in a tree
 	   /user       user management at supercluster level
+   /test       scripts to test server integrity	   
    /utils      php scripts for general use
    /workunits  source code to manage workunits
  

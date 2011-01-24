@@ -27,14 +27,23 @@ begin
 end;
 
 function uploadFromFileOrStream(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+// taken from HTTP Demo Unit1.pas::ProxyHttpPostFile(const URL, FieldName, FileName: string; const Data: TStream; const ResultData: TStrings): Boolean;
+const
+  CRLF = #$0D + #$0A;
+
 var
     Http        : THTTPSend;
     fromFile    : Boolean;
     temp        : TMemoryStream;
+    Bound, s,
+    FieldName   : AnsiString;
 begin
   Result   := false;
   fromFile := (stream = nil);
   logger.log(LVL_DEBUG, logHeader+'Execute method started.');
+  fieldName := 'myfile';  // on PHP use then
+                          // $_FILES['myfile']['type'], $_FILES['myfile']['size'],$_FILES['myfile']['tmp_name'], etc...
+
   if fromFile then
     logger.log(LVL_INFO, logHeader+'Pushing file '+sourcePath+sourceFile+' to URL: '+url)
   else
@@ -46,22 +55,39 @@ begin
 
   if Trim(proxy)<>'' then HTTP.ProxyHost := proxy;
   if Trim(port)<>'' then HTTP.ProxyPort := port;
-
   logger.log(LVL_DEBUG, logHeader+'User agent is '+HTTP.UserAgent);
 
-  if fromFile then
-    HTTP.Document.LoadFromFile(sourcePath+sourceFile)
-  else
-    HTTP.Document.LoadFromStream(stream);
-
   try
-    if not HTTP.HTTPMethod('POST', url) then
+   Bound := IntToHex(Random(MaxInt), 8) + '_Synapse_boundary';
+
+   if fromFile then
+     temp.LoadFromFile(sourcePath+sourceFile)
+   else
+     temp.LoadFromStream(stream);
+    temp.Position := 0;
+
+    s := '--' + Bound + CRLF;
+    s := s + 'content-disposition: form-data; name="' + FieldName + '";';
+    s := s + ' filename="' + sourceFile +'"' + CRLF;
+    s := s + 'Content-Type: application/octet-string' + CRLF + CRLF;
+    // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
+    HTTP.Document.WriteAnsiString(s);
+    HTTP.Document.CopyFrom(temp, 0);
+    s := CRLF + '--' + Bound + '--' + CRLF;
+    // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
+    HTTP.Document.WriteAnsiString(s);
+    HTTP.MimeType := 'multipart/form-data, boundary=' + Bound;
+    Result := HTTP.HTTPMethod('POST', URL);
+
+   //could be enabled to parse answers
+   //ResultData := nil;
+   if not Result then
       begin
 	logger.log(LVL_SEVERE, 'HTTP Error '+logHeader+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
         Result := false;
-      end
-    else
-        Result := parseHttpResult(HTTP, logger, logHeader);
+      end;
+   // else
+   //    ResultData.LoadFromStream(HTTP.Document);
 
   except
     on E : Exception do

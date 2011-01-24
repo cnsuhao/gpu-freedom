@@ -44,3 +44,18 @@ CREATE TABLE `tbchannel` (
 `usertime_dt` DATETIME NULL,
 `create_dt` DATETIME NOT NULL
 ) ENGINE = MYISAM ;
+
+
+CREATE TABLE `tbparameter` (
+  `id` int(11) NOT NULL auto_increment,
+  `paramtype` varchar(20) collate latin1_general_ci NOT NULL,
+  `paramname` varchar(20) collate latin1_general_ci NOT NULL,
+  `paramvalue` varchar(255) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `paramtype` (`paramtype`,`paramname`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+
+
+INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`) VALUES
+(1, 'TEST', 'DB_CONNECTION', 'OK');
+
