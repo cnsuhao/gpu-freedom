@@ -27,7 +27,7 @@ implementation
 procedure TTestDownloadThreadManager.TestDownThreadManager;
 begin
  downManager_.setMaxThreads(3);
- if FileExists(path_+'online.xml') then DeleteFile(path_+'index.html');
+ if FileExists(path_+'online.xml') then DeleteFile(path_+'online.xml');
  if FileExists(path_+'deltasql.php') then DeleteFile(path_+'deltasql.php');
  if FileExists(path_+'gpu.php') then DeleteFile(path_+'gpu.php');
  downManager_.download('http://www.gpu-grid.net/file_distributor/list_computers_online_xml.php', path_, 'online.xml');

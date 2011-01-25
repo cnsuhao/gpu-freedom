@@ -37,6 +37,8 @@ var
     temp        : TMemoryStream;
     Bound, s,
     FieldName   : AnsiString;
+    ResultData  : TStringList;
+    i           : Longint;
 begin
   Result   := false;
   fromFile := (stream = nil);
@@ -58,6 +60,8 @@ begin
   logger.log(LVL_DEBUG, logHeader+'User agent is '+HTTP.UserAgent);
 
   try
+   temp  := TMemoryStream.Create();
+   ResultData := TStringList.Create;
    Bound := IntToHex(Random(MaxInt), 8) + '_Synapse_boundary';
 
    if fromFile then
@@ -70,24 +74,30 @@ begin
     s := s + 'content-disposition: form-data; name="' + FieldName + '";';
     s := s + ' filename="' + sourceFile +'"' + CRLF;
     s := s + 'Content-Type: application/octet-string' + CRLF + CRLF;
+
     // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
     HTTP.Document.WriteAnsiString(s);
     HTTP.Document.CopyFrom(temp, 0);
-    s := CRLF + '--' + Bound + '--' + CRLF;
+     s := CRLF + '--' + Bound + '--' + CRLF;
     // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
     HTTP.Document.WriteAnsiString(s);
     HTTP.MimeType := 'multipart/form-data, boundary=' + Bound;
     Result := HTTP.HTTPMethod('POST', URL);
 
-   //could be enabled to parse answers
-   //ResultData := nil;
    if not Result then
       begin
 	logger.log(LVL_SEVERE, 'HTTP Error '+logHeader+IntToStr(Http.Resultcode)+' '+Http.Resultstring);
         Result := false;
-      end;
-   // else
-   //    ResultData.LoadFromStream(HTTP.Document);
+      end
+     else
+       begin
+         logger.log(LVL_DEBUG, logHeader+'Result data is:');
+         HTTP.Document.Position := 0;
+         ResultData.LoadFromStream(HTTP.Document);
+
+         for i:=1 to ResultData.Count do
+           logger.log(LVL_DEBUG, logHeader+IntToStr(i)+': '+ResultData.Strings[i]);
+       end;
 
   except
     on E : Exception do
@@ -97,7 +107,10 @@ begin
       end;
   end;
 
+  temp.Free;
   HTTP.Free;
+  ResultData.Free;
+  logger.log(LVL_DEBUG, logHeader+'Execute method finished.');
 end;
 
 
