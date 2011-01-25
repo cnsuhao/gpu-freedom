@@ -3,7 +3,7 @@ unit uploadutils;
 interface
 
 uses
-  sysutils, strutils, httpsend, downloadutils, Classes, loggers;
+  sysutils, strutils, httpsend, downloadutils, Classes, loggers, synautil;
 
 const
   HTTP_UPLOAD_TIMEOUT = 60000; // 60 seconds
@@ -75,12 +75,10 @@ begin
     s := s + ' filename="' + sourceFile +'"' + CRLF;
     s := s + 'Content-Type: application/octet-string' + CRLF + CRLF;
 
-    // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
-    HTTP.Document.WriteAnsiString(s);
+    WriteStrToStream(HTTP.Document, s);
     HTTP.Document.CopyFrom(temp, 0);
      s := CRLF + '--' + Bound + '--' + CRLF;
-    // Done with WriteAnsiString HTTP.Document.Write(Pointer(s)^, Length(s));
-    HTTP.Document.WriteAnsiString(s);
+    WriteStrToStream(HTTP.Document, s);
     HTTP.MimeType := 'multipart/form-data, boundary=' + Bound;
     Result := HTTP.HTTPMethod('POST', URL);
 
@@ -95,7 +93,7 @@ begin
          HTTP.Document.Position := 0;
          ResultData.LoadFromStream(HTTP.Document);
 
-         for i:=1 to ResultData.Count do
+         for i:=0 to ResultData.Count-1 do
            logger.log(LVL_DEBUG, logHeader+IntToStr(i)+': '+ResultData.Strings[i]);
        end;
 
