@@ -14,6 +14,7 @@ uses sqlite3ds, db, coretables, SysUtils;
 type TDbJobQueueRow = record
    id,
    job_id : Longint;
+   external_id : Longint;
    create_dt : TDateTime;
 end;
 
@@ -45,6 +46,7 @@ begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('job_id', ftInteger);
+      FieldDefs.Add('external_id', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
       CreateTable;
     end; {if not TableExists}
@@ -55,6 +57,7 @@ procedure TDbJobQueueTable.insert(var row : TDbJobQueueRow);
 begin
   dataset_.Append;
   dataset_.FieldByName('job_id').AsInteger := row.job_id;
+  dataset_.FieldByName('external_id').AsInteger := row.external_id;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
   dataset_.Post;
   dataset_.ApplyUpdates;

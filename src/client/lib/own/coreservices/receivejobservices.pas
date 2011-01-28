@@ -51,11 +51,15 @@ begin
     begin
         try
              begin
-               dbrow.externalid  := StrToInt(node.FindNode('externalid').TextContent);
+               dbrow.externalid  := IntToStr(srv_.id)+'_'+node.FindNode('externalid').TextContent;
                dbrow.jobid       := node.FindNode('jobid').TextContent;
-               dbrow.job         := node.FindNode('job').TextContent;
+               queuerow.external_id   := StrToInt(node.FindNode('requestid').TextContent);
+               dbrow.job              := node.FindNode('job').TextContent;
                dbrow.workunitincoming := node.FindNode('workunitincoming').TextContent;
                dbrow.workunitoutgoing := node.FindNode('workunitoutgoing').TextContent;
+               dbrow.requests    := StrToInt(node.FindNode('requests').TextContent);
+               dbrow.delivered   := StrToInt(node.FindNode('delivered').TextContent);
+               dbrow.results     := StrToInt(node.FindNode('results').TextContent);
                dbrow.islocal     := false;
                dbrow.server_id   := srv_.id;
                dbrow.create_dt   := Now;

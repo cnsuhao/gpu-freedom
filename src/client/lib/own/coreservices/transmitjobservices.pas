@@ -38,6 +38,7 @@ begin
  rep := rep+'job='+encodeURL(jobrow_.job)+'&';
  rep := rep+'workunitincoming='+encodeURL(jobrow_.workunitincoming)+'&';
  rep := rep+'workunitoutgoing='+encodeURL(jobrow_.workunitoutgoing)+'&';
+ rep := rep+'requests='+encodeURL(IntToStr(jobrow_.requests))+'&';
 
  logger_.log(LVL_DEBUG, logHeader_+'Reporting string is:');
  logger_.log(LVL_DEBUG, rep);
