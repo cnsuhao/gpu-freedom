@@ -59,3 +59,44 @@ CREATE TABLE `tbparameter` (
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`) VALUES
 (1, 'TEST', 'DB_CONNECTION', 'OK');
 
+CREATE TABLE `tbjob` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`jobid` VARCHAR( 16 ) NOT NULL ,
+`job` VARCHAR( 1024 ) NOT NULL ,
+`workunitincoming` VARCHAR( 64 ) NOT NULL ,
+`workunitoutgoing` VARCHAR( 64 ) NOT NULL ,
+`requests` INT NOT NULL DEFAULT '1',
+`delivered` INT NOT NULL DEFAULT '0',
+`results` INT NOT NULL DEFAULT '0',
+`nodename` VARCHAR( 64 ) NOT NULL ,
+`nodeid` VARCHAR( 32 ) NOT NULL ,
+`ip` VARCHAR( 32 ) NULL ,
+`create_dt` DATETIME NOT NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE `tbjobqueue` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`job_id` INT NOT NULL ,
+`nodeid` VARCHAR( 32 ) NOT NULL ,
+`transmitted` INT NOT NULL DEFAULT '0',
+`received` INT NOT NULL DEFAULT '0',
+`create_dt` DATETIME NOT NULL,
+`transmission_dt` DATETIME NULL,
+`reception_dt` DATETIME NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE `tbjobresult` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`job_id` INT NOT NULL ,
+`jobqueue_id` INT NOT NULL ,
+`jobresult` VARCHAR( 1024 ) NOT NULL ,
+`workunitresult` VARCHAR( 64 ) NOT NULL ,
+`iserroneous` INT NOT NULL DEFAULT '0',
+`errorid` INT NOT NULL DEFAULT '0',
+`errorarg` VARCHAR( 32 ) NOT NULL ,
+`errormsg` VARCHAR( 32 ) NOT NULL ,
+`nodename` VARCHAR( 64 ) NOT NULL ,
+`nodeid` VARCHAR( 32 ) NOT NULL ,
+`ip` VARCHAR( 32 ) NULL ,
+`create_dt` DATETIME NOT NULL
+) ENGINE = MYISAM ;
