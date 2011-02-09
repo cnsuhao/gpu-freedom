@@ -34,6 +34,7 @@ function TTransmitJobServiceThread.getPHPArguments() : AnsiString;
 var rep : AnsiString;
 begin
  rep :=     'nodeid='+encodeURL(myGPUId.nodeid)+'&';
+ rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
  rep := rep+'jobid='+encodeURL(jobrow_.jobid)+'&';
  rep := rep+'job='+encodeURL(jobrow_.job)+'&';
  rep := rep+'workunitincoming='+encodeURL(jobrow_.workunitincoming)+'&';
