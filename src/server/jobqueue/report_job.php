@@ -39,6 +39,10 @@ while ($i<$requests) {
 	$i++;
 }
 
+echo "   <job>\n";
+echo "      <externalid>$job_id</externalid>\n";
+echo "   </job>\n";
+
 mysql_close();
 
 ?>
