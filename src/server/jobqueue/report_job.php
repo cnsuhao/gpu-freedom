@@ -40,9 +40,11 @@ while ($i<$requests) {
 	$i++;
 }
 
+echo "<report>\n";
 echo "   <job>\n";
 echo "      <externalid>$job_id</externalid>\n";
 echo "   </job>\n";
+echo "</report>\n";
 
 mysql_close();
 
