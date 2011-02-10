@@ -4,10 +4,10 @@ interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
      jobtables, servermanagers, loggers, identities, dbtablemanagers,
-     SysUtils, Classes;
+     SysUtils, Classes, DOM;
 
 
-type TTransmitJobServiceThread = class(TTransmitServiceThread)
+type TTransmitJobServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var jobrow : TDbJobRow);
@@ -19,6 +19,7 @@ type TTransmitJobServiceThread = class(TTransmitServiceThread)
 
     function  getPHPArguments() : AnsiString;
     procedure insertTransmission();
+    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
@@ -54,11 +55,47 @@ begin
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobrow_.id)+' to TBJOB table.');
 end;
 
-procedure TTransmitJobServiceThread.Execute;
+procedure TTransmitJobServiceThread.parseXml(var xmldoc : TXMLDocument);
+var
+    node     : TDOMNode;
 begin
- insertTransmission();
- transmit('/jobqueue/report_job.php?'+getPHPArguments(), false);
- finishTransmit('Job transmitted :-)');
+  logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+  node := xmldoc.DocumentElement.FirstChild;
+
+  while Assigned(node) do
+    begin
+        try
+             begin
+               jobrow_.externalid  := node.FindNode('externalid').TextContent;
+               logger_.log(LVL_DEBUG, 'Externalid for transmitted job on server is: '+jobrow_.externalid);
+             end;
+          except
+           on E : Exception do
+              begin
+                erroneous_ := true;
+                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
+              end;
+          end; // except
+
+       node := node.NextSibling;
+     end;  // while Assigned(node)
+
+   logger_.log(LVL_DEBUG, 'Parsing of XML over.');
+end;
+
+procedure TTransmitJobServiceThread.Execute;
+var xmldoc     : TXMLDocument;
+    externalid : String;
+begin
+ receive('/jobqueue/report_job.php?'+getPHPArguments(), xmldoc, false);
+ if not erroneous_ then
+    begin
+     parseXml(xmldoc);
+     if not erroneous_ then
+        insertTransmission();
+    end;
+
+ finishReceive('Job transmitted :-)', xmldoc);
 end;
 
 
