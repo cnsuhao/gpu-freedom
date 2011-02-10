@@ -26,8 +26,9 @@ $mainquery  = "INSERT INTO tbjob (id, jobid, job, workunitincoming, workunitoutg
 $result=mysql_query($mainquery);
 
 // retrievieng the jobid
-$selquery  = "SELECT id FROM tbjob WHERE jobid='$jobid' AND nodeid='$nodeid' AND job='$job';"; 
-$job_id    =  mysql_result($selresult,0,"id");
+$selquery  = "SELECT id FROM tbjob WHERE (jobid='$jobid') AND (nodeid='$nodeid') AND (job='$job');"; 
+$selresult = mysql_query($selquery);
+$job_id    = mysql_result($selresult,0,"id");
 
 $i=0;
 while ($i<$requests) {

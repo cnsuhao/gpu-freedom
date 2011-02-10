@@ -134,6 +134,7 @@ begin
   jobrow.job := '1, 1, add';
   jobrow.jobid := '12345';
   jobrow.islocal:=false;
+  jobrow.requests:=3;
   jobrow.status:=JS_NEW;
   jobrow.workunitincoming:='pari.txt';
   jobrow.workunitoutgoing:='para.txt';
