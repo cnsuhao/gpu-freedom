@@ -95,6 +95,18 @@ begin
 
          for i:=0 to ResultData.Count-1 do
            logger.log(LVL_DEBUG, logHeader+IntToStr(i)+': '+ResultData.Strings[i]);
+
+         if (ResultData.Count=1) and (ResultData.Strings[0]='OK') then
+              begin
+                logger.log(LVL_INFO, logHeader+'Upload succesful');
+                Result := true;
+              end
+            else
+              begin
+                logger.log(LVL_SEVERE, logHeader+'Upload failed!');
+                Result := false;
+              end;
+
        end;
 
   except
