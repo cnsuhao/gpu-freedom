@@ -29,19 +29,5 @@
     <jobsinqueue>12</jobsinqueue>
  </server>
 
- <server>
-    <externalid>3</externalid>
-    <servername>Filedistributor</servername>
-    <serverurl>http://www.gpu-grid.net/file_distributor</serverurl>
-    <chatchannel>filedist</chatchannel>
-    <version>1.0.0</version>
-    <superserver>false</superserver>
-    <uptime>159</uptime>
-    <totaluptime>600</totaluptime>
-    <longitude>7</longitude>
-    <latitude>45</latitude>
-    <activenodes>10</activenodes>
-    <jobsinqueue>600</jobsinqueue>
- </server>
 
 </servers>
