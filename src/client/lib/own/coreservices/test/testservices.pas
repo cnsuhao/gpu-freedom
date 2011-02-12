@@ -167,6 +167,10 @@ begin
   jobresultrow.jobresult := '2';
   jobresultrow.jobid := '12345';
   jobresultrow.workunitresult:='';
+  jobresultrow.iserroneous := false;
+  jobresultrow.errorid := 0;
+  jobresultrow.errormsg := '';
+  jobresultrow.errorarg := '';
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createTransmitJobResultService(srv, jobresultrow);
   serviceMan_.launch(thread);
