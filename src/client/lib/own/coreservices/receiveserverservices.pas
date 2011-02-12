@@ -89,7 +89,7 @@ end;
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/supercluster/get_servers.php', xmldoc, true);
+ receive('/supercluster/get_servers_xml.php', xmldoc, true);
  if not erroneous_ then
     begin
      tableman_.getServerTable().execSQL('UPDATE tbserver set updated=0;');

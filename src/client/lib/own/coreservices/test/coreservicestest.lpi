@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="8"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -256,7 +256,7 @@
       <Unit28>
         <Filename Value="..\receiveclientservices.pas"/>
         <UnitName Value="receiveclientservices"/>
-        <CursorPos X="15" Y="109"/>
+        <CursorPos X="101" Y="109"/>
         <TopLine Value="85"/>
         <EditorIndex Value="13"/>
         <UsageCount Value="12"/>
@@ -272,8 +272,8 @@
       <Unit30>
         <Filename Value="..\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
-        <CursorPos X="40" Y="15"/>
-        <TopLine Value="1"/>
+        <CursorPos X="40" Y="92"/>
+        <TopLine Value="87"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -281,8 +281,8 @@
       <Unit31>
         <Filename Value="..\receiveparamservices.pas"/>
         <UnitName Value="receiveparamservices"/>
-        <CursorPos X="40" Y="7"/>
-        <TopLine Value="1"/>
+        <CursorPos X="43" Y="73"/>
+        <TopLine Value="58"/>
         <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -290,8 +290,8 @@
       <Unit32>
         <Filename Value="..\transmitjobservices.pas"/>
         <UnitName Value="transmitjobservices"/>
-        <CursorPos X="51" Y="37"/>
-        <TopLine Value="2"/>
+        <CursorPos X="35" Y="90"/>
+        <TopLine Value="73"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -299,7 +299,7 @@
       <Unit33>
         <Filename Value="..\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <CursorPos X="34" Y="92"/>
+        <CursorPos X="33" Y="92"/>
         <TopLine Value="80"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="11"/>

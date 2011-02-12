@@ -87,7 +87,7 @@ procedure TTransmitJobServiceThread.Execute;
 var xmldoc     : TXMLDocument;
     externalid : String;
 begin
- receive('/jobqueue/report_job.php?'+getPHPArguments(), xmldoc, false);
+ receive('/jobqueue/report_job_xml.php?'+getPHPArguments(), xmldoc, false);
  if not erroneous_ then
     begin
      parseXml(xmldoc);
