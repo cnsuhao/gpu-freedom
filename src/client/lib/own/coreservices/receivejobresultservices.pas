@@ -90,6 +90,4 @@ begin
  finishReceive('Service updated table TBJOBRESULT table succesfully :-)', xmldoc);
 end;
 
-
-
 end.
