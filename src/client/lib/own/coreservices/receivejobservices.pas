@@ -51,7 +51,7 @@ begin
     begin
         try
              begin
-               dbrow.externalid  := IntToStr(srv_.id)+'_'+node.FindNode('externalid').TextContent;
+               dbrow.externalid  := node.FindNode('externalid').TextContent;
                dbrow.jobid       := node.FindNode('jobid').TextContent;
                queuerow.external_id   := StrToInt(node.FindNode('requestid').TextContent);
                dbrow.job              := node.FindNode('job').TextContent;

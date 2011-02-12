@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="3"/>
+      <ActiveEditorIndexAtStart Value="9"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,7 +36,7 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="34">
+    <Units Count="35">
       <Unit0>
         <Filename Value="coreservicestest.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -49,7 +49,7 @@
         <UnitName Value="testservices"/>
         <CursorPos X="74" Y="93"/>
         <TopLine Value="82"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -65,7 +65,7 @@
         <UnitName Value="servermanagers"/>
         <CursorPos X="19" Y="131"/>
         <TopLine Value="107"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -134,7 +134,7 @@
         <UnitName Value="servicefactories"/>
         <CursorPos X="91" Y="58"/>
         <TopLine Value="41"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -178,7 +178,7 @@
         <UnitName Value="dbtablemanagers"/>
         <CursorPos X="54" Y="56"/>
         <TopLine Value="32"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit18>
@@ -194,7 +194,7 @@
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="1" Y="11"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -258,7 +258,7 @@
         <UnitName Value="receiveclientservices"/>
         <CursorPos X="101" Y="109"/>
         <TopLine Value="85"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit28>
@@ -273,7 +273,7 @@
         <Filename Value="..\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
         <CursorPos X="40" Y="92"/>
-        <TopLine Value="87"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -299,12 +299,21 @@
       <Unit33>
         <Filename Value="..\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <CursorPos X="33" Y="92"/>
-        <TopLine Value="80"/>
+        <CursorPos X="37" Y="54"/>
+        <TopLine Value="50"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit33>
+      <Unit34>
+        <Filename Value="..\..\coredb\jobtables.pas"/>
+        <UnitName Value="jobtables"/>
+        <CursorPos X="6" Y="91"/>
+        <TopLine Value="79"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit34>
     </Units>
     <JumpHistory Count="16" HistoryIndex="15">
       <Position1>

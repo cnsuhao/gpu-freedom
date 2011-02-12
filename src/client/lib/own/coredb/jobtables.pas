@@ -83,8 +83,10 @@ end;
 
 procedure TDbJobTable.getRow(var row : TDbJobRow);
 var options : TLocateOptions;
+    srvid   : Longint;
 begin
  options := [];
+ //TODO externalid is not unique, only pair externalid,serverid is
  if dataset_.Locate('externalid', row.externalid, options) then
    begin
      row.id         := dataset_.FieldByName('id').AsInteger;
