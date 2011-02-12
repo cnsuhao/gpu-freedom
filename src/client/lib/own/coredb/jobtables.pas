@@ -41,6 +41,7 @@ type TDbJobTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
+    function getId(jobid : String) : Longint;
     procedure getRow(var row : TDbJobRow);
     procedure insertOrUpdate(var row : TDbJobRow);
 
@@ -79,6 +80,16 @@ begin
       CreateTable;
     end; {if not TableExists}
   end; {with}
+end;
+
+function TDbJobTable.getId(jobid : String) : Longint;
+var options : TLocateOptions;
+begin
+ options := [];
+ if dataset_.Locate('externalid', row.externalid, options) then
+     Result :=  dataset_.FieldByName('id').AsInteger
+    else
+      Result := -1;
 end;
 
 procedure TDbJobTable.getRow(var row : TDbJobRow);
