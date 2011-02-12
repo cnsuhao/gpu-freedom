@@ -68,7 +68,7 @@ begin
                tableman_.getJobTable().insertOrUpdate(dbrow);
                queuerow.job_id := dbrow.id;
                tableman_.getJobQueueTable().insert(queuerow);
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobid: '+dbrow.jobid+' to TBJOB and to TBJOBQUEUE table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with externalid: '+dbrow.externalid+' to TBJOB and to TBJOBQUEUE table.');
              end;
           except
            on E : Exception do
