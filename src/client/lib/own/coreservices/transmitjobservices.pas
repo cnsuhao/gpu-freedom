@@ -52,7 +52,7 @@ begin
  jobrow_.server_id := srv_.id;
  jobrow_.status    := JS_TRANSMITTED;
  tableman_.getJobTable().insertOrUpdate(jobrow_);
- logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobrow_.id)+' to TBJOB table.');
+ logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobid '+jobrow_.jobid+' to TBJOB table.');
 end;
 
 procedure TTransmitJobServiceThread.parseXml(var xmldoc : TXMLDocument);
