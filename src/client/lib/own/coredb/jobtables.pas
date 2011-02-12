@@ -86,7 +86,7 @@ function TDbJobTable.getId(jobid : String) : Longint;
 var options : TLocateOptions;
 begin
  options := [];
- if dataset_.Locate('externalid', row.externalid, options) then
+ if dataset_.Locate('jobid', jobid, options) then
      Result :=  dataset_.FieldByName('id').AsInteger
     else
       Result := -1;

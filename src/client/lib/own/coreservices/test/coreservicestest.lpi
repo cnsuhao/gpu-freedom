@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -36,12 +36,12 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="38">
+    <Units Count="39">
       <Unit0>
         <Filename Value="coreservicestest.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="coreservicestest"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
       </Unit0>
       <Unit1>
         <Filename Value="testservices.pas"/>
@@ -49,7 +49,7 @@
         <UnitName Value="testservices"/>
         <CursorPos X="74" Y="93"/>
         <TopLine Value="82"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\servicemanagers.pas"/>
@@ -124,9 +124,11 @@
       <Unit12>
         <Filename Value="..\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <CursorPos X="91" Y="58"/>
-        <TopLine Value="41"/>
-        <UsageCount Value="17"/>
+        <CursorPos X="55" Y="16"/>
+        <TopLine Value="20"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="18"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\..\coremodules\threadmanagers.pas"/>
@@ -264,9 +266,9 @@
       <Unit32>
         <Filename Value="..\transmitjobservices.pas"/>
         <UnitName Value="transmitjobservices"/>
-        <CursorPos X="25" Y="99"/>
-        <TopLine Value="78"/>
-        <EditorIndex Value="2"/>
+        <CursorPos X="27" Y="84"/>
+        <TopLine Value="64"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit32>
@@ -280,9 +282,11 @@
       <Unit34>
         <Filename Value="..\..\coredb\jobtables.pas"/>
         <UnitName Value="jobtables"/>
-        <CursorPos X="20" Y="92"/>
-        <TopLine Value="85"/>
+        <CursorPos X="35" Y="89"/>
+        <TopLine Value="77"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit34>
       <Unit35>
         <Filename Value="..\receivejobresults.pas"/>
@@ -294,8 +298,8 @@
       <Unit36>
         <Filename Value="..\receivejobresultservices.pas"/>
         <UnitName Value="receivejobresultservices"/>
-        <CursorPos X="5" Y="91"/>
-        <TopLine Value="69"/>
+        <CursorPos X="13" Y="59"/>
+        <TopLine Value="53"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
@@ -303,14 +307,68 @@
       <Unit37>
         <Filename Value="..\transmitjobresultservices.pas"/>
         <UnitName Value="transmitjobresultservices"/>
-        <CursorPos X="44" Y="42"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
+        <CursorPos X="127" Y="71"/>
+        <TopLine Value="59"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit37>
+      <Unit38>
+        <Filename Value="..\..\coredb\jobresulttables.pas"/>
+        <UnitName Value="jobresulttables"/>
+        <CursorPos X="54" Y="109"/>
+        <TopLine Value="99"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit38>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="11" HistoryIndex="10">
+      <Position1>
+        <Filename Value="..\..\coredb\jobtables.pas"/>
+        <Caret Line="92" Column="20" TopLine="85"/>
+      </Position1>
+      <Position2>
+        <Filename Value="..\receivejobresultservices.pas"/>
+        <Caret Line="91" Column="5" TopLine="69"/>
+      </Position2>
+      <Position3>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="13" Column="91" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="10" Column="24" TopLine="9"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="73" Column="5" TopLine="49"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="38" Column="46" TopLine="23"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="41" Column="74" TopLine="29"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="44" Column="58" TopLine="31"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="7" Column="28" TopLine="49"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="22" Column="15" TopLine="1"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\transmitjobresultservices.pas"/>
+        <Caret Line="70" Column="94" TopLine="58"/>
+      </Position11>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>

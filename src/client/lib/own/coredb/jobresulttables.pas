@@ -15,6 +15,7 @@ type TDbJobResultRow = record
    id,
    externalid,
    job_id         : Longint;
+   jobid          : String;
    jobresult      : AnsiString;
    workunitresult : String;
    iserroneous    : Boolean;
@@ -54,6 +55,7 @@ begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('externalid', ftInteger);
+      FieldDefs.Add('jobid', ftString);
       FieldDefs.Add('job_id', ftInteger);
       FieldDefs.Add('jobresult', ftString);
       FieldDefs.Add('workunitresult', ftString);
@@ -77,6 +79,7 @@ begin
      row.id          := dataset_.FieldByName('id').AsInteger;
      row.externalid  := dataset_.FieldByName('externalid').AsInteger;
      row.job_id      := dataset_.FieldByName('job_id').AsInteger;
+     row.jobid       := dataset_.FieldByName('jobid').AsString;
      row.jobresult   := dataset_.FieldByName('jobresult').AsString;
      row.workunitresult := dataset_.FieldByName('workunitresult').AsString;
      row.iserroneous := dataset_.FieldByName('iserroneous').AsBoolean;
@@ -103,6 +106,7 @@ begin
   dataset_.FieldByName('id').AsInteger := row.id;
   dataset_.FieldByName('externalid').AsInteger := row.externalid;
   dataset_.FieldByName('job_id').AsInteger := row.job_id;
+  dataset_.FieldByName('jobid').AsString := row.jobid;
   dataset_.FieldByName('jobresult').AsString := row.jobresult;
   dataset_.FieldByName('workunitresult').AsString := row.workunitresult;
   dataset_.FieldByName('errorid').AsInteger := row.errorid;

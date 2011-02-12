@@ -54,6 +54,7 @@ begin
              begin
                dbrow.externalid     := StrToInt(node.FindNode('externalid').TextContent);
                dbrow.job_id         := job_id_;
+               dbrow.jobid          := jobid_;
                dbrow.jobresult      := node.FindNode('jobresult').TextContent;
                dbrow.workunitresult := node.FindNode('workunitresult').TextContent;
                dbrow.iserroneous    := (node.FindNode('iserroneous').TextContent='1');
@@ -62,7 +63,7 @@ begin
                dbrow.errorarg       := node.FindNode('errorarg').TextContent;
                dbrow.server_id      := srv_.id;
                tableman_.getJobResultTable().insertOrUpdate(dbrow);
-               logger_.log(LVL_DEBUG, 'Updated or added '+dbrow.externalid+' to TBJOBRESULT table.');
+               logger_.log(LVL_DEBUG, 'Updated or added '+IntToStr(dbrow.externalid)+' to TBJOBRESULT table.');
              end;
           except
            on E : Exception do

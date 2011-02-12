@@ -13,6 +13,7 @@ uses
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices,
+  receivejobresultservices, transmitjobresultservices,
   coreconfigurations, jobtables;
 
 type TServiceFactory = class(TObject)
