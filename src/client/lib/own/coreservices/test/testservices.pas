@@ -11,6 +11,7 @@ uses
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices, jobtables,
+  receivejobresultservices, transmitjobresultservices, jobresulttables,
   coreconfigurations;
 
 type
@@ -29,6 +30,9 @@ type
     procedure TestTransmitChannelService;
     procedure TestReceiveJobService;
     procedure TestTransmitJobService;
+    procedure TestReceiveJobResultService;
+    procedure TestTransmitJobResultService;
+
 
   private
     serviceMan_  : TServiceThreadManager;
@@ -143,6 +147,32 @@ begin
   serviceMan_.launch(thread);
   waitForCompletion();
 end;
+
+procedure TTestServices.TestReceiveJobResultService;
+var thread : TReceiveJobResultServiceThread;
+    srv    : TServerRecord;
+begin
+  serverMan_.getDefaultServer(srv);
+  thread := srvFactory_.createReceiveJobResultService(srv, '12345');
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
+
+
+procedure TTestServices.TestTransmitJobResultService;
+var thread : TTransmitJobResultServiceThread;
+    srv    : TServerRecord;
+    jobresultrow : TDbJobResultRow;
+begin
+  jobresultrow.jobresult := '2';
+  jobresultrow.jobid := '12345';
+  jobresultrow.workunitresult:='';
+  serverMan_.getDefaultServer(srv);
+  thread := srvFactory_.createTransmitJobResultService(srv, jobresultrow);
+  serviceMan_.launch(thread);
+  waitForCompletion();
+end;
+
 
 
 
