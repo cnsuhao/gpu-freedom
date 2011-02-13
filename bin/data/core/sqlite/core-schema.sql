@@ -31,6 +31,8 @@ CREATE TABLE tbjob (
    workunitincoming text,
    workunitoutgoing text,
    islocal boolean,
+   nodeid text,
+   nodename text,
    server_id int,
    create_dt text
 );
