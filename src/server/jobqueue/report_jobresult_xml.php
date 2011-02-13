@@ -26,6 +26,10 @@ mysql_connect($dbserver, $username, $password);
 // retrievieng the job id
 $selquery  = "SELECT id FROM tbjob WHERE (jobid='$jobid');"; 
 $selresult = mysql_query($selquery);
+if ($selresult=="") {
+   die('<b>Jobid $jobid does not exist on server!</b>');
+   mysql_close();
+}
 $job_id    = mysql_result($selresult,0,"id");
 
 mysql_close();

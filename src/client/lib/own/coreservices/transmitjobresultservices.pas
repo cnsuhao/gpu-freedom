@@ -36,6 +36,7 @@ var rep : AnsiString;
 begin
  rep :=     'nodeid='+encodeURL(myGPUId.nodeid)+'&';
  rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
+ rep := rep+'requestid='+encodeURL(IntToStr(jobresultrow_.requestid))+'&';
  rep := rep+'jobid='+encodeURL(jobresultrow_.jobid)+'&';
  rep := rep+'jobresult='+encodeURL(jobresultrow_.jobresult)+'&';
  rep := rep+'workunitresult='+encodeURL(jobresultrow_.workunitresult)+'&';

@@ -38,6 +38,8 @@ CREATE TABLE tbjob (
 CREATE TABLE tbjobqueue (
    id int primary key,
    job_id int,
+   requestid int,
+   server_id int,
    create_dt text
 );
 

@@ -28,6 +28,10 @@ $result=mysql_query($mainquery);
 // retrievieng the jobid
 $selquery  = "SELECT id FROM tbjob WHERE (jobid='$jobid') AND (nodeid='$nodeid') AND (job='$job');"; 
 $selresult = mysql_query($selquery);
+if ($selresult=="") {
+   die('<b>Internal error: jobid $jobid does not exist on server!</b>');
+   mysql_close();
+}
 $job_id    = mysql_result($selresult,0,"id");
 
 $i=0;
