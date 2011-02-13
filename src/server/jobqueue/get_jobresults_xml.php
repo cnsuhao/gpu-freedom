@@ -26,7 +26,7 @@ while ($i<$num) {
    $jobid          = mysql_result($result,0,"jobid");
    $jobresult      = mysql_result($result,0,"jobresult");
    $workunitresult = mysql_result($result,0,"workunitresult");
-   $requestid      = mysql_result($result,0,"requestid");
+   $requestid      = mysql_result($result,0,"jobqueue_id");
    $iserroneous    = mysql_result($result,0,"iserroneous");
    $errorid        = mysql_result($result,0,"errorid");
    $errormsg       = mysql_result($result,0,"errormsg");
