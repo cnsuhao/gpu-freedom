@@ -1,5 +1,9 @@
+12.12.2010-13.2.2011 git
+- milestone reached: implemented comm layer between server and client
+- milestone reached: http upload works
+
 16.10.2010-12.12.2010 git
-- milestone reached: implemented several services under /core/services
+- milestone reached: implemented several services under lib/own/coreservices
  which store data in sqlite database
 
 16.10.2010 git
