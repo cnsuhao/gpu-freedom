@@ -1,6 +1,7 @@
 <?php
 /*
-  This PHP script stores a job from a client into TBJOB and TBJOBQUEUE
+  This PHP script retrieves jobs from TBJOBQUEUE and TBJOB, ready for
+  clients to be processed
   
   Source code is under GPL, (c) 2002-2011 the Global Processing Unit Team
   
@@ -38,6 +39,8 @@ while ($i<$num) {
    $requests   = mysql_result($jobresult,0,"requests");
    $delivered  = mysql_result($jobresult,0,"delivered");
    $results    = mysql_result($jobresult,0,"requests");
+   $nodeid     = mysql_result($jobresult,0,"nodeid");
+   $nodename   = mysql_result($jobresult,0,"nodename");
    $delivered++;
   
    echo "   <job>\n";
@@ -50,6 +53,8 @@ while ($i<$num) {
    echo "      <requests>$requests</requests>\n";
    echo "      <delivered>$delivered</delivered>\n";
    echo "      <results>$results</results>\n";
+   echo "      <nodeid>$nodeid</nodeid>\n";
+   echo "      <nodename>$nodename</nodename>\n";
    echo "   </job>\n";
    
    $upjobqueuequery  = "UPDATE tbjobqueue SET transmitted=1, transmission_dt=NOW() WHERE id=$requestid"; 
