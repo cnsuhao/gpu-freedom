@@ -37,7 +37,7 @@ while ($i<$num) {
    echo "   <jobresult>\n";
    echo "      <externalid>$externalid</externalid>\n";
    echo "      <jobid>$jobid</jobid>\n";
-   echo "      <jobresult><![CDATA[$job]]></jobresult>\n";
+   echo "      <jobresult><![CDATA[$jobresult]]></jobresult>\n";
    echo "      <workunitresult>$workunitresult</workunitresult>\n";
    echo "      <requestid>$requestid</requestid>\n";
    echo "      <iserroneous>$iserroneous</iserroneous>\n";
