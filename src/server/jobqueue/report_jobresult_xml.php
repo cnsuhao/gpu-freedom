@@ -35,7 +35,7 @@ $job_id    = mysql_result($selresult,0,"id");
 $results   = mysql_result($selresult,0,"results"); 
 
 // checking that requestid exists
-$selquery  = "SELECT id FROM tbjobqueue WHERE (id='$requestid');"; 
+$selquery  = "SELECT id FROM tbjobqueue WHERE (id=$requestid);"; 
 $selresult = mysql_query($selquery);
 if ($selresult=="") {
    die('<b>Requestid $requestid does not exist as primary key in table TBJOBQUEUE on server!</b>');
@@ -47,6 +47,14 @@ $mainquery  = "INSERT INTO tbjobresult (id, jobid, jobresult, workunitresult, is
                VALUES('', '$jobid', '$jobresult', '$workunitresult', $iserroneous, $errorid, '$errormsg', '$errorarg', $requestid, '$nodename', '$nodeid', '$ip', NOW());"; 
 $result=mysql_query($mainquery);
 
+$selquery  = "SELECT id FROM tbjobresult WHERE (jobid='$jobid') AND (jobqueue_id=$requestid);"; 
+$selresult = mysql_query($selquery);
+if ($selresult=="") {
+   die('<b>Internal error: not possible to retrieve id of inserted TBJOBRESULT!</b>');
+   mysql_close();
+}
+$externalid = mysql_result($selresult,0,"id");
+
 // updating jobqueue
 $upjobqueuequery  = "UPDATE tbjobqueue SET received=1, reception_dt=NOW() WHERE id=$requestid"; 
 $upjobqueueresult = mysql_query($upjobqueuequery);
@@ -55,7 +63,12 @@ $upjobqueueresult = mysql_query($upjobqueuequery);
 $results++;
 $upjobquery  = "UPDATE tbjob SET results=$results WHERE id=$job_id"; 
 $upjobresult = mysql_query($upjobquery);
-
 mysql_close();
+
+echo "<report>\n";
+echo "   <jobresult>\n";
+echo "      <externalid>$externalid</externalid>\n";
+echo "   </jobresult>\n";
+echo "</report>\n";
 
 ?>
