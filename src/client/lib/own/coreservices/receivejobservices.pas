@@ -61,6 +61,8 @@ begin
                dbrow.requests    := StrToInt(node.FindNode('requests').TextContent);
                dbrow.delivered   := StrToInt(node.FindNode('delivered').TextContent);
                dbrow.results     := StrToInt(node.FindNode('results').TextContent);
+               dbrow.nodeid      := node.FindNode('nodeid').TextContent;
+               dbrow.nodename    := node.FindNode('nodename').TextContent;
                dbrow.islocal     := false;
                dbrow.server_id   := srv_.id;
                dbrow.create_dt   := Now;

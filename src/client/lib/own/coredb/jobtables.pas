@@ -33,6 +33,8 @@ type TDbJobRow = record
    delivered,
    results    : Longint;
    islocal    : Boolean;
+   nodeid,
+   nodename   : String;
    server_id  : Longint;
    create_dt  : TDateTime;
 end;
@@ -75,6 +77,8 @@ begin
       FieldDefs.Add('delivered', ftInteger);
       FieldDefs.Add('results', ftInteger);
       FieldDefs.Add('islocal', ftBoolean);
+      FieldDefs.Add('nodeid', ftString);
+      FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
       CreateTable;
@@ -111,6 +115,8 @@ begin
      row.workunitincoming := dataset_.FieldByName('workunitincoming').AsString;
      row.workunitoutgoing := dataset_.FieldByName('workunitoutgoing').AsString;
      row.islocal          := dataset_.FieldByName('islocal').AsBoolean;
+     row.nodeid     := dataset_.FieldByName('nodeid').AsString;
+     row.nodename   := dataset_.FieldByName('nodename').AsString;
      row.server_id  := dataset_.FieldByName('server_id').AsInteger;
      row.create_dt  := dataset_.FieldByName('create_dt').AsDateTime;
    end
@@ -138,6 +144,8 @@ begin
   dataset_.FieldByName('workunitoutgoing').AsString := row.workunitoutgoing;
   dataset_.FieldByName('islocal').AsBoolean := row.islocal;
   dataset_.FieldByName('server_id').AsInteger := row.server_id;
+  dataset_.FieldByName('nodeid').AsString := row.nodeid;
+  dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
 
   dataset_.Post;
