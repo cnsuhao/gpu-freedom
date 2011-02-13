@@ -166,6 +166,7 @@ var thread : TTransmitJobResultServiceThread;
 begin
   jobresultrow.jobresult := '2';
   jobresultrow.jobid := '12345';
+  jobresultrow.requestid := 1;
   jobresultrow.workunitresult:='';
   jobresultrow.iserroneous := false;
   jobresultrow.errorid := 0;

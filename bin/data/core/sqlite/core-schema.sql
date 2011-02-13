@@ -46,6 +46,7 @@ CREATE TABLE tbjobqueue (
 CREATE TABLE tbjobresult (
    id int primary key,
    externalid int,
+   requestid int,
    jobid text,
    job_id int,
    jobresult text,
