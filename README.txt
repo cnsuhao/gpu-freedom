@@ -109,15 +109,14 @@ File Tree structure for this package, codenamed freedom follows:
    /conf     server configuration
    /db       sql  scripts to create the database schema
    /jobqueue  source code managing the job queue
-   /wustorage where workunits are stored
-      /delivery    workunits ready for delivery
-      /received    computed workunits received from clients
    /supercluster   source code to inform parent server, so that
                    servers can be organized hierarchically in a tree
 	   /user       user management at supercluster level
    /test       scripts to test server integrity	   
    /utils      php scripts for general use
-   /workunits  source code to manage workunits
+   /workunit   where workunits are stored
+      /quests    workunits ready for delivery
+      /results   computed workunits received from clients
  
     
 
