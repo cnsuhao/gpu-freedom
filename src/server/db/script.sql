@@ -88,6 +88,7 @@ CREATE TABLE `tbjobqueue` (
 CREATE TABLE `tbjobresult` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `job_id` INT NOT NULL ,
+`jobid` VARCHAR( 16 ) NOT NULL ,
 `jobqueue_id` INT NOT NULL ,
 `jobresult` VARCHAR( 1024 ) NOT NULL ,
 `workunitresult` VARCHAR( 64 ) NOT NULL ,
