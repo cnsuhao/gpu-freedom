@@ -61,6 +61,8 @@ begin
                dbrow.errorid        := StrToInt(node.FindNode('errorid').TextContent);
                dbrow.errormsg       := node.FindNode('errormsg').TextContent;
                dbrow.errorarg       := node.FindNode('errorarg').TextContent;
+               dbrow.nodeid         := node.FindNode('nodeid').TextContent;
+               dbrow.nodename       := node.FindNode('nodename').TextContent;
                dbrow.server_id      := srv_.id;
                tableman_.getJobResultTable().insertOrUpdate(dbrow);
                logger_.log(LVL_DEBUG, 'Updated or added '+IntToStr(dbrow.externalid)+' to TBJOBRESULT table.');

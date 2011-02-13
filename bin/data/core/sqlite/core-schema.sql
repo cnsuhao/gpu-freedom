@@ -53,6 +53,8 @@ CREATE TABLE tbjobresult (
    errormsg text,
    errorarg text,
    server_id int,
+   nodename text,
+   nodeid text,
    create_dt text
 );
 

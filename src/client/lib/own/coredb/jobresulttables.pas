@@ -23,6 +23,8 @@ type TDbJobResultRow = record
    errormsg,
    errorarg       : String;
    server_id      : Longint;
+   nodeid,
+   nodename       : String;
    create_dt      : TDateTime;
 end;
 
@@ -64,6 +66,8 @@ begin
       FieldDefs.Add('errormsg', ftInteger);
       FieldDefs.Add('errorarg', ftInteger);
       FieldDefs.Add('server_id', ftInteger);
+      FieldDefs.Add('nodeid', ftString);
+      FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('create_dt', ftDateTime);
       CreateTable;
     end; {if not TableExists}
@@ -87,6 +91,8 @@ begin
      row.errormsg    := dataset_.FieldByName('errormsg').AsString;
      row.errorarg    := dataset_.FieldByName('errorarg').AsString;
      row.server_id   := dataset_.FieldByName('server_id').AsInteger;
+     row.nodeid      := dataset_.FieldByName('nodeid').AsString;
+     row.nodename    := dataset_.FieldByName('nodename').AsString;
      row.create_dt   := dataset_.FieldByName('create_dt').AsDateTime;
    end
   else
@@ -114,6 +120,8 @@ begin
   dataset_.FieldByName('errorarg').AsString := row.errorarg;
   dataset_.FieldByName('iserroneous').AsBoolean := row.iserroneous;
   dataset_.FieldByName('server_id').AsInteger := row.server_id;
+  dataset_.FieldByName('nodeid').AsString := row.nodeid;
+  dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
 
   dataset_.Post;
