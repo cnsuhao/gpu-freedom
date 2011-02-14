@@ -1,3 +1,28 @@
+# GPU Preview 0.5.0 for developers
+
+GPU is currently undergoing its 4th rewrite, codenamed freedom (3th was named solaris which reached version 0.963, 2th polaris, 1th unnamed). The preview package has version 0.5.0. This package is solely intended for developers as there is still no client working, just a bunch of unit tests.
+
+The package is intended to sketch the whole idea of the next generation GPU. Some people might be disappointed that GPU moves away from peer-to-peer to become a client-server architecture, but we believe this is the only drawback. The highlights of the coming release (probably 6 months from now) are:
+- client/server architecture should allow scaling of nodes up to several thousands of clients
+- client is in Freepascal and can be compiled on Windows, Linux and Mac OSX
+- Server is in PHP/mySQL and runs everywhere where LAMP stack runs
+- All software used to develop GPU II is Open Source and available freely
+- The plugin architecture of GPU I is retained, although the plugin layer has been rewritten (available in preview) and plugins need to be ported as well
+- Communication is entirely over HTTP, workunits can be downloaded, and resulting workunits can be uploaded via HTTP back to the server (available on GPU preview package)
+- HTTP makes GPU transparent to most proxies, so that clients can run also in companies and not only at home 
+- GPU II retains features like channels (to run whiteboard, chat and sensor networks), job management, clustering services, all rewritten in light of the experiences
+ done with GPU I (available on GPU preview package)
+- GPU II will stay a multipurpose distributed computing architecture, so that any client and any server will support any computation (unlike the BOINC architecture)
+- Each server should be able to support 40-100 clients according to some initial computations, the network should scale with number of servers
+- One superserver will manage the whole network of servers
+
+The package contains most of the server, communication layer client and server side, plugin layer clientside.
+we hope the release will fuel some interest into the GPU project.
+Have fun! 
+
+2011-02-14
+
+
 #
 0.960: climate simulation simulates vulcano Eyjafjallajoekull
 
