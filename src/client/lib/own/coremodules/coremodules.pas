@@ -34,10 +34,8 @@ uses
   frontendmanagers, compthreadmanagers, downloadthreadmanagers,
   uploadthreadmanagers, loggers;
 
-implementation
-
 type TCoreModule = class(TObject)
-    constructor Create(path, extension : String);
+    constructor Create(logger : TLogger; path, extension : String);
     destructor Destroy;
 
     // helper structures
@@ -62,11 +60,12 @@ type TCoreModule = class(TObject)
     upthreadman_    : TUploadThreadManager;
 end;
 
+implementation
 
-constructor TCoreModule.Create(path, extension : String);
+constructor TCoreModule.Create(logger : TLogger; path, extension : String);
 begin
    inherited Create();
-   logger_         := TLogger.Create(path+PathDelim+'logs', 'core.log', 'core.old', LVL_DEFAULT, 1024*1024);
+   logger_         := logger;
    plugman_        := TPluginManager.Create(path+PathDelim+'plugins'+PathDelim+'lib', extension, logger_);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
@@ -84,7 +83,6 @@ begin
   compthreadman_.Free;
   downthreadman_.Free;
   upthreadman_.Free;
-  logger_.Free;
   inherited;
 end;
 

@@ -8,7 +8,10 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  TGPU_component;
+  loggers,
+  coremodules, servicefactories,
+  servermanagers, coreconfigurations,
+  dbtablemanagers, testconstants;
 
 type
 
@@ -22,7 +25,13 @@ type
     destructor Destroy; override;
     procedure WriteHelp; virtual;
   private
-    GPU : TGPU;
+    path_      : String;
+    cms_       : TCoreModule;
+    sf_        : TServiceFactory;
+    sm_        : TServerManager;
+    logger_    : TLogger;
+    conf_      : TCoreConfiguration;
+    tableman_  : TDbTableManager;
   end;
 
 { TGPUCoreApp }
@@ -56,10 +65,26 @@ constructor TGPUCoreApp.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   StopOnException:=True;
+  path_ := extractFilePath(ParamStr(0));
+
+  logger_   := TLogger.Create(path_+PathDelim+'logs', 'coreapp.log', 'coreapp.old', LVL_DEFAULT, 1024*1024);
+  conf_     := TCoreConfiguration.Create(path_, 'coreapp.ini');
+  tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp-db.sqlite');
+  tableman_.OpenAll;
+  sm_       := TServerManager.Create(conf_, tableman_.getServerTable(), logger_);
+  cms_      := TCoreModule.Create(logger_, path_, 'dll');
+  sf_       := TServiceFactory.Create(sm_, tableman_, PROXY_HOST, PROXY_PORT, logger_, conf_);
 end;
 
 destructor TGPUCoreApp.Destroy;
 begin
+  cms_.Free;
+  sf_.Free;
+  sm_.Free;
+  tableman_.CloseAll;
+  tableman_.Free;
+  conf_.Free;
+  logger_.Free;
   inherited Destroy;
 end;
 
