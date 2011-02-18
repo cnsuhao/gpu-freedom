@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  loggers,
+  loggers, lockfiles,
   coremodules, servicefactories,
   servermanagers, coreconfigurations,
   dbtablemanagers, testconstants;
@@ -32,6 +32,7 @@ type
     logger_    : TLogger;
     conf_      : TCoreConfiguration;
     tableman_  : TDbTableManager;
+    lock_      : TLockFile;
   end;
 
 { TGPUCoreApp }
@@ -55,7 +56,12 @@ begin
     Exit;
   end;
 
-  { add your program here }
+  // main loop
+  while lock_.exists do
+    begin
+
+      Sleep(1000);
+    end;
 
   // stop program loop
   Terminate;
@@ -67,6 +73,7 @@ begin
   StopOnException:=True;
   path_ := extractFilePath(ParamStr(0));
 
+  lock_     := TLockFile.Create(path_+PathDelim+'locks', 'coreapp.lock');
   logger_   := TLogger.Create(path_+PathDelim+'logs', 'coreapp.log', 'coreapp.old', LVL_DEFAULT, 1024*1024);
   conf_     := TCoreConfiguration.Create(path_, 'coreapp.ini');
   tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp-db.sqlite');
@@ -85,6 +92,7 @@ begin
   tableman_.Free;
   conf_.Free;
   logger_.Free;
+  lock_.Free;
   inherited Destroy;
 end;
 
