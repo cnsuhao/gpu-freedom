@@ -90,10 +90,10 @@ var
   MyUserID        : TUserIdentity;
   MyConfID        : TConfIdentity;
 
-  TMCompStatus    : TThreadManagerStatus;
-  TMDownStatus    : TThreadManagerStatus;
-  TMUploadStatus  : TThreadManagerStatus;
-  TMServiceStatus : TThreadManagerStatus;
+  tmCompStatus    : TThreadManagerStatus;
+  tmDownStatus    : TThreadManagerStatus;
+  tmUploadStatus  : TThreadManagerStatus;
+  tmServiceStatus : TThreadManagerStatus;
 
 implementation
 

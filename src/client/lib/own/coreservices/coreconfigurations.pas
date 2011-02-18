@@ -106,10 +106,31 @@ begin
       receive_jobs_each      := ini_.ReadInteger('global','receive_jobs_each',120);
       transmit_jobs_each     := ini_.ReadInteger('global','transmit_jobs_each',120);
       receive_channels_each  := ini_.ReadInteger('global','receive_channels_each',120);
-      transmit_channels_each := ini_.ReadInteger('global','transmit_channels_each',120);
+      transmit_channels_each := ini_.ReadInteger('global','transmit_channels_each',130);
       receive_chat_each      := ini_.ReadInteger('global','receive_chat_each',45);
       purge_server_after_failures := ini_.ReadInteger('global','purge_server_after_failures',30);
  end;
+
+ with tmCompStatus do
+ begin
+    maxthreads := ini_.ReadInteger('computations','max_threads', 2);
+ end;
+
+ with tmDownStatus do
+ begin
+    maxthreads := ini_.ReadInteger('downloads','max_threads', 3);
+ end;
+
+ with tmUploadStatus do
+ begin
+    maxthreads := ini_.ReadInteger('uploads','max_threads', 2);
+ end;
+
+ with tmServiceStatus do
+ begin
+    maxthreads := ini_.ReadInteger('services','max_threads', 5);
+ end;
+
  CS_.Leave;
 end;
 
