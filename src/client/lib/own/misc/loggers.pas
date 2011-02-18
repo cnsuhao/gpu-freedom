@@ -9,7 +9,7 @@ unit loggers;
 }
 interface
 
-uses SysUtils, FileUtil, syncobjs;
+uses SysUtils, syncobjs;
 
 const
    LVL_FATAL    = 50;
@@ -101,11 +101,11 @@ end;
 function TLogger.logLvlToStr(level : Longint) : String;
 begin
   case level of
-   LVL_FATAL   : Result := 'FATAL';
-   LVL_SEVERE  : Result := 'SEVERE';
+   LVL_FATAL   : Result := 'FATAL  ';
+   LVL_SEVERE  : Result := 'SEVERE ';
    LVL_WARNING : Result := 'WARNING';
-   LVL_INFO    : Result := 'INFO';
-   LVL_DEBUG   : Result := 'DEBUG';
+   LVL_INFO    : Result := 'INFO   ';
+   LVL_DEBUG   : Result := 'DEBUG  ';
    else
     raise Exception.Create('Undefined log level in logLvlToStr');
   end;
@@ -121,14 +121,16 @@ var backup : Boolean;
 begin
   if severity<current_log_level_ then Exit;
   CS_.Enter;
-  backup := FileSize(full_name_)>max_filesize_;
-  if backup then
-       CopyFile(full_name_, path_+PathDelim+filename_backup_);
+
+  backup := false;
+  //backup := FileSize(full_name_)>max_filesize_;
+  //if backup then
+  //     CopyFile(full_name_, path_+PathDelim+filename_backup_);
 
   try
    AssignFile(F_, full_name_);
    if backup then Rewrite(F_) else Append(F_);
-   WriteLn(F_, DateToStr(now)+' '+TimeToStr(now)+' '+logLvlToStr(severity)+'> '+logStr);
+   WriteLn(F_, DateToStr(now)+' '+TimeToStr(now)+' '+logLvlToStr(severity)+'| '+logStr);
   finally
     CloseFile(F_);
   end;

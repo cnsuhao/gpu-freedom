@@ -11,7 +11,8 @@ uses
   loggers, lockfiles,  coreconfigurations,  testconstants, identities,
   coremodules, servicefactories, servicemanagers,
   servermanagers, dbtablemanagers,
-  receiveparamservices, receiveserverservices;
+  receiveparamservices, receiveserverservices,
+  receiveclientservices;
 
 type
 
@@ -25,7 +26,8 @@ type
     destructor  Destroy; override;
     procedure   WriteHelp; virtual;
   private
-    path_       : String;
+    path_,
+    logHeader_  : String;
     cms_        : TCoreModule;
     sf_         : TServiceFactory;
     sm_         : TServerManager;
@@ -37,25 +39,33 @@ type
 
     procedure   mainLoop;
     procedure   retrieveParamsAndServers;
+    procedure   retrieveClients;
   end;
 
 { TGPUCoreApp }
 
 procedure TGPUCoreApp.mainLoop;
-var tick : Longint;
+var tick, days  : Longint;
 begin
   // main loop
   tick := 1;
-  RetrieveParamsAndServers;
+  days := 0;
+  retrieveParamsAndServers;
+  retrieveClients;
   while lock_.exists do
     begin
-      if (tick mod myConfID.receive_servers_each = 0) then
-               retrieveParamsAndServers;
+      if (tick mod 60 = 0) then logger_.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(tick/60)+' minutes and '+IntToStr(days)+' days.');
+      if (tick mod myConfID.receive_servers_each = 0) then retrieveParamsAndServers;
+      if (tick mod myConfID.receive_nodes_each = 0) then retrieveClients;
 
       Sleep(1000);
 
       Inc(tick);
-      if (tick>=86400) then tick := 0;
+      if (tick>=86400) then
+         begin
+            tick := 0;
+            Inc(days);
+         end;
       serviceman_.clearFinishedThreads;
     end;
 end;
@@ -66,14 +76,42 @@ var receiveparamthread  : TReceiveParamServiceThread;
     srv                 : TServerRecord;
     slot                : Longint;
 begin
+   logger_.log(LVL_DEBUG, logHeader_+'RetrieveParamAndServices started...');
    sm_.getSuperServer(srv);
    receiveparamthread  := sf_.createReceiveParamService(srv);
    slot := serviceman_.launch(receiveparamthread);
-   if slot=-1 then receiveparamthread.Free;
+   if slot=-1 then
+          begin
+            receiveparamthread.Free;
+            logger_.log(LVL_SEVERE, logHeader_+'ReceiveParam failed, core too busy!');
+          end;
 
    receiveserverthread := sf_.createReceiveServerService(srv);
    slot := serviceman_.launch(receiveserverthread);
-   if slot=-1 then receiveserverthread.Free;
+   if slot=-1 then
+         begin
+           receiveserverthread.Free;
+           logger_.log(LVL_SEVERE, logHeader_+'ReceiveServer failed, core too busy!');
+         end;
+   logger_.log(LVL_DEBUG, logHeader_+'RetrieveParamAndServices over.');
+end;
+
+procedure TGPUCoreApp.retrieveClients;
+var receiveclientthread  : TReceiveClientServiceThread;
+    srv                  : TServerRecord;
+    slot                 : Longint;
+begin
+   logger_.log(LVL_DEBUG, logHeader_+'RetrieveClients started...');
+   sm_.getServer(srv);
+   receiveclientthread  := sf_.createReceiveClientService(srv);
+   slot := serviceman_.launch(receiveclientthread);
+   if slot=-1 then
+          begin
+            receiveclientthread.Free;
+            logger_.log(LVL_SEVERE, logHeader_+'ReceiveClients failed, core too busy!');
+          end;
+
+   logger_.log(LVL_DEBUG, logHeader_+'RetrieveClients over.');
 end;
 
 procedure TGPUCoreApp.DoRun;
@@ -107,9 +145,10 @@ begin
   inherited Create(TheOwner);
   StopOnException:=True;
   path_ := extractFilePath(ParamStr(0));
+  logHeader_ := 'gpucore> ';
 
   lock_     := TLockFile.Create(path_+PathDelim+'locks', 'coreapp.lock');
-  logger_   := TLogger.Create(path_+PathDelim+'logs', 'coreapp.log', 'coreapp.old', LVL_DEFAULT, 1024*1024);
+  logger_   := TLogger.Create(path_+PathDelim+'logs', 'coreapp.log', 'coreapp.old', LVL_DEBUG, 1024*1024);
   conf_     := TCoreConfiguration.Create(path_, 'coreapp.ini');
   conf_.loadConfiguration();
   tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp-db.sqlite');
