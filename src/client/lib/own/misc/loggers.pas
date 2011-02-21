@@ -32,6 +32,7 @@ type TLogger = class(TObject)
     function  logLvlToStr(level : Longint) : String;
     procedure log(severity : Longint; logStr : AnsiString); overload;
     procedure log(logStr : AnsiString); overload;
+    procedure logCR;
 
   private
     current_log_level_ : Longint;
@@ -137,6 +138,19 @@ begin
   CS_.Leave;
 end;
 
+procedure TLogger.logCR;
+begin
+  CS_.Enter;
+  try
+   AssignFile(F_, full_name_);
+   Append(F_);
+   WriteLn(F_);
+  finally
+    CloseFile(F_);
+  end;
+
+  CS_.Leave;
+end;
 
 end.
 

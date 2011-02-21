@@ -50,6 +50,11 @@ type
 procedure TGPUCoreApp.mainLoop;
 var tick, days  : Longint;
 begin
+  logger_.logCR; logger_.logCR;
+  logger_.logCR; logger_.logCR;
+  logger_.log(LVL_INFO, logHeader_+'********************');
+  logger_.log(LVL_INFO, logHeader_+'* Core launched ...*');
+  logger_.log(LVL_INFO, logHeader_+'********************');
   // main loop
   tick := 1;
   days := 0;
@@ -77,8 +82,10 @@ begin
     end;
 
   // last steps
-  myGPUID.Uptime := 0;
+  logger_.log(LVL_INFO, logHeader_+'Core was running for '+FloatToStr(myGPUID.uptime)+' days.');
   myGPUID.TotalUptime:=myGPUID.TotalUptime+myGPUID.Uptime;
+  myGPUID.Uptime := 0;
+  logger_.log(LVL_INFO, logHeader_+'Total uptime is '+FloatToStr(myGPUID.TotalUptime)+'.');
 end;
 
 procedure TGPUCoreApp.retrieveParamsAndServers;
