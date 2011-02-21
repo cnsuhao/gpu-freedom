@@ -137,7 +137,92 @@ end;
 procedure TCoreConfiguration.saveConfiguration();
 begin
   CS_.Enter;
-  CS_.Leave;
+  with myGPUID do
+    begin
+      ini_.WriteString('core','nodename', nodename);
+      ini_.WriteString('core','team', team);
+      ini_.WriteString('core','country', country);
+      ini_.WriteString('core','region', region);
+      ini_.WriteString('core','street', street);
+      ini_.WriteString('core','city', city);
+      ini_.WriteString('core','zip', zip);
+      ini_.WriteString('core','description','');
+      ini_.WriteString('core','nodeid', nodeid);
+      ini_.WriteString('core','ip', ip);
+      ini_.WriteString('core','localip', localip);
+      ini_.WriteString('core','os', os);
+      ini_.WriteString('core','version', version);
+      ini_.WriteString('core','port', port);
+      ini_.WriteBool('core','acceptincoming', acceptincoming);
+      ini_.WriteInteger('core','mhz', mhz);
+      ini_.WriteInteger('core','ram', ram);
+      ini_.WriteInteger('core','gigaflops', gigaflops);
+      ini_.WriteInteger('core','bits', bits);
+      ini_.WriteBool('core','isrscreensaver', isscreensaver);
+      ini_.WriteInteger('core','nbcpus', nbcpus);
+      ini_.WriteFloat('core','uptime', uptime);
+      ini_.WriteFloat('core','totaluptime', totaluptime);
+      ini_.WriteString('core','cputype', cputype);
+
+      ini_.WriteFloat('core','longitude', longitude);
+      ini_.WriteFloat('core','latitude', latitude);
+   end;
+
+ with myUserID do
+ begin
+      ini_.WriteString('user','userid', userid);
+      ini_.WriteString('user','username', username);
+      ini_.WriteString('user','password', password);
+      ini_.WriteString('user','email', email);
+      ini_.WriteString('user','realname', realname);
+      ini_.WriteString('user','homepage_url', homepage_url);
+ end;
+
+ with myConfID do
+ begin
+     ini_.WriteInteger('local','max_computations', max_computations);
+     ini_.WriteInteger('local','max_services', max_services);
+     ini_.WriteInteger('local','max_downloads', max_downloads);
+
+     ini_.WriteBool('local','run_only_when_idle', run_only_when_idle);
+
+     ini_.WriteString('communication','proxy', proxy);
+     ini_.WriteString('communication','port', port);
+     ini_.WriteString('communication','default_superserver_url', default_superserver_url);
+     ini_.WriteString('communication', 'default_server_name', default_server_name);
+
+     ini_.WriteInteger('global','receive_servers_each', receive_servers_each);
+     ini_.WriteInteger('global','receive_nodes_each', receive_nodes_each);
+     ini_.WriteInteger('global','transmit_node_each', transmit_node_each);
+     ini_.WriteInteger('global','receive_jobs_each', receive_jobs_each);
+     ini_.WriteInteger('global','transmit_jobs_each', transmit_jobs_each);
+     ini_.WriteInteger('global','receive_channels_each', receive_channels_each);
+     ini_.WriteInteger('global','transmit_channels_each', transmit_channels_each);
+     ini_.WriteInteger('global','receive_chat_each', receive_chat_each);
+     ini_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
+ end;
+
+ with tmCompStatus do
+ begin
+    ini_.WriteInteger('computations','max_threads', maxthreads);
+ end;
+
+ with tmDownStatus do
+ begin
+    ini_.WriteInteger('downloads','max_threads', maxthreads);
+ end;
+
+ with tmUploadStatus do
+ begin
+    ini_.WriteInteger('uploads','max_threads', maxthreads);
+ end;
+
+ with tmServiceStatus do
+ begin
+    ini_.WriteInteger('services','max_threads', maxthreads);
+ end;
+
+ CS_.Leave;
 end;
 
 

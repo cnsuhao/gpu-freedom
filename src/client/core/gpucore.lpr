@@ -161,6 +161,8 @@ end;
 
 destructor TGPUCoreApp.Destroy;
 begin
+  conf_.saveConfiguration();
+
   serviceman_.Free;
   cms_.Free;
   sf_.Free;

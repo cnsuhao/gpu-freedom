@@ -2,14 +2,14 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="\"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
+        <LRSInOutputDirectory Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
-      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
       <ActiveEditorIndexAtStart Value="0"/>
@@ -36,10 +36,10 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <CursorPos X="22" Y="84"/>
-        <TopLine Value="60"/>
+        <CursorPos X="3" Y="165"/>
+        <TopLine Value="153"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -116,36 +116,36 @@
         <Filename Value="..\lib\own\coremodules\coremodules.pas"/>
         <UnitName Value="coremodules"/>
         <CursorPos X="15" Y="63"/>
-        <TopLine Value="27"/>
+        <TopLine Value="41"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
         <CursorPos X="1" Y="1"/>
-        <TopLine Value="9"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="11"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <UnitName Value="loggers"/>
         <CursorPos X="5" Y="126"/>
-        <TopLine Value="1"/>
+        <TopLine Value="104"/>
         <EditorIndex Value="7"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\lib\own\coremodules\test\testpluginmanagers.pas"/>
         <UnitName Value="testpluginmanagers"/>
         <CursorPos X="1" Y="1"/>
-        <TopLine Value="56"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="6"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit14>
       <Unit15>
@@ -154,7 +154,7 @@
         <CursorPos X="48" Y="12"/>
         <TopLine Value="1"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
@@ -163,34 +163,34 @@
         <CursorPos X="55" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="8"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
         <CursorPos X="1" Y="109"/>
-        <TopLine Value="24"/>
+        <TopLine Value="87"/>
         <EditorIndex Value="5"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\initmodel.pas"/>
         <UnitName Value="initmodel"/>
         <CursorPos X="1" Y="1"/>
-        <TopLine Value="102"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="58" Y="222"/>
+        <TopLine Value="208"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
@@ -199,7 +199,7 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit20>
       <Unit21>
@@ -208,11 +208,11 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit21>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -289,6 +289,30 @@
         <Filename Value="gpucore.lpr"/>
         <Caret Line="62" Column="92" TopLine="38"/>
       </Position19>
+      <Position20>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="145" Column="8" TopLine="130"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="236" Column="26" TopLine="221"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="222" Column="61" TopLine="194"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="178" Column="7" TopLine="162"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="195" Column="58" TopLine="174"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
+        <Caret Line="212" Column="55" TopLine="196"/>
+      </Position25>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
