@@ -12,7 +12,9 @@ uses
   coremodules, servicefactories, servicemanagers,
   servermanagers, dbtablemanagers,
   receiveparamservices, receiveserverservices,
-  receiveclientservices;
+  receiveclientservices, transmitclientservices;
+
+const FRAC_SEC=1/24/3600;
 
 type
 
@@ -40,6 +42,7 @@ type
     procedure   mainLoop;
     procedure   retrieveParamsAndServers;
     procedure   retrieveClients;
+    procedure   transmitClient;
   end;
 
 { TGPUCoreApp }
@@ -52,15 +55,19 @@ begin
   days := 0;
   retrieveParamsAndServers;
   retrieveClients;
+  transmitClient;
   while lock_.exists do
     begin
-      if (tick mod 60 = 0) then logger_.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(tick/60)+' minutes and '+IntToStr(days)+' days.');
+      if (tick mod 60 = 0) then logger_.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
       if (tick mod myConfID.receive_servers_each = 0) then retrieveParamsAndServers;
       if (tick mod myConfID.receive_nodes_each = 0) then retrieveClients;
+      if (tick mod myConfID.transmit_node_each = 0) then transmitClient;
 
       Sleep(1000);
 
       Inc(tick);
+      myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
+
       if (tick>=86400) then
          begin
             tick := 0;
@@ -68,6 +75,10 @@ begin
          end;
       serviceman_.clearFinishedThreads;
     end;
+
+  // last steps
+  myGPUID.Uptime := 0;
+  myGPUID.TotalUptime:=myGPUID.TotalUptime+myGPUID.Uptime;
 end;
 
 procedure TGPUCoreApp.retrieveParamsAndServers;
@@ -112,6 +123,24 @@ begin
           end;
 
    logger_.log(LVL_DEBUG, logHeader_+'RetrieveClients over.');
+end;
+
+procedure TGPUCoreApp.transmitClient;
+var transmitclientthread  : TTransmitClientServiceThread;
+    srv                   : TServerRecord;
+    slot                  : Longint;
+begin
+   logger_.log(LVL_DEBUG, logHeader_+'TransmitClient started...');
+   sm_.getDefaultServer(srv);
+   transmitclientthread  := sf_.createTransmitClientService(srv);
+   slot := serviceman_.launch(transmitclientthread);
+   if slot=-1 then
+          begin
+            transmitclientthread.Free;
+            logger_.log(LVL_SEVERE, logHeader_+'TransmitClient failed, core too busy!');
+          end;
+
+   logger_.log(LVL_DEBUG, logHeader_+'TransmitClient over.');
 end;
 
 procedure TGPUCoreApp.DoRun;
