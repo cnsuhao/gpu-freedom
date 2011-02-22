@@ -36,8 +36,7 @@ $latitude        = $_GET['latitude'];
 $version         = $_GET['version'];
 $team            = $_GET['team'];
 $userid          = $_GET['userid'];
-$defaultservername = $_GET['defaultservername'];
-$description       = $_GET['description'];
+$description     = $_GET['description'];
 
 if ($nodeid=="") exit;
 
@@ -66,7 +65,6 @@ if ($debug==1) {
     echo "version=$version\n";   
     echo "team=$team\n";         
     echo "userid=$userid\n";        
-    echo "defaultservername=$defaultservername\n";
     echo "description=$description\n";       
 }
 
@@ -74,8 +72,7 @@ include("report_client.inc.php");
 
 $id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
-						$bits, $os, $longitude, $latitude, $version, $team, $userid, $defaultservername,
-						$description);
+						$bits, $os, $longitude, $latitude, $version, $team, $userid, $description);
 
 echo "Done!\n";						
 ?>

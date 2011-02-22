@@ -1,10 +1,10 @@
 <?php
 function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
-						$bits, $os, $longitude, $latitude, $version, $team, $userid, $defaultservername,
-						$description) {
+						$bits, $os, $longitude, $latitude, $version, $team, $userid, $description) {
 						
-	include("../conf/config.inc.php");					
+	include("../conf/config.inc.php");	
+    $debug=1;	
 	mysql_connect($dbserver, $username, $password);
     @mysql_select_db($database) or die("<b>Error: Unable to select database, please check settings in conf/config.inc.php</b>");					
 	$query="SELECT id FROM tbclient WHERE nodeid='$nodeid' LIMIT 1"; 
@@ -17,7 +17,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 										   ip, localip, port, acceptincoming,
 										   cputype, mhz, ram, gigaflops, bits, os,
 										   longitude, latitude,
-										   version, team, userid, defaultservername, 
+										   version, team, userid,  
 										   description,
 										   create_dt, update_dt)
 									VALUES('', '$nodename', '$nodeid', '$country', '$region', '$city', '$zip',
@@ -25,11 +25,12 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
                                            '$ip', '$localip', '$port', $acceptincoming,
                                            '$cputype', $mhz, $ram, $gigaflops, $bits, '$os',
 									        $longitude, $latitude,
-                                           '$version', '$team', '$userid', '$defaultservername',
+                                           '$version', '$team', '$userid', 
                                            '$description',										   
 										   NOW(), NOW()
 										   );";
        $resultinsert=mysql_query($queryinsert);
+	   if ($debug==1) echo "Insert statement is: $queryinsert\n";
 	    
        // at the moment we set $id to -1, later we might retrieve $id with a query
        // if necessary
@@ -43,12 +44,13 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 					ip='$ip', localip='$localip', port='$port', acceptincoming=$acceptincoming,
 					cputype='$cputype', mhz=$mhz, ram=$ram, gigaflops=$gigaflops, bits=$bits, os='$os',
 					longitude=$longitude, latitude=$latitude,
-                    version='$version', team='$team', userid='$userid', defaultservername='$defaultservername',
+                    version='$version', team='$team', userid='$userid', 
                     description='$description',					
 					update_dt=NOW()
 					WHERE id=$id;"; 
       $resultupdate=mysql_query($queryupdate);
-	}
+	   if ($debug==1) echo "Update statement is: $queryupdate\n";
+    }
 	mysql_close();	
     return $id;	
 }
