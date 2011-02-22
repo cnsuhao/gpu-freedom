@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  loggers, lockfiles,  coreconfigurations,  testconstants, identities,
+  loggers, lockfiles,  coreconfigurations,  identities,
   coremodules, servicefactories, servicemanagers,
   servermanagers, dbtablemanagers,
   receiveparamservices, receiveserverservices,
@@ -191,7 +191,7 @@ begin
   tableman_.OpenAll;
   sm_          := TServerManager.Create(conf_, tableman_.getServerTable(), logger_);
   cms_         := TCoreModule.Create(logger_, path_, 'dll');
-  sf_          := TServiceFactory.Create(sm_, tableman_, PROXY_HOST, PROXY_PORT, logger_, conf_);
+  sf_          := TServiceFactory.Create(sm_, tableman_, myConfId.proxy, myconfId.port, logger_, conf_);
   serviceman_  := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
 end;
 
