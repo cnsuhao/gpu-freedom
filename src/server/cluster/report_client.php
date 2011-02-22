@@ -41,11 +41,41 @@ $description       = $_GET['description'];
 
 if ($nodeid=="") exit;
 
+$debug=1;
+if ($debug==1) {
+	echo "nodename=$nodename\n";
+    echo "nodeid=$nodeid\n";
+    echo "country=$country\n";
+    echo "region=$region\n";
+    echo "city=$city\n";
+    echo "zip=$zip\n";   	
+    echo "uptime=$uptime\n";    	
+    echo "totaluptime=$totaluptime\n"; 
+    echo "ip=$ip\n";        		
+    echo "localip=$localip\n";       
+    echo "port=$port\n";           
+    echo "acceptincoming=$acceptincoming\n"; 
+    echo "cputype=$cputype\n";        
+    echo "mhz=$mhz\n";		   
+    echo "ram=$ram\n";            
+    echo "gigaflops=$gigaflops\n";   
+    echo "bits=$bits\n";        
+    echo "os=$os\n";            
+    echo "longitude=$longitude\n";     
+    echo "latitude=$latitude\n";    
+    echo "version=$version\n";   
+    echo "team=$team\n";         
+    echo "userid=$userid\n";        
+    echo "defaultservername=$defaultservername\n";
+    echo "description=$description\n";       
+}
+
 include("report_client.inc.php");
 
 $id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
 						$bits, $os, $longitude, $latitude, $version, $team, $userid, $defaultservername,
 						$description);
-							   
+
+echo "Done!\n";						
 ?>
