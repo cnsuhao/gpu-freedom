@@ -10,9 +10,10 @@ uses
   { you can add units after this }
   loggers, lockfiles,  coreconfigurations,  identities,
   coremodules, servicefactories, servicemanagers,
-  servermanagers, dbtablemanagers,
+  servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
-  receiveclientservices, transmitclientservices;
+  receiveclientservices, transmitclientservices,
+  receivechannelservices;
 
 const FRAC_SEC=1/24/3600;
 
@@ -40,9 +41,11 @@ type
     serviceman_ : TServiceThreadManager;
 
     procedure   mainLoop;
+    function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
     procedure   retrieveParamsAndServers;
     procedure   retrieveClients;
     procedure   transmitClient;
+    procedure   receiveChannels;
   end;
 
 { TGPUCoreApp }
@@ -60,6 +63,7 @@ begin
   days := 0;
   retrieveParamsAndServers;
   retrieveClients;
+  receiveChannels;
   transmitClient;
   while lock_.exists do
     begin
@@ -67,6 +71,7 @@ begin
       if (tick mod myConfID.receive_servers_each = 0) then retrieveParamsAndServers;
       if (tick mod myConfID.receive_nodes_each = 0) then retrieveClients;
       if (tick mod myConfID.transmit_node_each = 0) then transmitClient;
+      if (tick mod myConfID.receive_channels_each = 0) then receiveChannels;
 
       Sleep(1000);
 
@@ -88,66 +93,60 @@ begin
   logger_.log(LVL_INFO, logHeader_+'Total uptime is '+FloatToStr(myGPUID.TotalUptime)+'.');
 end;
 
+function    TGPUCoreApp.launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
+var slot : Longint;
+begin
+   Result := true;
+   logger_.log(LVL_DEBUG, logHeader_+tname+' started...');
+   slot := serviceman_.launch(thread);
+   if slot=-1 then
+         begin
+           Result := false;
+           logger_.log(LVL_SEVERE, logHeader_+tname+' failed, core too busy!');
+         end;
+
+   logger_.log(LVL_DEBUG, logHeader_+tname+' over.');
+end;
+
+
 procedure TGPUCoreApp.retrieveParamsAndServers;
 var receiveparamthread  : TReceiveParamServiceThread;
     receiveserverthread : TReceiveServerServiceThread;
     srv                 : TServerRecord;
-    slot                : Longint;
 begin
-   logger_.log(LVL_DEBUG, logHeader_+'RetrieveParamAndServices started...');
    sm_.getSuperServer(srv);
    receiveparamthread  := sf_.createReceiveParamService(srv);
-   slot := serviceman_.launch(receiveparamthread);
-   if slot=-1 then
-          begin
-            receiveparamthread.Free;
-            logger_.log(LVL_SEVERE, logHeader_+'ReceiveParam failed, core too busy!');
-          end;
+   if not launch(receiveparamthread, 'ReceiveParams', srv) then receiveparamthread.Free;
 
    receiveserverthread := sf_.createReceiveServerService(srv);
-   slot := serviceman_.launch(receiveserverthread);
-   if slot=-1 then
-         begin
-           receiveserverthread.Free;
-           logger_.log(LVL_SEVERE, logHeader_+'ReceiveServer failed, core too busy!');
-         end;
-   logger_.log(LVL_DEBUG, logHeader_+'RetrieveParamAndServices over.');
+   if not launch(receiveserverthread, 'ReceiveServers', srv) then receiveserverthread.Free;
 end;
 
 procedure TGPUCoreApp.retrieveClients;
 var receiveclientthread  : TReceiveClientServiceThread;
     srv                  : TServerRecord;
-    slot                 : Longint;
 begin
-   logger_.log(LVL_DEBUG, logHeader_+'RetrieveClients started...');
    sm_.getServer(srv);
    receiveclientthread  := sf_.createReceiveClientService(srv);
-   slot := serviceman_.launch(receiveclientthread);
-   if slot=-1 then
-          begin
-            receiveclientthread.Free;
-            logger_.log(LVL_SEVERE, logHeader_+'ReceiveClients failed, core too busy!');
-          end;
-
-   logger_.log(LVL_DEBUG, logHeader_+'RetrieveClients over.');
+   if not launch(receiveclientthread, 'ReceiveClients', srv) then receiveclientthread.Free;
 end;
 
 procedure TGPUCoreApp.transmitClient;
 var transmitclientthread  : TTransmitClientServiceThread;
     srv                   : TServerRecord;
-    slot                  : Longint;
 begin
-   logger_.log(LVL_DEBUG, logHeader_+'TransmitClient started...');
    sm_.getDefaultServer(srv);
    transmitclientthread  := sf_.createTransmitClientService(srv);
-   slot := serviceman_.launch(transmitclientthread);
-   if slot=-1 then
-          begin
-            transmitclientthread.Free;
-            logger_.log(LVL_SEVERE, logHeader_+'TransmitClient failed, core too busy!');
-          end;
+   if not launch(transmitclientthread, 'TransmitClient', srv) then transmitclientthread.Free;
+end;
 
-   logger_.log(LVL_DEBUG, logHeader_+'TransmitClient over.');
+procedure TGPUCoreApp.receiveChannels;
+var receivechanthread     : TReceiveChannelServiceThread;
+    srv                   : TServerRecord;
+begin
+   sm_.getDefaultServer(srv);
+   receivechanthread  := sf_.createReceiveChannelService(srv, srv.chatchannel, 'CHAT');
+   if not launch(receivechanthread, 'ReceiveChannels', srv) then receivechanthread.Free;
 end;
 
 procedure TGPUCoreApp.DoRun;
@@ -187,7 +186,7 @@ begin
   logger_   := TLogger.Create(path_+PathDelim+'logs', 'coreapp.log', 'coreapp.old', LVL_DEBUG, 1024*1024);
   conf_     := TCoreConfiguration.Create(path_, 'coreapp.ini');
   conf_.loadConfiguration();
-  tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp-db.sqlite');
+  tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp.db');
   tableman_.OpenAll;
   sm_          := TServerManager.Create(conf_, tableman_.getServerTable(), logger_);
   cms_         := TCoreModule.Create(logger_, path_, 'dll');

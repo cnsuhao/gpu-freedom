@@ -67,8 +67,9 @@ end;
 
 procedure TServerManager.getServerInternal(var srv : TServerRecord; i : Longint);
 begin
+  srv.id  := servers_[i].id;
   srv.url := servers_[i].url;
-  srv.id  := servers_[i].id
+  srv.chatchannel := servers_[i].chatchannel;
 end;
 
 procedure TServerManager.getServer(var srv : TServerRecord);
@@ -133,7 +134,7 @@ begin
       begin
         servers_[1].url := myConfID.default_superserver_url;
         servers_[1].id := 0;
-        servers_[1].chatchannel := '';
+        servers_[1].chatchannel := 'Altos';
         currentServers_ := 1;
         logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
       end
