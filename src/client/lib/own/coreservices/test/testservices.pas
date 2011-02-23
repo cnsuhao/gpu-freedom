@@ -5,7 +5,7 @@ unit testservices;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry,
+   Classes, SysUtils, fpcunit, testutils, testregistry,
   servicemanagers, servicefactories, servermanagers, testconstants,
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
@@ -172,13 +172,14 @@ begin
   jobresultrow.errorid := 0;
   jobresultrow.errormsg := '';
   jobresultrow.errorarg := '';
+  jobresultrow.nodeid := '123';
+  jobresultrow.nodename := 'hola';
+  jobresultrow.job_id := -1;
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createTransmitJobResultService(srv, jobresultrow);
   serviceMan_.launch(thread);
   waitForCompletion();
 end;
-
-
 
 
 procedure TTestServices.SetUp;

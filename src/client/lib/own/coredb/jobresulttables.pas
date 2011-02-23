@@ -65,8 +65,8 @@ begin
       FieldDefs.Add('workunitresult', ftString);
       FieldDefs.Add('iserroneous', ftBoolean);
       FieldDefs.Add('errorid', ftInteger);
-      FieldDefs.Add('errormsg', ftInteger);
-      FieldDefs.Add('errorarg', ftInteger);
+      FieldDefs.Add('errormsg', ftString);
+      FieldDefs.Add('errorarg', ftString);
       FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('nodeid', ftString);
       FieldDefs.Add('nodename', ftString);
@@ -112,7 +112,6 @@ begin
   else
       dataset_.Append;
 
-  dataset_.FieldByName('id').AsInteger := row.id;
   dataset_.FieldByName('externalid').AsInteger := row.externalid;
   dataset_.FieldByName('requestid').AsInteger := row.requestid;
   dataset_.FieldByName('job_id').AsInteger := row.job_id;
