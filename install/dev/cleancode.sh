@@ -1,6 +1,9 @@
 rm ../../bin/*.log
 rm ../../bin/*.ppu
 rm ../../bin/*.php
+rm ../../bin/*.html
+rm ../../bin/*.ini
+rm ../../bin/*.db
 rm ../../bin/*.or
 rm ../../bin/*.res
 rm ../../bin/*.o
