@@ -1,0 +1,9 @@
+object GPUMainApp: TGPUMainApp
+  Left = 401
+  Height = 650
+  Top = 193
+  Width = 953
+  Caption = 'GPU II'
+  ParentFont = False
+  LCLVersion = '0.9.26'
+end
