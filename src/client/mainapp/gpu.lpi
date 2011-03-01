@@ -6,7 +6,7 @@
     <General>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -30,12 +30,12 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="4">
       <Unit0>
         <Filename Value="gpu.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpu"/>
-        <CursorPos X="19" Y="13"/>
+        <CursorPos X="42" Y="18"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="20"/>
@@ -48,12 +48,30 @@
         <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="mainapp.lrs"/>
         <UnitName Value="mainapp"/>
-        <CursorPos X="129" Y="27"/>
+        <CursorPos X="56" Y="19"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\earthDrawingControl.pas"/>
+        <UnitName Value="earthDrawingControl"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="189"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\lib\ext\misc\arcball.pas"/>
+        <UnitName Value="arcball"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit3>
     </Units>
     <JumpHistory Count="1" HistoryIndex="0">
       <Position1>
@@ -66,7 +84,7 @@
     <Version Value="8"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\lib\own\coreservices\;..\lib\own\coremodules\;..\lib\own\misc\;..\lib\ext\synapse\src\lib\"/>
+      <OtherUnitFiles Value="..\lib\own\coreservices\;..\lib\own\coremodules\;..\lib\own\misc\;..\lib\ext\synapse\src\lib\;..\lib\ext\misc\"/>
       <UnitOutputDirectory Value="..\..\..\bin"/>
     </SearchPaths>
     <Parsing>
