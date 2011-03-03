@@ -5,7 +5,7 @@ unit sphere3dplots;
 interface
 
 uses
-  Classes, SysUtils, texturestructure, conversion, GL, GLU, Graphics,
+  Classes, SysUtils, texturestructure, conversions, GL, GLU, Graphics,
   ArcBall;
 
 const
@@ -31,7 +31,7 @@ var
 procedure init3DGrid();
 var i, j : Longint;
     p2 :T3DPoint;
-    lat, lon : TClimateType;
+    lat, lon : TFloatType;
 begin
  for j := 0 to 179 do
      for i := 0 to 359 do
@@ -62,7 +62,7 @@ var i, j,
     p1,p2,p3,p4 : T3DPoint;
     r, g, b,
     correction_x,
-    correction_y : TClimateType;
+    correction_y : TFloatType;
 
 begin
   for j := 0 to 179 do

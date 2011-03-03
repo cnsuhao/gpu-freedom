@@ -1,11 +1,11 @@
-unit OpenGLSphereControl;
+unit openglspherecontrol;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, Controls, SysUtils, GL, GLU, sphere3dPlots, arcball, OpenGLContext, texturestructure;
+  Classes, Controls, SysUtils, GL, GLU, sphere3dplots, arcball, OpenGLContext, texturestructure;
 
   type
     TOpenGLSphereControl = class(TOpenGLControl)
@@ -13,7 +13,6 @@ uses
          constructor Create(obj : TComponent);
          procedure setColors(colors : PGridColor);
          procedure setRotate(rotate : Boolean);
-         procedure setSphere(sphere : Boolean);
 
          procedure openGLSphereControlResize(Sender: TObject);
          procedure openGLSphereControlPaint(Sender: TObject);
@@ -31,7 +30,6 @@ uses
          _colors : PGridColor;
          _angle  : Double;
          _rotate : Boolean;
-         _sphere : Boolean;
    end;
 
 implementation
@@ -45,10 +43,9 @@ begin
 
   _angle := 0;
   _rotate := true;
-  _sphere := true;
 
-  onPaint := @openGLWorldControlPaint;
-  onResize := @openGLWorldControlResize;
+  onPaint := @openGLSphereControlPaint;
+  onResize := @openGLSphereControlResize;
   onMouseDown := @MouseDown;
   onMouseUP := @MouseUp;
   onMouseMove := @MouseMove;
@@ -62,11 +59,6 @@ end;
 procedure TOpenGLSphereControl.setRotate(rotate : Boolean);
 begin
   _rotate := rotate;
-end;
-
-procedure TOpenGLSphereControl.setSphere(sphere : Boolean);
-begin
-  _sphere := sphere;
 end;
 
 procedure TOpenGLSphereControl.MouseDown(Sender: TObject; Button: TMouseButton;
@@ -118,12 +110,8 @@ begin
   if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
 
   glEnable(GL_BLEND);
-  if _sphere then
-    plot3dSphere(_colors)
-  else
-    plot3dTerrain(_colors);
+  plot3dSphere(_colors);
   glDisable(GL_BLEND);
-
 
   SwapBuffers;
   if _rotate then
