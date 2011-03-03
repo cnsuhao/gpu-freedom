@@ -1,4 +1,4 @@
-unit textureDrawingControl;
+unit texturedrawingcontrol;
 
 {$mode objfpc}{$H+}
 interface
@@ -28,7 +28,7 @@ type
     _plotMode : Longint;
   end;
 
-  type PEarthDrawingControl = ^TEarthDrawingControl;
+  type PTextureDrawingControl = ^TTextureDrawingControl;
 
 implementation
 
@@ -38,7 +38,6 @@ begin
   inherited Create(obj);
   _size := size;
   _plotMode := plotmode;
-  _clima := clima;
 
   Height := _size*180+1;
   Width := _size*360+1;
@@ -65,7 +64,7 @@ var i, j : Longint;
 begin
   for j := 0 to 179 do
      for i := 0 to 359 do
-        _colors[i][j] := colors[i][j]^;
+        _colors[i][j] := colors^[i][j];
 end;
 
 
@@ -82,8 +81,8 @@ begin
     for j := 0 to 179 do
      for i := 0 to 359 do
        begin
-         Bitmap.Canvas.Pen.Color := colors[i][j];
-         Bitmap.Canvas.Brush.Color := colors[i][j];
+         Bitmap.Canvas.Pen.Color := _colors[i][j];
+         Bitmap.Canvas.Brush.Color := _colors[i][j];
          if (_size>1) then
            Bitmap.Canvas.Rectangle(i*_size ,j*_size, i*_size+_size, j*_size+_size)
          else

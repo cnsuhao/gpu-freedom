@@ -2,6 +2,9 @@ unit colors;
 
 interface
 
+type  TColor = Longint;
+
+const
   // colors taken from
   // http://www.lohninger.com/packages.html
   // SDL Delphi Components (c) by Lohninger

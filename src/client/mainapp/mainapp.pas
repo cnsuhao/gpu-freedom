@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  openglspherecontrol;
+  openglspherecontrol, texturedrawingcontrol;
 
 type
   TGPUMainApp = class(TForm)
