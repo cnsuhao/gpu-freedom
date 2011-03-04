@@ -1,0 +1,8 @@
+{ Das ist eine automatisch erzeugte Lazarus-Ressourcendatei }
+
+LazarusResources.Add('TGPUMainApp','FORMDATA',[
+  'TPF0'#11'TGPUMainApp'#10'GPUMainApp'#4'Left'#3#145#1#6'Height'#3#138#2#3'Top'
+  +#3#193#0#5'Width'#3#185#3#7'Caption'#6#6'GPU II'#8'OnCreate'#7#10'FormCreate'
+  +#9'OnDestroy'#7#11'FormDestroy'#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.26'#0
+  +#0
+]);

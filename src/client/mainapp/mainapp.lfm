@@ -4,6 +4,8 @@ object GPUMainApp: TGPUMainApp
   Top = 193
   Width = 953
   Caption = 'GPU II'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   ParentFont = False
   LCLVersion = '0.9.26'
 end
