@@ -16,12 +16,12 @@ type  T3DPoint = record
       x,y,z : Real;
 end;
 
-type  T3DGrid = Array [0..359] of Array [0..179] of T3DPoint;
+type  T3DGrid = Array [0..T_WIDTH] of Array [0..T_HEIGHT] of T3DPoint;
 type  P3DGrid = ^T3DGrid;
 
 procedure init3DGrid();
-procedure plot3d(vertex : P3DGrid; colors : PGridColor);
-procedure plot3dSphere(colors : PGridColor);
+procedure plot3d(vertex : P3DGrid; var colors : TGridColor);
+procedure plot3dSphere(var colors : TGridColor);
 
 implementation
 
@@ -55,7 +55,7 @@ begin
 end;
 
 
-procedure plot3d(vertex : P3DGrid; colors : PGridColor);
+procedure plot3d(vertex : P3DGrid; var colors : TGridColor);
 var i, j,
     target_i,
     target_j : Longint;
@@ -79,9 +79,9 @@ begin
           p4 := vertex^[target_i][target_j];
 
 
-          r := Red(colors^[i][j])/255;
-          g := Green(colors^[i][j])/255;
-          b := Blue(colors^[i][j])/255;
+          r := Red(colors[i][j])/255;
+          g := Green(colors[i][j])/255;
+          b := Blue(colors[i][j])/255;
 
           glBegin(GL_TRIANGLES);
           glColor3f(r,g,b);
@@ -100,7 +100,7 @@ begin
 
 end;
 
-procedure plot3dSphere(colors : PGridColor);
+procedure plot3dSphere(var colors : TGridColor);
 begin
  plot3d(@sphere3D, colors);
 end;

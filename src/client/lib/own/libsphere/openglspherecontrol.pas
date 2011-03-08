@@ -9,9 +9,8 @@ uses
 
   type
     TOpenGLSphereControl = class(TOpenGLControl)
-       public
          constructor Create(obj : TComponent);
-         procedure setColors(colors : PGridColor);
+         procedure setColors(var colors : TGridColor);
          procedure setRotate(rotate : Boolean);
 
          procedure openGLSphereControlResize(Sender: TObject);
@@ -27,7 +26,7 @@ uses
          cube_rotationx: GLFloat;
          cube_rotationy: GLFloat;
          cube_rotationz: GLFloat;
-         _colors : PGridColor;
+         _colors : TGridColor;
          _angle  : Double;
          _rotate : Boolean;
    end;
@@ -37,7 +36,6 @@ implementation
 constructor TOpenGLSphereControl.Create(obj : TComponent);
 begin
   inherited Create(obj);
-
   theBall := TArcBall.Create;
   theBall.Init(256);
 
@@ -51,9 +49,12 @@ begin
   onMouseMove := @MouseMove;
 end;
 
-procedure TOpenGLSphereControl.setColors(colors : PGridColor);
+procedure TOpenGLSphereControl.setColors(var colors : TGridColor);
+var i, j : Longint;
 begin
-  _colors := colors;
+  for j := 0 to T_HEIGHT do
+     for i := 0 to T_WIDTH do
+        _colors[i][j] := colors[i][j];
 end;
 
 procedure TOpenGLSphereControl.setRotate(rotate : Boolean);

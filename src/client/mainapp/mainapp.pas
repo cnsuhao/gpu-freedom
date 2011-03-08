@@ -14,6 +14,8 @@ type
   { TGPUMainApp }
 
   TGPUMainApp = class(TForm)
+    openGLSphereControl : TOpenGLSphereControl;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -45,10 +47,26 @@ begin
   tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp.db');
   tableman_.OpenAll;
   sm_          := TServerManager.Create(conf_, tableman_.getServerTable(), logger_);
+
+  openGLSphereControl := TOpenGLSphereControl.Create(self);
+  with OpenGLSphereControl do begin
+    Name:='OpenGLSphereControl';
+    Align:=alNone;
+    Parent:=Self;
+    Top := 0;
+    Left := 0;
+    Height := 360;
+    Width := 360;
+  end;
+  //OpenGLSphereControl.setColors(eDrawingControl.getColors);
+
+  //Application.AddOnIdleHandler(@OnAppIdle);
 end;
 
 procedure TGPUMainApp.FormDestroy(Sender: TObject);
 begin
+  openGLSphereControl.Free;
+
   conf_.saveConfiguration();
   lock_.delete;
 
@@ -64,4 +82,5 @@ initialization
   {$I mainapp.lrs}
 
 end.
+
 
