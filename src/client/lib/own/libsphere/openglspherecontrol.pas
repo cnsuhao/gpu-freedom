@@ -5,7 +5,8 @@ unit openglspherecontrol;
 interface
 
 uses
-  Classes, Controls, SysUtils, GL, GLU, sphere3dplots, arcball, OpenGLContext, texturestructure;
+  Classes, Controls, SysUtils, GL, GLU, sphere3dplots, arcball, OpenGLContext,
+  texturestructure, colors;
 
   type
     TOpenGLSphereControl = class(TOpenGLControl)
@@ -34,6 +35,7 @@ uses
 implementation
 
 constructor TOpenGLSphereControl.Create(obj : TComponent);
+var i, j : Longint;
 begin
   inherited Create(obj);
   theBall := TArcBall.Create;
@@ -41,6 +43,12 @@ begin
 
   _angle := 0;
   _rotate := true;
+
+  init3dgrid();
+  // init colors with some value, a blue ball to start with
+  for j:=0 to T_HEIGHT do
+   for i:=0 to T_WIDTH do
+     _colors[i][j] := clLightBlue;
 
   onPaint := @openGLSphereControlPaint;
   onResize := @openGLSphereControlResize;

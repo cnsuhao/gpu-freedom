@@ -18,6 +18,7 @@ type
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure OnAppIdle(Sender: TObject; var Done: Boolean);
   private
     path_,
     logHeader_ : String;
@@ -60,7 +61,7 @@ begin
   end;
   //OpenGLSphereControl.setColors(eDrawingControl.getColors);
 
-  //Application.AddOnIdleHandler(@OnAppIdle);
+  Application.AddOnIdleHandler(@OnAppIdle);
 end;
 
 procedure TGPUMainApp.FormDestroy(Sender: TObject);
@@ -76,6 +77,12 @@ begin
   conf_.Free;
   logger_.Free;
   lock_.Free;
+end;
+
+procedure TGPUMainApp.OnAppIdle(Sender: TObject; var Done: Boolean);
+begin
+  Done:=false;
+  openGLSphereControl.Invalidate;
 end;
 
 initialization

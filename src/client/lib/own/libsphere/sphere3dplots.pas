@@ -33,8 +33,8 @@ var i, j : Longint;
     p2 :T3DPoint;
     lat, lon : TFloatType;
 begin
- for j := 0 to 179 do
-     for i := 0 to 359 do
+ for j := 0 to T_HEIGHT do
+     for i := 0 to T_WIDTH do
        begin
          lat := YtoLat(j);       //-90..+90
          lon := XtoLon(i);       //-180..+180
@@ -65,13 +65,13 @@ var i, j,
     correction_y : TFloatType;
 
 begin
-  for j := 0 to 179 do
-     for i := 0 to 359 do
+  for j := 0 to T_HEIGHT do
+     for i := 0 to T_WIDTH do
        begin
           target_i := i+1;
           target_j := j+1;
-          if (target_i>359) then target_i := target_i-359;
-          if (target_j>179) then target_j := target_j-179;
+          if (target_i>T_WIDTH) then target_i := target_i-T_WIDTH;
+          if (target_j>T_HEIGHT) then target_j := target_j-T_HEIGHT;
 
           p1 := vertex^[i]  [j];
           p2 := vertex^[target_i][j];
