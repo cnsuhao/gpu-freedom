@@ -48,7 +48,10 @@ begin
   // init colors with some value, a blue ball to start with
   for j:=0 to T_HEIGHT do
    for i:=0 to T_WIDTH do
-     _colors[i][j] := clLightBlue;
+     _colors[i][j] := clLightSkyBlue;
+
+  for j:=0 to T_HEIGHT do
+     _colors[0][j] := clForestGreen;
 
   onPaint := @openGLSphereControlPaint;
   onResize := @openGLSphereControlResize;

@@ -57,7 +57,7 @@ begin
     Top := 0;
     Left := 0;
     Height := 360;
-    Width := 360;
+    Width := 480;
   end;
   //OpenGLSphereControl.setColors(eDrawingControl.getColors);
 
