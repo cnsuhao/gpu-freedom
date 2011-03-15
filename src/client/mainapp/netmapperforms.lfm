@@ -1,0 +1,12 @@
+object NetmapperForm: TNetmapperForm
+  Left = 425
+  Height = 380
+  Top = 193
+  Width = 500
+  Caption = 'Netmapper'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = False
+  LCLVersion = '0.9.26'
+  Visible = True
+end

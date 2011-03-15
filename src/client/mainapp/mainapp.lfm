@@ -1,8 +1,8 @@
 object GPUMainApp: TGPUMainApp
-  Left = 401
-  Height = 650
-  Top = 193
-  Width = 953
+  Left = 1100
+  Height = 72
+  Top = 330
+  Width = 486
   Caption = 'GPU II'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
