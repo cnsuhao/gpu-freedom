@@ -1,0 +1,67 @@
+object ChatForm: TChatForm
+  Left = 398
+  Height = 458
+  Top = 150
+  Width = 624
+  Caption = 'Chat'
+  ClientHeight = 458
+  ClientWidth = 624
+  ParentFont = False
+  LCLVersion = '0.9.26'
+  Visible = True
+  object PanelTop: TPanel
+    Height = 357
+    Width = 624
+    Align = alTop
+    ClientHeight = 357
+    ClientWidth = 624
+    TabOrder = 0
+    object mmChat: TMemo
+      Left = 1
+      Height = 355
+      Top = 1
+      Width = 622
+      Align = alClient
+      Lines.Strings = (
+        ''
+      )
+      TabOrder = 0
+    end
+  end
+  object PanelBottom: TPanel
+    Height = 98
+    Top = 360
+    Width = 624
+    Align = alBottom
+    ClientHeight = 98
+    ClientWidth = 624
+    TabOrder = 1
+    object mmSubmitChat: TMemo
+      Left = 8
+      Height = 82
+      Top = 8
+      Width = 480
+      Lines.Strings = (
+        ''
+      )
+      TabOrder = 0
+    end
+    object btnSend: TButton
+      Left = 488
+      Height = 57
+      Top = 8
+      Width = 128
+      Caption = 'Send'
+      TabOrder = 1
+    end
+    object cbSelectChannel: TComboBox
+      Left = 488
+      Height = 21
+      Top = 69
+      Width = 128
+      ItemHeight = 13
+      MaxLength = -1
+      TabOrder = 2
+    end
+  end
+end

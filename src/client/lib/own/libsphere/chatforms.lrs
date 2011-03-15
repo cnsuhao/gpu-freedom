@@ -1,0 +1,19 @@
+{ Das ist eine automatisch erzeugte Lazarus-Ressourcendatei }
+
+LazarusResources.Add('TChatForm','FORMDATA',[
+  'TPF0'#9'TChatForm'#8'ChatForm'#4'Left'#3#142#1#6'Height'#3#202#1#3'Top'#3#150
+  +#0#5'Width'#3'p'#2#7'Caption'#6#4'Chat'#12'ClientHeight'#3#202#1#11'ClientWi'
+  +'dth'#3'p'#2#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.26'#7'Visible'#9#0#6'TP'
+  +'anel'#8'PanelTop'#6'Height'#3'e'#1#5'Width'#3'p'#2#5'Align'#7#5'alTop'#12'C'
+  +'lientHeight'#3'e'#1#11'ClientWidth'#3'p'#2#8'TabOrder'#2#0#0#5'TMemo'#6'mmC'
+  +'hat'#4'Left'#2#1#6'Height'#3'c'#1#3'Top'#2#1#5'Width'#3'n'#2#5'Align'#7#8'a'
+  +'lClient'#13'Lines.Strings'#1#6#0#0#8'TabOrder'#2#0#0#0#0#6'TPanel'#11'Panel'
+  +'Bottom'#6'Height'#2'b'#3'Top'#3'h'#1#5'Width'#3'p'#2#5'Align'#7#8'alBottom'
+  +#12'ClientHeight'#2'b'#11'ClientWidth'#3'p'#2#8'TabOrder'#2#1#0#5'TMemo'#12
+  +'mmSubmitChat'#4'Left'#2#8#6'Height'#2'R'#3'Top'#2#8#5'Width'#3#224#1#13'Lin'
+  +'es.Strings'#1#6#0#0#8'TabOrder'#2#0#0#0#7'TButton'#7'btnSend'#4'Left'#3#232
+  +#1#6'Height'#2'9'#3'Top'#2#8#5'Width'#3#128#0#7'Caption'#6#4'Send'#8'TabOrde'
+  +'r'#2#1#0#0#9'TComboBox'#15'cbSelectChannel'#4'Left'#3#232#1#6'Height'#2#21#3
+  +'Top'#2'E'#5'Width'#3#128#0#10'ItemHeight'#2#13#9'MaxLength'#2#255#8'TabOrde'
+  +'r'#2#2#0#0#0#0
+]);
