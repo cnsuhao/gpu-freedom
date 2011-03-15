@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  openglspherecontrol, texturestructure;
+  openglspherecontrol, earthtextures, texturestructure;
 
 type
 
@@ -20,7 +20,7 @@ type
      procedure OnAppIdle(Sender: TObject; var Done: Boolean);
 
     private
-     //earthTexturer_ : TEarthTexturer;
+     earthTexturer_ : TEarthTexturer;
   end; 
 
 var
@@ -29,9 +29,8 @@ var
 implementation
 
 procedure TNetmapperForm.FormCreate(Sender: TObject);
-  //var colors : TGridColor;
 begin
-  //earthTexturer_ := TEarthTexturer.Create();
+  earthTexturer_ := TEarthTexturer.Create();
 
   openGLSphereControl := TOpenGLSphereControl.Create(self);
   with OpenGLSphereControl do begin
@@ -45,15 +44,15 @@ begin
     Visible := true;
   end;
 
-  //earthTexturer_.fillTexture(colors);
-  //openGLSphereControl.setColors(colors);
+
+  openGLSphereControl.setColors(earthTexturer_.getTexture());
 
   Application.AddOnIdleHandler(@OnAppIdle);
 end;
 
 procedure TNetmapperForm.FormDestroy(Sender: TObject);
 begin
-  //earthTexturer_.Free;
+  earthTexturer_.Free;
   openGLSphereControl.Free;
 end;
 

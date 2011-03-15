@@ -10,16 +10,18 @@ const
 type TEarthTexturer = class(TSphereTexturer)
   public
    constructor Create;
-   procedure fillTexture(var colors : TGridColor); virtual;
+   function getTexture() : PGridColor; virtual;
 private
    appPath_    : String;
    isOcean_    : TGridBoolean;
    elevation_,
    population_ : TGridFloat;
+   colors_     : TGridColor;
 
    procedure loadElevation;
    procedure loadPopulation;
    procedure increasePopulation(days : Longint);
+   procedure paintTexture;
 end;
 
 implementation
@@ -30,19 +32,12 @@ begin
  loadElevation;
  loadPopulation;
  increasePopulation(20*365); // the dataset is of 1990, simulation begins in 2010
+ paintTexture;
 end;
 
-procedure TEarthTexturer.fillTexture(var colors : TGridColor);
-var i, j : Longint;
+function TEarthTexturer.getTexture() : PGridColor;
 begin
-  for j:=0 to T_HEIGHT do
-    for i:=0 to T_WIDTH do
-      begin
-         if isOcean_[i][j] then
-             colors[i][j] := clBrown
-            else
-             colors[i][j] := clLightBlue;
-      end;
+  Result := @colors_;
 end;
 
 procedure TEarthTexturer.loadElevation;
@@ -115,6 +110,19 @@ begin
   for j:=0 to T_HEIGHT do
     for i:=0 to T_WIDTH do
        population_[i][j] := population_[i][j]*factor;
+end;
+
+procedure TEarthTexturer.paintTexture();
+var i, j : Longint;
+begin
+  for j:=0 to T_HEIGHT do
+    for i:=0 to T_WIDTH do
+      begin
+         if isOcean_[i][j] then
+             colors_[i][j] := clLightBlue
+            else
+             colors_[i][j] := clBrown;
+      end;
 end;
 
 end.

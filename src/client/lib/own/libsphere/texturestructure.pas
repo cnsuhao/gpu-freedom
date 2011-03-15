@@ -16,7 +16,7 @@ type  PGridColor   = ^TGridColor;
 
 type TSphereTexturer = class(TObject)
  public
-    procedure fillTexture(var colors : TGridColor); virtual; abstract;
+    function getTexture() : PGridColor; virtual; abstract;
 end;
 
 implementation

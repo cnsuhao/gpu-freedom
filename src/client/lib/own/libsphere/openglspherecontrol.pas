@@ -11,7 +11,7 @@ uses
   type
     TOpenGLSphereControl = class(TOpenGLControl)
          constructor Create(obj : TComponent);
-         procedure setColors(var colors : TGridColor);
+         procedure setColors(colors : PGridColor);
          procedure setRotate(rotate : Boolean);
 
          procedure openGLSphereControlResize(Sender: TObject);
@@ -60,12 +60,12 @@ begin
   onMouseMove := @MouseMove;
 end;
 
-procedure TOpenGLSphereControl.setColors(var colors : TGridColor);
+procedure TOpenGLSphereControl.setColors(colors : PGridColor);
 var i, j : Longint;
 begin
   for j := 0 to T_HEIGHT do
      for i := 0 to T_WIDTH do
-        _colors[i][j] := colors[i][j];
+        _colors[i][j] := colors^[i][j];
 end;
 
 procedure TOpenGLSphereControl.setRotate(rotate : Boolean);
