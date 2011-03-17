@@ -55,7 +55,8 @@ type
 type TConfIdentity = record
     max_computations,
     max_services,
-    max_downloads : Longint;
+    max_downloads,
+    max_uploads : Longint;
 
     run_only_when_idle : boolean;
 

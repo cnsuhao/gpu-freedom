@@ -92,6 +92,7 @@ begin
       max_computations        := ini_.ReadInteger('local','max_computations',3);
       max_services            := ini_.ReadInteger('local','max_services',3);
       max_downloads           := ini_.ReadInteger('local','max_downloads',3);
+      max_uploads             := ini_.ReadInteger('local','max_uploads',3);
 
       run_only_when_idle      := ini_.ReadBool('local','run_only_when_idle',true);
 
@@ -183,6 +184,7 @@ begin
      ini_.WriteInteger('local','max_computations', max_computations);
      ini_.WriteInteger('local','max_services', max_services);
      ini_.WriteInteger('local','max_downloads', max_downloads);
+     ini_.WriteInteger('local','max_uploads', max_uploads);
 
      ini_.WriteBool('local','run_only_when_idle', run_only_when_idle);
 
