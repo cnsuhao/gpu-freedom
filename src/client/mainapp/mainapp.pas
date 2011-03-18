@@ -6,8 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  lockfiles, loggers,
-  coreconfigurations, dbtablemanagers, servermanagers;
+  coreobjects;
 
 type
 
@@ -16,13 +15,6 @@ type
   TGPUMainApp = class(TForm)
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-  private
-    path_,
-    logHeader_ : String;
-    logger_    : TLogger;
-    conf_      : TCoreConfiguration;
-    tableman_  : TDbTableManager;
-    sm_        : TServerManager;
   end;
 
 var
@@ -34,26 +26,12 @@ implementation
 
 procedure TGPUMainApp.FormCreate(Sender: TObject);
 begin
-  path_ := extractFilePath(ParamStr(0));
-  logHeader_ := 'gpugui> ';
 
-  logger_   := TLogger.Create(path_+PathDelim+'logs', 'guiapp.log', 'guiapp.old', LVL_DEBUG, 1024*1024);
-  conf_     := TCoreConfiguration.Create(path_, 'coreapp.ini');
-  conf_.loadConfiguration();
-  tableman_ := TDbTableManager.Create(path_+PathDelim+'coreapp.db');
-  tableman_.OpenAll;
-  sm_          := TServerManager.Create(conf_, tableman_.getServerTable(), logger_);
 end;
 
 procedure TGPUMainApp.FormDestroy(Sender: TObject);
 begin
-  conf_.saveConfiguration();
 
-  sm_.Free;
-  tableman_.CloseAll;
-  tableman_.Free;
-  conf_.Free;
-  logger_.Free;
 end;
 
 

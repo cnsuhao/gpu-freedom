@@ -9,14 +9,17 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms
   { you can add units after this }, mainapp, SQLDBLaz, netmapperforms,
-chatforms, parametersforms;
+  chatforms, parametersforms, coreobjects;
 
 begin
   Application.Initialize;
+  loadCoreObjects;
   Application.CreateForm(TGPUMainApp, GPUMainApp);
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);
   Application.CreateForm(TParametersForm, ParametersForm);
   Application.Run;
+
+  discardCoreObjects;
 end.
 
