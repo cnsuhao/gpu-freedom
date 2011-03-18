@@ -1,11 +1,12 @@
 object ParametersForm: TParametersForm
-  Left = 500
+  Left = 8
   Height = 629
-  Top = 190
+  Top = 13
   Width = 742
   Caption = 'Parameters'
   ClientHeight = 629
   ClientWidth = 742
+  OnCreate = FormCreate
   ParentFont = False
   LCLVersion = '0.9.26'
   Visible = True
@@ -53,7 +54,6 @@ object ParametersForm: TParametersForm
       Top = 8
       Width = 132
       ItemHeight = 13
-      MaxLength = -1
       TabOrder = 1
     end
     object edtRegion: TLabeledEdit
@@ -196,7 +196,6 @@ object ParametersForm: TParametersForm
         'E'
         'W'
       )
-      MaxLength = -1
       Style = csDropDownList
       TabOrder = 9
     end
@@ -210,6 +209,7 @@ object ParametersForm: TParametersForm
         'N'
         'S'
       )
+      MaxLength = -1
       Style = csDropDownList
       TabOrder = 10
     end
@@ -504,6 +504,7 @@ object ParametersForm: TParametersForm
     Top = 576
     Width = 133
     Caption = 'Save'
+    OnClick = btnSaveClick
     TabOrder = 4
   end
   object btnReset: TButton
@@ -512,6 +513,7 @@ object ParametersForm: TParametersForm
     Top = 576
     Width = 133
     Caption = 'Reset'
+    OnClick = btnResetClick
     TabOrder = 5
   end
 end
