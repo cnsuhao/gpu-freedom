@@ -9,7 +9,7 @@ unit loggers;
 }
 interface
 
-uses SysUtils, syncobjs;
+uses SysUtils, FileUtil, syncobjs;
 
 const
    LVL_FATAL    = 50;
@@ -123,10 +123,9 @@ begin
   if severity<current_log_level_ then Exit;
   CS_.Enter;
 
-  backup := false;
-  //backup := FileSize(full_name_)>max_filesize_;
-  //if backup then
-  //     CopyFile(full_name_, path_+PathDelim+filename_backup_);
+  backup := FileSize(full_name_)>max_filesize_;
+  if backup then
+       CopyFile(full_name_, path_+PathDelim+filename_backup_);
 
   try
    AssignFile(F_, full_name_);
