@@ -4,13 +4,18 @@ interface
 
 uses
   lockfiles, loggers, SysUtils,
-  coreconfigurations, dbtablemanagers, servermanagers;
+  coreconfigurations, dbtablemanagers, servermanagers,
+  coremodules, servicefactories, servicemanagers,
+  identities;
 
 var
-   logger       : TLogger;
-   conf         : TCoreConfiguration;
-   tableman     : TDbTableManager;
-   serverman    : TServerManager;
+   logger         : TLogger;
+   conf           : TCoreConfiguration;
+   tableman       : TDbTableManager;
+   serverman      : TServerManager;
+   coremodule     : TCoreModule;
+   servicefactory : TServiceFactory;
+   serviceman     : TServiceThreadManager;
 
 
 procedure loadCoreObjects;
@@ -20,21 +25,29 @@ implementation
 
 procedure loadCoreObjects;
 var
-   CO_path : String;
+   path : String;
 begin
-  CO_path := extractFilePath(ParamStr(0));
+  path := extractFilePath(ParamStr(0));
 
-  logger    := TLogger.Create(CO_path+PathDelim+'logs', 'guiapp.log', 'guiapp.old', LVL_DEBUG, 1024*1024);
-  conf      := TCoreConfiguration.Create(CO_path, 'coreapp.ini');
+  logger    := TLogger.Create(path+PathDelim+'logs', 'guiapp.log', 'guiapp.old', LVL_DEBUG, 1024*1024);
+  conf      := TCoreConfiguration.Create(path, 'coreapp.ini');
   conf.loadConfiguration();
-  tableman := TDbTableManager.Create(CO_path+PathDelim+'coreapp.db');
+  tableman := TDbTableManager.Create(path+PathDelim+'coreapp.db');
   tableman.OpenAll;
   serverman := TServerManager.Create(conf, tableman.getServerTable(), logger);
+
+  coremodule       := TCoreModule.Create(logger, path, 'dll');
+  servicefactory   := TServiceFactory.Create(serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
+  serviceman       := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
 end;
 
 procedure discardCoreObjects;
 begin
-  //conf_.saveConfiguration();
+  conf.saveConfiguration();
+
+  serviceman.free;
+  servicefactory.free;
+  coremodule.free;
 
   serverman.Free;
   tableman.CloseAll;

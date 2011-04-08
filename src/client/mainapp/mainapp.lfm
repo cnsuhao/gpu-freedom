@@ -1,11 +1,16 @@
 object GPUMainApp: TGPUMainApp
-  Left = 1100
+  Left = 1075
   Height = 72
-  Top = 330
+  Top = 210
   Width = 486
   Caption = 'GPU II'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
   LCLVersion = '0.9.26'
+  object MainTimer: TTimer
+    OnTimer = MainTimerTimer
+    left = 16
+    top = 8
+  end
 end
