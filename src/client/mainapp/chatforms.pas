@@ -39,7 +39,6 @@ var srv  : TServerRecord;
     slot : Longint;
 begin
   serverman.getDefaultServer(srv);
-  ShowMessage(srv.url);
   if (thread<>nil) and (thread.isDone()) then thread.Free;
   if thread = nil then
      begin
