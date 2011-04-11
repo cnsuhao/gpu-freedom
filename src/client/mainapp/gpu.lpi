@@ -7,7 +7,7 @@
       <MainUnit Value="0"/>
       <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="13"/>
+      <ActiveEditorIndexAtStart Value="10"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -35,15 +35,15 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="26">
+    <Units Count="27">
       <Unit0>
         <Filename Value="gpu.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpu"/>
-        <CursorPos X="22" Y="23"/>
+        <CursorPos X="24" Y="28"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="20"/>
-        <UsageCount Value="85"/>
+        <EditorIndex Value="10"/>
+        <UsageCount Value="88"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -54,9 +54,9 @@
         <ResourceFilename Value="mainapp.lrs"/>
         <UnitName Value="mainapp"/>
         <CursorPos X="35" Y="20"/>
-        <TopLine Value="1"/>
+        <TopLine Value="2"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="88"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -99,17 +99,15 @@
         <UnitName Value="texturedrawingcontrol"/>
         <CursorPos X="41" Y="67"/>
         <TopLine Value="36"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="41"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="43"/>
       </Unit7>
       <Unit8>
         <Filename Value="..\lib\own\misc\colors.pas"/>
         <UnitName Value="colors"/>
         <CursorPos X="14" Y="13"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="19"/>
-        <UsageCount Value="34"/>
+        <EditorIndex Value="9"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -117,52 +115,42 @@
         <UnitName Value="texturestructure"/>
         <CursorPos X="1" Y="20"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="10"/>
-        <UsageCount Value="34"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="36"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
         <UnitName Value="openglspherecontrol"/>
         <CursorPos X="33" Y="68"/>
         <TopLine Value="33"/>
-        <EditorIndex Value="6"/>
         <UsageCount Value="34"/>
-        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
         <UnitName Value="sphere3dplots"/>
         <CursorPos X="69" Y="53"/>
         <TopLine Value="25"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="34"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="36"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\lib\own\misc\conversions.pas"/>
         <UnitName Value="conversions"/>
         <CursorPos X="17" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="9"/>
-        <UsageCount Value="34"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="36"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\lib\own\misc\identities.pas"/>
         <UnitName Value="identities"/>
         <CursorPos X="16" Y="59"/>
         <TopLine Value="37"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="34"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="36"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\..\..\..\backup\fileschanged.txt"/>
-        <CursorPos X="10" Y="7"/>
+        <CursorPos X="24" Y="8"/>
         <TopLine Value="1"/>
         <EditorIndex Value="11"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="None"/>
       </Unit14>
@@ -174,9 +162,7 @@
         <UnitName Value="simclimateUnit"/>
         <CursorPos X="44" Y="287"/>
         <TopLine Value="253"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="33"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="35"/>
       </Unit15>
       <Unit16>
         <Filename Value="netmapperforms.pas"/>
@@ -187,8 +173,8 @@
         <UnitName Value="netmapperforms"/>
         <CursorPos X="60" Y="48"/>
         <TopLine Value="27"/>
-        <EditorIndex Value="17"/>
-        <UsageCount Value="64"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -196,8 +182,8 @@
         <UnitName Value="earthtextures"/>
         <CursorPos X="38" Y="124"/>
         <TopLine Value="86"/>
-        <EditorIndex Value="18"/>
-        <UsageCount Value="28"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
@@ -207,10 +193,10 @@
         <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="chatforms.lrs"/>
         <UnitName Value="chatforms"/>
-        <CursorPos X="24" Y="42"/>
-        <TopLine Value="12"/>
-        <EditorIndex Value="13"/>
-        <UsageCount Value="56"/>
+        <CursorPos X="52" Y="25"/>
+        <TopLine Value="4"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -222,8 +208,8 @@
         <UnitName Value="parametersforms"/>
         <CursorPos X="35" Y="148"/>
         <TopLine Value="87"/>
-        <EditorIndex Value="16"/>
-        <UsageCount Value="48"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
@@ -231,26 +217,22 @@
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="53" Y="187"/>
         <TopLine Value="152"/>
-        <EditorIndex Value="12"/>
-        <UsageCount Value="17"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="19"/>
       </Unit20>
       <Unit21>
         <Filename Value="coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
         <CursorPos X="85" Y="17"/>
         <TopLine Value="16"/>
-        <EditorIndex Value="1"/>
         <UsageCount Value="17"/>
-        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <UnitName Value="loggers"/>
         <CursorPos X="108" Y="15"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="17"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit22>
       <Unit23>
@@ -258,8 +240,8 @@
         <UnitName Value="stkconstants"/>
         <CursorPos X="12" Y="90"/>
         <TopLine Value="53"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -267,8 +249,8 @@
         <UnitName Value="servicefactories"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="79"/>
-        <EditorIndex Value="15"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit24>
       <Unit25>
@@ -276,12 +258,20 @@
         <UnitName Value="servicemanagers"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="31"/>
-        <EditorIndex Value="14"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit25>
+      <Unit26>
+        <Filename Value="corelaunchers.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="corelaunchers"/>
+        <CursorPos X="19" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="20"/>
+      </Unit26>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="parametersforms.pas"/>
         <Caret Line="40" Column="13" TopLine="9"/>
@@ -315,100 +305,88 @@
         <Caret Line="44" Column="20" TopLine="9"/>
       </Position8>
       <Position9>
-        <Filename Value="coreobjects.pas"/>
-        <Caret Line="26" Column="1" TopLine="1"/>
+        <Filename Value="parametersforms.pas"/>
+        <Caret Line="55" Column="46" TopLine="31"/>
       </Position9>
       <Position10>
-        <Filename Value="coreobjects.pas"/>
-        <Caret Line="6" Column="32" TopLine="1"/>
+        <Filename Value="parametersforms.pas"/>
+        <Caret Line="57" Column="45" TopLine="43"/>
       </Position10>
       <Position11>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="55" Column="46" TopLine="31"/>
+        <Caret Line="106" Column="54" TopLine="70"/>
       </Position11>
       <Position12>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="57" Column="45" TopLine="43"/>
+        <Caret Line="101" Column="45" TopLine="79"/>
       </Position12>
       <Position13>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="106" Column="54" TopLine="70"/>
+        <Caret Line="126" Column="41" TopLine="87"/>
       </Position13>
       <Position14>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="101" Column="45" TopLine="79"/>
+        <Caret Line="112" Column="20" TopLine="90"/>
       </Position14>
       <Position15>
-        <Filename Value="parametersforms.pas"/>
-        <Caret Line="126" Column="41" TopLine="87"/>
-      </Position15>
-      <Position16>
-        <Filename Value="parametersforms.pas"/>
-        <Caret Line="112" Column="20" TopLine="90"/>
-      </Position16>
-      <Position17>
-        <Filename Value="coreobjects.pas"/>
-        <Caret Line="47" Column="19" TopLine="11"/>
-      </Position17>
-      <Position18>
         <Filename Value="..\lib\own\coremodules\stkconstants.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
-      </Position18>
-      <Position19>
+      </Position15>
+      <Position16>
         <Filename Value="..\lib\own\coremodules\stkconstants.pas"/>
         <Caret Line="79" Column="41" TopLine="1"/>
+      </Position16>
+      <Position17>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="22" Column="45" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="45" Column="27" TopLine="5"/>
+      </Position18>
+      <Position19>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="22" Column="1" TopLine="5"/>
       </Position19>
       <Position20>
-        <Filename Value="coreobjects.pas"/>
-        <Caret Line="8" Column="49" TopLine="1"/>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="9" Column="77" TopLine="3"/>
       </Position20>
       <Position21>
-        <Filename Value="coreobjects.pas"/>
-        <Caret Line="9" Column="13" TopLine="1"/>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="10" Column="17" TopLine="1"/>
       </Position21>
       <Position22>
         <Filename Value="chatforms.pas"/>
-        <Caret Line="22" Column="45" TopLine="1"/>
+        <Caret Line="42" Column="13" TopLine="1"/>
       </Position22>
       <Position23>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="45" Column="27" TopLine="5"/>
-      </Position23>
-      <Position24>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="22" Column="1" TopLine="5"/>
-      </Position24>
-      <Position25>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="9" Column="77" TopLine="3"/>
-      </Position25>
-      <Position26>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="10" Column="17" TopLine="1"/>
-      </Position26>
-      <Position27>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="42" Column="13" TopLine="1"/>
-      </Position27>
-      <Position28>
         <Filename Value="mainapp.pas"/>
         <Caret Line="34" Column="1" TopLine="2"/>
-      </Position28>
-      <Position29>
+      </Position23>
+      <Position24>
         <Filename Value="mainapp.pas"/>
         <Caret Line="19" Column="44" TopLine="2"/>
-      </Position29>
-      <Position30>
+      </Position24>
+      <Position25>
         <Filename Value="mainapp.pas"/>
         <Caret Line="41" Column="61" TopLine="1"/>
-      </Position30>
+      </Position25>
+      <Position26>
+        <Filename Value="gpu.lpr"/>
+        <Caret Line="16" Column="19" TopLine="1"/>
+      </Position26>
+      <Position27>
+        <Filename Value="gpu.lpr"/>
+        <Caret Line="12" Column="44" TopLine="1"/>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\lib\own\coreservices\;..\lib\own\coremodules\;..\lib\own\misc\;..\lib\ext\synapse\src\lib\;..\lib\ext\misc\;..\lib\own\libsphere\;c:\lazarus\components\opengl\;..\lib\own\coredb\"/>
+      <OtherUnitFiles Value="..\lib\own\coreservices\;..\lib\own\coremodules\;..\lib\own\misc\;..\lib\ext\synapse\src\lib\;..\lib\ext\misc\;..\lib\own\libsphere\;c:\lazarus\components\opengl\;..\lib\own\coredb\;..\core\"/>
       <UnitOutputDirectory Value="..\..\..\bin"/>
     </SearchPaths>
     <Parsing>

@@ -27,22 +27,22 @@ begin
 
   //if not DirectoryExists(path_) then
   //  MkDir(path_);
-
-  if not exists then createLf;
 end;
 
 destructor TLockFile.Destroy;
 begin
-  delete;
   inherited destroy;
 end;
 
 
 procedure TLockFile.createLF;
 begin
- AssignFile(F_, fullname_);
- Rewrite(F_);
- CloseFile(F_);
+ if not exists then
+    begin
+     AssignFile(F_, fullname_);
+     Rewrite(F_);
+     CloseFile(F_);
+    end;
 end;
 
 
@@ -53,7 +53,7 @@ end;
 
 procedure TLockFile.delete;
 begin
- DeleteFile(fullname_);
+ if exists then DeleteFile(fullname_);
 end;
 
 

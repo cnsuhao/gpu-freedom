@@ -8,12 +8,12 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  loggers, lockfiles,  coreconfigurations,  identities,
+  loggers, coreconfigurations,  identities,
   coremodules, servicefactories, servicemanagers,
   servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
   receiveclientservices, transmitclientservices,
-  receivechannelservices, coreobjects;
+  receivechannelservices, coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
 
@@ -30,8 +30,8 @@ type
     procedure   WriteHelp; virtual;
   private
     path_,
-    logHeader_  : String;
-    lock_       : TLockFile;
+    logHeader_   : String;
+    coremonitor_ : TCoreMonitor;
 
     procedure   mainLoop;
     function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
@@ -46,6 +46,7 @@ type
 procedure TGPUCoreApp.mainLoop;
 var tick, days  : Longint;
 begin
+  coremonitor_.coreStarted;
   logger.logCR; logger.logCR;
   logger.logCR; logger.logCR;
   logger.log(LVL_INFO, logHeader_+'********************');
@@ -58,7 +59,7 @@ begin
   retrieveClients;
   receiveChannels;
   transmitClient;
-  while lock_.exists do
+  while coremonitor_.coreCanRun do
     begin
       if (tick mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
       if (tick mod myConfID.receive_servers_each = 0) then retrieveParamsAndServers;
@@ -84,6 +85,7 @@ begin
   myGPUID.TotalUptime:=myGPUID.TotalUptime+myGPUID.Uptime;
   myGPUID.Uptime := 0;
   logger.log(LVL_INFO, logHeader_+'Total uptime is '+FloatToStr(myGPUID.TotalUptime)+'.');
+  coremonitor_.coreStopped;
 end;
 
 function    TGPUCoreApp.launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
@@ -175,14 +177,14 @@ begin
   path_ := extractFilePath(ParamStr(0));
   logHeader_ := 'gpucore> ';
 
-  lock_     := TLockFile.Create(path_+PathDelim+'locks', 'coreapp.lock');
+  coremonitor_ := TCoreMonitor.Create();
   loadCoreObjects('gpucore');
 end;
 
 destructor TGPUCoreApp.Destroy;
 begin
   discardCoreObjects;
-  lock_.Free;
+  coremonitor_.Free;
   inherited Destroy;
 end;
 
