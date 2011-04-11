@@ -22,7 +22,6 @@ type
     PanelTop: TPanel;
     procedure btnSendClick(Sender: TObject);
   private
-    thread : TTransmitChannelServiceThread;
   public
     { public declarations }
   end; 
@@ -37,15 +36,21 @@ implementation
 procedure TChatForm.btnSendClick(Sender: TObject);
 var srv  : TServerRecord;
     slot : Longint;
+    thread : TTransmitChannelServiceThread;
 begin
   serverman.getDefaultServer(srv);
-  if (thread<>nil) and (thread.isDone()) then thread.Free;
-  if thread = nil then
+  thread := servicefactory.createTransmitChannelService(srv, 'Altos', 'CHAT', mmSubmitChat.Text);
+  slot := serviceman.launch(thread);
+  if (slot<>-1) then
      begin
-       thread := servicefactory.createTransmitChannelService(srv, 'Altos', 'CHAT', mmSubmitChat.Text);
-       slot := serviceman.launch(thread);
-       if (slot<>-1) then mmSubmitChat.Clear;
-     end;
+       mmChat.Append(mmSubmitChat.Text);
+       mmSubmitChat.Clear;
+     end
+      else
+        begin
+          // attempt to send chat failed
+          thread.Free;
+        end;
 end;
 
 initialization
