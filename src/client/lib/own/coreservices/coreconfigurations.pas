@@ -12,6 +12,8 @@ type TCoreConfiguration = class(TObject)
   procedure loadConfiguration();
   procedure saveConfiguration();
 
+  procedure saveCoreConfiguration();
+
  private
   filename_,
   path_      : String;
@@ -168,8 +170,6 @@ begin
       ini_.WriteInteger('core','bits', bits);
       ini_.WriteBool('core','isrscreensaver', isscreensaver);
       ini_.WriteInteger('core','nbcpus', nbcpus);
-      ini_.WriteFloat('core','uptime', uptime);
-      ini_.WriteFloat('core','totaluptime', totaluptime);
       ini_.WriteString('core','cputype', cputype);
 
       ini_.WriteFloat('core','longitude', longitude);
@@ -197,18 +197,7 @@ begin
 
      ini_.WriteString('communication','proxy', proxy);
      ini_.WriteString('communication','port', port);
-     ini_.WriteString('communication','default_superserver_url', default_superserver_url);
      ini_.WriteString('communication', 'default_server_name', default_server_name);
-
-     ini_.WriteInteger('global','receive_servers_each', receive_servers_each);
-     ini_.WriteInteger('global','receive_nodes_each', receive_nodes_each);
-     ini_.WriteInteger('global','transmit_node_each', transmit_node_each);
-     ini_.WriteInteger('global','receive_jobs_each', receive_jobs_each);
-     ini_.WriteInteger('global','transmit_jobs_each', transmit_jobs_each);
-     ini_.WriteInteger('global','receive_channels_each', receive_channels_each);
-     ini_.WriteInteger('global','transmit_channels_each', transmit_channels_each);
-     ini_.WriteInteger('global','receive_chat_each', receive_chat_each);
-     ini_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
  end;
 
  with tmCompStatus do
@@ -234,6 +223,31 @@ begin
  CS_.Leave;
 end;
 
+procedure TCoreConfiguration.saveCoreConfiguration();
+begin
+ CS_.Enter;
+ with myGPUID do
+    begin
+      ini_.WriteFloat('core','uptime', uptime);
+      ini_.WriteFloat('core','totaluptime', totaluptime);
+    end;
+
+ with myConfID do
+ begin
+     ini_.WriteString('communication','default_superserver_url', default_superserver_url);
+
+     ini_.WriteInteger('global','receive_servers_each', receive_servers_each);
+     ini_.WriteInteger('global','receive_nodes_each', receive_nodes_each);
+     ini_.WriteInteger('global','transmit_node_each', transmit_node_each);
+     ini_.WriteInteger('global','receive_jobs_each', receive_jobs_each);
+     ini_.WriteInteger('global','transmit_jobs_each', transmit_jobs_each);
+     ini_.WriteInteger('global','receive_channels_each', receive_channels_each);
+     ini_.WriteInteger('global','transmit_channels_each', transmit_channels_each);
+     ini_.WriteInteger('global','receive_chat_each', receive_chat_each);
+     ini_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
+ end;
+ CS_.Leave;
+end;
 
 
 end.

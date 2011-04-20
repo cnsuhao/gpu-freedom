@@ -186,6 +186,7 @@ end;
 
 destructor TGPUCoreApp.Destroy;
 begin
+  conf.saveCoreConfiguration();
   discardCoreObjects;
   coremonitor_.Free;
   morefrequentupdates_.Free;

@@ -36,8 +36,8 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <CursorPos X="44" Y="70"/>
-        <TopLine Value="58"/>
+        <CursorPos X="32" Y="189"/>
+        <TopLine Value="172"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -175,8 +175,8 @@
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <CursorPos X="53" Y="113"/>
-        <TopLine Value="113"/>
+        <CursorPos X="44" Y="36"/>
+        <TopLine Value="229"/>
         <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -198,8 +198,8 @@
       <Unit22>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <CursorPos X="5" Y="46"/>
-        <TopLine Value="12"/>
+        <CursorPos X="11" Y="35"/>
+        <TopLine Value="33"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
