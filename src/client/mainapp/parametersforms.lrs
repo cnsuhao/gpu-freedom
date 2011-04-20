@@ -1,9 +1,9 @@
 { Das ist eine automatisch erzeugte Lazarus-Ressourcendatei }
 
 LazarusResources.Add('TParametersForm','FORMDATA',[
-  'TPF0'#15'TParametersForm'#14'ParametersForm'#4'Left'#3#236#0#6'Height'#3'<'#2
-  +#3'Top'#2'l'#5'Width'#3#230#2#7'Caption'#6#10'Parameters'#12'ClientHeight'#3
-  +'<'#2#11'ClientWidth'#3#230#2#8'OnCreate'#7#10'FormCreate'#10'LCLVersion'#6#8
+  'TPF0'#15'TParametersForm'#14'ParametersForm'#4'Left'#3#250#0#6'Height'#3'n'#2
+  +#3'Top'#2#0#5'Width'#3#230#2#7'Caption'#6#10'Parameters'#12'ClientHeight'#3
+  +'n'#2#11'ClientWidth'#3#230#2#8'OnCreate'#7#10'FormCreate'#10'LCLVersion'#6#8
   +'0.9.28.2'#7'Visible'#9#0#9'TGroupBox'#6'gbNode'#4'Left'#2#8#6'Height'#3#193
   +#0#3'Top'#2#8#5'Width'#3#209#2#7'Caption'#6#4'Node'#12'ClientHeight'#3#175#0
   +#11'ClientWidth'#3#205#2#8'TabOrder'#2#0#0#6'TLabel'#7'lblTeam'#4'Left'#3#6#1

@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls, servicefactories, coreobjects, transmitchannelservices,
-  servermanagers;
+  servermanagers,  retrievedtables, identities, lockfiles;
 
 type
 
@@ -23,9 +23,11 @@ type
     ChatTimer: TTimer;
     procedure btnSendClick(Sender: TObject);
     procedure ChatTimerTimer(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
     currentid_ : Longint;
+    morefrequentupdates_ : TLockFile;
   public
     { public declarations }
   end; 
@@ -47,8 +49,9 @@ begin
   slot := serviceman.launch(thread);
   if (slot<>-1) then
      begin
-       mmChat.Append(mmSubmitChat.Text);
+       mmChat.Append(myGPUID.nodename+'> '+mmSubmitChat.Text);
        mmSubmitChat.Clear;
+       if not morefrequentupdates_.exists then morefrequentupdates_.createLF;
      end
       else
         begin
@@ -60,13 +63,27 @@ end;
 procedure TChatForm.ChatTimerTimer(Sender: TObject);
 var content : String;
 begin
- currentid_ := tableman.getChannelTable().retrieveLatest('Altos', 'CHAT', currentid_, content);
+ currentid_ := tableman.getChannelTable().retrieveLatestChat('Altos', 'CHAT', currentid_, content);
  if content<>'' then mmChat.Append(IntToStr(currentid_)+':'+content);
 end;
 
-procedure TChatForm.FormCreate(Sender: TObject);
+procedure TChatForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
+ if morefrequentupdates_.exists then morefrequentupdates_.delete;
+ morefrequentupdates_.Free;
+end;
+
+procedure TChatForm.FormCreate(Sender: TObject);
+var srv : TServerRecord;
+    row : TDbRetrievedRow;
+    path : String;
+begin
+ serverman.getDefaultServer(srv);
+ //tableman.getRetrievedTable().getRow(row, srv.id, 'Altos', 'CHAT');
+ //currentid_ := row.lastmsg;
  currentid_ := -1;
+ path := extractFilePath(ParamStr(0));
+ morefrequentupdates_     := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 end;
 
 initialization

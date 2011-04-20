@@ -12,7 +12,7 @@
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="1"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -31,13 +31,13 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="22">
+    <Units Count="23">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
         <CursorPos X="90" Y="143"/>
-        <TopLine Value="128"/>
+        <TopLine Value="170"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -124,7 +124,7 @@
         <UnitName Value="servicefactories"/>
         <CursorPos X="14" Y="29"/>
         <TopLine Value="17"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -133,7 +133,7 @@
         <UnitName Value="loggers"/>
         <CursorPos X="10" Y="146"/>
         <TopLine Value="122"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit13>
@@ -176,8 +176,8 @@
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="53" Y="113"/>
-        <TopLine Value="113"/>
-        <EditorIndex Value="3"/>
+        <TopLine Value="194"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit19>
@@ -195,6 +195,15 @@
         <TopLine Value="1"/>
         <UsageCount Value="11"/>
       </Unit21>
+      <Unit22>
+        <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
+        <UnitName Value="coreobjects"/>
+        <CursorPos X="5" Y="46"/>
+        <TopLine Value="34"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit22>
     </Units>
     <JumpHistory Count="11" HistoryIndex="10">
       <Position1>

@@ -30,7 +30,7 @@ type TDbChannelTable = class(TDbCoreTable)
 
     procedure insert(row : TDbChannelRow);
     // returns the new id
-    function retrieveLatest(channame, chantype : String; lastid : Longint;
+    function retrieveLatestChat(channame, chantype : String; lastid : Longint;
              var content : AnsiString) : Longint;
 
   private
@@ -91,8 +91,8 @@ begin
 end;
 
 // returns the new id
-function TDbChannelTable.retrieveLatest(channame, chantype : String; lastid : Longint;
-                                        var content : AnsiString) : Longint;
+function TDbChannelTable.retrieveLatestChat(channame, chantype : String; lastid : Longint;
+                                            var content : AnsiString) : Longint;
 var newid : Longint;
 begin
   dataset_.Close();
@@ -107,7 +107,9 @@ begin
   dataset_.First;
   while not dataset_.EOF do
      begin
-       content := content + dataset_.FieldByName('content').AsString+#13#10;
+       content := content +
+                  dataset_.FieldByName('nodename').AsString+'>'+
+                  dataset_.FieldByName('content').AsString+#13#10;
        newid := dataset_.FieldByName('externalid').AsLongint;
        dataset_.Next;
      end;

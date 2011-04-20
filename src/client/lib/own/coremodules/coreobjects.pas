@@ -43,7 +43,7 @@ end;
 
 procedure discardCoreObjects;
 begin
-  conf.saveConfiguration();
+  //conf.saveCoreConfiguration();
 
   serviceman.free;
   servicefactory.free;

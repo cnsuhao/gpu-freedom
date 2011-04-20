@@ -6,6 +6,7 @@ object ChatForm: TChatForm
   Caption = 'Chat'
   ClientHeight = 458
   ClientWidth = 624
+  OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '0.9.28.2'
   Visible = True
@@ -67,6 +68,7 @@ object ChatForm: TChatForm
     end
   end
   object ChatTimer: TTimer
+    Interval = 10000
     OnTimer = ChatTimerTimer
     left = 272
     top = 328
