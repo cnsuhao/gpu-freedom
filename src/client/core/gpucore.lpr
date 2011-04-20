@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  loggers, coreconfigurations,  identities,
+  loggers, lockfiles, coreconfigurations,  identities,
   coremodules, servicefactories, servicemanagers,
   servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
@@ -32,6 +32,7 @@ type
     path_,
     logHeader_   : String;
     coremonitor_ : TCoreMonitor;
+    morefrequentupdates_ : TLockFile;
 
     procedure   mainLoop;
     function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
@@ -66,6 +67,7 @@ begin
       if (tick mod myConfID.receive_nodes_each = 0) then retrieveClients;
       if (tick mod myConfID.transmit_node_each = 0) then transmitClient;
       if (tick mod myConfID.receive_channels_each = 0) then receiveChannels;
+      if (tick mod 20 = 0) and morefrequentupdates_.exists then receiveChannels;
 
       Sleep(1000);
 
@@ -176,6 +178,7 @@ begin
   StopOnException:=True;
   path_ := extractFilePath(ParamStr(0));
   logHeader_ := 'gpucore> ';
+  morefrequentupdates_ := TLockFile.Create(path_+PathDelim+'locks', 'morefrequentchat.lock');
 
   coremonitor_ := TCoreMonitor.Create();
   loadCoreObjects('gpucore');
@@ -185,6 +188,7 @@ destructor TGPUCoreApp.Destroy;
 begin
   discardCoreObjects;
   coremonitor_.Free;
+  morefrequentupdates_.Free;
   inherited Destroy;
 end;
 

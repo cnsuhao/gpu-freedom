@@ -203,7 +203,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="parametersforms"/>
         <CursorPos X="45" Y="134"/>
-        <TopLine Value="150"/>
+        <TopLine Value="134"/>
         <EditorIndex Value="11"/>
         <UsageCount Value="54"/>
         <Loaded Value="True"/>
@@ -212,7 +212,7 @@
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="13" Y="66"/>
-        <TopLine Value="39"/>
+        <TopLine Value="42"/>
         <EditorIndex Value="16"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
@@ -299,7 +299,7 @@
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
         <CursorPos X="11" Y="21"/>
-        <TopLine Value="35"/>
+        <TopLine Value="21"/>
         <EditorIndex Value="4"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
