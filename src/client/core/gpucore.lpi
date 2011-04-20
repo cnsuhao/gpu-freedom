@@ -130,7 +130,7 @@
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <UnitName Value="loggers"/>
         <CursorPos X="10" Y="146"/>
-        <TopLine Value="45"/>
+        <TopLine Value="122"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -174,7 +174,7 @@
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="53" Y="113"/>
-        <TopLine Value="128"/>
+        <TopLine Value="113"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -194,7 +194,7 @@
         <UsageCount Value="11"/>
       </Unit21>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="10" HistoryIndex="9">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="71" Column="41" TopLine="50"/>
@@ -224,21 +224,17 @@
         <Caret Line="62" Column="92" TopLine="38"/>
       </Position7>
       <Position8>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="60" Column="111" TopLine="141"/>
+        <Filename Value="..\lib\own\misc\loggers.pas"/>
+        <Caret Line="128" Column="3" TopLine="109"/>
       </Position8>
       <Position9>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
-        <Caret Line="128" Column="3" TopLine="109"/>
+        <Caret Line="126" Column="23" TopLine="113"/>
       </Position9>
       <Position10>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
-        <Caret Line="126" Column="23" TopLine="113"/>
-      </Position10>
-      <Position11>
-        <Filename Value="..\lib\own\misc\loggers.pas"/>
         <Caret Line="12" Column="35" TopLine="1"/>
-      </Position11>
+      </Position10>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -2,7 +2,7 @@ unit coreconfigurations;
 
 interface
 
-uses identities, syncObjs, inifiles;
+uses identities, syncObjs, inifiles, SysUtils;
 
 type TCoreConfiguration = class(TObject)
  public
@@ -44,6 +44,7 @@ end;
 
 
 procedure TCoreConfiguration.loadConfiguration();
+var guid : TGUID;
 begin
   CS_.Enter;
   with myGPUID do
@@ -57,6 +58,12 @@ begin
       Zip       := ini_.ReadString('core','zip','zip');
       description := ini_.ReadString('core','description','');
       NodeId    := ini_.ReadString('core','nodeid','nodeid');
+      // create a new GUID if it does not exist
+      if NodeId='nodeid' then
+        begin
+          createGUID(guid);
+          NodeId := GuidToString(guid);
+        end;
       IP        := ini_.ReadString('core','ip','ip');
       localIP   := ini_.ReadString('core','localip','localip');
       OS        := ini_.ReadString('core','os','test os');

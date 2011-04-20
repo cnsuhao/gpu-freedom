@@ -1,7 +1,7 @@
 
 CREATE TABLE `tbclient` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`nodeid` VARCHAR( 32 ) NOT NULL ,
+`nodeid` VARCHAR( 42 ) NOT NULL ,
 `nodename` VARCHAR( 32 ) NOT NULL ,
 `country` VARCHAR( 32 ) NOT NULL ,
 `region` VARCHAR( 32 ) NULL ,
@@ -34,7 +34,7 @@ CREATE TABLE `tbclient` (
 
 CREATE TABLE `tbchannel` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`nodeid` VARCHAR( 32 ) NOT NULL ,
+`nodeid` VARCHAR( 42 ) NOT NULL ,
 `nodename` VARCHAR( 32 ) NOT NULL ,
 `user` VARCHAR( 32 ) NOT NULL ,
 `channame` VARCHAR( 32 ) NOT NULL ,
@@ -69,7 +69,7 @@ CREATE TABLE `tbjob` (
 `delivered` INT NOT NULL DEFAULT '0',
 `results` INT NOT NULL DEFAULT '0',
 `nodename` VARCHAR( 64 ) NOT NULL ,
-`nodeid` VARCHAR( 32 ) NOT NULL ,
+`nodeid` VARCHAR( 42 ) NOT NULL ,
 `ip` VARCHAR( 32 ) NULL ,
 `create_dt` DATETIME NOT NULL
 ) ENGINE = MYISAM ;
@@ -77,7 +77,7 @@ CREATE TABLE `tbjob` (
 CREATE TABLE `tbjobqueue` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `job_id` INT NOT NULL ,
-`nodeid` VARCHAR( 32 ) NOT NULL ,
+`nodeid` VARCHAR( 42 ) NOT NULL ,
 `transmitted` INT NOT NULL DEFAULT '0',
 `received` INT NOT NULL DEFAULT '0',
 `create_dt` DATETIME NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE `tbjobresult` (
 `errorarg` VARCHAR( 32 ) NOT NULL ,
 `errormsg` VARCHAR( 32 ) NOT NULL ,
 `nodename` VARCHAR( 64 ) NOT NULL ,
-`nodeid` VARCHAR( 32 ) NOT NULL ,
+`nodeid` VARCHAR( 42 ) NOT NULL ,
 `ip` VARCHAR( 32 ) NULL ,
 `create_dt` DATETIME NOT NULL
 ) ENGINE = MYISAM ;
