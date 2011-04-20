@@ -9,6 +9,8 @@ interface
 
 uses sqlite3ds;
 
+const QUOTE = Chr(39);
+
 type TDbCoreTable = class(TObject)
   public
     constructor Create(filename, tablename, primarykey : String);

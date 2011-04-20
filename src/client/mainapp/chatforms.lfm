@@ -6,6 +6,7 @@ object ChatForm: TChatForm
   Caption = 'Chat'
   ClientHeight = 458
   ClientWidth = 624
+  OnCreate = FormCreate
   ParentFont = False
   LCLVersion = '0.9.26'
   Visible = True
@@ -62,7 +63,6 @@ object ChatForm: TChatForm
       Top = 69
       Width = 128
       ItemHeight = 13
-      MaxLength = -1
       TabOrder = 2
     end
   end

@@ -3,11 +3,12 @@ unit channeltables;
    TDbChannelTable contains data in channels used by sensors, whiteboard and other
     GPU services. Chat is also implemented as channel.
 
-   (c) by 2010 HB9TVM and the GPU Team
+   (c) by 2010-2011 HB9TVM and the GPU Team
 }
 interface
 
 uses sqlite3ds, db, coretables, SysUtils;
+
 
 type TDbChannelRow = record
     id,
@@ -28,6 +29,9 @@ type TDbChannelTable = class(TDbCoreTable)
     constructor Create(filename : String);
 
     procedure insert(row : TDbChannelRow);
+    // returns the new id
+    function retrieveLatest(channame, chantype : String; lastid : Longint;
+             var content : AnsiString) : Longint;
 
   private
     procedure createDbTable();
@@ -86,5 +90,27 @@ begin
   dataset_.ApplyUpdates;
 end;
 
+// returns the new id
+function TDbChannelTable.retrieveLatest(channame, chantype : String; lastid : Longint;
+                                        var content : AnsiString) : Longint;
+var newid : Longint;
+begin
+  dataset_.Close();
+  dataset_.SQL := 'select * from tbchannel where (id>'+IntToStr(lastid)+') '+
+                  'and (channame='+QUOTE+channame+QUOTE+') '+
+                  'and (chantype='+QUOTE+chantype+QUOTE+') order by id asc;';
+  dataset_.Open;
+
+  content := '';
+  dataset_.First;
+  while not dataset_.EOF do
+     begin
+       content := content + dataset_.FieldByName('content').AsString+#13#10;
+       newid := dataset_.FieldByName('id').AsInteger;
+       dataset_.Next;
+     end;
+
+  Result := newid;
+end;
 
 end.

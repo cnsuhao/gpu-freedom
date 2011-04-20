@@ -21,7 +21,9 @@ type
     PanelBottom: TPanel;
     PanelTop: TPanel;
     procedure btnSendClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
+    currentid_ : Longint;
   public
     { public declarations }
   end; 
@@ -51,6 +53,13 @@ begin
           // attempt to send chat failed
           thread.Free;
         end;
+end;
+
+procedure TChatForm.FormCreate(Sender: TObject);
+var content : String;
+begin
+ currentid_ := tableman.getChannelTable().retrieveLatest('Altos', 'CHAT', 0, content);
+ if content<>'' then mmChat.Append(content);
 end;
 
 initialization
