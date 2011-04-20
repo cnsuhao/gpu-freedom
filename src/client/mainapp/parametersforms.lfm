@@ -1,14 +1,13 @@
 object ParametersForm: TParametersForm
-  Left = 8
-  Height = 629
-  Top = 13
+  Left = 236
+  Height = 572
+  Top = 108
   Width = 742
   Caption = 'Parameters'
-  ClientHeight = 629
+  ClientHeight = 572
   ClientWidth = 742
   OnCreate = FormCreate
-  ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.28.2'
   Visible = True
   object gbNode: TGroupBox
     Left = 8
@@ -21,9 +20,9 @@ object ParametersForm: TParametersForm
     TabOrder = 0
     object lblTeam: TLabel
       Left = 262
-      Height = 14
+      Height = 16
       Top = 11
-      Width = 31
+      Width = 34
       Caption = 'Team:'
       ParentColor = False
     end
@@ -37,23 +36,22 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtNodename
       EditLabel.AnchorSideBottom.Control = edtNodename
-      EditLabel.Left = 19
-      EditLabel.Height = 14
-      EditLabel.Top = 12
-      EditLabel.Width = 56
+      EditLabel.Left = 12
+      EditLabel.Height = 16
+      EditLabel.Top = 11
+      EditLabel.Width = 63
       EditLabel.Caption = 'Nodename:'
       EditLabel.Color = clRed
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 0
     end
     object cbTeam: TComboBox
       Left = 310
-      Height = 21
+      Height = 23
       Top = 8
       Width = 132
-      ItemHeight = 13
+      ItemHeight = 15
       TabOrder = 1
     end
     object edtRegion: TLabeledEdit
@@ -66,14 +64,13 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtRegion
       EditLabel.AnchorSideBottom.Control = edtRegion
-      EditLabel.Left = 37
-      EditLabel.Height = 14
-      EditLabel.Top = 44
-      EditLabel.Width = 38
+      EditLabel.Left = 34
+      EditLabel.Height = 16
+      EditLabel.Top = 43
+      EditLabel.Width = 41
       EditLabel.Caption = 'Region:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 2
     end
     object edtStreet: TLabeledEdit
@@ -86,14 +83,13 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtStreet
       EditLabel.AnchorSideBottom.Control = edtStreet
-      EditLabel.Left = 40
-      EditLabel.Height = 14
-      EditLabel.Top = 76
-      EditLabel.Width = 35
+      EditLabel.Left = 41
+      EditLabel.Height = 16
+      EditLabel.Top = 75
+      EditLabel.Width = 34
       EditLabel.Caption = 'Street:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 3
     end
     object edtZip: TLabeledEdit
@@ -106,14 +102,13 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtZip
       EditLabel.AnchorSideBottom.Control = edtZip
-      EditLabel.Left = 33
-      EditLabel.Height = 14
-      EditLabel.Top = 108
-      EditLabel.Width = 42
+      EditLabel.Left = 28
+      EditLabel.Height = 16
+      EditLabel.Top = 107
+      EditLabel.Width = 47
       EditLabel.Caption = 'Zip/City:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 4
     end
     object edtCity: TEdit
@@ -133,20 +128,19 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtDescription
       EditLabel.AnchorSideBottom.Control = edtDescription
-      EditLabel.Left = 30
-      EditLabel.Height = 14
-      EditLabel.Top = 140
-      EditLabel.Width = 101
+      EditLabel.Left = 21
+      EditLabel.Height = 16
+      EditLabel.Top = 139
+      EditLabel.Width = 110
       EditLabel.Caption = 'Description (or URL):'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 6
       Text = 'http://'
     end
     object edtLonDegrees: TLabeledEdit
       Left = 310
-      Height = 21
+      Height = 23
       Top = 42
       Width = 32
       EditLabel.AnchorSideLeft.Control = edtLonDegrees
@@ -154,20 +148,19 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtLonDegrees
       EditLabel.AnchorSideBottom.Control = edtLonDegrees
-      EditLabel.Left = 255
-      EditLabel.Height = 14
+      EditLabel.Left = 249
+      EditLabel.Height = 16
       EditLabel.Top = 45
-      EditLabel.Width = 52
+      EditLabel.Width = 58
       EditLabel.Caption = 'Longitude:'
       EditLabel.Color = clRed
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 7
     end
     object edtLatDegrees: TLabeledEdit
       Left = 310
-      Height = 21
+      Height = 23
       Top = 77
       Width = 32
       EditLabel.AnchorSideLeft.Control = edtLatDegrees
@@ -175,23 +168,22 @@ object ParametersForm: TParametersForm
       EditLabel.AnchorSideTop.Side = asrCenter
       EditLabel.AnchorSideRight.Control = edtLatDegrees
       EditLabel.AnchorSideBottom.Control = edtLatDegrees
-      EditLabel.Left = 263
-      EditLabel.Height = 14
+      EditLabel.Left = 260
+      EditLabel.Height = 16
       EditLabel.Top = 80
-      EditLabel.Width = 44
+      EditLabel.Width = 47
       EditLabel.Caption = 'Latitude:'
       EditLabel.Color = clRed
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 8
     end
     object cbLonDir: TComboBox
       Left = 350
-      Height = 21
+      Height = 23
       Top = 42
       Width = 40
-      ItemHeight = 13
+      ItemHeight = 15
       Items.Strings = (
         'E'
         'W'
@@ -201,21 +193,20 @@ object ParametersForm: TParametersForm
     end
     object cbLatDir: TComboBox
       Left = 350
-      Height = 21
+      Height = 23
       Top = 77
       Width = 40
-      ItemHeight = 13
+      ItemHeight = 15
       Items.Strings = (
         'N'
         'S'
       )
-      MaxLength = -1
       Style = csDropDownList
       TabOrder = 10
     end
     object edtLonMinutes: TEdit
       Left = 403
-      Height = 21
+      Height = 23
       Top = 42
       Width = 35
       TabOrder = 11
@@ -223,7 +214,7 @@ object ParametersForm: TParametersForm
     end
     object edtLatMinutes: TEdit
       Left = 403
-      Height = 21
+      Height = 23
       Top = 77
       Width = 35
       TabOrder = 12
@@ -231,7 +222,7 @@ object ParametersForm: TParametersForm
     end
     object edtLonSeconds: TEdit
       Left = 446
-      Height = 21
+      Height = 23
       Top = 42
       Width = 32
       TabOrder = 13
@@ -239,7 +230,7 @@ object ParametersForm: TParametersForm
     end
     object edtLatSeconds: TEdit
       Left = 446
-      Height = 21
+      Height = 23
       Top = 77
       Width = 32
       TabOrder = 14
@@ -272,7 +263,6 @@ object ParametersForm: TParametersForm
       EditLabel.Caption = 'Proxy:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 0
     end
     object edtProxyPort: TLabeledEdit
@@ -292,7 +282,6 @@ object ParametersForm: TParametersForm
       EditLabel.Caption = 'Port:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 1
     end
   end
@@ -331,7 +320,6 @@ object ParametersForm: TParametersForm
       EditLabel.Color = clRed
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 0
     end
     object edtPassword: TMaskEdit
@@ -339,8 +327,6 @@ object ParametersForm: TParametersForm
       Height = 23
       Top = 40
       Width = 128
-      BorderStyle = bsSingle
-      ParentColor = False
       TabOrder = 1
       SpaceChar = '*'
     end
@@ -361,7 +347,6 @@ object ParametersForm: TParametersForm
       EditLabel.Caption = 'Realname:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 2
     end
     object edtEmail: TLabeledEdit
@@ -381,7 +366,6 @@ object ParametersForm: TParametersForm
       EditLabel.Caption = 'Email:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 3
     end
     object edtHomepage: TLabeledEdit
@@ -401,7 +385,6 @@ object ParametersForm: TParametersForm
       EditLabel.Caption = 'Homepage:'
       EditLabel.ParentColor = False
       LabelPosition = lpLeft
-      ParentColor = False
       TabOrder = 4
       Text = 'http://'
     end
@@ -417,33 +400,33 @@ object ParametersForm: TParametersForm
     TabOrder = 3
     object lblMaxComputations: TLabel
       Left = 14
-      Height = 14
+      Height = 16
       Top = 44
-      Width = 92
+      Width = 103
       Caption = 'max computations:'
       ParentColor = False
     end
     object lblMaxServices: TLabel
       Left = 174
-      Height = 14
+      Height = 16
       Top = 44
-      Width = 67
+      Width = 70
       Caption = 'max services:'
       ParentColor = False
     end
     object lblMaxDownloads: TLabel
       Left = 334
-      Height = 14
+      Height = 16
       Top = 44
-      Width = 79
+      Width = 87
       Caption = 'max downloads:'
       ParentColor = False
     end
     object lblMaxUploads: TLabel
       Left = 510
-      Height = 14
+      Height = 16
       Top = 44
-      Width = 65
+      Width = 71
       Caption = 'max uploads:'
       ParentColor = False
     end
@@ -451,7 +434,7 @@ object ParametersForm: TParametersForm
       Left = 30
       Height = 19
       Top = 8
-      Width = 247
+      Width = 263
       Caption = 'Run only when idle (user not at the computer)'
       Checked = True
       State = cbChecked

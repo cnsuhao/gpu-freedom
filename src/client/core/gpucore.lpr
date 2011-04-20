@@ -140,7 +140,7 @@ var receivechanthread     : TReceiveChannelServiceThread;
     srv                   : TServerRecord;
 begin
    serverman.getDefaultServer(srv);
-   receivechanthread  := servicefactory.createReceiveChannelService(srv, srv.chatchannel, 'CHAT');
+   receivechanthread  := servicefactory.createReceiveChannelService(srv, {srv.chatchannel}'Altos', 'CHAT');
    if not launch(receivechanthread, 'ReceiveChannels', srv) then receivechanthread.Free;
 end;
 

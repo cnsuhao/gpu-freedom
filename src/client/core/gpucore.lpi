@@ -36,8 +36,8 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <CursorPos X="32" Y="54"/>
-        <TopLine Value="41"/>
+        <CursorPos X="90" Y="143"/>
+        <TopLine Value="128"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -122,16 +122,18 @@
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="14" Y="29"/>
+        <TopLine Value="17"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <UnitName Value="loggers"/>
         <CursorPos X="10" Y="146"/>
         <TopLine Value="122"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit13>
@@ -175,7 +177,7 @@
         <UnitName Value="coreconfigurations"/>
         <CursorPos X="53" Y="113"/>
         <TopLine Value="113"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit19>
@@ -194,7 +196,7 @@
         <UsageCount Value="11"/>
       </Unit21>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="71" Column="41" TopLine="50"/>
@@ -235,6 +237,10 @@
         <Filename Value="..\lib\own\misc\loggers.pas"/>
         <Caret Line="12" Column="35" TopLine="1"/>
       </Position10>
+      <Position11>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="143" Column="53" TopLine="128"/>
+      </Position11>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

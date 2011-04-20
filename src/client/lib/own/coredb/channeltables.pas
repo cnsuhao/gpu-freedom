@@ -7,7 +7,7 @@ unit channeltables;
 }
 interface
 
-uses sqlite3ds, db, coretables, SysUtils;
+uses sqlite3ds, db, coretables, SysUtils, identities;
 
 
 type TDbChannelRow = record
@@ -96,9 +96,11 @@ function TDbChannelTable.retrieveLatest(channame, chantype : String; lastid : Lo
 var newid : Longint;
 begin
   dataset_.Close();
-  dataset_.SQL := 'select * from tbchannel where (id>'+IntToStr(lastid)+') '+
+  dataset_.SQL := 'select * from tbchannel where (externalid>'+IntToStr(lastid)+') '+
                   'and (channame='+QUOTE+channame+QUOTE+') '+
-                  'and (chantype='+QUOTE+chantype+QUOTE+') order by id asc;';
+                  'and (chantype='+QUOTE+chantype+QUOTE+') '+
+                  'and (nodeid<>'+QUOTE+myGPUID.nodeid+QUOTE+')'+
+                  ' order by externalid asc;';
   dataset_.Open;
 
   content := '';
@@ -106,7 +108,7 @@ begin
   while not dataset_.EOF do
      begin
        content := content + dataset_.FieldByName('content').AsString+#13#10;
-       newid := dataset_.FieldByName('id').AsInteger;
+       newid := dataset_.FieldByName('externalid').AsLongint;
        dataset_.Next;
      end;
 

@@ -20,7 +20,9 @@ type
     mmSubmitChat: TMemo;
     PanelBottom: TPanel;
     PanelTop: TPanel;
+    ChatTimer: TTimer;
     procedure btnSendClick(Sender: TObject);
+    procedure ChatTimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     currentid_ : Longint;
@@ -55,11 +57,16 @@ begin
         end;
 end;
 
-procedure TChatForm.FormCreate(Sender: TObject);
+procedure TChatForm.ChatTimerTimer(Sender: TObject);
 var content : String;
 begin
- currentid_ := tableman.getChannelTable().retrieveLatest('Altos', 'CHAT', 0, content);
- if content<>'' then mmChat.Append(content);
+ currentid_ := tableman.getChannelTable().retrieveLatest('Altos', 'CHAT', currentid_, content);
+ if content<>'' then mmChat.Append(IntToStr(currentid_)+':'+content);
+end;
+
+procedure TChatForm.FormCreate(Sender: TObject);
+begin
+ currentid_ := -1;
 end;
 
 initialization

@@ -1,17 +1,18 @@
 object ChatForm: TChatForm
-  Left = 797
+  Left = 611
   Height = 458
-  Top = 305
+  Top = 185
   Width = 624
   Caption = 'Chat'
   ClientHeight = 458
   ClientWidth = 624
   OnCreate = FormCreate
-  ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.28.2'
   Visible = True
   object PanelTop: TPanel
+    Left = 0
     Height = 357
+    Top = 0
     Width = 624
     Align = alTop
     ClientHeight = 357
@@ -31,6 +32,7 @@ object ChatForm: TChatForm
     end
   end
   object PanelBottom: TPanel
+    Left = 0
     Height = 98
     Top = 360
     Width = 624
@@ -43,9 +45,6 @@ object ChatForm: TChatForm
       Height = 82
       Top = 8
       Width = 480
-      Lines.Strings = (
-        ''
-      )
       TabOrder = 0
     end
     object btnSend: TButton
@@ -59,11 +58,17 @@ object ChatForm: TChatForm
     end
     object cbSelectChannel: TComboBox
       Left = 488
-      Height = 21
+      Height = 23
       Top = 69
       Width = 128
-      ItemHeight = 13
+      ItemHeight = 15
       TabOrder = 2
+      Text = 'Altos'
     end
+  end
+  object ChatTimer: TTimer
+    OnTimer = ChatTimerTimer
+    left = 272
+    top = 328
   end
 end
