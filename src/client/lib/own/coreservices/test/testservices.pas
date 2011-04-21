@@ -193,7 +193,7 @@ begin
 
   tableMan_       := TDbTableManager.Create(path_+'core.db');
   tableMan_.openAll();
-  conf_           := TCoreConfiguration.Create(path_, 'core.ini');
+  conf_           := TCoreConfiguration.Create(path_);
   conf_.loadConfiguration();
   serverMan_      := TServerManager.Create(conf_,
                                            tableMan_.getServerTable(),
