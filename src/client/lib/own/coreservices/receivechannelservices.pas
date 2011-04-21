@@ -68,9 +68,9 @@ begin
                dbnode.create_dt         := Now();
                dbnode.usertime_dt       := Now(); //TODO parse from string from server
 
-               tableman_.getChannelTable().insert(dbnode);
                if dbnode.externalid>row.lastmsg then row.lastmsg := dbnode.externalid;
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added message '+IntToStr(dbnode.id)+' to tbchannel table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Adding message '+IntToStr(dbnode.externalid)+' to tbchannel table.');
+               tableman_.getChannelTable().insert(dbnode);
              end;
           except
            on E : Exception do
