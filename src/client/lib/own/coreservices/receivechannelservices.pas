@@ -57,6 +57,7 @@ begin
     begin
         try
              begin
+               dbnode.id                := 0;
                dbnode.content           := node.FindNode('content').TextContent;
                dbnode.server_id         := srv_.id;
                dbnode.externalid        := StrToInt(node.FindNode('id').TextContent);
@@ -71,6 +72,7 @@ begin
                if dbnode.externalid>row.lastmsg then row.lastmsg := dbnode.externalid;
                logger_.log(LVL_DEBUG, logHeader_+'Adding message '+IntToStr(dbnode.externalid)+' to tbchannel table.');
                tableman_.getChannelTable().insert(dbnode);
+               logger_.log(LVL_DEBUG, 'record count: '+IntToStr(tableman_.getChannelTable().getDS().RecordCount));
              end;
           except
            on E : Exception do
