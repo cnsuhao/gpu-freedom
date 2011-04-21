@@ -30,7 +30,7 @@ begin
   path := extractFilePath(ParamStr(0));
 
   logger    := TLogger.Create(path+PathDelim+'logs', logFile+'.log', logFile+'.old', LVL_DEBUG, 1024*1024);
-  conf      := TCoreConfiguration.Create(path, 'coreapp.ini');
+  conf      := TCoreConfiguration.Create(path);
   conf.loadConfiguration();
   tableman := TDbTableManager.Create(path+PathDelim+'coreapp.db');
   tableman.OpenAll;
