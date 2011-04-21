@@ -27,7 +27,6 @@ type
     procedure FormCreate(Sender: TObject);
   private
     currentid_ : Longint;
-    morefrequentupdates_ : TLockFile;
   public
     { public declarations }
   end; 
@@ -69,21 +68,17 @@ end;
 
 procedure TChatForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
- if morefrequentupdates_.exists then morefrequentupdates_.delete;
- morefrequentupdates_.Free;
+ if lf_morefrequentupdates.exists then lf_morefrequentupdates.delete;
 end;
 
 procedure TChatForm.FormCreate(Sender: TObject);
 var srv : TServerRecord;
     row : TDbRetrievedRow;
-    path : String;
 begin
  serverman.getDefaultServer(srv);
  //tableman.getRetrievedTable().getRow(row, srv.id, 'Altos', 'CHAT');
  //currentid_ := row.lastmsg;
  currentid_ := -1;
- path := extractFilePath(ParamStr(0));
- morefrequentupdates_     := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 end;
 
 initialization

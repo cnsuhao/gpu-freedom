@@ -1,4 +1,9 @@
 unit coreobjects;
+{
+ Defines a set of objects in common between mainapp (GUI) and core
+ (c) 2011 by HB9TVM and the GPU project
+}
+
 
 interface
 
@@ -16,6 +21,10 @@ var
    coremodule     : TCoreModule;
    servicefactory : TServiceFactory;
    serviceman     : TServiceThreadManager;
+
+   // lockfiles
+   lf_morefrequentupdates : TLockFile;
+
 
 
 procedure loadCoreObjects(logFile : String);
@@ -39,6 +48,9 @@ begin
   coremodule       := TCoreModule.Create(logger, path, 'dll');
   servicefactory   := TServiceFactory.Create(serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
   serviceman       := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
+
+  lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
+
 end;
 
 procedure discardCoreObjects;
@@ -52,6 +64,8 @@ begin
   tableman.Free;
   conf.Free;
   logger.Free;
+
+  lf_morefrequentupdates.Free;
 end;
 
 end.
