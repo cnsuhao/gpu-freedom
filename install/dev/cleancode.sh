@@ -10,7 +10,8 @@ rm ../../bin/*.o
 rm ../../bin/*.compiled
 rm ../../bin/online.*
 rm ../../bin/logs/*.log
-rm ../../bin/core.db
+rm ../../bin/*.db
+rm ../../bin/locks/*.lock
 rm ../../bin/plugins/lib/*.ppu
 rm ../../bin/plugins/lib/*.o
 rm ../../bin/plugins/lib/*.RES
