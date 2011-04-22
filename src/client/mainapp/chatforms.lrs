@@ -1,5 +1,3 @@
-{ Questo è un file risorse generato automaticamente da Lazarus }
-
 LazarusResources.Add('TChatForm','FORMDATA',[
   'TPF0'#9'TChatForm'#8'ChatForm'#4'Left'#3'c'#2#6'Height'#3#202#1#3'Top'#3#185
   +#0#5'Width'#3'p'#2#7'Caption'#6#4'Chat'#12'ClientHeight'#3#202#1#11'ClientWi'

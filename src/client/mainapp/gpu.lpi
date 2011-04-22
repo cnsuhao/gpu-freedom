@@ -9,7 +9,7 @@
       </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="16"/>
+      <ActiveEditorIndexAtStart Value="3"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -190,8 +190,8 @@
         <ComponentName Value="ChatForm"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="chatforms"/>
-        <CursorPos X="99" Y="80"/>
-        <TopLine Value="69"/>
+        <CursorPos X="72" Y="53"/>
+        <TopLine Value="41"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="62"/>
         <Loaded Value="True"/>
@@ -317,123 +317,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="gpu.lpr"/>
-        <Caret Line="16" Column="19" TopLine="1"/>
+        <Caret Line="12" Column="44" TopLine="1"/>
       </Position1>
       <Position2>
-        <Filename Value="gpu.lpr"/>
-        <Caret Line="12" Column="44" TopLine="1"/>
-      </Position2>
-      <Position3>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <Caret Line="5" Column="46" TopLine="1"/>
-      </Position3>
-      <Position4>
+      </Position2>
+      <Position3>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
-      </Position4>
-      <Position5>
+      </Position3>
+      <Position4>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <Caret Line="67" Column="27" TopLine="50"/>
+      </Position4>
+      <Position5>
+        <Filename Value="gpu.lpr"/>
+        <Caret Line="13" Column="95" TopLine="1"/>
       </Position5>
       <Position6>
         <Filename Value="gpu.lpr"/>
-        <Caret Line="13" Column="95" TopLine="1"/>
+        <Caret Line="30" Column="1" TopLine="7"/>
       </Position6>
       <Position7>
-        <Filename Value="gpu.lpr"/>
-        <Caret Line="30" Column="1" TopLine="7"/>
+        <Filename Value="..\lib\own\coredb\channeltables.pas"/>
+        <Caret Line="102" Column="44" TopLine="90"/>
       </Position7>
       <Position8>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
-        <Caret Line="102" Column="44" TopLine="90"/>
+        <Caret Line="10" Column="54" TopLine="1"/>
       </Position8>
       <Position9>
-        <Filename Value="..\lib\own\coredb\channeltables.pas"/>
-        <Caret Line="10" Column="54" TopLine="1"/>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="61" Column="19" TopLine="42"/>
       </Position9>
       <Position10>
         <Filename Value="chatforms.pas"/>
-        <Caret Line="61" Column="19" TopLine="42"/>
+        <Caret Line="68" Column="19" TopLine="44"/>
       </Position10>
       <Position11>
         <Filename Value="chatforms.pas"/>
-        <Caret Line="68" Column="19" TopLine="44"/>
+        <Caret Line="62" Column="85" TopLine="52"/>
       </Position11>
       <Position12>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="62" Column="85" TopLine="52"/>
-      </Position12>
-      <Position13>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
         <Caret Line="111" Column="36" TopLine="94"/>
-      </Position13>
-      <Position14>
+      </Position12>
+      <Position13>
         <Filename Value="gpu.lpr"/>
         <Caret Line="16" Column="13" TopLine="7"/>
-      </Position14>
-      <Position15>
+      </Position13>
+      <Position14>
         <Filename Value="chatforms.pas"/>
         <Caret Line="63" Column="51" TopLine="54"/>
-      </Position15>
-      <Position16>
+      </Position14>
+      <Position15>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
         <Caret Line="111" Column="85" TopLine="96"/>
+      </Position15>
+      <Position16>
+        <Filename Value="gpu.lpr"/>
+        <Caret Line="29" Column="25" TopLine="7"/>
       </Position16>
       <Position17>
         <Filename Value="gpu.lpr"/>
-        <Caret Line="29" Column="25" TopLine="7"/>
+        <Caret Line="25" Column="25" TopLine="1"/>
       </Position17>
       <Position18>
         <Filename Value="gpu.lpr"/>
-        <Caret Line="25" Column="25" TopLine="1"/>
+        <Caret Line="30" Column="1" TopLine="7"/>
       </Position18>
       <Position19>
-        <Filename Value="gpu.lpr"/>
-        <Caret Line="30" Column="1" TopLine="7"/>
-      </Position19>
-      <Position20>
         <Filename Value="chatforms.pas"/>
         <Caret Line="50" Column="44" TopLine="37"/>
+      </Position19>
+      <Position20>
+        <Filename Value="parametersforms.pas"/>
+        <Caret Line="148" Column="35" TopLine="124"/>
       </Position20>
       <Position21>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="148" Column="35" TopLine="124"/>
+        <Caret Line="149" Column="35" TopLine="125"/>
       </Position21>
       <Position22>
-        <Filename Value="parametersforms.pas"/>
-        <Caret Line="149" Column="35" TopLine="125"/>
-      </Position22>
-      <Position23>
         <Filename Value="chatforms.pas"/>
         <Caret Line="10" Column="47" TopLine="1"/>
-      </Position23>
-      <Position24>
+      </Position22>
+      <Position23>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="12" TopLine="7"/>
+      </Position23>
+      <Position24>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="83" Column="89" TopLine="59"/>
       </Position24>
       <Position25>
         <Filename Value="chatforms.pas"/>
-        <Caret Line="83" Column="89" TopLine="59"/>
+        <Caret Line="74" Column="42" TopLine="69"/>
       </Position25>
       <Position26>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="74" Column="42" TopLine="69"/>
+        <Filename Value="parametersforms.pas"/>
+        <Caret Line="148" Column="35" TopLine="125"/>
       </Position26>
       <Position27>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="148" Column="35" TopLine="125"/>
+        <Caret Line="84" Column="18" TopLine="80"/>
       </Position27>
       <Position28>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="84" Column="18" TopLine="80"/>
+        <Caret Line="62" Column="25" TopLine="50"/>
       </Position28>
       <Position29>
         <Filename Value="parametersforms.pas"/>
-        <Caret Line="62" Column="25" TopLine="50"/>
+        <Caret Line="84" Column="24" TopLine="72"/>
       </Position29>
       <Position30>
-        <Filename Value="parametersforms.pas"/>
-        <Caret Line="84" Column="24" TopLine="72"/>
+        <Filename Value="chatforms.pas"/>
+        <Caret Line="80" Column="99" TopLine="64"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

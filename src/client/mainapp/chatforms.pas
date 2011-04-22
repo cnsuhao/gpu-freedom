@@ -50,7 +50,7 @@ begin
      begin
        mmChat.Append(myGPUID.nodename+'> '+mmSubmitChat.Text);
        mmSubmitChat.Clear;
-       if not morefrequentupdates_.exists then morefrequentupdates_.createLF;
+       if not lf_morefrequentupdates.exists then lf_morefrequentupdates.createLF;
      end
       else
         begin
