@@ -57,7 +57,6 @@ begin
     begin
         try
              begin
-               dbnode.id                := 0;
                dbnode.content           := node.FindNode('content').TextContent;
                dbnode.server_id         := srv_.id;
                dbnode.externalid        := StrToInt(node.FindNode('id').TextContent);
