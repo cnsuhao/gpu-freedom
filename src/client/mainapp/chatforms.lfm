@@ -8,12 +8,11 @@ object ChatForm: TChatForm
   ClientWidth = 624
   OnClose = FormClose
   OnCreate = FormCreate
-  LCLVersion = '0.9.28.2'
+  ParentFont = False
+  LCLVersion = '0.9.26'
   Visible = True
   object PanelTop: TPanel
-    Left = 0
     Height = 357
-    Top = 0
     Width = 624
     Align = alTop
     ClientHeight = 357
@@ -29,11 +28,11 @@ object ChatForm: TChatForm
         ''
       )
       ReadOnly = True
+      ScrollBars = ssAutoBoth
       TabOrder = 0
     end
   end
   object PanelBottom: TPanel
-    Left = 0
     Height = 98
     Top = 360
     Width = 624
@@ -59,10 +58,10 @@ object ChatForm: TChatForm
     end
     object cbSelectChannel: TComboBox
       Left = 488
-      Height = 23
+      Height = 21
       Top = 69
       Width = 128
-      ItemHeight = 15
+      ItemHeight = 13
       TabOrder = 2
       Text = 'Altos'
     end
