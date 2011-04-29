@@ -95,6 +95,7 @@ function TDbChannelTable.retrieveLatestChat(channame, chantype : String; lastid 
                                             var content : AnsiString) : Longint;
 var newid : Longint;
 begin
+  newid := lastid;
   dataset_.Close();
   dataset_.SQL := 'select * from tbchannel where (externalid>'+IntToStr(lastid)+') '+
                   'and (channame='+QUOTE+channame+QUOTE+') '+
