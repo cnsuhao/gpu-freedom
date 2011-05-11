@@ -64,8 +64,6 @@ end;
 procedure   TCoreMonitor.startCore;
 var path : String;
 begin
- path := extractFilePath(ParamStr(0));
-
  coreprocess := TProcess.Create(nil);
  coreprocess.CommandLine := path+'gpucore.exe';
  coreprocess.Options := coreprocess.Options; // e.g.  +[poWaitOnExit];

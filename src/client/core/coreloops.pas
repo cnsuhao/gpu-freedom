@@ -85,8 +85,6 @@ begin
       if (tick_ mod myConfID.receive_channels_each = 0) then receiveChannels;
       if (tick_ mod 20 = 0) and lf_morefrequentupdates.exists then receiveChannels;
 
-      Sleep(1000);
-
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
 

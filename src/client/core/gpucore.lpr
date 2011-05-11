@@ -35,6 +35,7 @@ begin
   while coreloop_.getCoreMonitor().coreCanRun do
     begin
      coreloop_.tick();
+     Sleep(1000);
     end;
  coreloop_.stop();
 end;
