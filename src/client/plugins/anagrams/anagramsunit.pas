@@ -1,4 +1,4 @@
-unit anagrams;
+unit anagramsunit;
 
 {$mode objfpc}{$H+}
 
