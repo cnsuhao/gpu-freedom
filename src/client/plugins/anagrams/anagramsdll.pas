@@ -2,17 +2,20 @@ unit anagramsdll;
 
 interface
 
-uses SysUtils, stacks, formatsets;
+uses SysUtils, stacks, formatsets, anagramsunit;
 
 function description    : TStkString;
 function weburl         : TStkString;
 function stkversion     : TStkString;
 
+function discard(var stk: TStack): boolean;
 function anagram(var stk: TStack): boolean;
 function twowordsanagram(var stk: TStack): boolean;
 
 implementation
 
+var wExistence       : TWordExistence;
+    wexistenceLoaded : Boolean;
 
 function description: TStkString;
 begin
@@ -43,33 +46,53 @@ begin
  if Result then popStr(a, stk) else a := '';
 end;
 
-function retrieveStringParams(var a : TStkString; var b: TStkString; var stk : TStack) : Boolean;
+procedure loadWordExistence;
+var appPath : String;
 begin
- Result := checkStringParams(2, stk);
- if Result then
-    begin
-      popStr(b, stk);
-      popStr(a, stk);
-    end
- else
-    begin
-      a := '';
-      b := '';
-    end;
+ if not wExistenceLoaded then
+     begin
+      appPath := ExtractFilePath(ParamStr(0));
+      wExistence := TWordExistence.Create(appPath+PathDelim+'wordlist.txt');
+      wExistenceLoaded := true;
+     end;
+end;
+
+function discard(var stk: TStack): boolean;
+begin
+ if wExistenceLoaded then wExistence.Free;
 end;
 
 function anagram(var stk: TStack): boolean;
-var a, b : TStkString;
+var a, res    : TStkString;
+    myAnagram : TAnagram;
 begin
-  Result := retrieveStringParams(a, b, stk);
-  if Result then pushStr(a+b, stk);
+  loadWordExistence;
+  Result := retrieveStringParam(a, stk);
+  if Result then
+    begin
+     myAnagram := TAnagram.Create(a, wExistence);
+     res := myAnagram.findAnagram;
+     pushStr(res, stk);
+     myAnagram.Free;
+     Result := res<>'';
+    end;
 end;
 
 function twowordsanagram(var stk: TStack): boolean;
-var a, b : TStkString;
+var a,res   : TStkString;
+    myTwoAnagram : TTwoWordAnagram;
 begin
-  Result := retrieveStringParams(a, b, stk);
-  if Result then pushFloat(Pos(a, b), stk);
+  loadWordExistence;
+  Result := retrieveStringParam(a, stk);
+  if Result then
+    begin
+     myTwoAnagram := TTwoWordAnagram.Create(a, wExistence);
+     res := myTwoAnagram.findTwoWordsAnagram;
+     pushStr(res, stk);
+     myTwoAnagram.Free;
+     Result := res<>'';
+    end;
+
 end;
 
 

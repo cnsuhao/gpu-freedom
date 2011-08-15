@@ -68,8 +68,8 @@ type TAnagram = class(TObject)
    function nextAnagram() : String;
 end;
 
-type TTwoWordAnagram = class(TObject)
-   function findAnagram(bigword : String) : String;
+type TTwoWordAnagram = class(TAnagram)
+   function findTwoWordsAnagram() : String;
 end;
 
 
@@ -335,8 +335,8 @@ begin
    end;
 end;
 
-function TTwoWordAnagram.findAnagram(bigword : String) : String;
-var wexistence   : TWordExistence;
+function TTwoWordAnagram.findTwoWordsAnagram() : String;
+var
     perm         : TPermutation;
     genperm      : TGenPermutation;
     anagram      : TAnagram;
@@ -344,11 +344,12 @@ var wexistence   : TWordExistence;
     i, split     : Longint;
     word1, word2,
     anaword1, anaword2,
+    bigword,
     initword     : String;
     initstamp    : TDateTime;
 begin
   Result := '';
-  wexistence := TWordExistence.Create('wordlist.txt');
+  bigword := aword_;
   l := length(bigword);
   genperm := TGenPermutation.Create();
 
@@ -365,12 +366,12 @@ begin
              word1 := Copy(bigword,1,split);
              word2 := Copy(bigword,split+1,l);
 
-             anagram := TAnagram.Create(word1, wexistence);
+             anagram := TAnagram.Create(word1, wexistence_);
              anaword1 := anagram.findAnagram();
              anagram.Free;
              if anaword1 <> '' then
                   begin
-                    anagram := TAnagram.Create(word2, wexistence);
+                    anagram := TAnagram.Create(word2, wexistence_);
                     anaword2 := anagram.findAnagram();
                     anagram.Free;
                     if anaword2 <> '' then
@@ -383,7 +384,6 @@ begin
      end;
 
   genperm.Free;
-  wexistence.Free;
 end;
 
 end.
