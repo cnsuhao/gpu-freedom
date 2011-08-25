@@ -118,6 +118,11 @@ function getPtr  (i : Longint; var typePtr : TStkString; var stk : TStack) : TSt
 // moving stack index
 function mvIdx(var stk : TStack; offset : Longint) : Boolean;
 
+// help functions for plugins to check and retrieve params
+function checkStringParams(nbParams : Longint; var stk : TStack) : Boolean;
+function retrieveStringParam(var a : TStkString; var stk : TStack) : Boolean;
+function retrieveStringParams(var a : TStkString; var b: TStkString; var stk : TStack) : Boolean;
+
 implementation
 
 procedure initStack(var stk : TStack);
@@ -490,6 +495,36 @@ begin
          stk.idx := newidx;
          Result := true;
         end;
+end;
+
+function checkStringParams(nbParams : Longint; var stk : TStack) : Boolean;
+var types : TStkTypes;
+    i     : Longint;
+begin
+ for i:=1 to MAX_STACK_PARAMS do
+   types[i]:=STRING_STKTYPE;
+ Result  :=typeOfParametersCorrect(nbParams, stk, types);
+end;
+
+function retrieveStringParam(var a : TStkString; var stk : TStack) : Boolean;
+begin
+ Result := checkStringParams(1, stk);
+ if Result then popStr(a, stk) else a := '';
+end;
+
+function retrieveStringParams(var a : TStkString; var b: TStkString; var stk : TStack) : Boolean;
+begin
+ Result := checkStringParams(2, stk);
+ if Result then
+    begin
+      popStr(b, stk);
+      popStr(a, stk);
+    end
+ else
+    begin
+      a := '';
+      b := '';
+    end;
 end;
 
 end.

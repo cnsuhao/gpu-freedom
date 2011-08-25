@@ -39,35 +39,6 @@ begin
   Result := STACK_VERSION;
 end;
 
-function checkStringParams(nbParams : Longint; var stk : TStack) : Boolean;
-var types : TStkTypes;
-begin
- types[1]:=STRING_STKTYPE;
- types[2]:=STRING_STKTYPE;
- Result  :=typeOfParametersCorrect(nbParams, stk, types);
-end;
-
-function retrieveStringParam(var a : TStkString; var stk : TStack) : Boolean;
-begin
- Result := checkStringParams(1, stk);
- if Result then popStr(a, stk) else a := '';
-end;
-
-function retrieveStringParams(var a : TStkString; var b: TStkString; var stk : TStack) : Boolean;
-begin
- Result := checkStringParams(2, stk);
- if Result then
-    begin
-      popStr(b, stk);
-      popStr(a, stk);
-    end
- else
-    begin
-      a := '';
-      b := '';
-    end;
-end;
-
 function concat(var stk: TStack): boolean;
 var a, b : TStkString;
 begin

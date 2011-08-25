@@ -32,20 +32,6 @@ begin
   Result := STACK_VERSION;
 end;
 
-function checkStringParams(nbParams : Longint; var stk : TStack) : Boolean;
-var types : TStkTypes;
-begin
- types[1]:=STRING_STKTYPE;
- types[2]:=STRING_STKTYPE;
- Result  :=typeOfParametersCorrect(nbParams, stk, types);
-end;
-
-function retrieveStringParam(var a : TStkString; var stk : TStack) : Boolean;
-begin
- Result := checkStringParams(1, stk);
- if Result then popStr(a, stk) else a := '';
-end;
-
 procedure loadWordExistence;
 var appPath : String;
 begin
