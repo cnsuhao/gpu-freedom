@@ -25,8 +25,12 @@ type
     procedure ChatTimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+
   private
     currentid_ : Longint;
+    firstTime_ : Boolean;
+    procedure updateChat(ownChat : Boolean);
+
   public
     { public declarations }
   end; 
@@ -59,11 +63,17 @@ begin
         end;
 end;
 
-procedure TChatForm.ChatTimerTimer(Sender: TObject);
+procedure TChatForm.updateChat(ownChat : Boolean);
 var content : String;
 begin
- currentid_ := tableman.getChannelTable().retrieveLatestChat('Altos', 'CHAT', currentid_, content);
+ currentid_ := tableman.getChannelTable().retrieveLatestChat('Altos', 'CHAT', currentid_, content, ownChat);
  if content<>'' then mmChat.Append(IntToStr(currentid_)+':'+content);
+end;
+
+procedure TChatForm.ChatTimerTimer(Sender: TObject);
+begin
+  updateChat(firstTime_);
+  firstTime_ := false;
 end;
 
 procedure TChatForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -76,9 +86,8 @@ var srv : TServerRecord;
     row : TDbRetrievedRow;
 begin
  serverman.getDefaultServer(srv);
- //tableman.getRetrievedTable().getRow(row, srv.id, 'Altos', 'CHAT');
- //currentid_ := row.lastmsg;
  currentid_ := -1;
+ firstTime_ := true;
 end;
 
 initialization

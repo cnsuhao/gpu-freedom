@@ -31,7 +31,7 @@ type TDbChannelTable = class(TDbCoreTable)
     procedure insert(row : TDbChannelRow);
     // returns the new id
     function retrieveLatestChat(channame, chantype : String; lastid : Longint;
-             var content : AnsiString) : Longint;
+             var content : AnsiString; ownChat : Boolean) : Longint;
 
   private
     procedure createDbTable();
@@ -92,16 +92,21 @@ end;
 
 // returns the new id
 function TDbChannelTable.retrieveLatestChat(channame, chantype : String; lastid : Longint;
-                                            var content : AnsiString) : Longint;
+                                            var content : AnsiString; ownChat : Boolean) : Longint;
 var newid : Longint;
+    sqlStatement : String;
 begin
   newid := lastid;
   dataset_.Close();
-  dataset_.SQL := 'select * from tbchannel where (externalid>'+IntToStr(lastid)+') '+
+  sqlStatement := 'select * from tbchannel where (externalid>'+IntToStr(lastid)+') '+
                   'and (channame='+QUOTE+channame+QUOTE+') '+
-                  'and (chantype='+QUOTE+chantype+QUOTE+') '+
-                  'and (nodeid<>'+QUOTE+myGPUID.nodeid+QUOTE+')'+
+                  'and (chantype='+QUOTE+chantype+QUOTE+') ';
+  if not ownChat then sqlStatement := sqlStatement +
+                  'and (nodeid<>'+QUOTE+myGPUID.nodeid+QUOTE+') ';
+  sqlStatement := sqlStatement +
                   ' order by externalid asc;';
+
+  dataset_.SQL := sqlStatement;
   dataset_.Open;
 
   content := '';
