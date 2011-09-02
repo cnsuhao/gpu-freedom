@@ -17,6 +17,8 @@ type
 
      procedure FormCreate(Sender: TObject);
      procedure FormDestroy(Sender: TObject);
+     procedure FormHide(Sender: TObject);
+     procedure FormShow(Sender: TObject);
      procedure OnAppIdle(Sender: TObject; var Done: Boolean);
 
     private
@@ -56,10 +58,23 @@ begin
   openGLSphereControl.Free;
 end;
 
+procedure TNetmapperForm.FormHide(Sender: TObject);
+begin
+//
+end;
+
+procedure TNetmapperForm.FormShow(Sender: TObject);
+begin
+//
+end;
+
 procedure TNetmapperForm.OnAppIdle(Sender: TObject; var Done: Boolean);
 begin
-  Done:=false;
-  openGLSphereControl.Invalidate;
+if Visible then
+  begin
+     Done:=false;
+     openGLSphereControl.Invalidate;
+  end;
 end;
 
 initialization
