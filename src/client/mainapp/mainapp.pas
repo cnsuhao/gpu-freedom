@@ -21,6 +21,7 @@ type
     sbtnChat: TSpeedButton;
     sbtnConfig: TSpeedButton;
     sbtnNetmapper: TSpeedButton;
+    trayIcon: TTrayIcon;
     procedure btnSQLClick(Sender: TObject);
     procedure btnWebClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
