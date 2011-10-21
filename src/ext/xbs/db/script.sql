@@ -1,6 +1,6 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
----
+--
 -- Datenbank: `xbs`
 --
 
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `tbparameter` (
 
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`) VALUES
-(1, 'ESS', 'VERSION', '3.3'),
+(1, 'ESS', 'VERSION', '3.3');
 
 CREATE TABLE IF NOT EXISTS `counterparty` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `counterparty` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
 
-CREATE TABLE IF NOT EXISTS `powercontrolarea` (
+CREATE TABLE IF NOT EXISTS `controlarea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE latin1_general_ci NOT NULL,
   `region` varchar(32) COLLATE latin1_general_ci NOT NULL,
@@ -66,15 +66,14 @@ CREATE TABLE IF NOT EXISTS `powertrade` (
   `areafrom_id` int(11) DEFAULT NOT NULL,
   `areato_id` int(11) DEFAULT NOT NULL,
   `quantitytype` int(11) DEFAULT NOT NULL,
-  `basepeakoff` int(11) DEFAULT '0',
   `quantity` int(11) DEFAULT NULL,
+  `basepeakoff` int(11) DEFAULT '0',
   `profile_id` int(11) DEFAULT NULL,
   `block_id` int(11) DEFAULT NULL,
   `pricetype` int(11) DEFAULT NOT NULL,
   `priceindex_id` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
-  `currency` varchar(32) COLLATE latin1_general_ci NOT NULL,
+  `currency` varchar(3) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=2 ;
 
