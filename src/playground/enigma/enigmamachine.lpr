@@ -189,12 +189,13 @@ begin
          ch := cipherChar(c, i, pos1, pos2, pos3, pos4, rot1, rot2, rot3, rot4, refl);
          if (ch=c[i]) then
              begin
-                {WriteLn('Internal error: encoded char never can be the entry char (a property of the machine)');
+                WriteLn('Internal error: encoded char never can be the entry char (a property of the machine)');
                 WriteLn('Error for wheel positions '+IntToStr(pos3)+' '+IntToStr(pos2)+' '+IntToStr(pos1)+' ');
                 WriteLn('Entry char '+c[i]);
                 WriteLn('Exit char '+ch);
                 ReadLn;
-                Halt;}
+                Halt;
+
                 Result := '';
                 Exit;
              end;
@@ -249,7 +250,7 @@ begin
    if (rot4<>-1) then
         // naval version, 4th rotor in place
         begin
-          r4ch := rotor_[rot4][shiftPos(r3ch, pos4)];
+          r4ch := rotor_[rot4][shiftPos(r3ch, pos4-pos3)];
           reflch := reflector_[refl][shiftPos(r4ch, 26-pos4)];
         end
       else
@@ -278,11 +279,16 @@ begin
 
    // going back now through the wheels
    if (rot4<>-1) then
-        r4ch := invrotor_[rot4][shiftPos(reflch, pos4)]
+      begin
+          r4ch := invrotor_[rot4][shiftPos(reflch, pos4)];
+          r3ch := invrotor_[rot3][shiftPos(r4ch, pos3-pos4)];
+      end
       else
+      begin
         r4ch := reflch;
+        r3ch := invrotor_[rot3][shiftPos(r4ch, pos3)];
+      end;
 
-   r3ch := invrotor_[rot3][shiftPos(r4ch, pos3)];
    r2ch := invrotor_[rot2][shiftPos(r3ch, pos2-pos3)];
    r1ch := invrotor_[rot1][shiftPos(r2ch, pos1-pos2)];
    plugch := plugboard_[shiftPos(r1ch, 26-pos1)];
@@ -499,8 +505,8 @@ procedure TEnigmaApplication.DoRun;
 begin
   initEnigma;
   //doTest;
-  breakArmyEnigma(ciphertext_);
-  //breakNavalEnigma(ciphertext_);
+  //breakArmyEnigma(ciphertext_);
+  breakNavalEnigma(ciphertext_);
 
   ReadLn;
   // stop program loop
