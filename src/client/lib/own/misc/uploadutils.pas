@@ -3,14 +3,17 @@ unit uploadutils;
 interface
 
 uses
-  sysutils, strutils, httpsend, downloadutils, Classes, loggers, synautil;
+  sysutils, strutils, httpsend, downloadutils, Classes, loggers, synautil, synacode;
 
 const
   HTTP_UPLOAD_TIMEOUT = 60000; // 60 seconds
 
 function uploadFromFile(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
+function uploadFromFileWithField(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; fieldName : String) : Boolean;
 function uploadFromStream(url : AnsiString; proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
-function uploadFromFileOrStream(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function uploadFromFileOrStreamOrField(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream; fieldName : String) : Boolean;
+function postDataFromString(url, data : AnsiString; proxy, port, logHeader : String; var logger : TLogger) : Boolean;
+
 
 implementation
 
@@ -18,15 +21,22 @@ function uploadFromFile(url : AnsiString; sourcePath, sourceFile, proxy, port, l
 var dummy : TMemoryStream;
 begin
  dummy := nil;
- Result := uploadFromFileOrStream(url, sourcePath, sourceFile, proxy, port, logHeader, logger, dummy);
+ Result := uploadFromFileOrStreamOrField(url, sourcePath, sourceFile, proxy, port, logHeader, logger, dummy, 'myfile');
+end;
+
+function uploadFromFileWithField(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; fieldName : String) : Boolean;
+var dummy : TMemoryStream;
+begin
+ dummy := nil;
+ Result := uploadFromFileOrStreamOrField(url, sourcePath, sourceFile, proxy, port, logHeader, logger, dummy, fieldName);
 end;
 
 function uploadFromStream(url : AnsiString; proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
 begin
- Result := uploadFromFileOrStream(url, '', '', proxy, port, logHeader, logger, stream);
+ Result := uploadFromFileOrStreamOrField(url, '', '', proxy, port, logHeader, logger, stream, 'myfile');
 end;
 
-function uploadFromFileOrStream(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
+function uploadFromFileOrStreamOrField(url : AnsiString; sourcePath, sourceFile, proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream; fieldName : String) : Boolean;
 // taken from HTTP Demo Unit1.pas::ProxyHttpPostFile(const URL, FieldName, FileName: string; const Data: TStream; const ResultData: TStrings): Boolean;
 const
   CRLF = #$0D + #$0A;
@@ -35,16 +45,15 @@ var
     Http        : THTTPSend;
     fromFile    : Boolean;
     temp        : TMemoryStream;
-    Bound, s,
-    FieldName   : AnsiString;
+    Bound, s    : AnsiString;
     ResultData  : TStringList;
     i           : Longint;
 begin
   Result   := false;
   fromFile := (stream = nil);
   logger.log(LVL_DEBUG, logHeader+'Execute method started.');
-  fieldName := 'myfile';  // on PHP use then
-                          // $_FILES['myfile']['type'], $_FILES['myfile']['size'],$_FILES['myfile']['tmp_name'], etc...
+  //fieldName := 'myfile';  // on PHP use then
+  //                        // $_FILES['myfile']['type'], $_FILES['myfile']['size'],$_FILES['myfile']['tmp_name'], etc...
 
   if fromFile then
     logger.log(LVL_INFO, logHeader+'Pushing file '+sourcePath+sourceFile+' to URL: '+url)
@@ -103,7 +112,9 @@ begin
               end
             else
               begin
-                logger.log(LVL_SEVERE, logHeader+'Upload failed!');
+                logger.log(LVL_SEVERE, logHeader+'Upload failed with:');
+                for i:=0 to ResultData.Count-1 do
+                  logger.log(LVL_SEVERE, logHeader+IntToStr(i)+': '+ResultData.Strings[i]);
                 Result := false;
               end;
 
@@ -122,6 +133,28 @@ begin
   ResultData.Free;
   logger.log(LVL_DEBUG, logHeader+'Execute method finished.');
 end;
+
+
+function postDataFromString(url, data : AnsiString; proxy, port, logHeader : String; var logger : TLogger) : Boolean;
+var
+  HTTP: THTTPSend;
+begin
+  HTTP := THTTPSend.Create;
+  if Trim(proxy)<>'' then HTTP.ProxyHost := proxy;
+  if Trim(port)<>'' then HTTP.ProxyPort := port;
+  try
+    WriteStrToStream(HTTP.Document, encodeurl(data));
+    HTTP.MimeType := 'application/x-www-form-urlencoded';
+    Result := HTTP.HTTPMethod('POST', URL);
+    //if Result then
+    //  HTTP.Document.SaveToFile('http-response.txt');
+  finally
+    HTTP.Free;
+  end;
+end;
+
+
+
 
 
 end.
