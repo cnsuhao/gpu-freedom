@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'All Sound Same' by gfoot</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>Enodo</td><td>2012-04-02 15:11:01</td></td></tr><tr><td>Tron</td><td>2012-02-22 13:16:41</td></td></tr><tr><td>dayepa</td><td>2011-11-29 00:34:20</td></td></tr><tr><td>shockedfrog</td><td>2010-10-15 21:06:46</td></td></tr><tr><td>Zeta</td><td>2010-09-20 07:32:24</td></td></tr><tr><td>Icho</td><td>2010-08-17 08:35:51</td></td></tr><tr><td>zeased</td><td>2010-05-21 17:17:23</td></td></tr><tr><td>Yharaskrik</td><td>2010-03-24 05:59:45</td></td></tr><tr><td>laz0r</td><td>2010-03-08 12:23:26</td></td></tr><tr><td>zjorzzzey</td><td>2010-02-22 03:56:45</td></td></tr><tr><td>asdf_2</td><td>2009-09-06 08:38:36</td></td></tr><tr><td>tails</td><td>2009-06-26 00:37:29</td></td></tr><tr><td>teebee</td><td>2009-06-22 05:24:30</td></td></tr><tr><td>JanB</td><td>2009-02-22 16:23:39</td></td></tr><tr><td>efe</td><td>2009-02-16 14:31:28</td></td></tr><tr><td>papa</td><td>2009-02-14 12:06:43</td></td></tr><tr><td>MagneticMonopole</td><td>2009-02-01 12:04:07</td></td></tr><tr><td>gfoot</td><td>2008-11-21 12:40:22</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

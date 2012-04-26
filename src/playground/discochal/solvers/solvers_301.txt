@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Be Ye Men of Valour' by laz0r</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>Enodo</td><td>2012-03-16 15:26:29</td></td></tr><tr><td>MindFreakz</td><td>2012-03-09 15:14:24</td></td></tr><tr><td>polarlemniscate</td><td>2012-03-05 07:51:07</td></td></tr><tr><td>dayepa</td><td>2012-01-02 13:47:58</td></td></tr><tr><td>licstar</td><td>2011-12-24 09:59:41</td></td></tr><tr><td>swgr</td><td>2011-12-23 09:50:46</td></td></tr><tr><td>cutter</td><td>2011-11-24 12:59:23</td></td></tr><tr><td>Yharaskrik</td><td>2011-09-12 07:39:55</td></td></tr><tr><td>smutley</td><td>2011-09-11 13:48:05</td></td></tr><tr><td>asdf_2</td><td>2011-09-09 02:11:58</td></td></tr><tr><td>laz0r</td><td>2011-09-07 14:23:53</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

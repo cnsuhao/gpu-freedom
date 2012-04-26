@@ -1,0 +1,50 @@
+Challenges solved by userfriendly
+<h2>Challenge 'Newsgroup Cipher' by </h2>
+<h2>Challenge 'XOR Eval' by </h2>
+<h2>Challenge 'Common Comment' by </h2>
+<h2>Challenge 'Visible Ink' by adum</h2>
+<h2>Challenge 'Invisible Ink' by adum</h2>
+<h2>Challenge 'Who goes there?' by adum</h2>
+<h2>Challenge 'Substitute Teacher' by adum</h2>
+<h2>Challenge 'Ave' by adum</h2>
+<h2>Challenge 'A Few Percent' by adum</h2>
+<h2>Challenge 'Never Submit' by adum</h2>
+<h2>Challenge 'Follow the Logic' by adum</h2>
+<h2>Challenge 'Dit Dah' by adum</h2>
+<h2>Challenge 'Ones and Zeroes' by adum</h2>
+<h2>Challenge 'The Lightest Touch' by adum</h2>
+<h2>Challenge 'The Powers That Be' by adum</h2>
+<h2>Challenge 'BCD' by adum</h2>
+<h2>Challenge 'Web Design 101' by adum</h2>
+<h2>Challenge 'Go Forth' by adum</h2>
+<h2>Challenge 'Lorem Ipsum' by adum</h2>
+<h2>Challenge '3280' by adum</h2>
+<h2>Challenge 'Bit Test' by adum</h2>
+<h2>Challenge 'Type Faster' by adum</h2>
+<h2>Challenge 'Web Design 110' by adum</h2>
+<h2>Challenge 'The X Factor' by adum</h2>
+<h2>Challenge 'A Little PHP' by adum</h2>
+<h2>Challenge 'Didactic RGB' by adum</h2>
+<h2>Challenge 'Didactic Red' by adum</h2>
+<h2>Challenge 'Didactic Byte' by adum</h2>
+<h2>Challenge 'Didactic Bytes' by adum</h2>
+<h2>Challenge 'Delegates' by adum</h2>
+<h2>Challenge 'Didactic Text' by adum</h2>
+<h2>Challenge 'Didactic Bits' by adum</h2>
+<h2>Challenge 'Lower Count' by adum</h2>
+<h2>Challenge 'A Little Python' by adum</h2>
+<h2>Challenge 'Dungeon Master' by adum</h2>
+<h2>Challenge 'Valuation' by adum</h2>
+<h2>Challenge 'Didactic XOR' by adum</h2>
+<h2>Challenge 'Didactic XOR Cipher' by adum</h2>
+<h2>Challenge 'Didactic XOR Cipher 2' by adum</h2>
+<h2>Challenge 'Didactic XOR Cipher 3' by adum</h2>
+<h2>Challenge 'Didactic XOR Long Cipher' by adum</h2>
+<h2>Challenge 'Broken XOR 3' by adum</h2>
+<h2>Challenge 'Didactic Feedback Cipher' by adum</h2>
+<h2>Challenge 'Didactic Feedback Cipher 2' by adum</h2>
+<h2>Challenge 'Didactic Feedback Cipher Long' by adum</h2>
+<h2>Challenge 'Didactic Feedback Cipher Long 2' by adum</h2>
+<h2>Challenge 'iPod Fun' by lukas</h2>
+<h2>Challenge 'How is your Grammar?' by honze</h2>
+49 users/userfriendly.txt

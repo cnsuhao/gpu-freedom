@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Communication of the Past' by donald</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>Enodo</td><td>2012-03-19 15:59:34</td></td></tr><tr><td>dayepa</td><td>2012-01-17 21:31:15</td></td></tr><tr><td>Tron</td><td>2010-11-22 12:24:47</td></td></tr><tr><td>teebee</td><td>2010-10-22 14:43:07</td></td></tr><tr><td>Yharaskrik</td><td>2010-10-21 06:14:56</td></td></tr><tr><td>michuber</td><td>2010-10-18 13:03:56</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

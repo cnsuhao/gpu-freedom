@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Looks can be Deceiving' by GeneralBillings</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>michuber</td><td>2012-02-26 12:57:20</td></td></tr><tr><td>Yharaskrik</td><td>2012-02-23 06:27:46</td></td></tr><tr><td>dayepa</td><td>2012-02-20 04:41:14</td></td></tr><tr><td>SnakeSnake</td><td>2011-10-14 08:27:02</td></td></tr><tr><td>asdf_2</td><td>2011-09-02 22:11:20</td></td></tr><tr><td>Tron</td><td>2011-08-29 08:13:28</td></td></tr><tr><td>cutter</td><td>2011-08-28 23:50:48</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

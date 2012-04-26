@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Cube' by Yharaskrik</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>Enodo</td><td>2012-03-20 18:17:06</td></td></tr><tr><td>SnakeSnake</td><td>2012-03-04 15:23:59</td></td></tr><tr><td>Tron</td><td>2012-02-22 02:11:07</td></td></tr><tr><td>laz0r</td><td>2012-02-21 14:53:52</td></td></tr><tr><td>dayepa</td><td>2011-11-12 17:46:58</td></td></tr><tr><td>Yharaskrik</td><td>2010-04-17 11:04:12</td></td></tr><tr><td>portal</td><td>2010-04-11 09:05:41</td></td></tr><tr><td>teebee</td><td>2010-04-08 15:16:43</td></td></tr><tr><td>michuber</td><td>2010-03-16 05:49:10</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

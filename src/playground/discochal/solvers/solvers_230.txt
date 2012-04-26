@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Tiny Sentence Reversal' by adum</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+<th>best</th></tr>
+<tr valign=top>
+<tr><td>harvestsnow</td><td>2011-12-22 09:45:12</td><td>44</td></td></tr><tr><td>bellerophon</td><td>2011-07-01 04:08:44</td><td>44</td></td></tr><tr><td>tails</td><td>2009-12-25 16:41:47</td><td>44</td></td></tr><tr><td>Yharaskrik</td><td>2009-04-23 09:48:31</td><td>44</td></td></tr><tr><td>tog</td><td>2009-01-14 14:28:53</td><td>44</td></td></tr></tr>
+</table>
+
+<p>
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>king of the hill score</th><th>user</th><th>date</th></tr>
+
+<tr><td>44</td><td>tog</td><td>2009-01-14 14:45:27</td></td></tr><tr><td>46</td><td>tog</td><td>2009-01-14 14:30:44</td></td></tr><tr><td>48</td><td>Wastl</td><td>2009-01-13 03:24:30</td></td></tr><tr><td>52</td><td>tog</td><td>2009-01-12 12:03:58</td></td></tr><tr><td>56</td><td>Wastl</td><td>2009-01-09 08:35:28</td></td></tr><tr><td>57</td><td>Wastl</td><td>2009-01-09 08:29:35</td></td></tr><tr><td>60</td><td>gfoot</td><td>2009-01-08 15:47:44</td></td></tr><tr><td>62</td><td>Wastl</td><td>2009-01-08 07:19:47</td></td></tr><tr><td>63</td><td>gfoot</td><td>2009-01-07 13:54:59</td></td></tr><tr><td>72</td><td>Wastl</td><td>2009-01-07 12:49:15</td></td></tr><tr><td>80</td><td>gfoot</td><td>2009-01-06 16:26:34</td></td></tr><tr><td>106</td><td>efe</td><td>2009-01-06 08:40:59</td></td></tr><tr><td>111</td><td>MerickOWA</td><td>2009-01-06 07:33:37</td></td></tr><tr><td>114</td><td>efe</td><td>2009-01-06 04:39:37</td></td></tr><tr><td>120</td><td>efe</td><td>2009-01-06 04:37:12</td></td></tr><tr><td>141</td><td>efe</td><td>2009-01-06 04:02:55</td></td></tr><tr><td>205</td><td>Wastl</td><td>2009-01-06 00:22:51</td></td></tr><tr><td>215</td><td>Wastl</td><td>2009-01-06 00:13:20</td></td></tr><tr><td>225</td><td>Wastl</td><td>2009-01-06 00:10:35</td></td></tr><tr><td>315</td><td>Wastl</td><td>2009-01-05 23:19:03</td></td></tr>
+</table>
+
+</body>
+</html>

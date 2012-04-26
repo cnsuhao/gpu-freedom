@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Super Small Hello World' by adum</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+<th>best</th></tr>
+<tr valign=top>
+<tr><td>Enodo</td><td>2012-02-17 13:22:46</td><td>29</td></td></tr><tr><td>lvhao945</td><td>2011-12-30 11:23:02</td><td>29</td></td></tr><tr><td>swgr</td><td>2011-12-30 11:16:33</td><td>29</td></td></tr><tr><td>harvestsnow</td><td>2011-11-25 03:02:58</td><td>29</td></td></tr><tr><td>teebee</td><td>2011-08-18 18:12:57</td><td>29</td></td></tr><tr><td>arthur</td><td>2011-08-17 19:06:22</td><td>29</td></td></tr><tr><td>michuber</td><td>2011-02-11 13:42:23</td><td>29</td></td></tr><tr><td>Tron</td><td>2011-02-09 05:01:53</td><td>29</td></td></tr><tr><td>bellerophon</td><td>2010-05-30 10:03:36</td><td>29</td></td></tr><tr><td>asdf_2</td><td>2010-05-08 00:19:11</td><td>29</td></td></tr><tr><td>cutter</td><td>2010-04-29 09:09:51</td><td>29</td></td></tr><tr><td>e</td><td>2009-03-21 06:21:47</td><td>29</td></td></tr><tr><td>tog</td><td>2009-01-07 14:29:31</td><td>29</td></td></tr><tr><td>efe</td><td>2009-01-06 16:40:19</td><td>29</td></td></tr><tr><td>Yharaskrik</td><td>2009-01-06 08:27:46</td><td>29</td></td></tr></tr>
+</table>
+
+<p>
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>king of the hill score</th><th>user</th><th>date</th></tr>
+
+<tr><td>29</td><td>Yharaskrik</td><td>2009-01-06 08:55:55</td></td></tr><tr><td>30</td><td>efe</td><td>2009-01-06 07:06:47</td></td></tr><tr><td>31</td><td>efe</td><td>2009-01-06 06:29:38</td></td></tr><tr><td>32</td><td>ShardFire</td><td>2008-12-31 14:45:31</td></td></tr><tr><td>36</td><td>gfoot</td><td>2008-12-31 14:39:29</td></td></tr><tr><td>39</td><td>adum</td><td>2008-12-31 14:16:28</td></td></tr><tr><td>42</td><td>indUbio</td><td>2008-12-31 13:57:32</td></td></tr><tr><td>45</td><td>indUbio</td><td>2008-12-31 13:55:00</td></td></tr><tr><td>48</td><td>indUbio</td><td>2008-12-31 13:45:54</td></td></tr><tr><td>78</td><td>adum</td><td>2008-12-31 13:33:20</td></td></tr>
+</table>
+
+</body>
+</html>

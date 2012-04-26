@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Filtration Residue' by teebee</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>MalNivek</td><td>2012-04-24 09:00:12</td></td></tr><tr><td>magnus</td><td>2012-04-19 00:42:25</td></td></tr><tr><td>wischi</td><td>2012-04-17 14:44:55</td></td></tr><tr><td>honze</td><td>2012-03-19 06:07:21</td></td></tr><tr><td>doschde</td><td>2012-03-19 01:59:36</td></td></tr><tr><td>LoneWolf219</td><td>2012-02-18 09:46:46</td></td></tr><tr><td>cmur2</td><td>2012-02-12 02:57:57</td></td></tr><tr><td>marta_mueller</td><td>2012-02-11 15:06:05</td></td></tr><tr><td>Samora</td><td>2012-02-09 09:02:04</td></td></tr><tr><td>ctzsm</td><td>2012-02-06 08:22:07</td></td></tr><tr><td>MatRush</td><td>2012-02-03 23:11:19</td></td></tr><tr><td>Enodo</td><td>2012-02-01 13:04:32</td></td></tr><tr><td>swgr</td><td>2011-12-29 08:24:34</td></td></tr><tr><td>licstar</td><td>2011-12-15 08:54:30</td></td></tr><tr><td>magicdlf</td><td>2011-12-15 08:22:43</td></td></tr><tr><td>Dumbear</td><td>2011-12-14 00:50:05</td></td></tr><tr><td>harvestsnow</td><td>2011-12-01 15:21:29</td></td></tr><tr><td>dayepa</td><td>2011-11-09 21:59:07</td></td></tr><tr><td>kaste</td><td>2011-10-24 13:12:09</td></td></tr><tr><td>lorem_ipsum</td><td>2011-10-24 12:27:23</td></td></tr><tr><td>cashmoney</td><td>2011-10-05 04:34:16</td></td></tr><tr><td>chris2</td><td>2011-09-26 05:04:16</td></td></tr><tr><td>zafarrancho</td><td>2011-09-25 14:41:41</td></td></tr><tr><td>SnakeSnake</td><td>2011-09-22 15:41:49</td></td></tr><tr><td>Atermors</td><td>2011-09-10 14:16:06</td></td></tr><tr><td>bsguedes</td><td>2011-09-01 14:07:15</td></td></tr><tr><td>DL</td><td>2011-08-23 02:30:21</td></td></tr><tr><td>rokurou</td><td>2011-08-11 14:19:03</td></td></tr><tr><td>tog</td><td>2011-08-11 08:22:04</td></td></tr><tr><td>dangermouse</td><td>2011-08-05 05:42:03</td></td></tr><tr><td>JanB</td><td>2011-08-02 14:03:27</td></td></tr><tr><td>bellerophon</td><td>2011-07-22 10:40:48</td></td></tr><tr><td>CodeX</td><td>2011-07-20 01:50:33</td></td></tr><tr><td>Naprecks</td><td>2011-07-10 04:40:46</td></td></tr><tr><td>pms</td><td>2011-06-22 04:20:15</td></td></tr><tr><td>marv99</td><td>2011-06-05 03:27:18</td></td></tr><tr><td>sergejs</td><td>2011-04-13 04:58:11</td></td></tr><tr><td>martinsm</td><td>2011-04-08 02:07:49</td></td></tr><tr><td>Noob23</td><td>2011-03-11 08:21:13</td></td></tr><tr><td>...</td><td>2011-02-23 05:14:15</td></td></tr><tr><td>dschp</td><td>2011-02-04 03:19:52</td></td></tr><tr><td>portal</td><td>2011-01-31 13:59:13</td></td></tr><tr><td>arthur</td><td>2011-01-28 01:25:34</td></td></tr><tr><td>ShadowWidow</td><td>2011-01-25 10:37:10</td></td></tr><tr><td>cutter</td><td>2011-01-09 13:44:01</td></td></tr><tr><td>elnn</td><td>2011-01-04 01:55:55</td></td></tr><tr><td>Rat62</td><td>2010-12-20 12:23:05</td></td></tr><tr><td>darkcipher</td><td>2010-12-14 20:37:16</td></td></tr><tr><td>cLiEbiG</td><td>2010-12-09 23:54:16</td></td></tr><tr><td>MagneticMonopole</td><td>2010-12-06 23:57:15</td></td></tr><tr><td>marvin_t_martian</td><td>2010-11-29 15:37:48</td></td></tr><tr><td>alzi2k</td><td>2010-11-29 15:35:38</td></td></tr><tr><td>the hellridden Baron</td><td>2010-11-13 18:31:33</td></td></tr><tr><td>Tron</td><td>2010-11-04 06:13:52</td></td></tr><tr><td>MyNameIsAlreadyTaken</td><td>2010-10-29 10:13:24</td></td></tr><tr><td>go.to.hell</td><td>2010-10-28 06:46:39</td></td></tr><tr><td>HugStuart</td><td>2010-10-26 05:16:36</td></td></tr><tr><td>Mütze</td><td>2010-10-24 04:22:51</td></td></tr><tr><td>Adriano</td><td>2010-10-23 13:16:32</td></td></tr><tr><td>UnTaran</td><td>2010-10-22 14:08:09</td></td></tr><tr><td>stompmann</td><td>2010-10-15 02:10:41</td></td></tr><tr><td>S0rc</td><td>2010-10-13 13:54:17</td></td></tr><tr><td>skyraintmp</td><td>2010-09-30 08:26:59</td></td></tr><tr><td>miroe</td><td>2010-09-13 14:27:23</td></td></tr><tr><td>watashi</td><td>2010-09-13 07:10:14</td></td></tr><tr><td>smutley</td><td>2010-07-22 11:51:44</td></td></tr><tr><td>Breakun</td><td>2010-06-08 15:51:37</td></td></tr><tr><td>tehron</td><td>2010-06-03 06:19:28</td></td></tr><tr><td>dloser</td><td>2010-05-13 13:12:41</td></td></tr><tr><td>Arkondi</td><td>2010-05-07 04:44:23</td></td></tr><tr><td>Ironbird</td><td>2010-04-08 04:02:57</td></td></tr><tr><td>nuvak</td><td>2010-04-02 13:03:37</td></td></tr><tr><td>b0bA</td><td>2010-04-01 12:05:44</td></td></tr><tr><td>johng</td><td>2010-03-18 03:01:38</td></td></tr><tr><td>jonik555</td><td>2010-03-17 11:16:45</td></td></tr><tr><td>RCStef</td><td>2010-03-16 09:07:58</td></td></tr><tr><td>TheHiveMind</td><td>2010-03-16 04:14:06</td></td></tr><tr><td>Icho</td><td>2010-03-16 02:18:39</td></td></tr><tr><td>Yharaskrik</td><td>2010-03-12 05:41:35</td></td></tr><tr><td>tails</td><td>2010-03-12 00:55:49</td></td></tr><tr><td>asdf_2</td><td>2010-02-20 07:30:58</td></td></tr><tr><td>Slack</td><td>2009-12-10 12:37:39</td></td></tr><tr><td>Skeeve</td><td>2009-11-29 11:11:39</td></td></tr><tr><td>horst</td><td>2009-11-10 04:20:06</td></td></tr><tr><td>Col. Dump</td><td>2009-11-03 14:47:28</td></td></tr><tr><td>Zeta</td><td>2009-10-04 01:53:44</td></td></tr><tr><td>teebee</td><td>2009-09-25 11:07:40</td></td></tr><tr><td>efe</td><td>2009-09-25 09:28:59</td></td></tr><tr><td>michuber</td><td>2009-09-25 07:48:38</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>

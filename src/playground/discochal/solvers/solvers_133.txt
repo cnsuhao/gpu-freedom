@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+Challenge</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+
+ <img src="/images/header.png" width="877" height="68" border="0" alt="" usemap="#header_Map">
+<map name="header_Map">
+<area shape="rect" alt="" coords="753,41,858,63" href="/forum/profile.php?mode=register">
+<area shape="rect" alt="" coords="753,14,858,36" href="/forum/login.php">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<map name="header_Map_li">
+<area shape="rect" alt="" coords="0,22,223,61" href="/">
+</map>
+<br>
+<h2>Challenge 'Say It' by bok</h2>
+
+<table border=0 cellspacing=0 cellpadding=4>
+<tr><th>user</th><th>last try</th>
+</tr>
+<tr valign=top>
+<tr><td>burnpanck</td><td>2012-03-16 12:21:12</td></td></tr><tr><td>licstar</td><td>2011-12-30 19:40:49</td></td></tr><tr><td>efe</td><td>2010-12-22 13:41:41</td></td></tr><tr><td>Arkondi</td><td>2010-03-28 02:15:40</td></td></tr><tr><td>kalkofe3</td><td>2009-04-03 07:35:09</td></td></tr><tr><td>bok</td><td>2008-07-20 11:19:59</td></td></tr></tr>
+</table>
+
+
+</body>
+</html>
