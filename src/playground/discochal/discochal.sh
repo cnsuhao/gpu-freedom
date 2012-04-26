@@ -19,7 +19,7 @@ then
 	./removeif0.sh "user_$1.txt"
 	if [ -f "user_$1.txt" ]
 	then
-		cat "solvers/solvers_$i.txt" | grep "<h2>Challenge" > "chal_$1.txt"
+		cat "solvers/solvers_$i.txt" | grep "<h2>Challenge" | sed 's/<h2>//' | sed 's/<\/h2>//' > "chal_$1.txt"
 		cat "chal_$1.txt" >> "users/$1.txt"
 	fi
 fi
@@ -33,6 +33,7 @@ cat "users/$1.txt"
 # updateusers.sh needs to set this parameter
 if [ "$2" != "nowatchupdate"  ] 
 then
+        ./removeuser.sh $1 "nooutput" # to avoid adding it twice
 	echo "$1" >> watched.cfg
 fi
 
