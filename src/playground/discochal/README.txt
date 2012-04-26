@@ -10,12 +10,12 @@ It works in Cygwin under Windows and should work on any Linux flavour with bash 
 
 You should first make all scripts executable with 
 chmod 755 *.sh
-then update the "database" with ./updatechals.sh . This initial step can take up to 5 hours! Finally create a user file with your username with ./discochal.sh yourusername
+then update the "database" with ./updatechals.sh . This initial step can take up to 5 hours and is optional if you can live with the dataset shipped with this package (updated 26.4.2012)! Finally create a user file with your username with ./discochal.sh yourusername
 
 The list of commands you can use is:
 
 ./updatechals.sh
-Updates the solver lists for each challenge by downloading them from hacker.org, it can take up to 5 hours to do this. 
+Updates the solver lists for each challenge by downloading them from hacker.org, it can take up to 5 hours to do this. This package already contains data updated on 26.4.2012, so you might perform this step only if you downloaded this package a long tiem after this date.
 
 ./updatesinglechal.sh 303
 Updates the solvers of a single challenge id.
@@ -36,6 +36,9 @@ Retrieves all users who solved the challenge "Anybody Out There" which are liste
 
 ./watched.sh
 Shows all users you can currently analyze
+
+./solvedby.sh dangermouse
+Returns challenges solved by the user dangermouse
 
 ./removeuser.sh Tilka
 Removes a user from watched.cfg previously added with discochal.sh
