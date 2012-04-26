@@ -25,7 +25,9 @@ then
 fi
 done
 
-wc -l "users/$1.txt" >> "users/$1.txt"
+solved=$(wc -l "users/$1.txt" | awk '{print $1}')
+let "solved-=1";
+echo "$solved challenges solved by $1" >> "users/$1.txt"
 cat "users/$1.txt"
 
 echo "$1" >> watched.cfg
