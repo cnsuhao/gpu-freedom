@@ -4,10 +4,11 @@ if [ -z "$1" ]; then
   echo "output will be stored on username.txt, containing the challenges the user solved"  
   exit 0
 fi
-  
+
+source config.ini 
 rm "users/$1.txt" &> /dev/null
 echo "Challenges solved by $1" > "users/$1.txt"
-for i in {1..303}
+for (( i=1; i<=$MAX_CHALLS; i++ ))
 do
 if [ -f "solvers/solvers_$i.txt" ]
 then
