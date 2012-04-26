@@ -40,6 +40,9 @@ Shows all users you can currently analyze
 ./removeuser.sh Tilka
 Removes a user from watched.cfg previously added with discochal.sh
 
+./updateusers.sh
+Updates all users. It is good to launch this script when you already have users in your watchlist, after you did an update of the solvers with ./updatechals.sh
+
 ./cleanup.sh
 Cleans up the entire database and the users. You then need to rerun updatechals.sh
 

@@ -30,7 +30,11 @@ let "solved-=1";
 echo "$solved challenges solved by $1" >> "users/$1.txt"
 cat "users/$1.txt"
 
-echo "$1" >> watched.cfg
+# updateusers.sh needs to set this parameter
+if [ "$2" != "nowatchupdate"  ] 
+then
+	echo "$1" >> watched.cfg
+fi
 
 rm "user_$1.txt" &> /dev/null
 rm "chal_$1.txt" &> /dev/null
