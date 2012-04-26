@@ -1,3 +1,6 @@
+Discochal script set
+--------------------
+
 This set of simple bash scripts is intended for the www.hacker.org homepage and might be useful if:
 - you want to find out which challenges were solved by your competitors, but not by yourself
 - you want to know who solved a particular challenge out of your watchlist
@@ -7,12 +10,15 @@ It works in Cygwin under Windows and should work on any Linux flavour with bash 
 
 You should first make all scripts executable with 
 chmod 755 *.sh
-then update the "database" with ./updatechals.sh . This is an optional step which can take up to 5 hours, you might want to work with the existing data updated on 25.4.2012. Finally create a user file with your username with ./discochal.sh yourusername
+then update the "database" with ./updatechals.sh . This initial step can take up to 5 hours! Finally create a user file with your username with ./discochal.sh yourusername
 
 The list of commands you can use is:
 
 ./updatechals.sh
-Updates the solver lists for each challenge by downloading them from hacker.org, it can take up to 5 hours to do this. To start with, you can work with the already downloaded data of 25.4.2012 if you like.
+Updates the solver lists for each challenge by downloading them from hacker.org, it can take up to 5 hours to do this. 
+
+./updatesinglechal.sh 303
+Updates the solvers of a single challenge id.
 
 ./discochal.sh Tilka
 Creates a complete list of challenges solved by user Tilka. It takes about one minute to execute. After you launched this command, you can use diffchall.sh with the user Tilka  and the user will appear in whosolved.sh as well, as it will automatically be added to watched.cfg.
