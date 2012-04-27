@@ -1,4 +1,5 @@
 # this script simply downloads solvers for all levels
+mkdir solvers &>/dev/null
 source config.ini
  
 for (( i=1; i<=$MAX_CHALLS; i++ ))

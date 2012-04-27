@@ -5,7 +5,9 @@ if [ -z "$1" ]; then
   exit 0
 fi
 
+
 source config.ini 
+mkdir users &> /dev/null
 rm "users/$1.txt" &> /dev/null
 echo "Challenges solved by $1" > "users/$1.txt"
 for (( i=1; i<=$MAX_CHALLS; i++ ))
