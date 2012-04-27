@@ -13,6 +13,7 @@ if ! is_integer $1; then
   exit 0
 fi
 echo "Updating solvers for challenge $1"
+mkdir solvers &>/dev/null
 wget -O "solvers/solvers_$1.txt" "http://www.hacker.org/challenge/solvers.php?id=$1"
 echo "Done :-)"
 
