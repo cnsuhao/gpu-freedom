@@ -1,3 +1,4 @@
+rm -rf gpu_tarball.tar.gz
 cd gpu_freedom
 git pull
 cd ..
