@@ -17,7 +17,8 @@ begin
   if i > 0 then
   begin
     Result := Copy(S, 1, i - 1);
-    Delete(S, 1, i);
+    Delete(S, 1, i-1);
+    Delete(S, 1, length(Separator));
   end
   else
   begin
@@ -35,7 +36,8 @@ begin
   if i > 0 then
   begin
     Result := Copy(S, 1, i - 1);
-    Delete(S, 1, i);
+    Delete(S, 1, i-1);
+    Delete(S, 1, length(Separator));
   end
   else
   begin
@@ -45,4 +47,4 @@ begin
 end;
 
 end.
-
+
