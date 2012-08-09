@@ -90,6 +90,7 @@ Filedistributor:
 
 Ability to distribute binary files based on architecture 
 
+Another idea: use SymmetricDS at http://sourceforge.net/projects/symmetricds to synchronize GPU II servers
 
 GPU II superserver
 ------------------
