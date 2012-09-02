@@ -146,8 +146,8 @@ begin
     WriteStrToStream(HTTP.Document, encodeurl(data));
     HTTP.MimeType := 'application/x-www-form-urlencoded';
     Result := HTTP.HTTPMethod('POST', URL);
-    //if Result then
-    //  HTTP.Document.SaveToFile('http-response.txt');
+    if Result then
+      HTTP.Document.SaveToFile('http-response.txt');
   finally
     HTTP.Free;
   end;
