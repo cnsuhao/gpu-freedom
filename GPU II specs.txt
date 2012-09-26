@@ -1,6 +1,10 @@
 GPU II
 ------
 
+GPU II could be named CAScade if it would implement a complete distributable Computer Algebra System.
+A Shunting Yard parser could bring commands into GPU stack commands (postfix notation).
+Integration and differentation and complex algebra/matrix operations should be supported as well.
+
 GPU II Client
 -------------
 
@@ -90,7 +94,6 @@ Filedistributor:
 
 Ability to distribute binary files based on architecture 
 
-Another idea: use SymmetricDS at http://sourceforge.net/projects/symmetricds to synchronize GPU II servers
 
 GPU II superserver
 ------------------
