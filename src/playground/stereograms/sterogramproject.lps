@@ -15,13 +15,14 @@
         <Filename Value="stereogramform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmStereogram"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
+        <TopLine Value="33"/>
+        <CursorPos X="42" Y="53"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -30,11 +31,15 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="2" HistoryIndex="1">
       <Position1>
         <Filename Value="stereogramform.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
       </Position1>
+      <Position2>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="48" Column="3" TopLine="23"/>
+      </Position2>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

@@ -25,8 +25,10 @@ type
     lblMonitorWidth: TLabel;
     lblPaperDistance: TLabel;
     lblEyeDistance: TLabel;
+    OpenDialog: TOpenDialog;
     zimg: TImage;
     stereoimg: TImage;
+    procedure btnLoadImageClick(Sender: TObject);
   private
     { private declarations }
   public
@@ -39,6 +41,22 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TfrmStereogram }
+
+procedure TfrmStereogram.btnLoadImageClick(Sender: TObject);
+begin
+    openDialog := TOpenDialog.Create(self);
+    openDialog.InitialDir := GetCurrentDir;
+    openDialog.Options := [ofFileMustExist];
+    openDialog.Filter :=
+      'All images|*.png;*.bmp;*.gif;*.jpg';
+    openDialog.FilterIndex := 2;
+    if openDialog.Execute
+    then ShowMessage('File : '+openDialog.FileName)
+    else ShowMessage('Open file was cancelled');
+    openDialog.Free;
+end;
 
 end.
 

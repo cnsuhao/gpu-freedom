@@ -1,7 +1,7 @@
 object frmStereogram: TfrmStereogram
-  Left = 120
+  Left = 257
   Height = 556
-  Top = 186
+  Top = 227
   Width = 1607
   Caption = 'Stereograms (based on Oliver Lau''s code)'
   ClientHeight = 556
@@ -12,6 +12,7 @@ object frmStereogram: TfrmStereogram
     Height = 480
     Top = 24
     Width = 640
+    AutoSize = True
   end
   object edtEyeDistance: TEdit
     Left = 176
@@ -95,6 +96,7 @@ object frmStereogram: TfrmStereogram
     Top = 273
     Width = 155
     Caption = 'Load Source Image'
+    OnClick = btnLoadImageClick
     TabOrder = 5
   end
   object btnGenerateStereogram: TButton
@@ -110,5 +112,10 @@ object frmStereogram: TfrmStereogram
     Height = 480
     Top = 24
     Width = 640
+    AutoSize = True
+  end
+  object OpenDialog: TOpenDialog
+    left = 62
+    top = 201
   end
 end
