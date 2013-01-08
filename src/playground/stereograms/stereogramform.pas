@@ -53,8 +53,12 @@ begin
       'All images|*.png;*.bmp;*.gif;*.jpg';
     openDialog.FilterIndex := 2;
     if openDialog.Execute
-    then ShowMessage('File : '+openDialog.FileName)
-    else ShowMessage('Open file was cancelled');
+    then
+    begin
+        zimg.Picture.LoadFromFile(openDialog.FileName);
+        stereoimg.Picture.LoadFromFile(openDialog.FileName);
+    end;
+
     openDialog.Free;
 end;
 

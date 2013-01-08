@@ -1,7 +1,7 @@
 object frmStereogram: TfrmStereogram
-  Left = 257
+  Left = 359
   Height = 556
-  Top = 227
+  Top = 199
   Width = 1607
   Caption = 'Stereograms (based on Oliver Lau''s code)'
   ClientHeight = 556
@@ -20,6 +20,7 @@ object frmStereogram: TfrmStereogram
     Top = 23
     Width = 80
     TabOrder = 0
+    Text = '6.5'
   end
   object lblEyeDistance: TLabel
     Left = 36
@@ -35,6 +36,7 @@ object frmStereogram: TfrmStereogram
     Top = 56
     Width = 80
     TabOrder = 1
+    Text = '20'
   end
   object lblPaperDistance: TLabel
     Left = 16
@@ -51,6 +53,7 @@ object frmStereogram: TfrmStereogram
     Width = 80
     ReadOnly = True
     TabOrder = 2
+    Text = '33.33'
   end
   object Label1: TLabel
     Left = 26
@@ -66,6 +69,7 @@ object frmStereogram: TfrmStereogram
     Top = 88
     Width = 80
     TabOrder = 3
+    Text = '1600'
   end
   object lblMonitorWidth: TLabel
     Left = 29
@@ -81,6 +85,7 @@ object frmStereogram: TfrmStereogram
     Top = 120
     Width = 80
     TabOrder = 4
+    Text = '48'
   end
   object MonitorLength: TLabel
     Left = 38
