@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls;
+  StdCtrls, stereogramsunit, configurations;
 
 type
 
@@ -58,6 +58,8 @@ begin
         zimg.Picture.LoadFromFile(openDialog.FileName);
         stereoimg.Picture.LoadFromFile(openDialog.FileName);
     end;
+
+    initConfiguration;
 
     openDialog.Free;
 end;

@@ -35,7 +35,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="4">
       <Unit0>
         <Filename Value="sterogramproject.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -49,6 +49,16 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="stereogramsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="stereogramsunit"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="configurations.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="configurations"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, stereogramform
+  Forms, stereogramform, stereogramsunit, configurations
   { you can add units after this };
 
 {$R *.res}
