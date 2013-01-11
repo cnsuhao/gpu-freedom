@@ -28,7 +28,8 @@ var
   ErrorMsg: String;
 begin
 
-
+  WriteLn('Parliament simulation finished');
+  Readln;
   Terminate;
 end;
 

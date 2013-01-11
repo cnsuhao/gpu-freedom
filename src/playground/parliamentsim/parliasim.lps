@@ -11,8 +11,8 @@
         <UnitName Value="parliasim"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="3" Y="31"/>
+        <TopLine Value="19"/>
+        <CursorPos X="45" Y="31"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -20,10 +20,11 @@
         <Filename Value="parliamentstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentstructure"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="25" Y="1"/>
+        <TopLine Value="15"/>
+        <CursorPos X="26" Y="27"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -31,6 +32,19 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="11" Column="23" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="21" Column="5" TopLine="10"/>
+      </Position2>
+      <Position3>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="20" Column="22" TopLine="9"/>
+      </Position3>
+    </JumpHistory>
   </ProjectSession>
 </CONFIG>
