@@ -5,7 +5,7 @@ unit parliamentstructure;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, isaac;
 
 const MAX_DELEGATES = 300;
       MAX_PARTIES = 5;
@@ -16,7 +16,7 @@ type TDelegate = record
 end;
 
 type TDelegates = record
-    dels : Array[1..MAX_DELEGATES] of TDelegate;
+    delg : Array[1..MAX_DELEGATES] of TDelegate;
     size : Longint;
 end;
 
@@ -35,7 +35,40 @@ type TParliament = record
     parties : TParties;
 end;
 
+var rndgen     : TIsaac;
+    parliament : TParliament;
+
+function getRndminusOnetoOne : Extended;
+procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint);
+
 implementation
+
+function getRndminusOnetoOne : Extended;
+begin
+  Result := ( ( rndgen.Val/High(cardinal) )  * 2) - 1;
+end;
+
+procedure initDelegate(i : Longint);
+begin
+  parliament.delegates.delg[i].personalinterest := getRndminusOnetoOne;
+  parliament.delegates.delg[i].collectiveinterest := getRndminusOnetoOne;
+end;
+
+procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint);
+var i : Longint;
+begin
+ if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
+
+ parliament.delegates.size:=nbdelegates;
+ for i:=1 to nbdelegates do
+     begin
+        initDelegate(i);
+     end;
+
+end;
+
+initialization
+  rndgen := TIsaac.Create;
 
 end.
 
