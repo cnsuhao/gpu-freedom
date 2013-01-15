@@ -23,6 +23,10 @@ end;
 type TParty  = record
     members : Array[1..MAX_DELEGATES] of Longint; // index pointing to delegates
     size    : Longint;
+
+    centerx,
+    centery,
+    radius   : Extended;
 end;
 
 type TParties = record
@@ -39,7 +43,7 @@ var rndgen     : TIsaac;
     parliament : TParliament;
 
 function getRndminusOnetoOne : Extended;
-procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint);
+procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint; partyradius : Extended);
 
 implementation
 
@@ -54,7 +58,7 @@ begin
   parliament.delegates.delg[i].collectiveinterest := getRndminusOnetoOne;
 end;
 
-procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint);
+procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint; partyradius : Extended);
 var i : Longint;
 begin
  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
