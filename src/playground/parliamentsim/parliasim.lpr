@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp, parliamentstructure
+  Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput
   { you can add units after this };
 
 type
@@ -28,6 +28,7 @@ var
   ErrorMsg: String;
 begin
   initParliament(300,50,3,0.3);
+  printParliament;
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;

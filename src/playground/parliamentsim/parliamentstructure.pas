@@ -45,23 +45,10 @@ end;
 var rndgen     : TIsaac;
     parliament : TParliament;
 
-procedure logText(str : AnsiString);
 function getRndminusOnetoOne : Extended;
 procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint; partyradius : Extended);
-procedure printParliament;
 
 implementation
-
-
-procedure logText(str : AnsiString);
-begin
-
-end;
-
-procedure printParliament;
-begin
-
-end;
 
 function getRndminusOnetoOne : Extended;
 begin
@@ -91,7 +78,10 @@ begin
 end;
 
 procedure assignDelegatesWithPartyRadius(party : Longint);
+var x, y : Extended;
 begin
+   x := parliament.parties.par[party].centerx;
+   y := parliament.parties.par[party].centery;
 
 end;
 

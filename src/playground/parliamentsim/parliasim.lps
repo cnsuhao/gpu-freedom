@@ -4,28 +4,28 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="10"/>
-        <CursorPos X="27" Y="30"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="5"/>
+        <CursorPos X="68" Y="9"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="parliamentstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentstructure"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="34"/>
-        <CursorPos X="1" Y="58"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="43"/>
+        <CursorPos X="1" Y="53"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -35,7 +35,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="283"/>
         <CursorPos X="25" Y="23"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -45,11 +45,22 @@
         <CursorPos X="3" Y="91"/>
         <UsageCount Value="12"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="parliamentoutput.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="parliamentoutput"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="6"/>
+        <CursorPos X="1" Y="47"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit4>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="15" HistoryIndex="14">
+    <JumpHistory Count="22" HistoryIndex="21">
       <Position1>
         <Filename Value="parliamentstructure.pas"/>
         <Caret Line="11" Column="23" TopLine="1"/>
@@ -110,6 +121,34 @@
         <Filename Value="parliamentstructure.pas"/>
         <Caret Line="80" Column="57" TopLine="19"/>
       </Position15>
+      <Position16>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="77" Column="85" TopLine="50"/>
+      </Position16>
+      <Position17>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="74" Column="36" TopLine="52"/>
+      </Position17>
+      <Position18>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="79" Column="1" TopLine="56"/>
+      </Position18>
+      <Position19>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="82" Column="18" TopLine="62"/>
+      </Position19>
+      <Position20>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="85" Column="40" TopLine="63"/>
+      </Position20>
+      <Position21>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="119" Column="27" TopLine="97"/>
+      </Position21>
+      <Position22>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="120" Column="37" TopLine="97"/>
+      </Position22>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
