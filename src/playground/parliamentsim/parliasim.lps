@@ -9,23 +9,23 @@
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="10"/>
         <CursorPos X="27" Y="30"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="parliamentstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentstructure"/>
-        <EditorIndex Value="3"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="34"/>
-        <CursorPos X="98" Y="46"/>
-        <UsageCount Value="26"/>
+        <CursorPos X="1" Y="58"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -35,23 +35,21 @@
         <WindowIndex Value="0"/>
         <TopLine Value="283"/>
         <CursorPos X="25" Y="23"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\systemh.inc"/>
-        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
         <CursorPos X="3" Y="91"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit3>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="14" HistoryIndex="13">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="parliamentstructure.pas"/>
         <Caret Line="11" Column="23" TopLine="1"/>
@@ -74,40 +72,44 @@
       </Position5>
       <Position6>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="13" Column="56" TopLine="20"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position6>
       <Position7>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="48" Column="52" TopLine="13"/>
       </Position7>
       <Position8>
-        <Filename Value="..\..\client\lib\ext\misc\isaac.pas"/>
-        <Caret Line="23" Column="25" TopLine="337"/>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="38" Column="5" TopLine="4"/>
       </Position8>
       <Position9>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="48" Column="52" TopLine="13"/>
+        <Caret Line="41" Column="1" TopLine="13"/>
       </Position9>
       <Position10>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="38" Column="5" TopLine="4"/>
+        <Caret Line="57" Column="25" TopLine="14"/>
       </Position10>
       <Position11>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="41" Column="1" TopLine="13"/>
+        <Caret Line="40" Column="41" TopLine="16"/>
       </Position11>
       <Position12>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="57" Column="25" TopLine="14"/>
+        <Caret Line="54" Column="37" TopLine="29"/>
       </Position12>
       <Position13>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="40" Column="41" TopLine="16"/>
+        <Caret Line="100" Column="1" TopLine="66"/>
       </Position13>
       <Position14>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="54" Column="37" TopLine="29"/>
+        <Caret Line="82" Column="3" TopLine="66"/>
       </Position14>
+      <Position15>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="80" Column="57" TopLine="19"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
