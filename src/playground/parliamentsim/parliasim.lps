@@ -23,8 +23,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="15"/>
-        <CursorPos X="26" Y="27"/>
+        <TopLine Value="13"/>
+        <CursorPos X="38" Y="24"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -32,7 +32,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="parliamentstructure.pas"/>
         <Caret Line="11" Column="23" TopLine="1"/>
@@ -45,6 +45,10 @@
         <Filename Value="parliamentstructure.pas"/>
         <Caret Line="20" Column="22" TopLine="9"/>
       </Position3>
+      <Position4>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="35" Column="3" TopLine="3"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

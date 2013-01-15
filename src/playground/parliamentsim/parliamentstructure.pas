@@ -15,18 +15,23 @@ type TDelegate = record
     collectiveinterest : Extended; // values between -1..1
 end;
 
-type TDelegates = Array[1..MAX_DELEGATES] of TDelegate;
+type TDelegates = record
+    dels : Array[1..MAX_DELEGATES] of TDelegate;
+    size : Longint;
+end;
 
 type TParty  = record
-    members : TDelegates;
+    members : Array[1..MAX_DELEGATES] of Longint; // index pointing to delegates
     size    : Longint;
 end;
 
-type TParties = Array [1..MAX_PARTIES] of TParty;
+type TParties = record
+    par : Array [1..MAX_PARTIES] of TParty;
+    size : Longint;
+end;
 
 type TParliament = record
-    nbdelegates : Longint;
-    nbparties : Longint;
+    delegates   : TDelegates;
     parties : TParties;
 end;
 
