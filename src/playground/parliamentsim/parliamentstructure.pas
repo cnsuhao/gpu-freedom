@@ -13,8 +13,8 @@ const MAX_DELEGATES = 300;
       MAX_TRIES = 10000;
 
 type TDelegate = record
-    personalinterest,
-    collectiveinterest : Extended; // values between -1..1
+    personalinterestx,
+    collectiveinteresty : Extended; // values between -1..1
 
     party : Longint; // index to the party to which the delegate belongs
                      // -1 if INDIPENDENT
@@ -73,8 +73,8 @@ end;
 
 procedure initDelegate(i : Longint);
 begin
-  parliament.delegates.delg[i].personalinterest := getRndminusOnetoOne;
-  parliament.delegates.delg[i].collectiveinterest := getRndminusOnetoOne;
+  parliament.delegates.delg[i].personalinterestx := getRndminusOnetoOne;
+  parliament.delegates.delg[i].collectiveinteresty := getRndminusOnetoOne;
 
   parliament.delegates.delg[i].party := INDIPENDENT;
 end;
@@ -119,12 +119,28 @@ begin
   parliament.parties.par[i].size := 0;
 end;
 
-procedure assignDelegatesWithPartyRadius(party : Longint);
+procedure addDelegateToParty(d, party : Longint);
+begin
+  if parliament.delegates.delg[d].party<>INDIPENDENT then raise Exception.Create('Internal error: delegate was already assigned to a party!');
+  parliament.delegates.delg[d].party := party;
+
+  Inc(parliament.parties.par[party].size);
+end;
+
+procedure assignDelegatesToParty(party : Longint);
 var x, y : Extended;
+    i : Longint;
 begin
    x := parliament.parties.par[party].centerx;
    y := parliament.parties.par[party].centery;
 
+   for i:=1 to parliament.delegates.size do
+       begin
+          if distance(parliament.delegates.delg[i].personalinterestx,parliament.delegates.delg[i].collectiveinteresty,
+                      parliament.parties.par[party].centerx,
+                      parliament.parties.par[party].centery)<parliament.parties.par[party].radius then
+                                    addDelegateToParty(i, party);
+       end;
 end;
 
 procedure initParliament(nbdelegates, nbparties : Longint; partyradius : Extended);
@@ -140,19 +156,19 @@ begin
         initDelegate(i);
      end;
 
- // we define the parties and their radius
+ // we define the parties and their radius so that their surface is mutually exclusive
  for i:=1 to parliament.parties.size do
      begin
         initParty(i, partyradius);
      end;
 
- // we have two rounds to assign delegates to parties, first we use the setting partyradius
+ // we assign delegates to parties, first we use the setting partyradius
  for i:=1 to parliament.parties.size do
      begin
-        assignDelegatesWithPartyRadius(i);
+        assignDelegatesToParty(i);
      end;
 
- // to reach the proposed quota of indipendents, we take delegates and assign them to the party
+ // the remaining unassigned delegates are indipendent
 end;
 
 initialization

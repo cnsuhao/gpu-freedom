@@ -32,8 +32,8 @@ end;
 
 procedure printDelegate(i : Longint);
 begin
-  log(IntToStr(i)+';'+FloatToStr(parliament.delegates.delg[i].personalinterest)+';'+
-                      FloatToStr(parliament.delegates.delg[i].collectiveinterest)+';'+
+  log(IntToStr(i)+';'+FloatToStr(parliament.delegates.delg[i].personalinterestx)+';'+
+                      FloatToStr(parliament.delegates.delg[i].collectiveinteresty)+';'+
                       IntToStr(parliament.delegates.delg[i].party), 'parliament.txt');
 end;
 
