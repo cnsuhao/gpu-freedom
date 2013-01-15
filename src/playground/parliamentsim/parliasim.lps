@@ -9,10 +9,11 @@
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
-        <CursorPos X="72" Y="12"/>
+        <CursorPos X="28" Y="30"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -22,8 +23,8 @@
         <UnitName Value="parliamentstructure"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="125"/>
-        <CursorPos X="57" Y="146"/>
+        <TopLine Value="98"/>
+        <CursorPos X="43" Y="107"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -48,11 +49,10 @@
         <Filename Value="parliamentoutput.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentoutput"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="7"/>
-        <CursorPos X="67" Y="37"/>
+        <TopLine Value="20"/>
+        <CursorPos X="60" Y="27"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit4>

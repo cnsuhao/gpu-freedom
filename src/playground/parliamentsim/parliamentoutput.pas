@@ -42,7 +42,7 @@ procedure printParty(i : Longint);
 begin
   log(IntToStr(i)+';'+FloatToStr(parliament.parties.par[i].centerx)+';'+
                       FloatToStr(parliament.parties.par[i].centery)+';'+
-                      FloatToStr(parliament.parties.par[i].radius)+
+                      FloatToStr(parliament.parties.par[i].radius)+';'+
                       IntToStr(parliament.parties.par[i].size), 'parliament.txt');
 end;
 

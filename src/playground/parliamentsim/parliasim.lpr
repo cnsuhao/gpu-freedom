@@ -27,7 +27,7 @@ procedure TParliamentSim.DoRun;
 var
   ErrorMsg: String;
 begin
-  initParliament(200,3,0.5);
+  initParliament(300,2,0.55);
   printParliament;
   WriteLn('Parliament simulation finished');
   Readln;

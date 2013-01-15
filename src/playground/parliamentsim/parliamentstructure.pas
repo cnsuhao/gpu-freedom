@@ -88,7 +88,7 @@ begin
   for i:=1 to party-1 do
        begin
           if distance(x,y,parliament.parties.par[i].centerx,parliament.parties.par[i].centery)<
-                      parliament.parties.par[i].radius then
+                      2*parliament.parties.par[i].radius then
                         begin
                           Result := false;
                           Exit;
@@ -111,7 +111,13 @@ begin
    found := checkParty(x,y, i);
 
    Inc(count);
-   if count>MAX_TRIES then raise Exception.Create('Unable to allocate parties! Try to reduce their number or their size!');
+   if count>MAX_TRIES then
+               begin
+                 //raise Exception.Create('Unable to allocate parties! Try to reduce their number or their size!');
+                 WriteLn('Unable to allocate parties! Try to reduce their number or their size!');
+                 ReadLn;
+                 Halt;
+               end;
   until found;
   parliament.parties.par[i].centerx:= x;
   parliament.parties.par[i].centery:= y;
@@ -164,12 +170,11 @@ begin
      end;
 
  // we assign delegates to parties, first we use the setting partyradius
- {
  for i:=1 to parliament.parties.size do
      begin
         assignDelegatesToParty(i);
      end;
- }
+
  // the remaining unassigned delegates are indipendent
 end;
 
