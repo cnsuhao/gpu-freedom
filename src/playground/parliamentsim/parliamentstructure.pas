@@ -10,6 +10,7 @@ uses
 const MAX_DELEGATES = 300;
       MAX_PARTIES = 5;
       INDIPENDENT = -1;
+      MAX_TRIES = 10000;
 
 type TDelegate = record
     personalinterest,
@@ -40,19 +41,28 @@ end;
 type TParliament = record
     delegates   : TDelegates;
     parties : TParties;
+
+    indipendents : Longint; // number of delegates not covered by a party
 end;
 
 var rndgen     : TIsaac;
     parliament : TParliament;
 
 function getRndminusOnetoOne : Extended;
-procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint; partyradius : Extended);
+function distance(x,y,x2,y2 : Extended) : Extended;
+
+procedure initParliament(nbdelegates, nbparties : Longint; partyradius : Extended);
 
 implementation
 
 function getRndminusOnetoOne : Extended;
 begin
   Result := ( ( rndgen.Val/High(cardinal) )  * 2) - 1;
+end;
+
+function distance(x,y,x2,y2 : Extended) : Extended;
+begin
+  Result := Sqrt((x2-x)*(x2-x)+(y2-y)*(y2-y));
 end;
 
 // this garuantess a center with a complete circle
@@ -69,10 +79,42 @@ begin
   parliament.delegates.delg[i].party := INDIPENDENT;
 end;
 
-procedure initParty(i : Longint; partyradius : Extended);
+
+// this garuantees that there is no overlapping between parties
+function checkParty(x,y : Extended; party : Longint) : Boolean;
+var i : Longint;
 begin
-  parliament.parties.par[i].centerx:= getPartyCenter(partyradius);
-  parliament.parties.par[i].centery:= getPartyCenter(partyradius);
+  Result := true;
+  for i:=1 to party-1 do
+       begin
+          if distance(x,y,parliament.parties.par[i].centerx,parliament.parties.par[i].centery)<
+                      parliament.parties.par[i].radius then
+                        begin
+                          Result := false;
+                          Exit;
+                        end;
+       end;
+end;
+
+
+procedure initParty(i : Longint; partyradius : Extended);
+var x, y : Extended;
+    found : Boolean;
+    count : Longint;
+begin
+  parliament.parties.par[i].radius:= partyradius;
+
+  count := 0;
+  repeat
+   x := getPartyCenter(partyradius);
+   y := getPartyCenter(partyradius);
+   found := checkParty(x,y, i);
+
+   Inc(count);
+   if count>MAX_TRIES then raise Exception.Create('Unable to allocate parties! Try to reduce their number or their size!');
+  until found;
+  parliament.parties.par[i].centerx:= x;
+  parliament.parties.par[i].centery:= y;
 
   parliament.parties.par[i].size := 0;
 end;
@@ -85,7 +127,7 @@ begin
 
 end;
 
-procedure initParliament(nbdelegates, nbindipendents, nbparties : Longint; partyradius : Extended);
+procedure initParliament(nbdelegates, nbparties : Longint; partyradius : Extended);
 var i : Longint;
 begin
  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
