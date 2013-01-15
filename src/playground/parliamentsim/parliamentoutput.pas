@@ -34,13 +34,15 @@ procedure printDelegate(i : Longint);
 begin
   log(IntToStr(i)+';'+FloatToStr(parliament.delegates.delg[i].personalinterestx)+';'+
                       FloatToStr(parliament.delegates.delg[i].collectiveinteresty)+';'+
-                      IntToStr(parliament.delegates.delg[i].party), 'parliament.txt');
+                      IntToStr(parliament.delegates.delg[i].party)
+                      , 'parliament.txt');
 end;
 
 procedure printParty(i : Longint);
 begin
   log(IntToStr(i)+';'+FloatToStr(parliament.parties.par[i].centerx)+';'+
                       FloatToStr(parliament.parties.par[i].centery)+';'+
+                      FloatToStr(parliament.parties.par[i].radius)+
                       IntToStr(parliament.parties.par[i].size), 'parliament.txt');
 end;
 

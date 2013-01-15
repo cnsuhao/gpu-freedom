@@ -121,7 +121,8 @@ end;
 
 procedure addDelegateToParty(d, party : Longint);
 begin
-  if parliament.delegates.delg[d].party<>INDIPENDENT then raise Exception.Create('Internal error: delegate was already assigned to a party!');
+  if parliament.delegates.delg[d].party<>INDIPENDENT then raise Exception.Create('Internal error: delegate was already assigned to a party ('+
+                                                                                  IntToStr(d)+','+IntToStr(party)+','+IntToStr(parliament.delegates.delg[d].party)+')');
   parliament.delegates.delg[d].party := party;
 
   Inc(parliament.parties.par[party].size);
@@ -163,11 +164,12 @@ begin
      end;
 
  // we assign delegates to parties, first we use the setting partyradius
+ {
  for i:=1 to parliament.parties.size do
      begin
         assignDelegatesToParty(i);
      end;
-
+ }
  // the remaining unassigned delegates are indipendent
 end;
 
