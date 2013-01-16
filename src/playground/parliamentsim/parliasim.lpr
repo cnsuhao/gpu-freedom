@@ -22,15 +22,17 @@ type
   end;
 
 { TParliamentSim }
+var   par   : TParliament;
+      laws  : TLaws;
 
 procedure TParliamentSim.DoRun;
 var
   ErrorMsg: String;
-  par     : TParliament;
 begin
   initParliament(par, 300,2,0.55);
   printParliament(par);
-  simulateParliament(par);
+  initLaws(laws);
+  simulateParliament(par, laws);
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;

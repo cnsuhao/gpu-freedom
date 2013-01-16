@@ -11,6 +11,7 @@ const MAX_DELEGATES = 300;
       MAX_PARTIES = 5;
       INDIPENDENT = -1;
       MAX_TRIES = 10000;
+      MAX_LAWS = 3650;
 
 type TDelegate = record
     personalinterestx,
@@ -45,12 +46,29 @@ type TParliament = record
     indipendents : Longint; // number of delegates not covered by a party
 end;
 
+type TLaw = record
+    personalinterestx,
+    collectiveinteresty : Extended; // values between -1..1
+
+    yes, no  : Longint;
+    approved : Boolean;
+end;
+
+type TLaws = record
+      laws : Array [1..MAX_LAWS] of TLaw;
+      size : Longint;
+
+      approved : Longint;
+end;
+
+
 var rndgen     : TIsaac;
 
 function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
 procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
+procedure initLaws(var laws : TLaws);
 
 implementation
 
@@ -175,6 +193,11 @@ begin
      end;
 
  // the remaining unassigned delegates are indipendent
+end;
+
+procedure initLaws(var laws : TLaws);
+begin
+ laws.size := 3000;
 end;
 
 initialization
