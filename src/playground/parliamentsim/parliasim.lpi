@@ -32,7 +32,7 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -48,6 +48,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentoutput"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="simulation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="simulation"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput
+  Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput, simulation
   { you can add units after this };
 
 type
@@ -26,9 +26,11 @@ type
 procedure TParliamentSim.DoRun;
 var
   ErrorMsg: String;
+  par     : TParliament;
 begin
-  initParliament(300,2,0.55);
-  printParliament;
+  initParliament(par, 300,2,0.55);
+  printParliament(par);
+  simulateParliament(par);
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;

@@ -46,12 +46,11 @@ type TParliament = record
 end;
 
 var rndgen     : TIsaac;
-    parliament : TParliament;
 
 function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
-procedure initParliament(nbdelegates, nbparties : Longint; partyradius : Extended);
+procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
 
 implementation
 
@@ -71,7 +70,7 @@ begin
   Result := ( ( rndgen.Val/High(cardinal) )  * (2-2*partyradius)  ) - 1 + partyradius;
 end;
 
-procedure initDelegate(i : Longint);
+procedure initDelegate(var parliament : TParliament; i : Longint);
 begin
   parliament.delegates.delg[i].personalinterestx := getRndminusOnetoOne;
   parliament.delegates.delg[i].collectiveinteresty := getRndminusOnetoOne;
@@ -81,7 +80,7 @@ end;
 
 
 // this garuantees that there is no overlapping between parties
-function checkParty(x,y : Extended; party : Longint) : Boolean;
+function checkParty(var parliament : TParliament; x,y : Extended; party : Longint) : Boolean;
 var i : Longint;
 begin
   Result := true;
@@ -97,7 +96,7 @@ begin
 end;
 
 
-procedure initParty(i : Longint; partyradius : Extended);
+procedure initParty(var parliament : TParliament; i : Longint; partyradius : Extended);
 var x, y : Extended;
     found : Boolean;
     count : Longint;
@@ -108,7 +107,7 @@ begin
   repeat
    x := getPartyCenter(partyradius);
    y := getPartyCenter(partyradius);
-   found := checkParty(x,y, i);
+   found := checkParty(parliament, x,y, i);
 
    Inc(count);
    if count>MAX_TRIES then
@@ -125,7 +124,7 @@ begin
   parliament.parties.par[i].size := 0;
 end;
 
-procedure addDelegateToParty(d, party : Longint);
+procedure addDelegateToParty(var parliament : TParliament; d, party : Longint);
 begin
   if parliament.delegates.delg[d].party<>INDIPENDENT then raise Exception.Create('Internal error: delegate was already assigned to a party ('+
                                                                                   IntToStr(d)+','+IntToStr(party)+','+IntToStr(parliament.delegates.delg[d].party)+')');
@@ -134,7 +133,7 @@ begin
   Inc(parliament.parties.par[party].size);
 end;
 
-procedure assignDelegatesToParty(party : Longint);
+procedure assignDelegatesToParty(var parliament : TParliament; party : Longint);
 var x, y : Extended;
     i : Longint;
 begin
@@ -146,11 +145,11 @@ begin
           if distance(parliament.delegates.delg[i].personalinterestx,parliament.delegates.delg[i].collectiveinteresty,
                       parliament.parties.par[party].centerx,
                       parliament.parties.par[party].centery)<parliament.parties.par[party].radius then
-                                    addDelegateToParty(i, party);
+                                    addDelegateToParty(parliament, i, party);
        end;
 end;
 
-procedure initParliament(nbdelegates, nbparties : Longint; partyradius : Extended);
+procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
 var i : Longint;
 begin
  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
@@ -160,19 +159,19 @@ begin
 
  for i:=1 to nbdelegates do
      begin
-        initDelegate(i);
+        initDelegate(parliament, i);
      end;
 
  // we define the parties and their radius so that their surface is mutually exclusive
  for i:=1 to parliament.parties.size do
      begin
-        initParty(i, partyradius);
+        initParty(parliament, i, partyradius);
      end;
 
  // we assign delegates to parties, first we use the setting partyradius
  for i:=1 to parliament.parties.size do
      begin
-        assignDelegatesToParty(i);
+        assignDelegatesToParty(parliament, i);
      end;
 
  // the remaining unassigned delegates are indipendent

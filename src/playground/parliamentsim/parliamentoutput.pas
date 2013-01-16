@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, parliamentstructure;
 
 procedure log(str, filename : AnsiString);
-procedure printParliament;
+procedure printParliament(var parliament : TParliament);
 
 implementation
 
@@ -30,33 +30,33 @@ begin
 end;
 
 
-procedure printDelegate(i : Longint);
+procedure printDelegate(var parliament : TParliament; i : Longint);
 begin
   log(IntToStr(i)+';'+FloatToStr(parliament.delegates.delg[i].personalinterestx)+';'+
                       FloatToStr(parliament.delegates.delg[i].collectiveinteresty)+';'+
                       IntToStr(parliament.delegates.delg[i].party)
-                      , 'parliament.txt');
+                      , 'delegates.csv');
 end;
 
-procedure printParty(i : Longint);
+procedure printParty(var parliament : TParliament; i : Longint);
 begin
   log(IntToStr(i)+';'+FloatToStr(parliament.parties.par[i].centerx)+';'+
                       FloatToStr(parliament.parties.par[i].centery)+';'+
                       FloatToStr(parliament.parties.par[i].radius)+';'+
-                      IntToStr(parliament.parties.par[i].size), 'parliament.txt');
+                      IntToStr(parliament.parties.par[i].size), 'parties.csv');
 end;
 
-procedure printParliament;
+procedure printParliament(var parliament : TParliament);
 var i :  Longint;
 begin
   log('Delegates:', 'parliament.txt');
   for i:=1 to parliament.delegates.size do
-      printDelegate(i);
+      printDelegate(parliament, i);
 
   log('', 'parliament.txt');
   log('Parties:', 'parliament.txt');
   for i:=1 to parliament.parties.size do
-      printParty(i);
+      printParty(parliament, i);
 end;
 
 
