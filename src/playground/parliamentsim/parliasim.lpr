@@ -10,6 +10,8 @@ uses
   statistics
   { you can add units after this };
 
+const ROUNDS = 100;
+
 type
 
   { TParliamentSim }
@@ -28,17 +30,33 @@ var   par      : TParliament;
       simstats : TSimStats;
 
 
-procedure TParliamentSim.DoRun;
-var
-  ErrorMsg: String;
+procedure simulateLegislature(round : Longint);
+var count : Longint;
 begin
-  initParliament(par, 300,2,0.55);
+  count := 0;
+  while (not initParliament(par, 300,2,0.5))  do
+        begin
+          Inc(count);
+          if count>1000 then raise Exception.Create('Unable to start legislature!');
+        end;
+  WriteLn('Parliament constituted after '+IntToStr(count)+' tries...');
+
   printParliament(par);
   initLaws(laws, 3000);
   initSimStats(simstats, 1000);
   simulateParliament(par, laws);
-  collectStatistics(par, laws, simstats, 1);
-  printStatistic(simstats, 1);
+  collectStatistics(par, laws, simstats, round);
+  printStatistic(simstats, round);
+end;
+
+procedure TParliamentSim.DoRun;
+var
+  ErrorMsg: String;
+  var i : Longint;
+begin
+  for i:=1 to ROUNDS do
+    simulateLegislature(i);
+
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;

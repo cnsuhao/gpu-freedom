@@ -82,7 +82,7 @@ var rndgen     : TIsaac;
 function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
-procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
+function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
 procedure initLaws(var laws : TLaws; size : Longint);
 procedure initSimStats(var s : TSimStats; size : Longint);
 
@@ -130,7 +130,7 @@ begin
 end;
 
 
-procedure initParty(var parliament : TParliament; i : Longint; partyradius : Extended);
+function initParty(var parliament : TParliament; i : Longint; partyradius : Extended) : Boolean;
 var x, y : Extended;
     found : Boolean;
     count : Longint;
@@ -146,16 +146,17 @@ begin
    Inc(count);
    if count>MAX_TRIES then
                begin
-                 //raise Exception.Create('Unable to allocate parties! Try to reduce their number or their size!');
-                 WriteLn('Unable to allocate parties! Try to reduce their number or their size!');
-                 ReadLn;
-                 Halt;
+                 //WriteLn('Unable to allocate parties! Try to reduce their number or their size!');
+                 Result := false;
+                 Exit;
                end;
   until found;
   parliament.parties.par[i].centerx:= x;
   parliament.parties.par[i].centery:= y;
 
   parliament.parties.par[i].size := 0;
+
+  Result := true;
 end;
 
 procedure addDelegateToParty(var parliament : TParliament; d, party : Longint);
@@ -183,7 +184,7 @@ begin
        end;
 end;
 
-procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
+function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
 var i : Longint;
 begin
  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
@@ -199,7 +200,7 @@ begin
  // we define the parties and their radius so that their surface is mutually exclusive
  for i:=1 to parliament.parties.size do
      begin
-        initParty(parliament, i, partyradius);
+        if not initParty(parliament, i, partyradius) then Exit;
      end;
 
  // we assign delegates to parties, first we use the setting partyradius
@@ -216,7 +217,7 @@ begin
                     Inc(parliament.indipendents);
      end;
 
-
+ Result := true;
 end;
 
 procedure initLaws(var laws : TLaws; size : Longint);

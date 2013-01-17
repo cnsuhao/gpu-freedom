@@ -50,10 +50,11 @@ end;
 procedure printParliament(var parliament : TParliament);
 var i :  Longint;
 begin
+  {
   log('Delegates:', 'parliament.txt');
   for i:=1 to parliament.delegates.size do
       printDelegate(parliament, i);
-
+  }
   log('', 'parliament.txt');
   log('Parties:', 'parliament.txt');
   for i:=1 to parliament.parties.size do
