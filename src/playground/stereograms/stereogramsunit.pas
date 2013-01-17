@@ -29,6 +29,7 @@ begin
 
 end;
 
+// xDepthStep = mScaledDepthData.size().width() / mStereogram.width()
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
 var x,  xdo, xd, p, ph, s, left, right, l, Zorg  : Longint;
     E, ft, depx, Z : Extended;

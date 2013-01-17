@@ -68,10 +68,13 @@ procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
 var y : Longint;
     sameArr, pDepth : TDepthDataType;
 begin
-     for y:=1 to 1 do
+     for y:=0 to zimg.Height-1 do
          begin
            prepareDepthArray(zimg, sameArr, y);
+           makeSameArray(sameArr, pDepth, zimg.Width, 1);
          end;
+
+     ShowMessage('Stereogram generated');
 end;
 
 end.
