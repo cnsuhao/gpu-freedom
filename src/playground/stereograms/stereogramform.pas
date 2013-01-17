@@ -68,7 +68,9 @@ procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
 var y : Longint;
     sameArr, pDepth : TDepthDataType;
 begin
-     for y:=0 to zimg.Height-1 do
+    if FileExists('samearr.txt') then DeleteFile('samearr.txt');
+
+    for y:=0 to zimg.Height-1 do
          begin
            prepareDepthArray(zimg, sameArr, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
