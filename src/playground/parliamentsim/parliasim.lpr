@@ -6,7 +6,8 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput, simulation
+  Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput, simulation,
+  statistics
   { you can add units after this };
 
 type
@@ -22,8 +23,10 @@ type
   end;
 
 { TParliamentSim }
-var   par   : TParliament;
-      laws  : TLaws;
+var   par      : TParliament;
+      laws     : TLaws;
+      simstats : TSimStats;
+
 
 procedure TParliamentSim.DoRun;
 var
@@ -31,7 +34,8 @@ var
 begin
   initParliament(par, 300,2,0.55);
   printParliament(par);
-  initLaws(laws);
+  initLaws(laws, 3000);
+  initSimStats(simstats, 1000);
   simulateParliament(par, laws);
   WriteLn('Parliament simulation finished');
   Readln;

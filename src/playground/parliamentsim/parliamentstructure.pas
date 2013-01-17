@@ -12,6 +12,7 @@ const MAX_DELEGATES = 300;
       INDIPENDENT = -1;
       MAX_TRIES = 10000;
       MAX_LAWS = 3650;
+      MAX_LEGISLATURES = 3000;
 
 type TDelegate = record
     personalinterestx,
@@ -61,6 +62,20 @@ type TLaws = record
       approved : Longint;
 end;
 
+type TLegislatureStats = record
+    nbdelegates,
+    nbparties,
+    nbindipendents : Longint;
+
+    approvalrate,
+    totalbenefit : Extended;
+end;
+
+type TSimStats = record
+    legislatures : Array[1..MAX_LEGISLATURES] of TLegislatureStats;
+    size : Longint;
+end;
+
 
 var rndgen     : TIsaac;
 
@@ -68,7 +83,8 @@ function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
 procedure initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended);
-procedure initLaws(var laws : TLaws);
+procedure initLaws(var laws : TLaws; size : Longint);
+procedure initSimStats(var s : TSimStats; size : Longint);
 
 implementation
 
@@ -203,9 +219,16 @@ begin
 
 end;
 
-procedure initLaws(var laws : TLaws);
+procedure initLaws(var laws : TLaws; size : Longint);
 begin
- laws.size := 3000;
+ if size>MAX_LAWS then raise Exception.Create('Too many laws');
+ laws.size := size;
+end;
+
+procedure initSimStats(var s : TSimStats; size : Longint);
+begin
+ if size>MAX_LEGISLATURES then raise Exception.Create('Too many legislatures');
+ s.size := size;
 end;
 
 initialization
