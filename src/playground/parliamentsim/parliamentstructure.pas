@@ -193,6 +193,14 @@ begin
      end;
 
  // the remaining unassigned delegates are indipendent
+ parliament.indipendents:=0;
+ for i:=1 to nbdelegates do
+     begin
+        if parliament.delegates.delg[i].party=INDIPENDENT then
+                    Inc(parliament.indipendents);
+     end;
+
+
 end;
 
 procedure initLaws(var laws : TLaws);

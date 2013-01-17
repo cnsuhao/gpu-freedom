@@ -11,8 +11,8 @@
         <UnitName Value="parliasim"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="18" Y="34"/>
+        <TopLine Value="6"/>
+        <CursorPos X="26" Y="33"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -22,8 +22,8 @@
         <UnitName Value="parliamentstructure"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="40"/>
-        <CursorPos X="11" Y="58"/>
+        <TopLine Value="166"/>
+        <CursorPos X="36" Y="200"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -31,10 +31,11 @@
         <Filename Value="parliamentoutput.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentoutput"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="20"/>
-        <CursorPos X="30" Y="59"/>
+        <TopLine Value="19"/>
+        <CursorPos X="63" Y="62"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -42,11 +43,10 @@
         <Filename Value="simulation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="simulation"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="50"/>
-        <CursorPos X="22" Y="77"/>
+        <CursorPos X="79" Y="72"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -57,7 +57,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="283"/>
         <CursorPos X="25" Y="23"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -77,7 +77,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>

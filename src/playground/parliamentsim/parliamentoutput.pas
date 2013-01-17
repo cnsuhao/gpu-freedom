@@ -57,6 +57,9 @@ begin
   log('Parties:', 'parliament.txt');
   for i:=1 to parliament.parties.size do
       printParty(parliament, i);
+
+  WriteLn;
+  WriteLn('Indipendents: '+IntToStr(parliament.indipendents));
 end;
 
 
