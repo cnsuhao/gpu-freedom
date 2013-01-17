@@ -18,11 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="35"/>
-        <CursorPos X="42" Y="77"/>
+        <TopLine Value="37"/>
+        <CursorPos X="58" Y="75"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -31,10 +30,11 @@
         <Filename Value="stereogramsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="stereogramsunit"/>
-        <EditorIndex Value="2"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="8"/>
-        <CursorPos X="70" Y="32"/>
+        <TopLine Value="1"/>
+        <CursorPos X="56" Y="8"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -42,7 +42,7 @@
         <Filename Value="configurations.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="configurations"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="5"/>
@@ -52,12 +52,10 @@
       <Unit4>
         <Filename Value="D:\met\apps\lazarus\lcl\extctrls.pp"/>
         <UnitName Value="ExtCtrls"/>
-        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="31"/>
         <CursorPos X="3" Y="512"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="stereogramform.lfm"/>
@@ -71,7 +69,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="stereogramform.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -156,6 +154,26 @@
         <Filename Value="stereogramform.pas"/>
         <Caret Line="71" Column="30" TopLine="35"/>
       </Position21>
+      <Position22>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="18" Column="1" TopLine="3"/>
+      </Position22>
+      <Position23>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="115" Column="25" TopLine="79"/>
+      </Position23>
+      <Position24>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="18" Column="35" TopLine="1"/>
+      </Position24>
+      <Position25>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="123" Column="1" TopLine="79"/>
+      </Position25>
+      <Position26>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="115" Column="101" TopLine="95"/>
+      </Position26>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

@@ -5,26 +5,29 @@ unit stereogramsunit;
 interface
 
 uses
-  Classes, SysUtils, configurations, ExtCtrls;
+  Classes, SysUtils, configurations, ExtCtrls, Graphics;
 
 const MAX_WIDTH = 2048;
 
 
 type TDepthDataType = Array [0..MAX_WIDTH] of Longint;
+type TDepthAssigned = Array [0..MAX_WIDTH] of Boolean;
 
-procedure prepareDepthArray(var img : TImage; var pDepth : TDepthDataType; y : Longint);
+procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : Longint);
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
-
+procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
 
 implementation
 
-procedure prepareDepthArray(var img : TImage; var pDepth : TDepthDataType; y : Longint);
+var assigned : TDepthAssigned;
+
+procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : Longint);
 var x : Longint;
 begin
-  if img.Width>MAX_WIDTH then raise Exception.Create('Image width can not be larger than '+IntToStr(MAX_WIDTH));
-  for x:=0 to img.Width-1 do
+  if zimg.Width>MAX_WIDTH then raise Exception.Create('Image width can not be larger than '+IntToStr(MAX_WIDTH));
+  for x:=0 to zimg.Width-1 do
      begin
-        pDepth[x] := img.Picture.Bitmap.Canvas.Pixels[x,y] and 255;
+        pDepth[x] := zimg.Picture.Bitmap.Canvas.Pixels[x,y] and 255;
      end;
 
 end;
@@ -108,6 +111,29 @@ begin
 
 end;
 
+
+procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
+var x : Longint;
+    c : TColor;
+
+begin
+   // init assigned array
+   for x:=0 to stereoimg.Width-1 do assigned[x] := false;
+
+   c := clWhite;
+   for x:=0 to stereoimg.Width-1 do
+        begin
+           if assigned[x] then continue;
+
+           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := c;
+           //k:=sameArr[x];
+
+
+
+           if (c=clWhite) then c:=clBlack else c:=clWhite;
+        end;
+
+end;
 
 end.
 

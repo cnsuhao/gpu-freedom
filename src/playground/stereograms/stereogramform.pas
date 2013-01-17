@@ -72,6 +72,7 @@ begin
          begin
            prepareDepthArray(zimg, sameArr, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
+           colorImageLineBlackWhite(sameArr, stereoimg, y);
          end;
 
      ShowMessage('Stereogram generated');
