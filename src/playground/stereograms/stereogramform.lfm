@@ -1,7 +1,7 @@
 object frmStereogram: TfrmStereogram
-  Left = 510
+  Left = 715
   Height = 556
-  Top = 781
+  Top = 107
   Width = 1607
   Caption = 'Stereograms (based on Oliver Lau''s code)'
   ClientHeight = 556
@@ -104,20 +104,21 @@ object frmStereogram: TfrmStereogram
     OnClick = btnLoadImageClick
     TabOrder = 5
   end
-  object btnGenerateStereogram: TButton
-    Left = 53
-    Height = 25
-    Top = 312
-    Width = 155
-    Caption = 'Generate Stereogram'
-    TabOrder = 6
-  end
   object stereoimg: TImage
     Left = 952
     Height = 480
     Top = 24
     Width = 640
     AutoSize = True
+  end
+  object btnGenerateStereogram: TButton
+    Left = 53
+    Height = 25
+    Top = 312
+    Width = 155
+    Caption = 'Generate Stereogram...'
+    OnClick = btnGenerateStereogramClick
+    TabOrder = 6
   end
   object OpenDialog: TOpenDialog
     left = 62

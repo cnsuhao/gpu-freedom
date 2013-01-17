@@ -5,17 +5,29 @@ unit stereogramsunit;
 interface
 
 uses
-  Classes, SysUtils, configurations;
+  Classes, SysUtils, configurations, ExtCtrls;
 
 const MAX_WIDTH = 2048;
 
 
 type TDepthDataType = Array [0..MAX_WIDTH] of Longint;
 
+procedure prepareDepthArray(var img : TImage; var pDepth : TDepthDataType; y : Longint);
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
 
 
 implementation
+
+procedure prepareDepthArray(var img : TImage; var pDepth : TDepthDataType; y : Longint);
+var x : Longint;
+begin
+  if img.Width>MAX_WIDTH then raise Exception.Create('Image width can not be larger than '+IntToStr(MAX_WIDTH));
+  for x:=0 to img.Width-1 do
+     begin
+        pDepth[x] := img.Picture.Bitmap.Canvas.Pixels[x,y] and 255;
+     end;
+
+end;
 
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
 var x,  xdo, xd, p, ph, s, left, right, l, Zorg  : Longint;

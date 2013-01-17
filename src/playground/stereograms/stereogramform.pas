@@ -28,6 +28,7 @@ type
     OpenDialog: TOpenDialog;
     zimg: TImage;
     stereoimg: TImage;
+    procedure btnGenerateStereogramClick(Sender: TObject);
     procedure btnLoadImageClick(Sender: TObject);
   private
     { private declarations }
@@ -60,8 +61,17 @@ begin
     end;
 
     initConfiguration;
-
     openDialog.Free;
+end;
+
+procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
+var y : Longint;
+    sameArr, pDepth : TDepthDataType;
+begin
+     for y:=1 to 1 do
+         begin
+           prepareDepthArray(zimg, sameArr, y);
+         end;
 end;
 
 end.
