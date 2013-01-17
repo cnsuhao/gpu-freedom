@@ -38,7 +38,7 @@ begin
   initSimStats(simstats, 1000);
   simulateParliament(par, laws);
   collectStatistics(par, laws, simstats, 1);
-  printStatistics(simstats, 1);
+  printStatistic(simstats, 1);
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;

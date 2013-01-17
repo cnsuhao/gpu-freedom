@@ -28,8 +28,16 @@ function calculateTotalBenefit(var parliament : TParliament; var laws : TLaws; r
 var i, count       :  Longint;
     benefit        : Extended;
 begin
-  //for i:=1 to laws.size do
-  //  if laws.laws[i].approved;
+  count := 0;
+  benefit := 0;
+  for i:=1 to laws.size do
+    if laws.laws[i].approved then
+         begin
+           Inc(count);
+           benefit := benefit + laws.laws[i].collectiveinteresty;
+         end;
+
+  Result := benefit;
 end;
 
 procedure collectStatistics(var parliament : TParliament; var laws : TLaws; var stats : TSimStats; round : Longint);

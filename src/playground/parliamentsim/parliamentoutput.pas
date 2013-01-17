@@ -9,7 +9,7 @@ uses
 
 procedure log(str, filename : AnsiString);
 procedure printParliament(var parliament : TParliament);
-procedure printStatistics(var stats : TSimstats; round : Longint);
+procedure printStatistic(var stats : TSimstats; round : Longint);
 
 implementation
 
@@ -63,9 +63,13 @@ begin
   WriteLn('Indipendents: '+IntToStr(parliament.indipendents));
 end;
 
-procedure printStatistics(var stats : TSimstats; round : Longint);
+procedure printStatistic(var stats : TSimstats; round : Longint);
 begin
-
+   log(IntToStr(round)+';'+IntToStr(stats.legislatures[round].nbdelegates)+';'+
+                      IntToStr(stats.legislatures[round].nbindipendents)+';'+
+                      IntToStr(stats.legislatures[round].nbparties)+';'+
+                      FloatToStr(stats.legislatures[round].approvalrate)+';'+
+                      FloatToStr(stats.legislatures[round].totalbenefit)+';', 'statistics.csv');
 end;
 
 end.
