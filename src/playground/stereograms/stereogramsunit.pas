@@ -113,9 +113,8 @@ end;
 
 
 procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
-var x : Longint;
+var x, k : Longint;
     c : TColor;
-
 begin
    // init assigned array
    for x:=0 to stereoimg.Width-1 do assigned[x] := false;
@@ -126,8 +125,15 @@ begin
            if assigned[x] then continue;
 
            stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := c;
-           //k:=sameArr[x];
+           assigned[x] := true;
 
+           k:=x;
+           while (k<>sameArr[k]) and (k<stereoimg.Width) do
+             begin
+                k:=sameArr[k];
+                stereoimg.Picture.Bitmap.Canvas.Pixels[k,y] := c;
+                assigned[k] := true;
+             end;
 
 
            if (c=clWhite) then c:=clBlack else c:=clWhite;

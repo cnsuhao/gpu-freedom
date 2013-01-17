@@ -18,10 +18,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="37"/>
-        <CursorPos X="58" Y="75"/>
+        <CursorPos X="31" Y="71"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -30,11 +31,10 @@
         <Filename Value="stereogramsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="stereogramsunit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="56" Y="8"/>
+        <TopLine Value="101"/>
+        <CursorPos X="77" Y="116"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -69,7 +69,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="26" HistoryIndex="25">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="stereogramform.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -174,6 +174,10 @@
         <Filename Value="stereogramsunit.pas"/>
         <Caret Line="115" Column="101" TopLine="95"/>
       </Position26>
+      <Position27>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="130" Column="12" TopLine="98"/>
+      </Position27>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
