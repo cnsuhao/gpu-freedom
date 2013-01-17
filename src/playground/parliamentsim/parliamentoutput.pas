@@ -9,6 +9,7 @@ uses
 
 procedure log(str, filename : AnsiString);
 procedure printParliament(var parliament : TParliament);
+procedure printStatistics(var stats : TSimstats; round : Longint);
 
 implementation
 
@@ -62,6 +63,10 @@ begin
   WriteLn('Indipendents: '+IntToStr(parliament.indipendents));
 end;
 
+procedure printStatistics(var stats : TSimstats; round : Longint);
+begin
+
+end;
 
 end.
 
