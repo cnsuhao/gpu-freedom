@@ -22,9 +22,9 @@ implementation
 
 procedure initConfiguration();
 begin
-  conf.mEyeDist := 6.5;
-  conf.mResolution := 72; // 72 dpi
-  conf.mZScale := 1/255;
+  conf.mEyeDist := 2.56;   // (6.5cm in inches)
+  conf.mResolution := 94; // pixels per inch
+  conf.mZScale := 1/256;
   conf.mMu := 1/3;
 end;
 
