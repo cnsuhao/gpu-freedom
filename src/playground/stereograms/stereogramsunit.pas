@@ -15,6 +15,7 @@ type TDepthAssigned = Array [0..MAX_WIDTH] of Boolean;
 
 procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : Longint);
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
+procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
 procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
 
 implementation
@@ -139,6 +140,32 @@ begin
            if (c=clWhite) then c:=clBlack else c:=clWhite;
         end;
 
+end;
+
+procedure log(str, filename : AnsiString);
+var F : Textfile;
+begin
+  if not FileExists(filename) then
+     begin
+       AssignFile(F, filename);
+       Rewrite(F);
+       CloseFile(F);
+     end;
+
+  AssignFile(F, filename);
+  Append(F);
+  WriteLn(F, str);
+  CloseFile(F);
+end;
+
+procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
+var output : AnsiString;
+    i : Longint;
+begin
+    output := '';
+    for i:=0 to size-1 do
+       output := output + IntToStr(sameArr[i])+';';
+    log(output, 'samearr.txt');
 end;
 
 end.

@@ -72,6 +72,7 @@ begin
          begin
            prepareDepthArray(zimg, sameArr, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
+           printSameArray(sameArr, zimg.Width);
            colorImageLineBlackWhite(sameArr, stereoimg, y);
          end;
 

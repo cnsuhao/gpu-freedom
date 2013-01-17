@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="6">
+    <Units Count="7">
       <Unit0>
         <Filename Value="sterogramproject.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -18,11 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="37"/>
-        <CursorPos X="31" Y="71"/>
+        <TopLine Value="38"/>
+        <CursorPos X="48" Y="75"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -31,10 +30,11 @@
         <Filename Value="stereogramsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="stereogramsunit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="101"/>
-        <CursorPos X="77" Y="116"/>
+        <TopLine Value="128"/>
+        <CursorPos X="2" Y="148"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -42,7 +42,7 @@
         <Filename Value="configurations.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="configurations"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="5"/>
@@ -65,11 +65,21 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="..\parliamentsim\parliamentoutput.pas"/>
+        <UnitName Value="parliamentoutput"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="9"/>
+        <CursorPos X="1" Y="16"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit6>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="stereogramform.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -178,6 +188,18 @@
         <Filename Value="stereogramsunit.pas"/>
         <Caret Line="130" Column="12" TopLine="98"/>
       </Position27>
+      <Position28>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="19" Column="1" TopLine="1"/>
+      </Position28>
+      <Position29>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="169" Column="5" TopLine="129"/>
+      </Position29>
+      <Position30>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="168" Column="52" TopLine="129"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
