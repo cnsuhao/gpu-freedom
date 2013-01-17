@@ -28,6 +28,55 @@ begin
 end;
 
 
+function getPersonalInterest(var parliament : TParliament; del : Longint) : Extended;
+var party : Longint;
+begin
+  party := parliament.delegates.delg[del].party;
+  if  party = INDIPENDENT then
+     Result := parliament.delegates.delg[del].personalinterestx
+  else
+     Result := parliament.parties.par[party].centerx;
+end;
+
+function getCollectiveInterest(var parliament : TParliament; del : Longint) : Extended;
+var party : Longint;
+begin
+  party := parliament.delegates.delg[del].party;
+  if  party = INDIPENDENT then
+     Result := parliament.delegates.delg[del].collectiveinteresty
+  else
+     Result := parliament.parties.par[party].centery;
+end;
+
+// defines the voting window
+function delegateAcceptsLaw(var parliament : TParliament; var laws : TLaws; l, del : Longint) : Boolean;
+var x, y : Extended;
+begin
+   x := getPersonalInterest(parliament, del);
+   y := getCollectiveInterest(parliament, del);
+
+   Result := (laws.laws[l].personalinterestx>=x) and (laws.laws[l].collectiveinteresty>=y);
+end;
+
+procedure voteLaw(var parliament : TParliament; var laws : TLaws; l : Longint);
+var i : Longint;
+begin
+  for i:=1 to parliament.delegates.size do
+       begin
+         if delegateAcceptsLaw(parliament, laws, l, i) then
+            begin
+              Inc(laws.laws[l].yes);
+            end
+          else
+            begin
+              Inc(laws.laws[l].no);
+            end;
+
+       end;
+
+  laws.laws[l].approved := laws.laws[l].yes > laws.laws[l].no;
+end;
+
 procedure simulateLawProcess(var parliament : TParliament; var laws : TLaws; l : Longint);
 begin
    createLaw(parliament, laws, l);
