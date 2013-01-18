@@ -18,7 +18,7 @@ procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : 
 // processing inputs and creating output
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
 // processing output
-procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; zimg, stereoimg : TImage; y : Longint);
+procedure colorImageLine(var sameArr : TDepthDataType; zimg, stereoimg, texture : TImage; y : Longint);
 
 
 procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
@@ -121,7 +121,7 @@ begin
 end;
 
 
-procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; zimg, stereoimg : TImage; y : Longint);
+procedure colorImageLine(var sameArr : TDepthDataType; zimg, stereoimg, texture : TImage; y : Longint);
 var x, target : Longint;
     c : TColor;
 begin
@@ -133,7 +133,8 @@ begin
         begin
            if assigned[x] then continue;
 
-           c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
+           //c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
+           c:= texture.Picture.Bitmap.Canvas.Pixels[x mod texture.Width,y mod texture.Height];
 
            target := sameArr[x];
            if target<stereoimg.Width then

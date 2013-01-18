@@ -105,7 +105,7 @@ begin
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
            //printSameArray(sameArr, zimg.Width);
            //checkSameArray(sameArr, zimg.Width, y);
-           colorImageLineBlackWhite(sameArr, zimg, stereoimg, y);
+           colorImageLine(sameArr, zimg, stereoimg, texture, y);
          end;
 
      //ShowMessage('Stereogram generated');
