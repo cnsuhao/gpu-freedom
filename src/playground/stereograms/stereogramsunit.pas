@@ -141,6 +141,15 @@ begin
                    assigned[target] := true;
                    stereoimg.Picture.Bitmap.Canvas.Pixels[target,y] := c;
               end;
+
+           target := sameArr[target];
+           while (target<stereoimg.Width) and (target<>sameArr[target]) do
+              begin
+                   assigned[target] := true;
+                   stereoimg.Picture.Bitmap.Canvas.Pixels[target,y] := c;
+
+                   target := sameArr[target];
+              end;
         end;
 
 end;
