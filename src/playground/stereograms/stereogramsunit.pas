@@ -122,11 +122,27 @@ end;
 
 
 procedure colorImageLine(var sameArr : TDepthDataType; zimg, stereoimg, texture : TImage; y : Longint);
-var x, target : Longint;
+var x, target, same : Longint;
     c : TColor;
 begin
    // init assigned array
-   for x:=0 to stereoimg.Width-1 do assigned[x] := false;
+  x := stereoimg.Width-1;
+  while (x>=0) do
+    begin
+      same := sameArr[x];
+      if (same=x) then
+          begin
+             stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := texture.Picture.Bitmap.Canvas.Pixels[x mod texture.Width,y mod texture.Height];
+          end
+       else
+          begin
+             stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := stereoimg.Picture.Bitmap.Canvas.Pixels[same,y];
+          end;
+
+      Dec(x);
+    end;
+  {
+  for x:=0 to stereoimg.Width-1 do assigned[x] := false;
 
    c := clWhite;
    for x:=0 to stereoimg.Width-1  do
@@ -154,7 +170,7 @@ begin
 
            //if c=clWhite then c:=clBlack else c:=clWhite;
         end;
-
+   }
 end;
 
 procedure log(str, filename : AnsiString);
