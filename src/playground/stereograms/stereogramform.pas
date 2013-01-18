@@ -15,11 +15,13 @@ type
   TfrmStereogram = class(TForm)
     btnLoadImage: TButton;
     btnGenerateStereogram: TButton;
+    btnLoadTexture: TButton;
     edtMonitorLength: TEdit;
     edtMonitorWidth: TEdit;
     edtResolution: TEdit;
     edtPaperDistance: TEdit;
     edtEyeDistance: TEdit;
+    texture: TImage;
     Label1: TLabel;
     MonitorLength: TLabel;
     lblMonitorWidth: TLabel;
@@ -30,6 +32,7 @@ type
     stereoimg: TImage;
     procedure btnGenerateStereogramClick(Sender: TObject);
     procedure btnLoadImageClick(Sender: TObject);
+    procedure btnLoadTextureClick(Sender: TObject);
   private
     { private declarations }
   public
@@ -68,7 +71,24 @@ begin
       for x:=0 to stereoimg.Width-1 do
           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := clBlack;
 
+    texture.Picture.LoadFromFile('textures\SC_damask24.png');
+
     //showMessage('Image with is: '+IntToStr(zimg.Width));
+end;
+
+procedure TfrmStereogram.btnLoadTextureClick(Sender: TObject);
+begin
+       openDialog := TOpenDialog.Create(self);
+       openDialog.InitialDir := GetCurrentDir;
+       openDialog.Options := [ofFileMustExist];
+       openDialog.Filter :=
+          'All images|*.png;*.bmp;*.gif;*.jpg';
+        openDialog.FilterIndex := 2;
+        if openDialog.Execute
+        then
+        begin
+            texture.Picture.LoadFromFile(openDialog.FileName);
+        end;
 end;
 
 procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);

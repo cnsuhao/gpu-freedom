@@ -9,7 +9,7 @@
         <Filename Value="sterogramproject.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sterogramproject"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
       </Unit0>
       <Unit1>
         <Filename Value="stereogramform.pas"/>
@@ -18,11 +18,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="51"/>
-        <CursorPos X="59" Y="59"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="50"/>
+        <CursorPos X="13" Y="90"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,12 +31,11 @@
         <Filename Value="stereogramsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="stereogramsunit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="113"/>
         <CursorPos X="14" Y="154"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -46,7 +46,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="35" Y="5"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -80,123 +80,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="26" Column="53" TopLine="16"/>
+        <Caret Line="83" Column="58" TopLine="67"/>
       </Position1>
       <Position2>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="35" Column="126" TopLine="21"/>
+        <Caret Line="27" Column="18" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="37" Column="89" TopLine="20"/>
+        <Caret Line="8" Column="46" TopLine="1"/>
       </Position3>
       <Position4>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="53" Column="7" TopLine="24"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="26" Column="13" TopLine="1"/>
       </Position4>
       <Position5>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="83" Column="58" TopLine="67"/>
+        <Caret Line="8" Column="46" TopLine="1"/>
       </Position5>
       <Position6>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="27" Column="18" TopLine="1"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="64" Column="1" TopLine="24"/>
       </Position6>
       <Position7>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="8" Column="46" TopLine="1"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="63" Column="1" TopLine="23"/>
       </Position7>
       <Position8>
         <Filename Value="stereogramform.pas"/>
-        <Caret Line="26" Column="13" TopLine="1"/>
+        <Caret Line="65" Column="1" TopLine="24"/>
       </Position8>
       <Position9>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="8" Column="46" TopLine="1"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="73" Column="46" TopLine="34"/>
       </Position9>
       <Position10>
         <Filename Value="stereogramform.pas"/>
-        <Caret Line="64" Column="1" TopLine="24"/>
+        <Caret Line="71" Column="30" TopLine="35"/>
       </Position10>
       <Position11>
-        <Filename Value="stereogramform.pas"/>
-        <Caret Line="63" Column="1" TopLine="23"/>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="18" Column="1" TopLine="3"/>
       </Position11>
       <Position12>
-        <Filename Value="stereogramform.pas"/>
-        <Caret Line="65" Column="1" TopLine="24"/>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="115" Column="25" TopLine="79"/>
       </Position12>
       <Position13>
-        <Filename Value="stereogramform.pas"/>
-        <Caret Line="73" Column="46" TopLine="34"/>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="18" Column="35" TopLine="1"/>
       </Position13>
       <Position14>
-        <Filename Value="stereogramform.pas"/>
-        <Caret Line="71" Column="30" TopLine="35"/>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="123" Column="1" TopLine="79"/>
       </Position14>
       <Position15>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="18" Column="1" TopLine="3"/>
+        <Caret Line="115" Column="101" TopLine="95"/>
       </Position15>
       <Position16>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="115" Column="25" TopLine="79"/>
+        <Caret Line="130" Column="12" TopLine="98"/>
       </Position16>
       <Position17>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="18" Column="35" TopLine="1"/>
+        <Caret Line="19" Column="1" TopLine="1"/>
       </Position17>
       <Position18>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="123" Column="1" TopLine="79"/>
+        <Caret Line="169" Column="5" TopLine="129"/>
       </Position18>
       <Position19>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="115" Column="101" TopLine="95"/>
+        <Caret Line="168" Column="52" TopLine="129"/>
       </Position19>
       <Position20>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="130" Column="12" TopLine="98"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="73" Column="71" TopLine="38"/>
       </Position20>
       <Position21>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="19" Column="1" TopLine="1"/>
+        <Caret Line="179" Column="90" TopLine="142"/>
       </Position21>
       <Position22>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="169" Column="5" TopLine="129"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="72" Column="53" TopLine="41"/>
       </Position22>
       <Position23>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="168" Column="52" TopLine="129"/>
+        <Caret Line="172" Column="1" TopLine="142"/>
       </Position23>
       <Position24>
         <Filename Value="stereogramform.pas"/>
-        <Caret Line="73" Column="71" TopLine="38"/>
+        <Caret Line="66" Column="29" TopLine="43"/>
       </Position24>
       <Position25>
         <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="179" Column="90" TopLine="142"/>
+        <Caret Line="69" Column="89" TopLine="47"/>
       </Position25>
       <Position26>
-        <Filename Value="stereogramform.pas"/>
-        <Caret Line="72" Column="53" TopLine="41"/>
+        <Filename Value="stereogramsunit.pas"/>
+        <Caret Line="144" Column="1" TopLine="125"/>
       </Position26>
       <Position27>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="172" Column="1" TopLine="142"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="59" Column="59" TopLine="51"/>
       </Position27>
       <Position28>
         <Filename Value="stereogramform.pas"/>
-        <Caret Line="66" Column="29" TopLine="43"/>
+        <Caret Line="60" Column="59" TopLine="52"/>
       </Position28>
       <Position29>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="69" Column="89" TopLine="47"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="61" Column="59" TopLine="53"/>
       </Position29>
       <Position30>
-        <Filename Value="stereogramsunit.pas"/>
-        <Caret Line="144" Column="1" TopLine="125"/>
+        <Filename Value="stereogramform.pas"/>
+        <Caret Line="54" Column="5" TopLine="51"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
