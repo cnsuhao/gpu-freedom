@@ -68,13 +68,14 @@ begin
       for x:=0 to stereoimg.Width-1 do
           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := clBlack;
 
-    showMessage('Image with is: '+IntToStr(zimg.Width));
+    //showMessage('Image with is: '+IntToStr(zimg.Width));
 end;
 
 procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
 var y : Longint;
     sameArr, pDepth : TDepthDataType;
 begin
+    if FileExists('log.txt') then DeleteFile('log.txt');
     if FileExists('samearr.txt') then DeleteFile('samearr.txt');
     if FileExists('error.txt') then DeleteFile('error.txt');
 
@@ -82,7 +83,7 @@ begin
          begin
            prepareDepthArray(zimg, sameArr, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
-           printSameArray(sameArr, zimg.Width);
+           //printSameArray(sameArr, zimg.Width);
            checkSameArray(sameArr, zimg.Width, y);
            colorImageLineBlackWhite(sameArr, zimg, stereoimg, y);
          end;

@@ -1,7 +1,7 @@
 object frmStereogram: TfrmStereogram
-  Left = 715
+  Left = 48
   Height = 556
-  Top = 107
+  Top = 350
   Width = 1607
   Caption = 'Stereograms (based on Oliver Lau''s code)'
   ClientHeight = 556

@@ -23,6 +23,7 @@ procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; zimg, stereoimg
 
 procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
 procedure checkSameArray(var sameArr : TDepthDataType; size, y : Longint);
+procedure log(str, filename : AnsiString);
 
 implementation
 
@@ -66,6 +67,8 @@ begin
        s     := Round(E * (1 - conf.mMu * Z) / (2 - conf.mMu * Z));
        left  := x - Round(s/2);
        right := x + Round(s/2);
+       //log('x: '+IntToStr(x)+' left: '+IntToStr(left)+' right: '+IntToStr(right), 'log.txt');
+
        if (left>=0) and (right<size) then
                     begin // inside borders of picture with projection
                           t := 1;
@@ -108,13 +111,12 @@ begin
 
                     end;  // inside borders of picture with projection
 
-
+       //log('x: '+IntToStr(x)+' sameArr[x]: '+IntToStr(sameArr[x]), 'log.txt');
+       depx := depx + xDepthStep;
+       xd := Round(depx);
+       p := p + xd - xdo;
+       xdo := xd;
      end; // main for loop over x
-
-     depx := depx + xDepthStep;
-     xd := Round(depx);
-     p := p + xd - xdo;
-     xdo := xd;
 
 end;
 
@@ -134,8 +136,11 @@ begin
            c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
 
            target := sameArr[x];
-           assigned[target] := true;
-           stereoimg.Picture.Bitmap.Canvas.Pixels[target,y] := c;
+           if target<stereoimg.Width then
+              begin
+                   assigned[target] := true;
+                   stereoimg.Picture.Bitmap.Canvas.Pixels[target,y] := c;
+              end;
         end;
 
 end;
