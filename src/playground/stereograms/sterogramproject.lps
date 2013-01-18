@@ -18,10 +18,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="stereogramform"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="48"/>
-        <CursorPos X="7" Y="71"/>
+        <TopLine Value="51"/>
+        <CursorPos X="42" Y="84"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -30,11 +31,10 @@
         <Filename Value="stereogramsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="stereogramsunit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="113"/>
-        <CursorPos X="12" Y="144"/>
+        <CursorPos X="57" Y="154"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit2>

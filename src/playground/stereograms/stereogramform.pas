@@ -81,14 +81,14 @@ begin
 
     for y:=0 to zimg.Height-1 do
          begin
-           prepareDepthArray(zimg, sameArr, y);
+           prepareDepthArray(zimg, pDepth, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
            //printSameArray(sameArr, zimg.Width);
-           checkSameArray(sameArr, zimg.Width, y);
+           //checkSameArray(sameArr, zimg.Width, y);
            colorImageLineBlackWhite(sameArr, zimg, stereoimg, y);
          end;
 
-     ShowMessage('Stereogram generated');
+     //ShowMessage('Stereogram generated');
 end;
 
 end.

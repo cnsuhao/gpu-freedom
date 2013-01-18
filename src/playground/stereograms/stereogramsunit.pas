@@ -133,7 +133,7 @@ begin
         begin
            if assigned[x] then continue;
 
-           c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
+           //c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
 
            target := sameArr[x];
            if target<stereoimg.Width then
@@ -150,6 +150,8 @@ begin
 
                    target := sameArr[target];
               end;
+
+           if c=clWhite then c:=clBlack else c:=clWhite;
         end;
 
 end;
