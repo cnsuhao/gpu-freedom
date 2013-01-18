@@ -178,7 +178,6 @@ procedure checkSameArray(var sameArr : TDepthDataType; size, y : Longint);
 var
     x : Longint;
 begin
-  log('*******************', 'error.txt');
   for x:=0 to size-1 do
        begin
           if sameArr[x]<x then
