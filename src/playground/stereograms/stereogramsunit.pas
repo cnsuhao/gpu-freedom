@@ -13,10 +13,16 @@ const MAX_WIDTH = 2048;
 type TDepthDataType = Array [0..MAX_WIDTH] of Longint;
 type TDepthAssigned = Array [0..MAX_WIDTH] of Boolean;
 
+// preparing inputs
 procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : Longint);
+// processing inputs and creating output
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
-procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
+// processing output
 procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
+
+
+procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
+procedure checkSameArray(var sameArr : TDepthDataType; size, y : Longint);
 
 implementation
 
@@ -166,6 +172,21 @@ begin
     for i:=0 to size-1 do
        output := output + IntToStr(sameArr[i])+';';
     log(output, 'samearr.txt');
+end;
+
+procedure checkSameArray(var sameArr : TDepthDataType; size, y : Longint);
+var
+    x : Longint;
+begin
+  log('*******************', 'error.txt');
+  for x:=0 to size-1 do
+       begin
+          if sameArr[x]<x then
+               begin
+                 log('Consistency violated: error at line '+IntToStr(y)+', position '+IntToStr(x), 'error.txt');
+                 Exit;
+               end;
+       end;
 end;
 
 end.

@@ -69,12 +69,14 @@ var y : Longint;
     sameArr, pDepth : TDepthDataType;
 begin
     if FileExists('samearr.txt') then DeleteFile('samearr.txt');
+    if FileExists('error.txt') then DeleteFile('error.txt');
 
     for y:=0 to zimg.Height-1 do
          begin
            prepareDepthArray(zimg, sameArr, y);
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
-           printSameArray(sameArr, zimg.Width);
+           //printSameArray(sameArr, zimg.Width);
+           checkSameArray(sameArr, zimg.Width, y);
            colorImageLineBlackWhite(sameArr, stereoimg, y);
          end;
 
