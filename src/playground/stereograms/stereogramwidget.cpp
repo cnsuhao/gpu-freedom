@@ -191,6 +191,8 @@ void StereogramWidget::calcStereogram(void)
             dst[x] = (same == x)
                     ? src[same % mTexture.width()]
                     : dst[same];
+					
+					// if (same=x) then dst[x] := src[same mod Texture.width) else dst[x] := dst[same]
         }
     }
 }

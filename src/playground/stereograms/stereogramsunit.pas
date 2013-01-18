@@ -18,7 +18,7 @@ procedure prepareDepthArray(var zimg : TImage; var pDepth : TDepthDataType; y : 
 // processing inputs and creating output
 procedure makeSameArray(var sameArr, pDepth : TDepthDataType; size : Longint; xDepthStep : Extended);
 // processing output
-procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
+procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; zimg, stereoimg : TImage; y : Longint);
 
 
 procedure printSameArray(var sameArr : TDepthDataType; size : Longint);
@@ -119,31 +119,23 @@ begin
 end;
 
 
-procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; stereoimg : TImage; y : Longint);
-var x, k : Longint;
+procedure colorImageLineBlackWhite(var sameArr : TDepthDataType; zimg, stereoimg : TImage; y : Longint);
+var x, target : Longint;
     c : TColor;
 begin
    // init assigned array
    for x:=0 to stereoimg.Width-1 do assigned[x] := false;
 
    c := clWhite;
-   for x:=0 to stereoimg.Width-1 do
+   for x:=0 to stereoimg.Width-1  do
         begin
            if assigned[x] then continue;
 
-           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := c;
-           assigned[x] := true;
+           c:= zimg.Picture.Bitmap.Canvas.Pixels[x,y];
 
-           k:=x;
-           while (k<>sameArr[k]) and (k<stereoimg.Width) do
-             begin
-                k:=sameArr[k];
-                stereoimg.Picture.Bitmap.Canvas.Pixels[k,y] := c;
-                assigned[k] := true;
-             end;
-
-
-           if (c=clWhite) then c:=clBlack else c:=clWhite;
+           target := sameArr[x];
+           assigned[target] := true;
+           stereoimg.Picture.Bitmap.Canvas.Pixels[target,y] := c;
         end;
 
 end;

@@ -46,6 +46,7 @@ implementation
 { TfrmStereogram }
 
 procedure TfrmStereogram.btnLoadImageClick(Sender: TObject);
+var x, y : Longint;
 begin
     openDialog := TOpenDialog.Create(self);
     openDialog.InitialDir := GetCurrentDir;
@@ -62,6 +63,12 @@ begin
 
     initConfiguration;
     openDialog.Free;
+
+    for y:=0 to stereoimg.Height-1 do
+      for x:=0 to stereoimg.Width-1 do
+          stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := clBlack;
+
+    showMessage('Image with is: '+IntToStr(zimg.Width));
 end;
 
 procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
@@ -77,7 +84,7 @@ begin
            makeSameArray(sameArr, pDepth, zimg.Width, 1);
            //printSameArray(sameArr, zimg.Width);
            checkSameArray(sameArr, zimg.Width, y);
-           colorImageLineBlackWhite(sameArr, stereoimg, y);
+           colorImageLineBlackWhite(sameArr, zimg, stereoimg, y);
          end;
 
      ShowMessage('Stereogram generated');
