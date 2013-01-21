@@ -19,7 +19,7 @@ end;
 var conf : TConfiguration;
 
 procedure initConfiguration();
-procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm : Extended);
+procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm, mu : Extended);
 
 implementation
 
@@ -32,13 +32,15 @@ begin
 end;
 
 
-procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm : Extended);
+procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm, mu : Extended);
 begin
   initConfiguration();
 
   conf.mEyeDist := E / INCH_IN_CM;
   // what to do with twoD??
   conf.mResolution := monitorWidthPx/monitorWidthCm * INCH_IN_CM;
+
+  conf.mMu := mu;
 end;
 
 

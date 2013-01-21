@@ -103,7 +103,7 @@ object frmStereogram: TfrmStereogram
   object btnLoadImage: TButton
     Left = 53
     Height = 25
-    Top = 273
+    Top = 440
     Width = 155
     Caption = 'Load Source Image'
     OnClick = btnLoadImageClick
@@ -119,7 +119,7 @@ object frmStereogram: TfrmStereogram
   object btnGenerateStereogram: TButton
     Left = 53
     Height = 25
-    Top = 304
+    Top = 472
     Width = 155
     Caption = 'Generate Stereogram...'
     OnClick = btnGenerateStereogramClick
@@ -150,8 +150,24 @@ object frmStereogram: TfrmStereogram
     OnClick = btnGenerateRandomTextureClick
     TabOrder = 8
   end
+  object lblImageDepth: TLabel
+    Left = 0
+    Height = 16
+    Top = 187
+    Width = 169
+    Caption = 'Image Depth (mü between 0-1):'
+    ParentColor = False
+  end
+  object edtMu: TEdit
+    Left = 176
+    Height = 23
+    Top = 184
+    Width = 80
+    TabOrder = 9
+    Text = '0.3333'
+  end
   object OpenDialog: TOpenDialog
-    left = 62
-    top = 201
+    left = 16
+    top = 392
   end
 end

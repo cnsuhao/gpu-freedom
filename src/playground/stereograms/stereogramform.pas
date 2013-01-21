@@ -17,11 +17,13 @@ type
     btnGenerateStereogram: TButton;
     btnLoadTexture: TButton;
     btnGenerateRandomTexture: TButton;
+    edtMu: TEdit;
     edtMonitorLength: TEdit;
     edtMonitorWidth: TEdit;
     edtResolution: TEdit;
     edtPaperDistance: TEdit;
     edtEyeDistance: TEdit;
+    lblImageDepth: TLabel;
     texture: TImage;
     Label1: TLabel;
     MonitorLength: TLabel;
@@ -76,7 +78,9 @@ begin
          end;
 
     loadConfiguration(StrToFloat(edtEyeDistance.Text), StrToFloat(edtPaperDistance.Text),
-                      StrToFloat(edtMonitorWidth.Text), StrToFloat(edtMonitorLength.Text));
+                      StrToFloat(edtMonitorWidth.Text), StrToFloat(edtMonitorLength.Text),
+                      StrToFloat(edtMu.Text));
+
     for y:=0 to stereoimg.Height-1 do
       for x:=0 to stereoimg.Width-1 do
           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := clBlack;
@@ -124,7 +128,8 @@ begin
          end;
 
     stereoimg.Picture.saveToFile('stereogram.png');
-    //ShowMessage('Stereogram generated');
+
+    ShowMessage('Stereogram generated and saved in stereogram.png');
 end;
 
 procedure TfrmStereogram.btnGenerateRandomTextureClick(Sender: TObject);
