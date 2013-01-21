@@ -23,10 +23,16 @@ implementation
 procedure initConfiguration();
 begin
   conf.mEyeDist := 2.56;   // (6.5cm in inches)
-  conf.mResolution := 94; // pixels per inch
+  conf.mResolution := 85; // pixels per inch
   conf.mZScale := 1/256;
   conf.mMu := 1/3;
 end;
 
+{
+procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm);
+begin
+  conf.mEyeDist := E /
+end;
+}
 end.
 

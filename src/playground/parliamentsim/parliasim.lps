@@ -9,10 +9,9 @@
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="18"/>
+        <TopLine Value="27"/>
         <CursorPos X="61" Y="38"/>
         <UsageCount Value="37"/>
         <Loaded Value="True"/>
@@ -54,9 +53,10 @@
         <Filename Value="statistics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="statistics"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="10"/>
         <CursorPos X="65" Y="37"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>

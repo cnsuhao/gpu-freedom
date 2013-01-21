@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, stereogramsunit, configurations;
+  StdCtrls, stereogramsunit, configurations, isaac;
 
 type
 
@@ -16,6 +16,7 @@ type
     btnLoadImage: TButton;
     btnGenerateStereogram: TButton;
     btnLoadTexture: TButton;
+    btnGenerateRandomTexture: TButton;
     edtMonitorLength: TEdit;
     edtMonitorWidth: TEdit;
     edtResolution: TEdit;
@@ -30,11 +31,13 @@ type
     OpenDialog: TOpenDialog;
     zimg: TImage;
     stereoimg: TImage;
+    procedure btnGenerateRandomTextureClick(Sender: TObject);
     procedure btnGenerateStereogramClick(Sender: TObject);
     procedure btnLoadImageClick(Sender: TObject);
     procedure btnLoadTextureClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { private declarations }
+    isaac : TIsaac;
   public
     { public declarations }
   end;
@@ -91,6 +94,11 @@ begin
         end;
 end;
 
+procedure TfrmStereogram.FormCreate(Sender: TObject);
+begin
+  isaac := TIsaac.Create;
+end;
+
 procedure TfrmStereogram.btnGenerateStereogramClick(Sender: TObject);
 var y : Longint;
     sameArr, pDepth : TDepthDataType;
@@ -108,7 +116,25 @@ begin
            colorImageLine(sameArr, zimg, stereoimg, texture, y);
          end;
 
-     //ShowMessage('Stereogram generated');
+    stereoimg.Picture.saveToFile('stereogram.png');
+    //ShowMessage('Stereogram generated');
+end;
+
+procedure TfrmStereogram.btnGenerateRandomTextureClick(Sender: TObject);
+var x, y : Longint;
+    c    : TColor;
+begin
+  for y:=0 to texture.Height-1 do
+   for x:=0 to texture.Width-1 do
+       begin
+          if (isaac.Val/high(Cardinal))>0.5 then
+                c := clBlack
+               else
+                c := clWhite;
+
+          texture.Picture.Bitmap.Canvas.Pixels[x,y] := c;
+       end;
+  texture.Picture.SaveToFile('random.png');
 end;
 
 end.

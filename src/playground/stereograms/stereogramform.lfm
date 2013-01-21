@@ -1,11 +1,12 @@
 object frmStereogram: TfrmStereogram
-  Left = 460
+  Left = 51
   Height = 556
-  Top = 99
+  Top = 224
   Width = 1777
   Caption = 'Stereograms (based on Oliver Lau''s code)'
   ClientHeight = 556
   ClientWidth = 1777
+  OnCreate = FormCreate
   LCLVersion = '1.0.2.0'
   object zimg: TImage
     Left = 288
@@ -51,6 +52,7 @@ object frmStereogram: TfrmStereogram
     Height = 23
     Top = 151
     Width = 80
+    Enabled = False
     ReadOnly = True
     TabOrder = 2
     Text = '33.33'
@@ -114,7 +116,7 @@ object frmStereogram: TfrmStereogram
   object btnGenerateStereogram: TButton
     Left = 53
     Height = 25
-    Top = 352
+    Top = 304
     Width = 155
     Caption = 'Generate Stereogram...'
     OnClick = btnGenerateStereogramClick
@@ -122,19 +124,28 @@ object frmStereogram: TfrmStereogram
   end
   object texture: TImage
     Left = 1608
-    Height = 153
+    Height = 155
     Top = 23
-    Width = 146
+    Width = 154
     AutoSize = True
   end
   object btnLoadTexture: TButton
-    Left = 53
+    Left = 1607
     Height = 25
-    Top = 304
+    Top = 448
     Width = 155
     Caption = 'Load Texture'
     OnClick = btnLoadTextureClick
     TabOrder = 7
+  end
+  object btnGenerateRandomTexture: TButton
+    Left = 1608
+    Height = 25
+    Top = 479
+    Width = 154
+    Caption = 'Random Texture'
+    OnClick = btnGenerateRandomTextureClick
+    TabOrder = 8
   end
   object OpenDialog: TOpenDialog
     left = 62
