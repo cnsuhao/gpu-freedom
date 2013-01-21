@@ -71,6 +71,7 @@ object frmStereogram: TfrmStereogram
     Height = 23
     Top = 88
     Width = 80
+    OnChange = updateResolution
     TabOrder = 3
     Text = '1600'
   end
@@ -87,6 +88,7 @@ object frmStereogram: TfrmStereogram
     Height = 23
     Top = 120
     Width = 80
+    OnChange = updateResolution
     TabOrder = 4
     Text = '48'
   end

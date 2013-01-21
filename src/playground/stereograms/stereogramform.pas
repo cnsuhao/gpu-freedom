@@ -36,10 +36,10 @@ type
     procedure btnLoadImageClick(Sender: TObject);
     procedure btnLoadTextureClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure updateResolution(Sender: TObject);
   private
     isaac : TIsaac;
 
-    //procedure updateResolution;
   public
     { public declarations }
   end;
@@ -142,6 +142,15 @@ begin
           texture.Picture.Bitmap.Canvas.Pixels[x,y] := c;
        end;
   texture.Picture.SaveToFile('random.png');
+end;
+
+procedure TfrmStereogram.updateResolution(Sender: TObject);
+var pixels, cm : Extended;
+begin
+   pixels := StrToFloatDef(edtMonitorWidth.Text, 0);
+   cm     := StrToFloatDef(edtMonitorLength.Text, 0);
+   if (pixels<>0) and (cm<>0) then
+      edtResolution.Text := FloatToStr(pixels/cm);
 end;
 
 end.
