@@ -8,13 +8,17 @@
 ******************
 GPU freedom branch
 
+1.2012-1.2013
+in the playground subfolder:
+- added code to create stereograms out of Z-pictures
+- added code to simulate parliament with random quota of indipendents
+- added code to simulate Enigma machine
+- added code to compare solvers on hacker.org
+
 10.2009-10.2012 git
 Lot of preliminary development for the next generation GPU was done in the gpu_freedom package,
  currently at version 0.5.5 (in GPU II Preview section of download page). However, this package is not
   ready to be used yet.
-
-
-
 
 25.2.2011 0.5.1
 - core is working more or less

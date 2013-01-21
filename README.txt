@@ -117,7 +117,13 @@ File Tree structure for this package, codenamed freedom follows:
    /workunit   where workunits are stored
       /quests    workunits ready for delivery
       /results   computed workunits received from clients
- 
+	  
+/playground       code which could become a plugin or a frontend of GPU
+   /discochal     parsing and comparing users on hacker.org 
+   /enigma        freepascal code to simulate an Enigma machine
+   /ioc           index of coincidence code to gain insights in unknown ciphertext
+   /parlimanetsim parliament simulation with a quota of random indipendents
+   /stereograms   code to calculate stereograms out of Z-pictures   
     
 
 Have fun!
