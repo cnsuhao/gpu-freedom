@@ -7,6 +7,8 @@ interface
 uses
   Classes, SysUtils;
 
+const INCH_IN_CM = 2.54;
+
 type TConfiguration = record
     mEyeDist,
     mResolution,
@@ -17,6 +19,7 @@ end;
 var conf : TConfiguration;
 
 procedure initConfiguration();
+procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm : Extended);
 
 implementation
 
@@ -28,11 +31,16 @@ begin
   conf.mMu := 1/3;
 end;
 
-{
-procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm);
+
+procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm : Extended);
 begin
-  conf.mEyeDist := E /
+  initConfiguration();
+
+  conf.mEyeDist := E / INCH_IN_CM;
+  // what to do with twoD??
+  conf.mResolution := monitorWidthPx/monitorWidthCm * INCH_IN_CM;
 end;
-}
+
+
 end.
 

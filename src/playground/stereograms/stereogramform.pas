@@ -38,6 +38,8 @@ type
     procedure FormCreate(Sender: TObject);
   private
     isaac : TIsaac;
+
+    //procedure updateResolution;
   public
     { public declarations }
   end;
@@ -65,11 +67,16 @@ begin
     begin
         zimg.Picture.LoadFromFile(openDialog.FileName);
         stereoimg.Picture.LoadFromFile(openDialog.FileName);
-    end;
+        openDialog.Free;
+    end
+      else
+         begin
+           openDialog.Free;
+           Exit;
+         end;
 
-    initConfiguration;
-    openDialog.Free;
-
+    loadConfiguration(StrToFloat(edtEyeDistance.Text), StrToFloat(edtPaperDistance.Text),
+                      StrToFloat(edtMonitorWidth.Text), StrToFloat(edtMonitorLength.Text));
     for y:=0 to stereoimg.Height-1 do
       for x:=0 to stereoimg.Width-1 do
           stereoimg.Picture.Bitmap.Canvas.Pixels[x,y] := clBlack;
