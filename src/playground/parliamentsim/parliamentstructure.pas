@@ -85,7 +85,7 @@ function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
 function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
-function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius : Extended) : Boolean;
+function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius, majorPartyPercentage : Extended) : Boolean;
 
 procedure initLaws(var laws : TLaws; size : Longint);
 procedure initSimStats(var s : TSimStats; size : Longint);
@@ -257,11 +257,12 @@ Note: using this function to initialize the parliament allows to specify the nub
  delegates are no longer uniformely distributed in the plane (personalinterestx, collectiveinteresty).
  This initialization routine generates only two parties with the provided partyradius.
 }
-function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius : Extended) : Boolean;
-var p1 : Extended;
-    i, p1delegates, p2delegates : Longint;
+function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius, majorPartyPercentage : Extended) : Boolean;
+var i, p1delegates, p2delegates : Longint;
 begin
-  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegates!');
+ if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegates!');
+ if (majorPartyPercentage<0.5) then raise Exception.Create('Major party percentage has to be equal or higher 0.5');
+ if (majorPartyPercentage>=1) then raise Exception.Create('Major party percentage has to be lower than 1');
 
  parliament.delegates.size:=nbdelegates;
  parliament.parties.size := 2;
@@ -280,8 +281,7 @@ begin
         if not initParty(parliament, i, partyradius) then Exit;
      end;
 
- p1 := rndgen.Val/high(Cardinal); // strenght of party 1
- p1delegates := Round( (nbdelegates-nbindipendents) * p1);
+ p1delegates := Round( (nbdelegates-nbindipendents) * majorPartyPercentage);
  p2delegates := nbdelegates-p1delegates-nbindipendents;
 
  parliament.parties.par[1].size := p1delegates;
