@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp, parliamentstructure, parliamentoutput, simulation,
-  statistics
+  statistics, analysis
   { you can add units after this };
 
 const ROUNDS = 100;
