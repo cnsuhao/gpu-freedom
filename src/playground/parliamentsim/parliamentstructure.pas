@@ -83,6 +83,8 @@ function getRndminusOnetoOne : Extended;
 function distance(x,y,x2,y2 : Extended) : Extended;
 
 function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
+function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius : Extended) : Boolean;
+
 procedure initLaws(var laws : TLaws; size : Longint);
 procedure initSimStats(var s : TSimStats; size : Longint);
 
@@ -184,6 +186,10 @@ begin
        end;
 end;
 
+{
+Note: this initialization function garuantees that the delegates are uniformely distributed.
+      However, it is not possible to decide how many indipendent delegates there are...
+}
 function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
 var i : Longint;
 begin
@@ -218,6 +224,15 @@ begin
      end;
 
  Result := true;
+end;
+
+{
+Note: using this function to initialize the parliament allows to specify the nubmer of indipendent delegates. However, the
+ delegates are no longer uniformely distributed in the plane (personalinterestx, collectiveinteresty)
+}
+function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius : Extended) : Boolean;
+begin
+
 end;
 
 procedure initLaws(var laws : TLaws; size : Longint);
