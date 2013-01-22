@@ -68,7 +68,9 @@ procedure printStatistic(var stats : TSimstats; round : Longint);
 begin
    log(IntToStr(round)+';'+IntToStr(stats.legislatures[round].nbdelegates)+';'+
                       IntToStr(stats.legislatures[round].nbindipendents)+';'+
-                      IntToStr(stats.legislatures[round].nbparties)+';'+
+                      //IntToStr(stats.legislatures[round].nbparties)+';'+
+                      IntToStr(stats.legislatures[round].nbparty1)+';'+
+                      IntToStr(stats.legislatures[round].nbparty2)+';'+
                       FloatToStr(stats.legislatures[round].approvalrate)+';'+
                       FloatToStr(stats.legislatures[round].totalbenefit)+';', 'statistics.csv');
 end;

@@ -11,8 +11,8 @@
         <UnitName Value="parliasim"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="24"/>
-        <CursorPos X="45" Y="37"/>
+        <TopLine Value="1"/>
+        <CursorPos X="51" Y="44"/>
         <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -20,11 +20,10 @@
         <Filename Value="parliamentstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentstructure"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="258"/>
-        <CursorPos X="41" Y="266"/>
+        <TopLine Value="44"/>
+        <CursorPos X="42" Y="49"/>
         <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -32,10 +31,11 @@
         <Filename Value="parliamentoutput.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentoutput"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="32"/>
-        <CursorPos X="4" Y="57"/>
+        <TopLine Value="33"/>
+        <CursorPos X="66" Y="73"/>
         <UsageCount Value="40"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -45,7 +45,7 @@
         <UnitName Value="simulation"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="50"/>
+        <TopLine Value="1"/>
         <CursorPos X="21" Y="78"/>
         <UsageCount Value="38"/>
         <Loaded Value="True"/>
@@ -56,8 +56,8 @@
         <UnitName Value="statistics"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="10"/>
-        <CursorPos X="65" Y="37"/>
+        <TopLine Value="12"/>
+        <CursorPos X="39" Y="13"/>
         <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit4>

@@ -48,6 +48,11 @@ begin
 
   stats.legislatures[round].approvalrate:=calculateApprovalrate(parliament, laws, round);
   stats.legislatures[round].totalbenefit:=calculateTotalBenefit(parliament, laws, round);
+
+  if parliament.parties.size>0 then
+    stats.legislatures[round].nbparty1:=parliament.parties.par[1].size;
+  if parliament.parties.size>1 then
+    stats.legislatures[round].nbparty2:=parliament.parties.par[2].size;
 end;
 
 end.

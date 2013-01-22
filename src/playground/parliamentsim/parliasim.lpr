@@ -41,7 +41,7 @@ begin
         end;
   WriteLn('Parliament constituted after '+IntToStr(count)+' tries...');
 
-  printParliament(par);
+  //printParliament(par);
   initLaws(laws, 3000);
   initSimStats(simstats, 1000);
   simulateParliament(par, laws);

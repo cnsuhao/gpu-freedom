@@ -65,7 +65,9 @@ end;
 type TLegislatureStats = record
     nbdelegates,
     nbparties,
-    nbindipendents : Longint;
+    nbindipendents,
+    nbparty1,
+    nbparty2 : Longint;
 
     approvalrate,
     totalbenefit : Extended;
