@@ -10,7 +10,8 @@ uses
   statistics, analysis
   { you can add units after this };
 
-const ROUNDS = 100;
+const PARLIAMENT_ROUNDS = 100;
+      LAWS_PROPOSALS = 3000;
 
 type
 
@@ -30,11 +31,11 @@ var   par      : TParliament;
       simstats : TSimStats;
 
 
-procedure simulateLegislature(round : Longint);
+procedure simulateLegislature(round, parliamentsize, nbindipendents : Longint; majorPartyPercentage : Extended);
 var count : Longint;
 begin
   count := 0;
-  while (not initParliamentv2(par, 300, 30, 0.5, 0.7))  do
+  while (not initParliamentv2(par, parliamentsize, nbindipendents, 0.5 {partyradius}, majorPartyPercentage))  do
         begin
           Inc(count);
           if count>1000 then raise Exception.Create('Unable to start legislature!');
@@ -42,21 +43,27 @@ begin
   WriteLn('Parliament constituted after '+IntToStr(count)+' tries...');
 
   //printParliament(par);
-  initLaws(laws, 3000);
-  initSimStats(simstats, 1000);
+  initLaws(laws, LAWS_PROPOSALS);
   simulateParliament(par, laws);
   collectStatistics(par, laws, simstats, round);
   printStatistic(simstats, round);
 end;
 
-procedure TParliamentSim.DoRun;
-var
-  ErrorMsg: String;
-  var i : Longint;
-begin
-  for i:=1 to ROUNDS do
-    simulateLegislature(i);
 
+procedure simulateLegislatures(biground, parliamentsize, nbindipendents : Longint; majorPartyPercentage : Extended);
+var i : Longint;
+begin
+  initSimStats(simstats, PARLIAMENT_ROUNDS);
+  for i:=1 to PARLIAMENT_ROUNDS do
+    simulateLegislature(i, parliamentsize, nbindipendents, majorPartyPercentage);
+
+  //collectBigPartyStats(biground, parliamentsize, nbindipendents, majorPartyPercentage, simstats);
+end;
+
+procedure TParliamentSim.DoRun;
+var ErrorMsg: String;
+begin
+  simulateLegislatures(1, 300, 30, 0.7);
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;
