@@ -63,16 +63,21 @@ end;
 
 
 
+procedure searchOptimalNumberOfIndipendents(parliamentsize : Longint; majorPartyPercentage : Extended);
+var i : Longint;
+begin
+  WriteLn('Optimal number of indipendents should be: '+
+          IntToStr( optimalIndipendentsNumber(parliamentsize, majorPartyPercentage) ));
+
+  for i:=1 to parliamentsize do
+     simulateLegislatures(i, parliamentsize, i, majorPartyPercentage);
+
+
+end;
 
 procedure TParliamentSim.DoRun;
-var ErrorMsg: String;
-    i : Longint;
 begin
-  for i:=1 to 200 do
-     simulateLegislatures(i, 500, 500-i, 0.6);
-
-  WriteLn('Optimal number of indipendents should be: '+
-          IntToStr( optimalIndipendentsNumber(500, 0.6) ));
+  searchOptimalNumberOfIndipendents(500, 0.6);
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;
