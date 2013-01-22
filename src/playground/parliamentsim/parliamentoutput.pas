@@ -10,6 +10,7 @@ uses
 procedure log(str, filename : AnsiString);
 procedure printParliament(var parliament : TParliament);
 procedure printStatistic(var stats : TSimstats; round : Longint);
+procedure printBigPictureStats(biground : Longint; bigpicstats : TBigPictureStats);
 
 implementation
 
@@ -73,6 +74,16 @@ begin
                       IntToStr(stats.legislatures[round].nbparty2)+';'+
                       FloatToStr(stats.legislatures[round].approvalrate)+';'+
                       FloatToStr(stats.legislatures[round].totalbenefit)+';', 'statistics.csv');
+end;
+
+procedure printBigPictureStats(biground : Longint; bigpicstats : TBigPictureStats);
+begin
+    log(IntToStr(biground)+';'+IntToStr(bigpicstats[biground].parliamentsize)+';'+
+                               IntToStr(bigpicstats[biground].nbindipendents)+';'+
+                               FloatToStr(bigpicstats[biground].majorPartyPercentage)+';'+
+                               FloatToStr(bigpicstats[biground].avgApprovalrate)+';'+
+                               FloatToStr(bigpicstats[biground].avgTotalbenefit)+';', 'bigstatistics.csv');
+
 end;
 
 end.

@@ -8,6 +8,8 @@ uses
   Classes, SysUtils, parliamentstructure;
 
   procedure collectStatistics(var parliament : TParliament; var laws : TLaws; var stats : TSimStats; round : Longint);
+  procedure collectBigPictureStats(biground, parliamentsize, nbindipendents : Longint; majorPartyPercentage : Extended;
+                                   var simstats : TSimStats; var bigpic : TBigPictureStats);
 
 implementation
 
@@ -53,6 +55,31 @@ begin
     stats.legislatures[round].nbparty1:=parliament.parties.par[1].size;
   if parliament.parties.size>1 then
     stats.legislatures[round].nbparty2:=parliament.parties.par[2].size;
+end;
+
+
+procedure collectBigPictureStats(biground, parliamentsize, nbindipendents : Longint; majorPartyPercentage : Extended;
+                                 var simstats : TSimStats; var bigpic : TBigPictureStats);
+var i : Longint;
+    sum : Extended;
+begin
+  bigpic[biground].parliamentsize:=parliamentsize;
+  bigpic[biground].nbindipendents:=nbindipendents;
+  bigpic[biground].majorPartyPercentage:=majorPartyPercentage;
+
+  sum := 0;
+  for i:=1 to simstats.size do
+     begin
+       sum := sum + simstats.legislatures[i].approvalrate;
+     end;
+  bigpic[biground].avgApprovalRate:=sum/simstats.size;
+
+  sum := 0;
+  for i:=1 to simstats.size do
+     begin
+       sum := sum + simstats.legislatures[i].totalbenefit;
+     end;
+  bigpic[biground].avgTotalBenefit:=sum/simstats.size;
 end;
 
 end.

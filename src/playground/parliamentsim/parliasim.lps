@@ -9,11 +9,10 @@
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="27"/>
-        <CursorPos X="22" Y="60"/>
+        <TopLine Value="25"/>
+        <CursorPos X="47" Y="61"/>
         <UsageCount Value="52"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -23,8 +22,8 @@
         <UnitName Value="parliamentstructure"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="264"/>
-        <CursorPos X="19" Y="301"/>
+        <TopLine Value="55"/>
+        <CursorPos X="1" Y="88"/>
         <UsageCount Value="52"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -34,8 +33,8 @@
         <UnitName Value="parliamentoutput"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="32"/>
-        <CursorPos X="13" Y="65"/>
+        <TopLine Value="46"/>
+        <CursorPos X="69" Y="85"/>
         <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -45,7 +44,7 @@
         <UnitName Value="simulation"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="50"/>
+        <TopLine Value="5"/>
         <CursorPos X="11" Y="10"/>
         <UsageCount Value="40"/>
         <Loaded Value="True"/>
@@ -54,10 +53,11 @@
         <Filename Value="statistics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="statistics"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="13" Y="10"/>
+        <TopLine Value="42"/>
+        <CursorPos X="24" Y="82"/>
         <UsageCount Value="38"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -106,124 +106,124 @@
     </General>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="simulation.pas"/>
-        <Caret Line="74" Column="64" TopLine="36"/>
-      </Position1>
-      <Position2>
-        <Filename Value="simulation.pas"/>
-        <Caret Line="77" Column="16" TopLine="1"/>
-      </Position2>
-      <Position3>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="88" Column="1" TopLine="60"/>
-      </Position3>
-      <Position4>
-        <Filename Value="parliamentoutput.pas"/>
-        <Caret Line="13" Column="1" TopLine="1"/>
-      </Position4>
-      <Position5>
-        <Filename Value="statistics.pas"/>
-        <Caret Line="16" Column="8" TopLine="1"/>
-      </Position5>
-      <Position6>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="41" Column="3" TopLine="19"/>
-      </Position6>
-      <Position7>
-        <Filename Value="parliamentoutput.pas"/>
-        <Caret Line="72" Column="52" TopLine="32"/>
-      </Position7>
-      <Position8>
-        <Filename Value="parliamentoutput.pas"/>
-        <Caret Line="54" Column="91" TopLine="32"/>
-      </Position8>
-      <Position9>
-        <Filename Value="parliamentoutput.pas"/>
-        <Caret Line="70" Column="68" TopLine="32"/>
-      </Position9>
-      <Position10>
         <Filename Value="parliasim.lpr"/>
         <Caret Line="35" Column="57" TopLine="25"/>
-      </Position10>
-      <Position11>
+      </Position1>
+      <Position2>
         <Filename Value="parliasim.lpr"/>
         <Caret Line="40" Column="84" TopLine="13"/>
-      </Position11>
-      <Position12>
+      </Position2>
+      <Position3>
         <Filename Value="parliasim.lpr"/>
         <Caret Line="37" Column="49" TopLine="15"/>
+      </Position3>
+      <Position4>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="204" Column="64" TopLine="185"/>
+      </Position4>
+      <Position5>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="37" Column="18" TopLine="15"/>
+      </Position5>
+      <Position6>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="258" Column="120" TopLine="242"/>
+      </Position6>
+      <Position7>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="265" Column="30" TopLine="243"/>
+      </Position7>
+      <Position8>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="260" Column="8" TopLine="246"/>
+      </Position8>
+      <Position9>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="280" Column="17" TopLine="51"/>
+      </Position9>
+      <Position10>
+        <Filename Value="analysis.pas"/>
+        <Caret Line="26" Column="1" TopLine="1"/>
+      </Position10>
+      <Position11>
+        <Filename Value="analysis.pas"/>
+        <Caret Line="25" Column="100" TopLine="1"/>
+      </Position11>
+      <Position12>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="260" Column="107" TopLine="239"/>
       </Position12>
       <Position13>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="204" Column="64" TopLine="185"/>
+        <Caret Line="88" Column="129" TopLine="174"/>
       </Position13>
       <Position14>
         <Filename Value="parliasim.lpr"/>
-        <Caret Line="37" Column="18" TopLine="15"/>
+        <Caret Line="64" Column="41" TopLine="28"/>
       </Position14>
       <Position15>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="258" Column="120" TopLine="242"/>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="58" Column="92" TopLine="29"/>
       </Position15>
       <Position16>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="265" Column="30" TopLine="243"/>
+        <Caret Line="90" Column="19" TopLine="68"/>
       </Position16>
       <Position17>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="260" Column="8" TopLine="246"/>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="58" Column="92" TopLine="27"/>
       </Position17>
       <Position18>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="280" Column="17" TopLine="51"/>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="37" Column="84" TopLine="24"/>
       </Position18>
       <Position19>
-        <Filename Value="analysis.pas"/>
-        <Caret Line="26" Column="1" TopLine="1"/>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="45" Column="22" TopLine="24"/>
       </Position19>
       <Position20>
-        <Filename Value="analysis.pas"/>
-        <Caret Line="25" Column="100" TopLine="1"/>
+        <Filename Value="parliamentstructure.pas"/>
+        <Caret Line="90" Column="19" TopLine="68"/>
       </Position20>
       <Position21>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="260" Column="107" TopLine="239"/>
+        <Filename Value="parliasim.lpr"/>
+        <Caret Line="66" Column="32" TopLine="22"/>
       </Position21>
       <Position22>
         <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="88" Column="129" TopLine="174"/>
+        <Caret Line="81" Column="34" TopLine="52"/>
       </Position22>
       <Position23>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="64" Column="41" TopLine="28"/>
+        <Filename Value="statistics.pas"/>
+        <Caret Line="12" Column="3" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="58" Column="92" TopLine="29"/>
+        <Filename Value="statistics.pas"/>
+        <Caret Line="60" Column="145" TopLine="22"/>
       </Position24>
       <Position25>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="90" Column="19" TopLine="68"/>
+        <Filename Value="parliamentoutput.pas"/>
+        <Caret Line="14" Column="1" TopLine="1"/>
       </Position25>
       <Position26>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="58" Column="92" TopLine="27"/>
+        <Filename Value="parliamentoutput.pas"/>
+        <Caret Line="85" Column="64" TopLine="46"/>
       </Position26>
       <Position27>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="37" Column="84" TopLine="24"/>
+        <Filename Value="parliamentoutput.pas"/>
+        <Caret Line="13" Column="77" TopLine="1"/>
       </Position27>
       <Position28>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="45" Column="22" TopLine="24"/>
+        <Filename Value="parliamentoutput.pas"/>
+        <Caret Line="79" Column="77" TopLine="46"/>
       </Position28>
       <Position29>
-        <Filename Value="parliamentstructure.pas"/>
-        <Caret Line="90" Column="19" TopLine="68"/>
+        <Filename Value="parliamentoutput.pas"/>
+        <Caret Line="81" Column="77" TopLine="46"/>
       </Position29>
       <Position30>
-        <Filename Value="parliasim.lpr"/>
-        <Caret Line="66" Column="32" TopLine="22"/>
+        <Filename Value="statistics.pas"/>
+        <Caret Line="82" Column="32" TopLine="42"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

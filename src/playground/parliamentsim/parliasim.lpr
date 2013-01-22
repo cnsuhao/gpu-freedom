@@ -26,10 +26,10 @@ type
   end;
 
 { TParliamentSim }
-var   par      : TParliament;
-      laws     : TLaws;
-      simstats : TSimStats;
-
+var   par         : TParliament;
+      laws        : TLaws;
+      simstats    : TSimStats;
+      bigpicstats : TBigPictureStats;
 
 procedure simulateLegislature(round, parliamentsize, nbindipendents : Longint; majorPartyPercentage : Extended);
 var count : Longint;
@@ -57,7 +57,8 @@ begin
   for i:=1 to PARLIAMENT_ROUNDS do
     simulateLegislature(i, parliamentsize, nbindipendents, majorPartyPercentage);
 
-  //collectBigPictureStats(biground, parliamentsize, nbindipendents, majorPartyPercentage, simstats);
+  collectBigPictureStats(biground, parliamentsize, nbindipendents, majorPartyPercentage, simstats, bigpicstats);
+  printBigPictureStats(biground, bigpicstats);
 end;
 
 procedure TParliamentSim.DoRun;

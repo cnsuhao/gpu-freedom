@@ -13,6 +13,7 @@ const MAX_DELEGATES = 300;
       MAX_TRIES = 10000;
       MAX_LAWS = 3650;
       MAX_LEGISLATURES = 3000;
+      MAX_BIGPICTURE_STATS = 100;
 
 type TDelegate = record
     personalinterestx,
@@ -77,6 +78,16 @@ type TSimStats = record
     legislatures : Array[1..MAX_LEGISLATURES] of TLegislatureStats;
     size : Longint;
 end;
+
+type TBigPictureStatEntry = record
+    parliamentsize, nbindipendents : Longint;
+    majorPartyPercentage : Extended;
+
+    avgApprovalRate,
+    avgTotalBenefit : Extended;
+end;
+
+type TBigPictureStats = Array[1..MAX_BIGPICTURE_STATS] of TBigPictureStatEntry;
 
 
 var rndgen     : TIsaac;
