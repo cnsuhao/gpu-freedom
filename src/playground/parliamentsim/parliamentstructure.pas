@@ -193,7 +193,7 @@ Note: this initialization function garuantees that the delegates are uniformely 
 function initParliament(var parliament : TParliament; nbdelegates, nbparties : Longint; partyradius : Extended) : Boolean;
 var i : Longint;
 begin
- if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegetes!');
+ if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegates!');
 
  parliament.delegates.size:=nbdelegates;
  parliament.parties.size := nbparties;
@@ -226,13 +226,74 @@ begin
  Result := true;
 end;
 
+procedure forceDelegateToParty(var parliament : TParliament; party, delegate : Longint; partyradius : Extended);
+var x, y, partyx, partyy : Extended;
+    count                : Longint;
+begin
+ partyx := parliament.parties.par[party].centerx;
+ partyy := parliament.parties.par[party].centery;
+
+ x := getRndminusOnetoOne;
+ y := getRndminusOnetoOne;
+
+ count := 0;
+ while (distance(x, y, partyx, partyy)>partyradius) do
+    begin
+       Inc(count);
+       if count>MAX_TRIES then raise Exception.Create('Unable to force delegate to party! partyradius too small?');
+       x := getRndminusOnetoOne;
+       y := getRndminusOnetoOne;
+    end;
+
+ parliament.delegates.delg[delegate].personalinterestx := x;
+ parliament.delegates.delg[delegate].collectiveinteresty := y;
+ parliament.delegates.delg[delegate].party := party;
+end;
+
 {
 Note: using this function to initialize the parliament allows to specify the nubmer of indipendent delegates. However, the
- delegates are no longer uniformely distributed in the plane (personalinterestx, collectiveinteresty)
+ delegates are no longer uniformely distributed in the plane (personalinterestx, collectiveinteresty).
+ This initialization routine generates only two parties with the provided partyradius.
 }
 function initParliamentv2(var parliament : TParliament; nbdelegates, nbindipendents : Longint; partyradius : Extended) : Boolean;
+var p1 : Extended;
+    i, p1delegates, p2delegates : Longint;
 begin
+  if nbdelegates>MAX_DELEGATES then raise Exception.Create('Too many delegates!');
 
+ parliament.delegates.size:=nbdelegates;
+ parliament.parties.size := 2;
+ parliament.indipendents:=nbindipendents;
+
+ // we create first the indipendent candidates
+ for i:=1 to nbindipendents do
+     begin
+        initDelegate(parliament, i);
+     end;
+
+ // we define the parties and their radius so that their surface is mutually exclusive
+ parliament.parties.size := 2;
+ for i:=1 to 2 do
+     begin
+        if not initParty(parliament, i, partyradius) then Exit;
+     end;
+
+ p1 := rndgen.Val/high(Cardinal); // strenght of party 1
+ p1delegates := Round( (nbdelegates-nbindipendents) * p1);
+ p2delegates := nbdelegates-p1delegates-nbindipendents;
+
+ parliament.parties.par[1].size := p1delegates;
+ parliament.parties.par[2].size := p2delegates;
+
+
+ // we then make sure the other delegates belong to the correct party
+ for i:=nbindipendents+1 to p1delegates+nbindipendents do
+     forceDelegateToParty(parliament, 1, i, partyradius);
+
+ for i:=p1delegates+nbindipendents+1 to nbdelegates do
+     forceDelegateToParty(parliament, 2, i, partyradius);
+
+ Result := true;
 end;
 
 procedure initLaws(var laws : TLaws; size : Longint);

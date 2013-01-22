@@ -34,7 +34,7 @@ procedure simulateLegislature(round : Longint);
 var count : Longint;
 begin
   count := 0;
-  while (not initParliament(par, 300,2,0.5))  do
+  while (not initParliamentv2(par, 300, 30, 0.5))  do
         begin
           Inc(count);
           if count>1000 then raise Exception.Create('Unable to start legislature!');
