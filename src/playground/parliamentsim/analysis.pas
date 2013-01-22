@@ -22,18 +22,18 @@ interface
 uses
   Classes, SysUtils;
 
-function optimalIndipendentsNumber(delegates : Longint; majorPartyPercentage : Extended) : Extended;
+function optimalIndipendentsNumber(delegates : Longint; majorPartyPercentage : Extended) : Longint;
 
 implementation
 
 // this formula is taken from the article above
-function optimalIndipendentsNumber(delegates : Longint; majorPartyPercentage : Extended) : Extended;
+function optimalIndipendentsNumber(delegates : Longint; majorPartyPercentage : Extended) : Longint;
 var nominator, denominator : Extended;
 begin
   nominator   := 2*delegates - (4*delegates*majorPartyPercentage)+ 4;
   denominator := 1- (4*majorPartyPercentage);
 
-  Result := nominator/denominator;
+  Result := Round(nominator/denominator);
 end;
 
 end.

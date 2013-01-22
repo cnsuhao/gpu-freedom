@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, isaac;
 
-const MAX_DELEGATES = 300;
+const MAX_DELEGATES = 600;
       MAX_PARTIES = 5;
       INDIPENDENT = -1;
       MAX_TRIES = 10000;

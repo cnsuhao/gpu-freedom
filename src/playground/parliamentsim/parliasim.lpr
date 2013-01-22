@@ -40,13 +40,13 @@ begin
           Inc(count);
           if count>1000 then raise Exception.Create('Unable to start legislature!');
         end;
-  WriteLn('Parliament constituted after '+IntToStr(count)+' tries...');
+  //WriteLn('Parliament constituted after '+IntToStr(count)+' tries...');
 
   //printParliament(par);
   initLaws(laws, LAWS_PROPOSALS);
   simulateParliament(par, laws);
   collectStatistics(par, laws, simstats, round);
-  printStatistic(simstats, round);
+  //printStatistic(simstats, round);
 end;
 
 
@@ -61,10 +61,18 @@ begin
   printBigPictureStats(biground, bigpicstats);
 end;
 
+
+
+
 procedure TParliamentSim.DoRun;
 var ErrorMsg: String;
+    i : Longint;
 begin
-  simulateLegislatures(1, 300, 30, 0.7);
+  for i:=1 to 200 do
+     simulateLegislatures(i, 500, 500-i, 0.6);
+
+  WriteLn('Optimal number of indipendents should be: '+
+          IntToStr( optimalIndipendentsNumber(500, 0.6) ));
   WriteLn('Parliament simulation finished');
   Readln;
   Terminate;
