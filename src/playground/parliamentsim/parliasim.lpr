@@ -57,7 +57,7 @@ begin
   for i:=1 to PARLIAMENT_ROUNDS do
     simulateLegislature(i, parliamentsize, nbindipendents, majorPartyPercentage);
 
-  //collectBigPartyStats(biground, parliamentsize, nbindipendents, majorPartyPercentage, simstats);
+  //collectBigPictureStats(biground, parliamentsize, nbindipendents, majorPartyPercentage, simstats);
 end;
 
 procedure TParliamentSim.DoRun;
