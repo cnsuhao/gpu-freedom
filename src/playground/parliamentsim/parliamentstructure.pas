@@ -13,7 +13,7 @@ const MAX_DELEGATES = 600;
       MAX_TRIES = 10000;
       MAX_LAWS = 3650;
       MAX_LEGISLATURES = 3000;
-      MAX_BIGPICTURE_STATS = 100;
+      MAX_BIGPICTURE_STATS = 600;
 
 type TDelegate = record
     personalinterestx,
@@ -87,7 +87,7 @@ type TBigPictureStatEntry = record
     avgTotalBenefit : Extended;
 end;
 
-type TBigPictureStats = Array[1..MAX_BIGPICTURE_STATS] of TBigPictureStatEntry;
+type TBigPictureStats = Array[0..MAX_BIGPICTURE_STATS] of TBigPictureStatEntry;
 
 
 var rndgen     : TIsaac;

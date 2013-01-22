@@ -9,11 +9,10 @@
         <Filename Value="parliasim.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliasim"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="50"/>
-        <CursorPos X="11" Y="72"/>
+        <TopLine Value="36"/>
+        <CursorPos X="28" Y="73"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -21,10 +20,11 @@
         <Filename Value="parliamentstructure.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="parliamentstructure"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
-        <CursorPos X="57" Y="23"/>
+        <TopLine Value="1"/>
+        <CursorPos X="31" Y="16"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -56,8 +56,8 @@
         <UnitName Value="statistics"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="24" Y="82"/>
+        <TopLine Value="42"/>
+        <CursorPos X="1" Y="66"/>
         <UsageCount Value="39"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -68,7 +68,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="325"/>
         <CursorPos X="25" Y="23"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -76,7 +76,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
         <CursorPos X="3" Y="91"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit6>
       <Unit7>
         <Filename Value="..\..\..\..\alconnect\alconnectunit.pas"/>
@@ -87,7 +87,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit7>
       <Unit8>
         <Filename Value="analysis.pas"/>
@@ -223,7 +223,7 @@
       </Position29>
       <Position30>
         <Filename Value="parliasim.lpr"/>
-        <Caret Line="72" Column="59" TopLine="50"/>
+        <Caret Line="72" Column="11" TopLine="50"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

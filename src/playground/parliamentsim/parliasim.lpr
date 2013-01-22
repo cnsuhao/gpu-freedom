@@ -69,7 +69,7 @@ begin
   WriteLn('Optimal number of indipendents should be: '+
           IntToStr( optimalIndipendentsNumber(parliamentsize, majorPartyPercentage) ));
 
-  for i:=1 to parliamentsize do
+  for i:=0 to parliamentsize do
      simulateLegislatures(i, parliamentsize, i, majorPartyPercentage);
 
 
