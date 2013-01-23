@@ -10,8 +10,10 @@ uses
   statistics, analysis
   { you can add units after this };
 
-const PARLIAMENT_ROUNDS = 100;
-      LAWS_PROPOSALS = 3000;
+const
+      PARLIAMENT_SIZE = 300;    // number of delegates in parliament
+      PARLIAMENT_ROUNDS = 100;  // how many rounds for each majorPartyPercentage sweep over legislatures
+      LAWS_PROPOSALS = 2000;    // how many laws proposals in a legislature are proposed (motions)
 
 type
 
@@ -72,16 +74,32 @@ begin
   for i:=0 to parliamentsize do
      simulateLegislatures(i, parliamentsize, i, majorPartyPercentage);
 
-
+  WriteLn('Finishing this round with following results: ');
+  printOptimalIndipendentRate(bigpicstats, parliamentsize, majorPartyPercentage);
 end;
 
 procedure TParliamentSim.DoRun;
+var tick, majorPartyPercentage : Extended;
+    i    : Longint;
 begin
-  searchOptimalNumberOfIndipendents(500, 0.6);
-  WriteLn('Parliament simulation finished');
+  tick := 0.05;
+  for i:=0 to 9 do
+     begin
+       majorPartyPercentage := 0.5 + i * tick;
+       WriteLn;
+       WriteLn('Searching parameter space with '+IntToStr(PARLIAMENT_SIZE)+
+               ' delegates and percentage of major party '+
+               FloatToStr(majorPartyPercentage));
+
+       searchOptimalNumberOfIndipendents(PARLIAMENT_SIZE, majorPartyPercentage);
+
+       WriteLn;
+     end;
+  WriteLn('Parliament simulation finished, check optimal-vs-simulation.csv for results.');
   Readln;
   Terminate;
 end;
+
 
 constructor TParliamentSim.Create(TheOwner: TComponent);
 begin

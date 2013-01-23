@@ -5,12 +5,13 @@ unit parliamentoutput;
 interface
 
 uses
-  Classes, SysUtils, parliamentstructure;
+  Classes, SysUtils, parliamentstructure, analysis;
 
 procedure log(str, filename : AnsiString);
 procedure printParliament(var parliament : TParliament);
 procedure printStatistic(var stats : TSimstats; round : Longint);
 procedure printBigPictureStats(biground : Longint; bigpicstats : TBigPictureStats);
+procedure printOptimalIndipendentRate(bigpicstats : TBigPictureStats; parliamentsize : Longint; majorPartyPercentage : Extended);
 
 implementation
 
@@ -83,7 +84,29 @@ begin
                                FloatToStr(bigpicstats[biground].majorPartyPercentage)+';'+
                                FloatToStr(bigpicstats[biground].avgApprovalrate)+';'+
                                FloatToStr(bigpicstats[biground].avgTotalbenefit)+';', 'bigstatistics.csv');
+end;
 
+
+procedure printOptimalIndipendentRate(bigpicstats : TBigPictureStats; parliamentsize : Longint; majorPartyPercentage : Extended);
+var theoreticalIndipendents, simulationIndipendents, i : Longint;
+    simulationOptimal : Extended;
+begin
+    simulationOptimal := -1000000;
+    simulationIndipendents := -1;
+    for i:=0 to parliamentsize do
+        if bigpicstats[i].avgTotalbenefit>simulationOptimal then
+           begin
+              simulationOptimal := bigpicstats[i].avgTotalbenefit;
+              simulationIndipendents := bigpicstats[i].nbIndipendents;
+           end;
+
+    theoreticalIndipendents := optimalIndipendentsNumber(parliamentsize, majorPartyPercentage);
+    log( FloatToStr(majorPartyPercentage)+';'+
+         IntToStr(parliamentsize)+';'+
+         FloatToStr(simulationOptimal)+';'+
+         IntToStr(simulationIndipendents)+';'+
+         IntToStr(theoreticalIndipendents)+';'
+         , 'optimal-vs-simulation.csv');
 end;
 
 end.
