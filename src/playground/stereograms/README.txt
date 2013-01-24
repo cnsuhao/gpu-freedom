@@ -1,4 +1,4 @@
-Attempt to rewrite in Freepascal C# source code by Oliver Lau published on c't Programmieren magazine of 3/2012
+Succesful attempt to rewrite in Freepascal source code in C# by Oliver Lau published on c't Programmieren magazine of 3/2012
 
 Article source is:
 http://www.heise.de/ct/artikel/Magic-Eye-Movies-1673564.html
