@@ -19,7 +19,7 @@ end;
 var conf : TConfiguration;
 
 procedure initConfiguration();
-procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm, mu : Extended);
+procedure loadConfiguration(E, monitorWidthPx, monitorWidthCm, mu : Extended);
 
 implementation
 
@@ -32,7 +32,7 @@ begin
 end;
 
 
-procedure loadConfiguration(E, twoD, monitorWidthPx, monitorWidthCm, mu : Extended);
+procedure loadConfiguration(E, monitorWidthPx, monitorWidthCm, mu : Extended);
 begin
   initConfiguration();
 

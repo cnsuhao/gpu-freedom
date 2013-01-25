@@ -21,14 +21,12 @@ type
     edtMonitorLength: TEdit;
     edtMonitorWidth: TEdit;
     edtResolution: TEdit;
-    edtPaperDistance: TEdit;
     edtEyeDistance: TEdit;
     lblImageDepth: TLabel;
     texture: TImage;
     Label1: TLabel;
     MonitorLength: TLabel;
     lblMonitorWidth: TLabel;
-    lblPaperDistance: TLabel;
     lblEyeDistance: TLabel;
     OpenDialog: TOpenDialog;
     zimg: TImage;
@@ -77,7 +75,7 @@ begin
            Exit;
          end;
 
-    loadConfiguration(StrToFloat(edtEyeDistance.Text), StrToFloat(edtPaperDistance.Text),
+    loadConfiguration(StrToFloat(edtEyeDistance.Text),
                       StrToFloat(edtMonitorWidth.Text), StrToFloat(edtMonitorLength.Text),
                       StrToFloat(edtMu.Text));
 
@@ -121,7 +119,7 @@ begin
     for y:=0 to zimg.Height-1 do
          begin
            prepareDepthArray(zimg, pDepth, y);
-           makeSameArray(sameArr, pDepth, zimg.Width, 1);
+           makeSameArray(sameArr, pDepth, zimg.Width, zimg.Width/stereoimg.Width);
            //printSameArray(sameArr, zimg.Width);
            //checkSameArray(sameArr, zimg.Width, y);
            colorImageLine(sameArr, zimg, stereoimg, texture, y);
