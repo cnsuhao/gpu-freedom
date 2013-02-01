@@ -43,6 +43,7 @@ begin
       Height := frmCube.Height - Top - 15;
       Width := 2 * 360 + 15;
     end;
+    OpenGLCubeControl.setRotate(true);
     //OpenGLCubeControl.setParameters(world, clima);
 
     Application.AddOnIdleHandler(@OnAppIdle);

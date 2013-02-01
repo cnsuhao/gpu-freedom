@@ -5,12 +5,13 @@ unit plotcubes;
 interface
 
 uses
-  Classes, SysUtils, GL, GLU;
+  Classes, SysUtils, GL, GLU, GLUT, glFonts;
 
 procedure initCubePlot;
 procedure plotCube;
 
 implementation
+
 
 procedure initCubePlot;
 begin
@@ -60,7 +61,9 @@ begin
 	glTexCoord2f(1.0, 1.0); glVertex3f(-1.0,  1.0,  1.0);	// Top Right Of The Texture and Quad
 	glTexCoord2f(0.0, 1.0); glVertex3f(-1.0,  1.0, -1.0);	// Top Left Of The Texture and Quad
 
-  glEnd();					// Done Drawing The Cube
+  glEnd();  // Done Drawing The Cube
+
+  testGLFonts();
 end;
 
 
