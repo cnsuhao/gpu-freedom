@@ -4,37 +4,60 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="cube.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cube"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
       </Unit0>
       <Unit1>
         <Filename Value="cubeunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmCube"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="cubeUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="8" Y="9"/>
-        <UsageCount Value="20"/>
+        <CursorPos X="3" Y="9"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="openglcubecontrol.pas"/>
+        <UnitName Value="openglcubecontrol"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="25" Y="14"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="cubeunit.pas"/>
         <Caret Line="9" Column="25" TopLine="1"/>
       </Position1>
+      <Position2>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="136" Column="4" TopLine="92"/>
+      </Position2>
+      <Position3>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="28" Column="33" TopLine="92"/>
+      </Position3>
+      <Position4>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position4>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

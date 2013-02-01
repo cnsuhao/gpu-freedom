@@ -48,6 +48,7 @@
         <Filename Value="cubeunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmCube"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="cubeUnit"/>
       </Unit1>
@@ -61,6 +62,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="..\..\..\client\lib\ext\misc"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
