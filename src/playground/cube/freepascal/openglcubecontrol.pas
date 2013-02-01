@@ -5,7 +5,7 @@ unit openglcubecontrol;
 interface
 
 uses
-  Classes, Controls, SysUtils, GL, GLU, arcball, OpenGLContext;
+  Classes, Controls, SysUtils, GL, GLU, arcball, OpenGLContext, plotcubes;
 
   type
     TOpenGLCubeControl = class(TOpenGLControl)
@@ -109,12 +109,7 @@ begin
   if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
 
   glEnable(GL_BLEND);
-  {
-  if _sphere then
-    plot3dSphere(_colors)
-  else
-    plot3dTerrain(_colors);
-  }
+  plotCube;
   glDisable(GL_BLEND);
 
 
