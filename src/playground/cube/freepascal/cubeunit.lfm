@@ -4,5 +4,8 @@ object frmCube: TfrmCube
   Top = 176
   Width = 901
   Caption = 'Cube'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnPaint = FormPaint
   LCLVersion = '1.0.2.0'
 end

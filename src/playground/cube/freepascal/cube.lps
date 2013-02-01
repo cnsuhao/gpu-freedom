@@ -18,10 +18,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="cubeUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="3" Y="9"/>
+        <TopLine Value="27"/>
+        <CursorPos X="15" Y="41"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -29,11 +30,10 @@
       <Unit2>
         <Filename Value="openglcubecontrol.pas"/>
         <UnitName Value="openglcubecontrol"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="25" Y="14"/>
+        <TopLine Value="93"/>
+        <CursorPos X="22" Y="129"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -41,7 +41,7 @@
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="4" HistoryIndex="3">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="cubeunit.pas"/>
         <Caret Line="9" Column="25" TopLine="1"/>
@@ -58,6 +58,50 @@
         <Filename Value="openglcubecontrol.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
       </Position4>
+      <Position5>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="9" Column="3" TopLine="1"/>
+      </Position5>
+      <Position6>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="20" Column="44" TopLine="6"/>
+      </Position6>
+      <Position7>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="53" Column="13" TopLine="12"/>
+      </Position7>
+      <Position8>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="69" Column="12" TopLine="28"/>
+      </Position8>
+      <Position9>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="129" Column="41" TopLine="93"/>
+      </Position9>
+      <Position10>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="18" Column="30" TopLine="2"/>
+      </Position10>
+      <Position11>
+        <Filename Value="openglcubecontrol.pas"/>
+        <Caret Line="47" Column="26" TopLine="24"/>
+      </Position11>
+      <Position12>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="22" Column="15" TopLine="10"/>
+      </Position12>
+      <Position13>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="37" Column="20" TopLine="15"/>
+      </Position13>
+      <Position14>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="46" Column="7" TopLine="5"/>
+      </Position14>
+      <Position15>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="69" Column="3" TopLine="35"/>
+      </Position15>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

@@ -8,14 +8,14 @@ uses
   Classes, Controls, SysUtils, GL, GLU, arcball, OpenGLContext;
 
   type
-    TOpenGLWorldControl = class(TOpenGLControl)
+    TOpenGLCubeControl = class(TOpenGLControl)
        public
          constructor Create(obj : TComponent);
          procedure init;
          procedure setRotate(rotate : Boolean);
 
-         procedure openGLWorldControlResize(Sender: TObject);
-         procedure openGLWorldControlPaint(Sender: TObject);
+         procedure openGLCubeControlResize(Sender: TObject);
+         procedure openGLCubeControlPaint(Sender: TObject);
 
          procedure MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
          procedure MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -33,7 +33,7 @@ uses
 
 implementation
 
-constructor TOpenGLWorldControl.Create(obj : TComponent);
+constructor TOpenGLCubeControl.Create(obj : TComponent);
 begin
   inherited Create(obj);
 
@@ -43,24 +43,24 @@ begin
   _angle := 0;
   _rotate := true;
 
-  onPaint := @openGLWorldControlPaint;
-  onResize := @openGLWorldControlResize;
+  onPaint := @openGLCubeControlPaint;
+  onResize := @openGLCubeControlResize;
   onMouseDown := @MouseDown;
   onMouseUP := @MouseUp;
   onMouseMove := @MouseMove;
 end;
 
-procedure TOpenGLWorldControl.setRotate(rotate : Boolean);
+procedure TOpenGLCubeControl.setRotate(rotate : Boolean);
 begin
   _rotate := rotate;
 end;
 
-procedure TOpenGLWorldControl.init;
+procedure TOpenGLCubeControl.init;
 begin
   // init3DGrid(world, clima);
 end;
 
-procedure TOpenGLWorldControl.MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TOpenGLCubeControl.MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button = mbLeft then
@@ -70,14 +70,14 @@ begin
  	end;
 end;
 
-procedure TOpenGLWorldControl.MouseMove(Sender: TObject; Shift: TShiftState; X,
+procedure TOpenGLCubeControl.MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
   theBall.MouseMove(X, Y);
   Paint;
 end;
 
-procedure TOpenGLWorldControl.MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TOpenGLCubeControl.MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button = mbLeft then
@@ -87,7 +87,7 @@ begin
  	end;
 end;
 
-procedure TOpenGLWorldControl.OpenGLWorldControlPaint(Sender: TObject);
+procedure TOpenGLCubeControl.OpenGLCubeControlPaint(Sender: TObject);
 var
   sphere : PGLUquadric;
   Tex1, Tex2: GLuint;
@@ -126,7 +126,7 @@ begin
      end;
 end;
 
-procedure TOpenGLWorldControl.openGLWorldControlResize(Sender: TObject);
+procedure TOpenGLCubeControl.openGLCubeControlResize(Sender: TObject);
 begin
   if Sender=nil then ;
   if Height <= 0 then exit;
