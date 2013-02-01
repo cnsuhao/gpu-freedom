@@ -12,8 +12,8 @@ uses
 
 const
       PARLIAMENT_SIZE = 300;    // number of delegates in parliament
-      PARLIAMENT_ROUNDS = 100;  // how many rounds for each majorPartyPercentage sweep over legislatures
-      LAWS_PROPOSALS = 2000;    // how many laws proposals in a legislature are proposed (motions)
+      PARLIAMENT_ROUNDS = 1000; // how many rounds for each majorPartyPercentage sweep over legislatures
+      LAWS_PROPOSALS = 365;     // how many laws proposals in a legislature are proposed (motions)
 
 type
 

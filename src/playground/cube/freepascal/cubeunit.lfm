@@ -1,0 +1,8 @@
+object frmCube: TfrmCube
+  Left = 723
+  Height = 524
+  Top = 176
+  Width = 901
+  Caption = 'Cube'
+  LCLVersion = '1.0.2.0'
+end
