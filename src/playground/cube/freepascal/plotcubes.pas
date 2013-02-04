@@ -32,6 +32,12 @@ procedure TGLCube.plotCube;
 begin
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
   Tex1 := LoadGLTextureFromFile('01.png');
+  Tex2 := LoadGLTextureFromFile('02.png');
+  Tex3 := LoadGLTextureFromFile('03.png');
+  Tex4 := LoadGLTextureFromFile('04.png');
+  Tex5 := LoadGLTextureFromFile('05.png');
+  Tex6 := LoadGLTextureFromFile('06.png');
+
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, Tex1);
   glBegin(GL_QUADS);
@@ -45,7 +51,6 @@ begin
       glVertex3f( 1,-1, -1);
   glEnd;
 
-  Tex2 := LoadGLTextureFromFile('02.png');
   glBindTexture(GL_TEXTURE_2D, Tex2);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -58,7 +63,6 @@ begin
       glVertex3f(1,-1, 1);
   glEnd;
 
-  Tex3 := LoadGLTextureFromFile('03.png');
   glBindTexture(GL_TEXTURE_2D, Tex3);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -71,7 +75,6 @@ begin
       glVertex3f(-1,-1, 1);
   glEnd;
 
-  Tex4 := LoadGLTextureFromFile('04.png');
   glBindTexture(GL_TEXTURE_2D, Tex4);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -84,7 +87,6 @@ begin
       glVertex3f(-1,-1, 1);
   glEnd;
 
-  Tex5 := LoadGLTextureFromFile('05.png');
   glBindTexture(GL_TEXTURE_2D, Tex5);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -97,7 +99,7 @@ begin
       glVertex3f(-1, 1, 1);
   glEnd;
 
-  Tex6 := LoadGLTextureFromFile('06.png');
+  {
   glBindTexture(GL_TEXTURE_2D, Tex6);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -109,7 +111,7 @@ begin
       glTexCoord2f(1, 1);
       glVertex3f(-1, -1, 1);
   glEnd;
-
+  }
 
   glDisable(GL_TEXTURE_2D);
 end;
