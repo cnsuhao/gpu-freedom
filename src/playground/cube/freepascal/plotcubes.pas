@@ -13,7 +13,7 @@ type TGLCube = class(TObject)
    procedure plotCube;
 
    private
-     Tex1, Tex2: GLuint;
+     Tex1, Tex2, Tex3, Tex4, Tex5, Tex6: GLuint;
 end;
 
 implementation
@@ -26,9 +26,6 @@ end;
 procedure TGLCube.initCubePlot;
 begin
   glClearColor(0.0, 0.0, 0.0, 0.0);
-  glEnable(GL_TEXTURE_2D);
-  Tex1 := LoadGLTextureFromFile('01.png');
-  Tex2 := LoadGLTextureFromFile('02.png');
 end;
 
 procedure TGLCube.plotCube;
@@ -39,17 +36,17 @@ begin
   glBindTexture(GL_TEXTURE_2D, Tex1);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
-      glVertex3f( 1, 1, 0);
+      glVertex3f( 1, 1, -1);
       glTexCoord2f(0, 0);
-      glVertex3f(-1, 1, 0);
+      glVertex3f(-1, 1, -1);
       glTexCoord2f(0, 1);
-      glVertex3f(-1,-1, 0);
+      glVertex3f(-1,-1, -1);
       glTexCoord2f(1, 1);
-      glVertex3f( 1,-1, 0);
+      glVertex3f( 1,-1, -1);
   glEnd;
 
   Tex2 := LoadGLTextureFromFile('02.png');
-  glEnable(GL_TEXTURE_2D);
+
   glBindTexture(GL_TEXTURE_2D, Tex2);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
@@ -61,6 +58,9 @@ begin
       glTexCoord2f(1, 1);
       glVertex3f(1,-1, 1);
   glEnd;
+
+
+
   glDisable(GL_TEXTURE_2D);
 end;
 
