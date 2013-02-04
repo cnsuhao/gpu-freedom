@@ -48,6 +48,8 @@ begin
   onMouseDown := @MouseDown;
   onMouseUP := @MouseUp;
   onMouseMove := @MouseMove;
+
+  init;
 end;
 
 procedure TOpenGLCubeControl.setRotate(rotate : Boolean);
@@ -57,7 +59,7 @@ end;
 
 procedure TOpenGLCubeControl.init;
 begin
-  // init3DGrid(world, clima);
+  initCubePlot;
 end;
 
 procedure TOpenGLCubeControl.MouseDown(Sender: TObject; Button: TMouseButton;
@@ -108,9 +110,9 @@ begin
   glLoadMatrixf(@theBall.Matrix);
   if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
 
-  glEnable(GL_BLEND);
+  //glEnable(GL_BLEND);
   plotCube;
-  glDisable(GL_BLEND);
+  //glDisable(GL_BLEND);
 
 
   SwapBuffers;

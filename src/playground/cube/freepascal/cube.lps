@@ -4,12 +4,12 @@
     <PathDelim Value="\"/>
     <Version Value="9"/>
     <BuildModes Active="Default"/>
-    <Units Count="5">
+    <Units Count="11">
       <Unit0>
         <Filename Value="cube.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cube"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="24"/>
       </Unit0>
       <Unit1>
         <Filename Value="cubeunit.pas"/>
@@ -20,9 +20,9 @@
         <UnitName Value="cubeUnit"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="31"/>
-        <CursorPos X="39" Y="46"/>
-        <UsageCount Value="22"/>
+        <TopLine Value="20"/>
+        <CursorPos X="1" Y="47"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -33,149 +33,216 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="12"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="25"/>
+        <CursorPos X="27" Y="42"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="openglcubecontrol.pas"/>
-        <UnitName Value="openglcubecontrol"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="19"/>
-        <CursorPos X="74" Y="8"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
-      </Unit3>
-      <Unit4>
         <Filename Value="glfonts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="glfonts"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="54"/>
         <CursorPos X="1" Y="94"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="openglcubecontrol.pas"/>
+        <UnitName Value="openglcubecontrol"/>
+        <EditorIndex Value="9"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="90"/>
+        <CursorPos X="33" Y="112"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ImagingJpeg.pas"/>
+        <UnitName Value="ImagingJpeg"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="33"/>
+        <CursorPos X="3" Y="58"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ZLib\dzlib.pas"/>
+        <UnitName Value="dzlib"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="22"/>
+        <CursorPos X="2" Y="44"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Wrappers\Pascal\ImagingImport.pas"/>
+        <UnitName Value="ImagingImport"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="80"/>
+        <CursorPos X="2" Y="33"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Extensions\ImagingOpenGL.pas"/>
+        <UnitName Value="ImagingOpenGL"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="103"/>
+        <CursorPos X="27" Y="16"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Imaging.pas"/>
+        <UnitName Value="Imaging"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1644"/>
+        <CursorPos X="24" Y="1680"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ImagingOptions.inc"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="22"/>
+        <CursorPos X="103" Y="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit10>
     </Units>
     <General>
       <ActiveWindowIndexAtStart Value="0"/>
     </General>
-    <JumpHistory Count="28" HistoryIndex="27">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="cubeunit.pas"/>
-        <Caret Line="9" Column="25" TopLine="1"/>
+        <Caret Line="46" Column="7" TopLine="5"/>
       </Position1>
       <Position2>
-        <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="136" Column="4" TopLine="92"/>
+        <Filename Value="cubeunit.pas"/>
+        <Caret Line="69" Column="3" TopLine="35"/>
       </Position2>
       <Position3>
         <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="112" Column="12" TopLine="88"/>
       </Position3>
       <Position4>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="9" Column="3" TopLine="1"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="8" Column="29" TopLine="1"/>
       </Position4>
       <Position5>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="20" Column="44" TopLine="6"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="63" Column="13" TopLine="19"/>
       </Position5>
       <Position6>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="53" Column="13" TopLine="12"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="27" Column="1" TopLine="24"/>
       </Position6>
       <Position7>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="69" Column="12" TopLine="28"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="69" Column="16" TopLine="40"/>
       </Position7>
       <Position8>
-        <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="129" Column="41" TopLine="93"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="79" Column="27" TopLine="39"/>
       </Position8>
       <Position9>
-        <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="18" Column="30" TopLine="2"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="69" Column="12" TopLine="47"/>
       </Position9>
       <Position10>
-        <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="47" Column="26" TopLine="24"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="81" Column="32" TopLine="55"/>
       </Position10>
       <Position11>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="22" Column="15" TopLine="10"/>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="69" Column="3" TopLine="30"/>
       </Position11>
       <Position12>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="37" Column="20" TopLine="15"/>
+        <Filename Value="glfonts.pas"/>
+        <Caret Line="19" Column="1" TopLine="1"/>
       </Position12>
       <Position13>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="46" Column="7" TopLine="5"/>
+        <Filename Value="glfonts.pas"/>
+        <Caret Line="74" Column="1" TopLine="45"/>
       </Position13>
       <Position14>
-        <Filename Value="cubeunit.pas"/>
-        <Caret Line="69" Column="3" TopLine="35"/>
+        <Filename Value="glfonts.pas"/>
+        <Caret Line="19" Column="1" TopLine="1"/>
       </Position14>
       <Position15>
-        <Filename Value="openglcubecontrol.pas"/>
-        <Caret Line="112" Column="12" TopLine="88"/>
+        <Filename Value="glfonts.pas"/>
+        <Caret Line="85" Column="1" TopLine="59"/>
       </Position15>
       <Position16>
         <Filename Value="plotcubes.pas"/>
-        <Caret Line="8" Column="29" TopLine="1"/>
+        <Caret Line="8" Column="44" TopLine="1"/>
       </Position16>
       <Position17>
         <Filename Value="plotcubes.pas"/>
-        <Caret Line="63" Column="13" TopLine="19"/>
+        <Caret Line="22" Column="40" TopLine="8"/>
       </Position17>
       <Position18>
-        <Filename Value="plotcubes.pas"/>
-        <Caret Line="27" Column="1" TopLine="24"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ImagingJpeg.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position18>
       <Position19>
-        <Filename Value="plotcubes.pas"/>
-        <Caret Line="69" Column="16" TopLine="40"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ZLib\dzlib.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position19>
       <Position20>
-        <Filename Value="plotcubes.pas"/>
-        <Caret Line="79" Column="27" TopLine="39"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ZLib\dzlib.pas"/>
+        <Caret Line="40" Column="25" TopLine="34"/>
       </Position20>
       <Position21>
-        <Filename Value="plotcubes.pas"/>
-        <Caret Line="69" Column="12" TopLine="47"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\ZLib\dzlib.pas"/>
+        <Caret Line="41" Column="20" TopLine="28"/>
       </Position21>
       <Position22>
-        <Filename Value="plotcubes.pas"/>
-        <Caret Line="81" Column="32" TopLine="55"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Wrappers\Pascal\ImagingImport.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position22>
       <Position23>
         <Filename Value="plotcubes.pas"/>
-        <Caret Line="69" Column="3" TopLine="30"/>
+        <Caret Line="8" Column="59" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="glfonts.pas"/>
-        <Caret Line="19" Column="1" TopLine="1"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Extensions\ImagingOpenGL.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position24>
       <Position25>
-        <Filename Value="glfonts.pas"/>
-        <Caret Line="74" Column="1" TopLine="45"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Imaging.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position25>
       <Position26>
-        <Filename Value="glfonts.pas"/>
-        <Caret Line="19" Column="1" TopLine="1"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Extensions\ImagingOpenGL.pas"/>
+        <Caret Line="44" Column="3" TopLine="22"/>
       </Position26>
       <Position27>
-        <Filename Value="glfonts.pas"/>
-        <Caret Line="85" Column="1" TopLine="59"/>
+        <Filename Value="..\..\..\client\lib\ext\vampyre\Source\Extensions\ImagingOpenGL.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position27>
       <Position28>
         <Filename Value="plotcubes.pas"/>
-        <Caret Line="8" Column="44" TopLine="1"/>
+        <Caret Line="29" Column="3" TopLine="10"/>
       </Position28>
+      <Position29>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="35" Column="13" TopLine="7"/>
+      </Position29>
+      <Position30>
+        <Filename Value="plotcubes.pas"/>
+        <Caret Line="20" Column="28" TopLine="8"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

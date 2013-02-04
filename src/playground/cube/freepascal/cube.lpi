@@ -71,9 +71,10 @@
       <Filename Value="cube"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\..\..\client\lib\ext\misc"/>
-      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      <IncludeFiles Value="$(ProjOutDir);..\..\..\client\lib\ext\vampyre\Source"/>
+      <Libraries Value="..\..\..\client\lib\ext\vampyre\Extras\Extensions\J2KObjects"/>
+      <OtherUnitFiles Value="..\..\..\client\lib\ext\misc;..\..\..\client\lib\ext\vampyre\Source;..\..\..\client\lib\ext\vampyre\Source\Extensions;..\..\..\client\lib\ext\vampyre\Source\JpegLib;..\..\..\client\lib\ext\vampyre\Source\Wrappers\Pascal;..\..\..\client\lib\ext\vampyre\Source\Wrappers;..\..\..\client\lib\ext\vampyre\Source\ZLib;..\..\..\client\lib\ext\vampyre\Extras\Extensions"/>
+      <UnitOutputDirectory Value="D:\Projects\gpu_freedom\src\playground\cube\freepascal\lib"/>
     </SearchPaths>
     <Linking>
       <Options>
