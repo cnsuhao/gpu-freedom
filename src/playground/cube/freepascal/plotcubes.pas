@@ -71,20 +71,45 @@ begin
       glVertex3f(-1,-1, 1);
   glEnd;
 
-  {
   Tex4 := LoadGLTextureFromFile('04.png');
   glBindTexture(GL_TEXTURE_2D, Tex4);
   glBegin(GL_QUADS);
       glTexCoord2f(1, 0);
-      glVertex3f(-1, -1, 1);
-      glTexCoord2f(0, 0);
       glVertex3f(-1, 1, 1);
+      glTexCoord2f(0, 0);
+      glVertex3f(-1, 1, -1);
       glTexCoord2f(0, 1);
-      glVertex3f(-1,-1, 1);
-      glTexCoord2f(1, 1);
       glVertex3f(-1,-1, -1);
+      glTexCoord2f(1, 1);
+      glVertex3f(-1,-1, 1);
   glEnd;
-  }
+
+  Tex5 := LoadGLTextureFromFile('05.png');
+  glBindTexture(GL_TEXTURE_2D, Tex5);
+  glBegin(GL_QUADS);
+      glTexCoord2f(1, 0);
+      glVertex3f(-1, 1,-1);
+      glTexCoord2f(0, 0);
+      glVertex3f(1, 1, -1);
+      glTexCoord2f(0, 1);
+      glVertex3f(1,1, 1);
+      glTexCoord2f(1, 1);
+      glVertex3f(-1, 1, 1);
+  glEnd;
+
+  Tex6 := LoadGLTextureFromFile('06.png');
+  glBindTexture(GL_TEXTURE_2D, Tex6);
+  glBegin(GL_QUADS);
+      glTexCoord2f(1, 0);
+      glVertex3f(-1, -1,-1);
+      glTexCoord2f(0, 0);
+      glVertex3f(1, -1, -1);
+      glTexCoord2f(0, 1);
+      glVertex3f(1, -1, 1);
+      glTexCoord2f(1, 1);
+      glVertex3f(-1, -1, 1);
+  glEnd;
+
 
   glDisable(GL_TEXTURE_2D);
 end;
