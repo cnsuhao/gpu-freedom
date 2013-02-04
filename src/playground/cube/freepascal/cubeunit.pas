@@ -43,7 +43,7 @@ begin
       Height := frmCube.Height - Top - 15;
       Width := 2 * 360 + 15;
     end;
-    OpenGLCubeControl.setRotate(true);
+    OpenGLCubeControl.setRotate(false);
     Application.AddOnIdleHandler(@OnAppIdle);
 end;
 

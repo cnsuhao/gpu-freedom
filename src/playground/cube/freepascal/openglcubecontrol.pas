@@ -11,7 +11,6 @@ uses
     TOpenGLCubeControl = class(TOpenGLControl)
        public
          constructor Create(obj : TComponent);
-         procedure init;
          procedure setRotate(rotate : Boolean);
 
          procedure openGLCubeControlResize(Sender: TObject);
@@ -29,6 +28,7 @@ uses
          cube_rotationz: GLFloat;
          _angle  : Double;
          _rotate : Boolean;
+         glCube  : TGLCube;
    end;
 
 implementation
@@ -49,7 +49,7 @@ begin
   onMouseUP := @MouseUp;
   onMouseMove := @MouseMove;
 
-  init;
+  glCube := TGLCube.Create();
 end;
 
 procedure TOpenGLCubeControl.setRotate(rotate : Boolean);
@@ -57,10 +57,7 @@ begin
   _rotate := rotate;
 end;
 
-procedure TOpenGLCubeControl.init;
-begin
-  initCubePlot;
-end;
+
 
 procedure TOpenGLCubeControl.MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -97,10 +94,6 @@ var
 begin
   if Sender=nil then ;
 
-  glClearColor(0.0, 0.0, 0.0, 0.0);
-  glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
-  glEnable(GL_DEPTH_TEST);
-
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(-2, 2, -1.5, 1.5, -2, 2);
@@ -110,9 +103,9 @@ begin
   glLoadMatrixf(@theBall.Matrix);
   if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
 
-  //glEnable(GL_BLEND);
-  plotCube;
-  //glDisable(GL_BLEND);
+  glEnable(GL_BLEND);
+  glCube.plotCube;
+  glDisable(GL_BLEND);
 
 
   SwapBuffers;
