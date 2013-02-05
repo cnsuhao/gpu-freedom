@@ -94,6 +94,8 @@ var
 begin
   if Sender=nil then ;
 
+  glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   glOrtho(-2, 2, -1.5, 1.5, -2, 2);

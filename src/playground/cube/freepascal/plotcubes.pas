@@ -25,12 +25,59 @@ end;
 
 procedure TGLCube.initCubePlot;
 begin
+  showMessage('I am here');
   glClearColor(0.0, 0.0, 0.0, 0.0);
+
 end;
+
 
 procedure TGLCube.plotCube;
 begin
-  glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+  glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_TEXTURE_2D);
+  Tex1 := LoadGLTextureFromFile('01.png');
+  glBindTexture(GL_TEXTURE_2D, Tex1);
+
+  glBegin(GL_QUADS);
+
+  glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
+  glTexCoord2i(0, 1); glVertex3f(-1, -1,  1);
+  glTexCoord2i(1, 1); glVertex3f(-1,  1,  1);
+  glTexCoord2i(1, 0); glVertex3f(-1,  1, -1);
+
+  glTexCoord2i(0, 0); glVertex3f( 1, -1, -1);
+  glTexCoord2i(0, 1); glVertex3f( 1, -1,  1);
+  glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
+  glTexCoord2i(1, 0); glVertex3f( 1,  1, -1);
+
+  glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
+  glTexCoord2i(0, 1); glVertex3f(-1, -1,  1);
+  glTexCoord2i(1, 1); glVertex3f( 1, -1,  1);
+  glTexCoord2i(1, 0); glVertex3f( 1, -1, -1);
+
+  glTexCoord2i(0, 0); glVertex3f(-1,  1, -1);
+  glTexCoord2i(0, 1); glVertex3f(-1,  1,  1);
+  glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
+  glTexCoord2i(1, 0); glVertex3f( 1,  1, -1);
+
+  glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
+  glTexCoord2i(0, 1); glVertex3f(-1,  1, -1);
+  glTexCoord2i(1, 1); glVertex3f( 1,  1, -1);
+  glTexCoord2i(1, 0); glVertex3f( 1, -1, -1);
+
+  glTexCoord2i(0, 0); glVertex3f(-1, -1,  1);
+  glTexCoord2i(0, 1); glVertex3f(-1,  1,  1);
+  glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
+  glTexCoord2i(1, 0); glVertex3f( 1, -1,  1);
+
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+
+end;
+
+{
+procedure TGLCube.plotCube;
+begin
   Tex1 := LoadGLTextureFromFile('01.png');
   Tex2 := LoadGLTextureFromFile('02.png');
   Tex3 := LoadGLTextureFromFile('03.png');
@@ -115,7 +162,7 @@ begin
 
   glDisable(GL_TEXTURE_2D);
 end;
-
+}
 
 end.
 
