@@ -25,46 +25,54 @@ end;
 
 procedure TGLCube.initCubePlot;
 begin
-  showMessage('I am here');
   glClearColor(0.0, 0.0, 0.0, 0.0);
-
 end;
 
-
+{
 procedure TGLCube.plotCube;
 begin
   glEnable(GL_COLOR_MATERIAL);
   glEnable(GL_TEXTURE_2D);
   Tex1 := LoadGLTextureFromFile('01.png');
-  glBindTexture(GL_TEXTURE_2D, Tex1);
+  Tex2 := LoadGLTextureFromFile('02.png');
+  Tex3 := LoadGLTextureFromFile('03.png');
+  Tex4 := LoadGLTextureFromFile('04.png');
+  Tex5 := LoadGLTextureFromFile('05.png');
+  Tex6 := LoadGLTextureFromFile('06.png');
 
   glBegin(GL_QUADS);
 
+  glBindTexture(GL_TEXTURE_2D, Tex1);
   glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
   glTexCoord2i(0, 1); glVertex3f(-1, -1,  1);
   glTexCoord2i(1, 1); glVertex3f(-1,  1,  1);
   glTexCoord2i(1, 0); glVertex3f(-1,  1, -1);
 
+  glBindTexture(GL_TEXTURE_2D, Tex2);
   glTexCoord2i(0, 0); glVertex3f( 1, -1, -1);
   glTexCoord2i(0, 1); glVertex3f( 1, -1,  1);
   glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
   glTexCoord2i(1, 0); glVertex3f( 1,  1, -1);
 
+  glBindTexture(GL_TEXTURE_2D, Tex3);
   glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
   glTexCoord2i(0, 1); glVertex3f(-1, -1,  1);
   glTexCoord2i(1, 1); glVertex3f( 1, -1,  1);
   glTexCoord2i(1, 0); glVertex3f( 1, -1, -1);
 
+  glBindTexture(GL_TEXTURE_2D, Tex4);
   glTexCoord2i(0, 0); glVertex3f(-1,  1, -1);
   glTexCoord2i(0, 1); glVertex3f(-1,  1,  1);
   glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
   glTexCoord2i(1, 0); glVertex3f( 1,  1, -1);
 
+  glBindTexture(GL_TEXTURE_2D, Tex5);
   glTexCoord2i(0, 0); glVertex3f(-1, -1, -1);
   glTexCoord2i(0, 1); glVertex3f(-1,  1, -1);
   glTexCoord2i(1, 1); glVertex3f( 1,  1, -1);
   glTexCoord2i(1, 0); glVertex3f( 1, -1, -1);
 
+  glBindTexture(GL_TEXTURE_2D, Tex6);
   glTexCoord2i(0, 0); glVertex3f(-1, -1,  1);
   glTexCoord2i(0, 1); glVertex3f(-1,  1,  1);
   glTexCoord2i(1, 1); glVertex3f( 1,  1,  1);
@@ -74,8 +82,8 @@ begin
   glDisable(GL_TEXTURE_2D);
 
 end;
+}
 
-{
 procedure TGLCube.plotCube;
 begin
   Tex1 := LoadGLTextureFromFile('01.png');
@@ -146,23 +154,22 @@ begin
       glVertex3f(-1, 1, 1);
   glEnd;
 
-  {
+
   glBindTexture(GL_TEXTURE_2D, Tex6);
   glBegin(GL_QUADS);
-      glTexCoord2f(1, 0);
-      glVertex3f(-1, -1,-1);
       glTexCoord2f(0, 0);
-      glVertex3f(1, -1, -1);
+      glVertex3f(-1, -1,-1);
       glTexCoord2f(0, 1);
-      glVertex3f(1, -1, 1);
+      glVertex3f(1, -1, -1);
       glTexCoord2f(1, 1);
+      glVertex3f(1, -1, 1);
+      glTexCoord2f(1, 0);
       glVertex3f(-1, -1, 1);
   glEnd;
-  }
 
   glDisable(GL_TEXTURE_2D);
 end;
-}
+
 
 end.
 

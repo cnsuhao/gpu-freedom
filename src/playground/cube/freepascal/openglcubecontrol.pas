@@ -105,9 +105,9 @@ begin
   glLoadMatrixf(@theBall.Matrix);
   if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
 
-  glEnable(GL_BLEND);
+  //glEnable(GL_BLEND);
   glCube.plotCube;
-  glDisable(GL_BLEND);
+  //glDisable(GL_BLEND);
 
 
   SwapBuffers;
