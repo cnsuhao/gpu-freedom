@@ -1,18 +1,20 @@
-17.10.2012 0.964 Release Notes
-- Added daylength duration to Simclimate
-- Orbit Simulation and Analysis: added planet textures when zooming close to a planet
-
-16.10.2012 CVS
-- added daylength duration to simclimate frontend :-D it's damn working :-)
  
 ******************
 GPU freedom branch
 
+18.2.2013
+Added sql2xml.php util by Darko Bunic, seiing if it can simplify server development
+
+1.1.2013-15.2.2013
+Exploring new development ways for the coming GPU III release, codenamed Becquerel (joke to the new Nvida Tesla k20x graphics card)
+- Read the book "CUDA by Example"
+
 1.2012-1.2013
+
 in the playground subfolder:
-- added code to create stereograms out of Z-pictures
-- added code to simulate parliament with random quota of indipendents
-- added code to simulate Enigma machine
+- added code to create stereograms out of Z-pictures (could see a stereogram, works)
+- added code to simulate parliament with random quota of indipendents (does not work well)
+- added code to simulate Enigma machine (works fine)
 - added code to compare solvers on hacker.org
 
 10.2009-10.2012 git
@@ -69,9 +71,15 @@ The FPC unit test framework loaded plugin basic, the plugin computed 1+1
 
 ***************************** start of GPU freedom branch
 
-11.2009 0.9631 CVS
+17.10.2012 0.964 Release Notes
+- Added daylength duration to Simclimate
 - Orbit Simulation and Analysis: added planet textures when zooming close to a planet
 
+16.10.2012 CVS
+- added daylength duration to simclimate frontend :-D it's damn working :-)
+
+11.2009 0.9631 CVS
+- Orbit Simulation and Analysis: added planet textures when zooming close to a planet
 
 16.9.2009 0.963 Release Notes
 - Several improvements in simclimate frontend:
