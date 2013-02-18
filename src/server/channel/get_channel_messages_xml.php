@@ -38,7 +38,7 @@ while ($i<$num) {
    
    echo "   <msg>\n";
    echo "      <id>$id</id>\n";
-   echo "      <content><![CDATA[$content]]></content>";
+   echo "      <content><![CDATA[$content]]></content>\n";
    echo "      <nodeid>$nodeid</nodeid>\n";
    echo "      <nodename>$nodename</nodename>\n";
    echo "      <user>$user</user>\n";

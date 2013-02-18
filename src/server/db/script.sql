@@ -101,3 +101,5 @@ CREATE TABLE `tbjobresult` (
 `ip` VARCHAR( 32 ) NULL ,
 `create_dt` DATETIME NOT NULL
 ) ENGINE = MYISAM ;
+
+INSERT INTO `gpu_server`.`tbchannel` (`id`, `nodeid`, `nodename`, `user`, `channame`, `chantype`, `content`, `ip`, `usertime_dt`, `create_dt`) VALUES ('1', '1', 'andromeda', 'dangermouse', 'Altos', 'CHAT', 'Hello World', '127.0.0.1', '2013-02-18 00:00:00', '2013-02-18 00:00:00');
