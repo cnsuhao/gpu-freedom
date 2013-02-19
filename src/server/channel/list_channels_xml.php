@@ -3,6 +3,6 @@
 <channeltype>
 <?php 
 $level_list = Array("type");
-sql2xml('select distinct c.channame from tbchannel c', $level_list, 0);
+sql2xml('select distinct c.channame, c.chantype from tbchannel c', $level_list, 0);
 ?>
 </channeltype>
