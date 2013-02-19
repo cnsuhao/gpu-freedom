@@ -6,12 +6,17 @@
  * Original version by Darko Bunic http://www.redips.net/about/
  * @param string  $sql       - SQL statement
  * @param string  $structure - XML hierarchy
+ *                             (at which column the inner XML starts)
  */
+ 
 function sql2xml($sql, $level_list, $structure = 0) {
-    include_once("../conf/config.inc.php");
+    include("../conf/config.inc.php"); 
+
 	// init variables for row processing
 	$row_current = $row_previous = null;
 	// set MySQL username/password and connect to the database
+	
+	// TODO: this is a persistent connection, check if mysql_connect in combination with mysql_close should be used instead
 	$db_cn = mysql_pconnect($dbserver, $username, $password);
 	mysql_select_db($database, $db_cn);
 	$result = mysql_query($sql, $db_cn);

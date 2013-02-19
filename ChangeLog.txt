@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+19.2.2013
+Started heavy refactoring of the server part, using sql2xml.php. Channels are done.
+
 18.2.2013
 Added sql2xml.php util by Darko Bunic, seiing if it can simplify server development
 
