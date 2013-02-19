@@ -1,5 +1,8 @@
 <?php include('../utils/sql2xml.php') ?>
  
 <channel>
-<?php sql2xml('select c.id, c.nodeid from tbchannel c', '0') ?>
+<?php 
+$level_list = Array("msg");
+sql2xml('select c.id, c.content, c.nodeid, c.nodename, c.user, c.channame, c.chantype, c.usertime_dt, c.create_dt from tbchannel c', $level_list, 0);
+?>
 </channel>

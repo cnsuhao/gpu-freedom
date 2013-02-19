@@ -7,7 +7,7 @@
  * @param string  $sql       - SQL statement
  * @param string  $structure - XML hierarchy
  */
-function sql2xml($sql, $structure = 0) {
+function sql2xml($sql, $level_list, $structure = 0) {
     include_once("../conf/config.inc.php");
 	// init variables for row processing
 	$row_current = $row_previous = null;
@@ -60,7 +60,7 @@ function sql2xml($sql, $structure = 0) {
 				}
 				// set flag to open
 				$tagOpened[$level] = true;
-				print "<ROW$level>\n";
+				print "<row$level>\n";
 				// loop through hierarchy levels
 				for ($i = $pos; $i < $pos + $hierarchy[$level]; $i++) {
 					$name = strtolower(mysql_field_name($result, $i));
@@ -89,7 +89,7 @@ function sql2xml($sql, $structure = 0) {
 	// close opened tags
 	for ($level = $deep; $level >= 0; $level--) {
 		if ($tagOpened[$level]) {
-			print "</ROW$level>\n";
+			print "</row$level>\n";
 		}
 	}
 }
