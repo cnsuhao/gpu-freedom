@@ -25,7 +25,8 @@ echo "<channel>\n";
 
 $level_list = Array("msg");
 sql2xml("select c.id, c.content, c.nodeid, c.nodename, c.user, c.channame, c.chantype, c.usertime_dt, c.create_dt from tbchannel c
-         where channame='$channame' and chantype='$chantype' and c.id>$lastmsg;
+         where channame='$channame' and chantype='$chantype' and c.id>$lastmsg
+		 order by c.id desc;
 		", $level_list, 0);
 		
 echo "</channel>\n";

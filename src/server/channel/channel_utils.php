@@ -6,7 +6,7 @@ function retrieve_valid_lastmsg($channame, $chantype) {
 	include("../conf/config.inc.php");
     
 	$db_cn = mysql_connect($dbserver, $username, $password);
-	@mysql_select_db($database, $db_cn) or die("<b>Error: Unable to select database, please check settings in conf/config.inc.php</b>");
+	@mysql_select_db($database, $db_cn) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 	
 	$sql    = "select max(id) from tbchannel where channame='$channame' and chantype='$chantype';";
 	$result = mysql_query($sql, $db_cn);

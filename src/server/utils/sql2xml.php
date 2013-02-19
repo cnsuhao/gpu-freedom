@@ -18,7 +18,7 @@ function sql2xml($sql, $level_list, $structure = 0) {
 	
 	// TODO: this is a persistent connection, check if mysql_connect in combination with mysql_close should be used instead
 	$db_cn = mysql_pconnect($dbserver, $username, $password);
-	mysql_select_db($database, $db_cn);
+	@mysql_select_db($database, $db_cn) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 	$result = mysql_query($sql, $db_cn);
 	// get number of columns in result
 	$ncols = mysql_num_fields($result);
