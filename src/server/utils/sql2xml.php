@@ -50,7 +50,7 @@ function sql2xml($sql, $level_list, $structure = 0) {
 				// close current tag and all tags below
 				for ($i = $deep; $i >= $level; $i--) {
 					if ($tagOpened[$i]) {
-						print "</row$i>\n";
+						print "</" . $level_list[$i] . ">\n";
 					}
 					$tagOpened[$i] = false;
 				}
@@ -60,7 +60,7 @@ function sql2xml($sql, $level_list, $structure = 0) {
 				}
 				// set flag to open
 				$tagOpened[$level] = true;
-				print "<row$level>\n";
+				print "<" . $level_list[$level] . ">\n";
 				// loop through hierarchy levels
 				for ($i = $pos; $i < $pos + $hierarchy[$level]; $i++) {
 					$name = strtolower(mysql_field_name($result, $i));
@@ -75,21 +75,21 @@ function sql2xml($sql, $level_list, $structure = 0) {
 			$row_current = $row_previous = '';
 		}
 		// print rest
-		print "<row$level>\n";
+		print "<" . $level_list[$level] . ">\n";
 		for ($i = $pos; $i < $ncols; $i++) {
 			$name = strtolower(mysql_field_name($result, $i));
 			print "<$name>";
 			print trim(htmlspecialchars($row[$i],$i));
 			print "</$name>\n";
 		}
-		print "</row$level>\n";
+		print "</" . $level_list[$level] . ">\n";
 		// remember previous row
 		$rowPrev = $row;
 	}
 	// close opened tags
 	for ($level = $deep; $level >= 0; $level--) {
 		if ($tagOpened[$level]) {
-			print "</row$level>\n";
+			print "</" . $level_list[$level] . ">\n";
 		}
 	}
 }
