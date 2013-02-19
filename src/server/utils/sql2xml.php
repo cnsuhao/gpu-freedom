@@ -8,11 +8,12 @@
  * @param string  $structure - XML hierarchy
  */
 function sql2xml($sql, $structure = 0) {
+    include_once("../conf/config.inc.php");
 	// init variables for row processing
 	$row_current = $row_previous = null;
 	// set MySQL username/password and connect to the database
-	$db_cn = mysql_pconnect('localhost', 'username', 'password');
-	mysql_select_db('test', $db_cn);
+	$db_cn = mysql_pconnect($dbserver, $username, $password);
+	mysql_select_db($database, $db_cn);
 	$result = mysql_query($sql, $db_cn);
 	// get number of columns in result
 	$ncols = mysql_num_fields($result);
@@ -49,7 +50,7 @@ function sql2xml($sql, $structure = 0) {
 				// close current tag and all tags below
 				for ($i = $deep; $i >= $level; $i--) {
 					if ($tagOpened[$i]) {
-						print "</ROW$i>\n";
+						print "</row$i>\n";
 					}
 					$tagOpened[$i] = false;
 				}
@@ -62,7 +63,7 @@ function sql2xml($sql, $structure = 0) {
 				print "<ROW$level>\n";
 				// loop through hierarchy levels
 				for ($i = $pos; $i < $pos + $hierarchy[$level]; $i++) {
-					$name = strtoupper(mysql_field_name($result, $i));
+					$name = strtolower(mysql_field_name($result, $i));
 					print "<$name>";
 					print trim(htmlspecialchars($row[$i],$i));
 					print "</$name>\n";
@@ -74,14 +75,14 @@ function sql2xml($sql, $structure = 0) {
 			$row_current = $row_previous = '';
 		}
 		// print rest
-		print "<ROW$level>\n";
+		print "<row$level>\n";
 		for ($i = $pos; $i < $ncols; $i++) {
-			$name = strtoupper(mysql_field_name($result, $i));
+			$name = strtolower(mysql_field_name($result, $i));
 			print "<$name>";
 			print trim(htmlspecialchars($row[$i],$i));
 			print "</$name>\n";
 		}
-		print "</ROW$level>\n";
+		print "</row$level>\n";
 		// remember previous row
 		$rowPrev = $row;
 	}
