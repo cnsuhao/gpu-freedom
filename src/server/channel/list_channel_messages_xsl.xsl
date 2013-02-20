@@ -35,40 +35,38 @@
     <xsl:template match="msg">
         <!-- display msg field -->
         <tr>
-            <td colspan="2">
+            <td>
                 <xsl:value-of select="id"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="chantype"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="channame"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="nodename"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="user"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="content"/>			
             </td>
-			<td colspan="2">
+			<td>
                 <xsl:value-of select="create_dt"/>			
-            </td>
+            </td>	
 			
-        </tr>
-        <!-- client loop -->
-        <xsl:apply-templates select="client"/>
+			<!-- client loop -->
+			<xsl:apply-templates select="client"/>
+		</tr>
     </xsl:template>
  
-    <!-- song template -->
+    <!-- client template -->
     <xsl:template match="client">
-        <tr>
             <td><xsl:value-of select="country"/></td>
             <td><xsl:value-of select="longitude"/></td>
 			<td><xsl:value-of select="latitude"/></td>
-        </tr>
     </xsl:template>
  
 </xsl:stylesheet>
