@@ -9,7 +9,7 @@
                 <title>GPU Server - List latest channel messages (refreshes each minute)</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0"><br>
+			    <img src="../images/gpu-inverse.jpg" border="0" />
                 <h2>List latest channel messages</h2>
                 <table border="1">
 					<tr>
