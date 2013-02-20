@@ -7,7 +7,7 @@
   
 */
 
-include('../utils/sql2xml.php'); 
+include('../utils/sql2xml/sql2xml.php'); 
 include('channel_utils.php');
 
 // retrieving parameters
