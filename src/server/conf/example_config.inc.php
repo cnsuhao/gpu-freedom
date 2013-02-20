@@ -17,7 +17,4 @@ $update_interval = 300;
 // in list pages, how many entries are displayed at once
 $entriesperpage = 25;
 
-// how old are channel entries
-$channel_entries_offset=50;
-
 ?>
