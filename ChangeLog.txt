@@ -1,11 +1,14 @@
 ******************
 GPU freedom branch
 
+20.2.2013
+Server: Applying XSLT transformation to generate HTML file from XML in channel subfolder
+
 19.2.2013
-Started heavy refactoring of the server part, using sql2xml.php. Channels are done.
+Server: Started heavy refactoring of the server part, using sql2xml.php. Channels are done.
 
 18.2.2013
-Added sql2xml.php util by Darko Bunic, seiing if it can simplify server development
+Server: Added sql2xml.php util by Darko Bunic, seiing if it can simplify server development
 
 1.1.2013-15.2.2013
 Exploring new development ways for the coming GPU III release, codenamed Becquerel (joke to the new Nvida Tesla k20x graphics card)
