@@ -8,7 +8,6 @@
 */
 
 include('../utils/sql2xml/sql2xml.php'); 
-include('channel_utils.php');
 
 // retrieving parameters
 if (isset($_GET['channame'])) $channame = $_GET['channame']; else $channame="";
@@ -18,8 +17,8 @@ if (isset($_GET['lastmsg'])) $lastmsg  = $_GET['lastmsg']; else $lastmsg=0;
 // validating parameters
 if ($channame=="") die('ERROR, parameters not defined. Please define at least channame with a valid channel name!');
 
-// if the $lastmsg is not defined, bootstrap it with a valid value
-if ($lastmsg==0) $lastmsg=retrieve_valid_lastmsg($channame, $chantype);
+// if the $lastmsg is not defined, limit results to the last 40 entries
+if ($lastmsg==0) $limitation="LIMIT 0,40"; else $limitation = "";
 
 echo "<channel>\n";
 $level_list = Array("msg", "client");
