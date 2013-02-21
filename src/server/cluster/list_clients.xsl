@@ -3,7 +3,7 @@
     <xsl:output method="html" doctype-public="-//W3C//DTD HTML 4.01//EN"
                 doctype-system="http://www.w3.org/TR/html4/strict.dtd" />
  
-    <xsl:template match="DOCUMENT">
+    <xsl:template match="clients">
         <html>
             <head>
 			    <meta http-equiv="refresh" content="60" />

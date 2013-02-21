@@ -9,10 +9,13 @@
 
  include('../utils/sql2xml/sql2xml.php'); 
  include('../utils/sql2xml/xsl.php');
+ include('../utils/utils.inc.php');
  include('../utils/constants.inc.php');
 
- ob_start();
- echo "<DOCUMENT>\n"; 
+ $xml = getparam('xml', true); 
+ if (!$xml) ob_start();
+ 
+ echo "<clients>\n"; 
  // TODO: reenable condition selecting only nodes which are online
  $level_list = Array("client");
  sql2xml("select id, nodeid, nodename, country, region, city, zip, os, version, acceptincoming, 
@@ -22,7 +25,7 @@
 		 order by update_dt desc 
 		 limit 0, $max_online_clients_xml;
 		", $level_list, 0);
- echo "</DOCUMENT>\n";
+ echo "</clients>\n";
  
- apply_XSLT("cluster");
+ if (!$xml) apply_XSLT("cluster");
 ?>
