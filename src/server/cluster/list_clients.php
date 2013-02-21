@@ -21,7 +21,7 @@
  sql2xml("select id, nodeid, nodename, country, region, city, zip, os, version, acceptincoming, 
                 gigaflops, ram, mhz, nbcpus, bits, isscreensaver, uptime, totaluptime,
  				longitude, latitude, team, description from tbclient 
-         -- where update_dt >= ( curdate() - interval $update_interval second ) 
+         -- where update_dt >= ( curdate() - interval $client_update_interval second ) 
 		 order by update_dt desc 
 		 limit 0, $max_online_clients_xml;
 		", $level_list, 0);
