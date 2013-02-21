@@ -1,7 +1,7 @@
 <?php
 
 function getparam($name, $default) {
- if (isset($_GET["$name"])) return $_GET["$name"]; else return "$default";
+ if (isset($_GET["$name"])) return $_GET["$name"]; else return $default;
 }
 
 function js_redirect($s)

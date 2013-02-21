@@ -22,26 +22,26 @@ $city     = getparam('city', '');
 $zip      = getparam('zip', '');
 $uptime   = getparam('uptime', '');
 $totaluptime = getparam('totaluptime', '');
-$ip          = getparam('ip', '');
 $localip     = getparam('localip', '');
 $port        = getparam('port', '');
-$acceptincoming = getparam('acceptincoming', '');
+$acceptincoming = getparam('acceptincoming', 0);
 $cputype        = getparam('cputype', '');
-$mhz            = getparam('mhz', '');
-$ram            = getparam('ram', '');
-$gigaflops      = getparam('gigaflops', '');
-$bits           = getparam('bits', '');
+$mhz            = getparam('mhz', 0);
+$ram            = getparam('ram', 0);
+$gigaflops      = getparam('gigaflops', 0);
+$bits           = getparam('bits', 32);
 $os             = getparam('os', '');
-$longitude   = getparam('longitude', '');
-$latitude    = getparam('latitude', '');
+$longitude   = getparam('longitude', 0);
+$latitude    = getparam('latitude', 0);
 $version     = getparam('version', '');
 $team        = getparam('team', '');
 $userid      = getparam('userid', '');
 $description = getparam('description', '');
 
-if ($nodeid=="") exit;
+if ( ($nodeid=="") || ($nodename=="") || ($uptime=="") || ($totaluptime=="") ) exit;
+$ip = $_SERVER['REMOTE_ADDR'];
 
-$debug=1;
+$debug=0;
 if ($debug==1) {
 	echo "nodename=$nodename\n";
     echo "nodeid=$nodeid\n";
@@ -74,6 +74,5 @@ include("report_client.inc.php");
 $id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
 						$bits, $os, $longitude, $latitude, $version, $team, $userid, $description);
-
-echo "Done!\n";						
+					
 ?>

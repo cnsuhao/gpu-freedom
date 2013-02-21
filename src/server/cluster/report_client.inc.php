@@ -4,9 +4,9 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 						$bits, $os, $longitude, $latitude, $version, $team, $userid, $description) {
 						
 	include("../conf/config.inc.php");	
-    $debug=1;	
+    $debug=0;	
 	mysql_connect($dbserver, $username, $password);
-    @mysql_select_db($database) or die("<b>Error: Unable to select database, please check settings in conf/config.inc.php</b>");					
+    @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
 	$query="SELECT id FROM tbclient WHERE nodeid='$nodeid' LIMIT 1"; 
     $result=mysql_query($query);
     if ($result!="") { $num=mysql_numrows($result); } else { $num=0; } 
@@ -49,9 +49,10 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 					update_dt=NOW()
 					WHERE id=$id;"; 
       $resultupdate=mysql_query($queryupdate);
-	   if ($debug==1) echo "Update statement is: $queryupdate\n";
+	  if ($debug==1) echo "Update statement is: $queryupdate\n";
     }
 	mysql_close();	
-    return $id;	
+    echo "OK";
+	return $id;	
 }
 ?>
