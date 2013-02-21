@@ -1,6 +1,6 @@
 <parameters>
 <communication>
- <receive_servers_each>14400</receive_servers_each>
+ <receive_servers_each>3600</receive_servers_each>
  <receive_nodes_each>120</receive_nodes_each>
  <transmit_node_each>180</transmit_node_each>
  <receive_jobs_each>120</receive_jobs_each>
