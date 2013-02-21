@@ -11,7 +11,7 @@
  include('../utils/utils.inc.php'); 
  
  // retrieving parameters
- $xml      = getparam("xml", true);
+ $xml      = getparam("xml", false);
  $channame = getparam("channame","%");
  $chantype = getparam("chantype","CHAT");
  $lastmsg  = getparam("lastmsg", 0);
@@ -30,7 +30,6 @@
 		 , $level_list, 9);
  
  echo "</channel>\n";
- 
  if (!$xml) apply_XSLT("channel");
  
  ?>

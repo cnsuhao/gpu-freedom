@@ -12,7 +12,7 @@
  include('../utils/utils.inc.php');
  include('../utils/constants.inc.php');
 
- $xml = getparam('xml', true); 
+ $xml = getparam('xml', false); 
  if (!$xml) ob_start();
  
  echo "<clients>\n"; 
