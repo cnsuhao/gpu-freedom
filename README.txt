@@ -1,5 +1,5 @@
 GPU, a Global Processing Unit
-(c) 2002-2011 the GPU Development Team
+(c) 2002-2013 the GPU Development Team
 
 Most source is under GNU General Public License (see GPL_license.txt).
 The PPL is a modified GPL license to prohibit military use (see PPL_license.txt). 

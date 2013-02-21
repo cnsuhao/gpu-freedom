@@ -2,7 +2,7 @@
 GPU freedom branch
 
 21.2.2013
-Server: Refactoring cluster subfolder of GPU server
+Server: Refactoring cluster subfolder of GPU server. Providing list of servers.
 
 20.2.2013
 Server: Applying XSLT transformation to generate HTML file from XML in channel subfolder
