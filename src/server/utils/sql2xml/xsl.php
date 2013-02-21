@@ -1,4 +1,12 @@
 <?php
+/**
+ * apply_XSLT takes an XML and the XSL transforming into an HTML page
+ *
+ * Adapted from http://www.redips.net/php/from-mysql-to-html-with-xml/
+ * Original version by Darko Bunic http://www.redips.net/about/
+ * @param string  $basedir       - base folder of server, eg. "client", "cluster", "supercluster", etc.
+ *
+ */
 
 function apply_XSLT($basedir) {
 	
