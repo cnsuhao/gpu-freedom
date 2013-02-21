@@ -16,7 +16,7 @@
  if (!$xml) ob_start();
  
  echo "<servers>\n"; 
- // TODO: reenable condition selecting only nodes which are online
+ // TODO: reenable condition selecting only servers which are online
  $level_list = Array("server");
  sql2xml("select id, serverid, servername, serverurl, chatchannel, version, superserver, uptime, totaluptime, 
                  longitude, latitude, activenodes, jobinqueue, create_dt, update_dt
