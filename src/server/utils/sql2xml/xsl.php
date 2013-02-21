@@ -1,4 +1,9 @@
 <?php
+
+function prepare_XSLT() {
+	ob_start();
+}
+
 /**
  * apply_XSLT takes an XML and the XSL transforming into an HTML page
  *
@@ -37,4 +42,7 @@ function apply_XSLT($basedir) {
 	
 	return;
 }
+
+
+
 ?>
