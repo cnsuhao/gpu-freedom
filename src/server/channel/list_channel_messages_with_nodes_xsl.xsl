@@ -6,7 +6,8 @@
     <xsl:template match="DOCUMENT">
         <html>
             <head>
-                <title>GPU Server - List latest channel messages (refreshes each minute)</title>
+			    <meta http-equiv="refresh" content="20" />
+                <title>GPU Server - List latest channel messages (refreshes each 20 seconds)</title>
             </head>
             <body>
 			    <img src="../images/gpu-inverse.jpg" border="0" />
