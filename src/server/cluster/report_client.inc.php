@@ -25,7 +25,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
                                            '$ip', '$localip', '$port', $acceptincoming,
                                            '$cputype', $mhz, $ram, $gigaflops, $bits, '$os',
 									        $longitude, $latitude,
-                                           '$version', '$team', '$userid', 
+                                            $version, '$team', '$userid', 
                                            '$description',										   
 										   NOW(), NOW()
 										   );";
@@ -44,7 +44,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 					ip='$ip', localip='$localip', port='$port', acceptincoming=$acceptincoming,
 					cputype='$cputype', mhz=$mhz, ram=$ram, gigaflops=$gigaflops, bits=$bits, os='$os',
 					longitude=$longitude, latitude=$latitude,
-                    version='$version', team='$team', userid='$userid', 
+                    version=$version, team='$team', userid='$userid', 
                     description='$description',					
 					update_dt=NOW()
 					WHERE id=$id;"; 

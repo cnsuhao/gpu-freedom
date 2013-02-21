@@ -8,7 +8,7 @@
  
  GPU server stores also a last updated information for each computer
  
- This information is then used in list_clients_xsl.php to compile a list
+ This information is then used in list_clients.php to compile a list
  of currently active nodes.
 
 */
@@ -38,7 +38,7 @@ $team        = getparam('team', '');
 $userid      = getparam('userid', '');
 $description = getparam('description', '');
 
-if ( ($nodeid=="") || ($nodename=="") || ($uptime=="") || ($totaluptime=="") ) exit;
+if ( ($nodeid=="") || ($nodename=="") || ($uptime=="") || ($totaluptime=="") ) die("ERROR: please specify at least nodeid, nodename, uptime and totaluptime");
 $ip = $_SERVER['REMOTE_ADDR'];
 
 $debug=0;
