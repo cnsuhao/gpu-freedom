@@ -5,14 +5,16 @@
   Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
   
 */
+include("../utils/utils.inc.php");
 include("../conf/config.inc.php");
-if (isset($_GET['nodename'])) $nodename = $_GET['nodename']; else $nodename="";
-if (isset($_GET['nodeid'])) $nodeid   = $_GET['nodeid'];     else $nodeid="";
-if (isset($_GET['user'])) $user     = $_GET['user'];         else $user="";
-if (isset($_GET['chantype'])) $chantype = $_GET['chantype']; else $chantype="";
-if (isset($_GET['channame'])) $channame = $_GET['channame']; else $channame="";
-if (isset($_GET['usertime'])) $usertime = $_GET['usertime']; else $usertime="";
-if (isset($_GET['content'])) $content  = $_GET['content'];   else $content="";
+
+$nodename = getparam('nodename', '');
+$nodeid   = getparam('nodeid', '');
+$user     = getparam('user', '');
+$chantype = getparam('chantype', '');
+$channame = getparam('channame', '');
+$usertime = getparam('usertime', '');
+$content  = getparam('content', '');
 
 if (($nodename=="") || ($nodeid=="") || ($user=="") || ($chantype=="") || ($channame=="") || ($content=="")) die('ERROR: Parameters not defined');
 

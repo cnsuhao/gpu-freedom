@@ -8,35 +8,36 @@
  
  GPU server stores also a last updated information for each computer
  
- This information is then used in list_computers_online_xml.php to compile a list
+ This information is then used in list_clients_xsl.php to compile a list
  of currently active nodes.
 
 */
+include("../utils/utils.inc.php");
 
-$nodename 		 = $_GET['nodename'];
-$nodeid          = $_GET['nodeid'];
-$country   		 = $_GET['country'];
-$region   		 = $_GET['region'];
-$city   		 = $_GET['city'];
-$zip   		     = $_GET['zip'];
-$uptime    		 = $_GET['uptime'];
-$totaluptime     = $_GET['totaluptime'];
-$ip        		 = $_GET['ip'];
-$localip         = $_GET['localip'];
-$port            = $_GET['port'];
-$acceptincoming  = $_GET['acceptincoming'];
-$cputype         = $_GET['cputype'];
-$mhz		     = $_GET['mhz'];
-$ram             = $_GET['ram'];
-$gigaflops       = $_GET['gigaflops'];
-$bits            = $_GET['bits'];
-$os              = $_GET['os'];
-$longitude       = $_GET['longitude'];
-$latitude        = $_GET['latitude'];
-$version         = $_GET['version'];
-$team            = $_GET['team'];
-$userid          = $_GET['userid'];
-$description     = $_GET['description'];
+$nodename = getparam('nodename', '');
+$nodeid   = getparam('nodeid', '');
+$country  = getparam('country', '');
+$region   = getparam('region', '');
+$city     = getparam('city', '');
+$zip      = getparam('zip', '');
+$uptime   = getparam('uptime', '');
+$totaluptime = getparam('totaluptime', '');
+$ip          = getparam('ip', '');
+$localip     = getparam('localip', '');
+$port        = getparam('port', '');
+$acceptincoming = getparam('acceptincoming', '');
+$cputype        = getparam('cputype', '');
+$mhz            = getparam('mhz', '');
+$ram            = getparam('ram', '');
+$gigaflops      = getparam('gigaflops', '');
+$bits           = getparam('bits', '');
+$os             = getparam('os', '');
+$longitude   = getparam('longitude', '');
+$latitude    = getparam('latitude', '');
+$version     = getparam('version', '');
+$team        = getparam('team', '');
+$userid      = getparam('userid', '');
+$description = getparam('description', '');
 
 if ($nodeid=="") exit;
 
