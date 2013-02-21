@@ -6,7 +6,7 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
     $debug=1;	
 	mysql_connect($dbserver, $username, $password);
     @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
-	$query="SELECT id FROM tbserver WHERE nodeid='$serverid' LIMIT 1"; 
+	$query="SELECT id FROM tbserver WHERE serverid='$serverid' LIMIT 1"; 
     $result=mysql_query($query);
     if ($result!="") { $num=mysql_numrows($result); } else { $num=0; } 
     if ($num==0) {
