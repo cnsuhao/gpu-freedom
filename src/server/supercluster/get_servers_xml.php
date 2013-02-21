@@ -31,3 +31,22 @@
 
 
 </servers>
+
+
+CREATE TABLE IF NOT EXISTS `tbserver` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `serverid` varchar(42) NOT NULL,
+  `servername` varchar(32) NOT NULL,
+  `serverurl`  varchar(256) NOT NULL,
+  `chatchannel` varchar(32) NULL,
+  `version`    double NOT NULL,
+  `superserver`    BOOL NOT NULL,
+  `ip` varchar(32) DEFAULT NULL,
+  `uptime` double NOT NULL,
+  `totaluptime` double NOT NULL,
+  
+  
+  `create_dt` datetime NOT NULL,
+  `update_dt` datetime NULL
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
