@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2013 at 02:57 PM
+-- Generation Time: Feb 21, 2013 at 03:05 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
 (2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(3, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 12, 0, 0, '', '', '', '', '2013-02-21 11:58:24', '2013-02-21 12:02:45'),
+(3, '4', 'piero', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 11, 0, 0, '', '', '', '', '2013-02-21 11:58:24', '2013-02-21 14:59:15'),
 (4, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-21 11:58:49', '2013-02-21 11:58:49');
 
 -- --------------------------------------------------------
@@ -212,7 +212,15 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbserver`
+--
+
+INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `totaluptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
+(1, '1', 'Altos', 'http://127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0, 0, '127.0.0.1', 0, 0, 47, 7, 3, 1, '0000-00-00 00:00:00', NULL),
+(2, '2', 'Orion', 'http://127.0.0.1:8090/superserver', 'orion', 0, 1, '127.0.0.1', 0, 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
