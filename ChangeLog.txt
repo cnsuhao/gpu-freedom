@@ -1,26 +1,26 @@
 ******************
 GPU freedom branch
 
-22.2.2013
+22.2.2013 git
 Server: initial implementation of the superserver logic. Bootstrapping, call to list of superservers and retrieve servers from superserver still missing.
 
-21.2.2013
+21.2.2013 git
 Server: Refactoring cluster subfolder of GPU server. Providing list of servers.
 
-20.2.2013
+20.2.2013 git
 Server: Applying XSLT transformation to generate HTML file from XML in channel subfolder
 
-19.2.2013
+19.2.2013 git
 Server: Started heavy refactoring of the server part, using sql2xml.php. Channels are done.
 
-18.2.2013
+18.2.2013 git
 Server: Added sql2xml.php util by Darko Bunic, seiing if it can simplify server development
 
-1.1.2013-15.2.2013
+1.1.2013-15.2.2013  git
 Exploring new development ways for the coming GPU III release, codenamed Becquerel (joke to the new Nvida Tesla k20x graphics card)
 - Read the book "CUDA by Example"
 
-1.2012-1.2013
+1.2012-1.2013 git
 
 in the playground subfolder:
 - added code to create stereograms out of Z-pictures (could see a stereogram, works)
