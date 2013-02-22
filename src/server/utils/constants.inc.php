@@ -3,6 +3,9 @@
   Constants used by GPU server
 */
 
+// current server version
+$server_version = 0.1;
+
 // cluster settings
 // maximum number of online nodes shown in list_clients.php
 $max_online_clients_xml = 2000;
