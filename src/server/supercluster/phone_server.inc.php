@@ -31,10 +31,8 @@ function call_superserver_phone() {
   //die("<b>$nbscripts $nbmodules $nbprojects $nbbranches $nbsyncs $nbusers $nbmp $nbsb $deltasql_version</b>");
 }
 
-function answer_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue) {
+function answer_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
   include("../conf/config.inc.php");
-  // we retrieve the IP of the caller here  
-  $ip = $_SERVER['REMOTE_ADDR'];
   
   $debug=0;	
   mysql_connect($dbserver, $username, $password);

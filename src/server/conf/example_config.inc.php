@@ -18,4 +18,7 @@ $am_i_superserver = false; // specifies if this server collects information from
 $my_longitude = 14;
 $my_latitude  = 10;
 
+// Parameters which need to be generated in the db
+// serverid
+
 ?>
