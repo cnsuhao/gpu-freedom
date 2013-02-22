@@ -21,17 +21,20 @@ function call_superserver_phone() {
   
   $timeout = 6;
   $old = ini_set('default_socket_timeout', $timeout);
-  $handle = fopen("http://deltasql.sourceforge.net/deltasql/phone_call.php?nbscripts=$nbscripts&nbmodules=$nbmodules&nbprojects=$nbprojects&nbbranches=$nbbranches&nbsyncs=$nbsyncs&nbusers=$nbusers&nbmp=$nbmp&nbsb=$nbsb&version=$deltasql_version", 'r');
+  
+  //TODO: define $superserver in a loop of existing superservers
+  //TODO: retrieve my_server_id from tbparameter
+  //TODO: calculate uptime and totaluptime from parameters
+  $handle = fopen("http://$serverurl/supercluster/phone_call.php?serverid=$my_server_id&servername=$my_server_name&serverurl=$my_server_url&chatchannel=$my_chat_channel&version=$server_version&uptime=$uptime&totaluptime=$totaluptime&longitude=$my_longitude&latitude=$my_latitude&activenodes=$activenodes&jobinqueue=$jobinqueue", 'r');
   ini_set('default_socket_timeout', $old);
   stream_set_timeout($handle, $timeout);
   stream_set_blocking($handle, 0); 
-
   fclose($handle);
 
-  //die("<b>$nbscripts $nbmodules $nbprojects $nbbranches $nbsyncs $nbusers $nbmp $nbsb $deltasql_version</b>");
+  //die("<b>Server name and url: $my_server_name $my_server_url</b>");
 }
 
-function answer_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
+function superserver_answers_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
   include("../conf/config.inc.php");
   
   $debug=0;	

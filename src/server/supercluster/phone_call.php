@@ -18,6 +18,6 @@ $jobinqueue   = getparam('jobinqueue', 0);
 if (($serverid=="") || ($serverurl=="")) die("ERROR: please define at least serverid and serverurl");
 $ip = $_SERVER['REMOTE_ADDR'];
 
-answer_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip);
+superserver_answers_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip);
 
 ?>
