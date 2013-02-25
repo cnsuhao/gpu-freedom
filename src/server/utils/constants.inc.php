@@ -22,5 +22,7 @@ $client_update_interval = 60;
 $server_update_interval = 10; //3600;
 
 // number of closest superservers which are informed of our server
-$nb_superserver_informed = 3;
+$nb_superserver_informed = 2;
+// timeout in seconds for a superserver to report the info
+$max_superserver_timeout = 20;
 ?>
