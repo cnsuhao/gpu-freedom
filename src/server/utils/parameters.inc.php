@@ -26,13 +26,5 @@ function set_db_parameter($paramtype, $paramname, $paramvalue) {
   mysql_query($query); 
 }
 
-function retrieve_salt() {
-  return get_db_parameter('SECURITY','PWD_HASH_SALT', '');
-}
-
-function salt_and_hash($pwd, $salt) {  
-  return md5("$pwd$salt");
-}
-
 
 ?>
