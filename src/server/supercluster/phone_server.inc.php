@@ -10,14 +10,10 @@ function count_records($table) {
   return $nbrecords;
 }
 
-function call_superserver_phone() {
+function call_superserver_phone($serverurl, $activenodes, $jobinqueue) {
   // a connection needs to be established
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
-
-  // collect data for the phone call
-  $activenodes  = count_records("tbclient");
-  $jobinqueue   = count_records("tbjobqueue");
   
   $timeout = 6;
   $old = ini_set('default_socket_timeout', $timeout);
@@ -34,10 +30,30 @@ function call_superserver_phone() {
   //die("<b>Server name and url: $my_server_name $my_server_url</b>");
 }
 
+function call_nearest_superservers() {
+  include("../conf/config.inc.php"); 
+  include("../utils/constants.inc.php");
+
+  // collect data for the phone call
+  $activenodes  = count_records("tbclient");
+  $jobinqueue   = count_records("tbjobqueue");
+
+  mysql_connect($dbserver, $username, $password);
+  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
+  $query="SELECT serverid, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) FROM tbserver 
+          WHERE serverid<>'$my_server_id' 
+		  AND superserver=1
+		  ORDER BY PLANAR_DISTANCE() ASC
+          LIMIT $nb_superserver_informed;";
+  echo "$query";		  
+  $result=mysql_query($query);
+  mysql_close();
+}
+
 function superserver_answers_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
   include("../conf/config.inc.php");
   
-  $debug=0;	
+  $debug=1;	
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
   $query="SELECT id FROM tbserver WHERE serverid='$serverid' LIMIT 1";  
