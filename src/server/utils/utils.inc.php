@@ -19,11 +19,9 @@ function js_cookie($name,$value)
         print "</script>";
 }
 
-function get_parameter_default($paramtype, $paramname, $userid, $defaultparam) {
-  if ($userid=="") $userquery="AND user_id IS NULL";
-  else $userquery="AND user_id=$userid";
-  
-  $query="SELECT paramvalue from tbparameter where paramtype='$paramtype' and paramname='$paramname' $userquery"; 
+function get_db_parameter($paramtype, $paramname, $defaultparam) {
+ 
+  $query="SELECT paramvalue from tbparameter where paramtype='$paramtype' and paramname='$paramname' LIMIT 1;"; 
   $result=mysql_query($query);  
   $num=mysql_numrows($result);
   
@@ -34,28 +32,21 @@ function get_parameter_default($paramtype, $paramname, $userid, $defaultparam) {
   return $paramvalue;
 }
 
-function get_parameter($paramtype, $paramname, $userid) {
-  $paramvalue=get_parameter_default($paramtype,$paramname,$userid,"");
-  return $paramvalue;
-}
 
-function set_parameter($paramtype, $paramname, $paramvalue, $userid) {
-  if ($userid=="") $userupdate="";
-  else $userupdate="AND user_id=$userid";
+function set_db_parameter($paramtype, $paramname, $paramvalue) {
   
   // decide first if we need to insert a new parameter
-  $check = get_parameter_default($paramtype, $paramname, $userid, 'missing parameter');
+  $check = get_db_parameter($paramtype, $paramname, 'missing parameter');
   if ($check=='missing parameter') {
-      if ($userid=="") $userid="NULL";
-	  $query="INSERT INTO tbparameter (id, paramtype, paramname, paramvalue, user_id) VALUES('', '$paramtype', '$paramname', '$paramvalue', $userid);";    	  
+ 	  $query="INSERT INTO tbparameter (id, paramtype, paramname, paramvalue) VALUES('', '$paramtype', '$paramname', '$paramvalue');";    	  
   }
   else
-      $query="UPDATE tbparameter p SET p.paramvalue='$paramvalue' where paramtype='$paramtype' and paramname='$paramname' $userupdate"; 
+      $query="UPDATE tbparameter p SET p.paramvalue='$paramvalue' where paramtype='$paramtype' and paramname='$paramname';"; 
   mysql_query($query); 
 }
 
 function retrieve_salt() {
-  return get_parameter('SECURITY','PWD_HASH_SALT', '');
+  return get_db_parameter('SECURITY','PWD_HASH_SALT', '');
 }
 
 function salt_and_hash($pwd, $salt) {  
