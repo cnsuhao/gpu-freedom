@@ -8,6 +8,8 @@
  
   mysql_connect($dbserver, $username, $password);
  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php'\n");
+
+ set_db_parameter("TEST", "DB_CONNECTION", "OK");
  
  // define an unique server id for this installation
  if (get_db_parameter("CONFIGURATION", "SERVER_ID", "missing")=="missing") {
