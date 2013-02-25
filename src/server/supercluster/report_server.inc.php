@@ -136,8 +136,42 @@ function call_nearest_superservers_to_report_my_status() {
 
 
 function retrieve_server_list_from_nearest_superserver() {
+  include("../conf/config.inc.php");
+  include("../utils/parameters.inc.php");  
+  
+  mysql_connect($dbserver, $username, $password);
+  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");			
 
+  $my_server_id = get_db_parameter("CONFIGURATION", "SERVER_ID", "missing");
+  if ($my_server_id=="missing") die("ERROR: Internal server error, SERVER_ID in TBPARAMETER is missing!");  
+  
+  $query="SELECT servername, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) as distance
+          FROM tbserver 
+          WHERE serverid<>'$my_server_id' 
+		  AND superserver=1
+		  ORDER BY distance ASC
+          LIMIT 1";
+  echo "$query\n";		  
+  $result=mysql_query($query);
+  
+  if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
+  
+  
+  mysql_close();
 
+/*
+$oDOM = new DOMDocument();
+$oDOM->loadXML(file_get_contents('books.xml')); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx
+foreach ($oDOM->getElementsByTagName('book') as $oBookNode)
+{
+    printf(
+        "INSERT INTO table (title, author, description) VALUES ('%s', '%s', '%s')",
+        mysql_real_escape_string($oBookNode->getElementsByTagName('title')->item(0)->nodeValue),
+        mysql_real_escape_string($oBookNode->getElementsByTagName('author')->item(0)->nodeValue),
+        mysql_real_escape_string($oBookNode->getElementsByTagName('description')->item(0)->nodeValue)
+    );
+}
+*/
 }
 
 function call_superserver_if_required() {
