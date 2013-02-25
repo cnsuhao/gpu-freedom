@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2013 at 03:05 PM
+-- Generation Time: Feb 25, 2013 at 09:42 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `gpu_server`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `PLANAR_DISTANCE`(lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE,  lon2 DOUBLE) RETURNS double
+    DETERMINISTIC
+BEGIN
+     DECLARE dist DOUBLE;
+     SET dist = SQRT((lat1-lat2)*(lat1-lat2)+(lon1-lon2)*(lon1-lon2));
+     RETURN dist;
+    END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -99,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
 (2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(3, '4', 'piero', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 11, 0, 0, '', '', '', '', '2013-02-21 11:58:24', '2013-02-21 14:59:15'),
+(3, '4', 'blablabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 64, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-21 11:58:24', '2013-02-21 17:10:12'),
 (4, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-21 11:58:49', '2013-02-21 11:58:49');
 
 -- --------------------------------------------------------
@@ -212,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tbserver`
@@ -220,7 +234,8 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `totaluptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'Altos', 'http://127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0, 0, '127.0.0.1', 0, 0, 47, 7, 3, 1, '0000-00-00 00:00:00', NULL),
-(2, '2', 'Orion', 'http://127.0.0.1:8090/superserver', 'orion', 0, 1, '127.0.0.1', 0, 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL);
+(2, '2', 'Orion', 'http://127.0.0.1:8090/superserver', 'orion', 0, 1, '127.0.0.1', 0, 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL),
+(6, '3', 'Aldebaran', 'http://www.deltasql.org/deltasql', 'aldebaran', 0, 0, NULL, 0, 3, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-21 17:16:36');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
