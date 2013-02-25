@@ -4,6 +4,7 @@ include("phone_server.inc.php");
 include("../utils/utils.inc.php");
 
 $serverid     = getparam('serverid', '');
+$servername   = getparam('servername', '');
 $serverurl    = getparam('serverurl', '');
 $chatchannel  = getparam('chatchannel', '');
 $version      = getparam('version', 0);
