@@ -14,7 +14,7 @@ if (!file_exists("../conf/config.inc.php")) {
  }  
  
 include("../conf/config.inc.php");
-include("../utils/utils.inc.php");
+include("../utils/parameters.inc.php");
 
 
 mysql_connect($dbserver, $username, $password);
