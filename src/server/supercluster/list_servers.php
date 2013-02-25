@@ -18,7 +18,7 @@
  echo "<servers>\n"; 
  // TODO: reenable condition selecting only servers which are online
  $level_list = Array("server");
- sql2xml("select id, serverid, servername, serverurl, chatchannel, version, superserver, uptime, totaluptime, 
+ sql2xml("select id, serverid, servername, serverurl, chatchannel, version, superserver, uptime,  
                  longitude, latitude, activenodes, jobinqueue, create_dt, update_dt
          from tbserver 
          -- where update_dt >= ( curdate() - interval $server_update_interval second ) 

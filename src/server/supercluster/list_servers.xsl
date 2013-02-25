@@ -22,7 +22,6 @@
 						<th>longitude</th>
 						<th>latitude</th>
 						<th>uptime</th>
-						<th>total uptime</th>
 						<th>active nodes</th>
 						<th>jobs in queue</th>
 					</tr>
@@ -59,9 +58,6 @@
 			<td>
                 <xsl:value-of select="uptime"/>			
             </td>				
-			<td>
-                <xsl:value-of select="totaluptime"/>			
-            </td>	
 			<td>
                 <xsl:value-of select="activenodes"/>			
             </td>

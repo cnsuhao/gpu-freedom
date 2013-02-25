@@ -10,7 +10,7 @@ function count_records($table) {
   return $nbrecords;
 }
 
-function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime, $totaluptime) {
+function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime) {
   // a connection needs to be established
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
@@ -21,7 +21,7 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   $timeout = 6;
   $old = ini_set('default_socket_timeout', $timeout);
   
-  $url = "http://$serverurl/supercluster/phone_call.php?serverid=$my_server_id&servername=$my_server_name&serverurl=$my_server_url&chatchannel=$my_default_chat_channel&version=$server_version&uptime=$uptime&totaluptime=$totaluptime&longitude=$my_longitude&latitude=$my_latitude&activenodes=$activenodes&jobinqueue=$jobinqueue";
+  $url = "http://$serverurl/supercluster/report_server.php?serverid=$my_server_id&servername=$my_server_name&serverurl=$my_server_url&chatchannel=$my_default_chat_channel&version=$server_version&uptime=$uptime&longitude=$my_longitude&latitude=$my_latitude&activenodes=$activenodes&jobinqueue=$jobinqueue";
   if ($debug) echo "URL is $url\n";
   
   $handle = fopen($url, 'r');
@@ -33,7 +33,8 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   if ($debug) echo "Phone call over\n";
 }
 
-function superserver_answers_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
+
+function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
   include("../conf/config.inc.php");
   
   $debug=1;	
@@ -46,11 +47,11 @@ function superserver_answers_phone($serverid, $servername, $serverurl, $chatchan
   if ($num==0) {
 	   // we do an INSERT
        $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver,
-	                                       uptime, totaluptime, activenodes, jobinqueue,
+	                                       uptime, activenodes, jobinqueue,
 										   longitude, latitude, ip,
 										   create_dt, update_dt)
 									VALUES('', '$serverid', '$servername', '$serverurl', '$chatchannel', $version, $superserver,
-                                            $uptime, $totaluptime, $activenodes, $jobinqueue,
+                                            $uptime, $activenodes, $jobinqueue,
 											$longitude, $latitude, '$ip',						   
 										    NOW(), NOW()
 										   );";
@@ -65,7 +66,7 @@ function superserver_answers_phone($serverid, $servername, $serverurl, $chatchan
 	  $id=mysql_result($result,0,"id");
 	  $queryupdate="UPDATE tbserver SET 
 	                servername='$servername', serverurl='$serverurl', chatchannel='$chatchannel', superserver=$superserver,
-					uptime=$uptime, totaluptime=$totaluptime, activenodes=$activenodes, jobinqueue=$jobinqueue,
+					uptime=$uptime, activenodes=$activenodes, jobinqueue=$jobinqueue,
 					ip='$ip', 
 					longitude=$longitude, latitude=$latitude, 
                     version=$version, 					
@@ -98,7 +99,6 @@ function call_nearest_superservers() {
   
   // TODO: calculate these two parameters
   $uptime = 0;
-  $totaluptime = 0;
   
   // retrieve servers which are eligible to get the phone call
   $query="SELECT serverid, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) as distance
@@ -116,14 +116,14 @@ function call_nearest_superservers() {
   $i = 0;
   while ($i<$num) {
 	$serverurl = mysql_result($result, $i, 'serverurl'); 
-	call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime, $totaluptime);
+	call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime);
 	$i++;
   } 
   mysql_close();
   
   // now we upgrade also this information on ourself in our tbserver table
-  superserver_answers_phone($my_server_id, $my_server_name, $my_server_url, $my_default_chat_channel, $server_version, $am_i_superserver, $uptime, $totaluptime, 
-                            $my_longitude, $my_latitude, $activenodes, $jobinqueue, "localhost");
+  report_serverinfo($my_server_id, $my_server_name, $my_server_url, $my_default_chat_channel, $server_version, $am_i_superserver, $uptime, $totaluptime, 
+                    $my_longitude, $my_latitude, $activenodes, $jobinqueue, "localhost");
   echo "OK";
 }
 

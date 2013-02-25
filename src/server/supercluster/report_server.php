@@ -13,11 +13,6 @@
 */
 include("../utils/utils.inc.php");
 
-/*
-id, serverid, servername, serverurl, chatchannel, version, superserver, uptime, totaluptime, 
-                 longitude, latitude, activenodes, jobinqueue, create_dt, update_dt
-*/
-
 $serverid     = getparam('serverid', '');
 $servername   = getparam('servername', '');
 $serverurl    = getparam('serverurl', '');
@@ -33,9 +28,9 @@ $jobinqueue   = getparam('jobinqueue', 0);
 if ( ($serverid=="") || ($servername=="") || ($uptime=="") ) die("ERROR: please specify at least serverid, servername and uptime");
 $ip = $_SERVER['REMOTE_ADDR'];
 
-include("report_server.inc.php");
+include("phone_server.inc.php");
 
 $id = report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, 
-                        $longitude, $latitude, $activenodes, $jobinqueue);
+                        $longitude, $latitude, $activenodes, $jobinqueue, $ip);
 					
 ?>
