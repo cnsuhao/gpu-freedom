@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2013 at 10:12 AM
+-- Generation Time: Feb 25, 2013 at 10:41 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -226,16 +226,17 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tbserver`
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `totaluptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(1, '1', 'Altos', 'http://127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0, 0, '127.0.0.1', 0, 0, 47, 7, 3, 1, '0000-00-00 00:00:00', NULL),
-(2, '2', 'Orion', 'http://127.0.0.1:8090/orion', 'orion', 0, 1, '127.0.0.1', 0, 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL),
-(6, '3', 'Aldebaran', 'http://127.0.0.1:8090/aldebaran', '', 0, 1, NULL, 0, 3, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-25 10:05:53');
+(1, '1', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0, 1, '127.0.0.1', 0, 0, 47, 7, 3, 1, '0000-00-00 00:00:00', NULL),
+(2, '2', 'Orion', '127.0.0.1:8090/orion', 'orion', 0, 0, '127.0.0.1', 0, 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL),
+(6, '3', 'Aldebaran', '127.0.0.1:8090/aldebaran', '', 0, 0, NULL, 0, 3, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-25 10:05:53'),
+(7, '13', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, '127.0.0.1', 0, 17, 14, 10, 4, 0, '2013-02-25 10:36:42', '2013-02-25 10:39:57');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
