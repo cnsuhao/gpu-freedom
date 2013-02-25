@@ -135,6 +135,11 @@ function call_nearest_superservers_to_report_my_status() {
 }
 
 
+function retrieve_server_list_from_nearest_superserver() {
+
+
+}
+
 function call_superserver_if_required() {
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
@@ -168,6 +173,7 @@ function call_superserver_if_required() {
 			mysql_close();
 			
 			call_nearest_superservers_to_report_my_status();
+			retrieve_server_list_from_nearest_superserver();
   }
   
   
