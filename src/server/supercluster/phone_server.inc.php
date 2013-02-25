@@ -122,7 +122,7 @@ function call_nearest_superservers() {
   mysql_close();
   
   // now we upgrade also this information on ourself in our tbserver table
-  report_serverinfo($my_server_id, $my_server_name, $my_server_url, $my_default_chat_channel, $server_version, $am_i_superserver, $uptime, $totaluptime, 
+  report_serverinfo($my_server_id, $my_server_name, $my_server_url, $my_default_chat_channel, $server_version, $am_i_superserver, $uptime, 
                     $my_longitude, $my_latitude, $activenodes, $jobinqueue, "localhost");
   echo "OK";
 }
