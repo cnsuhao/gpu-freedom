@@ -22,10 +22,6 @@
 	set_db_parameter("TIME", "UPTIME", "0");
  }
 
- if (get_db_parameter("TIME", "TOTAL_UPTIME", "missing")=="missing") {
-	set_db_parameter("TIME",  "TOTAL_UPTIME", "0");
- }
- 
  if (get_db_parameter("SECURITY", "PWD_HASH_SALT", "missing")=="missing") {
 	// TODO: will this be just the next random number after serverid?
 	$d        = uniqid (rand(), true);

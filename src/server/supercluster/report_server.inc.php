@@ -1,5 +1,5 @@
 <?php
-function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime,
+function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, 
                         $longitude, $latitude, $activenodes, $jobinqueue) {
 						
 	include("../conf/config.inc.php");	
@@ -11,11 +11,11 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
     if ($result!="") { $num=mysql_numrows($result); } else { $num=0; } 
     if ($num==0) {
 	   // we do an INSERT
-       $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver, uptime, totaluptime,
+       $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver, uptime, 
 	                                       longitude, latitude, activenodes, jobinqueue,
 										   create_dt, update_dt)
 									VALUES('', '$serverid', '$servername', '$serverurl', '$chatchannel', $version, $superserver,
-                                            $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue,
+                                            $uptime, $longitude, $latitude, $activenodes, $jobinqueue,
                                            NOW(), NOW()
 										   );";
        $resultinsert=mysql_query($queryinsert);
@@ -29,7 +29,7 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 	  $id=mysql_result($result,0,"id");
 	  $queryupdate="UPDATE tbserver SET 
 	                servername='$servername', serverurl='$serverurl', chatchannel='$chatchannel', version=$version, superserver=$superserver,
-					uptime=$uptime, totaluptime=$totaluptime,
+					uptime=$uptime, 
 					longitude=$longitude, latitude=$latitude,
                     activenodes=$activenodes, jobinqueue=$jobinqueue,
 					update_dt=NOW()
