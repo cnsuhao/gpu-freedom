@@ -89,7 +89,7 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 }
 
 
-function call_nearest_superservers() {
+function call_nearest_superservers_to_report_my_status() {
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
   include_once("../utils/parameters.inc.php");
@@ -167,7 +167,7 @@ function call_superserver_if_required() {
 			
 			mysql_close();
 			
-			call_nearest_superservers();
+			call_nearest_superservers_to_report_my_status();
   }
   
   
