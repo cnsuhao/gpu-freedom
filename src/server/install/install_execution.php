@@ -21,6 +21,11 @@
  if (get_db_parameter("TIME", "UPTIME", "missing")=="missing") {
 	set_db_parameter("TIME", "UPTIME", "0");
  }
+ 
+ if (get_db_parameter("TIME", "LAST_SUPERSERVER_CALL", "missing")=="missing") {
+	set_db_parameter("TIME", "LAST_SUPERSERVER_CALL", time());
+ }
+ 
 
  if (get_db_parameter("SECURITY", "PWD_HASH_SALT", "missing")=="missing") {
 	// TODO: will this be just the next random number after serverid?

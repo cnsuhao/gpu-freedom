@@ -10,6 +10,9 @@
  
  This information is then used in list_clients.php to compile a list
  of currently active nodes.
+ 
+ Additionally, this page might trigger a superserver call, to inform superservers
+ of this server.
 
 */
 include("../utils/utils.inc.php");
@@ -74,5 +77,9 @@ include("report_client.inc.php");
 $id = report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $uptime, $totaluptime,
                         $ip, $localip, $port, $acceptincoming, $cputype, $mhz, $ram, $gigaflops,
 						$bits, $os, $longitude, $latitude, $version, $team, $userid, $description);
+
+//TODO: better would be to schedule this call in a cronjob						
+include("../supercluster/report_server.inc.php");		
+call_superserver_if_required(); 				
 					
 ?>

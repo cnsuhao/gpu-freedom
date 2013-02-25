@@ -1,8 +1,9 @@
 <?php
 
 /*
-  This PHP script contains the logic to handle calls to superservers, to inform superservers of our current online status.
-  Please note that any server can be also superserver.
+  This PHP script contains the logic to handle calls to superservers, so that superservers are aware of our current online status.
+  Please note that any server can be also superserver and can receive calls from other servers. However, only powerful servers 
+  with reliable connectivity should get superserver status.
   
   Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
   
@@ -91,7 +92,7 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 function call_nearest_superservers() {
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
-  include("../utils/parameters.inc.php");
+  include_once("../utils/parameters.inc.php");
 
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
@@ -103,9 +104,9 @@ function call_nearest_superservers() {
   $my_server_id = get_db_parameter("CONFIGURATION", "SERVER_ID", "missing");
   if ($my_server_id=="missing") die("ERROR: Internal server error, SERVER_ID in TBPARAMETER is missing!");  
   
-  // TODO: calculate the parameter
-  $uptime = 0;
-  
+  $uptime = get_db_parameter("TIME", "UPTIME", "missing");
+  if ($uptime=="missing") die("ERROR: Internal error, UPTIME parameter is missing");
+   
   // retrieve servers which are eligible to get the phone call
   $query="SELECT serverid, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) as distance
           FROM tbserver 
@@ -133,5 +134,44 @@ function call_nearest_superservers() {
   echo "OK";
 }
 
+
+function call_superserver_if_required() {
+  include("../conf/config.inc.php"); 
+  include("../utils/constants.inc.php");
+  include("../utils/parameters.inc.php");
+
+  mysql_connect($dbserver, $username, $password);
+  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");	
+
+  $last_update = get_db_parameter("TIME", "LAST_SUPERSERVER_CALL", "missing");
+  if ($last_update=="missing") die("ERROR: Internal error, LAST_SUPERSERVER_CALL parameter is missing");
+  
+  mysql_close();
+  
+  $current_time = time();
+  $difference = ($current_time-$last_update);
+  
+  if ( $difference > $server_update_interval ) {
+            mysql_connect($dbserver, $username, $password);
+            @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");	
+  
+			set_db_parameter("TIME", "LAST_SUPERSERVER_CALL", $current_time);
+			$uptime = get_db_parameter("TIME", "UPTIME", "missing");
+			if ($uptime=="missing") die("ERROR: Internal error, UPTIME parameter is missing");
+			
+			if ($difference <= 24 * 3600) {  // if there is more than one day of difference, we assume the server was offline during this time
+
+				$new_uptime = $uptime + $difference;
+				set_db_parameter("TIME", "UPTIME", $new_uptime);
+			}
+			
+			mysql_close();
+			
+			call_nearest_superservers();
+  }
+  
+  
+  
+}
 
 ?>

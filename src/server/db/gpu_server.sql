@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2013 at 02:53 PM
+-- Generation Time: Feb 25, 2013 at 04:15 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tbclient`
@@ -113,8 +113,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
 (2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(3, '4', 'blablabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 64, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-21 11:58:24', '2013-02-21 17:10:12'),
-(4, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-21 11:58:49', '2013-02-21 11:58:49');
+(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 177, 0, 0, '', '', '', '', '2013-02-25 15:57:26', '2013-02-25 16:12:39');
 
 -- --------------------------------------------------------
 
@@ -189,24 +188,25 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
 CREATE TABLE IF NOT EXISTS `tbparameter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `paramtype` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `paramname` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `paramname` varchar(32) COLLATE latin1_general_ci NOT NULL,
   `paramvalue` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `create_dt` datetime DEFAULT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `paramtype` (`paramtype`,`paramname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `tbparameter`
 --
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`, `create_dt`, `update_dt`) VALUES
-(1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-02-25 11:57:43'),
+(1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-02-25 16:13:37'),
 (9, 'TIME', 'UPTIME', '0', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
-(10, 'TIME', 'TOTAL_UPTIME', '0', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (8, 'CONFIGURATION', 'SERVER_ID', 'fb4bc9a27a2be5e0b7ce08dc2bf09618', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
-(11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44');
+(11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
+(12, 'TIME', 'LAST_SUPERSERVER_CAL', '1361802684', '2013-02-25 15:31:24', '2013-02-25 15:31:24'),
+(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1361805217', '2013-02-25 16:13:37', '2013-02-25 16:13:37');
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
 (2, '2', 'Orion', '127.0.0.1:8090/orion', 'orion', 0, 0, '127.0.0.1', 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL),
-(6, '3', 'Aldebaran', '127.0.0.1:8090/aldebaran', '', 0, 0, NULL, 0, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-25 10:05:53'),
+(6, '3', 'Aldebaran', '127.0.0.1:8090/aldebaran', '', 0, 0, '127.0.0.1', 0, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-25 14:58:33'),
 (8, '713070990de9273edef1b31b9aadd75a', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, '127.0.0.1', 0, 14, 10, 4, 0, '2013-02-25 11:46:07', '2013-02-25 11:47:19');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -19,8 +19,7 @@ $max_online_servers_xml = 2000;
 $client_update_interval = 60;
 
 // this is the update interval in seconds of servers
-$server_update_interval = 3600;
-
+$server_update_interval = 10; //3600;
 
 // number of closest superservers which are informed of our server
 $nb_superserver_informed = 3;
