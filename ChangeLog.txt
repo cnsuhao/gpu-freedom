@@ -3,6 +3,7 @@ GPU freedom branch
 
 25.2.2013 git
 Server: added mySQL stored function PLANAR_DISTANCE(), to retrieve distance on a plane between two points (one day to be replaced by spherical distance)
+        implemented and tested mechanism in which server informs a limited number of closest superservers of its presence
 
 22.2.2013 git
 Server: initial implementation of the superserver logic. Bootstrapping, call to list of superservers and retrieve servers from superserver still missing.
