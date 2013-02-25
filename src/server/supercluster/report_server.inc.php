@@ -1,5 +1,13 @@
 <?php
 
+/*
+  This PHP script contains the logic to handle calls to superservers, to inform superservers of our current online status.
+  Please note that any server can be also superserver.
+  
+  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  
+*/
+
 function count_records($table) {
   $querycount = "SELECT count(*) from $table;";
   $resultcount=mysql_query($querycount);
@@ -76,8 +84,6 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 	  if ($debug==1) echo "Update statement is: $queryupdate\n";
     }
 	mysql_close();
-	
-    echo "OK";
 	return $id;	
 }
 
@@ -97,7 +103,7 @@ function call_nearest_superservers() {
   $my_server_id = get_db_parameter("CONFIGURATION", "SERVER_ID", "missing");
   if ($my_server_id=="missing") die("ERROR: Internal server error, SERVER_ID in TBPARAMETER is missing!");  
   
-  // TODO: calculate these two parameters
+  // TODO: calculate the parameter
   $uptime = 0;
   
   // retrieve servers which are eligible to get the phone call
