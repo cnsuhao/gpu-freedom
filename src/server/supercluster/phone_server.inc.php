@@ -10,7 +10,7 @@ function count_records($table) {
   return $nbrecords;
 }
 
-function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $uptime, $totaluptime) {
+function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime, $totaluptime) {
   // a connection needs to be established
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
@@ -31,45 +31,6 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $uptime, 
   fclose($handle);
 
   if ($debug) echo "Phone call over\n";
-}
-
-function call_nearest_superservers() {
-  include("../conf/config.inc.php"); 
-  include("../utils/constants.inc.php");
-
-  mysql_connect($dbserver, $username, $password);
-  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
-  
-  // collect data for the phone call
-  $activenodes  = count_records("tbclient");
-  $jobinqueue   = count_records("tbjobqueue");
-  
-  // TODO: calculate these two parameters
-  $uptime = 0;
-  $totaluptime = 0;
-  
-  // retrieve servers which are eligible to get the phone call
-  $query="SELECT serverid, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) as distance
-          FROM tbserver 
-          WHERE serverid<>'$my_server_id' 
-		  AND superserver=1
-		  ORDER BY distance ASC
-          LIMIT $nb_superserver_informed;";
-  echo "$query\n";		  
-  $result=mysql_query($query);
-  
-  if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
-  
-  // do the calls
-  $i = 0;
-  while ($i<$num) {
-	$serverurl = mysql_result($result, $i, 'serverurl'); 
-	call_superserver_phone($serverurl, $activenodes, $jobinqueue, $uptime, $totaluptime);
-	$i++;
-  }
-  
-  mysql_close();
-  echo "OK";
 }
 
 function superserver_answers_phone($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $totaluptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
@@ -119,6 +80,52 @@ function superserver_answers_phone($serverid, $servername, $serverurl, $chatchan
 	return $id;	
 }
 
+
+function call_nearest_superservers() {
+  include("../conf/config.inc.php"); 
+  include("../utils/constants.inc.php");
+  include("../utils/parameters.inc.php");
+
+  mysql_connect($dbserver, $username, $password);
+  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
+  
+  // collect data for the phone call
+  $activenodes  = count_records("tbclient");
+  $jobinqueue   = count_records("tbjobqueue");
+  
+  $my_server_id = get_db_parameter("CONFIGURATION", "SERVER_ID", "missing");
+  if ($my_server_id=="missing") die("ERROR: Internal server error, SERVER_ID in TBPARAMETER is missing!");  
+  
+  // TODO: calculate these two parameters
+  $uptime = 0;
+  $totaluptime = 0;
+  
+  // retrieve servers which are eligible to get the phone call
+  $query="SELECT serverid, serverurl, longitude, latitude, PLANAR_DISTANCE(latitude, longitude, $my_longitude, $my_latitude) as distance
+          FROM tbserver 
+          WHERE serverid<>'$my_server_id' 
+		  AND superserver=1
+		  ORDER BY distance ASC
+          LIMIT $nb_superserver_informed;";
+  echo "$query\n";		  
+  $result=mysql_query($query);
+  
+  if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
+  
+  // do the calls
+  $i = 0;
+  while ($i<$num) {
+	$serverurl = mysql_result($result, $i, 'serverurl'); 
+	call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime, $totaluptime);
+	$i++;
+  } 
+  mysql_close();
+  
+  // now we upgrade also this information on ourself in our tbserver table
+  superserver_answers_phone($my_server_id, $my_server_name, $my_server_url, $my_default_chat_channel, $server_version, $am_i_superserver, $uptime, $totaluptime, 
+                            $my_longitude, $my_latitude, $activenodes, $jobinqueue, "localhost");
+  echo "OK";
+}
 
 
 ?>
