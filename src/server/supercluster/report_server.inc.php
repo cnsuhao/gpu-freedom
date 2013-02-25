@@ -9,6 +9,8 @@
   
 */
 
+include_once("../utils/parameters.inc.php");
+
 function count_records($table) {
   $querycount = "SELECT count(*) from $table;";
   $resultcount=mysql_query($querycount);
@@ -92,7 +94,6 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 function call_nearest_superservers_to_report_my_status() {
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
-  include_once("../utils/parameters.inc.php");
 
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
@@ -137,7 +138,6 @@ function call_nearest_superservers_to_report_my_status() {
 
 function retrieve_server_list_from_nearest_superserver() {
   include("../conf/config.inc.php");
-  include("../utils/parameters.inc.php");  
   
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");			
@@ -177,7 +177,6 @@ foreach ($oDOM->getElementsByTagName('book') as $oBookNode)
 function call_superserver_if_required() {
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
-  include("../utils/parameters.inc.php");
 
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");	
