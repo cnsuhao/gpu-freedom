@@ -20,7 +20,7 @@ include("../utils/parameters.inc.php");
 mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php'\n");
 
-$answer = get_db_parameter("TEST", "DB_CONNECTION", "NOT OK");
+$answer = get_db_parameter("TEST", "DB_CONNECTION", "ERROR: DB_CONNECTION parameter missing, launch installer (currently install/install_execution.php");
 
 mysql_close();
 
