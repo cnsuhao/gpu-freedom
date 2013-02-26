@@ -3,6 +3,7 @@ GPU freedom branch
 
 26.2.2013 git
 Server: retrieving server list from closest superserver
+        redefined and simplified datamodel for jobs (tbjob->tbjobdefinition, changed tables tbjobresult and tbjobqueue)
 
 25.2.2013 git
 Server: added mySQL stored function PLANAR_DISTANCE(), to retrieve distance on a plane between two points (one day to be replaced by spherical distance)
