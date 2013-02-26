@@ -116,7 +116,10 @@ function retrieve_server_list_from_nearest_superserver() {
   
   mysql_close();
 
-  save_url("$url/supercluster/list_servers.php?xml=1", "../temp/servers.xml", $max_superserver_timeout);
+  $e = uniqid (rand(), true);
+  $suffix = md5($e);
+  $filename = "../temp/servers_$suffix.xml";
+  save_url("$url/supercluster/list_servers.php?xml=1", $filename, $max_superserver_timeout);
   
 /*
 $oDOM = new DOMDocument();
@@ -131,6 +134,8 @@ foreach ($oDOM->getElementsByTagName('book') as $oBookNode)
     );
 }
 */
+
+  //unlink($filename);
 }
 
 function call_superserver_if_required() {
