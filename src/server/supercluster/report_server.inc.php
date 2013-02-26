@@ -22,6 +22,52 @@ function count_records($table) {
   return $nbrecords;
 }
 
+function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
+  include("../conf/config.inc.php");
+  
+  $debug=1;	
+  mysql_connect($dbserver, $username, $password);
+  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
+  $query="SELECT id FROM tbserver WHERE serverid='$serverid' LIMIT 1";  
+  $result=mysql_query($query);
+  if ($result!="") { $num=mysql_numrows($result); } else { $num=0; } 
+  
+  if ($num==0) {
+	   // we do an INSERT
+       $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver,
+	                                       uptime, activenodes, jobinqueue,
+										   longitude, latitude, ip,
+										   create_dt, update_dt)
+									VALUES('', '$serverid', '$servername', '$serverurl', '$chatchannel', $version, $superserver,
+                                            $uptime, $activenodes, $jobinqueue,
+											$longitude, $latitude, '$ip',						   
+										    NOW(), NOW()
+										   );";
+       $resultinsert=mysql_query($queryinsert);
+	   if ($debug==1) echo "Insert statement is: $queryinsert\n";
+	    
+       // at the moment we set $id to -1, later we might retrieve $id with a query
+       // if necessary
+       $id=-1;	   
+	} else {
+	  // we do an UPDATE
+	  $id=mysql_result($result,0,"id");
+	  $queryupdate="UPDATE tbserver SET 
+	                servername='$servername', serverurl='$serverurl', chatchannel='$chatchannel', superserver=$superserver,
+					uptime=$uptime, activenodes=$activenodes, jobinqueue=$jobinqueue,
+					ip='$ip', 
+					longitude=$longitude, latitude=$latitude, 
+                    version=$version, 					
+					update_dt=NOW()
+					WHERE id=$id;"; 
+      $resultupdate=mysql_query($queryupdate);
+	  if ($debug==1) echo "Update statement is: $queryupdate\n";
+    }
+	mysql_close();
+	
+	return $id;	
+}
+
 function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_server_id, $uptime) {
   // a connection needs to be established
   include("../conf/config.inc.php"); 
@@ -125,12 +171,21 @@ function retrieve_server_list_from_nearest_superserver() {
   $oDOM->loadXML(file_get_contents($filename)); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx
   
   foreach ($oDOM->getElementsByTagName('server') as $oServerNode)   {
-    printf(
-        "INSERT INTO tbserver (serverid, servername, serverurl) VALUES ('%s', '%s', '%s')",
-        mysql_real_escape_string($oServerNode->getElementsByTagName('serverid')->item(0)->nodeValue),
-        mysql_real_escape_string($oServerNode->getElementsByTagName('servername')->item(0)->nodeValue),
-        mysql_real_escape_string($oServerNode->getElementsByTagName('serverurl')->item(0)->nodeValue)
-    );
+        $serverid   = mysql_real_escape_string($oServerNode->getElementsByTagName('serverid')->item(0)->nodeValue);
+		if ($serverid==$my_server_id) continue; // we do not update information on our server from unreliable external sources :-)
+		
+        $servername = mysql_real_escape_string($oServerNode->getElementsByTagName('servername')->item(0)->nodeValue);
+        $serverurl  = mysql_real_escape_string($oServerNode->getElementsByTagName('serverurl')->item(0)->nodeValue); 
+        $chatchannel = mysql_real_escape_string($oServerNode->getElementsByTagName('chatchannel')->item(0)->nodeValue); 
+        $version = mysql_real_escape_string($oServerNode->getElementsByTagName('version')->item(0)->nodeValue); 
+        $superserver = mysql_real_escape_string($oServerNode->getElementsByTagName('superserver')->item(0)->nodeValue); 
+        $uptime = mysql_real_escape_string($oServerNode->getElementsByTagName('uptime')->item(0)->nodeValue); 
+        $longitude = mysql_real_escape_string($oServerNode->getElementsByTagName('longitude')->item(0)->nodeValue); 
+        $latitude = mysql_real_escape_string($oServerNode->getElementsByTagName('latitude')->item(0)->nodeValue); 
+        $activenodes = mysql_real_escape_string($oServerNode->getElementsByTagName('activenodes')->item(0)->nodeValue); 
+        $jobinqueue = mysql_real_escape_string($oServerNode->getElementsByTagName('jobinqueue')->item(0)->nodeValue); 	
+
+        report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $longitude, $latitude, $activenodes, $jobinqueue, "");		
   } //for each
   
   unlink($filename);
@@ -173,51 +228,5 @@ function call_superserver_if_required() {
   
 }
 
-
-function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
-  include("../conf/config.inc.php");
-  
-  $debug=1;	
-  mysql_connect($dbserver, $username, $password);
-  @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
-  $query="SELECT id FROM tbserver WHERE serverid='$serverid' LIMIT 1";  
-  $result=mysql_query($query);
-  if ($result!="") { $num=mysql_numrows($result); } else { $num=0; } 
-  
-  if ($num==0) {
-	   // we do an INSERT
-       $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver,
-	                                       uptime, activenodes, jobinqueue,
-										   longitude, latitude, ip,
-										   create_dt, update_dt)
-									VALUES('', '$serverid', '$servername', '$serverurl', '$chatchannel', $version, $superserver,
-                                            $uptime, $activenodes, $jobinqueue,
-											$longitude, $latitude, '$ip',						   
-										    NOW(), NOW()
-										   );";
-       $resultinsert=mysql_query($queryinsert);
-	   if ($debug==1) echo "Insert statement is: $queryinsert\n";
-	    
-       // at the moment we set $id to -1, later we might retrieve $id with a query
-       // if necessary
-       $id=-1;	   
-	} else {
-	  // we do an UPDATE
-	  $id=mysql_result($result,0,"id");
-	  $queryupdate="UPDATE tbserver SET 
-	                servername='$servername', serverurl='$serverurl', chatchannel='$chatchannel', superserver=$superserver,
-					uptime=$uptime, activenodes=$activenodes, jobinqueue=$jobinqueue,
-					ip='$ip', 
-					longitude=$longitude, latitude=$latitude, 
-                    version=$version, 					
-					update_dt=NOW()
-					WHERE id=$id;"; 
-      $resultupdate=mysql_query($queryupdate);
-	  if ($debug==1) echo "Update statement is: $queryupdate\n";
-    }
-	mysql_close();
-	
-	return $id;	
-}
 
 ?>
