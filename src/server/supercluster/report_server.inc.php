@@ -32,7 +32,16 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   $timeout = $max_superserver_timeout;
   $old = ini_set('default_socket_timeout', $timeout);
   
-  $url = "http://$serverurl/supercluster/report_server.php?serverid=$my_server_id&servername=$my_server_name&serverurl=$my_server_url&chatchannel=$my_default_chat_channel&version=$server_version&uptime=$uptime&longitude=$my_longitude&latitude=$my_latitude&activenodes=$activenodes&jobinqueue=$jobinqueue";
+  $serverid   = urlencode($my_server_id);
+  $servername = urlencode($my_server_name);
+  $myurl      = urlencode($my_server_url);
+  $chat       = urlencode($my_default_chat_channel);
+  $version    = urlencode($server_version);
+  $up         = urlencode($uptime);
+  $lon        = urlencode($my_longitude);
+  $lat        = urlencode($my_latitude);
+  
+  $url = "http://$serverurl/supercluster/report_server.php?serverid=$serverid&servername=$servername&serverurl=$myurl&chatchannel=$chat&version=$version&uptime=$up&longitude=$lon&latitude=$lat&activenodes=$activenodes&jobinqueue=$jobinqueue";
   if ($debug) echo "URL is $url\n";
   
   $handle = fopen($url, 'r');
