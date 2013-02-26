@@ -2,6 +2,8 @@
 
 /*
   This PHP script contains the logic to handle calls to superservers, so that superservers are aware of our current online status.
+  It also contains logic to retrieve the server list from a superserver and to load it in our database.
+  
   Please note that any server can be also superserver and can receive calls from other servers. However, only powerful servers 
   with reliable connectivity should get superserver status.
   
