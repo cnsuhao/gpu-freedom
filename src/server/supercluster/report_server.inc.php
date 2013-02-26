@@ -133,7 +133,7 @@ function retrieve_server_list_from_nearest_superserver() {
     );
   } //for each
   
-  //unlink($filename);
+  unlink($filename);
 }
 
 function call_superserver_if_required() {
