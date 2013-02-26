@@ -1,5 +1,7 @@
 <?php
-	
+/*
+  This script should be executed after the user filled some form and after logic creates the configuration file.
+*/
 
 
  include("../conf/config.inc.php");	

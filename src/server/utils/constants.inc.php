@@ -1,6 +1,6 @@
 <?php
 /*
-  Constants used by GPU server
+  Constants used by GPU server, do not change them! Typically, they are changed between releases, if necessary.
 */
 
 // current server version

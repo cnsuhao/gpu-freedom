@@ -1,4 +1,9 @@
 <?php
+/*
+  General utilities
+  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  
+*/
 
 function getparam($name, $default) {
  if (isset($_GET["$name"])) return $_GET["$name"]; else return $default;
