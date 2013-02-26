@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2013 at 04:15 PM
+-- Generation Time: Feb 26, 2013 at 05:23 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -113,27 +113,23 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
 (2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 177, 0, 0, '', '', '', '', '2013-02-25 15:57:26', '2013-02-25 16:12:39');
+(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-25 15:57:26', '2013-02-26 14:43:24');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbjob`
+-- Table structure for table `tbjobdefinition`
 --
 
-CREATE TABLE IF NOT EXISTS `tbjob` (
+CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jobid` varchar(16) NOT NULL,
+  `jobdefinitionid` varchar(42) NOT NULL,
   `job` varchar(1024) NOT NULL,
-  `workunitincoming` varchar(64) NOT NULL,
-  `workunitoutgoing` varchar(64) NOT NULL,
-  `requests` int(11) NOT NULL DEFAULT '1',
-  `delivered` int(11) NOT NULL DEFAULT '0',
-  `results` int(11) NOT NULL DEFAULT '0',
   `nodename` varchar(64) NOT NULL,
   `nodeid` varchar(42) NOT NULL,
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
+  `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -145,10 +141,14 @@ CREATE TABLE IF NOT EXISTS `tbjob` (
 
 CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `job_id` int(11) NOT NULL,
+  `jobdefinition_id` int(11) NOT NULL,
+  `jobdefinitionid` varchar(42) NOT NULL,
+  `jobqueueid` varchar(42) NOT NULL,
+  `workunitjob` varchar(64) DEFAULT NULL,
+  `workunitresult` varchar(64) DEFAULT NULL,
   `nodeid` varchar(42) NOT NULL,
-  `transmitted` int(11) NOT NULL DEFAULT '0',
-  `received` int(11) NOT NULL DEFAULT '0',
+  `transmitted` int(1) NOT NULL DEFAULT '0',
+  `received` int(1) NOT NULL DEFAULT '0',
   `create_dt` datetime NOT NULL,
   `transmission_dt` datetime DEFAULT NULL,
   `reception_dt` datetime DEFAULT NULL,
@@ -163,9 +163,11 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
 
 CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jobresultid` varchar(42) NOT NULL,
   `job_id` int(11) NOT NULL,
-  `jobid` varchar(16) NOT NULL,
+  `jobid` varchar(42) NOT NULL,
   `jobqueue_id` int(11) NOT NULL,
+  `jobqueueid` varchar(42) NOT NULL,
   `jobresult` varchar(1024) NOT NULL,
   `workunitresult` varchar(64) NOT NULL,
   `iserroneous` int(11) NOT NULL DEFAULT '0',
@@ -202,11 +204,10 @@ CREATE TABLE IF NOT EXISTS `tbparameter` (
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`, `create_dt`, `update_dt`) VALUES
 (1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-02-25 16:13:37'),
-(9, 'TIME', 'UPTIME', '0', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
+(9, 'TIME', 'UPTIME', '80989', '2013-02-25 11:55:44', '2013-02-26 14:43:27'),
 (8, 'CONFIGURATION', 'SERVER_ID', 'fb4bc9a27a2be5e0b7ce08dc2bf09618', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
-(12, 'TIME', 'LAST_SUPERSERVER_CAL', '1361802684', '2013-02-25 15:31:24', '2013-02-25 15:31:24'),
-(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1361805217', '2013-02-25 16:13:37', '2013-02-25 16:13:37');
+(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1361886206', '2013-02-25 16:13:37', '2013-02-26 14:43:27');
 
 -- --------------------------------------------------------
 
@@ -231,16 +232,16 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tbserver`
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(2, '2', 'Orion', '127.0.0.1:8090/orion', 'orion', 0, 0, '127.0.0.1', 0, 30, 3, 12, 3, '0000-00-00 00:00:00', NULL),
-(6, '3', 'Aldebaran', '127.0.0.1:8090/aldebaran', '', 0, 0, '127.0.0.1', 0, 0, 0, 0, 0, '2013-02-21 17:14:58', '2013-02-25 14:58:33'),
-(8, '713070990de9273edef1b31b9aadd75a', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, '127.0.0.1', 0, 14, 10, 4, 0, '2013-02-25 11:46:07', '2013-02-25 11:47:19');
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0, 0, '2013-02-26 14:35:36', '2013-02-26 14:43:33'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 13, 2, '2013-02-26 14:39:33', '2013-02-26 14:43:34');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
