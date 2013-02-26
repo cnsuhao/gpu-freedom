@@ -121,20 +121,18 @@ function retrieve_server_list_from_nearest_superserver() {
   $filename = "../temp/servers_$suffix.xml";
   save_url("$url/supercluster/list_servers.php?xml=1", $filename, $max_superserver_timeout);
   
-/*
-$oDOM = new DOMDocument();
-$oDOM->loadXML(file_get_contents('books.xml')); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx
-foreach ($oDOM->getElementsByTagName('book') as $oBookNode)
-{
+  $oDOM = new DOMDocument();
+  $oDOM->loadXML(file_get_contents($filename)); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx
+  
+  foreach ($oDOM->getElementsByTagName('server') as $oServerNode)   {
     printf(
-        "INSERT INTO table (title, author, description) VALUES ('%s', '%s', '%s')",
-        mysql_real_escape_string($oBookNode->getElementsByTagName('title')->item(0)->nodeValue),
-        mysql_real_escape_string($oBookNode->getElementsByTagName('author')->item(0)->nodeValue),
-        mysql_real_escape_string($oBookNode->getElementsByTagName('description')->item(0)->nodeValue)
+        "INSERT INTO tbserver (serverid, servername, serverurl) VALUES ('%s', '%s', '%s')",
+        mysql_real_escape_string($oServerNode->getElementsByTagName('serverid')->item(0)->nodeValue),
+        mysql_real_escape_string($oServerNode->getElementsByTagName('servername')->item(0)->nodeValue),
+        mysql_real_escape_string($oServerNode->getElementsByTagName('serverurl')->item(0)->nodeValue)
     );
-}
-*/
-
+  } //for each
+  
   //unlink($filename);
 }
 
