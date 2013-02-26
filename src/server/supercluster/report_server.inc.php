@@ -10,6 +10,7 @@
 */
 
 include_once("../utils/parameters.inc.php");
+include_once("../utils/urls.inc.php");
 
 function count_records($table) {
   $querycount = "SELECT count(*) from $table;";
@@ -29,9 +30,6 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   
   if ($debug) echo "Calling $serverurl, $activenodes, $jobinqueue\n";
   
-  $timeout = $max_superserver_timeout;
-  $old = ini_set('default_socket_timeout', $timeout);
-  
   $serverid   = urlencode($my_server_id);
   $servername = urlencode($my_server_name);
   $myurl      = urlencode($my_server_url);
@@ -42,14 +40,9 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   $lat        = urlencode($my_latitude);
   
   $url = "http://$serverurl/supercluster/report_server.php?serverid=$serverid&servername=$servername&serverurl=$myurl&chatchannel=$chat&version=$version&uptime=$up&longitude=$lon&latitude=$lat&activenodes=$activenodes&jobinqueue=$jobinqueue";
-  if ($debug) echo "URL is $url\n";
   
-  $handle = fopen($url, 'r');
-  ini_set('default_socket_timeout', $old);
-  stream_set_timeout($handle, $timeout);
-  stream_set_blocking($handle, 0); 
-  fclose($handle);
-
+  if ($debug) echo "URL is $url\n"; 
+  touch_url($url, $max_superserver_timeout);
   if ($debug) echo "Phone call over\n";
 }
 
@@ -101,6 +94,7 @@ function call_nearest_superservers_to_report_my_status() {
 
 function retrieve_server_list_from_nearest_superserver() {
   include("../conf/config.inc.php");
+  include("../utils/constants.inc.php");
   
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");			
@@ -115,13 +109,15 @@ function retrieve_server_list_from_nearest_superserver() {
 		  ORDER BY distance ASC
           LIMIT 1";
   echo "$query\n";		  
-  $result=mysql_query($query);
-  
+  $result = mysql_query($query);
   if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
   
+  if ($num>0) $url = mysql_result($result, 0, 'serverurl');
   
   mysql_close();
 
+  save_url("$url/supercluster/list_servers.php?xml=1", "../temp/servers.xml", $max_superserver_timeout);
+  
 /*
 $oDOM = new DOMDocument();
 $oDOM->loadXML(file_get_contents('books.xml')); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx

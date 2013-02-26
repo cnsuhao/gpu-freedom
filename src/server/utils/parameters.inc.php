@@ -1,4 +1,10 @@
 <?php
+/*
+  Utilities to save and load parameters from table tbparameter
+  
+  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  
+*/
 
 function get_db_parameter($paramtype, $paramname, $defaultparam) {
  
