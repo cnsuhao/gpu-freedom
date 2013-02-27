@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 03:34 PM
+-- Generation Time: Feb 27, 2013 at 03:42 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -51,7 +51,9 @@ CREATE TABLE IF NOT EXISTS `tbchannel` (
   `ip` varchar(32) DEFAULT NULL,
   `usertime_dt` datetime DEFAULT NULL,
   `create_dt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `nodeid_2` (`nodeid`),
+  KEY `create_dt` (`create_dt`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
@@ -104,7 +106,8 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nodeid` (`nodeid`)
+  UNIQUE KEY `nodeid` (`nodeid`),
+  KEY `nodeid_2` (`nodeid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -132,7 +135,8 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`)
+  UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
+  KEY `jobdefinitionid_2` (`jobdefinitionid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -159,7 +163,8 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `transmission_dt` datetime DEFAULT NULL,
   `reception_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `jobqueueid` (`jobqueueid`)
+  UNIQUE KEY `jobqueueid` (`jobqueueid`),
+  KEY `jobqueueid_2` (`jobqueueid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -190,7 +195,8 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `nodeid` varchar(42) NOT NULL,
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `jobresultid` (`jobresultid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -251,7 +257,8 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `serverid` (`serverid`)
+  UNIQUE KEY `serverid` (`serverid`),
+  KEY `serverid_2` (`serverid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
