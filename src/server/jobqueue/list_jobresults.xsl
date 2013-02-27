@@ -17,18 +17,18 @@
 						<th>jobresultid</th>
 						<th>jobqueueid</th>
 						<th>jobdefinitionid</th>
+						<th>job</th>
 						<th>job result</th>
 						<th>workunit result</th>
 						<th>is erroneous</th>
 						<th>errorid</th>
 						<th>error argument</th>
 						<th>error message</th>
-						<th>nodename</th>
+						<th>answering nodename</th>
 						<th>create_dt of request</th>
 						<th>transmission_dt</th>
 						<th>create_dt of result</th>
-						<th>job</th>
-						<th>nodename</th>
+						<th>requester</th>
 					</tr>
                     <xsl:apply-templates select="jobresult"/>
                 </table>
@@ -49,6 +49,9 @@
             </td>
 			<td>
                 <xsl:value-of select="jobid"/>			
+            </td>
+			<td>
+                <xsl:value-of select="job"/>			
             </td>
 			<td>
                 <xsl:value-of select="jobresult"/>			
@@ -90,7 +93,6 @@
    </xsl:template>
  
     <xsl:template match="jobdefinition">
-            <td><xsl:value-of select="job"/></td>
             <td><xsl:value-of select="nodename"/></td>
     </xsl:template>
  
