@@ -1,7 +1,6 @@
 <?php
 /*
-  This PHP script retrieves the clients which are currently registered with this server
-  and displays it as a HTML page.
+  This PHP script retrieves the latest job definitions.
   
   Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
   

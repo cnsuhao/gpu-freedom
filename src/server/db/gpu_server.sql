@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 08:21 AM
+-- Generation Time: Feb 27, 2013 at 09:55 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -154,13 +154,18 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `workunitjob` varchar(64) DEFAULT NULL,
   `workunitresult` varchar(64) DEFAULT NULL,
   `nodeid` varchar(42) NOT NULL,
-  `transmitted` int(1) NOT NULL DEFAULT '0',
-  `received` int(1) NOT NULL DEFAULT '0',
   `create_dt` datetime NOT NULL,
   `transmission_dt` datetime DEFAULT NULL,
   `reception_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbjobqueue`
+--
+
+INSERT INTO `tbjobqueue` (`id`, `jobdefinition_id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `create_dt`, `transmission_dt`, `reception_dt`) VALUES
+(1, 0, 'ac43b', 'jqid', 'workunitjob', 'workunitresult', '1', '2013-02-06 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -247,8 +252,8 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
 (9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
-(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0, 0, '2013-02-26 14:35:36', '2013-02-26 14:43:33'),
-(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 13, 2, '2013-02-26 14:39:33', '2013-02-26 14:43:34');
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
