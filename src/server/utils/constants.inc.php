@@ -6,12 +6,14 @@
 // current server version
 $server_version = 0.1;
 
+
+// [Cluster Management]
 // cluster settings
 // maximum number of online nodes shown in list_clients.php
-$max_online_clients_xml = 2000;
+$max_online_clients_xml = 1000;
 
 // maximum number of online nodes shown in list_servers.php
-$max_online_servers_xml = 2000;
+$max_online_servers_xml = 1000;
 
 // this is the update interval in seconds of clients
 // which touch the report_client.php script
@@ -25,4 +27,11 @@ $server_update_interval = 10; //3600;
 $nb_superserver_informed = 2;
 // timeout in seconds for a superserver to report our status or to retrieve servers or clients
 $max_superserver_timeout = 20;
+
+
+// [Job Management]
+
+// this is the maximal number of requests allowed for a job definition
+$max_requests_for_jobs = 500;
+
 ?>

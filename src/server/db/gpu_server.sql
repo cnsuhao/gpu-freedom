@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 10:44 AM
+-- Generation Time: Feb 27, 2013 at 03:34 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -103,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   `cputype` varchar(64) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nodeid` (`nodeid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -130,7 +131,8 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -148,7 +150,6 @@ INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `nodename`, `node
 
 CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jobdefinition_id` int(11) NOT NULL,
   `jobdefinitionid` varchar(42) NOT NULL,
   `jobqueueid` varchar(42) NOT NULL,
   `workunitjob` varchar(64) DEFAULT NULL,
@@ -157,15 +158,16 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `create_dt` datetime NOT NULL,
   `transmission_dt` datetime DEFAULT NULL,
   `reception_dt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `jobqueueid` (`jobqueueid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `tbjobqueue`
 --
 
-INSERT INTO `tbjobqueue` (`id`, `jobdefinition_id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `create_dt`, `transmission_dt`, `reception_dt`) VALUES
-(1, 0, 'ac43b', 'jqid', 'workunitjob', 'workunitresult', '1', '2013-02-06 00:00:00', NULL, NULL);
+INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `create_dt`, `transmission_dt`, `reception_dt`) VALUES
+(1, 'ac43b', 'jqid', 'workunitjob', 'workunitresult', '1', '2013-02-06 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -176,9 +178,7 @@ INSERT INTO `tbjobqueue` (`id`, `jobdefinition_id`, `jobdefinitionid`, `jobqueue
 CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `jobresultid` varchar(42) NOT NULL,
-  `job_id` int(11) NOT NULL,
   `jobid` varchar(42) NOT NULL,
-  `jobqueue_id` int(11) NOT NULL,
   `jobqueueid` varchar(42) NOT NULL,
   `jobresult` varchar(1024) NOT NULL,
   `workunitresult` varchar(64) NOT NULL,
@@ -197,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
 -- Dumping data for table `tbjobresult`
 --
 
-INSERT INTO `tbjobresult` (`id`, `jobresultid`, `job_id`, `jobid`, `jobqueue_id`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
-(1, 'jrid', 0, 'ac43b', 0, 'jqid', '2', 'workunitresult', 0, 0, '', '', 'andromeda', '1', NULL, '2013-02-27 00:00:00');
+INSERT INTO `tbjobresult` (`id`, `jobresultid`, `jobid`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
+(1, 'jrid', 'ac43b', 'jqid', '2', 'workunitresult', 0, 0, '', '', 'andromeda', '1', NULL, '2013-02-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -250,7 +250,8 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `jobinqueue` int(11) NOT NULL,
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `serverid` (`serverid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
