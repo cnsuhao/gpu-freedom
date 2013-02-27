@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 03:42 PM
+-- Generation Time: Feb 27, 2013 at 04:19 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -52,8 +52,7 @@ CREATE TABLE IF NOT EXISTS `tbchannel` (
   `usertime_dt` datetime DEFAULT NULL,
   `create_dt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `nodeid_2` (`nodeid`),
-  KEY `create_dt` (`create_dt`)
+  KEY `nodeid_2` (`nodeid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
@@ -137,14 +136,15 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
   KEY `jobdefinitionid_2` (`jobdefinitionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tbjobdefinition`
 --
 
 INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `nodename`, `nodeid`, `ip`, `create_dt`, `update_dt`) VALUES
-(1, 'ac43b', '1,1,add', 'andromeda', '1', NULL, '2013-02-27 00:00:00', '2013-02-27 00:00:00');
+(1, 'ac43b', '1,1,add', 'andromeda', '1', NULL, '2013-02-27 00:00:00', '2013-02-27 00:00:00'),
+(2, 'ac44b', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 16:06:47', '2013-02-27 16:06:47');
 
 -- --------------------------------------------------------
 
