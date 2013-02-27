@@ -9,7 +9,10 @@
  include('../utils/sql2xml/xsl.php'); 
  include('../utils/utils.inc.php'); 
  
- $xml = getparam('xml', false); 
+ $jobid = getparam('jobid', "");
+ if ($jobid=="") $jobclause=""; else $jobclause="and r.jobid='$jobid'"; 
+ 
+ $xml   = getparam('xml', false); 
 
  if (!$xml) prepare_XSLT();
  echo "<jobresults>\n"; 
@@ -19,6 +22,7 @@
 				 d.nodename
          from tbjobresult r, tbjobqueue q, tbjobdefinition d 
          where r.jobqueueid = q.jobqueueid and q.jobdefinitionid = d.jobdefinitionid
+		 $jobclause
 		 order by r.create_dt desc 
 		 LIMIT 0, 40;",
 		 $level_list, "13, 3");
