@@ -38,7 +38,7 @@ in the playground subfolder:
 - added code to create stereograms out of Z-pictures (could see a stereogram, works)
 - added code to simulate parliament with random quota of indipendents (does not work well)
 - added code to simulate Enigma machine (works fine)
-- added code to compare solvers on hacker.org
+- added code to compare solvers on hacker.org (works fine)
 
 10.2009-10.2012 git
 Lot of preliminary development for the next generation GPU was done in the gpu_freedom package,
