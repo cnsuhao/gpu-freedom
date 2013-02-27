@@ -12,9 +12,6 @@
  include('../utils/utils.inc.php');
  include('../utils/constants.inc.php');
 
- $nodeid = getparam("nodeid", "");
- if ($nodeid=="") $nodeclause = ""; else $nodeclause = "and nodeid<>'$nodeid'";
- 
  $xml = getparam('xml', false); 
  if (!$xml) ob_start();
  
@@ -24,9 +21,7 @@
  sql2xml("select id, nodeid, nodename, country, region, city, zip, os, version, acceptincoming, 
                 gigaflops, ram, mhz, nbcpus, bits, isscreensaver, uptime, totaluptime,
  				longitude, latitude, team, description from tbclient 
-		 where (1=1)		
-         -- and update_dt >= ( curdate() - interval $client_update_interval second ) 
-		 $nodeclause
+         -- where update_dt >= ( curdate() - interval $client_update_interval second ) 
 		 order by update_dt desc 
 		 limit 0, $max_online_clients_xml;
 		", $level_list, 0);

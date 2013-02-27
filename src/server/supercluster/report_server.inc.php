@@ -167,7 +167,8 @@ function retrieve_server_list_from_nearest_superserver() {
   $e = uniqid (rand(), true);
   $suffix = md5($e);
   $filename = "../temp/servers_$suffix.xml";
-  save_url("$url/supercluster/list_servers.php?xml=1", $filename, $max_superserver_timeout);
+  $myid = urlencode($my_server_id);
+  save_url("$url/supercluster/list_servers.php?xml=1&serverid=$myid", $filename, $max_superserver_timeout);
   
   $oDOM = new DOMDocument();
   $oDOM->loadXML(file_get_contents($filename)); #See: http://msdn.microsoft.com/en-us/library/ms762271(VS.85).aspx
@@ -175,7 +176,7 @@ function retrieve_server_list_from_nearest_superserver() {
   foreach ($oDOM->getElementsByTagName('server') as $oServerNode)   {
         $serverid   = mysql_real_escape_string($oServerNode->getElementsByTagName('serverid')->item(0)->nodeValue);
 		if ($serverid==$my_server_id) continue; // we do not update information on our server from unreliable external sources :-)
-		
+		                                        // a superserver should not provide information on ourself, as we pass our server id
         $servername = mysql_real_escape_string($oServerNode->getElementsByTagName('servername')->item(0)->nodeValue);
         $serverurl  = mysql_real_escape_string($oServerNode->getElementsByTagName('serverurl')->item(0)->nodeValue); 
         $chatchannel = mysql_real_escape_string($oServerNode->getElementsByTagName('chatchannel')->item(0)->nodeValue); 
