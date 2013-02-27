@@ -3,51 +3,81 @@
     <xsl:output method="html" doctype-public="-//W3C//DTD HTML 4.01//EN"
                 doctype-system="http://www.w3.org/TR/html4/strict.dtd" />
  
-    <xsl:template match="jobqueues">
+    <xsl:template match="jobresults">
         <html>
             <head>
-			    <title>GPU Server - List Job Queue</title>
+			    <title>GPU Server - List Job Results</title>
             </head>
             <body>
 			    <img src="../images/gpu-inverse.jpg" border="0" />
-                <h2>List Job Queues</h2>
+                <h2>List Job Results</h2>
                 <table border="1">
 					<tr>
 						<th>id</th>
+						<th>jobresultid</th>
 						<th>jobqueueid</th>
 						<th>jobdefinitionid</th>
-						<th>workunit job</th>
+						<th>job result</th>
 						<th>workunit result</th>
-						<th>create_dt</th>
+						<th>is erroneous</th>
+						<th>errorid</th>
+						<th>error argument</th>
+						<th>error message</th>
+						<th>nodename</th>
+						<th>create_dt of request</th>
 						<th>transmission_dt</th>
-						<th>reception_dt</th>
+						<th>create_dt of result</th>
 						<th>job</th>
 						<th>nodename</th>
 					</tr>
-                    <xsl:apply-templates select="jobqueue"/>
+                    <xsl:apply-templates select="jobresult"/>
                 </table>
             </body>
         </html>
     </xsl:template>
- 
-    <xsl:template match="jobqueue">
+
+    <xsl:template match="jobresult">
         <tr bgcolor="#81F781">
             <td>
                 <xsl:value-of select="id"/>			
             </td>
 			<td>
+                <xsl:value-of select="jobresultid"/>			
+            </td>
+			<td>
                 <xsl:value-of select="jobqueueid"/>			
             </td>
 			<td>
-                <xsl:value-of select="jobdefinitionid"/>			
+                <xsl:value-of select="jobid"/>			
             </td>
 			<td>
-                <xsl:value-of select="workunitjob"/>			
+                <xsl:value-of select="jobresult"/>			
             </td>
 			<td>
                 <xsl:value-of select="workunitresult"/>			
             </td>
 			<td>
+                <xsl:value-of select="iserroneous"/>			
+            </td>
+			<td>
+                <xsl:value-of select="errorid"/>			
+            </td>	
+			<td>
+                <xsl:value-of select="errorarg"/>			
+            </td>		
+			<td>
+                <xsl:value-of select="errormsg"/>			
+            </td>		
+			<td>
+                <xsl:value-of select="nodename"/>			
+            </td>		
+			
+			<xsl:apply-templates select="jobqueue"/>
+		</tr>
+    </xsl:template>
+	
+    <xsl:template match="jobqueue">
+ 			<td>
                 <xsl:value-of select="create_dt"/>			
             </td>
 			<td>
@@ -57,8 +87,7 @@
                 <xsl:value-of select="reception_dt"/>			
             </td>		
 			<xsl:apply-templates select="jobdefinition"/>
-		</tr>
-    </xsl:template>
+   </xsl:template>
  
     <xsl:template match="jobdefinition">
             <td><xsl:value-of select="job"/></td>

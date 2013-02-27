@@ -3,7 +3,7 @@ GPU freedom branch
 
 27.2.2013
 Server: added nodeid and serverid to list_servers.php and list_clients.php to filter our own id
-		added list job definitons, list job queue and list result
+		added list job definitons, list job queue and list result in jobqueue subfolder
 
 26.2.2013 0.5.6
 Server: retrieving server list from closest superserver

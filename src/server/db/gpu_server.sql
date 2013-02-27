@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 09:55 AM
+-- Generation Time: Feb 27, 2013 at 10:44 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -191,7 +191,14 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbjobresult`
+--
+
+INSERT INTO `tbjobresult` (`id`, `jobresultid`, `job_id`, `jobid`, `jobqueue_id`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
+(1, 'jrid', 0, 'ac43b', 0, 'jqid', '2', 'workunitresult', 0, 0, '', '', 'andromeda', '1', NULL, '2013-02-27 00:00:00');
 
 -- --------------------------------------------------------
 
