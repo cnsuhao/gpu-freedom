@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 04:19 PM
+-- Generation Time: Feb 27, 2013 at 05:58 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `jobdefinitionid` varchar(42) NOT NULL,
   `job` varchar(1024) NOT NULL,
-  `nodename` varchar(64) NOT NULL,
+  `nodename` varchar(32) NOT NULL,
   `nodeid` varchar(42) NOT NULL,
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
   KEY `jobdefinitionid_2` (`jobdefinitionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `tbjobdefinition`
@@ -144,7 +144,13 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
 
 INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `nodename`, `nodeid`, `ip`, `create_dt`, `update_dt`) VALUES
 (1, 'ac43b', '1,1,add', 'andromeda', '1', NULL, '2013-02-27 00:00:00', '2013-02-27 00:00:00'),
-(2, 'ac44b', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 16:06:47', '2013-02-27 16:06:47');
+(2, 'ac44b', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 16:06:47', '2013-02-27 16:06:47'),
+(3, 'ac44bd', '4,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:52:09', '2013-02-27 17:52:09'),
+(4, 'ac44dbd', '6,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:52:36', '2013-02-27 17:52:36'),
+(5, 'ac44dbde', '6,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:53:58', '2013-02-27 17:53:58'),
+(6, 'ac43dbde', '6,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:56:01', '2013-02-27 17:56:01'),
+(7, 'ac43dbd2e', '6,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:57:06', '2013-02-27 17:57:06'),
+(8, 'ac43ddbd2e', '7,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-27 17:57:55', '2013-02-27 17:57:55');
 
 -- --------------------------------------------------------
 
@@ -159,20 +165,39 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   `workunitjob` varchar(64) DEFAULT NULL,
   `workunitresult` varchar(64) DEFAULT NULL,
   `nodeid` varchar(42) NOT NULL,
+  `nodename` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,
   `transmission_dt` datetime DEFAULT NULL,
   `reception_dt` datetime DEFAULT NULL,
+  `ip` varchar(42) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobqueueid` (`jobqueueid`),
   KEY `jobqueueid_2` (`jobqueueid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tbjobqueue`
 --
 
-INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `create_dt`, `transmission_dt`, `reception_dt`) VALUES
-(1, 'ac43b', 'jqid', 'workunitjob', 'workunitresult', '1', '2013-02-06 00:00:00', NULL, NULL);
+INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `nodename`, `create_dt`, `transmission_dt`, `reception_dt`, `ip`) VALUES
+(1, 'ac43b', 'jqid', 'workunitjob', 'workunitresult', '1', NULL, '2013-02-06 00:00:00', NULL, NULL, ''),
+(2, 'ac43dbd2e', '8b3bb012115428c0cb07745357c28822', '', '', '1', 'andromeda', '2013-02-27 17:57:06', NULL, NULL, '127.0.0.1'),
+(3, 'ac43ddbd2e', '3bf69edcd1c15bab52947f235c09a44b', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(4, 'ac43ddbd2e', 'f2b6f4e2d72d0cdf2d5c7c10fb0eab32', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(5, 'ac43ddbd2e', '3eb102a527a7e4d720a196694947f5a7', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(6, 'ac43ddbd2e', '5216378825321f2498747908293a3579', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(7, 'ac43ddbd2e', '7c89182ed3a75ff45254ed46fb1e9b10', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(8, 'ac43ddbd2e', '899edba8c996f2921fa742db8635163d', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(9, 'ac43ddbd2e', '791919b4d542d693ebcf40cfc3d2719c', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(10, 'ac43ddbd2e', 'f85811eacc3a7447134a434e023350a5', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(11, 'ac43ddbd2e', '027d5d503db94354d6464e38bc08303e', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(12, 'ac43ddbd2e', 'df4683f5711fbc12846ecadc739dd728', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(13, 'ac43ddbd2e', '0290133976f6892e270a4cc049e2d477', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(14, 'ac43ddbd2e', '3eeca23f7f5a675507561db5000d1576', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(15, 'ac43ddbd2e', '656388d66d725b56b2c5c5033ccfa3d0', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(16, 'ac43ddbd2e', '3ca7f305050132c88333bf7377aa2438', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(17, 'ac43ddbd2e', '26b9b205a59f6933472cd3ef462609d8', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1'),
+(18, 'ac43ddbd2e', '545836148e43b2335927328c29fac323', '', '', '1', 'andromeda', '2013-02-27 17:57:55', NULL, NULL, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -191,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `errorid` int(11) NOT NULL DEFAULT '0',
   `errorarg` varchar(32) NOT NULL,
   `errormsg` varchar(32) NOT NULL,
-  `nodename` varchar(64) NOT NULL,
+  `nodename` varchar(32) NOT NULL,
   `nodeid` varchar(42) NOT NULL,
   `ip` varchar(32) DEFAULT NULL,
   `create_dt` datetime NOT NULL,

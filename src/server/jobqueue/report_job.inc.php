@@ -24,7 +24,7 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 	mysql_query($queryjobinsert);
 	
 	// 3. Inserting Jobqueue entries, one for each request
-	for ($i=1; $i<$nbrequests; $i++) {
+	for ($i=0; $i<$nbrequests; $i++) {
 			// generate unique jobqueueid
 			$d           = uniqid (rand(), true);
             $jobqueueid  = md5($d);
@@ -32,14 +32,13 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 			if ($tagworkunitjob==1)    $wujob="$workunitjob_$i"; else $wujob="$workunitjob";
 			if ($tagworkunitresult==1) $wures="$workunitresult_$i"; else $wures="$workunitresult";
 	
-	
+			$queryjobqueue = "INSERT INTO tbjobqueue (id, jobdefinitionid, jobqueueid, workunitjob, workunitresult, nodeid, nodename, ip, create_dt)
+					          VALUES('', '$jobid', '$jobqueueid', '$wujob', '$wures', '$nodeid', '$nodename', '$ip', NOW());";
+			if ($debug==1) echo "$queryjobqueue";
+			mysql_query($queryjobqueue);
 	}
 	
-	
-	// 3. 
-	
 	mysql_close();
-	
 	return "";
 }
 
