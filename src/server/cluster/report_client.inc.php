@@ -26,7 +26,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
                                            '$cputype', $mhz, $ram, $gigaflops, $bits, '$os',
 									        $longitude, $latitude,
                                             $version, '$team', '$userid', 
-                                           '$description',										   
+                                           '$description',	POINT($longitude , $latitude),									   
 										   NOW(), NOW()
 										   );";
        $resultinsert=mysql_query($queryinsert);
@@ -45,6 +45,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 					cputype='$cputype', mhz=$mhz, ram=$ram, gigaflops=$gigaflops, bits=$bits, os='$os',
 					longitude=$longitude, latitude=$latitude,
                     version=$version, team='$team', userid='$userid', 
+					pos=POINT($longitude , $latitude),
                     description='$description',					
 					update_dt=NOW()
 					WHERE id=$id;"; 
