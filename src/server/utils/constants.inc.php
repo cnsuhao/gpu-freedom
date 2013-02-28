@@ -30,8 +30,13 @@ $max_superserver_timeout = 20;
 
 
 // [Job Management]
-
 // this is the maximal number of requests allowed for a job definition
 $max_requests_for_jobs = 500;
+
+// How many jobs are distribued to a client, when it requests to crunch them
+$jobs_to_be_distributed_at_once = 3;
+
+// Retransmission interval in seconds for jobs which require an acknowledgment
+$retransmission_interval = 7200;
 
 ?>
