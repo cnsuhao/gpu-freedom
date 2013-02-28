@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 03:24 PM
+-- Generation Time: Feb 28, 2013 at 03:51 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -182,18 +182,18 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
 --
 
 INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `nodename`, `requireack`, `acknodeid`, `acknodename`, `create_dt`, `transmission_dt`, `transmissionid`, `ack_dt`, `reception_dt`, `ip`) VALUES
-(37, 'ae', '1', '', '', '1', 'andromeda', 1, '1', 'andromeda', '2013-02-28 09:08:22', NULL, '', '2013-02-28 10:04:20', NULL, '127.0.0.1'),
-(38, 'ae', 'a5ff54c89409e531a5c17db42d042bf8', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, '', NULL, NULL, '127.0.0.1'),
-(39, 'ae', '386ab115e8b712010150234cd30a2d8a', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, '', NULL, NULL, '127.0.0.1'),
-(40, 'ae', 'b83bece49df09724ab375740dbe14847', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, '', NULL, NULL, '127.0.0.1'),
-(41, 'aeb', '885209a2c1c1bd4d3be3e9a1d60847a9', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(42, 'aeb', '581e795543f3496da91c2a03e0f84d4a', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(43, 'aeb', '9405beefee59a405c826ab04273a5a95', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(44, 'aeb', '33183e593ad27f3224e754080b8f1c11', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(45, 'aeqb', '3d107ba023dc3a98502cda09eeef19bb', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(46, 'aeqb', '38f81038011aa487b43a11e0b2d17e97', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(47, 'aeqb', 'a7c73d77185d550c96c5b800eefdafea', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, '', NULL, NULL, '127.0.0.1'),
-(48, 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, '', NULL, NULL, '127.0.0.1');
+(37, 'ae', '1', '', '', '1', 'andromeda', 1, '1', 'andromeda', '2013-02-28 09:08:22', '2013-02-28 15:46:56', '9ca77f0d9349bf9b05ee3b4bf34d983e', '2013-02-28 10:04:20', NULL, '127.0.0.1'),
+(38, 'ae', 'a5ff54c89409e531a5c17db42d042bf8', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', '2013-02-28 15:46:56', '9ca77f0d9349bf9b05ee3b4bf34d983e', NULL, NULL, '127.0.0.1'),
+(39, 'ae', '386ab115e8b712010150234cd30a2d8a', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', '2013-02-28 15:46:56', '9ca77f0d9349bf9b05ee3b4bf34d983e', NULL, NULL, '127.0.0.1'),
+(40, 'ae', 'b83bece49df09724ab375740dbe14847', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', '2013-02-28 15:48:57', '8b5b3960c320a7c1ddd77215d1d96843', NULL, NULL, '127.0.0.1'),
+(41, 'aeb', '885209a2c1c1bd4d3be3e9a1d60847a9', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', '2013-02-28 15:48:57', '8b5b3960c320a7c1ddd77215d1d96843', NULL, NULL, '127.0.0.1'),
+(42, 'aeb', '581e795543f3496da91c2a03e0f84d4a', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', '2013-02-28 15:48:57', '8b5b3960c320a7c1ddd77215d1d96843', NULL, NULL, '127.0.0.1'),
+(43, 'aeb', '9405beefee59a405c826ab04273a5a95', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', '2013-02-28 15:49:02', '0e0af3f6ce8aab98e776adf6fae52b80', NULL, NULL, '127.0.0.1'),
+(44, 'aeb', '33183e593ad27f3224e754080b8f1c11', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', '2013-02-28 15:49:02', '0e0af3f6ce8aab98e776adf6fae52b80', NULL, NULL, '127.0.0.1'),
+(45, 'aeqb', '3d107ba023dc3a98502cda09eeef19bb', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:02', '0e0af3f6ce8aab98e776adf6fae52b80', NULL, NULL, '127.0.0.1'),
+(46, 'aeqb', '38f81038011aa487b43a11e0b2d17e97', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, NULL, '127.0.0.1'),
+(47, 'aeqb', 'a7c73d77185d550c96c5b800eefdafea', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, NULL, '127.0.0.1'),
+(48, 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, NULL, '127.0.0.1');
 
 -- --------------------------------------------------------
 
