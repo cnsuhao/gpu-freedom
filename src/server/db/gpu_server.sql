@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 09:09 AM
+-- Generation Time: Feb 28, 2013 at 11:56 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   `totaluptime` double NOT NULL,
   `longitude` double NOT NULL,
   `latitude` double NOT NULL,
+  `pos` point DEFAULT NULL,
   `userid` varchar(32) NOT NULL,
   `team` varchar(64) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -113,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 -- Dumping data for table `tbclient`
 --
 
-INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
-(1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, '', '', '', '', '2013-02-25 15:57:26', '2013-02-26 14:43:24');
+INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `pos`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
+(1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, NULL, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
+(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, NULL, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
+(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, NULL, '', '', '', '', '2013-02-25 15:57:26', '2013-02-26 14:43:24');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
   KEY `jobdefinitionid_2` (`jobdefinitionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `tbjobdefinition`
@@ -144,7 +145,8 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
 
 INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `nodename`, `nodeid`, `ip`, `create_dt`, `update_dt`) VALUES
 (11, 'ae', '9,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:22', '2013-02-28 09:08:22'),
-(12, 'aeb', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:51', '2013-02-28 09:08:51');
+(12, 'aeb', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:51', '2013-02-28 09:08:51'),
+(13, 'aeqb', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 11:22:51', '2013-02-28 11:22:51');
 
 -- --------------------------------------------------------
 
@@ -171,21 +173,25 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobqueueid` (`jobqueueid`),
   KEY `jobqueueid_2` (`jobqueueid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `tbjobqueue`
 --
 
 INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, `workunitresult`, `nodeid`, `nodename`, `requireack`, `acknodeid`, `acknodename`, `create_dt`, `transmission_dt`, `ack_dt`, `reception_dt`, `ip`) VALUES
-(37, 'ae', '586b33e1563a734ed93850feba3d9902', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, NULL, NULL, '127.0.0.1'),
+(37, 'ae', '1', '', '', '1', 'andromeda', 1, '1', 'andromeda', '2013-02-28 09:08:22', NULL, '2013-02-28 10:04:20', NULL, '127.0.0.1'),
 (38, 'ae', 'a5ff54c89409e531a5c17db42d042bf8', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, NULL, NULL, '127.0.0.1'),
 (39, 'ae', '386ab115e8b712010150234cd30a2d8a', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, NULL, NULL, '127.0.0.1'),
 (40, 'ae', 'b83bece49df09724ab375740dbe14847', '', '', '1', 'andromeda', 1, NULL, NULL, '2013-02-28 09:08:22', NULL, NULL, NULL, '127.0.0.1'),
 (41, 'aeb', '885209a2c1c1bd4d3be3e9a1d60847a9', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, NULL, NULL, '127.0.0.1'),
 (42, 'aeb', '581e795543f3496da91c2a03e0f84d4a', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, NULL, NULL, '127.0.0.1'),
 (43, 'aeb', '9405beefee59a405c826ab04273a5a95', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, NULL, NULL, '127.0.0.1'),
-(44, 'aeb', '33183e593ad27f3224e754080b8f1c11', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, NULL, NULL, '127.0.0.1');
+(44, 'aeb', '33183e593ad27f3224e754080b8f1c11', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 09:08:51', NULL, NULL, NULL, '127.0.0.1'),
+(45, 'aeqb', '3d107ba023dc3a98502cda09eeef19bb', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, NULL, NULL, '127.0.0.1'),
+(46, 'aeqb', '38f81038011aa487b43a11e0b2d17e97', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, NULL, NULL, '127.0.0.1'),
+(47, 'aeqb', 'a7c73d77185d550c96c5b800eefdafea', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, NULL, NULL, '127.0.0.1'),
+(48, 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', NULL, NULL, NULL, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -265,6 +271,7 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `uptime` double NOT NULL,
   `longitude` double NOT NULL,
   `latitude` double NOT NULL,
+  `pos` point DEFAULT NULL,
   `activenodes` int(11) NOT NULL,
   `jobinqueue` int(11) NOT NULL,
   `create_dt` datetime NOT NULL,
@@ -272,16 +279,17 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `serverid` (`serverid`),
   KEY `serverid_2` (`serverid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `tbserver`
 --
 
-INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
-(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
-(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02');
+INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `pos`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, NULL, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, NULL, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, NULL, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02'),
+(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 0, 0, NULL, 0, 0, '2013-02-28 11:21:54', '2013-02-28 11:21:54');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

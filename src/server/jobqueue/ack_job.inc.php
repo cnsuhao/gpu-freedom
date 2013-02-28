@@ -30,10 +30,10 @@ function ack_job($jobqueueid, $jobid, $nodeid, $nodename, $ip) {
     @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 
 	$res = verify_jobqueue_if_exists($jobqueueid, $jobid);
-	if ($res==0) return "There is no jobqueue entry with the jobid and jobqueueid provided"; 
+	if ($res==0) { mysql_close(); return "There is no jobqueue entry with the jobid and jobqueueid provided"; } 
 
 	$ack = verify_if_already_acknowledged($jobqueueid, $jobid);
-	if ($ack!="") return "The job was already acknowledged by $ack";
+	if ($ack!="") { mysql_close(); return "The job was already acknowledged by $ack"; }
 	
 	$queryupdate  = "update tbjobqueue set acknodeid='$nodeid', acknodename='$nodename', ack_dt=NOW() where jobdefinitionid='$jobid' and jobqueueid='$jobqueueid';";
 	mysql_query($queryupdate);
