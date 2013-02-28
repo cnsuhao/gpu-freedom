@@ -18,11 +18,14 @@
 						<th>jobdefinitionid</th>
 						<th>workunit job</th>
 						<th>workunit result</th>
+						<th>requires ack</th>
 						<th>create_dt</th>
 						<th>transmission_dt</th>
+						<th>ack_dt</th>
+						<th>nodename of acknowledger</th>
 						<th>reception_dt</th>
 						<th>job</th>
-						<th>nodename</th>
+						<th>nodename of requester</th>
 					</tr>
                     <xsl:apply-templates select="jobqueue"/>
                 </table>
@@ -48,10 +51,19 @@
                 <xsl:value-of select="workunitresult"/>			
             </td>
 			<td>
+                <xsl:value-of select="requireack"/>			
+            </td>
+			<td>
                 <xsl:value-of select="create_dt"/>			
             </td>
 			<td>
                 <xsl:value-of select="transmission_dt"/>			
+            </td>	
+			<td>
+                <xsl:value-of select="ack_dt"/>			
+            </td>	
+			<td>
+                <xsl:value-of select="acknodeid"/>			
             </td>	
 			<td>
                 <xsl:value-of select="reception_dt"/>			

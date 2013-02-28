@@ -5,7 +5,7 @@
 
 */
 
-function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $ip) {
+function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $ip) {
     include("../conf/config.inc.php");	
     $debug=1;	
 	mysql_connect($dbserver, $username, $password);
@@ -32,8 +32,8 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 			if ($tagworkunitjob==1)    $wujob="$workunitjob_$i"; else $wujob="$workunitjob";
 			if ($tagworkunitresult==1) $wures="$workunitresult_$i"; else $wures="$workunitresult";
 	
-			$queryjobqueue = "INSERT INTO tbjobqueue (id, jobdefinitionid, jobqueueid, workunitjob, workunitresult, nodeid, nodename, ip, create_dt)
-					          VALUES('', '$jobid', '$jobqueueid', '$wujob', '$wures', '$nodeid', '$nodename', '$ip', NOW());";
+			$queryjobqueue = "INSERT INTO tbjobqueue (id, jobdefinitionid, jobqueueid, workunitjob, workunitresult, nodeid, nodename, requireack, ip, create_dt)
+					          VALUES('', '$jobid', '$jobqueueid', '$wujob', '$wures', '$nodeid', '$nodename', $requireack, '$ip', NOW());";
 			if ($debug==1) echo "$queryjobqueue";
 			mysql_query($queryjobqueue);
 	}

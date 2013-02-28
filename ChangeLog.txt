@@ -1,7 +1,10 @@
 ******************
 GPU freedom branch
 
-27.2.2013
+28.2.2013 git
+Server: added optional acklownedgment mechanism
+
+27.2.2013 git
 Server: added nodeid and serverid to list_servers.php and list_clients.php to filter our own id
 		added list job definitons, list job queue and list result in jobqueue subfolder
 		added indexes to speed up external id retrieval, added unique constraints to garuantee consistency
