@@ -15,10 +15,11 @@ function verify_jobqueue_if_exists($jobqueueid, $jobid) {
 }
 
 function verify_if_already_acknowledged($jobqueueid, $jobid) {
-    $query  = "select ack_dt from tbjobqueue where jobdefinitionid='$jobid' and jobqueueid='$jobqueueid';";
+    $query  = "select ack_dt, acknodename from tbjobqueue where jobdefinitionid='$jobid' and jobqueueid='$jobqueueid';";
 	$result = mysql_query($query);
 	$ack_dt = mysql_result($result, 0, "ack_dt");
-	if ($ack_dt=="") return 1; else return 0;
+	$acknodename = mysql_result($result, 0, "acknodename");
+	if ($ack_dt=="") return ""; else return $acknodename;
 	
 }
 
@@ -31,6 +32,9 @@ function ack_job($jobqueueid, $jobid, $nodeid, $nodename, $ip) {
 	$res = verify_jobqueue_if_exists($jobqueueid, $jobid);
 	if ($res==0) return "There is no jobqueue entry with the jobid and jobqueueid provided"; 
 
+	$ack = verify_if_already_acknowledged($jobqueueid, $jobid);
+	if ($ack!="") return "The job was already acknowledged by $ack";
+	
 	$queryupdate  = "update tbjobqueue set acknodeid='$nodeid', acknodename='$nodename', ack_dt=NOW() where jobdefinitionid='$jobid' and jobqueueid='$jobqueueid';";
 	mysql_query($queryupdate);
 	
