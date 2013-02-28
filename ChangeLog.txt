@@ -6,6 +6,7 @@ Server: added optional acklownedgment mechanism
         implementing job results mechanism
 		populating spatial points in tbserver and tbclient
 		implementing mechanism to receive jobs in list_jobqueues.php
+		added initial graphs to GPU server
 
 27.2.2013 git
 Server: added nodeid and serverid to list_servers.php and list_clients.php to filter our own id

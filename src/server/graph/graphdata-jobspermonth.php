@@ -42,7 +42,7 @@ include("../conf/config.inc.php");
 
 // use the chart class to build the chart:
 $g = new graph();
-$g->title( 'Jobs per month', '{font-size:18px; color: #d01f3c}' );
+$g->title( 'Jobs per Month', '{font-size:18px; color: #d01f3c}' );
 
 //
 // pass in two arrays, one of data, the other data labels

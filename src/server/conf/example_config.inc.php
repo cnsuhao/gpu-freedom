@@ -3,6 +3,10 @@
  User settings are defined here
 */
 
+// Personal settings, who are you brave?
+$my_username = "dm";
+$my_homepage = "http://gpu.sourceforge.net";
+
 // mySQL settings to connect to db schema
 $username = "gpuuser";
 $password = "gpupwd";
@@ -17,6 +21,5 @@ $my_default_chat_channel = "altos";
 $am_i_superserver = 0; // specifies if this server collects information from other servers
 $my_longitude = 14;
 $my_latitude  = 10;
-
 
 ?>

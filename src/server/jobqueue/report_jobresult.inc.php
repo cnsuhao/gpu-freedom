@@ -8,9 +8,17 @@
 include_once("../utils/utils.inc.php");
 include_once("ack_job.inc.php");
 
+
+function check_if_job_already_reported($jobqueueid) {
+    $querycheck  = "SELECT count(*) FROM tbjobqueue WHERE jobqueueid='$jobqueueid' AND (reception_dt IS NOT NULL);";
+	$resultcheck = mysql_query($querycheck);
+	$count = mysql_result($resultcheck, 0, "count(*)");
+	if ($count>0) return 0; else return 1;
+}
+
 function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $ip) {
     include("../conf/config.inc.php");	
-    $debug=1;	
+    $debug=0;	
 	mysql_connect($dbserver, $username, $password);
     @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 
@@ -18,15 +26,23 @@ function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $
 	$res = verify_jobqueue_if_exists($jobqueueid, $jobid);
 	if ($res==0) { mysql_close(); return "There is no jobqueue entry with the jobid and jobqueueid provided"; } 
 	
-	$jobresultid  = create_unique_id();
+	// verify that someone else did not already report the result
+    $res = check_if_job_already_reported($jobqueueid);	
+	if ($res==0) { mysql_close(); return "Someone else already provided an answer for this job!"; } 
 	
 	// 2. Inserting the job result
+	$jobresultid  = create_unique_id();
 	$queryinsert = "INSERT INTO tbjobresult (id, jobresultid, jobdefinitionid, jobqueueid, jobresult, workunitresult, iserroneous, errorid, errorarg, errormsg, 
 	                                         nodename, nodeid, ip, create_dt)
 									  VALUES('', '$jobresultid', '$jobid', '$jobqueueid', '$jobresult', '$workunitresult', $iserroneous,  $errorid, '$errorarg', '$errormsg',
   									         '$nodename', '$nodeid', '$ip', NOW());";
 	if ($debug==1) echo "$queryinsert";
 	mysql_query($queryinsert);	
+	
+	// 3. setting reception_dt on jobqueue
+	$queryupdate = "UPDATE tbjobqueue SET reception_dt=NOW() WHERE jobqueueid='$jobqueueid';";
+	if ($debug==1) echo "$queryupdate";
+	mysql_query($queryupdate);
 	
 	mysql_close();
 	return "";
