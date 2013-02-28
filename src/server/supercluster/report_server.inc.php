@@ -39,11 +39,11 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 	   // we do an INSERT
        $queryinsert="INSERT INTO tbserver (id, serverid, servername, serverurl, chatchannel, version, superserver,
 	                                       uptime, activenodes, jobinqueue,
-										   longitude, latitude, ip,
+										   longitude, latitude, ip, pos,
 										   create_dt, update_dt)
 									VALUES('', '$serverid', '$servername', '$serverurl', '$chatchannel', $version, $superserver,
                                             $uptime, $activenodes, $jobinqueue,
-											$longitude, $latitude, '$ip',						   
+											$longitude, $latitude, '$ip', POINT($longitude , $latitude) 						   
 										    NOW(), NOW()
 										   );";
        $resultinsert=mysql_query($queryinsert);
@@ -60,7 +60,8 @@ function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $ve
 					uptime=$uptime, activenodes=$activenodes, jobinqueue=$jobinqueue,
 					ip='$ip', 
 					longitude=$longitude, latitude=$latitude, 
-                    version=$version, 					
+                    version=$version, 	
+                    pos=POINT($longitude , $latitude),					
 					update_dt=NOW()
 					WHERE id=$id;"; 
       $resultupdate=mysql_query($queryupdate);

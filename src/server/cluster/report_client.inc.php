@@ -18,7 +18,7 @@ function report_clientinfo($nodename, $nodeid, $country, $region, $city, $zip, $
 										   cputype, mhz, ram, gigaflops, bits, os,
 										   longitude, latitude,
 										   version, team, userid,  
-										   description,
+										   description, pos,
 										   create_dt, update_dt)
 									VALUES('', '$nodename', '$nodeid', '$country', '$region', '$city', '$zip',
                                             $uptime, $totaluptime,

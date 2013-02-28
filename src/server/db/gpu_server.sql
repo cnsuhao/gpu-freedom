@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 11:56 AM
+-- Generation Time: Feb 28, 2013 at 01:27 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   `totaluptime` double NOT NULL,
   `longitude` double NOT NULL,
   `latitude` double NOT NULL,
-  `pos` point DEFAULT NULL,
+  `pos` point NOT NULL,
   `userid` varchar(32) NOT NULL,
   `team` varchar(64) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -115,9 +115,8 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 --
 
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `pos`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
-(1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, NULL, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, NULL, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(5, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 0, 0, NULL, '', '', '', '', '2013-02-25 15:57:26', '2013-02-26 14:43:24');
+(1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
+(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -271,25 +270,26 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
   `uptime` double NOT NULL,
   `longitude` double NOT NULL,
   `latitude` double NOT NULL,
-  `pos` point DEFAULT NULL,
+  `pos` point NOT NULL,
   `activenodes` int(11) NOT NULL,
   `jobinqueue` int(11) NOT NULL,
   `create_dt` datetime NOT NULL,
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `serverid` (`serverid`),
-  KEY `serverid_2` (`serverid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  KEY `serverid_2` (`serverid`),
+  SPATIAL KEY `pos` (`pos`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `tbserver`
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `pos`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, NULL, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
-(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, NULL, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
-(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, NULL, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02'),
-(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 0, 0, NULL, 0, 0, '2013-02-28 11:21:54', '2013-02-28 11:21:54');
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, 0x00000000010100000000000000000000000000000000000000, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x00000000010100000000000000000000000000000000000000, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000000000000000000000000000, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02'),
+(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 0, 0, 0x00000000010100000000000000000000000000000000000000, 0, 0, '2013-02-28 11:21:54', '2013-02-28 11:21:54');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
