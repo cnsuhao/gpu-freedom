@@ -5,6 +5,8 @@
 
 */
 
+include_once("../utils/utils.inc.php");
+
 function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $ip) {
     include("../conf/config.inc.php");	
     $debug=1;	
@@ -26,8 +28,7 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 	// 3. Inserting Jobqueue entries, one for each request
 	for ($i=0; $i<$nbrequests; $i++) {
 			// generate unique jobqueueid
-			$d           = uniqid (rand(), true);
-            $jobqueueid  = md5($d);
+			$jobqueueid  = create_unique_id();
 			
 			if ($tagworkunitjob==1)    $wujob="$workunitjob_$i"; else $wujob="$workunitjob";
 			if ($tagworkunitresult==1) $wures="$workunitresult_$i"; else $wures="$workunitresult";

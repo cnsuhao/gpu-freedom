@@ -13,6 +13,7 @@
 
 include_once("../utils/parameters.inc.php");
 include_once("../utils/urls.inc.php");
+include_once("../utils/utils.inc.php");
 
 function count_records($table) {
   $querycount = "SELECT count(*) from $table;";
@@ -164,8 +165,7 @@ function retrieve_server_list_from_nearest_superserver() {
   
   mysql_close();
 
-  $e = uniqid (rand(), true);
-  $suffix = md5($e);
+  $suffix = create_unique_id();
   $filename = "../temp/servers_$suffix.xml";
   $myid = urlencode($my_server_id);
   save_url("$url/supercluster/list_servers.php?xml=1&serverid=$myid", $filename, $max_superserver_timeout);

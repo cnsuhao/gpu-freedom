@@ -9,6 +9,10 @@ function getparam($name, $default) {
  if (isset($_GET["$name"])) return $_GET["$name"]; else return $default;
 }
 
+function create_unique_id() {
+    return md5( uniqid (rand(), true));
+}
+
 function js_redirect($s)
     {
         print "<body onload=\"window.location='$s';\">";
