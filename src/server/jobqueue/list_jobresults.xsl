@@ -48,7 +48,7 @@
                 <xsl:value-of select="jobqueueid"/>			
             </td>
 			<td>
-                <xsl:value-of select="jobid"/>			
+                <xsl:value-of select="jobdefinitionid"/>			
             </td>
 			<td>
                 <xsl:value-of select="job"/>			

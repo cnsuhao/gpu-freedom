@@ -18,12 +18,15 @@ function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $
 	$res = verify_jobqueue_if_exists($jobqueueid, $jobid);
 	if ($res==0) { mysql_close(); return "There is no jobqueue entry with the jobid and jobqueueid provided"; } 
 	
-	// 2. Inserting the job result
-	$queryjobinsert = "INSERT INTO tbjobdefinition (id, jobdefinitionid, job, nodename, nodeid, ip, create_dt, update_dt)
-					   VALUES('', '$jobid', '$job', '$nodename', '$nodeid', '$ip', NOW(), NOW());";
-	if ($debug==1) echo "$queryjobinsert";
-	mysql_query($queryjobinsert);
+	$jobresultid  = create_unique_id();
 	
+	// 2. Inserting the job result
+	$queryinsert = "INSERT INTO tbjobresult (id, jobresultid, jobdefinitionid, jobqueueid, jobresult, workunitresult, iserroneous, errorid, errorarg, errormsg, 
+	                                         nodename, nodeid, ip, create_dt)
+									  VALUES('', '$jobresultid', '$jobid', '$jobqueueid', '$jobresult', '$workunitresult', $iserroneous,  $errorid, '$errorarg', '$errormsg',
+  									         '$nodename', '$nodeid', '$ip', NOW());";
+	if ($debug==1) echo "$queryinsert";
+	mysql_query($queryinsert);	
 	
 	mysql_close();
 	return "";

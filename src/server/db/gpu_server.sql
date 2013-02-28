@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 01:27 PM
+-- Generation Time: Feb 28, 2013 at 02:51 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nodeid` (`nodeid`),
   KEY `nodeid_2` (`nodeid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tbclient`
@@ -116,7 +116,8 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `pos`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL);
+(2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
+(6, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 13.5, 14.3, 0x0000000001010000000000000000002b409a99999999992c40, '', '', '', '', '2013-02-28 14:31:41', '2013-02-28 14:32:34');
 
 -- --------------------------------------------------------
 
@@ -201,7 +202,7 @@ INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, 
 CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `jobresultid` varchar(42) NOT NULL,
-  `jobid` varchar(42) NOT NULL,
+  `jobdefinitionid` varchar(42) NOT NULL,
   `jobqueueid` varchar(42) NOT NULL,
   `jobresult` varchar(1024) NOT NULL,
   `workunitresult` varchar(64) NOT NULL,
@@ -221,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
 -- Dumping data for table `tbjobresult`
 --
 
-INSERT INTO `tbjobresult` (`id`, `jobresultid`, `jobid`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
+INSERT INTO `tbjobresult` (`id`, `jobresultid`, `jobdefinitionid`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
 (1, 'jrid', 'ac43b', 'jqid', '2', 'workunitresult', 0, 0, '', '', 'andromeda', '1', NULL, '2013-02-27 00:00:00');
 
 -- --------------------------------------------------------
@@ -247,10 +248,10 @@ CREATE TABLE IF NOT EXISTS `tbparameter` (
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`, `create_dt`, `update_dt`) VALUES
 (1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-02-25 16:13:37'),
-(9, 'TIME', 'UPTIME', '80989', '2013-02-25 11:55:44', '2013-02-26 14:43:27'),
+(9, 'TIME', 'UPTIME', '81042', '2013-02-25 11:55:44', '2013-02-28 14:32:36'),
 (8, 'CONFIGURATION', 'SERVER_ID', 'fb4bc9a27a2be5e0b7ce08dc2bf09618', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
-(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1361886206', '2013-02-25 16:13:37', '2013-02-26 14:43:27');
+(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1362058355', '2013-02-25 16:13:37', '2013-02-28 14:32:36');
 
 -- --------------------------------------------------------
 
@@ -286,10 +287,10 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `pos`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 80989, 14, 10, 0x00000000010100000000000000000000000000000000000000, 3, 0, '2013-02-25 16:27:29', '2013-02-26 14:43:30'),
-(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x00000000010100000000000000000000000000000000000000, 0, 0, '2013-02-26 14:35:36', '2013-02-27 08:40:01'),
-(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000000000000000000000000000, 13, 2, '2013-02-26 14:39:33', '2013-02-27 08:40:02'),
-(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 0, 0, 0x00000000010100000000000000000000000000000000000000, 0, 0, '2013-02-28 11:21:54', '2013-02-28 11:21:54');
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 81042, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 3, 12, '2013-02-25 16:27:29', '2013-02-28 14:32:39'),
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 0, 0, '2013-02-26 14:35:36', '2013-02-28 14:32:44'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000008056400000000000805640, 13, 2, '2013-02-26 14:39:33', '2013-02-28 14:32:45'),
+(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 18, 18, 0x00000000010100000000000000000032400000000000003240, 0, 0, '2013-02-28 11:21:54', '2013-02-28 13:36:46');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

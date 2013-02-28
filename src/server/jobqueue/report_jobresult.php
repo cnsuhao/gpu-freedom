@@ -14,11 +14,11 @@ $nodename       = getparam('nodename', '');
 $jobresult      = getparam('jobresult', '');
 $workunitresult = getparam('wuresult', '');
 $iserroneous    = getparam('iserroneous', '');
-$errorid		= getparam('errorid', '');
+$errorid		= getparam('errorid', 0);
 $errorarg		= getparam('errorarg', '');
 $errormsg		= getparam('errormsg', '');
 
-if ( ($jobqueueid=="") || ($jobid=="") || ($nodeid=="") || ($nodename=="") || ($iserroneous) ) die("ERROR: please specify at least jobqueueid, jobid, nodeid, nodename and iserroneous");
+if ( ($jobqueueid=="") || ($jobid=="") || ($nodeid=="") || ($nodename=="") || ($iserroneous=="") ) die("ERROR: please specify at least jobqueueid, jobid, nodeid, nodename and iserroneous");
 
 $ip = $_SERVER['REMOTE_ADDR'];
 
