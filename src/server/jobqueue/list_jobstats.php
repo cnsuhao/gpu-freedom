@@ -31,7 +31,7 @@
 @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
  echo "<jobstats>\n";
  
- $queryjobs = "select d.jobdefinitionid, d.job, d.requireack
+ $queryjobs = "select d.jobdefinitionid, d.job, d.requireack, d.create_dt
                from tbjobdefinition d
 			   where $selectclause;
 			  ";
@@ -42,20 +42,22 @@
 	$jobid        = mysql_result($resultjobs, $i, 'jobdefinitionid');
 	$job          = mysql_result($resultjobs, $i, 'job');
 	$requireack   = mysql_result($resultjobs, $i, 'requireack');
+	$create_dt    = mysql_result($resultjobs, $i, 'create_dt');
 	$nbqueues     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid'");
 	$transmitted  = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (transmission_dt is not NULL)");
     $acknowledged = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (ack_dt is not NULL)");
     $received     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (reception_dt is not NULL)");
 	
-	echo "<job>\n";
+	echo "<jobstat>\n";
 	echo "<jobid>$jobid</jobid>\n";
 	echo "<job>$job</job>\n";
 	echo "<requireack>$requireack</requireack>\n";
-	echo "<queues>$nbqueues</queues>\n";
+	echo "<create_dt>$create_dt</create_dt>";
+	echo "<requests>$nbqueues</requests>\n";
 	echo "<transmitted>$transmitted</transmitted>\n";
 	echo "<acknowledged>$acknowledged</acknowledged>\n";
 	echo "<received>$received</received>\n";
-	echo "</job>\n";
+	echo "</jobstat>\n";
 	
  }
   
