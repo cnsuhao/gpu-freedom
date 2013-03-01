@@ -42,13 +42,19 @@
 	$jobid        = mysql_result($resultjobs, $i, 'jobdefinitionid');
 	$job          = mysql_result($resultjobs, $i, 'job');
 	$requireack   = mysql_result($resultjobs, $i, 'requireack');
-	$nbqueues = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid'");
-    
+	$nbqueues     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid'");
+	$transmitted  = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (transmission_dt is not NULL)");
+    $acknowledged = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (ack_dt is not NULL)");
+    $received     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (reception_dt is not NULL)");
+	
 	echo "<job>\n";
 	echo "<jobid>$jobid</jobid>\n";
 	echo "<job>$job</job>\n";
 	echo "<requireack>$requireack</requireack>\n";
 	echo "<queues>$nbqueues</queues>\n";
+	echo "<transmitted>$transmitted</transmitted>\n";
+	echo "<acknowledged>$acknowledged</acknowledged>\n";
+	echo "<received>$received</received>\n";
 	echo "</job>\n";
 	
  }
