@@ -9,7 +9,7 @@
                 <title>GPU Server - Available channels</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>Available Channels</h2>
                 <table border="1">
 					<tr>
@@ -19,6 +19,8 @@
                     
                     <xsl:apply-templates select="channeltype"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>

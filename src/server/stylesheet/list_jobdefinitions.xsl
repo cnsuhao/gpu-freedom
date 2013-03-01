@@ -9,7 +9,7 @@
 			    <title>GPU Server - List Job Definitions</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>List Job Definitions</h2>
                 <table border="1">
 					<tr>
@@ -23,6 +23,8 @@
                     <!-- msg loop -->
                     <xsl:apply-templates select="jobdefinition"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>

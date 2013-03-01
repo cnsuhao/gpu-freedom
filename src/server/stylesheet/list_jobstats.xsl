@@ -9,7 +9,7 @@
                 <title>GPU Server - Job Statistics</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>Job Statistics</h2>
                 <table border="1">
 					<tr>
@@ -25,6 +25,8 @@
                     
                     <xsl:apply-templates select="jobstat"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>

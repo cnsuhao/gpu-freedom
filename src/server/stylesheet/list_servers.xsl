@@ -10,8 +10,9 @@
                 <title>GPU Server - List Servers (refreshs each three minutes)</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>List Online Servers</h2>
+				
                 <table border="1">
 					<tr>
 						<th>id</th>
@@ -28,6 +29,8 @@
                     <!-- msg loop -->
                     <xsl:apply-templates select="server"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>

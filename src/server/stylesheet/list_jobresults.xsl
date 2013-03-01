@@ -9,7 +9,7 @@
 			    <title>GPU Server - List Job Results</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>List Job Results</h2>
                 <table border="1">
 					<tr>
@@ -32,6 +32,8 @@
 					</tr>
                     <xsl:apply-templates select="jobresult"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>

@@ -10,7 +10,7 @@
                 <title>GPU Server - List latest channel messages (refreshes each 20 seconds)</title>
             </head>
             <body>
-			    <img src="../images/gpu-inverse.jpg" border="0" />
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
                 <h2>List latest channel messages</h2>
                 <table border="1">
 					<tr>
@@ -28,6 +28,8 @@
                     <!-- msg loop -->
                     <xsl:apply-templates select="msg"/>
                 </table>
+				<hr />
+				<a href="../index.php">Back</a><br />
             </body>
         </html>
     </xsl:template>
