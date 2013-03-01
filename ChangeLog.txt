@@ -5,6 +5,9 @@ GPU freedom branch
 Server: added jobtype to datamodel to distinguish jobs which come not from GPU engine (maybe Octave or Maxima?)
         moving all xsl files to stylesheet subdirectory, to easy deployment on clients for debugging purposes
 		added list_jobstats.php to retrieve statistics on a given job (to know if all results are reported)
+		
+		The server is polished up and finished with the entire functionality, we can go back to refactor the Freepascal
+		client now.
 
 28.2.2013 git
 Server: added optional acklownedgment mechanism
