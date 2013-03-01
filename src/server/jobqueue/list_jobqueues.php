@@ -41,14 +41,14 @@
  echo "<jobqueues>\n"; 
  $level_list = Array("jobqueue", "jobdefinition");
  sql2xml("select q.id, q.jobdefinitionid, q.jobqueueid, q.workunitjob, q.workunitresult, q.nodeid, q.requireack, q.acknodeid, q.acknodename,
-                 q.create_dt, q.transmission_dt, q.ack_dt, q.reception_dt, d.job,
+                 q.create_dt, q.transmission_dt, q.transmissionid, q.ack_dt, q.reception_dt, d.job,
 				 d.nodename
          from tbjobqueue q, tbjobdefinition d 
          where q.jobdefinitionid = d.jobdefinitionid
 		 $crunchclause
 		 order by q.create_dt desc 
 		 LIMIT 0, $limit;"
-		 , $level_list, 13);
+		 , $level_list, 14);
  
  echo "</jobqueues>\n";
  if (!$xml) apply_XSLT();

@@ -10,7 +10,15 @@
  include('../utils/utils.inc.php'); 
  
  $jobid = getparam('jobid', "");
- if ($jobid=="") $jobclause=""; else $jobclause="and r.jobid='$jobid'"; 
+ $transmissionid = getparam('transmissionid', "");
+ if ($jobid!="") {
+	$jobclause="and r.jobid='$jobid'"; 
+ } else
+ if ($transmissionid!="") {
+	$jobclause="and q.transmissionid='$transmissionid'";
+ } else {
+	$jobclause="";
+ }
  
  $xml   = getparam('xml', false); 
 
