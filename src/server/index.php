@@ -16,8 +16,18 @@ echo "<hr>";
 echo "<table>";
 echo "<tr><td>";
 open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdata-jobspermonth.php');
+echo "<br>";
+echo "<center>";
+echo "<b>Jobs<b><br>";
+echo "<a href='jobqueue/list_jobdefinitions.php'>Definitions</a> <a href='jobqueue/list_jobqueues.php'>Queue</a> <a href='jobqueue/list_jobresults.php'>Results</a> <a href='jobqueue/list_jobstats.php'>Stats</a>";
+echo "</center>";
 echo "</td><td>";
 open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdata-channels.php');
+echo "<center>";
+echo "<b>Channels<b><br>";
+echo "<a href='channel/list_channels.php'>Channels</a> <a href='channel/list_channel_messages.php'>Messages</a>";
+echo "</center>";
+
 echo "</td></tr>";
 
 echo "<tr><td>";
