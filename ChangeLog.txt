@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+1.3.2013 git
+Server: added jobtype to datamodel to distinguish jobs which come not from GPU engine (maybe Octave or Maxima?)
+
 28.2.2013 git
 Server: added optional acklownedgment mechanism
         implementing job results mechanism

@@ -7,7 +7,7 @@
 
 include_once("../utils/utils.inc.php");
 
-function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $ip) {
+function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip) {
     include("../conf/config.inc.php");	
     $debug=1;	
 	mysql_connect($dbserver, $username, $password);
@@ -20,8 +20,8 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 	if ($countjobid>0) { mysql_close(); return "Jobid is not unique! Please choose another jobid!"; }
 
 	// 2. Inserting the job definition
-	$queryjobinsert = "INSERT INTO tbjobdefinition (id, jobdefinitionid, job, nodename, nodeid, ip, create_dt, update_dt)
-					   VALUES('', '$jobid', '$job', '$nodename', '$nodeid', '$ip', NOW(), NOW());";
+	$queryjobinsert = "INSERT INTO tbjobdefinition (id, jobdefinitionid, job, nodename, nodeid, jobtype, ip, create_dt, update_dt)
+					   VALUES('', '$jobid', '$job', '$nodename', '$nodeid', '$jobtype', '$ip', NOW(), NOW());";
 	if ($debug==1) echo "$queryjobinsert";
 	mysql_query($queryjobinsert);
 	
@@ -30,8 +30,8 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 			// generate unique jobqueueid
 			$jobqueueid  = create_unique_id();
 			
-			if ($tagworkunitjob==1)    $wujob="$workunitjob_$i"; else $wujob="$workunitjob";
-			if ($tagworkunitresult==1) $wures="$workunitresult_$i"; else $wures="$workunitresult";
+			if ($tagworkunitjob==1)    $wujob="$workunitjob"."_"."$i"; else $wujob="$workunitjob";
+			if ($tagworkunitresult==1) $wures="$workunitresult"."_"."$i"; else $wures="$workunitresult";
 	
 			$queryjobqueue = "INSERT INTO tbjobqueue (id, jobdefinitionid, jobqueueid, workunitjob, workunitresult, nodeid, nodename, requireack, ip, create_dt)
 					          VALUES('', '$jobid', '$jobqueueid', '$wujob', '$wures', '$nodeid', '$nodename', $requireack, '$ip', NOW());";

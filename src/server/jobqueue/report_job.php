@@ -19,6 +19,7 @@ $nbrequests     = getparam('nbrequests', '1');
 $tagworkunitjob     = getparam('tagwujob', '0');
 $tagworkunitresult  = getparam('tagwuresult', '0');
 $requireack         = getparam('requireack', '0');
+$jobtype            = getparam('jobtype', 'GPU_Engine');
 
 if ( ($jobid=="") || ($job=="") || ($nodename=="") || ($nodeid=="") ) die("ERROR: please specify at least jobid, job, nodename and nodeid");
 if ($nbrequests > $max_requests_for_jobs) die ("ERROR: too many requests specified. Maximum is $max_requests_for_jobs");
@@ -28,7 +29,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
 include("report_job.inc.php");
 
-$exitmsg = report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $ip);
+$exitmsg = report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip);
 
 if ($exitmsg == "") echo "OK"; else echo "ERROR: $exitmsg";
 					
