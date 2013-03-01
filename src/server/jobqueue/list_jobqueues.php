@@ -51,6 +51,6 @@
 		 , $level_list, 13);
  
  echo "</jobqueues>\n";
- if (!$xml) apply_XSLT("jobqueue");
+ if (!$xml) apply_XSLT();
  
  ?>

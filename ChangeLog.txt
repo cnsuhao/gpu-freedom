@@ -3,6 +3,7 @@ GPU freedom branch
 
 1.3.2013 git
 Server: added jobtype to datamodel to distinguish jobs which come not from GPU engine (maybe Octave or Maxima?)
+        moving all xsl files to stylesheet subdirectory, to easy deployment on clients for debugging purposes
 
 28.2.2013 git
 Server: added optional acklownedgment mechanism

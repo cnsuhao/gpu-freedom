@@ -28,6 +28,6 @@
 		 $level_list, "13, 3");
  
  echo "</jobresults>\n";
- if (!$xml) apply_XSLT("jobqueue");
+ if (!$xml) apply_XSLT();
  
  ?>

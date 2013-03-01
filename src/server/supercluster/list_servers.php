@@ -32,5 +32,5 @@
 		", $level_list, 0);
  echo "</servers>\n";
  
- if (!$xml) apply_XSLT("supercluster");
+ if (!$xml) apply_XSLT();
 ?>

@@ -30,6 +30,6 @@
 		 , $level_list, 9);
  
  echo "</channel>\n";
- if (!$xml) apply_XSLT("channel");
+ if (!$xml) apply_XSLT();
  
  ?>

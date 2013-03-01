@@ -21,6 +21,6 @@
           order by channame asc; ', $level_list, 0);
  
  echo "</channeltypes>\n";
- if (!$xml) apply_XSLT("channel");
+ if (!$xml) apply_XSLT();
 
 ?>

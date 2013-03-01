@@ -32,5 +32,5 @@
 		", $level_list, 0);
  echo "</clients>\n";
  
- if (!$xml) apply_XSLT("cluster");
+ if (!$xml) apply_XSLT();
 ?>

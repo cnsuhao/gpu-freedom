@@ -30,5 +30,5 @@
 		", $level_list, 0);
  echo "</jobdefinitions>\n";
  
- if (!$xml) apply_XSLT("jobqueue");
+ if (!$xml) apply_XSLT();
 ?>
