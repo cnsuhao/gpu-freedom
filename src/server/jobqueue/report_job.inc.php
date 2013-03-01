@@ -20,8 +20,8 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 	if ($countjobid>0) { mysql_close(); return "Jobid is not unique! Please choose another jobid!"; }
 
 	// 2. Inserting the job definition
-	$queryjobinsert = "INSERT INTO tbjobdefinition (id, jobdefinitionid, job, nodename, nodeid, jobtype, ip, create_dt, update_dt)
-					   VALUES('', '$jobid', '$job', '$nodename', '$nodeid', '$jobtype', '$ip', NOW(), NOW());";
+	$queryjobinsert = "INSERT INTO tbjobdefinition (id, jobdefinitionid, job, nodename, nodeid, jobtype, requireack, ip, create_dt, update_dt)
+					   VALUES('', '$jobid', '$job', '$nodename', '$nodeid', '$jobtype', $requireack, '$ip', NOW(), NOW());";
 	if ($debug==1) echo "$queryjobinsert";
 	mysql_query($queryjobinsert);
 	

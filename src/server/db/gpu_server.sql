@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2013 at 06:06 PM
+-- Generation Time: Mar 01, 2013 at 11:53 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -129,6 +129,8 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `jobdefinitionid` varchar(42) NOT NULL,
   `job` varchar(1024) NOT NULL,
+  `jobtype` varchar(16) NOT NULL,
+  `requireack` tinyint(1) NOT NULL DEFAULT '0',
   `nodename` varchar(32) NOT NULL,
   `nodeid` varchar(42) NOT NULL,
   `ip` varchar(32) DEFAULT NULL,
@@ -137,16 +139,21 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
   KEY `jobdefinitionid_2` (`jobdefinitionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tbjobdefinition`
 --
 
-INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `nodename`, `nodeid`, `ip`, `create_dt`, `update_dt`) VALUES
-(11, 'ae', '9,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:22', '2013-02-28 09:08:22'),
-(12, 'aeb', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:51', '2013-02-28 09:08:51'),
-(13, 'aeqb', '3,2,add', 'andromeda', '1', '127.0.0.1', '2013-02-28 11:22:51', '2013-02-28 11:22:51');
+INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `jobtype`, `requireack`, `nodename`, `nodeid`, `ip`, `create_dt`, `update_dt`) VALUES
+(11, 'ae', '9,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:22', '2013-02-28 09:08:22'),
+(12, 'aeb', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-02-28 09:08:51', '2013-02-28 09:08:51'),
+(13, 'aeqb', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-02-28 11:22:51', '2013-02-28 11:22:51'),
+(14, '23', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:03:35', '2013-03-01 10:03:35'),
+(15, '24', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:12:53', '2013-03-01 10:12:53'),
+(16, '25', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:14:09', '2013-03-01 10:14:09'),
+(17, '26', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:14:48', '2013-03-01 10:14:48'),
+(18, 'arb', '0,0,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 11:52:35', '2013-03-01 11:52:35');
 
 -- --------------------------------------------------------
 
@@ -175,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   UNIQUE KEY `jobqueueid` (`jobqueueid`),
   KEY `jobqueueid_2` (`jobqueueid`),
   KEY `transmissionid` (`transmissionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
 
 --
 -- Dumping data for table `tbjobqueue`
@@ -193,7 +200,27 @@ INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, 
 (45, 'aeqb', '3d107ba023dc3a98502cda09eeef19bb', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:02', '0e0af3f6ce8aab98e776adf6fae52b80', NULL, NULL, '127.0.0.1'),
 (46, 'aeqb', '38f81038011aa487b43a11e0b2d17e97', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, NULL, '127.0.0.1'),
 (47, 'aeqb', 'a7c73d77185d550c96c5b800eefdafea', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, NULL, '127.0.0.1'),
-(48, 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, '2013-02-28 18:04:57', '127.0.0.1');
+(48, 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-02-28 11:22:51', '2013-02-28 15:49:12', '715a42e97ab4f2d4ff75bc712c152954', NULL, '2013-02-28 18:04:57', '127.0.0.1'),
+(49, '23', 'aa11057a12c466000829d9132240654f', '0', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:03:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(50, '23', '6226feda971b206220cb656f0bff980a', '1', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:03:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(51, '23', 'fdf2877f276716232a14f6db36fbc62b', '2', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:03:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(52, '23', '20e39c93eb6d3de0b9fdf9753bc9d9d5', '3', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:03:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(53, '24', 'd8fa37cb3d374d3ef3f6f985b1e84641', '0', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:12:53', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(54, '24', 'f4c722f51128a6f7f8197d6fa82a2363', '1', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:12:53', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(55, '24', 'ef56bc64f9e50a55831cabb13fc7533e', '2', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:12:53', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(56, '24', '72b51557fbf5df8de649f9264d16838b', '3', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:12:53', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(57, '25', '8aa221fe9783a45d0369aafd21f292d1', '_0', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:09', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(58, '25', '017900e2984e3a014692e124cc13546c', '_1', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:09', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(59, '25', 'b24a33174ade8ea95681eacae1992ea0', '_2', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:09', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(60, '25', 'dedc3be27333aaa2e3660e6be88fe0bd', '_3', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:09', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(61, '26', 'd3228e7226fdb3469960e66eff7480ea', '', '_0', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:48', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(62, '26', '05358b01367d685acec388eedafd0f69', '', '_1', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:48', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(63, '26', '61a5a5e45a5f3f2f1f30cf773717c4f8', '', '_2', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:48', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(64, '26', '5f0cb471737931493475e28d655403ec', '', '_3', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 10:14:48', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(65, 'arb', '2b5b931f7d2ec098d72fddcb3560dc0d', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(66, 'arb', '1c336aa1ceeb3691abcf5281300139c8', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(67, 'arb', 'e5247a5d71f33e0b23a0b2cea4327d46', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(68, 'arb', '63c44568b05ee6975cfa7d1fa070a971', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1');
 
 -- --------------------------------------------------------
 
