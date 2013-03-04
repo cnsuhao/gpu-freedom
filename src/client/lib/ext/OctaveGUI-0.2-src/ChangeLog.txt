@@ -1,0 +1,11 @@
+0.2-Alpha:
+- Non-existent or invalid directory in initialization file is replaced
+  by current directory (reduced possible exceptions)
+- Safer octave communication
+- Added M files browser
+- Added history list, please note that it's not (yet) fully synchronized
+  with either the prompt (missing public properties) or octave itself
+  (octave's history feature not used)
+
+0.1-Alpha:
+- Initial release
