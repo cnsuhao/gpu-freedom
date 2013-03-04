@@ -108,7 +108,7 @@ begin
 
       proxy                   := ini_.ReadString('communication','proxy','');
       port                    := ini_.ReadString('communication','port','');
-      default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://www.gpu-grid.net/superserver');
+      default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://127.0.0.1:8090/gpu_freedom/src/server');
       default_server_name     := inicore_.ReadString('communication', 'default_server_name','Altos');
 
       receive_servers_each   := inicore_.ReadInteger('global','receive_servers_each',14400);

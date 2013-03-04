@@ -53,11 +53,11 @@ begin
                dbnode.city              := node.FindNode('city').TextContent;
                dbnode.zip               := node.FindNode('zip').TextContent;
                dbnode.description       := node.FindNode('description').TextContent;
-               dbnode.ip                := node.FindNode('ip').TextContent;
-               dbnode.port              := node.FindNode('port').TextContent;
-               dbnode.localip           := node.FindNode('localip').TextContent;
+               dbnode.ip                := ''; // not transmitted
+               dbnode.port              := ''; // not transmitted
+               dbnode.localip           := ''; // not transmitted
                dbnode.os                := node.FindNode('os').TextContent;
-               dbnode.cputype           := node.FindNode('cputype').TextContent;
+               dbnode.cputype           := ''; // not transmitted
                dbnode.version           := node.FindNode('version').TextContent;
                dbnode.acceptincoming    := (node.FindNode('acceptincoming').TextContent='true');
                dbnode.gigaflops    := StrToInt(node.FindNode('gigaflops').TextContent);
@@ -71,7 +71,7 @@ begin
                dbnode.totaluptime := StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
                dbnode.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbnode.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
-               dbnode.userid      := node.FindNode('userid').TextContent;
+               dbnode.userid      := ''; // not transmittted
                dbnode.team        := node.FindNode('team').TextContent;
                tableman_.getClientTable().insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added <'+dbnode.nodename+'> to tbclient table.');
@@ -93,7 +93,7 @@ end;
 procedure TReceiveClientServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/cluster/list_clients_online_xml.php?nodeid='+encodeUrl(myGPUID.NodeId), xmldoc, false);
+ receive('/cluster/list_clients.php?xml=1&nodeid='+encodeUrl(myGPUID.NodeId), xmldoc, false);
 
  if not erroneous_ then
     begin
