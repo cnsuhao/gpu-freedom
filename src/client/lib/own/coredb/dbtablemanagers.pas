@@ -29,6 +29,7 @@ type TDbTableManager = class(TObject)
     function getJobResultTable() : TDbJobResultTable;
     function getJobQueueTable() : TDbJobQueueTable;
 
+  private
     clienttable_    : TDbClientTable;
     servertable_    : TDbServerTable;
     chantable_      : TDbChannelTable;

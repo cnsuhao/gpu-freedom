@@ -23,10 +23,10 @@ type TReceiveJobResultServiceThread = class(TReceiveServiceThread)
     procedure Execute; override;
 
  private
-   procedure parseXml(var xmldoc : TXMLDocument);
-
    jobid_  : String;
    job_id_ : Longint;
+
+   procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation

@@ -29,14 +29,15 @@ type TCoreLoop = class(TObject)
     logHeader_   : String;
     coremonitor_ : TCoreMonitor;
 
+    tick_,
+    days_        : Longint;
+
     function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
     procedure   retrieveParamsAndServers;
     procedure   retrieveClients;
     procedure   transmitClient;
     procedure   receiveChannels;
 
-    tick_,
-    days_        : Longint;
 end;
 
 implementation
@@ -70,20 +71,22 @@ begin
   // main loop
   tick_ := 1;
   days_ := 0;
-  retrieveParamsAndServers;
+  //retrieveParamsAndServers;
   retrieveClients;
-  receiveChannels;
-  transmitClient;
+  //receiveChannels;
+  //transmitClient;
 end;
 
 procedure TCoreLoop.tick;
 begin
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
-      if (tick_ mod myConfID.receive_servers_each = 0) then retrieveParamsAndServers;
-      if (tick_ mod myConfID.receive_nodes_each = 0) then retrieveClients;
+      //if (tick_ mod 20 {myConfID.receive_servers_each = 0}) then retrieveParamsAndServers;
+      //if (tick_ mod 20 {myConfID.receive_nodes_each = 0}) then retrieveClients;
+      {
       if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;
       if (tick_ mod myConfID.receive_channels_each = 0) then receiveChannels;
       if (tick_ mod 20 = 0) and lf_morefrequentupdates.exists then receiveChannels;
+      }
 
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
@@ -133,10 +136,10 @@ var receiveparamthread  : TReceiveParamServiceThread;
 begin
    serverman.getSuperServer(srv);
    receiveparamthread  := servicefactory.createReceiveParamService(srv);
-   if not launch(receiveparamthread, 'ReceiveParams', srv) then receiveparamthread.Free;
+   if not launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams', srv) then receiveparamthread.Free;
 
    receiveserverthread := servicefactory.createReceiveServerService(srv);
-   if not launch(receiveserverthread, 'ReceiveServers', srv) then receiveserverthread.Free;
+   if not launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers', srv) then receiveserverthread.Free;
 end;
 
 procedure TCoreLoop.retrieveClients;
@@ -145,7 +148,7 @@ var receiveclientthread  : TReceiveClientServiceThread;
 begin
    serverman.getServer(srv);
    receiveclientthread  := servicefactory.createReceiveClientService(srv);
-   if not launch(receiveclientthread, 'ReceiveClients', srv) then receiveclientthread.Free;
+   if not launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients', srv) then receiveclientthread.Free;
 end;
 
 procedure TCoreLoop.transmitClient;
@@ -154,7 +157,7 @@ var transmitclientthread  : TTransmitClientServiceThread;
 begin
    serverman.getDefaultServer(srv);
    transmitclientthread  := servicefactory.createTransmitClientService(srv);
-   if not launch(transmitclientthread, 'TransmitClient', srv) then transmitclientthread.Free;
+   if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
 end;
 
 procedure TCoreLoop.receiveChannels;
@@ -163,7 +166,7 @@ var receivechanthread     : TReceiveChannelServiceThread;
 begin
    serverman.getDefaultServer(srv);
    receivechanthread  := servicefactory.createReceiveChannelService(srv, {srv.chatchannel}'Altos', 'CHAT');
-   if not launch(receivechanthread, 'ReceiveChannels', srv) then receivechanthread.Free;
+   if not launch(TCoreServiceThread(receivechanthread), 'ReceiveChannels', srv) then receivechanthread.Free;
 end;
 
 

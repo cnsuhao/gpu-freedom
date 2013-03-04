@@ -89,7 +89,7 @@ end;
 var
   Application: TGPUCoreApp;
 
-{$IFDEF WINDOWS}{$R gpucore.rc}{$ENDIF}
+{$R *.res}
 
 begin
   Application:=TGPUCoreApp.Create(nil);
