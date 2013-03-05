@@ -1,6 +1,10 @@
 ******************
 GPU freedom branch
 
+5.3.2013 git
+Client: turns out there was no lock problem with sqlite3, but with the coreapp implementation of lockfiles.pas :-)
+        the client refactoring can go on
+
 4.3.2013 git
 Client: managed to recompile core, managed to retrieve clients from server and store it in sqlite, however, still deadlocks presumably with sqlite (need to check lockfiles though)
 		added OctaveGUI as external library, Octave could be used as external Computer Algebra System. Maybe we could bind Maxima in a similar way, too.

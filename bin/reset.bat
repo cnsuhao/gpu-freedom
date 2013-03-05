@@ -1,4 +1,5 @@
 del *.o
 del *.ppu
-del .\locks\coreapp.lock
-del coreapp.db
+del .\locks\gpucore.lock
+del gpucore.db
+del gpucore.compiled

@@ -1,1 +1,1 @@
-del .\locks\coreapp.lock
+del .\locks\gpucore.lock

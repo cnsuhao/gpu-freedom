@@ -37,7 +37,7 @@ begin
    inherited Create;
 
    path_ := extractFilePath(ParamStr(0));
-   isrunninglock_     := TLockFile.Create(path_+'locks', 'coreapp.lock');
+   isrunninglock_     := TLockFile.Create(path_+'locks', 'gpucore.lock');
 end;
 
 destructor  TCoreMonitor.Destroy();

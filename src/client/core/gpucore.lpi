@@ -33,16 +33,16 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="33">
+    <Units Count="36">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="26"/>
+        <TopLine Value="1"/>
         <CursorPos X="10" Y="37"/>
-        <UsageCount Value="26"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -185,10 +185,12 @@
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="10"/>
-        <CursorPos X="46" Y="39"/>
-        <UsageCount Value="11"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\lib\own\misc\testconstants.pas"/>
@@ -200,22 +202,21 @@
       <Unit22>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="11" Y="30"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="14"/>
+        <CursorPos X="84" Y="55"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="62"/>
+        <TopLine Value="39"/>
         <CursorPos X="27" Y="84"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -269,32 +270,63 @@
       <Unit30>
         <Filename Value="..\lib\own\misc\lockfiles.pas"/>
         <UnitName Value="lockfiles"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="13"/>
         <CursorPos X="3" Y="2"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit30>
       <Unit31>
         <Filename Value="coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="15" Y="20"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="7"/>
+        <CursorPos X="66" Y="40"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit31>
       <Unit32>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="179"/>
         <CursorPos X="21" Y="201"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit32>
+      <Unit33>
+        <Filename Value="..\..\..\bin\start.bat"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Bat"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="..\..\..\bin\stop.bat"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="20" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Bat"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="..\..\..\bin\reset.bat"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="21" Y="5"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Bat"/>
+      </Unit35>
     </Units>
     <JumpHistory Count="16" HistoryIndex="15">
       <Position1>
@@ -359,7 +391,7 @@
       </Position15>
       <Position16>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="84" Column="22" TopLine="58"/>
+        <Caret Line="84" Column="27" TopLine="39"/>
       </Position16>
     </JumpHistory>
   </ProjectOptions>
