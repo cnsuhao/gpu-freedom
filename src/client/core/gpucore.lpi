@@ -40,7 +40,7 @@
         <UnitName Value="gpucore"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="53"/>
+        <TopLine Value="1"/>
         <CursorPos X="71" Y="28"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
@@ -126,7 +126,7 @@
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
         <CursorPos X="14" Y="27"/>
@@ -179,15 +179,17 @@
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="93"/>
+        <TopLine Value="96"/>
         <CursorPos X="141" Y="111"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="10"/>
         <CursorPos X="1" Y="1"/>
@@ -204,7 +206,7 @@
       <Unit22>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="14"/>
         <CursorPos X="84" Y="55"/>
@@ -214,7 +216,7 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="117"/>
         <CursorPos X="112" Y="143"/>
@@ -233,10 +235,10 @@
         <Filename Value="..\lib\own\coreservices\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="66"/>
-        <CursorPos X="10" Y="103"/>
+        <TopLine Value="67"/>
+        <CursorPos X="8" Y="98"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -251,7 +253,7 @@
       <Unit27>
         <Filename Value="..\lib\own\coreservices\receiveclientservices.pas"/>
         <UnitName Value="receiveclientservices"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="66"/>
         <CursorPos X="61" Y="74"/>
@@ -261,7 +263,7 @@
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="34"/>
         <CursorPos X="24" Y="22"/>
@@ -279,7 +281,7 @@
       <Unit30>
         <Filename Value="..\lib\own\misc\lockfiles.pas"/>
         <UnitName Value="lockfiles"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="17"/>
         <WindowIndex Value="0"/>
         <TopLine Value="13"/>
         <CursorPos X="3" Y="2"/>
@@ -289,7 +291,7 @@
       <Unit31>
         <Filename Value="coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="0"/>
         <TopLine Value="7"/>
         <CursorPos X="66" Y="40"/>
@@ -298,7 +300,7 @@
       </Unit31>
       <Unit32>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="179"/>
         <CursorPos X="21" Y="201"/>
@@ -307,7 +309,7 @@
       </Unit32>
       <Unit33>
         <Filename Value="..\..\..\bin\start.bat"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
@@ -317,7 +319,7 @@
       </Unit33>
       <Unit34>
         <Filename Value="..\..\..\bin\stop.bat"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="20" Y="1"/>
@@ -327,7 +329,7 @@
       </Unit34>
       <Unit35>
         <Filename Value="..\..\..\bin\reset.bat"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="21" Y="5"/>
@@ -338,17 +340,17 @@
       <Unit36>
         <Filename Value="..\lib\own\coreservices\receiveparamservices.pas"/>
         <UnitName Value="receiveparamservices"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="39"/>
         <CursorPos X="66" Y="73"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="32"/>
         <CursorPos X="14" Y="54"/>
@@ -358,7 +360,7 @@
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
         <UnitName Value="servertables"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="106"/>
         <CursorPos X="28" Y="74"/>
