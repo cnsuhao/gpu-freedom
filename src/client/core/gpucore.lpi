@@ -40,7 +40,7 @@
         <UnitName Value="gpucore"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
+        <TopLine Value="26"/>
         <CursorPos X="10" Y="37"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
@@ -210,10 +210,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="117"/>
-        <CursorPos X="41" Y="51"/>
+        <TopLine Value="62"/>
+        <CursorPos X="27" Y="84"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit23>
@@ -268,10 +269,9 @@
       <Unit30>
         <Filename Value="..\lib\own\misc\lockfiles.pas"/>
         <UnitName Value="lockfiles"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="13"/>
         <CursorPos X="3" Y="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -296,7 +296,7 @@
         <Loaded Value="True"/>
       </Unit32>
     </Units>
-    <JumpHistory Count="23" HistoryIndex="22">
+    <JumpHistory Count="16" HistoryIndex="15">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="67" Column="38" TopLine="1"/>
@@ -334,61 +334,33 @@
         <Caret Line="90" Column="28" TopLine="5"/>
       </Position9>
       <Position10>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="21" Column="15" TopLine="40"/>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="44" Column="9" TopLine="35"/>
       </Position10>
       <Position11>
         <Filename Value="gpucore.lpr"/>
-        <Caret Line="44" Column="9" TopLine="35"/>
+        <Caret Line="48" Column="6" TopLine="26"/>
       </Position11>
       <Position12>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="39" Column="110" TopLine="60"/>
-      </Position12>
-      <Position13>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="48" Column="6" TopLine="26"/>
-      </Position13>
-      <Position14>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="21" Column="51" TopLine="38"/>
-      </Position14>
-      <Position15>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="18" Column="17" TopLine="25"/>
-      </Position15>
-      <Position16>
-        <Filename Value="coremonitors.pas"/>
-        <Caret Line="14" Column="17" TopLine="22"/>
-      </Position16>
-      <Position17>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="21" Column="51" TopLine="53"/>
-      </Position17>
-      <Position18>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="18" Column="17" TopLine="19"/>
-      </Position18>
-      <Position19>
         <Filename Value="coreloops.pas"/>
         <Caret Line="51" Column="41" TopLine="25"/>
-      </Position19>
-      <Position20>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="21" Column="51" TopLine="23"/>
-      </Position20>
-      <Position21>
-        <Filename Value="coremonitors.pas"/>
-        <Caret Line="19" Column="15" TopLine="28"/>
-      </Position21>
-      <Position22>
+      </Position12>
+      <Position13>
         <Filename Value="coremonitors.pas"/>
         <Caret Line="64" Column="49" TopLine="28"/>
-      </Position22>
-      <Position23>
+      </Position13>
+      <Position14>
         <Filename Value="..\lib\own\misc\lockfiles.pas"/>
         <Caret Line="2" Column="2" TopLine="1"/>
-      </Position23>
+      </Position14>
+      <Position15>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="37" Column="10" TopLine="26"/>
+      </Position15>
+      <Position16>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="84" Column="22" TopLine="58"/>
+      </Position16>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
