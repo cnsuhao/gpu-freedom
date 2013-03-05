@@ -3,15 +3,15 @@ unit servertables;
    TDbServerTable contains the server nodes seen on the GPU network
    active and inactive
 
-   (c) by 2010 HB9TVM and the GPU Team
+   (c) by 2010-2013 HB9TVM and the GPU Team
 }
 interface
 
 uses sqlite3ds, db, coretables, SysUtils;
 
 type TDbServerRow = record
-    id,
-    externalid       : Longint;
+    id            : Longint;
+    serverid,
     servername,
     serverurl,
     chatchannel,
@@ -20,13 +20,12 @@ type TDbServerRow = record
     updated,
     defaultsrv,
     superserver      : Boolean;
-    uptime,
-    totaluptime      : TDateTime;
+    uptime           : Longint;
     longitude,
     latitude,
     distance         : Real;
     activenodes,
-    jobsinqueue,
+    jobinqueue,
     failures         : Longint;
 end;
 
@@ -59,7 +58,7 @@ begin
     begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
-      FieldDefs.Add('externalid', ftInteger);
+      FieldDefs.Add('serverid', ftString);
       FieldDefs.Add('servername', ftString);
       FieldDefs.Add('serverurl', ftString);
       FieldDefs.Add('chatchannel', ftString);
@@ -89,7 +88,7 @@ var options : TLocateOptions;
     updated : Boolean;
 begin
   options := [];
-  if dataset_.Locate('externalid', row.externalid, options) then
+  if dataset_.Locate('serverid', row.serverid, options) then
     begin
       dataset_.Edit;
       updated := true;
@@ -100,7 +99,7 @@ begin
       updated := false;
     end;
 
-  dataset_.FieldByName('externalid').AsInteger := row.externalid;
+  dataset_.FieldByName('serverid').AsString := row.serverid;
   dataset_.FieldByName('servername').AsString := row.servername;
   dataset_.FieldByName('serverurl').AsString := row.serverurl;
   dataset_.FieldByName('chatchannel').AsString := row.chatchannel;
@@ -109,13 +108,12 @@ begin
   dataset_.FieldByName('updated').AsBoolean := true;
   dataset_.FieldByName('defaultsrv').AsBoolean := row.defaultsrv;
   dataset_.FieldByName('superserver').AsBoolean := row.superserver;
-  dataset_.FieldByName('uptime').AsFloat := row.uptime;
-  dataset_.FieldByName('totaluptime').AsFloat := row.totaluptime;
+  dataset_.FieldByName('uptime').AsInteger := row.uptime;
   dataset_.FieldByName('latitude').AsFloat := row.latitude;
   dataset_.FieldByName('longitude').AsFloat := row.longitude;
   dataset_.FieldByName('distance').AsFloat := row.distance;
   dataset_.FieldByName('activenodes').AsInteger := row.activenodes;
-  dataset_.FieldByName('jobinqueue').AsInteger := row.jobsinqueue;
+  dataset_.FieldByName('jobinqueue').AsInteger := row.jobinqueue;
   dataset_.FieldByName('failures').AsInteger := row.failures;
 
   if updated then

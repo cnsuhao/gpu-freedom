@@ -4,7 +4,7 @@ unit receiveserverservices;
   This unit receives a list of active servers from GPU II superserver
    and stores it in the TDbServerTable object.
 
-  (c) 2010 by HB9TVM and the GPU Team
+  (c) 2010-2013 by HB9TVM and the GPU Team
   This code is licensed under the GPL
 
 }
@@ -48,7 +48,7 @@ begin
     begin
         try
              begin
-               dbrow.externalid  := StrToInt(node.FindNode('externalid').TextContent);
+               dbrow.serverid  :=   node.FindNode('serverid').TextContent;
                dbrow.servername  := node.FindNode('servername').TextContent;
                dbrow.serverurl   := node.FindNode('serverurl').TextContent;
                dbrow.chatchannel := node.FindNode('chatchannel').TextContent;
@@ -57,14 +57,13 @@ begin
                dbrow.updated     := true;
                dbrow.defaultsrv  := false;
                dbrow.superserver := node.FindNode('superserver').TextContent='true';
-               dbrow.uptime      := StrToFloatDef(node.FindNode('uptime').TextContent, 0);
-               dbrow.totaluptime := StrToFloatDef(node.FindNode('totaluptime').TextContent, 0);
+               dbrow.uptime      := StrToInt(node.FindNode('uptime').TextContent);
                dbrow.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbrow.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
                dbrow.distance    := getDistanceOnEarthSphere(dbrow.longitude, dbrow.latitude,
                                                              myGPUId.Longitude, myGPUId.Latitude);
                dbrow.activenodes := StrToInt(node.FindNode('activenodes').TextContent);
-               dbrow.jobsinqueue := StrToInt(node.FindNode('jobsinqueue').TextContent);
+               dbrow.jobinqueue := StrToInt(node.FindNode('jobinqueue').TextContent);
                dbrow.failures    := 0;
 
                tableman_.getServerTable().insertOrUpdate(dbrow);
@@ -89,17 +88,19 @@ end;
 procedure TReceiveServerServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/supercluster/get_servers_xml.php', xmldoc, true);
+ receive('/supercluster/list_servers.php?xml=1', xmldoc, false);
  if not erroneous_ then
     begin
      tableman_.getServerTable().execSQL('UPDATE tbserver set updated=0;');
      parseXml(xmldoc);
      if not erroneous_ then
        begin
+        {
         tableman_.getServerTable().execSQL('UPDATE tbserver set online=updated;');
         tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=0;');
         tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
         servMan_.reloadServers();
+        }
        end;
     end;
 

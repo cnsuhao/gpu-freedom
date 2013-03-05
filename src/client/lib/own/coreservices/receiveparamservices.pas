@@ -70,7 +70,7 @@ end;
 procedure TReceiveParamServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/supercluster/get_parameters_xml.php', xmldoc, true);
+ receive('/supercluster/list_parameters.php?xml=1', xmldoc, false);
 
  if not erroneous_ then
      parseXml(xmldoc);
