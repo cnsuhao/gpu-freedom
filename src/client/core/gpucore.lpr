@@ -31,13 +31,21 @@ type
 
 procedure TGPUCoreApp.mainLoop;
 begin
- coreloop_.start();
+ if coreloop_.getCoreMonitor().coreCanStart then
+    coreloop_.start()
+ else
+    begin
+         WriteLn('Could not launch core, as it is already running. '+#13#10+
+                 'Please delete the lockfile locks/coreapp.lock to stop the process and before relaunching it.');
+         ReadLn;
+         Halt;
+    end;
+
   while coreloop_.getCoreMonitor().coreCanRun do
     begin
      coreloop_.tick();
      Sleep(1000);
     end;
- coreloop_.stop();
 end;
 
 procedure TGPUCoreApp.DoRun;
@@ -76,6 +84,7 @@ end;
 
 destructor TGPUCoreApp.Destroy;
 begin
+  coreloop_.stop();
   coreloop_.Free;
   inherited Destroy;
 end;

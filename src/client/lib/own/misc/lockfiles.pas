@@ -1,5 +1,5 @@
 unit lockfiles;
-
+{ $DEFINE DEBUG}
 interface
 
 uses Sysutils;
@@ -25,8 +25,10 @@ begin
   inherited Create;
   fullname_ := path+pathDelim+filename;
 
-  //if not DirectoryExists(path_) then
-  //  MkDir(path_);
+  {$IFDEF DEBUG}WriteLn('Creating TLockfile with definition '+fullname_);{$ENDIF}
+
+  if not DirectoryExists(path) then
+    MkDir(path);
 end;
 
 destructor TLockFile.Destroy;
@@ -37,8 +39,10 @@ end;
 
 procedure TLockFile.createLF;
 begin
+ {$IFDEF DEBUG}WriteLn('CreateLF ('+fullname_+')');{$ENDIF}
  if not exists then
     begin
+     {$IFDEF DEBUG}WriteLn('Creating file ('+fullname_+')');{$ENDIF}
      AssignFile(F_, fullname_);
      Rewrite(F_);
      CloseFile(F_);
@@ -49,11 +53,22 @@ end;
 function TLockFile.exists : Boolean;
 begin
  Result := FileExists(fullname_);
+
+ {$IFDEF DEBUG}
+ if Result then
+      WriteLn('Lockfile exists ('+fullname_+')')
+ else
+      WriteLn('Lockfile does not exist ('+fullname_+')')
+ {$ENDIF}
 end;
 
 procedure TLockFile.delete;
 begin
- if exists then DeleteFile(fullname_);
+ if exists then
+  begin
+   DeleteFile(fullname_);
+   {$IFDEF DEBUG}WriteLn('Deleting lockfile ('+fullname_+')'){$ENDIF}
+  end;
 end;
 
 

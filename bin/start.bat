@@ -1,0 +1,1 @@
+.\gpucore.exe > gpucore.log

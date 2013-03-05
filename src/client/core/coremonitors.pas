@@ -17,6 +17,7 @@ type TCoreMonitor = class(TObject)
     // used in core
     procedure coreStarted;
     function  coreCanRun : Boolean;
+    function  coreCanStart : Boolean;
     procedure coreStopped;
 
     // called by GUI
@@ -36,7 +37,7 @@ begin
    inherited Create;
 
    path_ := extractFilePath(ParamStr(0));
-   isrunninglock_     := TLockFile.Create(path_+PathDelim+'locks', 'coreapp.lock');
+   isrunninglock_     := TLockFile.Create(path_+'locks', 'coreapp.lock');
 end;
 
 destructor  TCoreMonitor.Destroy();
@@ -60,6 +61,12 @@ function    TCoreMonitor.coreCanRun : Boolean;
 begin
   Result := isrunninglock_.exists;
 end;
+
+function    TCoreMonitor.coreCanStart : Boolean;
+begin
+  Result := not isrunninglock_.exists;
+end;
+
 
 procedure   TCoreMonitor.startCore;
 var path : String;
