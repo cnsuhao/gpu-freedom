@@ -1,1 +1,1 @@
-.\gpucore.exe > gpucore.log
+.\gpucore.exe
