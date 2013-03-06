@@ -42,6 +42,8 @@ begin
              begin
               with myConfId do
                begin
+
+                 {
                  receive_servers_each  := StrToInt(param.FindNode('receive_servers_each').TextContent);
                  receive_nodes_each    := StrToInt(param.FindNode('receive_nodes_each').TextContent);
                  transmit_node_each    := StrToInt(param.FindNode('transmit_node_each').TextContent);
@@ -51,6 +53,7 @@ begin
                  transmit_channels_each:= StrToInt(param.FindNode('transmit_channels_each').TextContent);
                  receive_chat_each     := StrToInt(param.FindNode('receive_chat_each').TextContent);
                  purge_server_after_failures := StrToInt(param.FindNode('purge_server_after_failures').TextContent);
+                 }
                  logger_.log(LVL_DEBUG, 'All parameters updated succesfully');
                end; // with
              end;

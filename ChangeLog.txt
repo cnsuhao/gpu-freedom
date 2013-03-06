@@ -2,7 +2,7 @@
 GPU freedom branch
 
 6.3.2013 git
-Client:  refactored parameter retrieval from server
+Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
 Server:  refactored list_parameters.php so that it appears as normal page
 
 5.3.2013 git

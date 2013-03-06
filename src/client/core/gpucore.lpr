@@ -1,5 +1,5 @@
 program gpucore;
-
+{$DEFINE DEBUG}
 {$mode objfpc}{$H+}
 
 uses
@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  coreloops;
+  coreloops, coreobjects, loggers;
 
 type
 
@@ -30,14 +30,19 @@ type
 { TGPUCoreApp }
 
 procedure TGPUCoreApp.mainLoop;
+var msg1, msg2 : String;
 begin
  if coreloop_.getCoreMonitor().coreCanStart then
     coreloop_.start()
  else
     begin
-         WriteLn('Could not launch core, as it is already running. '+#13#10+
-                 'Please delete the lockfile locks/coreapp.lock to stop the process and before relaunching it.');
+         msg1 := 'TGPUCoreApp> Could not launch core, as lockfile locks/gpucore.lock exists. ';
+         msg2 := 'TGPUCoreApp> Please stop any running process named gpucore.exe, delete the mentioned lockfile and relaunch gpucore.exe again.';
+         logger.log(LVL_FATAL, msg1); logger.log(LVL_FATAL, msg2);
+         {$IFDEF DEBUG}
+         WriteLn(msg1); WriteLn(msg2);
          ReadLn;
+         {$ENDIF}
          Halt;
     end;
 
