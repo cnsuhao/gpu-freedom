@@ -39,12 +39,12 @@ var
     node     : TDOMNode;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
-  node := xmldoc.DocumentElement.FirstChild;
+ try
+  begin
+    node := xmldoc.DocumentElement.FirstChild;
 
   while Assigned(node) do
     begin
-        try
-             begin
                dbnode.nodeid            := node.FindNode('nodeid').TextContent;
                dbnode.server_id         := srv_.id;
                dbnode.nodename          := node.FindNode('nodename').TextContent;
@@ -75,7 +75,10 @@ begin
                dbnode.team        := node.FindNode('team').TextContent;
                tableman_.getClientTable().insertOrUpdate(dbnode);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added <'+dbnode.nodename+'> to tbclient table.');
-             end;
+       node := node.NextSibling;
+     end;  // while Assigned(node)
+
+ end; // try
           except
            on E : Exception do
               begin
@@ -84,8 +87,7 @@ begin
               end;
           end; // except
 
-       node := node.NextSibling;
-     end;  // while Assigned(node)
+
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
