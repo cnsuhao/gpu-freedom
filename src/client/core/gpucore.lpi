@@ -163,7 +163,7 @@
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="70"/>
         <CursorPos X="15" Y="47"/>
@@ -211,7 +211,7 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="46"/>
         <CursorPos X="12" Y="76"/>
@@ -229,11 +229,10 @@
       <Unit25>
         <Filename Value="..\lib\own\coreservices\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="40"/>
-        <CursorPos X="15" Y="73"/>
+        <TopLine Value="33"/>
+        <CursorPos X="75" Y="49"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -248,15 +247,18 @@
       <Unit27>
         <Filename Value="..\lib\own\coreservices\receiveclientservices.pas"/>
         <UnitName Value="receiveclientservices"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="32"/>
-        <CursorPos X="61" Y="74"/>
+        <CursorPos X="1" Y="45"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="126"/>
         <CursorPos X="52" Y="133"/>
@@ -323,15 +325,15 @@
         <UnitName Value="receiveparamservices"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="69"/>
-        <CursorPos X="17" Y="94"/>
+        <TopLine Value="39"/>
+        <CursorPos X="66" Y="45"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="88"/>
         <CursorPos X="87" Y="134"/>
@@ -341,7 +343,7 @@
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
         <UnitName Value="servertables"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="37"/>
         <CursorPos X="13" Y="64"/>
@@ -351,7 +353,7 @@
       <Unit39>
         <Filename Value="..\lib\own\coredb\parametertables.pas"/>
         <UnitName Value="parametertables"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="74"/>
         <CursorPos X="76" Y="76"/>
@@ -381,7 +383,7 @@
       <Unit42>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\sqlite\customsqliteds.pas"/>
         <UnitName Value="CustomSqliteDS"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1846"/>
         <CursorPos X="14" Y="269"/>
@@ -391,7 +393,7 @@
       <Unit43>
         <Filename Value="..\lib\own\misc\geoutils.pas"/>
         <UnitName Value="geoutils"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="45" Y="58"/>
@@ -400,7 +402,7 @@
       </Unit43>
       <Unit44>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\mathh.inc"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="39"/>
         <CursorPos X="63" Y="76"/>

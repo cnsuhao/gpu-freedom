@@ -44,12 +44,12 @@ var
     dbnode   : TDbParameterRow;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+ try
+  begin
   node := xmldoc.DocumentElement.FirstChild;
 
   while Assigned(node) do
     begin
-        try
-             begin
                dbnode.paramtype         := node.FindNode('paramtype').TextContent;
                dbnode.paramname         := node.FindNode('paramname').TextContent;
                dbnode.paramvalue        := node.FindNode('paramvalue').TextContent;
@@ -60,8 +60,11 @@ begin
                tableman_.getParameterTable().insertorupdate(dbnode);
                logger_.log(LVL_DEBUG, 'record count: '+IntToStr(tableman_.getParameterTable().getDS().RecordCount));
 
-             end;
-          except
+        node := node.NextSibling;
+     end;  // while Assigned(param)
+
+   end; // try
+       except
            on E : Exception do
               begin
                 erroneous_ := true;
@@ -69,8 +72,6 @@ begin
               end;
           end; // except
 
-        node := node.NextSibling;
-     end;  // while Assigned(param)
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
    loadParametersIntoConfiguration;
