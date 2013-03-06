@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="41">
+    <Units Count="42">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -208,7 +208,7 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="138"/>
         <CursorPos X="34" Y="167"/>
@@ -250,10 +250,12 @@
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="34"/>
-        <CursorPos X="24" Y="22"/>
+        <TopLine Value="50"/>
+        <CursorPos X="52" Y="133"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit28>
       <Unit29>
         <Filename Value="..\lib\own\coreservices\transmitclientservices.pas"/>
@@ -314,17 +316,17 @@
         <Filename Value="..\lib\own\coreservices\receiveparamservices.pas"/>
         <UnitName Value="receiveparamservices"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="66"/>
-        <CursorPos X="67" Y="99"/>
+        <TopLine Value="61"/>
+        <CursorPos X="72" Y="76"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="32"/>
         <CursorPos X="14" Y="54"/>
@@ -342,10 +344,12 @@
       <Unit39>
         <Filename Value="..\lib\own\coredb\parametertables.pas"/>
         <UnitName Value="parametertables"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="81" Y="20"/>
+        <TopLine Value="11"/>
+        <CursorPos X="28" Y="68"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit39>
       <Unit40>
         <Filename Value="..\lib\own\coreservices\receivechannelservices.pas"/>
@@ -357,8 +361,18 @@
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit40>
+      <Unit41>
+        <Filename Value="..\lib\own\coredb\retrievedtables.pas"/>
+        <UnitName Value="retrievedtables"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="15" Y="27"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit41>
     </Units>
-    <JumpHistory Count="6" HistoryIndex="5">
+    <JumpHistory Count="7" HistoryIndex="6">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -381,8 +395,12 @@
       </Position5>
       <Position6>
         <Filename Value="..\lib\own\coreservices\receiveparamservices.pas"/>
-        <Caret Line="99" Column="67" TopLine="66"/>
+        <Caret Line="99" Column="67" TopLine="42"/>
       </Position6>
+      <Position7>
+        <Filename Value="..\lib\own\coreservices\receivechannelservices.pas"/>
+        <Caret Line="84" Column="34" TopLine="46"/>
+      </Position7>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

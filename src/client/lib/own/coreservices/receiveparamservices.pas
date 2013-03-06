@@ -56,8 +56,8 @@ begin
                dbnode.create_dt         := Now();
                dbnode.update_dt         := Now(); //TODO parse from string from server
 
-               logger_.log(LVL_DEBUG, logHeader_+'Adding parameter '+dbnode.paramname+' to tbparameter table.');
-               tableman_.getParameterTable().insert(dbnode);
+               logger_.log(LVL_DEBUG, logHeader_+'Adding or updating parameter '+dbnode.paramname+' to tbparameter table.');
+               tableman_.getParameterTable().insertorupdate(dbnode);
                logger_.log(LVL_DEBUG, 'record count: '+IntToStr(tableman_.getParameterTable().getDS().RecordCount));
 
              end;

@@ -22,7 +22,7 @@ type TDbParameterTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
-    procedure insert(row : TDbParameterRow);
+    procedure insertorupdate(row : TDbParameterRow);
 
     function retrieveParameter(paramtype, paramname, ifmissing : String) : String;
     function setParameter(paramtype, paramname, paramvalue : String) : Boolean;
@@ -58,19 +58,33 @@ begin
   end; {with}
 end;
 
-procedure TDbParameterTable.insert(row : TDbParameterRow);
+procedure TDbParameterTable.insertorupdate(row : TDbParameterRow);
 var options : TLocateOptions;
     updated : Boolean;
 begin
-  // TODO remove this from public visibility
-
-  dataset_.Append;
+   options := [];
+   if dataset_.Locate('paramname', row.paramname, options) then
+     begin
+       dataset_.Edit;
+       updated := true;
+     end
+   else
+     begin
+       dataset_.Append;
+       updated := false;
+     end;
 
   dataset_.FieldByName('paramtype').AsString := row.paramtype;
   dataset_.FieldByName('paramname').AsString := row.paramname;
   dataset_.FieldByName('paramvalue').AsString := row.paramvalue;
-  dataset_.FieldByName('create_dt').AsDateTime := row.create_dt;
-  dataset_.FieldByName('update_dt').AsDateTime := row.update_dt;
+
+  if updated then
+    dataset_.FieldByName('update_dt').AsDateTime := Now
+  else
+    begin
+      dataset_.FieldByName('create_dt').AsDateTime := Now;
+      //dataset_.FieldByName('update_dt').AsDateTime := nil;
+    end;
 
   dataset_.Post;
   dataset_.ApplyUpdates;
@@ -119,8 +133,13 @@ begin
 end;
 
 function TDbParameterTable.setParameter(paramtype, paramname, paramvalue : String) : Boolean;
+var row  : TDbParameterRow;
 begin
- WriteLn('TODO: implement setParameter');
+  row.paramtype  := paramtype;
+  row.paramname  := paramname;
+  row.paramvalue := paramvalue;
+
+  insertorupdate(row);
 end;
 
 end.
