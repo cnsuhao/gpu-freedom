@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="43">
+    <Units Count="44">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -163,11 +163,11 @@
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="70"/>
         <CursorPos X="15" Y="47"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
@@ -211,12 +211,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -232,9 +231,9 @@
         <UnitName Value="receiveserverservices"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="6"/>
+        <TopLine Value="39"/>
         <CursorPos X="86" Y="35"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit25>
       <Unit26>
@@ -256,11 +255,11 @@
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="126"/>
         <CursorPos X="52" Y="133"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit28>
       <Unit29>
@@ -325,23 +324,23 @@
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
         <CursorPos X="17" Y="94"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="64"/>
         <CursorPos X="87" Y="134"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
         <UnitName Value="servertables"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="37"/>
         <CursorPos X="13" Y="64"/>
@@ -351,11 +350,11 @@
       <Unit39>
         <Filename Value="..\lib\own\coredb\parametertables.pas"/>
         <UnitName Value="parametertables"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="74"/>
         <CursorPos X="76" Y="76"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit39>
       <Unit40>
@@ -365,7 +364,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="46"/>
         <CursorPos X="34" Y="84"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit40>
       <Unit41>
@@ -375,21 +374,32 @@
         <WindowIndex Value="0"/>
         <TopLine Value="79"/>
         <CursorPos X="119" Y="7"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit41>
       <Unit42>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\sqlite\customsqliteds.pas"/>
         <UnitName Value="CustomSqliteDS"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1846"/>
         <CursorPos X="14" Y="269"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit42>
+      <Unit43>
+        <Filename Value="..\lib\own\misc\geoutils.pas"/>
+        <UnitName Value="geoutils"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="68" Y="35"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit43>
     </Units>
-    <JumpHistory Count="20" HistoryIndex="19">
+    <JumpHistory Count="21" HistoryIndex="20">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -470,6 +480,10 @@
         <Filename Value="coreloops.pas"/>
         <Caret Line="176" Column="24" TopLine="138"/>
       </Position20>
+      <Position21>
+        <Filename Value="..\lib\own\coreservices\receiveserverservices.pas"/>
+        <Caret Line="35" Column="86" TopLine="39"/>
+      </Position21>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

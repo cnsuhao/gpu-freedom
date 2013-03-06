@@ -32,7 +32,7 @@ begin
   lat1 := lat1+90;
   lat2 := lat2+90;
 
-  //TODO: check if pythagoras holds on sphere
+  //TODO: check if pythagoras holds on sphere // note it does not!!
   dLat := Abs(lat1-lat2)/180*EARTH_PERIMETER/2;
   dLon := Abs(lon1-lon2)/360*EARTH_PERIMETER;
   d := Sqrt(sqr(dLat)+sqr(dLon));
