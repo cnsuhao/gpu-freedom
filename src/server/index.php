@@ -35,7 +35,7 @@ open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdat
 echo "</td><td>";
 echo "<center>";
 echo "<b>Cluster<b><br>";
-echo "<a href='cluster/list_clients.php'>Clients</a> <a href='supercluster/list_servers.php'>Servers</a>";
+echo "<a href='cluster/list_clients.php'>Clients</a> <a href='supercluster/list_servers.php'>Servers</a> <a href='supercluster/list_parameters.php'>Parameters</a>";
 echo "</center>";
 //open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdata-scriptsperproject.php');
 echo "</td></tr>";

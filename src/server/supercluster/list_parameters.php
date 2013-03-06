@@ -1,14 +1,32 @@
-<parameters>
-<communication>
- <todo>here we should retrieve valid stuff from constants.inc.php and from tbparameter</todo>
- <receive_servers_each>3600</receive_servers_each>
- <receive_nodes_each>120</receive_nodes_each>
- <transmit_node_each>180</transmit_node_each>
- <receive_jobs_each>120</receive_jobs_each>
- <transmit_jobs_each>120</transmit_jobs_each>
- <receive_channels_each>120</receive_channels_each>
- <transmit_channels_each>120</transmit_channels_each>
- <receive_chat_each>45</receive_chat_each>
- <purge_server_after_failures>30</purge_server_after_failures>
-</communication>
-</parameters>
+<?php
+/*
+  This PHP script retrieves parameters from table TBPARAMETER.
+  
+  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  
+*/
+
+ include('../utils/sql2xml/sql2xml.php'); 
+ include('../utils/sql2xml/xsl.php');
+ include('../utils/utils.inc.php');
+ include('../utils/constants.inc.php');
+ 
+ $paramtype = getparam("paramtype", "");
+ if ($paramtype=="") $paramclause = ""; else $paramclause = "and paramtype='$paramtype'";
+
+ $xml = getparam('xml', false); 
+ if (!$xml) ob_start();
+ 
+ echo "<parameters>\n"; 
+ $level_list = Array("parameter");
+ sql2xml("select id, paramtype, paramname, paramvalue, create_dt, update_dt
+         from tbparameter
+		 where 
+		 paramtype<>'CONFIGURATION' and paramtype<>'SECURITY'
+		 $paramclause
+		 order by paramtype, paramname;
+		", $level_list, 0);
+ echo "</parameters>\n";
+ 
+ if (!$xml) apply_XSLT();
+?>

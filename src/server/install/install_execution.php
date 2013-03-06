@@ -14,6 +14,17 @@
 
  set_db_parameter("TEST", "DB_CONNECTION", "OK");
  
+ set_db_parameter("CLIENT", "receive_servers_each", "3600");
+ set_db_parameter("CLIENT", "receive_nodes_each", "120");
+ set_db_parameter("CLIENT", "transmit_node_each", "180");
+ set_db_parameter("CLIENT", "receive_jobs_each", "120");
+ set_db_parameter("CLIENT", "transmit_jobs_each", "120");
+ set_db_parameter("CLIENT", "receive_channels_each", "120");
+ set_db_parameter("CLIENT", "transmit_channels_each", "120");
+ set_db_parameter("CLIENT", "receive_chat_each", "45");
+ set_db_parameter("CLIENT", "purge_server_after_failures", "30");
+ 
+ 
  // define an unique server id for this installation
  if (get_db_parameter("CONFIGURATION", "SERVER_ID", "missing")=="missing") {
 	$serverid = create_unique_id();

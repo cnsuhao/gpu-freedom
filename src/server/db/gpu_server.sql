@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 01, 2013 at 04:00 PM
+-- Generation Time: Mar 06, 2013 at 10:39 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -278,18 +278,27 @@ CREATE TABLE IF NOT EXISTS `tbparameter` (
   `update_dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `paramtype` (`paramtype`,`paramname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `tbparameter`
 --
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`, `create_dt`, `update_dt`) VALUES
-(1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-02-25 16:13:37'),
+(1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-03-06 10:18:17'),
 (9, 'TIME', 'UPTIME', '81042', '2013-02-25 11:55:44', '2013-02-28 14:32:36'),
 (8, 'CONFIGURATION', 'SERVER_ID', 'fb4bc9a27a2be5e0b7ce08dc2bf09618', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
-(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1362058355', '2013-02-25 16:13:37', '2013-02-28 14:32:36');
+(14, 'CLIENT', 'receive_servers_each', '3600', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1362058355', '2013-02-25 16:13:37', '2013-02-28 14:32:36'),
+(15, 'CLIENT', 'receive_nodes_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(16, 'CLIENT', 'transmit_node_each', '180', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(17, 'CLIENT', 'receive_jobs_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(18, 'CLIENT', 'transmit_jobs_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(19, 'CLIENT', 'receive_channels_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(20, 'CLIENT', 'transmit_channels_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(21, 'CLIENT', 'receive_chat_each', '45', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
+(22, 'CLIENT', 'purge_server_after_failures', '30', '2013-03-06 10:18:17', '2013-03-06 10:18:17');
 
 -- --------------------------------------------------------
 
@@ -325,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `pos`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 81042, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 3, 12, '2013-02-25 16:27:29', '2013-02-28 14:32:39'),
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 81042, 7, 45, 0x0000000001010000000000000000002c400000000000002440, 3, 12, '2013-02-25 16:27:29', '2013-02-28 14:32:39'),
 (11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 0, 0, '2013-02-26 14:35:36', '2013-02-28 14:32:44'),
 (12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000008056400000000000805640, 13, 2, '2013-02-26 14:39:33', '2013-02-28 14:32:45'),
 (13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 18, 18, 0x00000000010100000000000000000032400000000000003240, 0, 0, '2013-02-28 11:21:54', '2013-02-28 13:36:46');
