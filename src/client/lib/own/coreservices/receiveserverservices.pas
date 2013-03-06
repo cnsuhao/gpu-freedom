@@ -66,7 +66,7 @@ begin
                dbrow.jobinqueue := StrToInt(node.FindNode('jobinqueue').TextContent);
                dbrow.failures    := 0;
 
-               tableman_.getServerTable().insertOrUpdate(dbrow);
+               if dbrow.serverurl<>'' then tableman_.getServerTable().insertOrUpdate(dbrow);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table (distance: '+FloatToStr(dbrow.distance)+').');
              end;
           except
@@ -95,13 +95,10 @@ begin
      parseXml(xmldoc);
      if not erroneous_ then
        begin
-       {
-        TODO: debug and reenable this section
         tableman_.getServerTable().execSQL('UPDATE tbserver set online=updated;');
         tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=0;');
-        tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');
+        tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(s.distance) from tbserver s);');
         servMan_.reloadServers();
-        }
        end;
     end;
 

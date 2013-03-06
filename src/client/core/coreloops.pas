@@ -73,8 +73,8 @@ begin
   tick_ := 1;
   days_ := 0;
   retrieveParams;
-  //retrieveServers;
-  //retrieveClients;
+  retrieveServers;
+  retrieveClients;
   //receiveChannels;
   //transmitClient;
 end;
@@ -135,7 +135,7 @@ procedure TCoreLoop.retrieveParams;
 var receiveparamthread  : TReceiveParamServiceThread;
     srv                 : TServerRecord;
 begin
-   serverman.getSuperServer(srv);
+   serverman.getDefaultServer(srv);
 
    receiveparamthread  := servicefactory.createReceiveParamService(srv);
    if not launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams', srv) then receiveparamthread.Free;
@@ -145,7 +145,7 @@ procedure TCoreLoop.retrieveServers;
 var receiveserverthread : TReceiveServerServiceThread;
     srv                 : TServerRecord;
 begin
-   serverman.getSuperServer(srv);
+   serverman.getDefaultServer(srv);
 
    receiveserverthread := servicefactory.createReceiveServerService(srv);
    if not launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers', srv) then receiveserverthread.Free;
@@ -155,7 +155,7 @@ procedure TCoreLoop.retrieveClients;
 var receiveclientthread  : TReceiveClientServiceThread;
     srv                  : TServerRecord;
 begin
-   serverman.getServer(srv);
+   serverman.getDefaultServer(srv);
    receiveclientthread  := servicefactory.createReceiveClientService(srv);
    if not launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients', srv) then receiveclientthread.Free;
 end;

@@ -91,7 +91,7 @@ begin
                   transmit_channels_each:= StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'transmit_channels_each','60'));
                   receive_chat_each     := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_chat_each','60'));
                   purge_server_after_failures := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'purge_server_after_failures','30'));
-    end; // with
+                end; // with
 
  logger_.log(LVL_DEBUG, 'receinve_nodes_each is set to '+IntToStr(myConfID.receive_nodes_each));
 end;

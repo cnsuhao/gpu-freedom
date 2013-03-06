@@ -101,11 +101,12 @@ procedure TServerManager.reloadServers();
 var i  : Longint;
     ds : TSqlite3DataSet;
 begin
+ logger_.log(LVL_DEBUG, 'TServermanager> Entering reloadServers()');
  cs_.Enter;
  i:=0;
  defaultserver_ := -1;
  superserver_ := -1;
-
+try
  ds := servertable_.getDS();
  ds.First;
  while not ds.EOF do
@@ -139,8 +140,10 @@ begin
         logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
       end
      else
-       currentServers_ := i;
-
+       begin
+         currentServers_ := i;
+         logger_.log(LVL_INFO, 'TServermanager> Superserver now set to '+myConfID.default_superserver_url);
+       end;
  if superserver_=-1 then
     begin
       logger_.log(LVL_SEVERE, 'TServermanager> Superserver not defined');
@@ -154,7 +157,16 @@ begin
     end;
 
  count_ := defaultserver_;
- cs_.Leave;
+except
+  on E : Exception do
+     begin
+      logger_.log(LVL_DEBUG, 'Exception '+e.ClassName+' thrown with message '+e.Message);
+     end;
+end;
+
+cs_.Leave;
+logger_.log(LVL_DEBUG, 'TServermanager> Exiting reloadServers()');
+
 end;
 
 procedure TServerManager.increaseFailures(url : String);

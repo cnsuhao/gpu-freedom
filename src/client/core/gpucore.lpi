@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="42">
+    <Units Count="43">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -42,7 +42,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="17" Y="45"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -163,9 +163,12 @@
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
-        <TopLine Value="87"/>
-        <CursorPos X="1" Y="109"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="70"/>
+        <CursorPos X="15" Y="47"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\initmodel.pas"/>
@@ -208,10 +211,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="7"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="138"/>
-        <CursorPos X="34" Y="167"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit23>
@@ -226,10 +230,12 @@
       <Unit25>
         <Filename Value="..\lib\own\coreservices\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="67"/>
-        <CursorPos X="24" Y="99"/>
+        <TopLine Value="6"/>
+        <CursorPos X="86" Y="35"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit25>
       <Unit26>
         <Filename Value="..\lib\own\coreservices\servicemanagers.pas"/>
@@ -250,7 +256,7 @@
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="126"/>
         <CursorPos X="52" Y="133"/>
@@ -315,18 +321,17 @@
       <Unit36>
         <Filename Value="..\lib\own\coreservices\receiveparamservices.pas"/>
         <UnitName Value="receiveparamservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
-        <CursorPos X="22" Y="84"/>
+        <CursorPos X="17" Y="94"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="64"/>
         <CursorPos X="87" Y="134"/>
@@ -336,15 +341,17 @@
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
         <UnitName Value="servertables"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="28" Y="74"/>
+        <TopLine Value="37"/>
+        <CursorPos X="13" Y="64"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit38>
       <Unit39>
         <Filename Value="..\lib\own\coredb\parametertables.pas"/>
         <UnitName Value="parametertables"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="74"/>
         <CursorPos X="76" Y="76"/>
@@ -371,8 +378,18 @@
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit41>
+      <Unit42>
+        <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\sqlite\customsqliteds.pas"/>
+        <UnitName Value="CustomSqliteDS"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1846"/>
+        <CursorPos X="14" Y="269"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit42>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -405,6 +422,54 @@
         <Filename Value="..\lib\own\coreservices\receiveparamservices.pas"/>
         <Caret Line="97" Column="76" TopLine="57"/>
       </Position8>
+      <Position9>
+        <Filename Value="..\lib\own\coreservices\receiveserverservices.pas"/>
+        <Caret Line="101" Column="34" TopLine="66"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
+        <Caret Line="32" Column="28" TopLine="22"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
+        <Caret Line="60" Column="16" TopLine="23"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coredb\servertables.pas"/>
+        <Caret Line="64" Column="13" TopLine="37"/>
+      </Position12>
+      <Position13>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="138" Column="11" TopLine="120"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
+        <Caret Line="30" Column="15" TopLine="55"/>
+      </Position14>
+      <Position15>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="182" Column="30" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="138" Column="24" TopLine="101"/>
+      </Position16>
+      <Position17>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="148" Column="24" TopLine="111"/>
+      </Position17>
+      <Position18>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="158" Column="24" TopLine="121"/>
+      </Position18>
+      <Position19>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="167" Column="24" TopLine="130"/>
+      </Position19>
+      <Position20>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="176" Column="24" TopLine="138"/>
+      </Position20>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
