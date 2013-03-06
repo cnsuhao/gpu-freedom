@@ -33,6 +33,7 @@ begin
   lat2 := lat2+90;
 
   //TODO: check if pythagoras holds on sphere // note it does not!!
+  // correct formula on http://en.wikipedia.org/wiki/Great-circle_distance
   dLat := Abs(lat1-lat2)/180*EARTH_PERIMETER/2;
   dLon := Abs(lon1-lon2)/360*EARTH_PERIMETER;
   d := Sqrt(sqr(dLat)+sqr(dLon));
