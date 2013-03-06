@@ -24,7 +24,7 @@ type TDbParameterTable = class(TDbCoreTable)
 
     procedure insertorupdate(row : TDbParameterRow);
 
-    function retrieveParameter(paramtype, paramname, ifmissing : String) : String;
+    function getParameter(paramtype, paramname, ifmissing : String) : String;
     function setParameter(paramtype, paramname, paramvalue : String) : Boolean;
 
   private
@@ -90,46 +90,18 @@ begin
   dataset_.ApplyUpdates;
 end;
 
-{
-// TODO: delete me
-// returns the new id
-function TDbChannelTable.retrieveLatestChat(channame, chantype : String; lastid : Longint;
-                                            var content : AnsiString; ownChat : Boolean) : Longint;
-var newid : Longint;
-    sqlStatement : String;
+
+function TDbParameterTable.getParameter(paramtype, paramname, ifmissing : String) : String;
+var options : TLocateOptions;
 begin
-  newid := lastid;
-  dataset_.Close();
-  sqlStatement := 'select * from tbchannel where (externalid>'+IntToStr(lastid)+') '+
-                  'and (channame='+QUOTE+channame+QUOTE+') '+
-                  'and (chantype='+QUOTE+chantype+QUOTE+') ';
-  if not ownChat then sqlStatement := sqlStatement +
-                  'and (nodeid<>'+QUOTE+myGPUID.nodeid+QUOTE+') ';
-  sqlStatement := sqlStatement +
-                  ' order by externalid asc;';
-
-  dataset_.SQL := sqlStatement;
-  dataset_.Open;
-
-  content := '';
-  dataset_.First;
-  while not dataset_.EOF do
-     begin
-       content := content +
-                  dataset_.FieldByName('nodename').AsString+'>'+
-                  dataset_.FieldByName('content').AsString+#13#10;
-       newid := dataset_.FieldByName('externalid').AsLongint;
-       dataset_.Next;
-     end;
-
-  Result := newid;
-end;
-}
-
-
-function TDbParameterTable.retrieveParameter(paramtype, paramname, ifmissing : String) : String;
-begin
- WriteLn('TODO: implement retrieveParameter');
+  // TODO: paramtype is currently unused here
+  options := [];
+  if dataset_.Locate('paramname', paramname, options) then
+       begin
+         Result :=  dataset_.FieldByName('paramvalue').AsString;
+       end
+  else
+      Result := ifmissing;
 end;
 
 function TDbParameterTable.setParameter(paramtype, paramname, paramvalue : String) : Boolean;

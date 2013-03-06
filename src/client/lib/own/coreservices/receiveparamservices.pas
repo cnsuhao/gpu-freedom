@@ -25,7 +25,7 @@ type TReceiveParamServiceThread = class(TReceiveServiceThread)
 
  private
    procedure parseXml(var xmldoc : TXMLDocument);
-
+   procedure loadParametersIntoConfiguration;
 end;
 
 
@@ -73,25 +73,31 @@ begin
      end;  // while Assigned(param)
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
+   loadParametersIntoConfiguration;
    logger_.log(LVL_DEBUG, 'All parameters updated succesfully');
 end;
 
-{
-TODO: load this parameters from tbparameter into myConfId
-with myConfId do
-               begin
 
-                 receive_servers_each  := StrToInt(param.FindNode('receive_servers_each').TextContent);
-                 receive_nodes_each    := StrToInt(param.FindNode('receive_nodes_each').TextContent);
-                 transmit_node_each    := StrToInt(param.FindNode('transmit_node_each').TextContent);
-                 receive_jobs_each     := StrToInt(param.FindNode('receive_jobs_each').TextContent);
-                 transmit_jobs_each    := StrToInt(param.FindNode('transmit_jobs_each').TextContent);
-                 receive_channels_each := StrToInt(param.FindNode('receive_channels_each').TextContent);
-                 transmit_channels_each:= StrToInt(param.FindNode('transmit_channels_each').TextContent);
-                 receive_chat_each     := StrToInt(param.FindNode('receive_chat_each').TextContent);
-                 purge_server_after_failures := StrToInt(param.FindNode('purge_server_after_failures').TextContent);
-end; // with
-}
+procedure TReceiveParamServiceThread.loadParametersIntoConfiguration;
+begin
+ with myConfId do
+                begin
+                  WriteLn(tableman_.getParameterTable().getParameter('CLIENT', 'receive_servers_each','3600'));
+                  ReadLn;
+                  Halt;
+                  receive_servers_each  := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_servers_each','3553'));
+                  receive_nodes_each    := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_nodes_each','120'));
+                  transmit_node_each    := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'transmit_node_each','121'));
+                  receive_jobs_each     := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_jobs_each','60'));
+                  transmit_jobs_each    := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'transmit_jobs_each','60'));
+                  receive_channels_each := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_channels_each','60'));
+                  transmit_channels_each:= StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'transmit_channels_each','60'));
+                  receive_chat_each     := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'receive_chat_each','60'));
+                  purge_server_after_failures := StrToInt(tableman_.getParameterTable().getParameter('CLIENT', 'purge_server_after_failures','30'));
+ end; // with
+
+ logger_.log(LVL_DEBUG, 'receinve_nodes_each is set to '+IntToStr(myConfID.receive_nodes_each));
+end;
 
 procedure TReceiveParamServiceThread.Execute;
 var xmldoc    : TXMLDocument;
