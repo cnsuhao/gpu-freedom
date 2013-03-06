@@ -5,6 +5,7 @@ GPU freedom branch
 Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
          retrieval of tbserver, tbclient and tbparameter succesful, including mechanism of setting default server
 		 try/except around receive{client,server,parameter}services revised
+		 revised formula to calcuate distance on sphere in geoutils.pas
 Server:  refactored list_parameters.php so that it appears as normal page
 
 5.3.2013 git
