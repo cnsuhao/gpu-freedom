@@ -96,6 +96,7 @@ begin
      if not erroneous_ then
        begin
        {
+        TODO: debug and reenable this section
         tableman_.getServerTable().execSQL('UPDATE tbserver set online=updated;');
         tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=0;');
         tableman_.getServerTable().execSQL('UPDATE tbserver set defaultsrv=1 where distance=(select min(distance) from tbserver);');

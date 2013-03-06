@@ -9,7 +9,7 @@ unit dbtablemanagers;
 interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
-     jobtables, jobqueuetables, jobresulttables;
+     jobtables, jobqueuetables, jobresulttables, parametertables;
 
 
 type TDbTableManager = class(TObject)
@@ -29,6 +29,8 @@ type TDbTableManager = class(TObject)
     function getJobResultTable() : TDbJobResultTable;
     function getJobQueueTable() : TDbJobQueueTable;
 
+    function getParameterTable() : TDbParameterTable;
+
   private
     clienttable_    : TDbClientTable;
     servertable_    : TDbServerTable;
@@ -37,6 +39,7 @@ type TDbTableManager = class(TObject)
     jobtable_       : TDbJobTable;
     jobresulttable_ : TDbJobResultTable;
     jobqueuetable_  : TDbJobQueueTable;
+    parametertable_ : TDbParameterTable;
 end;
 
 implementation
@@ -50,6 +53,7 @@ begin
   jobtable_       := TDbJobTable.Create(filename);
   jobresulttable_ := TDbJobResultTable.Create(filename);
   jobqueuetable_  := TDbJobQueueTable.Create(filename);
+  parametertable_ := TDbParameterTable.Create(filename);
 end;
 
 
@@ -62,6 +66,7 @@ begin
  jobtable_.Free;
  jobresulttable_.Free;
  jobqueuetable_.Free;
+ parametertable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -73,6 +78,7 @@ begin
   jobtable_.Open;
   jobresulttable_.Open;
   jobqueuetable_.Open;
+  parametertable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -84,6 +90,7 @@ begin
   jobtable_.Close;
   jobresulttable_.Close;
   jobqueuetable_.Close;
+  parametertable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -119,6 +126,11 @@ end;
 function TDbTableManager.getJobQueueTable() : TDbJobQueueTable;
 begin
   Result := jobqueuetable_;
+end;
+
+function TDbTableManager.getParameterTable() : TDbParameterTable;
+begin
+  Result := parametertable_;
 end;
 
 end.

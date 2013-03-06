@@ -33,7 +33,8 @@ type TCoreLoop = class(TObject)
     days_        : Longint;
 
     function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
-    procedure   retrieveParamsAndServers;
+    procedure   retrieveParams;
+    procedure   retrieveServers;
     procedure   retrieveClients;
     procedure   transmitClient;
     procedure   receiveChannels;
@@ -71,7 +72,8 @@ begin
   // main loop
   tick_ := 1;
   days_ := 0;
-  retrieveParamsAndServers;
+  //retrieveParams;
+  //retrieveServers;
   //retrieveClients;
   //receiveChannels;
   //transmitClient;
@@ -80,8 +82,8 @@ end;
 procedure TCoreLoop.tick;
 begin
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
-      //if (tick_ mod 20 {myConfID.receive_servers_each = 0}) then retrieveParamsAndServers;
-      if (tick_ mod 60 = 0 {myConfID.receive_nodes_each = 0}) then retrieveClients;
+      //if (tick_ mod 20 {myConfID.receive_servers_each = 0}) then begin retrieveParams; retrieveServers; end;
+      //if (tick_ mod 60 = 0 {myConfID.receive_nodes_each = 0}) then retrieveClients;
       {
       if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;
       if (tick_ mod myConfID.receive_channels_each = 0) then receiveChannels;
@@ -129,15 +131,21 @@ begin
 end;
 
 
-procedure TCoreLoop.retrieveParamsAndServers;
+procedure TCoreLoop.retrieveParams;
 var receiveparamthread  : TReceiveParamServiceThread;
-    receiveserverthread : TReceiveServerServiceThread;
     srv                 : TServerRecord;
 begin
    serverman.getSuperServer(srv);
 
    receiveparamthread  := servicefactory.createReceiveParamService(srv);
    if not launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams', srv) then receiveparamthread.Free;
+end;
+
+procedure TCoreLoop.retrieveServers;
+var receiveserverthread : TReceiveServerServiceThread;
+    srv                 : TServerRecord;
+begin
+   serverman.getSuperServer(srv);
 
    receiveserverthread := servicefactory.createReceiveServerService(srv);
    if not launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers', srv) then receiveserverthread.Free;
