@@ -42,12 +42,12 @@ var
 
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+try
+  begin
   node := xmldoc.DocumentElement.FirstChild;
 
   while Assigned(node) do
     begin
-        try
-             begin
                dbrow.serverid  :=   node.FindNode('serverid').TextContent;
                dbrow.servername  := node.FindNode('servername').TextContent;
                dbrow.serverurl   := node.FindNode('serverurl').TextContent;
@@ -60,25 +60,24 @@ begin
                dbrow.uptime      := StrToInt(node.FindNode('uptime').TextContent);
                dbrow.longitude   := StrToFloatDef(node.FindNode('longitude').TextContent, 0);
                dbrow.latitude    := StrToFloatDef(node.FindNode('latitude').TextContent, 0);
-               dbrow.distance    := getDistanceOnEarthSphere(dbrow.longitude, dbrow.latitude,
-                                                             myGPUId.Longitude, myGPUId.Latitude);
+               dbrow.distance    := getDistanceOnEarthSphere(dbrow.latitude, dbrow.longitude,
+                                                             myGPUId.Latitude, myGPUId.Longitude);
                dbrow.activenodes := StrToInt(node.FindNode('activenodes').TextContent);
                dbrow.jobinqueue := StrToInt(node.FindNode('jobinqueue').TextContent);
                dbrow.failures    := 0;
 
                if dbrow.serverurl<>'' then tableman_.getServerTable().insertOrUpdate(dbrow);
                logger_.log(LVL_DEBUG, 'Updated or added <'+dbrow.servername+'> to tbserver table (distance: '+FloatToStr(dbrow.distance)+').');
-             end;
-          except
-           on E : Exception do
-              begin
-                erroneous_ := true;
-                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
-              end;
-          end; // except
-
-       node := node.NextSibling;
+               node := node.NextSibling;
      end;  // while Assigned(node)
+   end; // try
+except
+ on E : Exception do
+    begin
+      erroneous_ := true;
+      logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
+    end;
+end; // except
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
