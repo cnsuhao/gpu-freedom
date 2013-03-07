@@ -37,7 +37,7 @@ type TCoreLoop = class(TObject)
     procedure   retrieveServers;
     procedure   retrieveClients;
     procedure   transmitClient;
-    procedure   receiveChannels;
+    procedure   retrieveChannels;
 
 end;
 
@@ -72,10 +72,10 @@ begin
   // main loop
   tick_ := 1;
   days_ := 0;
-  retrieveParams;
-  retrieveServers;
-  retrieveClients;
-  //receiveChannels;
+  //retrieveParams;
+  //retrieveServers;
+  //retrieveClients;
+  retrieveChannels;
   //transmitClient;
 end;
 
@@ -169,7 +169,7 @@ begin
    if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
 end;
 
-procedure TCoreLoop.receiveChannels;
+procedure TCoreLoop.retrieveChannels;
 var receivechanthread     : TReceiveChannelServiceThread;
     srv                   : TServerRecord;
 begin

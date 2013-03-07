@@ -42,7 +42,7 @@ end;
 
 function  TReceiveChannelServiceThread.getPHPArguments(var row : TDbRetrievedRow) : AnsiString;
 begin
- Result :=  'nodeid='+encodeUrl(myGPUId.NodeId)+'&lastmsg='+IntToStr(row.lastmsg)+'&chantype='+encodeURl(chantype_)+'&channame='+encodeUrl(channame_);
+ Result :=  'xml=1&nodeid='+encodeUrl(myGPUId.NodeId)+'&lastmsg='+IntToStr(row.lastmsg)+'&chantype='+encodeURl(chantype_)+'&channame='+encodeUrl(channame_);
 end;
 
 procedure TReceiveChannelServiceThread.parseXml(var xmldoc : TXMLDocument; var row : TDbRetrievedRow);
@@ -51,12 +51,13 @@ var
     node     : TDOMNode;
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
+
+try
+  begin
   node := xmldoc.DocumentElement.FirstChild;
 
   while Assigned(node) do
     begin
-        try
-             begin
                dbnode.content           := node.FindNode('content').TextContent;
                dbnode.server_id         := srv_.id;
                dbnode.externalid        := StrToInt(node.FindNode('id').TextContent);
@@ -72,7 +73,10 @@ begin
                logger_.log(LVL_DEBUG, logHeader_+'Adding message '+IntToStr(dbnode.externalid)+' to tbchannel table.');
                tableman_.getChannelTable().insert(dbnode);
                logger_.log(LVL_DEBUG, 'record count: '+IntToStr(tableman_.getChannelTable().getDS().RecordCount));
-             end;
+
+       node := node.NextSibling;
+     end;  // while Assigned(node)
+ end; // try
           except
            on E : Exception do
               begin
@@ -81,8 +85,6 @@ begin
               end;
           end; // except
 
-       node := node.NextSibling;
-     end;  // while Assigned(node)
 
    tableMan_.getRetrievedTable.insertOrUpdate(row);
    logger_.log(LVL_DEBUG, logHeader_+'Parameter in TBRETRIEVED updated with lastmsg '+IntToStr(row.lastmsg)+', msgtype '+row.msgtype+'.');
@@ -96,7 +98,7 @@ var xmldoc    : TXMLDocument;
 begin
  tableman_.getRetrievedTable().getRow(row, srv_.id, channame_, chantype_);
 
- receive('/channel/get_channel_messages_xml.php?'+getPHPArguments(row), xmldoc, false);
+ receive('/channel/list_channel_messages.php?'+getPHPArguments(row), xmldoc, false);
 
  if not erroneous_ then
      parseXml(xmldoc, row);

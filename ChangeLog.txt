@@ -1,5 +1,7 @@
 ******************
 GPU freedom branch
+7.3.2013 git
+Client: checked retreving of channel data
 
 6.3.2013 git
 Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
