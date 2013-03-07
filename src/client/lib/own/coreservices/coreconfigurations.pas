@@ -4,6 +4,10 @@ interface
 
 uses identities, syncObjs, inifiles, SysUtils;
 
+const
+ GPU_CLIENT_VERSION = 0.1;
+
+
 type TCoreConfiguration = class(TObject)
  public
   constructor Create(path : String);
@@ -70,7 +74,7 @@ begin
       IP        := ini_.ReadString('core','ip','ip');
       localIP   := ini_.ReadString('core','localip','localip');
       OS        := ini_.ReadString('core','os','test os');
-      Version   := ini_.ReadString('core','version','1.0.0');
+      Version   := StrToFloat(ini_.ReadString('core','version', FloatToStr(GPU_CLIENT_VERSION)));
       Port      := ini_.ReadString('core','port','1234');
       AcceptIncoming := ini_.ReadBool('core','acceptincoming',false);
       MHz            := ini_.ReadInteger('core','mhz',1000);
@@ -162,7 +166,7 @@ begin
       ini_.WriteString('core','ip', ip);
       ini_.WriteString('core','localip', localip);
       ini_.WriteString('core','os', os);
-      ini_.WriteString('core','version', version);
+      ini_.WriteString('core','version', FloatToStr(version));
       ini_.WriteString('core','port', port);
       ini_.WriteBool('core','acceptincoming', acceptincoming);
       ini_.WriteInteger('core','mhz', mhz);

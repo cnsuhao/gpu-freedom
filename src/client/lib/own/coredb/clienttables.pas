@@ -24,8 +24,7 @@ type TDbClientRow = record
     port,
     localip,
     os,
-    cputype,
-    version          : String;
+    cputype          : String;
     acceptincoming   : Boolean;
     gigaflops,
     ram,
@@ -39,6 +38,7 @@ type TDbClientRow = record
     updated          : Boolean;
     userid,
     team             : String;
+    version          : Double;
     uptime,
     totaluptime      : TDateTime;
     longitude,
@@ -85,7 +85,7 @@ begin
       FieldDefs.Add('localip', ftString);
       FieldDefs.Add('os', ftString);
       FieldDefs.Add('cputype', ftString);
-      FieldDefs.Add('version', ftString);
+      FieldDefs.Add('version', ftFloat);
       FieldDefs.Add('acceptincoming', ftBoolean);
       FieldDefs.Add('gigaflops', ftInteger);
       FieldDefs.Add('ram', ftInteger);
@@ -136,7 +136,7 @@ begin
   dataset_.FieldByName('localip').AsString := row.localip;
   dataset_.FieldByName('os').AsString := row.os;
   dataset_.FieldByName('cputype').AsString := row.cputype;
-  dataset_.FieldByName('version').AsString := row.version;
+  dataset_.FieldByName('version').AsFloat := row.version;
   dataset_.FieldByName('acceptincoming').AsBoolean := row.acceptincoming;
   dataset_.FieldByName('gigaflops').AsInteger := row.gigaflops;
   dataset_.FieldByName('ram').AsInteger := row.ram;

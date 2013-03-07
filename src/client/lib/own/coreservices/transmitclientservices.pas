@@ -34,7 +34,8 @@ var rep : AnsiString;
 begin
 with myGPUID do
  begin
-  rep :=     'nodename='+encodeURL(nodename)+'&';
+  rep := 'xml=1&';
+  rep := rep+'nodename='+encodeURL(nodename)+'&';
   rep := rep+'nodeid='+encodeURL(nodeid)+'&';
   rep := rep+'country='+encodeURL(country)+'&';
   rep := rep+'region='+encodeURL(region)+'&';
@@ -54,7 +55,7 @@ with myGPUID do
   rep := rep+'os='+encodeURL(os)+'&';
   rep := rep+'longitude='+encodeURL(FloatToStr(longitude))+'&';  //TODO: FloatToStr with formatset
   rep := rep+'latitude='+encodeURL(FloatToStr(latitude))+'&';    //TODO: FloatToStr with formatset
-  rep := rep+'version='+encodeURL('1.0.0')+'&';
+  rep := rep+'version='+encodeURL(FloatToStr(myGPUID.version))+'&';
   rep := rep+'team='+encodeURL(team)+'&';
   rep := rep+'userid='+encodeURL(myUserID.userid)+'&';
   rep := rep+'description='+encodeURL(description);//+'&';

@@ -20,6 +20,6 @@ include("ack_job.inc.php");
 
 $exitmsg = ack_job($jobqueueid, $jobid, $nodeid, $nodename, $ip);
 
-if ($exitmsg == "") echo "OK"; else echo "ERROR: $exitmsg";
+if ($exitmsg == "") echo "OK\n"; else echo "ERROR: $exitmsg\n";
 					
 ?>

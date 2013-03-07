@@ -143,7 +143,7 @@ begin
   if (arg='node.ip')            then Result := pushStr(MyGPUID.ip, stk) else
   if (arg='node.port')          then Result := pushStr(MyGPUID.port, stk) else
   if (arg='node.os')            then Result := pushStr(MyGPUID.os, stk) else
-  if (arg='node.version')       then Result := pushStr(MyGPUID.version, stk) else
+  if (arg='node.version')       then Result := pushFloat(MyGPUID.version, stk) else
   if (arg='node.accept')        then Result := pushBool(MyGPUID.acceptincoming, stk) else
   if (arg='node.mhz')           then Result := pushFloat(MyGPUID.mhz, stk) else
   if (arg='node.ram')           then Result := pushFloat(MyGPUID.ram, stk) else

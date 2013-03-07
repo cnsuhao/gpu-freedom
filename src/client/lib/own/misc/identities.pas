@@ -25,7 +25,6 @@ type
     IP,
     localIP,
     OS,
-    Version,
     Port : String;
     AcceptIncoming : Boolean; // if a node is able to accept incoming connections
     MHz,
@@ -34,6 +33,7 @@ type
     bits         : Longint;
     isScreensaver : Boolean;
     nbCPUs: Longint;
+    Version,
     Uptime,
     TotalUptime : Double;
     CPUType     : String;

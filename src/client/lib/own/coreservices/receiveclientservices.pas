@@ -58,7 +58,7 @@ begin
                dbnode.localip           := ''; // not transmitted
                dbnode.os                := node.FindNode('os').TextContent;
                dbnode.cputype           := ''; // not transmitted
-               dbnode.version           := node.FindNode('version').TextContent;
+               dbnode.version           := StrToFloatDef(node.FindNode('version').TextContent, -1);
                dbnode.acceptincoming    := (node.FindNode('acceptincoming').TextContent='true');
                dbnode.gigaflops    := StrToInt(node.FindNode('gigaflops').TextContent);
                dbnode.ram          := StrToInt(node.FindNode('ram').TextContent);

@@ -26,6 +26,6 @@ include("report_jobresult.inc.php");
 
 $exitmsg = report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $ip);
 
-if ($exitmsg == "") echo "OK"; else echo "ERROR: $exitmsg";
+if ($exitmsg == "") echo "OK\n"; else echo "ERROR: $exitmsg\n";
 					
 ?>

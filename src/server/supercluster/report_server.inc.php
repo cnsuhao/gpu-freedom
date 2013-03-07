@@ -28,7 +28,7 @@ function count_records($table) {
 function report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, $longitude, $latitude, $activenodes, $jobinqueue, $ip) {
   include("../conf/config.inc.php");
   
-  $debug=1;	
+  $debug=0;	
   mysql_connect($dbserver, $username, $password);
   @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");					
   $query="SELECT id FROM tbserver WHERE serverid='$serverid' LIMIT 1";  
@@ -76,7 +76,7 @@ function call_superserver_phone($serverurl, $activenodes, $jobinqueue, $my_serve
   // a connection needs to be established
   include("../conf/config.inc.php"); 
   include("../utils/constants.inc.php");
-  $debug = 1;
+  $debug = 0;
   
   if ($debug) echo "Calling $serverurl, $activenodes, $jobinqueue\n";
   
@@ -121,7 +121,7 @@ function call_nearest_superservers_to_report_my_status() {
 		  AND superserver=1
 		  ORDER BY distance ASC
           LIMIT $nb_superserver_informed;";
-  echo "$query\n";		  
+  //echo "$query\n";		  
   $result=mysql_query($query);
   
   if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
@@ -158,7 +158,7 @@ function retrieve_server_list_from_nearest_superserver() {
 		  AND superserver=1
 		  ORDER BY distance ASC
           LIMIT 1";
-  echo "$query\n";		  
+  //echo "$query\n";		  
   $result = mysql_query($query);
   if ($result!="") { $num=mysql_numrows($result); } else { $num=0; }
   

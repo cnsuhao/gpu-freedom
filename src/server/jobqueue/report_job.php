@@ -31,6 +31,6 @@ include("report_job.inc.php");
 
 $exitmsg = report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip);
 
-if ($exitmsg == "") echo "OK"; else echo "ERROR: $exitmsg";
+if ($exitmsg == "") echo "OK\n"; else echo "ERROR: $exitmsg\n";
 					
 ?>

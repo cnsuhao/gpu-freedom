@@ -28,5 +28,5 @@ $mainquery  = "INSERT INTO tbchannel (id, nodename, nodeid, user, chantype, chan
 $result=mysql_query($mainquery);
 mysql_close();
 
-echo "OK"
+echo "OK\n"
 ?>

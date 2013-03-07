@@ -9,7 +9,7 @@ include_once("../utils/utils.inc.php");
 
 function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip) {
     include("../conf/config.inc.php");	
-    $debug=1;	
+    $debug=0;	
 	mysql_connect($dbserver, $username, $password);
     @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 

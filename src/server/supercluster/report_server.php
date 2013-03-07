@@ -33,6 +33,6 @@ include("report_server.inc.php");
 $id = report_serverinfo($serverid, $servername, $serverurl, $chatchannel, $version, $superserver, $uptime, 
                         $longitude, $latitude, $activenodes, $jobinqueue, $ip);
 						
-echo "OK";
+echo "OK\n";
 					
 ?>
