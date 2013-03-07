@@ -2,7 +2,9 @@
 GPU freedom branch
 7.3.2013 git
 Client: checked retrieval of channel data, it's working fine
-	    checked transmission of client information to server
+	    checked transmission of client information to server, it's working fine, too.
+		Next step is revising the datamodel for the job structure, i'd like to have the following tables:
+		tbjobdefinition, tbjobstats, tbjobqueue and tbjobresult
 
 6.3.2013 git
 Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
