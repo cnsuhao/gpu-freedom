@@ -1,0 +1,12 @@
+
+1. (Debian:) Run: apt-get install apache2 php5 mysql-server phpmyadmin
+or
+1. (Other OS:) Install apache2, mysql, php5
+
+2. Create a mysql user with a database
+3. Run db/gpu_server.sql on new database
+4. Run DELETE FROM tbparameter
+4. Copy conf/example-config.inc.php to conf/config.inc.php
+6. Edit the settings in config.inc.php
+7. Open install/install_execution.php from your browser
+8. Open test/check_status.php from your browser, it should display OK
