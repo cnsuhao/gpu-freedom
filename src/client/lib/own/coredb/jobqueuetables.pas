@@ -15,9 +15,8 @@ const
   // for status column
   JS_READY           = 30;
   JS_RUNNING         = 40;
-  JS_ONHOLD          = 50;
-  JS_COMPLETED_OK       = 90;
-  JS_COMPLETED_ERROR    = 99;
+  JS_COMPLETED       = 90;
+  JS_TRANSMITTED     = 99;
 
 
 type TDbJobQueueRow = record

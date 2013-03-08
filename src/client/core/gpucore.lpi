@@ -400,8 +400,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="62"/>
-        <CursorPos X="115" Y="99"/>
+        <TopLine Value="50"/>
+        <CursorPos X="101" Y="99"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit46>
@@ -418,8 +418,8 @@
         <UnitName Value="jobqueuetables"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="63"/>
-        <CursorPos X="120" Y="130"/>
+        <TopLine Value="1"/>
+        <CursorPos X="22" Y="19"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit48>
@@ -444,91 +444,127 @@
         <Loaded Value="True"/>
       </Unit50>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="gpucore.lpr"/>
-        <Caret Line="41" Column="23" TopLine="1"/>
+        <Caret Line="42" Column="16" TopLine="20"/>
       </Position1>
       <Position2>
         <Filename Value="gpucore.lpr"/>
-        <Caret Line="42" Column="16" TopLine="20"/>
+        <Caret Line="35" Column="80" TopLine="22"/>
       </Position2>
       <Position3>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="35" Column="80" TopLine="22"/>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="133" Column="22" TopLine="92"/>
       </Position3>
       <Position4>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
-        <Caret Line="133" Column="22" TopLine="92"/>
+        <Caret Line="12" Column="19" TopLine="1"/>
       </Position4>
       <Position5>
-        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
-        <Caret Line="12" Column="19" TopLine="1"/>
-      </Position5>
-      <Position6>
         <Filename Value="coreloops.pas"/>
         <Caret Line="163" Column="36" TopLine="123"/>
-      </Position6>
-      <Position7>
+      </Position5>
+      <Position6>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <Caret Line="32" Column="25" TopLine="13"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
+        <Caret Line="60" Column="46" TopLine="28"/>
       </Position7>
       <Position8>
         <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
-        <Caret Line="60" Column="46" TopLine="28"/>
+        <Caret Line="99" Column="6" TopLine="65"/>
       </Position8>
       <Position9>
         <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
-        <Caret Line="99" Column="6" TopLine="65"/>
+        <Caret Line="122" Column="31" TopLine="87"/>
       </Position9>
       <Position10>
-        <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
-        <Caret Line="122" Column="31" TopLine="87"/>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="92" Column="19" TopLine="53"/>
       </Position10>
       <Position11>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="92" Column="19" TopLine="53"/>
+        <Caret Line="130" Column="127" TopLine="90"/>
       </Position11>
       <Position12>
-        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="130" Column="127" TopLine="90"/>
+        <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
+        <Caret Line="36" Column="22" TopLine="2"/>
       </Position12>
       <Position13>
         <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
-        <Caret Line="36" Column="22" TopLine="2"/>
+        <Caret Line="28" Column="1" TopLine="14"/>
       </Position13>
       <Position14>
-        <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
-        <Caret Line="28" Column="1" TopLine="14"/>
-      </Position14>
-      <Position15>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <Caret Line="15" Column="19" TopLine="1"/>
-      </Position15>
-      <Position16>
+      </Position14>
+      <Position15>
         <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
         <Caret Line="28" Column="22" TopLine="3"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="29" Column="56" TopLine="12"/>
       </Position16>
       <Position17>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
-        <Caret Line="29" Column="56" TopLine="12"/>
+        <Caret Line="57" Column="23" TopLine="35"/>
       </Position17>
       <Position18>
-        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
-        <Caret Line="57" Column="23" TopLine="35"/>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="71" Column="32" TopLine="39"/>
       </Position18>
       <Position19>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="71" Column="32" TopLine="39"/>
+        <Caret Line="54" Column="27" TopLine="36"/>
       </Position19>
       <Position20>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="54" Column="27" TopLine="36"/>
+        <Caret Line="78" Column="25" TopLine="51"/>
       </Position20>
       <Position21>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="78" Column="25" TopLine="51"/>
+        <Caret Line="99" Column="115" TopLine="62"/>
       </Position21>
+      <Position22>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="73" Column="56" TopLine="51"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="70" Column="66" TopLine="51"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="88" Column="89" TopLine="59"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="89" Column="23" TopLine="67"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="90" Column="44" TopLine="67"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="92" Column="38" TopLine="70"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="94" Column="34" TopLine="1"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="99" Column="39" TopLine="74"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="98" Column="54" TopLine="76"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

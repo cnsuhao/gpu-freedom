@@ -70,33 +70,33 @@ try
                domjobdefinition := node.FindNode('jobdefinition');
                if domjobdefinition<>nil then
                   begin
-                   dbjobrow.job := domjobdefinition.FindNode('job');
-                   dbjobrow.jobtype := domjobdefinition.FindNode('jobtype');
+                   dbjobrow.job     := domjobdefinition.FindNode('job').TextContent;
+                   dbjobrow.jobtype := domjobdefinition.FindNode('jobtype').TextContent;
 
                    nodename := domjobdefinition.FindNode('nodename').TextContent;
                    dbqueuerow.nodename := nodename;
                    dbjobrow.nodename := nodename;
                   end;
 
-               requireack := (Trim(node.FindNode('requireack'))='1');
+               requireack := (Trim(node.FindNode('requireack').TextContent)='1');
                dbjobrow.requireack := requireack;
                dbqueuerow.requireack:= requireack;
 
                //TODO: set this dates according to server
                dbqueuerow.create_dt   := Now;
                dbqueuerow.transmission_dt := Now;
-               dbqueuerow.transmissionid  := node.FindNode('transmissionid');
-               dbqueurow.ack_dt := nil;
-               dbqueuerow.reception_dt := nil;
+               dbqueuerow.transmissionid  := node.FindNode('transmissionid').TextContent;
+               dbqueuerow.ack_dt := 0;
+               dbqueuerow.reception_dt := 0;
 
-               dbqueuerow.server_id: = srv_.id;
+               dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
-               dbjobrow.status      := JS_READY;
+               dbqueuerow.status    := JS_READY;
 
-               tableman_.getJobTable().insertOrUpdate(dbrow);
+               tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
                //queuerow.job_id := dbrow.id;  // this could be setup at a later point
-               tableman_.getJobQueueTable().insert(queuerow);
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbrow.jobdefinitionid+' to TBJOB and to TBJOBQUEUE table.');
+               tableman_.getJobQueueTable().insert(dbqueuerow);
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOB and to TBJOBQUEUE table.');
 
        node := node.NextSibling;
      end;  // while Assigned(node)
