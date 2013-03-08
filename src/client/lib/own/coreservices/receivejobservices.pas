@@ -38,7 +38,7 @@ end;
 
 procedure TReceiveJobServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbrow    : TDbJobRow;
+    dbjobrow : TDbJobDefinitionRow;
     queuerow : TDbJobQueueRow;
     node     : TDOMNode;
     port     : String;
@@ -51,22 +51,22 @@ begin
     begin
         try
              begin
-               dbrow.externalid   := node.FindNode('externalid').TextContent;
-               dbrow.jobid        := node.FindNode('jobid').TextContent;
+               dbjobrow.externalid   := node.FindNode('externalid').TextContent;
+               dbjobrow.jobid        := node.FindNode('jobid').TextContent;
                queuerow.requestid := StrToInt(node.FindNode('requestid').TextContent);
                queuerow.server_id := srv_.id;
-               dbrow.job              := node.FindNode('job').TextContent;
-               dbrow.workunitincoming := node.FindNode('workunitincoming').TextContent;
-               dbrow.workunitoutgoing := node.FindNode('workunitoutgoing').TextContent;
-               dbrow.requests    := StrToInt(node.FindNode('requests').TextContent);
-               dbrow.delivered   := StrToInt(node.FindNode('delivered').TextContent);
-               dbrow.results     := StrToInt(node.FindNode('results').TextContent);
-               dbrow.nodeid      := node.FindNode('nodeid').TextContent;
-               dbrow.nodename    := node.FindNode('nodename').TextContent;
-               dbrow.islocal     := false;
-               dbrow.server_id   := srv_.id;
-               dbrow.create_dt   := Now;
-               dbrow.status      := JS_RECEIVED;
+               dbjobrow.job              := node.FindNode('job').TextContent;
+               dbjobrow.workunitincoming := node.FindNode('workunitincoming').TextContent;
+               dbjobrow.workunitoutgoing := node.FindNode('workunitoutgoing').TextContent;
+               dbjobrow.requests    := StrToInt(node.FindNode('requests').TextContent);
+               dbjobrow.delivered   := StrToInt(node.FindNode('delivered').TextContent);
+               dbjobrow.results     := StrToInt(node.FindNode('results').TextContent);
+               dbjobrow.nodeid      := node.FindNode('nodeid').TextContent;
+               dbjobrow.nodename    := node.FindNode('nodename').TextContent;
+               dbjobrow.islocal     := false;
+               dbjobrow.server_id   := srv_.id;
+               dbjobrow.create_dt   := Now;
+               dbjobrow.status      := JS_READY;
 
                tableman_.getJobTable().insertOrUpdate(dbrow);
                queuerow.job_id := dbrow.id;

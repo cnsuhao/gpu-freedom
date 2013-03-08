@@ -42,7 +42,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="13"/>
         <CursorPos X="56" Y="33"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -190,7 +190,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="102"/>
         <CursorPos X="21" Y="137"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit20>
       <Unit21>
@@ -211,7 +211,7 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="97" Y="14"/>
@@ -389,18 +389,21 @@
         <UnitName Value="jobdefinitiontables"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="76"/>
+        <TopLine Value="48"/>
         <CursorPos X="64" Y="104"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit45>
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="19" Y="15"/>
+        <TopLine Value="34"/>
+        <CursorPos X="48" Y="69"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit46>
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
@@ -408,17 +411,16 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="6"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit47>
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="90"/>
+        <TopLine Value="63"/>
         <CursorPos X="120" Y="130"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit48>
       <Unit49>
@@ -426,8 +428,8 @@
         <UnitName Value="jobstatstables"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="2"/>
-        <CursorPos X="22" Y="36"/>
+        <TopLine Value="14"/>
+        <CursorPos X="5" Y="58"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit49>
@@ -436,13 +438,13 @@
         <UnitName Value="jobresulttables"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="93"/>
-        <CursorPos X="29" Y="31"/>
+        <TopLine Value="98"/>
+        <CursorPos X="64" Y="133"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit50>
     </Units>
-    <JumpHistory Count="12" HistoryIndex="11">
+    <JumpHistory Count="16" HistoryIndex="15">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -491,6 +493,22 @@
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <Caret Line="130" Column="127" TopLine="90"/>
       </Position12>
+      <Position13>
+        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
+        <Caret Line="31" Column="29" TopLine="93"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
+        <Caret Line="36" Column="22" TopLine="2"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
+        <Caret Line="28" Column="1" TopLine="14"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="15" Column="19" TopLine="1"/>
+      </Position16>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -16,7 +16,6 @@ type TDbJobResultRow = record
    jobresultid,
    jobdefinitionid,
    jobqueueid     : String;
-   requestid,
    jobresult      : Ansistring;
    workunitresult : String;
 
@@ -60,19 +59,21 @@ begin
     begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
-      FieldDefs.Add('externalid', ftInteger);
-      FieldDefs.Add('requestid', ftInteger);
-      FieldDefs.Add('jobid', ftString);
-      FieldDefs.Add('job_id', ftInteger);
+      FieldDefs.Add('jobresultid', ftString);
+      FieldDefs.Add('jobdefinitionid', ftString);
+      FieldDefs.Add('jobqueueid', ftString);
       FieldDefs.Add('jobresult', ftString);
       FieldDefs.Add('workunitresult', ftString);
+
       FieldDefs.Add('iserroneous', ftBoolean);
       FieldDefs.Add('errorid', ftInteger);
       FieldDefs.Add('errormsg', ftString);
       FieldDefs.Add('errorarg', ftString);
-      FieldDefs.Add('server_id', ftInteger);
+
       FieldDefs.Add('nodeid', ftString);
       FieldDefs.Add('nodename', ftString);
+
+      FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
       CreateTable;
     end; {if not TableExists}
@@ -83,19 +84,21 @@ procedure TDbJobResultTable.getRow(var row : TDbJobResultRow);
 var options : TLocateOptions;
 begin
  options := [];
- if dataset_.Locate('id', row.id, options) then
+ if dataset_.Locate('jobresultid', row.jobresultid, options) then
    begin
      row.id          := dataset_.FieldByName('id').AsInteger;
-     row.externalid  := dataset_.FieldByName('externalid').AsInteger;
-     row.requestid   := dataset_.FieldByName('requestid').AsInteger;
-     row.job_id      := dataset_.FieldByName('job_id').AsInteger;
-     row.jobid       := dataset_.FieldByName('jobid').AsString;
+     row.jobresultid  := dataset_.FieldByName('jobresultid').AsString;
+     row.jobdefinitionid  := dataset_.FieldByName('jobdefinitionid').AsString;
+     row.jobqueueid       := dataset_.FieldByName('jobqueueid').AsString;
+
      row.jobresult   := dataset_.FieldByName('jobresult').AsString;
      row.workunitresult := dataset_.FieldByName('workunitresult').AsString;
+
      row.iserroneous := dataset_.FieldByName('iserroneous').AsBoolean;
      row.errorid     := dataset_.FieldByName('errorid').AsInteger;
      row.errormsg    := dataset_.FieldByName('errormsg').AsString;
      row.errorarg    := dataset_.FieldByName('errorarg').AsString;
+
      row.server_id   := dataset_.FieldByName('server_id').AsInteger;
      row.nodeid      := dataset_.FieldByName('nodeid').AsString;
      row.nodename    := dataset_.FieldByName('nodename').AsString;
@@ -110,21 +113,23 @@ procedure TDbJobResultTable.insertOrUpdate(var row : TDbJobResultRow);
 var options : TLocateOptions;
 begin
   options := [];
-  if dataset_.Locate('id', row.id, options) then
+  if dataset_.Locate('jobresultid', row.jobresultid, options) then
       dataset_.Edit
   else
       dataset_.Append;
 
-  dataset_.FieldByName('externalid').AsInteger := row.externalid;
-  dataset_.FieldByName('requestid').AsInteger := row.requestid;
-  dataset_.FieldByName('job_id').AsInteger := row.job_id;
-  dataset_.FieldByName('jobid').AsString := row.jobid;
+  dataset_.FieldByName('jobresultid').AsString := row.jobresultid;
+  dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
+  dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
+
   dataset_.FieldByName('jobresult').AsString := row.jobresult;
   dataset_.FieldByName('workunitresult').AsString := row.workunitresult;
+
   dataset_.FieldByName('errorid').AsInteger := row.errorid;
   dataset_.FieldByName('errormsg').AsString := row.errormsg;
   dataset_.FieldByName('errorarg').AsString := row.errorarg;
   dataset_.FieldByName('iserroneous').AsBoolean := row.iserroneous;
+
   dataset_.FieldByName('server_id').AsInteger := row.server_id;
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
