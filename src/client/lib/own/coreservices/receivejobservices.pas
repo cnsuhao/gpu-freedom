@@ -38,40 +38,65 @@ end;
 
 procedure TReceiveJobServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbjobrow : TDbJobDefinitionRow;
-    queuerow : TDbJobQueueRow;
-    node     : TDOMNode;
-    port     : String;
+    dbjobrow   : TDbJobDefinitionRow;
+    dbqueuerow : TDbJobQueueRow;
+    node       : TDOMNode;
+    domjobdefinition     : TDOMNode;
+    nodename,
+    nodeid,
+    jobdefinitionid      : String;
+    requireack           : Boolean;
 
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
-  node := xmldoc.DocumentElement.FirstChild;
 
 try
   begin
-   while Assigned(node) do
+  node := xmldoc.DocumentElement.FirstChild;
+  while Assigned(node) do
     begin
-               dbjobrow.externalid   := node.FindNode('externalid').TextContent;
-               dbjobrow.jobid        := node.FindNode('jobid').TextContent;
-               queuerow.requestid := StrToInt(node.FindNode('requestid').TextContent);
-               queuerow.server_id := srv_.id;
-               dbjobrow.job              := node.FindNode('job').TextContent;
-               dbjobrow.workunitincoming := node.FindNode('workunitincoming').TextContent;
-               dbjobrow.workunitoutgoing := node.FindNode('workunitoutgoing').TextContent;
-               dbjobrow.requests    := StrToInt(node.FindNode('requests').TextContent);
-               dbjobrow.delivered   := StrToInt(node.FindNode('delivered').TextContent);
-               dbjobrow.results     := StrToInt(node.FindNode('results').TextContent);
-               dbjobrow.nodeid      := node.FindNode('nodeid').TextContent;
-               dbjobrow.nodename    := node.FindNode('nodename').TextContent;
-               dbjobrow.islocal     := false;
+               jobdefinitionid := node.FindNode('jobdefinitionid').TextContent;
+               dbqueuerow.jobdefinitionid := jobdefinitionid;
+               dbjobrow.jobdefinitionid := jobdefinitionid;
+
+               dbqueuerow.jobqueueid      := node.FindNode('jobqueueid').TextContent;;
+               dbqueuerow.workunitjob     := node.FindNode('workunitjob').TextContent;
+               dbqueuerow.workunitresult  := node.FindNode('workunitresult').TextContent;
+
+               nodeid := node.FindNode('nodeid').TextContent;
+               dbqueuerow.nodeid := nodeid;
+               dbjobrow.nodeid   := nodeid;
+
+               domjobdefinition := node.FindNode('jobdefinition');
+               if domjobdefinition<>nil then
+                  begin
+                   dbjobrow.job := domjobdefinition.FindNode('job');
+                   dbjobrow.jobtype := domjobdefinition.FindNode('jobtype');
+
+                   nodename := domjobdefinition.FindNode('nodename').TextContent;
+                   dbqueuerow.nodename := nodename;
+                   dbjobrow.nodename := nodename;
+                  end;
+
+               requireack := (Trim(node.FindNode('requireack'))='1');
+               dbjobrow.requireack := requireack;
+               dbqueuerow.requireack:= requireack;
+
+               //TODO: set this dates according to server
+               dbqueuerow.create_dt   := Now;
+               dbqueuerow.transmission_dt := Now;
+               dbqueuerow.transmissionid  := node.FindNode('transmissionid');
+               dbqueurow.ack_dt := nil;
+               dbqueuerow.reception_dt := nil;
+
+               dbqueuerow.server_id: = srv_.id;
                dbjobrow.server_id   := srv_.id;
-               dbjobrow.create_dt   := Now;
                dbjobrow.status      := JS_READY;
 
                tableman_.getJobTable().insertOrUpdate(dbrow);
-               queuerow.job_id := dbrow.id;
+               //queuerow.job_id := dbrow.id;  // this could be setup at a later point
                tableman_.getJobQueueTable().insert(queuerow);
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with externalid: '+dbrow.externalid+' to TBJOB and to TBJOBQUEUE table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbrow.jobdefinitionid+' to TBJOB and to TBJOBQUEUE table.');
 
        node := node.NextSibling;
      end;  // while Assigned(node)
@@ -92,7 +117,7 @@ end;
 procedure TReceiveJobServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/jobqueue/get_jobs_xml.php?max=3&nodeid='+encodeURL(myGPUId.NodeId),
+ receive('/list_jobqueues.php?xml=1&crunch=1&nodeid='+encodeURL(myGPUId.NodeId),
          xmldoc, false);
 
  if not erroneous_ then

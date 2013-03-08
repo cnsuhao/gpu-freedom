@@ -25,6 +25,7 @@
 						<th>nodename of acknowledger</th>
 						<th>reception_dt</th>
 						<th>job</th>
+						<th>job type</th>
 						<th>nodename of requester</th>
 					</tr>
                     <xsl:apply-templates select="jobqueue"/>
@@ -76,6 +77,7 @@
  
     <xsl:template match="jobdefinition">
             <td><xsl:value-of select="job"/></td>
+			<td><xsl:value-of select="jobtype"/></td>
             <td><xsl:value-of select="nodename"/></td>
     </xsl:template>
  

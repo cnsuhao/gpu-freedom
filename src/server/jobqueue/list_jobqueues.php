@@ -41,7 +41,7 @@
  echo "<jobqueues>\n"; 
  $level_list = Array("jobqueue", "jobdefinition");
  sql2xml("select q.id, q.jobdefinitionid, q.jobqueueid, q.workunitjob, q.workunitresult, q.nodeid, q.requireack, q.acknodeid, q.acknodename,
-                 q.create_dt, q.transmission_dt, q.transmissionid, q.ack_dt, q.reception_dt, d.job,
+                 q.create_dt, q.transmission_dt, q.transmissionid, q.ack_dt, q.reception_dt, d.job, d.jobtype,
 				 d.nodename
          from tbjobqueue q, tbjobdefinition d 
          where q.jobdefinitionid = d.jobdefinitionid

@@ -34,7 +34,7 @@ $max_superserver_timeout = 20;
 $max_requests_for_jobs = 500;
 
 // How many jobs are distribued to a client, when it requests to crunch them
-$jobs_to_be_distributed_at_once = 3;
+$jobs_to_be_distributed_at_once = 1;
 
 // Retransmission interval in seconds for jobs which require an acknowledgment
 $retransmission_interval = 7200;
