@@ -30,8 +30,8 @@ type TDbJobTable = class(TDbCoreTable)
     constructor Create(filename : String);
 
     function getId(jobid : String) : Longint;
-    procedure getRow(var row : TDbJobRow);
-    procedure insertOrUpdate(var row : TDbJobRow);
+    procedure getRow(var row : TDbJobDefinitionRow);
+    procedure insertOrUpdate(var row : TDbJobDefinitionRow);
 
   private
     procedure createDbTable();
@@ -72,63 +72,54 @@ function TDbJobTable.getId(jobid : String) : Longint;
 var options : TLocateOptions;
 begin
  options := [];
- if dataset_.Locate('jobid', jobid, options) then
+ if dataset_.Locate('jobdefinitionid', jobid, options) then
      Result :=  dataset_.FieldByName('id').AsInteger
     else
       Result := -1;
 end;
 
-procedure TDbJobTable.getRow(var row : TDbJobRow);
+procedure TDbJobTable.getRow(var row : TDbJobDefinitionRow);
 var options : TLocateOptions;
     srvid   : Longint;
 begin
  options := [];
- //TODO externalid is not unique, only pair externalid,serverid is
- if dataset_.Locate('externalid', row.externalid, options) then
+ if dataset_.Locate('jobdefinitionid', row.jobdefinitionid, options) then
    begin
      row.id         := dataset_.FieldByName('id').AsInteger;
-     row.externalid := dataset_.FieldByName('externalid').AsString;
-     row.jobid      := dataset_.FieldByName('jobid').AsString;
+     row.jobdefinitionid  := dataset_.FieldByName('jobdefinitionid').AsString;
      row.job        := dataset_.FieldByName('job').AsString;
-     row.status     := dataset_.FieldByName('status').AsInteger;
-     row.requests   := dataset_.FieldByName('requests').AsInteger;
-     row.delivered  := dataset_.FieldByName('delivered').AsInteger;
-     row.results    := dataset_.FieldByName('results').AsInteger;
-     row.workunitincoming := dataset_.FieldByName('workunitincoming').AsString;
-     row.workunitoutgoing := dataset_.FieldByName('workunitoutgoing').AsString;
-     row.islocal          := dataset_.FieldByName('islocal').AsBoolean;
+     row.jobtype    := dataset_.FieldByName('jobtype').AsString;
+     row.requireack := dataset_.FieldByName('requireack').AsBoolean;
+     row.islocal    := dataset_.FieldByName('islocal').AsBoolean;
      row.nodeid     := dataset_.FieldByName('nodeid').AsString;
      row.nodename   := dataset_.FieldByName('nodename').AsString;
      row.server_id  := dataset_.FieldByName('server_id').AsInteger;
      row.create_dt  := dataset_.FieldByName('create_dt').AsDateTime;
+     row.update_dt  := dataset_.FieldByName('update_dt').AsDateTime;
    end
   else
      row.id := -1;
 end;
 
-procedure TDbJobTable.insertOrUpdate(var row : TDbJobRow);
+procedure TDbJobTable.insertOrUpdate(var row : TDbJobDefinitionRow);
 var options : TLocateOptions;
 begin
   options := [];
-  if dataset_.Locate('externalid', row.externalid, options) then
+  if dataset_.Locate('jobdefinitionid', row.jobdefinitionid, options) then
       dataset_.Edit
   else
       dataset_.Append;
 
-  dataset_.FieldByName('externalid').AsString := row.externalid;
-  dataset_.FieldByName('jobid').AsString := row.jobid;
+  dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
   dataset_.FieldByName('job').AsString := row.job;
-  dataset_.FieldByName('status').AsInteger := row.status;
-  dataset_.FieldByName('requests').AsInteger := row.requests;
-  dataset_.FieldByName('delivered').AsInteger := row.delivered;
-  dataset_.FieldByName('results').AsInteger := row.results;
-  dataset_.FieldByName('workunitincoming').AsString := row.workunitincoming;
-  dataset_.FieldByName('workunitoutgoing').AsString := row.workunitoutgoing;
+  dataset_.FieldByName('jobtype').AsString := row.jobtype;
+  dataset_.FieldByName('requireack').AsBoolean := row.requireack;
   dataset_.FieldByName('islocal').AsBoolean := row.islocal;
-  dataset_.FieldByName('server_id').AsInteger := row.server_id;
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
+  dataset_.FieldByName('server_id').AsInteger := row.server_id;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
+  dataset_.FieldByName('update_dt').AsDateTime := Now;
 
   dataset_.Post;
   dataset_.ApplyUpdates;
