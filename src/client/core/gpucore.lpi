@@ -188,8 +188,8 @@
         <UnitName Value="dbtablemanagers"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="102"/>
-        <CursorPos X="21" Y="137"/>
+        <TopLine Value="20"/>
+        <CursorPos X="24" Y="100"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -215,7 +215,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="97" Y="14"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -389,8 +389,8 @@
         <UnitName Value="jobdefinitiontables"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="48"/>
-        <CursorPos X="64" Y="104"/>
+        <TopLine Value="87"/>
+        <CursorPos X="27" Y="131"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit45>
@@ -400,8 +400,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="34"/>
-        <CursorPos X="48" Y="69"/>
+        <TopLine Value="32"/>
+        <CursorPos X="25" Y="54"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit46>
@@ -444,7 +444,7 @@
         <Loaded Value="True"/>
       </Unit50>
     </Units>
-    <JumpHistory Count="16" HistoryIndex="15">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -509,6 +509,22 @@
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <Caret Line="15" Column="19" TopLine="1"/>
       </Position16>
+      <Position17>
+        <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
+        <Caret Line="28" Column="22" TopLine="3"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="29" Column="56" TopLine="12"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="57" Column="23" TopLine="35"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="71" Column="32" TopLine="39"/>
+      </Position20>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

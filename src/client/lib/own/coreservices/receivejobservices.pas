@@ -47,10 +47,10 @@ begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
 
-  while Assigned(node) do
+try
+  begin
+   while Assigned(node) do
     begin
-        try
-             begin
                dbjobrow.externalid   := node.FindNode('externalid').TextContent;
                dbjobrow.jobid        := node.FindNode('jobid').TextContent;
                queuerow.requestid := StrToInt(node.FindNode('requestid').TextContent);
@@ -72,17 +72,17 @@ begin
                queuerow.job_id := dbrow.id;
                tableman_.getJobQueueTable().insert(queuerow);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with externalid: '+dbrow.externalid+' to TBJOB and to TBJOBQUEUE table.');
-             end;
-          except
-           on E : Exception do
-              begin
-                erroneous_ := true;
-                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
-              end;
-          end; // except
 
        node := node.NextSibling;
      end;  // while Assigned(node)
+end; // try
+except
+    on E : Exception do
+       begin
+            erroneous_ := true;
+            logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
+       end;
+end; // except
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;

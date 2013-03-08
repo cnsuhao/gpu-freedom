@@ -25,7 +25,7 @@ type TDbJobDefinitionRow = record
    update_dt  : TDateTime;
 end;
 
-type TDbJobTable = class(TDbCoreTable)
+type TDbJobDefinitionTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
@@ -39,13 +39,13 @@ type TDbJobTable = class(TDbCoreTable)
 
 implementation
 
-constructor TDbJobTable.Create(filename : String);
+constructor TDbJobDefinitionTable.Create(filename : String);
 begin
   inherited Create(filename, 'tbjobdefinition', 'id');
   createDbTable();
 end;
 
-procedure TDbJobTable.createDbTable();
+procedure TDbJobDefinitionTable.createDbTable();
 begin
  with dataset_ do
   begin
@@ -68,7 +68,7 @@ begin
   end; {with}
 end;
 
-function TDbJobTable.getId(jobid : String) : Longint;
+function TDbJobDefinitionTable.getId(jobid : String) : Longint;
 var options : TLocateOptions;
 begin
  options := [];
@@ -78,7 +78,7 @@ begin
       Result := -1;
 end;
 
-procedure TDbJobTable.getRow(var row : TDbJobDefinitionRow);
+procedure TDbJobDefinitionTable.getRow(var row : TDbJobDefinitionRow);
 var options : TLocateOptions;
     srvid   : Longint;
 begin
@@ -101,7 +101,7 @@ begin
      row.id := -1;
 end;
 
-procedure TDbJobTable.insertOrUpdate(var row : TDbJobDefinitionRow);
+procedure TDbJobDefinitionTable.insertOrUpdate(var row : TDbJobDefinitionRow);
 var options : TLocateOptions;
 begin
   options := [];

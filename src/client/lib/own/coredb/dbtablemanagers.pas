@@ -26,7 +26,7 @@ type TDbTableManager = class(TObject)
     function getChannelTable() : TDbChannelTable;
     function getRetrievedTable() : TDbRetrievedTable;
 
-    function getJobTable() : TDbJobTable;
+    function getJobDefinitionTable() : TDbJobDefinitionTable;
     function getJobResultTable() : TDbJobResultTable;
     function getJobQueueTable() : TDbJobQueueTable;
     function getJobStatsTable() : TDbJobStatsTable;
@@ -39,7 +39,7 @@ type TDbTableManager = class(TObject)
     servertable_    : TDbServerTable;
     chantable_      : TDbChannelTable;
     retrtable_      : TDbRetrievedTable;
-    jobtable_       : TDbJobTable;
+    jobdefinitiontable_   : TDbJobDefinitionTable;
     jobresulttable_ : TDbJobResultTable;
     jobqueuetable_  : TDbJobQueueTable;
     jobstatstable_  : TDbJobStatsTable;
@@ -54,9 +54,10 @@ begin
   clienttable_ := TDbClientTable.Create(filename);
   chantable_   := TDbChannelTable.Create(filename);
   retrtable_   := TDbRetrievedTable.Create(filename);
-  jobtable_       := TDbJobTable.Create(filename);
+  jobdefinitiontable_ := TDbJobDefinitionTable.Create(filename);
   jobresulttable_ := TDbJobResultTable.Create(filename);
   jobqueuetable_  := TDbJobQueueTable.Create(filename);
+  jobstatstable_  := TDbJobStatsTable.Create(filename);
   parametertable_ := TDbParameterTable.Create(filename);
 end;
 
@@ -67,9 +68,10 @@ begin
  servertable_.Free;
  chantable_.Free;
  retrtable_.Free;
- jobtable_.Free;
+ jobdefinitiontable_.Free;
  jobresulttable_.Free;
  jobqueuetable_.Free;
+ jobstatstable_.Free;
  parametertable_.Free;
 end;
 
@@ -79,9 +81,10 @@ begin
   servertable_.Open;
   chantable_.Open;
   retrtable_.Open;
-  jobtable_.Open;
+  jobdefinitiontable_.Open;
   jobresulttable_.Open;
   jobqueuetable_.Open;
+  jobstatstable_.Open;
   parametertable_.Open;
 end;
 
@@ -91,9 +94,10 @@ begin
   servertable_.Close;
   chantable_.Close;
   retrtable_.Close;
-  jobtable_.Close;
+  jobdefinitiontable_.Close;
   jobresulttable_.Close;
   jobqueuetable_.Close;
+  jobstatstable_.Close;
   parametertable_.Close;
 end;
 
@@ -117,9 +121,9 @@ begin
   Result := retrtable_;
 end;
 
-function TDbTableManager.getJobTable() : TDbJobTable;
+function TDbTableManager.getJobDefinitionTable() : TDbJobDefinitionTable;
 begin
-  Result := jobtable_;
+  Result := jobdefinitiontable_;
 end;
 
 function TDbTableManager.getJobResultTable() : TDbJobResultTable;
