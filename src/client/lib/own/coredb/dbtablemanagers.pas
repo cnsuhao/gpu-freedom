@@ -9,7 +9,8 @@ unit dbtablemanagers;
 interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
-     jobdefinitiontables, jobqueuetables, jobresulttables, parametertables;
+     jobdefinitiontables, jobqueuetables, jobresulttables, parametertables,
+     jobstatstables;
 
 
 type TDbTableManager = class(TObject)
@@ -28,8 +29,10 @@ type TDbTableManager = class(TObject)
     function getJobTable() : TDbJobTable;
     function getJobResultTable() : TDbJobResultTable;
     function getJobQueueTable() : TDbJobQueueTable;
+    function getJobStatsTable() : TDbJobStatsTable;
 
     function getParameterTable() : TDbParameterTable;
+
 
   private
     clienttable_    : TDbClientTable;
@@ -39,6 +42,7 @@ type TDbTableManager = class(TObject)
     jobtable_       : TDbJobTable;
     jobresulttable_ : TDbJobResultTable;
     jobqueuetable_  : TDbJobQueueTable;
+    jobstatstable_  : TDbJobStatsTable;
     parametertable_ : TDbParameterTable;
 end;
 
@@ -127,6 +131,12 @@ function TDbTableManager.getJobQueueTable() : TDbJobQueueTable;
 begin
   Result := jobqueuetable_;
 end;
+
+function TDbTableManager.getJobStatsTable() : TDbJobStatsTable;
+begin
+  Result := jobstatstable_;
+end;
+
 
 function TDbTableManager.getParameterTable() : TDbParameterTable;
 begin

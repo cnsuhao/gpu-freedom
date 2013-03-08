@@ -24,7 +24,7 @@ type TDbJobQueueRow = record
    id              : Longint;
    jobdefinitionid : String;
    status          : Longint;
-   server_id  : Longint;
+   server_id       : Longint;
    jobqueueid      : String;
    workunitjob,
    workunitresult  : String;
@@ -34,7 +34,6 @@ type TDbJobQueueRow = record
    islocal         : Boolean;
    acknodeid,
    acknodename     : String;
-   status     : Longint;
    create_dt  : TDateTime;
    transmission_dt : TDateTime;
    transmissionid  : String;
@@ -69,10 +68,24 @@ begin
     begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
-      FieldDefs.Add('job_id', ftInteger);
-      FieldDefs.Add('requestid', ftInteger);
+      FieldDefs.Add('jobdefinitionid', ftString);
+      FieldDefs.Add('status', ftInteger);
       FieldDefs.Add('server_id', ftInteger);
+      FieldDefs.Add('jobqueueid', ftString);
+      FieldDefs.Add('workunitjob', ftString);
+      FieldDefs.Add('workunitresult', ftString);
+      FieldDefs.Add('nodeid', ftString);
+      FieldDefs.Add('nodename', ftString);
+      FieldDefs.Add('requireack', ftBoolean);
+      FieldDefs.Add('islocal', ftBoolean);
+      FieldDefs.Add('acknodeid', ftString);
+      FieldDefs.Add('acknodename', ftString);
       FieldDefs.Add('create_dt', ftDateTime);
+      FieldDefs.Add('transmission_dt', ftDateTime);
+      FieldDefs.Add('transmissionid', ftString);
+      FieldDefs.Add('ack_dt', ftDateTime);
+      FieldDefs.Add('reception_dt', ftDateTime);
+      FieldDefs.Add('server_id', ftInteger);
       CreateTable;
     end; {if not TableExists}
   end; {with}

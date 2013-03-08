@@ -53,20 +53,16 @@ begin
     begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
-      FieldDefs.Add('externalid', ftString);
-      FieldDefs.Add('jobid', ftString);
+      FieldDefs.Add('jobdefinitionid', ftString);
       FieldDefs.Add('job', ftString);
-      FieldDefs.Add('status', ftInteger);
-      FieldDefs.Add('workunitincoming', ftString);
-      FieldDefs.Add('workunitoutgoing', ftString);
-      FieldDefs.Add('requests', ftInteger);
-      FieldDefs.Add('delivered', ftInteger);
-      FieldDefs.Add('results', ftInteger);
+      FieldDefs.Add('jobtype', ftString);
+      FieldDefs.Add('requireack', ftBoolean);
       FieldDefs.Add('islocal', ftBoolean);
       FieldDefs.Add('nodeid', ftString);
       FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
+      FieldDefs.Add('update_dt', ftDateTime);
       CreateTable;
     end; {if not TableExists}
   end; {with}
