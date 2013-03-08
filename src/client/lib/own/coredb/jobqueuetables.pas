@@ -70,7 +70,6 @@ begin
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('jobdefinitionid', ftString);
       FieldDefs.Add('status', ftInteger);
-      FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('jobqueueid', ftString);
       FieldDefs.Add('workunitjob', ftString);
       FieldDefs.Add('workunitresult', ftString);
@@ -94,10 +93,23 @@ end;
 procedure TDbJobQueueTable.insert(var row : TDbJobQueueRow);
 begin
   dataset_.Append;
-  dataset_.FieldByName('job_id').AsInteger := row.job_id;
-  dataset_.FieldByName('requestid').AsInteger := row.requestid;
+  dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
+  dataset_.FieldByName('status').AsInteger := JS_READY;
+  dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
+  dataset_.FieldByName('workunitjob').AsString := row.workunitjob;
+  dataset_.FieldByName('workunitresult').AsString := row.workunitresult;
+  dataset_.FieldByName('nodeid').AsString := row.nodeid;
+  dataset_.FieldByName('nodename').AsString := row.nodename;
+  dataset_.FieldByName('requireack').AsBoolean := row.requireack;
+  dataset_.FieldByName('islocal').AsBoolean := row.islocal;
+  dataset_.FieldByName('acknodeid').AsString := row.acknodeid;
+  dataset_.FieldByName('acknodename').AsString := row.acknodename;
+  dataset_.FieldByName('create_dt').AsDateTime := row.create_dt;
+  dataset_.FieldByName('transmission_dt').AsDateTime := row.transmission_dt;
+  dataset_.FieldByName('transmissionid').AsString := row.transmissionid;
+  dataset_.FieldByName('ack_dt').AsDateTime := row.ack_dt;
+  dataset_.FieldByName('reception_dt').AsDateTime := row.reception_dt;
   dataset_.FieldByName('server_id').AsInteger := row.server_id;
-  dataset_.FieldByName('create_dt').AsDateTime := Now;
   dataset_.Post;
   dataset_.ApplyUpdates;
   row.id := dataset_.FieldByName('id').AsInteger;
@@ -107,7 +119,7 @@ procedure TDbJobQueueTable.delete(var row : TDbJobQueueRow);
 var options : TLocateOptions;
 begin
   options := [];
-  if dataset_.Locate('job_id', row.job_id, options) then
+  if dataset_.Locate('jobdefinitionid', row.jobdefinitionid, options) then
     begin
       dataset_.Delete;
       dataset_.Post;
@@ -115,7 +127,7 @@ begin
     end
   else
     begin
-     raise Exception.Create('Internal error: Nothing to delete in tbjobqueue, job_id was '+IntToStr(row.job_id));
+     raise Exception.Create('Internal error: Nothing to delete in tbjobqueue, jobdefinitionid was '+row.jobdefinitionid);
     end;
 end;
 
