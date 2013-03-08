@@ -25,6 +25,14 @@ type TDbJobDefinitionRow = record
    update_dt  : TDateTime;
 end;
 
+type TJobTransmissionDetails = record
+     workunitjob : String;
+     workunitresult : String;
+     nbrequests  : Longint;
+     tagwujob,
+     tagwuresult : Boolean;
+end;
+
 type TDbJobDefinitionTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);

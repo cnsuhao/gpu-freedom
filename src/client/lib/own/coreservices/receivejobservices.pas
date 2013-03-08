@@ -96,7 +96,7 @@ try
                tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
                //queuerow.job_id := dbrow.id;  // this could be setup at a later point
                tableman_.getJobQueueTable().insert(dbqueuerow);
-               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOB and to TBJOBQUEUE table.');
+               logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOBDEFINITION and to TBJOBQUEUE table.');
 
        node := node.NextSibling;
      end;  // while Assigned(node)
