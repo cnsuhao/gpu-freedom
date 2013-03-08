@@ -24,7 +24,6 @@ type TReceiveJobResultServiceThread = class(TReceiveServiceThread)
 
  private
    jobid_  : String;
-   job_id_ : Longint;
 
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
@@ -36,7 +35,6 @@ constructor TReceiveJobResultServiceThread.Create(var servMan : TServerManager; 
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobResultServiceThread]> ', conf, tableman);
  jobid_  := jobid;
- job_id_ := tableman_.getJobTable().getId(jobid_);
 end;
 
 procedure TReceiveJobResultServiceThread.parseXml(var xmldoc : TXMLDocument);
@@ -47,14 +45,13 @@ var
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
   node := xmldoc.DocumentElement.FirstChild;
-
-  while Assigned(node) do
+try
+  begin
+   while Assigned(node) do
     begin
-        try
-             begin
-               dbrow.externalid     := StrToInt(node.FindNode('externalid').TextContent);
-               dbrow.job_id         := job_id_;
-               dbrow.jobid          := jobid_;
+               dbrow.jobresultid     := node.FindNode('jobresultid').TextContent;
+               dbrow.jobdefinitionid := node.FindNode('jobdefinitionid').TextContent;
+               dbrow.jobqueueid      := node.FindNode('jobdefinitionid').TextContent;
                dbrow.jobresult      := node.FindNode('jobresult').TextContent;
                dbrow.workunitresult := node.FindNode('workunitresult').TextContent;
                dbrow.iserroneous    := (node.FindNode('iserroneous').TextContent='1');
@@ -65,18 +62,20 @@ begin
                dbrow.nodename       := node.FindNode('nodename').TextContent;
                dbrow.server_id      := srv_.id;
                tableman_.getJobResultTable().insertOrUpdate(dbrow);
-               logger_.log(LVL_DEBUG, 'Updated or added '+IntToStr(dbrow.externalid)+' to TBJOBRESULT table.');
-             end;
-          except
+
+               //TODO, here we could update jobqueue
+               logger_.log(LVL_DEBUG, 'Updated or added '+dbrow.jobresultid+' to TBJOBRESULT table.');
+
+               node := node.NextSibling;
+     end;  // while Assigned(node)
+end; // try
+     except
            on E : Exception do
               begin
-                erroneous_ := true;
-                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
+                   erroneous_ := true;
+                   logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
               end;
-          end; // except
-
-       node := node.NextSibling;
-     end;  // while Assigned(node)
+     end; // except
 
    logger_.log(LVL_DEBUG, 'Parsing of XML over.');
 end;
@@ -86,7 +85,7 @@ end;
 procedure TReceiveJobResultServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/jobqueue/get_jobresults_xml.php?jobid='+jobid_, xmldoc, false);
+ receive('/jobqueue/list_jobresults.php?jobid='+jobid_, xmldoc, false);
  if not erroneous_ then
      parseXml(xmldoc);
 
