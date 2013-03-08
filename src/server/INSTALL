@@ -1,7 +1,7 @@
 
-1. (Debian:) Run: apt-get install apache2 php5 mysql-server phpmyadmin
+1. (Debian:) Run: apt-get install apache2 php5 mysql-server phpmyadmin php5-xsl
 or
-1. (Other OS:) Install apache2, mysql, php5
+1. (Other OS:) Install apache2, mysql, php5, php5 Xsl extension
 
 2. Create a mysql user with a database
 3. Run db/gpu_server.sql on new database
