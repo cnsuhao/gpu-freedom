@@ -11,12 +11,35 @@ interface
 
 uses sqlite3ds, db, coretables, SysUtils;
 
+const
+  // for status column
+  JS_READY           = 30;
+  JS_RUNNING         = 40;
+  JS_ONHOLD          = 50;
+  JS_COMPLETED_OK       = 90;
+  JS_COMPLETED_ERROR    = 99;
+
+
 type TDbJobQueueRow = record
-   id,
-   job_id : Longint;
-   requestid : Longint;
-   server_id : Longint;
-   create_dt : TDateTime;
+   id              : Longint;
+   jobdefinitionid : String;
+   status          : Longint;
+   server_id  : Longint;
+   jobqueueid      : String;
+   workunitjob,
+   workunitresult  : String;
+   nodeid,
+   nodename        : String;
+   requireack,
+   islocal         : Boolean;
+   acknodeid,
+   acknodename     : String;
+   status     : Longint;
+   create_dt  : TDateTime;
+   transmission_dt : TDateTime;
+   transmissionid  : String;
+   ack_dt          : TDateTime;
+   reception_dt    : TDateTime;
 end;
 
 type TDbJobQueueTable = class(TDbCoreTable)

@@ -14,7 +14,7 @@ uses
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices,
   receivejobresultservices, transmitjobresultservices,
-  coreconfigurations, jobtables, jobresulttables;
+  coreconfigurations, jobdefinitiontables, jobresulttables;
 
 type TServiceFactory = class(TObject)
    public

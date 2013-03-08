@@ -1,5 +1,10 @@
 ******************
 GPU freedom branch
+
+8.3.2013 git
+Client: refactoring tbjob to tbjobdefinition, allineating datamodel for tbjobqueue and tbjobresult to server datamodel
+	    adding tbjobstats table
+
 7.3.2013 git
 Client: checked retrieval of channel data, it's working fine
 	    checked transmission of client information to server, it's working fine, too.

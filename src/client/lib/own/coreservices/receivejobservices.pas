@@ -5,14 +5,14 @@ unit receivejobservices;
    and stores it in the TDbJobTable object. An entry into TDbJobQueueTable
     is added as well.
 
-  (c) 2011 by HB9TVM and the GPU Team
+  (c) 2011-2013 by HB9TVM and the GPU Team
   This code is licensed under the GPL
 
 }
 interface
 
 uses coreservices, servermanagers, jobqueuetables, dbtablemanagers,
-     jobtables, loggers, downloadutils, coreconfigurations,
+     jobdefinitiontables, loggers, downloadutils, coreconfigurations,
      Classes, SysUtils, DOM, identities, synacode;
 
 type TReceiveJobServiceThread = class(TReceiveServiceThread)

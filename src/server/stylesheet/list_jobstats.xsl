@@ -15,6 +15,7 @@
 					<tr>
 						<th>jobid</th>
 						<th>job</th>
+						<th>jobtype</th>
 						<th>requiresack</th>
 						<th>create_dt</th>
 						<th>requests</th>
@@ -34,10 +35,13 @@
     <xsl:template match="jobstat">
         <tr bgcolor="#81F781">
             <td>
-                <xsl:value-of select="jobid"/>			
+                <xsl:value-of select="jobdefinitionid"/>			
             </td>
 			<td>
                 <xsl:value-of select="job"/>			
+            </td>
+			<td>
+                <xsl:value-of select="jobtype"/>			
             </td>
 			<td>
                 <xsl:value-of select="requireack"/>			

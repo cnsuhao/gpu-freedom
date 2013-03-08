@@ -12,20 +12,23 @@ interface
 uses sqlite3ds, db, coretables, SysUtils;
 
 type TDbJobResultRow = record
-   id,
-   externalid,
+   id              : Longint;
+   jobresultid,
+   jobdefinitionid,
+   jobqueueid     : String;
    requestid,
-   job_id         : Longint;
-   jobid          : String;
-   jobresult      : AnsiString;
+   jobresult      : Ansistring;
    workunitresult : String;
+
    iserroneous    : Boolean;
    errorid        : Longint;
    errormsg,
    errorarg       : String;
-   server_id      : Longint;
+
    nodeid,
    nodename       : String;
+
+   server_id      : Longint;
    create_dt      : TDateTime;
 end;
 

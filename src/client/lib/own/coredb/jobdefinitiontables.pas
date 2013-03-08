@@ -1,4 +1,4 @@
-unit jobtables;
+unit jobdefinitiontables;
 {
    TDbJobTable contains the jobs which need to be executed or are already executed.
    If they need to be executed, there will be a reference in TDbJobQueue.
@@ -11,32 +11,18 @@ interface
 
 uses sqlite3ds, db, coretables, SysUtils;
 
-const
-  // for status column
-  JS_NEW             = 10;
-  JS_TRANSMITTED     = 20;
-  JS_RECEIVED        = 30;
-  JS_RUNNING         = 40;
-  JS_ONHOLD          = 50;
-  JS_COMPLETED       = 90;
-
-
-type TDbJobRow = record
+type TDbJobDefinitionRow = record
    id         : Longint;
-   externalid : String;
-   jobid      : String;
+   jobdefinitionid  : String;
    job        : AnsiString;
-   status     : Longint;
-   workunitincoming,
-   workunitoutgoing : String;
-   requests,
-   delivered,
-   results    : Longint;
+   jobtype    : String;
+   requireack,
    islocal    : Boolean;
    nodeid,
    nodename   : String;
    server_id  : Longint;
-   create_dt  : TDateTime;
+   create_dt,
+   update_dt  : TDateTime;
 end;
 
 type TDbJobTable = class(TDbCoreTable)
@@ -55,7 +41,7 @@ implementation
 
 constructor TDbJobTable.Create(filename : String);
 begin
-  inherited Create(filename, 'tbjob', 'id');
+  inherited Create(filename, 'tbjobdefinition', 'id');
   createDbTable();
 end;
 

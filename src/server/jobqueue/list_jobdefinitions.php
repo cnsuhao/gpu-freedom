@@ -20,7 +20,7 @@
  echo "<jobdefinitions>\n"; 
  // TODO: enable condition selection only the job definitions of the last day
  $level_list = Array("jobdefinition");
- sql2xml("select id, jobdefinitionid, job, nodename,  create_dt, update_dt
+ sql2xml("select id, jobdefinitionid, job, jobtype, nodename,  create_dt, update_dt
           from tbjobdefinition 
 		  where (1=1)
          -- and update_dt >= ( curdate() - interval 1 day ) 

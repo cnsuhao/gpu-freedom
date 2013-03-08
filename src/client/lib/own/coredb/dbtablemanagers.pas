@@ -9,7 +9,7 @@ unit dbtablemanagers;
 interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
-     jobtables, jobqueuetables, jobresulttables, parametertables;
+     jobdefinitiontables, jobqueuetables, jobresulttables, parametertables;
 
 
 type TDbTableManager = class(TObject)

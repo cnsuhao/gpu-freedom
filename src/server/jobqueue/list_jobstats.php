@@ -31,7 +31,7 @@
 @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
  echo "<jobstats>\n";
  
- $queryjobs = "select d.jobdefinitionid, d.job, d.requireack, d.create_dt
+ $queryjobs = "select d.jobdefinitionid, d.job, d.jobtype, d.requireack, d.create_dt
                from tbjobdefinition d
 			   where $selectclause;
 			  ";
@@ -39,8 +39,9 @@
  if ($resultjobs=="") $num=0; else $num=mysql_numrows($resultjobs); 
 
  for ($i=0; $i<$num; $i++) {
-	$jobid        = mysql_result($resultjobs, $i, 'jobdefinitionid');
+	$jobdefinitionid  = mysql_result($resultjobs, $i, 'jobdefinitionid');
 	$job          = mysql_result($resultjobs, $i, 'job');
+	$jobtype      = mysql_result($resultjobs, $i, 'jobtype');
 	$requireack   = mysql_result($resultjobs, $i, 'requireack');
 	$create_dt    = mysql_result($resultjobs, $i, 'create_dt');
 	$nbqueues     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid'");
@@ -49,8 +50,9 @@
     $received     = retrieve_count("select count(*) from tbjobqueue where jobdefinitionid='$jobid' and (reception_dt is not NULL)");
 	
 	echo "<jobstat>\n";
-	echo "<jobid>$jobid</jobid>\n";
+	echo "<jobdefinitionid>$jobdefinitionid</jobdefinitionid>\n";
 	echo "<job>$job</job>\n";
+	echo "<jobtype>$jobtype</jobtype>\n";
 	echo "<requireack>$requireack</requireack>\n";
 	echo "<create_dt>$create_dt</create_dt>";
 	echo "<requests>$nbqueues</requests>\n";

@@ -3,7 +3,7 @@ unit transmitjobservices;
 interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
-     jobtables, servermanagers, loggers, identities, dbtablemanagers,
+     jobdefinitiontables, servermanagers, loggers, identities, dbtablemanagers,
      SysUtils, Classes, DOM;
 
 

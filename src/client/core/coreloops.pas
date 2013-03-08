@@ -72,10 +72,8 @@ begin
   // main loop
   tick_ := 1;
   days_ := 0;
-  retrieveParams;
-  Sleep(1000);
-  retrieveServers;
-  Sleep(1000);
+  //retrieveParams;
+  //retrieveServers;
   //retrieveClients;
   //retrieveChannels;
   transmitClient;

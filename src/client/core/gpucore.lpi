@@ -33,16 +33,16 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="47">
+    <Units Count="51">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="70"/>
-        <CursorPos X="79" Y="114"/>
-        <UsageCount Value="38"/>
+        <TopLine Value="13"/>
+        <CursorPos X="56" Y="33"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -127,8 +127,8 @@
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
-        <CursorPos X="14" Y="27"/>
+        <TopLine Value="1"/>
+        <CursorPos X="63" Y="6"/>
         <UsageCount Value="12"/>
       </Unit12>
       <Unit13>
@@ -163,12 +163,10 @@
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
-        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="140"/>
+        <TopLine Value="70"/>
         <CursorPos X="15" Y="47"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\initmodel.pas"/>
@@ -180,20 +178,20 @@
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="55"/>
-        <CursorPos X="95" Y="77"/>
+        <TopLine Value="96"/>
+        <CursorPos X="141" Y="111"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="92"/>
-        <CursorPos X="22" Y="133"/>
-        <UsageCount Value="15"/>
+        <TopLine Value="1"/>
+        <CursorPos X="19" Y="12"/>
+        <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\lib\own\misc\testconstants.pas"/>
@@ -213,11 +211,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="63"/>
-        <CursorPos X="15" Y="78"/>
-        <UsageCount Value="19"/>
+        <TopLine Value="1"/>
+        <CursorPos X="97" Y="14"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -247,33 +245,26 @@
       <Unit27>
         <Filename Value="..\lib\own\coreservices\receiveclientservices.pas"/>
         <UnitName Value="receiveclientservices"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="39"/>
-        <CursorPos X="98" Y="61"/>
+        <TopLine Value="40"/>
+        <CursorPos X="47" Y="44"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit27>
       <Unit28>
         <Filename Value="..\lib\own\coredb\clienttables.pas"/>
         <UnitName Value="clienttables"/>
-        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="5"/>
-        <CursorPos X="14" Y="27"/>
+        <TopLine Value="59"/>
+        <CursorPos X="52" Y="133"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit28>
       <Unit29>
         <Filename Value="..\lib\own\coreservices\transmitclientservices.pas"/>
         <UnitName Value="transmitclientservices"/>
-        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="35"/>
-        <CursorPos X="63" Y="58"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
+        <TopLine Value="59"/>
+        <CursorPos X="41" Y="80"/>
+        <UsageCount Value="9"/>
       </Unit29>
       <Unit30>
         <Filename Value="..\lib\own\misc\lockfiles.pas"/>
@@ -334,15 +325,15 @@
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="88"/>
-        <CursorPos X="87" Y="134"/>
-        <UsageCount Value="14"/>
+        <TopLine Value="115"/>
+        <CursorPos X="14" Y="55"/>
+        <UsageCount Value="15"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
         <UnitName Value="servertables"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="37"/>
+        <TopLine Value="7"/>
         <CursorPos X="13" Y="64"/>
         <UsageCount Value="12"/>
       </Unit38>
@@ -357,12 +348,10 @@
       <Unit40>
         <Filename Value="..\lib\own\coreservices\receivechannelservices.pas"/>
         <UnitName Value="receivechannelservices"/>
-        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="45"/>
+        <TopLine Value="66"/>
         <CursorPos X="27" Y="44"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\lib\own\coredb\retrievedtables.pas"/>
@@ -396,27 +385,64 @@
         <UsageCount Value="11"/>
       </Unit44>
       <Unit45>
-        <Filename Value="..\lib\own\misc\identities.pas"/>
-        <UnitName Value="identities"/>
-        <EditorIndex Value="8"/>
+        <Filename Value="..\lib\own\coredb\jobdefinitiontables.pas"/>
+        <UnitName Value="jobdefinitiontables"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="5"/>
-        <CursorPos X="13" Y="36"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="10"/>
+        <CursorPos X="15" Y="25"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit45>
       <Unit46>
-        <Filename Value="..\lib\own\coremodules\specialcommands.pas"/>
-        <UnitName Value="specialcommands"/>
-        <EditorIndex Value="7"/>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <UnitName Value="receivejobservices"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="124"/>
-        <CursorPos X="57" Y="146"/>
+        <TopLine Value="1"/>
+        <CursorPos X="19" Y="15"/>
+        <UsageCount Value="10"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
+        <UnitName Value="transmitjobservices"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="19" Y="6"/>
+        <UsageCount Value="10"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <UnitName Value="jobqueuetables"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="4"/>
+        <CursorPos X="30" Y="24"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
+        <UnitName Value="jobstatstables"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="17" Y="17"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
+        <UnitName Value="jobresulttables"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="29" Y="31"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
-      </Unit46>
+      </Unit50>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="6" HistoryIndex="5">
       <Position1>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="41" Column="23" TopLine="1"/>
@@ -426,85 +452,21 @@
         <Caret Line="42" Column="16" TopLine="20"/>
       </Position2>
       <Position3>
-        <Filename Value="..\lib\own\coreservices\receivechannelservices.pas"/>
-        <Caret Line="84" Column="34" TopLine="46"/>
-      </Position3>
-      <Position4>
         <Filename Value="gpucore.lpr"/>
         <Caret Line="35" Column="80" TopLine="22"/>
+      </Position3>
+      <Position4>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="133" Column="22" TopLine="92"/>
       </Position4>
       <Position5>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="79" Column="14" TopLine="49"/>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="12" Column="19" TopLine="1"/>
       </Position5>
       <Position6>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="39" Column="32" TopLine="16"/>
+        <Caret Line="163" Column="36" TopLine="123"/>
       </Position6>
-      <Position7>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="79" Column="18" TopLine="42"/>
-      </Position7>
-      <Position8>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="88" Column="74" TopLine="51"/>
-      </Position8>
-      <Position9>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="33" Column="56" TopLine="13"/>
-      </Position9>
-      <Position10>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="113" Column="1" TopLine="70"/>
-      </Position10>
-      <Position11>
-        <Filename Value="..\lib\own\coreservices\transmitclientservices.pas"/>
-        <Caret Line="38" Column="15" TopLine="25"/>
-      </Position11>
-      <Position12>
-        <Filename Value="gpucore.lpr"/>
-        <Caret Line="94" Column="12" TopLine="1"/>
-      </Position12>
-      <Position13>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="111" Column="141" TopLine="49"/>
-      </Position13>
-      <Position14>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="73" Column="71" TopLine="52"/>
-      </Position14>
-      <Position15>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="165" Column="61" TopLine="1"/>
-      </Position15>
-      <Position16>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="73" Column="76" TopLine="36"/>
-      </Position16>
-      <Position17>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="7" Column="19" TopLine="1"/>
-      </Position17>
-      <Position18>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="9" Column="1" TopLine="1"/>
-      </Position18>
-      <Position19>
-        <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
-        <Caret Line="77" Column="76" TopLine="56"/>
-      </Position19>
-      <Position20>
-        <Filename Value="..\lib\own\coremodules\specialcommands.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position20>
-      <Position21>
-        <Filename Value="..\lib\own\coreservices\transmitclientservices.pas"/>
-        <Caret Line="58" Column="41" TopLine="1"/>
-      </Position21>
-      <Position22>
-        <Filename Value="..\lib\own\coreservices\receiveclientservices.pas"/>
-        <Caret Line="44" Column="47" TopLine="40"/>
-      </Position22>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

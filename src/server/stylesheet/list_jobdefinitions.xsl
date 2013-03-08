@@ -16,6 +16,7 @@
 						<th>id</th>
 						<th>jobdefinitionid</th>
 						<th>job</th>
+						<th>jobtype</th>
 						<th>nodename</th>
 						<th>create_dt</th>
 						<th>update_dt</th>
@@ -39,6 +40,9 @@
             </td>
 			<td>
                 <xsl:value-of select="job"/>				
+            </td>
+			<td>
+                <xsl:value-of select="jobtype"/>				
             </td>
 			<td>
                 <xsl:value-of select="nodename"/>			
