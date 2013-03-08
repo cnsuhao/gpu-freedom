@@ -2,29 +2,31 @@
 GPU freedom branch
 
 8.3.2013 git
-Client: refactoring tbjob to tbjobdefinition, allineating datamodel for tbjobqueue and tbjobresult to server datamodel
+Core Client: refactoring tbjob to tbjobdefinition, allineating datamodel for tbjobqueue and tbjobresult to server datamodel
 	    adding tbjobstats table
+		allineating source code  with new datamodel
+		now are missing: receivejobstats and testing and debugging the whole core in respect to jobs (and adding a stub to submit jobs from GUI)
 
 7.3.2013 git
-Client: checked retrieval of channel data, it's working fine
+Core Client: checked retrieval of channel data, it's working fine
 	    checked transmission of client information to server, it's working fine, too.
 		Next step is revising the datamodel for the job structure, i'd like to have the following tables:
 		tbjobdefinition, tbjobstats, tbjobqueue and tbjobresult
 
 6.3.2013 git
-Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
+Core Client:  refactored parameter retrieval from server, added table tbparameter in sqlite
          retrieval of tbserver, tbclient and tbparameter succesful, including mechanism of setting default server
 		 try/except around receive{client,server,parameter}services revised
 		 revised formula to calcuate distance on sphere in geoutils.pas
 Server:  refactored list_parameters.php so that it appears as normal page
 
 5.3.2013 git
-Client: turns out there was no lock problem with sqlite3, but with the coreapp implementation of lockfiles.pas :-)
+Core Client: turns out there was no lock problem with sqlite3, but with the coreapp implementation of lockfiles.pas :-)
         the client refactoring can go on
 		retrieving parameters and servers almost works
 
 4.3.2013 git
-Client: managed to recompile core, managed to retrieve clients from server and store it in sqlite, however, still deadlocks presumably with sqlite (need to check lockfiles though)
+Core Client: managed to recompile core, managed to retrieve clients from server and store it in sqlite, however, still deadlocks presumably with sqlite (need to check lockfiles though)
 		added OctaveGUI as external library, Octave could be used as external Computer Algebra System. Maybe we could bind Maxima in a similar way, too.
 
 1.3.2013 0.5.7

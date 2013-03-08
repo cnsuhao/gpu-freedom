@@ -19,7 +19,6 @@ type TTransmitJobResultServiceThread = class(TReceiveServiceThread)
 
     function  getPHPArguments() : AnsiString;
     procedure insertTransmission();
-    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
 implementation
@@ -34,16 +33,18 @@ end;
 function TTransmitJobResultServiceThread.getPHPArguments() : AnsiString;
 var rep : AnsiString;
 begin
- rep :=     'nodeid='+encodeURL(myGPUId.nodeid)+'&';
- rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
- rep := rep+'requestid='+encodeURL(IntToStr(jobresultrow_.requestid))+'&';
- rep := rep+'jobid='+encodeURL(jobresultrow_.jobid)+'&';
+ rep := '';
+ rep := rep+'jobqueueid='+encodeURL(jobresultrow_.jobqueueid)+'&';
+ rep := rep+'jobid='+encodeURL(jobresultrow_.jobdefinitionid)+'&';
+ rep := rep+'jobresultid='+encodeURL(jobresultrow_.jobresultid)+'&';
  rep := rep+'jobresult='+encodeURL(jobresultrow_.jobresult)+'&';
  rep := rep+'workunitresult='+encodeURL(jobresultrow_.workunitresult)+'&';
  rep := rep+'iserroneous='+encodeURL(BoolToStr(jobresultrow_.iserroneous))+'&';
  rep := rep+'errorid='+encodeURL(IntToStr(jobresultrow_.errorid))+'&';
- rep := rep+'errormsg='+encodeURL(jobresultrow_.errormsg)+'&';
  rep := rep+'errorarg='+encodeURL(jobresultrow_.errorarg);
+ rep := rep+'errormsg='+encodeURL(jobresultrow_.errormsg)+'&';
+ rep := rep+'nodeid='+encodeURL(myGPUId.nodeid)+'&';
+ rep := rep+'nodename='+encodeURL(myGPUId.nodename);
 
  logger_.log(LVL_DEBUG, logHeader_+'Reporting string is:');
  logger_.log(LVL_DEBUG, rep);
@@ -57,43 +58,14 @@ begin
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
 end;
 
-procedure TTransmitJobResultServiceThread.parseXml(var xmldoc : TXMLDocument);
-var
-    node     : TDOMNode;
-begin
-  logger_.log(LVL_DEBUG, 'Parsing of XML started...');
-  node := xmldoc.DocumentElement.FirstChild;
-
-  while Assigned(node) do
-    begin
-        try
-             begin
-               jobresultrow_.externalid  := StrToInt(node.FindNode('externalid').TextContent);
-               logger_.log(LVL_DEBUG, 'Externalid for transmitted jobresult on server is: '+IntToStr(jobresultrow_.externalid));
-             end;
-          except
-           on E : Exception do
-              begin
-                erroneous_ := true;
-                logger_.log(LVL_SEVERE, logHeader_+'Exception catched in parseXML: '+E.Message);
-              end;
-          end; // except
-
-       node := node.NextSibling;
-     end;  // while Assigned(node)
-
-   logger_.log(LVL_DEBUG, 'Parsing of XML over.');
-end;
 
 procedure TTransmitJobResultServiceThread.Execute;
 var xmldoc     : TXMLDocument;
     externalid : String;
 begin
- receive('/jobqueue/report_jobresult_xml.php?'+getPHPArguments(), xmldoc, false);
+ receive('/jobqueue/report_jobresult.php?'+getPHPArguments(), xmldoc, false);
  if not erroneous_ then
     begin
-     parseXml(xmldoc);
-     if not erroneous_ then
         insertTransmission();
     end;
 
