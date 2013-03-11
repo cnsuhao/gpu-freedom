@@ -10,3 +10,6 @@ or
 6. Edit the settings in config.inc.php
 7. Open install/install_execution.php from your browser
 8. Open test/check_status.php from your browser, it should display OK
+9. Check if everything is working by visiting this two pages:
+yourserver/index.php
+yourserver/cluster/list_clients.php
