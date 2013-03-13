@@ -8,8 +8,8 @@ uses
 
 const
   HTTP_DOWNLOAD_TIMEOUT = 10000; // 10 seconds
-  HTTP_USER_AGENT = 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
-
+  //HTTP_USER_AGENT = 'Mozilla/4.0 (compatible; Synapse for GPU at http://gpu.sourceforge.net)';
+  HTTP_USER_AGENT = 'Mozilla/5.0 (Linux; U; Android 2.2; fr-fr; Desire_A8181 Build/FRF91) App3leWebKit/53.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1';
 
 function downloadToFile(url : AnsiString; targetPath, targetFile, proxy, port, logHeader : String; var logger : TLogger) : Boolean;
 function downloadToStream(url : AnsiString; proxy, port, logHeader : String; var logger : TLogger; var stream : TMemoryStream) : Boolean;
