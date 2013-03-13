@@ -110,9 +110,13 @@ begin
 
       run_only_when_idle      := ini_.ReadBool('local','run_only_when_idle',true);
 
-      proxy                   := ini_.ReadString('communication','proxy','');
-      port                    := ini_.ReadString('communication','port','');
-      default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://127.0.0.1:8090/gpu_freedom/src/server');
+      proxy                   := ini_.ReadString('communication','proxy','192.168.4.2');
+      port                    := ini_.ReadString('communication','port','8080');
+      //proxy                   := ini_.ReadString('communication','proxy','192.168.4.2');
+      //port                    := ini_.ReadString('communication','port','8080');
+      //default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://127.0.0.1:8090/gpu_freedom/src/server');
+      default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://gpu.maxmaton.nl');
+
       default_server_name     := inicore_.ReadString('communication', 'default_server_name','Altos');
 
       receive_servers_each   := inicore_.ReadInteger('global','receive_servers_each',14400);

@@ -72,6 +72,7 @@ begin
   // main loop
   tick_ := 1;
   days_ := 0;
+
   //retrieveParams;
   //retrieveServers;
   //retrieveClients;

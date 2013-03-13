@@ -27,14 +27,12 @@ type TServerManager = class(TObject)
 
     procedure getServer(var srv : TServerRecord);
     procedure getDefaultServer(var srv : TServerRecord);
-    procedure getSuperServer(var srv : TServerRecord);
 
     procedure reloadServers();
     procedure increaseFailures(url : String);
 
    private
     defaultserver_  : Longint;
-    superserver_    : Longint;
     cs_             : TCriticalSection;
     count_,
     currentServers_ : Longint;
@@ -89,13 +87,6 @@ begin
   cs_.Leave;
 end;
 
-procedure TServerManager.getSuperServer(var srv : TServerRecord);
-begin
-  cs_.Enter;
-  getServerInternal(srv, superserver_);
-  cs_.Leave;
-end;
-
 
 procedure TServerManager.reloadServers();
 var i  : Longint;
@@ -105,7 +96,7 @@ begin
  cs_.Enter;
  i:=0;
  defaultserver_ := -1;
- superserver_ := -1;
+
 try
  ds := servertable_.getDS();
  ds.First;
@@ -117,11 +108,7 @@ try
      servers_[i].id          := ds.FieldValues['id'];
      servers_[i].chatchannel := ds.FieldValues['chatchannel'];
      logger_.log(LVL_DEBUG, 'TServermanager> '+ds.FieldValues['serverurl']);
-     if ds.FieldValues['superserver']=true then
-        begin
-          superserver_ := i;
-          logger_.log(LVL_DEBUG, 'TServermanager> ^ is superserver');
-        end;
+
      if ds.FieldValues['defaultsrv']=true then
          begin
           defaultserver_ := i;
@@ -137,24 +124,14 @@ try
         servers_[1].id := 0;
         servers_[1].chatchannel := 'Altos';
         currentServers_ := 1;
-        logger_.log(LVL_INFO, 'TServermanager> Superserver initially set to '+myConfID.default_superserver_url);
+        defaultserver_ := 1;
+        logger_.log(LVL_INFO, 'TServermanager> Default superserver initially set to '+myConfID.default_superserver_url);
       end
      else
        begin
          currentServers_ := i;
          logger_.log(LVL_INFO, 'TServermanager> Superserver now set to '+myConfID.default_superserver_url);
        end;
- if superserver_=-1 then
-    begin
-      logger_.log(LVL_SEVERE, 'TServermanager> Superserver not defined');
-      superserver_ := 1;
-    end;
-
- if defaultserver_=-1 then
-    begin
-      logger_.log(LVL_SEVERE, 'TServermanager> Defaultserver not defined');
-      defaultserver_ := 1;
-    end;
 
  count_ := defaultserver_;
 except
