@@ -5,10 +5,10 @@ interface
 uses identities, syncObjs, inifiles, SysUtils;
 
 const
- GPU_CLIENT_VERSION         = 0.1;
- DEFAULT_SUPERSERVER_URL_1  = 'http://gpu.maxmaton.nl'; // _1 because in With part compiler does not distinguish
- PROXY                      = '192.168.4.2';
- PORT                       = '8080';
+ GPU_CLIENT_VERSION           = 0.1;
+ DEF_SUPERSERVER_URL          = 'http://gpu.maxmaton.nl';
+ DEF_PROXY                    = '192.168.4.2';
+ DEF_PORT                     = '8080';
 
 
 type TCoreConfiguration = class(TObject)
@@ -110,9 +110,9 @@ begin
 
       run_only_when_idle      := ini_.ReadBool('local','run_only_when_idle',true);
 
-      proxy                   := ini_.ReadString('communication','proxy', PROXY);
-      port                    := ini_.ReadString('communication','port',  PORT);
-      default_superserver_url := inicore_.ReadString('communication','default_superserver_url', DEFAULT_SUPERSERVER_URL_1);
+      proxy                   := ini_.ReadString('communication','proxy', DEF_PROXY);
+      port                    := ini_.ReadString('communication','port',  DEF_PORT);
+      default_superserver_url := inicore_.ReadString('communication','default_superserver_url', DEF_SUPERSERVER_URL);
       default_server_name     := inicore_.ReadString('communication', 'default_server_name','Altos');
 
       receive_servers_each   := inicore_.ReadInteger('global','receive_servers_each',14400);

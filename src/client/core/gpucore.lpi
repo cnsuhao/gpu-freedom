@@ -40,7 +40,7 @@
         <UnitName Value="gpucore"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="61"/>
+        <TopLine Value="1"/>
         <CursorPos X="17" Y="27"/>
         <UsageCount Value="49"/>
         <Loaded Value="True"/>
@@ -158,11 +158,10 @@
       <Unit16>
         <Filename Value="..\lib\own\misc\downloadutils.pas"/>
         <UnitName Value="downloadutils"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="5" Y="11"/>
+        <TopLine Value="43"/>
+        <CursorPos X="62" Y="2"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -188,8 +187,8 @@
         <UnitName Value="coreconfigurations"/>
         <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="113" Y="9"/>
+        <TopLine Value="139"/>
+        <CursorPos X="9" Y="96"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit19>
@@ -213,7 +212,7 @@
         <UnitName Value="coreobjects"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="19"/>
+        <TopLine Value="28"/>
         <CursorPos X="49" Y="21"/>
         <UsageCount Value="14"/>
         <Loaded Value="True"/>
@@ -221,10 +220,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="88"/>
-        <CursorPos X="17" Y="18"/>
+        <TopLine Value="43"/>
+        <CursorPos X="15" Y="77"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit23>

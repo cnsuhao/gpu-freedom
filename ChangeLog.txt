@@ -2,7 +2,7 @@
 GPU freedom branch
 
 13.3.2013 git
-Core Client: testing core through proxies and firewalls with external GPU II server kindly provided by hacker <thexa4>.
+Core Client: testing core client through proxies and firewalls with external GPU II server kindly provided by hacker <thexa4>. It works :-)
 
 8.3.2013 git
 Core Client: refactoring tbjob to tbjobdefinition, allineating datamodel for tbjobqueue and tbjobresult to server datamodel

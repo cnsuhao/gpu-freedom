@@ -73,7 +73,8 @@ begin
   tick_ := 1;
   days_ := 0;
 
-  //retrieveParams;
+  retrieveParams;
+  Sleep(1000);
   //retrieveServers;
   //retrieveClients;
   //retrieveChannels;
