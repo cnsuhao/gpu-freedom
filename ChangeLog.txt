@@ -5,6 +5,8 @@ GPU freedom branch
 Core Client: testing core client through proxies and firewalls with external GPU II server kindly provided by hacker <thexa4>. It works :-)
              first long run of a core against external server
 			 if long run succeeds, next step is to test the job receival and transmission and then integrate it into the existing GPU engine
+GUI:         recompiling in Lazarus 1.0 after long time			 
+
 
 8.3.2013 git
 Core Client: refactoring tbjob to tbjobdefinition, allineating datamodel for tbjobqueue and tbjobresult to server datamodel

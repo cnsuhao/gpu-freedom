@@ -66,7 +66,7 @@ var aProcess : TProcess;
 begin
   AProcess := TProcess.Create(nil);
   try
-    AProcess.CommandLine := '"'+appPath_+PathDelim+'sqlite3.exe" "'+appPath_+PathDelim+'coreapp.db'+'"';
+    AProcess.CommandLine := '"'+appPath_+PathDelim+'sqlite3.exe" "'+appPath_+PathDelim+'gpucore.db'+'"';
     AProcess.Options := AProcess.Options - [poWaitOnExit];
     AProcess.Execute;
   finally
