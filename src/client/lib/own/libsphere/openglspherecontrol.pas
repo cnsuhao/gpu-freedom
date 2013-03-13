@@ -131,6 +131,7 @@ begin
        _angle := _angle + 1;
        if (_angle>359) then _angle := 0;
      end;
+
 end;
 
 procedure TOpenGLSphereControl.openGLSphereControlResize(Sender: TObject);

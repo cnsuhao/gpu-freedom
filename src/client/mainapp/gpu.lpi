@@ -39,7 +39,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="36">
+    <Units Count="37">
       <Unit0>
         <Filename Value="gpu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -48,7 +48,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="33" Y="7"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="96"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -59,11 +59,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="mainapp"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="54"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="96"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -119,7 +119,7 @@
       <Unit9>
         <Filename Value="..\lib\own\libsphere\texturestructure.pas"/>
         <UnitName Value="texturestructure"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
@@ -129,19 +129,22 @@
       <Unit10>
         <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
         <UnitName Value="openglspherecontrol"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="31"/>
-        <CursorPos X="20" Y="14"/>
-        <UsageCount Value="34"/>
+        <TopLine Value="28"/>
+        <CursorPos X="22" Y="13"/>
+        <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
         <UnitName Value="sphere3dplots"/>
-        <TopLine Value="25"/>
-        <CursorPos X="69" Y="53"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="11" Y="22"/>
         <UsageCount Value="36"/>
+        <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\lib\own\misc\conversions.pas"/>
@@ -182,21 +185,21 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="29"/>
-        <CursorPos X="6" Y="25"/>
-        <UsageCount Value="74"/>
+        <TopLine Value="30"/>
+        <CursorPos X="62" Y="50"/>
+        <UsageCount Value="75"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
         <UnitName Value="earthtextures"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="12"/>
-        <CursorPos X="76" Y="52"/>
+        <TopLine Value="9"/>
+        <CursorPos X="4" Y="24"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit17>
@@ -210,7 +213,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="88"/>
-        <UsageCount Value="66"/>
+        <UsageCount Value="67"/>
       </Unit18>
       <Unit19>
         <Filename Value="parametersforms.pas"/>
@@ -222,7 +225,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="132"/>
         <CursorPos X="45" Y="134"/>
-        <UsageCount Value="58"/>
+        <UsageCount Value="59"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
@@ -277,7 +280,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -354,8 +357,18 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit35>
+      <Unit36>
+        <Filename Value="netmapperforms.lfm"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit36>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="12" TopLine="7"/>
@@ -452,6 +465,22 @@
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
         <Caret Line="141" Column="13" TopLine="100"/>
       </Position24>
+      <Position25>
+        <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
+        <Caret Line="135" Column="1" TopLine="100"/>
+      </Position25>
+      <Position26>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="44" Column="15" TopLine="30"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
+        <Caret Line="13" Column="22" TopLine="16"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
+        <Caret Line="22" Column="11" TopLine="1"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

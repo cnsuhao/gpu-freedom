@@ -41,14 +41,13 @@ begin
     Parent:=Self;
     Top := 10;
     Left := 10;
-    Height := 360;
+    Height := 320;
     Width := 480;
     Visible := true;
   end;
 
 
   openGLSphereControl.setColors(earthTexturer_.getTexture());
-
   Application.AddOnIdleHandler(@OnAppIdle);
 end;
 
@@ -75,6 +74,7 @@ if Visible then
      Done:=false;
      openGLSphereControl.Invalidate;
   end;
+Application.ProcessMessages;
 end;
 
 initialization
