@@ -48,7 +48,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="33" Y="7"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -59,12 +59,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="mainapp"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="47"/>
-        <CursorPos X="96" Y="69"/>
-        <UsageCount Value="93"/>
+        <TopLine Value="1"/>
+        <CursorPos X="19" Y="54"/>
+        <UsageCount Value="95"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -120,17 +119,22 @@
       <Unit9>
         <Filename Value="..\lib\own\libsphere\texturestructure.pas"/>
         <UnitName Value="texturestructure"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="1" Y="20"/>
-        <UsageCount Value="36"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="37"/>
+        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
         <UnitName Value="openglspherecontrol"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="35" Y="15"/>
+        <TopLine Value="31"/>
+        <CursorPos X="20" Y="14"/>
         <UsageCount Value="34"/>
+        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
@@ -159,7 +163,6 @@
         <TopLine Value="1"/>
         <CursorPos X="11" Y="6"/>
         <UsageCount Value="37"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit14>
       <Unit15>
@@ -179,18 +182,23 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="79" Y="62"/>
-        <UsageCount Value="72"/>
+        <TopLine Value="29"/>
+        <CursorPos X="6" Y="25"/>
+        <UsageCount Value="74"/>
+        <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
         <UnitName Value="earthtextures"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="86"/>
-        <CursorPos X="38" Y="124"/>
-        <UsageCount Value="32"/>
+        <TopLine Value="12"/>
+        <CursorPos X="76" Y="52"/>
+        <UsageCount Value="33"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="chatforms.pas"/>
@@ -202,7 +210,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="88"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="66"/>
       </Unit18>
       <Unit19>
         <Filename Value="parametersforms.pas"/>
@@ -214,7 +222,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="132"/>
         <CursorPos X="45" Y="134"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="58"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
@@ -269,7 +277,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="27"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -329,7 +337,6 @@
         <TopLine Value="63"/>
         <CursorPos X="35" Y="64"/>
         <UsageCount Value="10"/>
-        <LoadedDesigner Value="True"/>
       </Unit33>
       <Unit34>
         <Filename Value="D:\met\apps\lazarus\components\opengl\glwin32wglcontext.pas"/>
@@ -348,7 +355,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="12" TopLine="7"/>
@@ -385,6 +392,66 @@
         <Filename Value="mainapp.pas"/>
         <Caret Line="47" Column="6" TopLine="36"/>
       </Position9>
+      <Position10>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="62" Column="79" TopLine="25"/>
+      </Position10>
+      <Position11>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="25" Column="6" TopLine="3"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="10" Column="6" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="50" Column="54" TopLine="24"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="38" Column="11" TopLine="3"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="5" Column="25" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="132" Column="73" TopLine="92"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="38" Column="40" TopLine="15"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="132" Column="73" TopLine="92"/>
+      </Position18>
+      <Position19>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="25" Column="6" TopLine="29"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="38" Column="11" TopLine="25"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="39" Column="60" TopLine="16"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="40" Column="33" TopLine="17"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="39" Column="33" TopLine="17"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
+        <Caret Line="141" Column="13" TopLine="100"/>
+      </Position24>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
