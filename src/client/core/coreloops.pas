@@ -75,22 +75,23 @@ begin
 
   retrieveParams;
   Sleep(1000);
-  //retrieveServers;
-  //retrieveClients;
-  //retrieveChannels;
+  //retrieveServers;  TODO: enable this!!
+  Sleep(1000);
+  retrieveClients;
+  Sleep(1000);
+  retrieveChannels;
+  Sleep(1000);
   transmitClient;
 end;
 
 procedure TCoreLoop.tick;
 begin
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
-      //if (tick_ mod 20 {myConfID.receive_servers_each = 0}) then begin retrieveParams; retrieveServers; end;
-      //if (tick_ mod 60 = 0 {myConfID.receive_nodes_each = 0}) then retrieveClients;
-      {
+      if (tick_ mod myConfID.receive_servers_each = 0) then begin retrieveParams; Sleep(1000); retrieveServers; end;
+      if (tick_ mod myConfID.receive_nodes_each = 0) then retrieveClients;
       if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;
-      if (tick_ mod myConfID.receive_channels_each = 0) then receiveChannels;
-      if (tick_ mod 20 = 0) and lf_morefrequentupdates.exists then receiveChannels;
-      }
+      if (tick_ mod myConfID.receive_channels_each = 0) then retrieveChannels;
+      if (tick_ mod 20 = 0) and lf_morefrequentupdates.exists then retrieveChannels;
 
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
