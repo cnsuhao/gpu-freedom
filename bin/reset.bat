@@ -4,3 +4,4 @@ del .\locks\gpucore.lock
 del .\logs\gpucore.log
 del gpucore.db
 del gpucore.compiled
+del *.ini

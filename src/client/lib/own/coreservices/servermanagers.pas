@@ -130,7 +130,7 @@ try
      else
        begin
          currentServers_ := i;
-         logger_.log(LVL_INFO, 'TServermanager> Superserver now set to '+myConfID.default_superserver_url);
+         logger_.log(LVL_INFO, 'TServermanager> Default superserver now set to '+myConfID.default_superserver_url);
        end;
 
  count_ := defaultserver_;

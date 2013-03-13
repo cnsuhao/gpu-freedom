@@ -41,6 +41,7 @@ begin
   logger    := TLogger.Create(path+PathDelim+'logs', logFile+'.log', logFile+'.old', LVL_DEBUG, 1024*1024);
   conf      := TCoreConfiguration.Create(path);
   conf.loadConfiguration();
+
   tableman := TDbTableManager.Create(path+PathDelim+'gpucore.db');
   tableman.OpenAll;
   serverman := TServerManager.Create(conf, tableman.getServerTable(), logger);

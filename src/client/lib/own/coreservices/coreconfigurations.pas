@@ -5,7 +5,10 @@ interface
 uses identities, syncObjs, inifiles, SysUtils;
 
 const
- GPU_CLIENT_VERSION = 0.1;
+ GPU_CLIENT_VERSION         = 0.1;
+ DEFAULT_SUPERSERVER_URL_1  = 'http://gpu.maxmaton.nl'; // _1 because in With part compiler does not distinguish
+ PROXY                      = '192.168.4.2';
+ PORT                       = '8080';
 
 
 type TCoreConfiguration = class(TObject)
@@ -24,7 +27,6 @@ type TCoreConfiguration = class(TObject)
   ini_,
   inicore_   : TInifile;
 
-  CS_ : TCriticalSection;
 end;
 
 
@@ -38,14 +40,13 @@ begin
 
   ini_     := TInifile.Create(path_+'appgui.ini');
   inicore_ := TInifile.Create(path_+'appcore.ini');
-  CS_ := TCriticalSection.Create;
+
 end;
 
 destructor TCoreConfiguration.Destroy;
 begin
  ini_.Free;
  inicore_.Free;
- CS_.Free;
  inherited Destroy;
 end;
 
@@ -53,10 +54,9 @@ end;
 procedure TCoreConfiguration.loadConfiguration();
 var guid : TGUID;
 begin
-  CS_.Enter;
   with myGPUID do
     begin
-      NodeName  := ini_.ReadString('core','nodename','testnode');
+      NodeName  := ini_.ReadString('core','nodename','thexa4isthebest');
       Team      := ini_.ReadString('core','team','team');
       Country   := ini_.ReadString('core','country','country');
       Region    := ini_.ReadString('core','region','region');
@@ -98,7 +98,7 @@ begin
       password      := ini_.ReadString('user','password','');
       email         := ini_.ReadString('user','email','testuser@test.com');
       realname      := ini_.ReadString('user','realname','Paul Smith');
-      homepage_url  := ini_.ReadString('user','homepage_url','http://www.gpu-grid.net');
+      homepage_url  := ini_.ReadString('user','homepage_url','http://gpu.sourceforge.net');
  end;
 
  with myConfID do
@@ -110,13 +110,9 @@ begin
 
       run_only_when_idle      := ini_.ReadBool('local','run_only_when_idle',true);
 
-      proxy                   := ini_.ReadString('communication','proxy','192.168.4.2');
-      port                    := ini_.ReadString('communication','port','8080');
-      //proxy                   := ini_.ReadString('communication','proxy','192.168.4.2');
-      //port                    := ini_.ReadString('communication','port','8080');
-      //default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://127.0.0.1:8090/gpu_freedom/src/server');
-      default_superserver_url := inicore_.ReadString('communication','default_superserver_url','http://gpu.maxmaton.nl');
-
+      proxy                   := ini_.ReadString('communication','proxy', PROXY);
+      port                    := ini_.ReadString('communication','port',  PORT);
+      default_superserver_url := inicore_.ReadString('communication','default_superserver_url', DEFAULT_SUPERSERVER_URL_1);
       default_server_name     := inicore_.ReadString('communication', 'default_server_name','Altos');
 
       receive_servers_each   := inicore_.ReadInteger('global','receive_servers_each',14400);
@@ -150,12 +146,10 @@ begin
     maxthreads := ini_.ReadInteger('services','max_threads', 5);
  end;
 
- CS_.Leave;
 end;
 
 procedure TCoreConfiguration.saveConfiguration();
 begin
-  CS_.Enter;
   with myGPUID do
     begin
       ini_.WriteString('core','nodename', nodename);
@@ -228,12 +222,10 @@ begin
     ini_.WriteInteger('services','max_threads', maxthreads);
  end;
 
- CS_.Leave;
 end;
 
 procedure TCoreConfiguration.saveCoreConfiguration();
 begin
- CS_.Enter;
  with myGPUID do
     begin
       inicore_.WriteFloat('core','uptime', uptime);
@@ -255,7 +247,6 @@ begin
      inicore_.WriteInteger('global','receive_chat_each', receive_chat_each);
      inicore_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
  end;
- CS_.Leave;
 end;
 
 
