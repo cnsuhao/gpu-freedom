@@ -5,3 +5,5 @@ del .\logs\gpucore.log
 del gpucore.db
 del gpucore.compiled
 del *.ini
+del *.or
+del *.res

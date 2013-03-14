@@ -82,6 +82,7 @@ begin
   tick_ := 1;
   days_ := 0;
 
+  {
   retrieveParams;
   Sleep(1000);
   //TODO: enable this!!
@@ -94,17 +95,20 @@ begin
   transmitClient;
   Sleep(1000);
   retrieveJobs;
+  Sleep(1000); }
+  retrieveJobResults;
 end;
 
 procedure TCoreLoop.tick;
 begin
+      {
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
       if (tick_ mod myConfID.receive_servers_each = 0) then begin retrieveParams; Sleep(1000); retrieveServers; end;
       if (tick_ mod myConfID.receive_nodes_each = 0) then retrieveClients;
       if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;
       if (tick_ mod myConfID.receive_channels_each = 0) then retrieveChannels;
       if (tick_ mod 20 = 0) and lf_morefrequentupdates.exists then retrieveChannels;
-
+      }
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
 

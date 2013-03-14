@@ -85,7 +85,7 @@ end;
 procedure TReceiveJobResultServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/jobqueue/list_jobresults.php?jobid='+jobid_, xmldoc, false);
+ receive('/jobqueue/list_jobresults.php?xml=1&jobid='+jobid_, xmldoc, false);
  if not erroneous_ then
      parseXml(xmldoc);
 
