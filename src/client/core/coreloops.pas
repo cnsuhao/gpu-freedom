@@ -84,13 +84,16 @@ begin
 
   retrieveParams;
   Sleep(1000);
-  //retrieveServers;  TODO: enable this!!
+  //TODO: enable this!!
+  //retrieveServers;
   Sleep(1000);
   retrieveClients;
   Sleep(1000);
   retrieveChannels;
   Sleep(1000);
   transmitClient;
+  Sleep(1000);
+  retrieveJobs;
 end;
 
 procedure TCoreLoop.tick;

@@ -117,7 +117,7 @@ end;
 procedure TReceiveJobServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/list_jobqueues.php?xml=1&crunch=1&nodeid='+encodeURL(myGPUId.NodeId),
+ receive('/jobqueue/list_jobqueues.php?xml=1&crunch=1&nodeid='+encodeURL(myGPUId.NodeId),
          xmldoc, false);
 
  if not erroneous_ then

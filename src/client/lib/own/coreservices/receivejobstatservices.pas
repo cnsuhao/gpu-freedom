@@ -82,7 +82,7 @@ end;
 procedure TReceiveJobStatServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/list_jobstats.php?xml=1&nodeid='+encodeURL(myGPUId.NodeId),
+ receive('/jobqueue/list_jobstats.php?xml=1&nodeid='+encodeURL(myGPUId.NodeId),
          xmldoc, false);
 
  if not erroneous_ then
