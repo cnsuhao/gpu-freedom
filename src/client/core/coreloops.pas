@@ -9,7 +9,8 @@ uses
   servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
   receiveclientservices, transmitclientservices,
-  receivechannelservices, coreobjects, coremonitors;
+  receivechannelservices, receivejobstatservices,
+  coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
 

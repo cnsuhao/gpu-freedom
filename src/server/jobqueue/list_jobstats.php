@@ -21,7 +21,7 @@
  if ($jobid != "") {
     $selectclause = "(d.jobdefinitionid='$jobid')";
  } else {
-	$selectclause = "(d.create_dt > NOW() - INTERVAL 7 DAY)";
+	$selectclause = "(d.create_dt > NOW() - INTERVAL 30 DAY)";
  }
  
 
@@ -54,7 +54,7 @@
 	echo "<job>$job</job>\n";
 	echo "<jobtype>$jobtype</jobtype>\n";
 	echo "<requireack>$requireack</requireack>\n";
-	echo "<create_dt>$create_dt</create_dt>";
+	echo "<create_dt>$create_dt</create_dt>\n";
 	echo "<requests>$nbqueues</requests>\n";
 	echo "<transmitted>$transmitted</transmitted>\n";
 	echo "<acknowledged>$acknowledged</acknowledged>\n";

@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+14.3.2013 git
+Core Client: implementing retrieval of job statistics
+
 13.3.2013 git
 Core Client: testing core client through proxies and firewalls with external GPU II server kindly provided by hacker <thexa4>. It works :-)
              first long run of a core against external server
