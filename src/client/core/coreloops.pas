@@ -93,6 +93,7 @@ begin
   Sleep(1000);
   retrieveChannels;
   Sleep(1000);
+  serviceman.clearFinishedThreads;
   transmitClient;
   Sleep(1000);
   retrieveJobs;
@@ -101,7 +102,7 @@ begin
   Sleep(1000);
   retrieveJobStats;
 
-  { // used to test Job transmission and Joresult transmission
+  { // u./sed to test Job transmission and Joresult transmission
   Sleep(1000);
   transmitJob;
   Sleep(1000);
