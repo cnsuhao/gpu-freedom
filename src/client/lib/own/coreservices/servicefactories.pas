@@ -14,6 +14,7 @@ uses
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices,
   receivejobresultservices, transmitjobresultservices,
+  receivejobstatservices,
   coreconfigurations, jobdefinitiontables, jobresulttables;
 
 type TServiceFactory = class(TObject)
@@ -33,6 +34,7 @@ type TServiceFactory = class(TObject)
                                           content : AnsiString) : TTransmitChannelServiceThread;
     function createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
     function createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobDefinitionRow; var trandetails : TJobTransmissionDetails) : TTransmitJobServiceThread;
+    function createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
     function createReceiveJobResultService(var srv : TServerRecord; jobid : String) : TReceiveJobResultServiceThread;
     function createTransmitJobResultService(var srv : TServerRecord; var jobresultrow : TDbJobResultRow) : TTransmitJobResultServiceThread;
 
@@ -106,6 +108,11 @@ end;
 function TServiceFactory.createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobDefinitionRow; var trandetails : TJobTransmissionDetails) : TTransmitJobServiceThread;
 begin
  Result := TTransmitJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobrow, trandetails);
+end;
+
+function TServiceFactory.createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
+begin
+ Result := TReceiveJobStatServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
 function TServiceFactory.createReceiveJobResultService(var srv : TServerRecord; jobid : String) : TReceiveJobResultServiceThread;

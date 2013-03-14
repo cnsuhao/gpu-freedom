@@ -51,6 +51,8 @@ begin
      coreloop_.tick();
      Sleep(1000);
     end;
+
+  logger.log(LVL_INFO, 'Normal core shutdown, due to lockfile removal.');
 end;
 
 procedure TGPUCoreApp.DoRun;

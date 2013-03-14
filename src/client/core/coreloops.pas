@@ -9,7 +9,8 @@ uses
   servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
   receiveclientservices, transmitclientservices,
-  receivechannelservices, receivejobstatservices,
+  receivechannelservices, receivejobservices,
+  receivejobstatservices,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -34,12 +35,19 @@ type TCoreLoop = class(TObject)
     days_        : Longint;
 
     function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
+
     procedure   retrieveParams;
     procedure   retrieveServers;
     procedure   retrieveClients;
-    procedure   transmitClient;
     procedure   retrieveChannels;
+    procedure   retrieveJobs;
+    procedure   retrieveJobStats;
+    procedure   retrieveJobQueues;
+    procedure   retrieveJobResults;
 
+    procedure   transmitClient;
+    procedure   transmitJob;
+    procedure   transmitJobResult;
 end;
 
 implementation
@@ -182,5 +190,42 @@ begin
    if not launch(TCoreServiceThread(receivechanthread), 'ReceiveChannels', srv) then receivechanthread.Free;
 end;
 
+procedure TCoreLoop.retrieveJobs;
+var receivejobthread     : TReceiveJobServiceThread;
+    srv                  : TServerRecord;
+begin
+   serverman.getDefaultServer(srv);
+   receivejobthread  := servicefactory.createReceiveJobService(srv);
+   if not launch(TCoreServiceThread(receivejobthread), 'ReceiveJobs', srv) then receivejobthread.Free;
+end;
+
+procedure TCoreLoop.retrieveJobStats;
+var receivejobstatsthread     : TReceiveJobstatServiceThread;
+    srv                      : TServerRecord;
+begin
+   serverman.getDefaultServer(srv);
+   receivejobstatsthread  := servicefactory.createReceiveJobstatService(srv);
+   if not launch(TCoreServiceThread(receivejobstatsthread), 'ReceiveJobStats', srv) then receivejobstatsthread.Free;
+end;
+
+procedure TCoreLoop.retrieveJobQueues;
+begin
+
+end;
+
+procedure TCoreLoop.retrieveJobResults;
+begin
+
+end;
+
+procedure TCoreLoop.transmitJob;
+begin
+
+end;
+
+procedure TCoreLoop.transmitJobResult;
+begin
+
+end;
 
 end.
