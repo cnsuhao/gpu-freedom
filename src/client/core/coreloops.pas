@@ -100,7 +100,10 @@ begin
   //retrieveJobResults;
   //Sleep(1000);
   //retrieveJobStats;
+  Sleep(1000);
   transmitJob;
+  Sleep(1000);
+  transmitJobResult;
 end;
 
 procedure TCoreLoop.tick;
@@ -264,7 +267,19 @@ var transmitjobresultthread  : TTransmitJobResultServiceThread;
     jobresultrow             : TDbJobResultRow;
 begin
    serverman.getDefaultServer(srv);
-   //TODO: fill jobresultrow with data
+
+    // This was added for testing purposes
+   jobresultrow.nodename:= myGPUID.nodename;
+   jobresultrow.nodeid  := myGPUID.nodeid;
+   jobresultrow.jobdefinitionid:='ajdflasdfjla';
+   jobresultrow.iserroneous:=false;
+   jobresultrow.jobqueueid:='deec00759415e9201a21b0c197bb28b2';
+   jobresultrow.jobresult:='25';
+   jobresultrow.jobresultid:='asdfa';
+   jobresultrow.errorid := 0;
+   jobresultrow.errorarg := '';
+   jobresultrow.errormsg := '';
+   jobresultrow.workunitresult:='';
    transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv, jobresultrow);
    if not launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult', srv) then transmitjobresultthread.Free;
 end;

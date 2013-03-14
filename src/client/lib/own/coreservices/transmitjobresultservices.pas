@@ -7,7 +7,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
      SysUtils, Classes, DOM;
 
 
-type TTransmitJobResultServiceThread = class(TReceiveServiceThread)
+type TTransmitJobResultServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var jobresultrow : TDbJobResultRow);
@@ -41,7 +41,7 @@ begin
  rep := rep+'workunitresult='+encodeURL(jobresultrow_.workunitresult)+'&';
  rep := rep+'iserroneous='+encodeURL(BoolToStr(jobresultrow_.iserroneous))+'&';
  rep := rep+'errorid='+encodeURL(IntToStr(jobresultrow_.errorid))+'&';
- rep := rep+'errorarg='+encodeURL(jobresultrow_.errorarg);
+ rep := rep+'errorarg='+encodeURL(jobresultrow_.errorarg)+'&';
  rep := rep+'errormsg='+encodeURL(jobresultrow_.errormsg)+'&';
  rep := rep+'nodeid='+encodeURL(myGPUId.nodeid)+'&';
  rep := rep+'nodename='+encodeURL(myGPUId.nodename);
@@ -60,16 +60,16 @@ end;
 
 
 procedure TTransmitJobResultServiceThread.Execute;
-var xmldoc     : TXMLDocument;
+var
     externalid : String;
 begin
- receive('/jobqueue/report_jobresult.php?'+getPHPArguments(), xmldoc, false);
+ transmit('/jobqueue/report_jobresult.php?'+getPHPArguments(), false);
  if not erroneous_ then
     begin
         insertTransmission();
     end;
 
- finishReceive('Jobresult transmitted :-)', xmldoc);
+ finishTransmit('Jobresult transmitted :-)');
 end;
 
 end.
