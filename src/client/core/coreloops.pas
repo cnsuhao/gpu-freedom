@@ -10,7 +10,9 @@ uses
   receiveparamservices, receiveserverservices,
   receiveclientservices, transmitclientservices,
   receivechannelservices, receivejobservices,
-  receivejobstatservices,
+  receivejobstatservices,  receivejobresultservices,
+  transmitjobresultservices,
+  jobresulttables,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -42,11 +44,9 @@ type TCoreLoop = class(TObject)
     procedure   retrieveChannels;
     procedure   retrieveJobs;
     procedure   retrieveJobStats;
-    procedure   retrieveJobQueues;
     procedure   retrieveJobResults;
 
     procedure   transmitClient;
-    procedure   transmitJob;
     procedure   transmitJobResult;
 end;
 
@@ -172,15 +172,6 @@ begin
    if not launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients', srv) then receiveclientthread.Free;
 end;
 
-procedure TCoreLoop.transmitClient;
-var transmitclientthread  : TTransmitClientServiceThread;
-    srv                   : TServerRecord;
-begin
-   serverman.getDefaultServer(srv);
-   transmitclientthread  := servicefactory.createTransmitClientService(srv);
-   if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
-end;
-
 procedure TCoreLoop.retrieveChannels;
 var receivechanthread     : TReceiveChannelServiceThread;
     srv                   : TServerRecord;
@@ -201,31 +192,43 @@ end;
 
 procedure TCoreLoop.retrieveJobStats;
 var receivejobstatsthread     : TReceiveJobstatServiceThread;
-    srv                      : TServerRecord;
+    srv                       : TServerRecord;
 begin
    serverman.getDefaultServer(srv);
    receivejobstatsthread  := servicefactory.createReceiveJobstatService(srv);
    if not launch(TCoreServiceThread(receivejobstatsthread), 'ReceiveJobStats', srv) then receivejobstatsthread.Free;
 end;
 
-procedure TCoreLoop.retrieveJobQueues;
-begin
-
-end;
 
 procedure TCoreLoop.retrieveJobResults;
+var  receivejobresultthread : TReceiveJobresultServiceThread;
+     srv                    : TServerRecord;
 begin
-
+   serverman.getDefaultServer(srv);
+   //TODO: we do not pass job id for the moment
+   receivejobresultthread  := servicefactory.createReceiveJobresultService(srv, '');
+   if not launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult', srv) then receivejobresultthread.Free;
 end;
 
-procedure TCoreLoop.transmitJob;
-begin
 
+procedure TCoreLoop.transmitClient;
+var transmitclientthread  : TTransmitClientServiceThread;
+    srv                   : TServerRecord;
+begin
+   serverman.getDefaultServer(srv);
+   transmitclientthread  := servicefactory.createTransmitClientService(srv);
+   if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
 end;
 
 procedure TCoreLoop.transmitJobResult;
+var transmitjobresultthread  : TTransmitJobResultServiceThread;
+    srv                      : TServerRecord;
+    jobresultrow             : TDbJobResultRow;
 begin
-
+   serverman.getDefaultServer(srv);
+   //TODO: fill jobresultrow with data
+   transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv, jobresultrow);
+   if not launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult', srv) then transmitjobresultthread.Free;
 end;
 
 end.
