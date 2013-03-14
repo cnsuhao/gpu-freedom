@@ -4,6 +4,7 @@ GPU freedom branch
 14.3.2013 git
 Core Client: implementing retrieval of job statistics
              testing retrieval of jobs, jobstats and job results which works
+			 testing transmission of jobs and jobresults
 GUI:		 added rotate checkbox to netmapper form
 
 13.3.2013 git

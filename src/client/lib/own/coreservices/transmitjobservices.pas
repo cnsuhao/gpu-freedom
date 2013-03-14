@@ -7,7 +7,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
      SysUtils, Classes, DOM;
 
 
-type TTransmitJobServiceThread = class(TReceiveServiceThread)
+type TTransmitJobServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var jobdefinitionrow : TDbJobDefinitionRow;
@@ -37,7 +37,7 @@ end;
 function TTransmitJobServiceThread.getPHPArguments() : AnsiString;
 var rep : AnsiString;
 begin
- rep :=     'xml=1&nodeid='+encodeURL(myGPUId.nodeid)+'&';
+ rep :=     'nodeid='+encodeURL(myGPUId.nodeid)+'&';
  rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
  rep := rep+'jobid='+encodeURL(jobdefrow_.jobdefinitionid)+'&';
  rep := rep+'job='+encodeURL(jobdefrow_.job)+'&';
@@ -66,16 +66,14 @@ end;
 
 
 procedure TTransmitJobServiceThread.Execute;
-var xmldoc     : TXMLDocument;
-    externalid : String;
 begin
- receive('/jobqueue/report_job.php?'+getPHPArguments(), xmldoc, false);
+ transmit('/jobqueue/report_job.php?'+getPHPArguments(), false);
  if not erroneous_ then
     begin
         insertTransmission();
     end;
 
- finishReceive('Job transmitted :-)', xmldoc);
+ finishTransmit('Job transmitted :-)');
 end;
 
 

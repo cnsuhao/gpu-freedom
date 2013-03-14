@@ -11,8 +11,8 @@ uses
   receiveclientservices, transmitclientservices,
   receivechannelservices, receivejobservices,
   receivejobstatservices,  receivejobresultservices,
-  transmitjobresultservices,
-  jobresulttables,
+  transmitjobservices, transmitjobresultservices,
+  jobdefinitiontables, jobresulttables,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -47,6 +47,7 @@ type TCoreLoop = class(TObject)
     procedure   retrieveJobResults;
 
     procedure   transmitClient;
+    procedure   transmitJob;
     procedure   transmitJobResult;
 end;
 
@@ -97,8 +98,9 @@ begin
   retrieveJobs;
   Sleep(1000); }
   //retrieveJobResults;
-  Sleep(1000);
-  retrieveJobStats;
+  //Sleep(1000);
+  //retrieveJobStats;
+  transmitJob;
 end;
 
 procedure TCoreLoop.tick;
@@ -227,6 +229,33 @@ begin
    serverman.getDefaultServer(srv);
    transmitclientthread  := servicefactory.createTransmitClientService(srv);
    if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
+end;
+
+procedure TCoreLoop.transmitJob;
+var transmitjobthread  : TTransmitJobServiceThread;
+    srv                : TServerRecord;
+    jobrow             : TDbJobDefinitionRow;
+    trandetails        : TJobTransmissionDetails;
+begin
+   serverman.getDefaultServer(srv);
+
+   // This was added for testing purposes
+   jobrow.islocal:=false;
+   jobrow.job:='13,12,add';
+   jobrow.jobdefinitionid:='ajdflasdfjla';
+   jobrow.jobtype:='GPU_Engine';
+   jobrow.requireack:=true;
+   jobrow.nodeid:=myGPUID.NodeId;
+   jobrow.nodename:=myGPUID.NodeName;
+
+   trandetails.nbrequests:=13;
+   trandetails.tagwuresult:=false;
+   trandetails.tagwujob:=false;
+   trandetails.workunitjob:='';
+   trandetails.workunitresult:='';
+
+   transmitjobthread  := servicefactory.createTransmitJobService(srv, jobrow, trandetails);
+   if not launch(TCoreServiceThread(transmitjobthread), 'TransmitJob', srv) then transmitjobthread.Free;
 end;
 
 procedure TCoreLoop.transmitJobResult;
