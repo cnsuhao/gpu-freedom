@@ -46,7 +46,7 @@
         <UnitName Value="gpu"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="2"/>
         <CursorPos X="108" Y="20"/>
         <UsageCount Value="97"/>
         <Loaded Value="True"/>
@@ -133,7 +133,7 @@
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="102"/>
-        <CursorPos X="3" Y="122"/>
+        <CursorPos X="140" Y="116"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit10>
@@ -188,7 +188,7 @@
         <UnitName Value="netmapperforms"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="53"/>
+        <TopLine Value="68"/>
         <CursorPos X="49" Y="61"/>
         <UsageCount Value="76"/>
         <Loaded Value="True"/>

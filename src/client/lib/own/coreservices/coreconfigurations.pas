@@ -6,10 +6,20 @@ uses identities, syncObjs, inifiles, SysUtils;
 
 const
  GPU_CLIENT_VERSION           = 0.1;
+
+ {
+ // CONF External
  DEF_SUPERSERVER_URL          = 'http://gpu.maxmaton.nl';
  DEF_PROXY                    = '192.168.4.2';
  DEF_PORT                     = '8080';
+ }
 
+ //{
+ // CONF Internal
+ DEF_SUPERSERVER_URL          = 'http://127.0.0.1:8090/gpu_freedom/src/server';
+ DEF_PROXY                    = '';
+ DEF_PORT                     = '';
+ //}
 
 type TCoreConfiguration = class(TObject)
  public

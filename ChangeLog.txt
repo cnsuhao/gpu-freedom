@@ -3,7 +3,8 @@ GPU freedom branch
 
 14.3.2013 git
 Core Client: implementing retrieval of job statistics
-             testing retrieval of jobs and job results
+             testing retrieval of jobs, jobstats and job results which works
+GUI:		 added rotate checkbox to netmapper form
 
 13.3.2013 git
 Core Client: testing core client through proxies and firewalls with external GPU II server kindly provided by hacker <thexa4>. It works :-)

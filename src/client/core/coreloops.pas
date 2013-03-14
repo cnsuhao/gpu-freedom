@@ -96,7 +96,9 @@ begin
   Sleep(1000);
   retrieveJobs;
   Sleep(1000); }
-  retrieveJobResults;
+  //retrieveJobResults;
+  Sleep(1000);
+  retrieveJobStats;
 end;
 
 procedure TCoreLoop.tick;
