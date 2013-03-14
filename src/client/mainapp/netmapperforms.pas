@@ -6,23 +6,32 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  openglspherecontrol, earthtextures, texturestructure;
+  StdCtrls, ExtCtrls, openglspherecontrol, earthtextures, texturestructure;
+
+const
+  BORDER = 10;
 
 type
 
   { TNetmapperForm }
 
   TNetmapperForm = class(TForm)
+      cbRotate: TCheckBox;
      openGLSphereControl : TOpenGLSphereControl;
+     pnlTop: TPanel;
 
+     procedure cbRotateChange(Sender: TObject);
      procedure FormCreate(Sender: TObject);
      procedure FormDestroy(Sender: TObject);
      procedure FormHide(Sender: TObject);
+     procedure FormResize(Sender: TObject);
      procedure FormShow(Sender: TObject);
      procedure OnAppIdle(Sender: TObject; var Done: Boolean);
 
     private
      earthTexturer_ : TEarthTexturer;
+
+    procedure resizeWindow;
   end; 
 
 var
@@ -39,16 +48,29 @@ begin
     Name:='OpenGLSphereControl';
     Align:=alNone;
     Parent:=Self;
-    Top := 10;
-    Left := 10;
-    Height := 320;
-    Width := 480;
     Visible := true;
   end;
-
+  resizeWindow;
 
   openGLSphereControl.setColors(earthTexturer_.getTexture());
   Application.AddOnIdleHandler(@OnAppIdle);
+end;
+
+procedure TNetmapperForm.cbRotateChange(Sender: TObject);
+begin
+  OpenGLSphereControl.setRotate(cbRotate.Checked);
+end;
+
+procedure TNetmapperForm.resizeWindow;
+begin
+ pnlTop.Width := self.Width;
+
+ with OpenGLSphereControl do begin
+  Top := pnlTop.Height+BORDER;
+  Left := BORDER;
+  Height := self.Height-pnlTop.Height - (BORDER * 2);
+  Width := self.Width - (BORDER * 2);
+ end;
 end;
 
 procedure TNetmapperForm.FormDestroy(Sender: TObject);
@@ -60,6 +82,11 @@ end;
 procedure TNetmapperForm.FormHide(Sender: TObject);
 begin
 //
+end;
+
+procedure TNetmapperForm.FormResize(Sender: TObject);
+begin
+ resizeWindow;
 end;
 
 procedure TNetmapperForm.FormShow(Sender: TObject);

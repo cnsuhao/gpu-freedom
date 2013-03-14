@@ -119,7 +119,7 @@ begin
 
   glLoadIdentity();
   glLoadMatrixf(@theBall.Matrix);
-  if _rotate then glRotatef(_angle, 0.0, 1.0, 0.0);
+  glRotatef(_angle, 0.0, 1.0, 0.0);
 
   glEnable(GL_BLEND);
   plot3dSphere(_colors);
