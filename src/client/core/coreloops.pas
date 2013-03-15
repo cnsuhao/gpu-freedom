@@ -13,7 +13,7 @@ uses
   receivejobstatservices,  receivejobresultservices,
   transmitjobservices, transmitjobresultservices,
   transmitackjobservices,
-  jobdefinitiontables, jobresulttables,
+  jobdefinitiontables, jobresulttables, jobqueuetables,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -50,6 +50,7 @@ type TCoreLoop = class(TObject)
     procedure   transmitClient;
     procedure   transmitJob;
     procedure   transmitJobResult;
+    procedure   transmitAck;
 end;
 
 implementation
@@ -84,7 +85,6 @@ begin
   tick_ := 1;
   days_ := 0;
 
-
   retrieveParams;
   Sleep(1000);
   //TODO: enable this!!
@@ -107,7 +107,10 @@ begin
   Sleep(1000);
   transmitJob;
   Sleep(1000);
-  transmitJobResult;}
+  transmitJobResult;
+  Sleep(1000);
+  transmitAck;
+  }
 end;
 
 procedure TCoreLoop.tick;
@@ -292,6 +295,21 @@ begin
    jobresultrow.workunitresult:='';
    transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv, jobresultrow);
    if not launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult', srv) then transmitjobresultthread.Free;
+end;
+
+procedure TCoreLoop.transmitAck;
+var transmitackthread  : TTransmitAckJobServiceThread;
+    srv                : TServerRecord;
+    jobqueuerow        : TDbJobQueueRow;
+begin
+  serverman.getDefaultServer(srv);
+
+  // This was added for testing purposes
+   jobqueuerow.jobqueueid:= 'deec00759415e9201a21b0c197bb28b2';
+   jobqueuerow.jobdefinitionid     := 'ajdflasdfjla';
+
+  transmitackthread  := servicefactory.createTransmitAckJobService(srv, jobqueuerow);
+  if not launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob', srv) then transmitackthread.Free;
 end;
 
 end.

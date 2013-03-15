@@ -14,8 +14,8 @@ uses
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices,
   receivejobresultservices, transmitjobresultservices,
-  receivejobstatservices,
-  coreconfigurations, jobdefinitiontables, jobresulttables;
+  receivejobstatservices, transmitackjobservices,
+  coreconfigurations, jobdefinitiontables, jobresulttables, jobqueuetables;
 
 type TServiceFactory = class(TObject)
    public
@@ -37,6 +37,7 @@ type TServiceFactory = class(TObject)
     function createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
     function createReceiveJobResultService(var srv : TServerRecord; jobid : String) : TReceiveJobResultServiceThread;
     function createTransmitJobResultService(var srv : TServerRecord; var jobresultrow : TDbJobResultRow) : TTransmitJobResultServiceThread;
+    function createTransmitAckJobService(var srv : TServerRecord; var jobqueuerow : TDbJobQueueRow) : TTransmitAckJobServiceThread;
 
    private
 
@@ -122,7 +123,12 @@ end;
 
 function TServiceFactory.createTransmitJobResultService(var srv : TServerRecord; var jobresultrow : TDbJobResultRow) : TTransmitJobResultServiceThread;
 begin
-Result := TTransmitJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobresultrow);
+ Result := TTransmitJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobresultrow);
+end;
+
+function TServiceFactory.createTransmitAckJobService(var srv : TServerRecord; var jobqueuerow : TDbJobQueueRow) : TTransmitAckJobServiceThread;
+begin
+ Result := TTransmitAckJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobqueuerow);
 end;
 
 end.

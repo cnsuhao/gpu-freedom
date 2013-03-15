@@ -66,7 +66,7 @@
                 <xsl:value-of select="ack_dt"/>			
             </td>	
 			<td>
-                <xsl:value-of select="acknodeid"/>			
+                <xsl:value-of select="acknodename"/>			
             </td>	
 			<td>
                 <xsl:value-of select="reception_dt"/>			
