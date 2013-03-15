@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+15.3.2013 git
+Core Client: implementing acknowledge transmission for a jobqueue
+
 14.3.2013 git
 Core Client: implementing retrieval of job statistics
              testing retrieval of jobs, jobstats and job results which works

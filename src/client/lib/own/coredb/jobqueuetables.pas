@@ -13,6 +13,7 @@ uses sqlite3ds, db, coretables, SysUtils;
 
 const
   // for status column
+  JS_NEW             = 10;
   JS_READY           = 30;
   JS_RUNNING         = 40;
   JS_COMPLETED       = 90;
@@ -44,7 +45,7 @@ type TDbJobQueueTable = class(TDbCoreTable)
   public
     constructor Create(filename : String);
 
-    procedure insert(var row : TDbJobQueueRow);
+    procedure insertOrUpdate(var row : TDbJobQueueRow);
     procedure delete(var row : TDbJobQueueRow);
 
   private
@@ -89,9 +90,15 @@ begin
   end; {with}
 end;
 
-procedure TDbJobQueueTable.insert(var row : TDbJobQueueRow);
+procedure TDbJobQueueTable.insertOrUpdate(var row : TDbJobQueueRow);
+var options : TLocateOptions;
 begin
-  dataset_.Append;
+  options := [];
+  if dataset_.Locate('jobqueueid', row.jobqueueid, options) then
+      dataset_.Edit
+  else
+      dataset_.Append;
+
   dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
   dataset_.FieldByName('status').AsInteger := JS_READY;
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;

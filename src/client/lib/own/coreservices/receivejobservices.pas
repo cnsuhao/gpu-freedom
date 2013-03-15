@@ -91,11 +91,14 @@ try
 
                dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
-               dbqueuerow.status    := JS_READY;
+               if requireack then
+                   dbqueuerow.status    := JS_NEW
+               else
+                   dbqueuerow.status    := JS_READY;
 
                tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
                //queuerow.job_id := dbrow.id;  // this could be setup at a later point
-               tableman_.getJobQueueTable().insert(dbqueuerow);
+               tableman_.getJobQueueTable().insertOrUpdate(dbqueuerow);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOBDEFINITION and to TBJOBQUEUE table.');
 
        node := node.NextSibling;
