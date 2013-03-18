@@ -46,12 +46,12 @@ begin
   tableman := TDbTableManager.Create(path+PathDelim+'gpucore.db');
   tableman.OpenAll;
   serverman := TServerManager.Create(conf, tableman.getServerTable(), logger);
+  workflowman      := TWorkflowManager.Create(tableman, logger);
 
   coremodule       := TCoreModule.Create(logger, path, 'dll');
-  servicefactory   := TServiceFactory.Create(serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
+  servicefactory   := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
   serviceman       := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
 
-  workflowman      := TWorkflowManager.Create(tableman, logger);
 
   lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 

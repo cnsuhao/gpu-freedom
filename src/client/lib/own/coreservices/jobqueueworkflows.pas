@@ -8,13 +8,13 @@ unit jobqueueworkflows;
 interface
 
 uses SyncObjs,
-     dbtablemanagers, workflowancestors, loggers;
+     dbtablemanagers, jobqueuetables, workflowancestors, loggers;
 
 type TJobQueueWorkflow = class(TWorkflowAncestor)
        constructor Create(var tableman : TDbTableManager; var logger : TLogger);
 
      private
-       procedure changeStatus(jobqueueid : String; fromS, toS : Longint);
+       procedure changeStatus(row : TDbJobQueueRow; fromS, toS : Longint);
 end;
 
 implementation
@@ -24,7 +24,7 @@ begin
   inherited Create(tableman, logger);
 end;
 
-procedure TJobQueueWorkflow.changeStatus(jobqueueid : String; fromS, toS : Longint);
+procedure TJobQueueWorkflow.changeStatus(row : TDbJobQueueRow; fromS, toS : Longint);
 begin
   CS_.Enter;
   // perform status change

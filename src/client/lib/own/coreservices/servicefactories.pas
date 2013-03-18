@@ -14,12 +14,12 @@ uses
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices,
   receivejobresultservices, transmitjobresultservices,
-  receivejobstatservices, transmitackjobservices,
+  receivejobstatservices, transmitackjobservices, workflowmanagers,
   coreconfigurations, jobdefinitiontables, jobresulttables, jobqueuetables;
 
 type TServiceFactory = class(TObject)
    public
-    constructor Create(var servMan : TServerManager;
+    constructor Create(var workflowMan : TWorkflowManager; var servMan : TServerManager;
                        var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
     destructor Destroy;
 
@@ -41,23 +41,25 @@ type TServiceFactory = class(TObject)
 
    private
 
-     servMan_  : TServerManager;
-     tableMan_ : TDbTableManager;
-     logger_   : TLogger;
+     servMan_      : TServerManager;
+     tableMan_     : TDbTableManager;
+     workflowMan_  : TWorkflowManager;
+     logger_       : TLogger;
      proxy_,
-     port_     : String;
-     conf_     : TCoreConfiguration;
+     port_         : String;
+     conf_         : TCoreConfiguration;
 
 end;
 
 implementation
 
-constructor TServiceFactory.Create(var servMan : TServerManager;
+constructor TServiceFactory.Create(var workflowMan : TWorkflowManager; var servMan : TServerManager;
                                    var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
 begin
  servMan_  := servMan;
  tableMan_ := tableMan;
  logger_   := logger;
+ workflowMan_ := workflowMan;
 
  proxy_    := proxy;
  port_     := port;
@@ -128,7 +130,7 @@ end;
 
 function TServiceFactory.createTransmitAckJobService(var srv : TServerRecord; var jobqueuerow : TDbJobQueueRow) : TTransmitAckJobServiceThread;
 begin
- Result := TTransmitAckJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobqueuerow);
+ Result := TTransmitAckJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_, jobqueuerow);
 end;
 
 end.

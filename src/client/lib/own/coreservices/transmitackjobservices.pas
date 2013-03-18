@@ -4,18 +4,21 @@ interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
      jobqueuetables, servermanagers, loggers, identities, dbtablemanagers,
+     workflowmanagers,
      SysUtils, Classes, DOM;
 
 
 type TTransmitAckJobServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var jobqueuerow : TDbJobQueueRow);
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+                     var jobqueuerow : TDbJobQueueRow);
  protected
   procedure Execute; override;
 
  private
     jobqueuerow_   : TDbJobQueueRow;
+    workflowman_   : TWorkflowManager;
 
     function  getPHPArguments() : AnsiString;
     procedure updateJobQueue();
@@ -24,9 +27,10 @@ end;
 implementation
 
 constructor TTransmitAckJobServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                   var conf : TCoreConfiguration; var tableman : TDbTableManager;  var jobqueuerow : TDbJobQueueRow);
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager;  var workflowman : TWorkflowManager; var jobqueuerow : TDbJobQueueRow);
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TTransmitAckJobServiceThread]> ', conf, tableman);
+ workflowman_ := workflowman;
  jobqueuerow_ := jobqueuerow;
 end;
 

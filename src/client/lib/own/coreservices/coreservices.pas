@@ -33,6 +33,7 @@ type TCommServiceThread = class(TCoreServiceThread)
   protected
     srv_      : TServerRecord;
     servMan_  : TServerManager;
+
     proxy_,
     port_     : String;
 
