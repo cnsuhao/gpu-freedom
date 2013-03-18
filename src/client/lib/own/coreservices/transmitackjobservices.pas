@@ -50,10 +50,10 @@ end;
 procedure TTransmitAckJobServiceThread.updateJobQueue();
 begin
  jobqueuerow_.server_id := srv_.id;
- jobqueuerow_.status    := JS_READY;
  jobqueuerow_.ack_dt    := Now;
- tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
- logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
+
+ if workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_) then
+         logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
 end;
 
 
