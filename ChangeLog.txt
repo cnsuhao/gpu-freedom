@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+18.3.2013 git
+Core Client: implementing the jobqueue workflow and a workflow abstraction
+
 15.3.2013 git
 Core Client: implementing acknowledge transmission for a jobqueue
 

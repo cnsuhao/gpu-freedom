@@ -3,7 +3,7 @@ unit dbtablemanagers;
    TDbTableManager handles all tables in the sqlite database
     specified in the constructor.dbtablemanagers
 
-   (c) by 2010 HB9TVM and the GPU Team
+   (c) by 2010-2013 HB9TVM and the GPU Team
 }
 
 interface

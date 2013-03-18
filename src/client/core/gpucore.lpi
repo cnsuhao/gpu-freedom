@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="57">
+    <Units Count="60">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="165" Y="38"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="62"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -123,12 +123,10 @@
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="100"/>
         <CursorPos X="4" Y="20"/>
         <UsageCount Value="15"/>
-        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
@@ -178,20 +176,20 @@
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="229"/>
         <CursorPos X="4" Y="15"/>
         <UsageCount Value="16"/>
-        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="14"/>
-        <CursorPos X="14" Y="31"/>
+        <TopLine Value="1"/>
+        <CursorPos X="10" Y="8"/>
         <UsageCount Value="19"/>
+        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\lib\own\misc\testconstants.pas"/>
@@ -203,22 +201,21 @@
       <Unit22>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="5"/>
-        <CursorPos X="4" Y="22"/>
+        <TopLine Value="38"/>
+        <CursorPos X="20" Y="64"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="82"/>
-        <CursorPos X="3" Y="106"/>
-        <UsageCount Value="29"/>
+        <TopLine Value="51"/>
+        <CursorPos X="12" Y="65"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -470,12 +467,10 @@
       <Unit55>
         <Filename Value="..\lib\own\coreservices\transmitackjobservices.pas"/>
         <UnitName Value="transmitackjobservices"/>
-        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="10"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit55>
       <Unit56>
         <Filename Value="..\lib\own\coredb\coretables.pas"/>
@@ -485,127 +480,158 @@
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
       </Unit56>
+      <Unit57>
+        <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
+        <UnitName Value="workflowancestors"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="7"/>
+        <CursorPos X="14" Y="19"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <UnitName Value="jobqueueworkflows"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="6" Y="29"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
+        <UnitName Value="workflowmanagers"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="7"/>
+        <CursorPos X="21" Y="34"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit59>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="14" Column="14" TopLine="1"/>
+        <Caret Line="14" Column="24" TopLine="1"/>
       </Position1>
       <Position2>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="50" Column="28" TopLine="23"/>
+        <Caret Line="235" Column="45" TopLine="218"/>
       </Position2>
       <Position3>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="102" Column="14" TopLine="75"/>
+        <Caret Line="239" Column="70" TopLine="220"/>
       </Position3>
       <Position4>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="50" Column="29" TopLine="34"/>
+        <Caret Line="241" Column="11" TopLine="220"/>
       </Position4>
       <Position5>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="240" Column="93" TopLine="211"/>
+        <Caret Line="15" Column="24" TopLine="1"/>
       </Position5>
       <Position6>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="14" Column="24" TopLine="1"/>
+        <Caret Line="238" Column="50" TopLine="222"/>
       </Position6>
       <Position7>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="235" Column="45" TopLine="218"/>
+        <Caret Line="123" Column="2" TopLine="88"/>
       </Position7>
       <Position8>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="239" Column="70" TopLine="220"/>
+        <Caret Line="99" Column="16" TopLine="82"/>
       </Position8>
       <Position9>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="241" Column="11" TopLine="220"/>
+        <Caret Line="118" Column="64" TopLine="101"/>
       </Position9>
       <Position10>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="15" Column="24" TopLine="1"/>
+        <Caret Line="119" Column="52" TopLine="99"/>
       </Position10>
       <Position11>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="238" Column="50" TopLine="222"/>
+        <Caret Line="121" Column="49" TopLine="96"/>
       </Position11>
       <Position12>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="123" Column="2" TopLine="88"/>
+        <Caret Line="119" Column="46" TopLine="102"/>
       </Position12>
       <Position13>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="99" Column="16" TopLine="82"/>
+        <Caret Line="53" Column="29" TopLine="45"/>
       </Position13>
       <Position14>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="118" Column="64" TopLine="101"/>
+        <Caret Line="307" Column="78" TopLine="274"/>
       </Position14>
       <Position15>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="119" Column="52" TopLine="99"/>
+        <Caret Line="301" Column="41" TopLine="275"/>
       </Position15>
       <Position16>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="121" Column="49" TopLine="96"/>
+        <Caret Line="288" Column="4" TopLine="275"/>
       </Position16>
       <Position17>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="119" Column="46" TopLine="102"/>
+        <Caret Line="16" Column="56" TopLine="1"/>
       </Position17>
       <Position18>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="53" Column="29" TopLine="45"/>
+        <Caret Line="303" Column="41" TopLine="275"/>
       </Position18>
       <Position19>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="307" Column="78" TopLine="274"/>
+        <Caret Line="307" Column="40" TopLine="275"/>
       </Position19>
       <Position20>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="301" Column="41" TopLine="275"/>
+        <Caret Line="307" Column="40" TopLine="275"/>
       </Position20>
       <Position21>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="288" Column="4" TopLine="275"/>
+        <Caret Line="306" Column="29" TopLine="1"/>
       </Position21>
       <Position22>
         <Filename Value="coreloops.pas"/>
-        <Caret Line="16" Column="56" TopLine="1"/>
+        <Caret Line="65" Column="12" TopLine="51"/>
       </Position22>
       <Position23>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="303" Column="41" TopLine="275"/>
+        <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
+        <Caret Line="20" Column="35" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="307" Column="40" TopLine="275"/>
+        <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
+        <Caret Line="16" Column="58" TopLine="7"/>
       </Position24>
       <Position25>
-        <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
-        <Caret Line="22" Column="4" TopLine="5"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="10" Column="1" TopLine="1"/>
       </Position25>
       <Position26>
-        <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
-        <Caret Line="40" Column="133" TopLine="17"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="30" Column="27" TopLine="1"/>
       </Position26>
       <Position27>
-        <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
-        <Caret Line="131" Column="113" TopLine="98"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="11" Column="49" TopLine="1"/>
       </Position27>
       <Position28>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="307" Column="40" TopLine="275"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="17" Column="18" TopLine="1"/>
       </Position28>
       <Position29>
-        <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
-        <Caret Line="129" Column="26" TopLine="100"/>
+        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
+        <Caret Line="37" Column="31" TopLine="3"/>
       </Position29>
       <Position30>
-        <Filename Value="coreloops.pas"/>
-        <Caret Line="306" Column="29" TopLine="1"/>
+        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
+        <Caret Line="9" Column="49" TopLine="1"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
