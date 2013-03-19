@@ -53,9 +53,10 @@ type TDbJobQueueTable = class(TDbCoreTable)
     procedure insertOrUpdate(var row : TDbJobQueueRow);
     procedure delete(var row : TDbJobQueueRow);
     function  findRowInStatus(var row : TDbJobQueueRow; status : TJobStatus) : Boolean;
-
+    function  findRowWithJobQueueId(var row : TDbJobQueueRow; jobqueueid : String) : Boolean;
   private
     procedure createDbTable();
+    procedure fillRow(var row : TDbJobQueueRow);
   end;
 
 implementation
@@ -154,6 +155,25 @@ begin
  options := [];
  if dataset_.Locate('status', status, options) then
    begin
+     fillRow(row);
+     Result := true;
+   end;
+end;
+
+function  TDbJobQueueTable.findRowWithJobQueueId(var row : TDbJobQueueRow; jobqueueid : String) : Boolean;
+var options : TLocateOptions;
+begin
+ Result := false;
+ options := [];
+ if dataset_.Locate('jobqueueid', jobqueueid, options) then
+   begin
+     fillRow(row);
+     Result := true;
+   end;
+end;
+
+procedure TDbJobQueueTable.fillRow(var row : TDbJobQueueRow);
+begin
      row.jobdefinitionid := dataset_.FieldByName('jobdefinitionid').AsString;
      row.status          := dataset_.FieldByName('status').AsInteger;
      row.jobqueueid      := dataset_.FieldByName('jobqueueid').AsString;
@@ -173,9 +193,6 @@ begin
      row.ack_dt          := dataset_.FieldByName('ack_dt').AsDateTime;
      row.reception_dt    := dataset_.FieldByName('reception_dt').AsDateTime;
      row.server_id       := dataset_.FieldByName('server_id').AsInteger;
-
-     Result := true;
-   end;
 end;
 
 end.

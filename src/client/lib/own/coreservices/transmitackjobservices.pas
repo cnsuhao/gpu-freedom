@@ -60,6 +60,7 @@ begin
  if not workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW.');
+           Exit;
          end;
 
  transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
