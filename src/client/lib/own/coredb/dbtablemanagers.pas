@@ -10,7 +10,7 @@ interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
      jobdefinitiontables, jobqueuetables, jobresulttables, parametertables,
-     jobstatstables;
+     jobstatstables, wandbtables;
 
 
 type TDbTableManager = class(TObject)
@@ -32,6 +32,7 @@ type TDbTableManager = class(TObject)
     function getJobStatsTable() : TDbJobStatsTable;
 
     function getParameterTable() : TDbParameterTable;
+    function getWanDbParameterTable() : TDbWanParameterTable;
 
 
   private
@@ -44,6 +45,7 @@ type TDbTableManager = class(TObject)
     jobqueuetable_  : TDbJobQueueTable;
     jobstatstable_  : TDbJobStatsTable;
     parametertable_ : TDbParameterTable;
+    wandbtable_     : TDbWanParameterTable;
 end;
 
 implementation
@@ -59,6 +61,7 @@ begin
   jobqueuetable_  := TDbJobQueueTable.Create(filename);
   jobstatstable_  := TDbJobStatsTable.Create(filename);
   parametertable_ := TDbParameterTable.Create(filename);
+  wandbtable_     := TDbWanParameterTable.Create(filename);
 end;
 
 
@@ -73,6 +76,7 @@ begin
  jobqueuetable_.Free;
  jobstatstable_.Free;
  parametertable_.Free;
+ wandbtable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -86,6 +90,7 @@ begin
   jobqueuetable_.Open;
   jobstatstable_.Open;
   parametertable_.Open;
+  wandbtable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -99,6 +104,7 @@ begin
   jobqueuetable_.Close;
   jobstatstable_.Close;
   parametertable_.Close;
+  wandbtable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -145,6 +151,11 @@ end;
 function TDbTableManager.getParameterTable() : TDbParameterTable;
 begin
   Result := parametertable_;
+end;
+
+function TDbTableManager.getWanDbParameterTable() : TDbWanParameterTable;
+begin
+  Result := wandbtable_;
 end;
 
 end.

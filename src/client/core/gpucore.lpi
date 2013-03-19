@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="60">
+    <Units Count="61">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -123,7 +123,7 @@
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="18"/>
         <CursorPos X="68" Y="39"/>
@@ -186,10 +186,10 @@
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="10" Y="8"/>
+        <TopLine Value="16"/>
+        <CursorPos X="25" Y="158"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -203,7 +203,7 @@
       <Unit22>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="5" Y="36"/>
@@ -213,11 +213,10 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="24" Y="16"/>
+        <CursorPos X="150" Y="8"/>
         <UsageCount Value="35"/>
         <Loaded Value="True"/>
       </Unit23>
@@ -327,7 +326,7 @@
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="40" Y="14"/>
@@ -400,7 +399,7 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="47"/>
         <CursorPos X="45" Y="97"/>
@@ -418,7 +417,7 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="37" Y="56"/>
@@ -436,7 +435,7 @@
       <Unit50>
         <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
         <UnitName Value="jobresulttables"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="118"/>
         <CursorPos X="28" Y="128"/>
@@ -446,7 +445,7 @@
       <Unit51>
         <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
         <UnitName Value="transmitjobresultservices"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="57"/>
         <CursorPos X="72" Y="76"/>
@@ -480,7 +479,7 @@
       <Unit55>
         <Filename Value="..\lib\own\coreservices\transmitackjobservices.pas"/>
         <UnitName Value="transmitackjobservices"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="41"/>
         <CursorPos X="81" Y="62"/>
@@ -491,14 +490,14 @@
         <Filename Value="..\lib\own\coredb\coretables.pas"/>
         <UnitName Value="coretables"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="12"/>
+        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="10"/>
       </Unit56>
       <Unit57>
         <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
         <UnitName Value="workflowancestors"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="14" Y="19"/>
@@ -508,7 +507,7 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <UnitName Value="jobqueueworkflows"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
         <CursorPos X="28" Y="53"/>
@@ -518,134 +517,145 @@
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <UnitName Value="workflowmanagers"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="21" Y="34"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
       </Unit59>
+      <Unit60>
+        <Filename Value="..\lib\own\coredb\wandbtables.pas"/>
+        <UnitName Value="wandbtables"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="17"/>
+        <CursorPos X="31" Y="45"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit60>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="80" Column="50" TopLine="57"/>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="24" Column="23" TopLine="7"/>
       </Position1>
       <Position2>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="175" Column="74" TopLine="131"/>
+        <Caret Line="152" Column="30" TopLine="131"/>
       </Position2>
       <Position3>
-        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="24" Column="23" TopLine="7"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="53" Column="6" TopLine="19"/>
       </Position3>
       <Position4>
-        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="152" Column="30" TopLine="131"/>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="85" Column="1" TopLine="65"/>
       </Position4>
       <Position5>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <Caret Line="53" Column="6" TopLine="19"/>
+        <Caret Line="25" Column="1" TopLine="17"/>
       </Position5>
       <Position6>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <Caret Line="85" Column="1" TopLine="65"/>
+        <Caret Line="109" Column="45" TopLine="79"/>
       </Position6>
       <Position7>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <Caret Line="25" Column="1" TopLine="17"/>
+        <Caret Line="111" Column="13" TopLine="80"/>
       </Position7>
       <Position8>
-        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <Caret Line="109" Column="45" TopLine="79"/>
-      </Position8>
-      <Position9>
-        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <Caret Line="111" Column="13" TopLine="80"/>
-      </Position9>
-      <Position10>
         <Filename Value="..\lib\own\coreservices\transmitackjobservices.pas"/>
         <Caret Line="34" Column="1" TopLine="17"/>
-      </Position10>
-      <Position11>
+      </Position8>
+      <Position9>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <Caret Line="133" Column="114" TopLine="102"/>
-      </Position11>
-      <Position12>
+      </Position9>
+      <Position10>
         <Filename Value="coreloops.pas"/>
         <Caret Line="88" Column="3" TopLine="81"/>
-      </Position12>
-      <Position13>
+      </Position10>
+      <Position11>
         <Filename Value="coreloops.pas"/>
         <Caret Line="296" Column="70" TopLine="270"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="59" Column="49" TopLine="46"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="57" Column="1" TopLine="42"/>
       </Position13>
       <Position14>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="59" Column="49" TopLine="46"/>
+        <Caret Line="161" Column="140" TopLine="159"/>
       </Position14>
       <Position15>
-        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="57" Column="1" TopLine="42"/>
+        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
+        <Caret Line="74" Column="34" TopLine="50"/>
       </Position15>
       <Position16>
-        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
-        <Caret Line="161" Column="140" TopLine="159"/>
+        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
+        <Caret Line="6" Column="39" TopLine="1"/>
       </Position16>
       <Position17>
         <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="74" Column="34" TopLine="50"/>
+        <Caret Line="65" Column="59" TopLine="48"/>
       </Position17>
       <Position18>
-        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="6" Column="39" TopLine="1"/>
+        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
+        <Caret Line="43" Column="51" TopLine="24"/>
       </Position18>
       <Position19>
-        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="65" Column="59" TopLine="48"/>
+        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
+        <Caret Line="84" Column="29" TopLine="78"/>
       </Position19>
       <Position20>
         <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
-        <Caret Line="43" Column="51" TopLine="24"/>
+        <Caret Line="135" Column="26" TopLine="94"/>
       </Position20>
       <Position21>
         <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
-        <Caret Line="84" Column="29" TopLine="78"/>
+        <Caret Line="131" Column="45" TopLine="29"/>
       </Position21>
       <Position22>
         <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
-        <Caret Line="135" Column="26" TopLine="94"/>
+        <Caret Line="161" Column="1" TopLine="127"/>
       </Position22>
       <Position23>
-        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
-        <Caret Line="131" Column="45" TopLine="29"/>
+        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
+        <Caret Line="34" Column="1" TopLine="2"/>
       </Position23>
       <Position24>
-        <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
-        <Caret Line="161" Column="1" TopLine="127"/>
+        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
+        <Caret Line="71" Column="82" TopLine="54"/>
       </Position24>
       <Position25>
         <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="34" Column="1" TopLine="2"/>
+        <Caret Line="78" Column="64" TopLine="57"/>
       </Position25>
       <Position26>
-        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="71" Column="82" TopLine="54"/>
-      </Position26>
-      <Position27>
-        <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
-        <Caret Line="78" Column="64" TopLine="57"/>
-      </Position27>
-      <Position28>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <Caret Line="27" Column="160" TopLine="24"/>
-      </Position28>
-      <Position29>
+      </Position26>
+      <Position27>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <Caret Line="128" Column="120" TopLine="102"/>
-      </Position29>
-      <Position30>
+      </Position27>
+      <Position28>
         <Filename Value="coreloops.pas"/>
         <Caret Line="296" Column="70" TopLine="270"/>
+      </Position28>
+      <Position29>
+        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
+        <Caret Line="36" Column="1" TopLine="22"/>
+      </Position29>
+      <Position30>
+        <Filename Value="..\lib\own\coredb\wandbtables.pas"/>
+        <Caret Line="52" Column="77" TopLine="2"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

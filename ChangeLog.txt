@@ -4,7 +4,8 @@ GPU freedom branch
 19.3.2013 git
 Core Client: added job and jobtype fields to TBJOBQUEUE to simplify workflow
 			 added routines which retrieve a jobqueue in a given status
-			 added table TDBWANPARAMETER (nanobit's idea) to core, which will be populated through channels
+			 refactored transmitjobresult and ackjobqueue
+			 added table TBWANDBPARAMETER (nanobit's idea) to core, which will be populated through channels
 
 18.3.2013 git
 Core Client: implementing the jobqueue workflow and a workflow abstraction
