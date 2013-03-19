@@ -13,7 +13,7 @@ uses
   receivejobstatservices,  receivejobresultservices,
   transmitjobservices, transmitjobresultservices,
   transmitackjobservices,
-  jobdefinitiontables, jobresulttables, jobqueuetables,
+  jobdefinitiontables,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -277,30 +277,16 @@ end;
 procedure TCoreLoop.transmitJobResult;
 var transmitjobresultthread  : TTransmitJobResultServiceThread;
     srv                      : TServerRecord;
-    jobresultrow             : TDbJobResultRow;
 begin
    serverman.getDefaultServer(srv);
 
-    // This was added for testing purposes
-   jobresultrow.nodename:= myGPUID.nodename;
-   jobresultrow.nodeid  := myGPUID.nodeid;
-   jobresultrow.jobdefinitionid:='ajdflasdfjla';
-   jobresultrow.iserroneous:=false;
-   jobresultrow.jobqueueid:='deec00759415e9201a21b0c197bb28b2';
-   jobresultrow.jobresult:='25';
-   jobresultrow.jobresultid:='asdfa';
-   jobresultrow.errorid := 0;
-   jobresultrow.errorarg := '';
-   jobresultrow.errormsg := '';
-   jobresultrow.workunitresult:='';
-   transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv, jobresultrow);
+   transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv);
    if not launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult', srv) then transmitjobresultthread.Free;
 end;
 
 procedure TCoreLoop.transmitAck;
 var transmitackthread  : TTransmitAckJobServiceThread;
     srv                : TServerRecord;
-    jobqueuerow        : TDbJobQueueRow;
 begin
   serverman.getDefaultServer(srv);
   transmitackthread  := servicefactory.createTransmitAckJobService(srv);

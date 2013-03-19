@@ -10,8 +10,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
 type TTransmitJobResultServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
-                     var jobresultrow : TDbJobResultRow);
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
  protected
   procedure Execute; override;
 
@@ -27,11 +26,10 @@ end;
 implementation
 
 constructor TTransmitJobResultServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                   var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;  var jobresultrow : TDbJobResultRow);
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TTransmitJobResultServiceThread]> ', conf, tableman);
  workflowman_  := workflowman;
- jobresultrow_ := jobresultrow;
 end;
 
 function TTransmitJobResultServiceThread.getPHPArguments() : AnsiString;
@@ -68,10 +66,16 @@ end;
 
 procedure TTransmitJobResultServiceThread.Execute;
 begin
-  // retrieve jobqueue for this jobresult
-  if not tableman_.getJobQueueTable().findRowWithJobQueueId(jobqueuerow_, jobresultrow_.jobqueueid) then
+   if not workflowman_.getJobQueueWorkflow().findRowInStatusCompleted(jobqueuerow_) then
          begin
-           logger_.log(LVL_SEVERE, logHeader_+'Could not find jobqueue with jobqueueid '+jobresultrow_.jobqueueid);
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPLETED. Exit.');
+           Exit;
+         end;
+
+  // retrieve jobresult for this jobqueue
+  if not tableman_.getJobResultTable().findRowWithJobQueueId(jobresultrow_, jobqueuerow_.jobqueueid) then
+         begin
+           logger_.log(LVL_SEVERE, logHeader_+'Internal error: Could not find jobresult with jobqueueid '+jobqueuerow_.jobqueueid+' although jobqueue is in status COMPLETED!');
            Exit;
          end;
 

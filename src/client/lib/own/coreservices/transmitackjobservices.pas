@@ -59,7 +59,7 @@ procedure TTransmitAckJobServiceThread.Execute;
 begin
  if not workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW. Exit.');
            Exit;
          end;
 

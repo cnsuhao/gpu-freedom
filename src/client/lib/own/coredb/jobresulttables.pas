@@ -36,10 +36,12 @@ type TDbJobResultTable = class(TDbCoreTable)
     constructor Create(filename : String);
 
     procedure getRow(var row : TDbJobResultRow);
+    function  findRowWithJobQueueId(var row : TDbJobResultRow; jobqueueid : String) : Boolean;
     procedure insertOrUpdate(var row : TDbJobResultRow);
 
   private
     procedure createDbTable();
+    procedure fillRow(var row : TDbJobResultRow);
   end;
 
 implementation
@@ -86,23 +88,7 @@ begin
  options := [];
  if dataset_.Locate('jobresultid', row.jobresultid, options) then
    begin
-     row.id          := dataset_.FieldByName('id').AsInteger;
-     row.jobresultid  := dataset_.FieldByName('jobresultid').AsString;
-     row.jobdefinitionid  := dataset_.FieldByName('jobdefinitionid').AsString;
-     row.jobqueueid       := dataset_.FieldByName('jobqueueid').AsString;
-
-     row.jobresult   := dataset_.FieldByName('jobresult').AsString;
-     row.workunitresult := dataset_.FieldByName('workunitresult').AsString;
-
-     row.iserroneous := dataset_.FieldByName('iserroneous').AsBoolean;
-     row.errorid     := dataset_.FieldByName('errorid').AsInteger;
-     row.errormsg    := dataset_.FieldByName('errormsg').AsString;
-     row.errorarg    := dataset_.FieldByName('errorarg').AsString;
-
-     row.server_id   := dataset_.FieldByName('server_id').AsInteger;
-     row.nodeid      := dataset_.FieldByName('nodeid').AsString;
-     row.nodename    := dataset_.FieldByName('nodename').AsString;
-     row.create_dt   := dataset_.FieldByName('create_dt').AsDateTime;
+     fillRow(row);
    end
   else
      row.id := -1;
@@ -137,6 +123,39 @@ begin
 
   dataset_.Post;
   dataset_.ApplyUpdates;
+end;
+
+function TDbJobResultTable.findRowWithJobQueueId(var row : TDbJobResultRow; jobqueueid : String) : Boolean;
+var options : TLocateOptions;
+begin
+ Result := false;
+ options := [];
+ if dataset_.Locate('jobqueueid', jobqueueid, options) then
+          begin
+            fillRow(row);
+            Result := true;
+          end;
+end;
+
+procedure TDbJobResultTable.fillRow(var row : TDbJobResultRow);
+begin
+     row.id          := dataset_.FieldByName('id').AsInteger;
+     row.jobresultid  := dataset_.FieldByName('jobresultid').AsString;
+     row.jobdefinitionid  := dataset_.FieldByName('jobdefinitionid').AsString;
+     row.jobqueueid       := dataset_.FieldByName('jobqueueid').AsString;
+
+     row.jobresult   := dataset_.FieldByName('jobresult').AsString;
+     row.workunitresult := dataset_.FieldByName('workunitresult').AsString;
+
+     row.iserroneous := dataset_.FieldByName('iserroneous').AsBoolean;
+     row.errorid     := dataset_.FieldByName('errorid').AsInteger;
+     row.errormsg    := dataset_.FieldByName('errormsg').AsString;
+     row.errorarg    := dataset_.FieldByName('errorarg').AsString;
+
+     row.server_id   := dataset_.FieldByName('server_id').AsInteger;
+     row.nodeid      := dataset_.FieldByName('nodeid').AsString;
+     row.nodename    := dataset_.FieldByName('nodename').AsString;
+     row.create_dt   := dataset_.FieldByName('create_dt').AsDateTime;
 end;
 
 end.
