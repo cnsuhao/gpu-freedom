@@ -19,7 +19,7 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
        function changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
 
      private
-       function changeStatus(row : TDbJobQueueRow; fromS, toS : Longint) : Boolean;
+       function changeStatus(row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
 end;
 
 implementation
@@ -62,7 +62,7 @@ begin
   Result := changeStatus(row, JS_COMPLETED, JS_TRANSMITTED);
 end;
 
-function TJobQueueWorkflow.changeStatus(row : TDbJobQueueRow; fromS, toS : Longint) : Boolean;
+function TJobQueueWorkflow.changeStatus(row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
 begin
   Result := false;
   if row.status<>fromS then

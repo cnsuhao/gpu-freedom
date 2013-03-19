@@ -16,8 +16,12 @@ const
   JS_NEW             = 10;
   JS_READY           = 30;
   JS_RUNNING         = 40;
-  JS_COMPLETED       = 90;
-  JS_TRANSMITTED     = 99;
+  JS_COMPUTED        = 90;
+  JS_COMPLETED       = 91;  // local jobs finish in completed
+  JS_TRANSMITTED     = 92;  // global jobs finish in transmitted
+  JS_CLEANUP         = 99;  // global jobs are cleaned up once transmitted (workunits are deleted)
+
+type TJobStatus      = Longint;
 
 
 type TDbJobQueueRow = record
@@ -49,6 +53,7 @@ type TDbJobQueueTable = class(TDbCoreTable)
 
     procedure insertOrUpdate(var row : TDbJobQueueRow);
     procedure delete(var row : TDbJobQueueRow);
+    function  findRowInStatus(var row : TDbJobQueueRow; status : TJobStatus) : Boolean;
 
   private
     procedure createDbTable();
@@ -141,6 +146,37 @@ begin
     begin
      raise Exception.Create('Internal error: Nothing to delete in tbjobqueue, jobdefinitionid was '+row.jobdefinitionid);
     end;
+end;
+
+function  TDbJobQueueTable.findRowInStatus(var row : TDbJobQueueRow; status : TJobStatus) : Boolean;
+var options : TLocateOptions;
+begin
+ Result := false;
+ options := [];
+ if dataset_.Locate('status', status, options) then
+   begin
+     row.jobdefinitionid := dataset_.FieldByName('jobdefinitionid').AsString;
+     row.status          := dataset_.FieldByName('status').AsInteger;
+     row.jobqueueid      := dataset_.FieldByName('jobqueueid').AsString;
+     row.job             := dataset_.FieldByName('job').AsString;
+     row.jobtype         := dataset_.FieldByName('jobtype').AsString;
+     row.workunitjob     := dataset_.FieldByName('workunitjob').AsString;
+     row.workunitresult  := dataset_.FieldByName('workunitresult').AsString;
+     row.nodeid          := dataset_.FieldByName('nodeid').AsString;
+     row.nodename        := dataset_.FieldByName('nodename').AsString;
+     row.requireack      := dataset_.FieldByName('requireack').AsBoolean;
+     row.islocal         := dataset_.FieldByName('islocal').AsBoolean;
+     row.acknodeid       := dataset_.FieldByName('acknodeid').AsString;
+     row.acknodename     := dataset_.FieldByName('acknodename').AsString;
+     row.create_dt       := dataset_.FieldByName('create_dt').AsDateTime;
+     row.transmission_dt := dataset_.FieldByName('transmission_dt').AsDateTime;
+     row.transmissionid  := dataset_.FieldByName('transmissionid').AsString;
+     row.ack_dt          := dataset_.FieldByName('ack_dt').AsDateTime;
+     row.reception_dt    := dataset_.FieldByName('reception_dt').AsDateTime;
+     row.server_id       := dataset_.FieldByName('server_id').AsInteger;
+
+     Result := true;
+   end;
 end;
 
 end.
