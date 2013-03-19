@@ -16,7 +16,6 @@ const
   JS_NEW             = 10;
   JS_READY           = 30;
   JS_RUNNING         = 40;
-  JS_COMPUTED        = 90;
   JS_COMPLETED       = 91;  // local jobs finish in completed
   JS_TRANSMITTED     = 92;  // global jobs finish in transmitted
   JS_CLEANUP         = 99;  // global jobs are cleaned up once transmitted (workunits are deleted)

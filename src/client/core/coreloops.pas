@@ -303,13 +303,7 @@ var transmitackthread  : TTransmitAckJobServiceThread;
     jobqueuerow        : TDbJobQueueRow;
 begin
   serverman.getDefaultServer(srv);
-
-  // This was added for testing purposes
-   jobqueuerow.jobqueueid:= 'deec00759415e9201a21b0c197bb28b2';
-   jobqueuerow.jobdefinitionid     := 'ajdflasdfjla';
-   jobqueuerow.status := JS_NEW;
-
-  transmitackthread  := servicefactory.createTransmitAckJobService(srv, jobqueuerow);
+  transmitackthread  := servicefactory.createTransmitAckJobService(srv);
   if not launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob', srv) then transmitackthread.Free;
 end;
 

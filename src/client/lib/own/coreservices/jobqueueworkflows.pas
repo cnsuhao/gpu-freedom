@@ -13,12 +13,18 @@ uses SyncObjs, SysUtils,
 type TJobQueueWorkflow = class(TWorkflowAncestor)
        constructor Create(var tableman : TDbTableManager; var logger : TLogger);
 
+       function findRowInStatusNew(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusReady(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusCompleted(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusTransmitted(var row : TDbJobQueueRow) : Boolean;
+
        function changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromReadyToRunning(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRunningToCompleted(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
 
      private
+       function findRowInStatus(row : TDbJobQueueRow; s : TJobStatus) : Boolean;
        function changeStatus(row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
 end;
 
@@ -27,6 +33,26 @@ implementation
 constructor TJobQueueWorkflow.Create(var tableman : TDbTableManager; var logger : TLogger);
 begin
   inherited Create(tableman, logger);
+end;
+
+function TJobQueueWorkflow.findRowInStatusNew(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_NEW);
+end;
+
+function TJobQueueWorkflow.findRowInStatusReady(var row : TDbJobQueueRow) : Boolean;
+begin
+ Result := findRowInStatus(row, JS_READY);
+end;
+
+function TJobQueueWorkflow.findRowInStatusCompleted(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_COMPLETED);
+end;
+
+function TJobQueueWorkflow.findRowInStatusTransmitted(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_TRANSMITTED);
 end;
 
 function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
@@ -73,14 +99,34 @@ begin
         end;
 
   CS_.Enter;
-  row.status := toS;
-  tableman_.getJobQueueTable().insertOrUpdate(row);
-  Result := true;
-  CS_.Leave;
+  try
+    row.status := toS;
+    tableman_.getJobQueueTable().insertOrUpdate(row);
+    Result := true;
+  except
+    on e : Exception  do
+        logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
+                                   IntToStr(fromS)+' because of Exception '+e.ToString);
+  end;
 
-  logger_.log(LVL_DEBUG, 'Jobqueue row '+row.jobdefinitionid+' changed status from '+
-              IntToStr(fromS)+' to status '+IntToStr(row.status));
+  CS_.Leave;
+  if Result then logger_.log(LVL_DEBUG, 'Jobqueue row '+row.jobdefinitionid+' changed status from '+
+                                         IntToStr(fromS)+' to status '+IntToStr(row.status));
 end;
 
+function TJobQueueWorkflow.findRowInStatus(row : TDbJobQueueRow; s : TJobStatus) : Boolean;
+begin
+  Result := false;
+  CS_.Enter;
+  try
+     Result := tableman_.getJobQueueTable().findRowInStatus(row, s);
+  except
+    on e : Exception  do
+        logger_.log(LVL_SEVERE, 'Internal error: Not possible to retrieve row in status '+
+                                   IntToStr(s)+' because of Exception '+e.ToString);
+  end;
+
+  CS_.Leave;
+end;
 
 end.
