@@ -44,7 +44,9 @@ var
     domjobdefinition     : TDOMNode;
     nodename,
     nodeid,
-    jobdefinitionid      : String;
+    jobdefinitionid,
+    jobtype              : String;
+    job                  : AnsiString;
     requireack           : Boolean;
 
 begin
@@ -70,8 +72,12 @@ try
                domjobdefinition := node.FindNode('jobdefinition');
                if domjobdefinition<>nil then
                   begin
-                   dbjobrow.job     := domjobdefinition.FindNode('job').TextContent;
-                   dbjobrow.jobtype := domjobdefinition.FindNode('jobtype').TextContent;
+                   job := domjobdefinition.FindNode('job').TextContent;
+                   jobtype := domjobdefinition.FindNode('jobtype').TextContent;
+                   dbjobrow.job     := job;
+                   dbjobrow.jobtype := jobtype;
+                   dbqueuerow.job     := job;
+                   dbqueuerow.jobtype := jobtype;
 
                    nodename := domjobdefinition.FindNode('nodename').TextContent;
                    dbqueuerow.nodename := nodename;
@@ -87,6 +93,8 @@ try
                dbqueuerow.transmission_dt := Now;
                dbqueuerow.transmissionid  := node.FindNode('transmissionid').TextContent;
                dbqueuerow.ack_dt := 0;
+               dbqueuerow.acknodeid := '';
+               dbqueuerow.acknodename := '';
                dbqueuerow.reception_dt := 0;
 
                dbqueuerow.server_id := srv_.id;
