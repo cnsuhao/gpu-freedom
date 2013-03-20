@@ -81,7 +81,7 @@ begin
 
        erroneous_ := job_.hasError;
 
-       // now it is time to
+       // now it is time to persist the result in TBJOBRESULT
 
        workflowman_.getJobQueueWorkflow().changeStatusFromRunningToCompleted(jobqueuerow_);
 

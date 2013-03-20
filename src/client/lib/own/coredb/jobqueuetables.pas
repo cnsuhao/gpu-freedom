@@ -45,6 +45,7 @@ type TDbJobQueueRow = record
    acknodeid,
    acknodename     : String;
    create_dt  : TDateTime;
+   update_dt  : TDateTime;
    transmission_dt : TDateTime;
    transmissionid  : String;
    ack_dt          : TDateTime;
@@ -94,6 +95,7 @@ begin
       FieldDefs.Add('acknodeid', ftString);
       FieldDefs.Add('acknodename', ftString);
       FieldDefs.Add('create_dt', ftDateTime);
+      FieldDefs.Add('update_dt', ftDateTime);
       FieldDefs.Add('transmission_dt', ftDateTime);
       FieldDefs.Add('transmissionid', ftString);
       FieldDefs.Add('ack_dt', ftDateTime);
@@ -127,6 +129,7 @@ begin
   dataset_.FieldByName('acknodeid').AsString := row.acknodeid;
   dataset_.FieldByName('acknodename').AsString := row.acknodename;
   dataset_.FieldByName('create_dt').AsDateTime := row.create_dt;
+  dataset_.FieldByName('update_dt').AsDateTime := row.update_dt;
   dataset_.FieldByName('transmission_dt').AsDateTime := row.transmission_dt;
   dataset_.FieldByName('transmissionid').AsString := row.transmissionid;
   dataset_.FieldByName('ack_dt').AsDateTime := row.ack_dt;
@@ -193,6 +196,7 @@ begin
      row.acknodeid       := dataset_.FieldByName('acknodeid').AsString;
      row.acknodename     := dataset_.FieldByName('acknodename').AsString;
      row.create_dt       := dataset_.FieldByName('create_dt').AsDateTime;
+     row.update_dt       := dataset_.FieldByName('update_dt').AsDateTime;
      row.transmission_dt := dataset_.FieldByName('transmission_dt').AsDateTime;
      row.transmissionid  := dataset_.FieldByName('transmissionid').AsString;
      row.ack_dt          := dataset_.FieldByName('ack_dt').AsDateTime;

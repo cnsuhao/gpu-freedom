@@ -101,6 +101,7 @@ begin
   CS_.Enter;
   try
     row.status := toS;
+    row.update_dt := Now;
     tableman_.getJobQueueTable().insertOrUpdate(row);
     Result := true;
   except
