@@ -10,7 +10,7 @@ interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
      jobdefinitiontables, jobqueuetables, jobresulttables, parametertables,
-     jobstatstables, wandbtables;
+     jobstatstables, wandbtables, jobqueuehistorytables;
 
 
 type TDbTableManager = class(TObject)
@@ -30,22 +30,24 @@ type TDbTableManager = class(TObject)
     function getJobResultTable() : TDbJobResultTable;
     function getJobQueueTable() : TDbJobQueueTable;
     function getJobStatsTable() : TDbJobStatsTable;
+    function getJobQueueHistoryTable() : TDbJobQueueHistoryTable;
 
     function getParameterTable() : TDbParameterTable;
     function getWanDbParameterTable() : TDbWanParameterTable;
 
 
   private
-    clienttable_    : TDbClientTable;
-    servertable_    : TDbServerTable;
-    chantable_      : TDbChannelTable;
-    retrtable_      : TDbRetrievedTable;
+    clienttable_     : TDbClientTable;
+    servertable_     : TDbServerTable;
+    chantable_       : TDbChannelTable;
+    retrtable_       : TDbRetrievedTable;
     jobdefinitiontable_   : TDbJobDefinitionTable;
-    jobresulttable_ : TDbJobResultTable;
-    jobqueuetable_  : TDbJobQueueTable;
-    jobstatstable_  : TDbJobStatsTable;
-    parametertable_ : TDbParameterTable;
-    wandbtable_     : TDbWanParameterTable;
+    jobresulttable_  : TDbJobResultTable;
+    jobqueuetable_   : TDbJobQueueTable;
+    jobstatstable_   : TDbJobStatsTable;
+    parametertable_  : TDbParameterTable;
+    wandbtable_      : TDbWanParameterTable;
+    jobqueuehistory_ : TDbJobQueueHistoryTable;
 end;
 
 implementation
@@ -62,6 +64,7 @@ begin
   jobstatstable_  := TDbJobStatsTable.Create(filename);
   parametertable_ := TDbParameterTable.Create(filename);
   wandbtable_     := TDbWanParameterTable.Create(filename);
+  jobqueuehistory_:= TDbJobQueueHistoryTable.Create(filename);
 end;
 
 
@@ -77,6 +80,7 @@ begin
  jobstatstable_.Free;
  parametertable_.Free;
  wandbtable_.Free;
+ jobqueuehistory_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -91,6 +95,7 @@ begin
   jobstatstable_.Open;
   parametertable_.Open;
   wandbtable_.Open;
+  jobqueuehistory_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -105,6 +110,7 @@ begin
   jobstatstable_.Close;
   parametertable_.Close;
   wandbtable_.Close;
+  jobqueuehistory_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -156,6 +162,11 @@ end;
 function TDbTableManager.getWanDbParameterTable() : TDbWanParameterTable;
 begin
   Result := wandbtable_;
+end;
+
+function TDbTableManager.getJobQueueHistoryTable() : TDbJobQueueHistoryTable;
+begin
+  Result := jobqueuehistory_;
 end;
 
 end.
