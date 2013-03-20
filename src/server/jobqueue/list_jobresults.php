@@ -25,8 +25,9 @@
  if (!$xml) prepare_XSLT();
  echo "<jobresults>\n"; 
  $level_list = Array("jobresult", "jobqueue", "jobdefinition");
- sql2xml("select r.id, r.jobresultid, r.jobdefinitionid, r.jobqueueid, d.job, r.jobresult, r.workunitresult, r.iserroneous, r.errorid, r.errorarg,
-                 r.errormsg, r.nodename, r.nodeid, q.create_dt, q.transmission_dt, q.reception_dt, 
+ sql2xml("select r.id, r.jobresultid, r.jobdefinitionid, r.jobqueueid, d.job, r.jobresult, r.workunitresult, r.walltime,
+                 r.iserroneous, r.errorid, r.errorarg, r.errormsg, 
+                 r.nodename, r.nodeid, q.create_dt, q.transmission_dt, q.reception_dt, 
 				 d.nodename
          from tbjobresult r, tbjobqueue q, tbjobdefinition d 
          where r.jobqueueid = q.jobqueueid and q.jobdefinitionid = d.jobdefinitionid

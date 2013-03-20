@@ -17,6 +17,7 @@ $iserroneous    = getparam('iserroneous', '');
 $errorid		= getparam('errorid', 0);
 $errorarg		= getparam('errorarg', '');
 $errormsg		= getparam('errormsg', '');
+$walltime		= getparam('errormsg', 0);
 
 if ( ($jobqueueid=="") || ($jobid=="") || ($nodeid=="") || ($nodename=="") || ($iserroneous=="") ) die("ERROR: please specify at least jobqueueid, jobid, nodeid, nodename and iserroneous");
 
@@ -24,7 +25,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
 include("report_jobresult.inc.php");
 
-$exitmsg = report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $ip);
+$exitmsg = report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $walltime, $ip);
 
 if ($exitmsg == "") echo "OK\n"; else echo "ERROR: $exitmsg\n";
 					

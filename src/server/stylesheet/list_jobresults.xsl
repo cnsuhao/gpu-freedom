@@ -20,6 +20,7 @@
 						<th>job</th>
 						<th>job result</th>
 						<th>workunit result</th>
+						<th>wall time</th>
 						<th>is erroneous</th>
 						<th>errorid</th>
 						<th>error argument</th>
@@ -60,6 +61,9 @@
             </td>
 			<td>
                 <xsl:value-of select="workunitresult"/>			
+            </td>
+			<td>
+                <xsl:value-of select="walltime"/>			
             </td>
 			<td>
                 <xsl:value-of select="iserroneous"/>			

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2013 at 10:39 AM
+-- Generation Time: Mar 20, 2013 at 04:12 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `tbchannel` (
   `create_dt` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `nodeid_2` (`nodeid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `tbchannel`
@@ -66,7 +66,8 @@ INSERT INTO `tbchannel` (`id`, `nodeid`, `nodename`, `user`, `channame`, `chanty
 (4, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-02-19 16:26:15'),
 (6, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-02-21 11:37:59'),
 (7, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-02-21 11:38:53'),
-(8, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-02-21 11:38:56');
+(8, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-02-21 11:38:56'),
+(9, '2', 'virgibuntu', 'virginia', 'Altos', 'CHAT', 'test', '127.0.0.1', NULL, '2013-03-08 09:52:31');
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nodeid` (`nodeid`),
   KEY `nodeid_2` (`nodeid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tbclient`
@@ -117,7 +118,12 @@ CREATE TABLE IF NOT EXISTS `tbclient` (
 INSERT INTO `tbclient` (`id`, `nodeid`, `nodename`, `country`, `region`, `city`, `zip`, `ip`, `port`, `localip`, `os`, `version`, `acceptincoming`, `gigaflops`, `ram`, `mhz`, `nbcpus`, `bits`, `isscreensaver`, `uptime`, `totaluptime`, `longitude`, `latitude`, `pos`, `userid`, `team`, `description`, `cputype`, `create_dt`, `update_dt`) VALUES
 (1, '1', 'andromeda', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'Win7', 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 46.5, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
 (2, '2', 'virgibuntu', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL, 'WinXP', 1.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 47, 0x00000000010100000000000000000000000000000000000000, '', '', NULL, NULL, '0000-00-00 00:00:00', NULL),
-(6, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 13.5, 14.3, 0x0000000001010000000000000000002b409a99999999992c40, '', '', '', '', '2013-02-28 14:31:41', '2013-02-28 14:32:34');
+(6, '4', 'blabla', '', '', '', '', '127.0.0.1', '', '', '', 0, 0, 0, 0, 0, 0, 32, 0, 0, 9, 13.5, 14.3, 0x0000000001010000000000000000002b409a99999999992c40, '', '', '', '', '2013-02-28 14:31:41', '2013-02-28 14:32:34'),
+(8, '{4A696323-9FF3-4D87-8511-D9C9E41F7B8F}', 'testnode', 'country', 'region', 'city', 'zip', '127.0.0.1', '1234', 'localip', 'test os', 0.1, 0, 1, 512, 1000, 0, 32, 0, 0.00001157407407, 0, 7, 45, 0x0000000001010000000000000000001c400000000000804640, '1', 'team', '', 'AMD', '2013-03-07 15:53:08', '2013-03-07 15:53:08'),
+(9, '{B5996ADB-F3B8-4C26-B5A2-D7C44D578E16}', 'testnode', 'country', 'region', 'city', 'zip', '127.0.0.1', '1234', 'localip', 'test os', 0.1, 0, 1, 512, 1000, 0, 32, 0, 0.00001157407407, 0, 7, 45, 0x0000000001010000000000000000001c400000000000804640, '1', 'team', '', 'AMD', '2013-03-07 16:01:11', '2013-03-07 16:01:11'),
+(10, '{25DAB1AE-A03C-4510-81BF-9EC9302FF8F8}', 'testnode', 'country', 'region', 'city', 'zip', '127.0.0.1', '1234', 'localip', 'test os', 0.1, 0, 1, 512, 1000, 0, 32, 0, 0.00001157407407, 0, 7, 45, 0x0000000001010000000000000000001c400000000000804640, '1', 'team', '', 'AMD', '2013-03-08 09:20:48', '2013-03-08 09:20:48'),
+(11, '{D0134753-9108-412E-B7FF-1076D9AD93FA}', 'testnode', 'country', 'region', 'city', 'zip', '127.0.0.1', '1234', 'localip', 'test os', 0.1, 0, 1, 512, 1000, 0, 32, 0, 0.00001157407407, 0, 7, 45, 0x0000000001010000000000000000001c400000000000804640, '1', 'team', '', 'AMD', '2013-03-08 16:37:57', '2013-03-08 16:37:57'),
+(12, '{5F5720A2-09F7-4699-813C-B82944A16C5D}', 'testnode', 'country', 'region', 'city', 'zip', '127.0.0.1', '1234', 'localip', 'test os', 0.1, 0, 1, 512, 1000, 0, 32, 0, 0.00001157407407, 0, 7, 45, 0x0000000001010000000000000000001c400000000000804640, '1', 'team', '', 'AMD', '2013-03-13 14:37:04', '2013-03-13 14:37:04');
 
 -- --------------------------------------------------------
 
@@ -139,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `tbjobdefinition` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jobdefinitionid` (`jobdefinitionid`),
   KEY `jobdefinitionid_2` (`jobdefinitionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `tbjobdefinition`
@@ -153,7 +159,8 @@ INSERT INTO `tbjobdefinition` (`id`, `jobdefinitionid`, `job`, `jobtype`, `requi
 (15, '24', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:12:53', '2013-03-01 10:12:53'),
 (16, '25', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:14:09', '2013-03-01 10:14:09'),
 (17, '26', '3,2,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 10:14:48', '2013-03-01 10:14:48'),
-(18, 'arb', '0,0,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 11:52:35', '2013-03-01 11:52:35');
+(18, 'arb', '0,0,add', 'GPU_Engine', 0, 'andromeda', '1', '127.0.0.1', '2013-03-01 11:52:35', '2013-03-01 11:52:35'),
+(19, 'ajdflasdfjla', '13,12,add', 'GPU_Engine', 1, 'thexa4isthebest', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', '127.0.0.1', '2013-03-14 13:48:59', '2013-03-14 13:48:59');
 
 -- --------------------------------------------------------
 
@@ -182,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `tbjobqueue` (
   UNIQUE KEY `jobqueueid` (`jobqueueid`),
   KEY `jobqueueid_2` (`jobqueueid`),
   KEY `transmissionid` (`transmissionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
 
 --
 -- Dumping data for table `tbjobqueue`
@@ -220,7 +227,20 @@ INSERT INTO `tbjobqueue` (`id`, `jobdefinitionid`, `jobqueueid`, `workunitjob`, 
 (65, 'arb', '2b5b931f7d2ec098d72fddcb3560dc0d', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
 (66, 'arb', '1c336aa1ceeb3691abcf5281300139c8', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
 (67, 'arb', 'e5247a5d71f33e0b23a0b2cea4327d46', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
-(68, 'arb', '63c44568b05ee6975cfa7d1fa070a971', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1');
+(68, 'arb', '63c44568b05ee6975cfa7d1fa070a971', '', '', '1', 'andromeda', 0, NULL, NULL, '2013-03-01 11:52:35', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(69, 'ajdflasdfjla', 'b72b0e2f2720050d3e07c203be1a8379', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(70, 'ajdflasdfjla', '67b6a1d821ad498bcb4f3a38f90cdc54', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(71, 'ajdflasdfjla', '0f240437874c284bcc74ba52ffc9f56a', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(72, 'ajdflasdfjla', '2f711392bbfdf12a4d5046bdde5c4e72', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(73, 'ajdflasdfjla', '47ff978f6c8d0d6061f3f1bb376b679a', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(74, 'ajdflasdfjla', '4255fcbe03ce46b80018629df52cfac2', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(75, 'ajdflasdfjla', '485260f521ebbb808a9a716c18a4f233', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(76, 'ajdflasdfjla', 'ede93aabd50f15c5b19652e0f00b0e3d', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(77, 'ajdflasdfjla', '2797a845fc446f458cb9e4f3141802e8', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(78, 'ajdflasdfjla', 'f70bef1d16418b1c69bf2b4f724c785b', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(79, 'ajdflasdfjla', 'ee56e37e0dbeaf2c3d3e84faf82317d3', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(80, 'ajdflasdfjla', '6e1ac7612f2a47754d4b214e4a3cb190', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, NULL, '127.0.0.1'),
+(81, 'ajdflasdfjla', 'b7bc90b5aa2df3579a39d58126318c0c', '', '', '{3D769D23-9FA8-43FF-A3D9-05CB55528AFF}', 'thexa4isthebest', 1, NULL, NULL, '2013-03-14 13:48:59', NULL, NULL, NULL, '2013-03-14 14:14:33', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -235,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `jobqueueid` varchar(42) NOT NULL,
   `jobresult` varchar(1024) NOT NULL,
   `workunitresult` varchar(64) NOT NULL,
+  `walltime` int(11) NOT NULL DEFAULT '0',
   `iserroneous` int(11) NOT NULL DEFAULT '0',
   `errorid` int(11) NOT NULL DEFAULT '0',
   `errorarg` varchar(32) NOT NULL,
@@ -245,23 +266,24 @@ CREATE TABLE IF NOT EXISTS `tbjobresult` (
   `create_dt` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobresultid` (`jobresultid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tbjobresult`
 --
 
-INSERT INTO `tbjobresult` (`id`, `jobresultid`, `jobdefinitionid`, `jobqueueid`, `jobresult`, `workunitresult`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
-(2, 'bee522a89d23719339c66e57d2e13943', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 15:04:36'),
-(3, '00e653c122baab92e345df40e7855f5d', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 17:05:44'),
-(4, '4d4e633f26b5ce785d56a2aedb6ec59a', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:02'),
-(5, '4b24dda8b7667385e0e7ab6f537911e9', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:38'),
-(6, '505d2622b9c8913cc298c81272173d7a', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:44'),
-(7, '48a957bd18ee23fdd12a4e286e0a376b', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:28'),
-(8, '02189942e5f3f30256b4c34246bac34b', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:33'),
-(9, 'd0e76947dd5a394f7b9c730b6ad82b12', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:48'),
-(10, 'e1a0c75c9617b8a6fdd2a051d86668ab', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:03:53'),
-(11, '69fc8587f7834c7b91790e1f99f251de', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:04:57');
+INSERT INTO `tbjobresult` (`id`, `jobresultid`, `jobdefinitionid`, `jobqueueid`, `jobresult`, `workunitresult`, `walltime`, `iserroneous`, `errorid`, `errorarg`, `errormsg`, `nodename`, `nodeid`, `ip`, `create_dt`) VALUES
+(2, 'bee522a89d23719339c66e57d2e13943', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 15:04:36'),
+(3, '00e653c122baab92e345df40e7855f5d', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 17:05:44'),
+(4, '4d4e633f26b5ce785d56a2aedb6ec59a', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:02'),
+(5, '4b24dda8b7667385e0e7ab6f537911e9', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:38'),
+(6, '505d2622b9c8913cc298c81272173d7a', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:00:44'),
+(7, '48a957bd18ee23fdd12a4e286e0a376b', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:28'),
+(8, '02189942e5f3f30256b4c34246bac34b', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:33'),
+(9, 'd0e76947dd5a394f7b9c730b6ad82b12', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:01:48'),
+(10, 'e1a0c75c9617b8a6fdd2a051d86668ab', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:03:53'),
+(11, '69fc8587f7834c7b91790e1f99f251de', 'aeqb', '909dfb369fbba5fc24628b6d2e3bbc1f', '5', '', 0, 0, 0, '', '', 'andromeda', '1', '127.0.0.1', '2013-02-28 18:04:57'),
+(12, 'ac7524548e9af36a9527d40451099c64', 'ajdflasdfjla', 'b7bc90b5aa2df3579a39d58126318c0c', '25', '', 0, 0, 24510404, 'errormsg=', '', 'thexa4isthebest', '{A77EE274-8755-4F78-9351-2E468B2D844B}', '127.0.0.1', '2013-03-14 14:14:33');
 
 -- --------------------------------------------------------
 
@@ -286,11 +308,11 @@ CREATE TABLE IF NOT EXISTS `tbparameter` (
 
 INSERT INTO `tbparameter` (`id`, `paramtype`, `paramname`, `paramvalue`, `create_dt`, `update_dt`) VALUES
 (1, 'TEST', 'DB_CONNECTION', 'OK', NULL, '2013-03-06 10:18:17'),
-(9, 'TIME', 'UPTIME', '81042', '2013-02-25 11:55:44', '2013-02-28 14:32:36'),
+(9, 'TIME', 'UPTIME', '172085', '2013-02-25 11:55:44', '2013-03-08 16:37:59'),
 (8, 'CONFIGURATION', 'SERVER_ID', 'fb4bc9a27a2be5e0b7ce08dc2bf09618', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (11, 'SECURITY', 'PWD_HASH_SALT', 'caacafd10c3a5837a9f98e21991e4d22', '2013-02-25 11:55:44', '2013-02-25 11:55:44'),
 (14, 'CLIENT', 'receive_servers_each', '3600', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
-(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1362058355', '2013-02-25 16:13:37', '2013-02-28 14:32:36'),
+(13, 'TIME', 'LAST_SUPERSERVER_CALL', '1363181825', '2013-02-25 16:13:37', '2013-03-13 14:37:06'),
 (15, 'CLIENT', 'receive_nodes_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
 (16, 'CLIENT', 'transmit_node_each', '180', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
 (17, 'CLIENT', 'receive_jobs_each', '120', '2013-03-06 10:18:17', '2013-03-06 10:18:17'),
@@ -334,10 +356,10 @@ CREATE TABLE IF NOT EXISTS `tbserver` (
 --
 
 INSERT INTO `tbserver` (`id`, `serverid`, `servername`, `serverurl`, `chatchannel`, `version`, `superserver`, `ip`, `uptime`, `longitude`, `latitude`, `pos`, `activenodes`, `jobinqueue`, `create_dt`, `update_dt`) VALUES
-(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 81042, 7, 45, 0x0000000001010000000000000000002c400000000000002440, 3, 12, '2013-02-25 16:27:29', '2013-02-28 14:32:39'),
-(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 0, 0, '2013-02-26 14:35:36', '2013-02-28 14:32:44'),
-(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000008056400000000000805640, 13, 2, '2013-02-26 14:39:33', '2013-02-28 14:32:45'),
-(13, '3', 'Aldebaran', '', '', 0, 0, '127.0.0.1', 0, 18, 18, 0x00000000010100000000000000000032400000000000003240, 0, 0, '2013-02-28 11:21:54', '2013-02-28 13:36:46');
+(9, 'fb4bc9a27a2be5e0b7ce08dc2bf09618', 'Altos', '127.0.0.1:8090/gpu_freedom/src/server', 'altos', 0.1, 0, 'localhost', 172085, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 8, 32, '2013-02-25 16:27:29', '2013-03-13 14:37:09'),
+(11, '6e771f4936a0d24bf2448e0d187725a4', 'Orion', '127.0.0.1:8090/server', 'orion', 0.1, 1, '', 1693, 14, 10, 0x0000000001010000000000000000002c400000000000002440, 0, 0, '2013-02-26 14:35:36', '2013-03-13 14:37:15'),
+(12, 'paripara', 'Algol', 'http://127.0.0.1:8090/algol', 'algol', 0.05, 0, '', 99, 90, 90, 0x00000000010100000000000000008056400000000000805640, 13, 2, '2013-02-26 14:39:33', '2013-03-13 14:37:14'),
+(13, '3', 'Aldebaran', '', '', 0, 0, '', 0, 18, 18, 0x00000000010100000000000000000032400000000000003240, 0, 0, '2013-02-28 11:21:54', '2013-03-13 14:37:16');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

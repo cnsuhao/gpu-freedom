@@ -16,7 +16,7 @@ function check_if_job_already_reported($jobqueueid) {
 	if ($count>0) return 0; else return 1;
 }
 
-function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $ip) {
+function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $workunitresult, $iserroneous, $errorid, $errorarg, $errormsg, $walltime, $ip) {
     include("../conf/config.inc.php");	
     $debug=0;	
 	mysql_connect($dbserver, $username, $password);
@@ -33,9 +33,9 @@ function report_jobresult($jobqueueid, $jobid, $nodeid, $nodename, $jobresult, $
 	// 2. Inserting the job result
 	$jobresultid  = create_unique_id();
 	$queryinsert = "INSERT INTO tbjobresult (id, jobresultid, jobdefinitionid, jobqueueid, jobresult, workunitresult, iserroneous, errorid, errorarg, errormsg, 
-	                                         nodename, nodeid, ip, create_dt)
+	                                         nodename, nodeid, walltime, ip, create_dt)
 									  VALUES('', '$jobresultid', '$jobid', '$jobqueueid', '$jobresult', '$workunitresult', $iserroneous,  $errorid, '$errorarg', '$errormsg',
-  									         '$nodename', '$nodeid', '$ip', NOW());";
+  									         '$nodename', '$nodeid', $walltime, '$ip', NOW());";
 	if ($debug==1) echo "$queryinsert";
 	mysql_query($queryinsert);	
 	
