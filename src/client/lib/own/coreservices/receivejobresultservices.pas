@@ -39,8 +39,8 @@ end;
 
 procedure TReceiveJobResultServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbrow    : TDbJobResultRow;
-    node     : TDOMNode;
+    dbrow              : TDbJobResultRow;
+    node, wallnode     : TDOMNode;
 
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
@@ -60,6 +60,9 @@ try
                dbrow.errorarg       := node.FindNode('errorarg').TextContent;
                dbrow.nodeid         := node.FindNode('nodeid').TextContent;
                dbrow.nodename       := node.FindNode('nodename').TextContent;
+               wallnode := node.FindNode('walltime');
+               if Assigned(wallnode) then dbrow.walltime:=StrToIntDef(wallnode.TextContent, 0) else dbrow.walltime := 0;
+
                dbrow.server_id      := srv_.id;
                dbrow.walltime := 0;
 

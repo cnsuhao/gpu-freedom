@@ -46,7 +46,8 @@ begin
  rep := rep+'errorarg='+encodeURL(jobresultrow_.errorarg)+'&';
  rep := rep+'errormsg='+encodeURL(jobresultrow_.errormsg)+'&';
  rep := rep+'nodeid='+encodeURL(myGPUId.nodeid)+'&';
- rep := rep+'nodename='+encodeURL(myGPUId.nodename);
+ rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
+ rep := rep+'walltime='+IntToStr(jobresultrow_.walltime);
 
  logger_.log(LVL_DEBUG, logHeader_+'Reporting string is:');
  logger_.log(LVL_DEBUG, rep);

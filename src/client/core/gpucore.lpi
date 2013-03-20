@@ -38,7 +38,7 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="52"/>
         <CursorPos X="41" Y="77"/>
@@ -217,10 +217,11 @@
       <Unit24>
         <Filename Value="..\lib\own\coreservices\receivejobresultservices.pas"/>
         <UnitName Value="receivejobresultservices"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="50"/>
-        <CursorPos X="147" Y="66"/>
+        <TopLine Value="42"/>
+        <CursorPos X="94" Y="64"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit24>
@@ -393,7 +394,7 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="114"/>
         <CursorPos X="157" Y="98"/>
@@ -411,7 +412,7 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="172"/>
         <CursorPos X="57" Y="199"/>
@@ -429,7 +430,7 @@
       <Unit50>
         <Filename Value="..\lib\own\coredb\jobresulttables.pas"/>
         <UnitName Value="jobresulttables"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="22"/>
         <CursorPos X="63" Y="32"/>
@@ -439,10 +440,12 @@
       <Unit51>
         <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
         <UnitName Value="transmitjobresultservices"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="57"/>
-        <CursorPos X="72" Y="76"/>
+        <TopLine Value="24"/>
+        <CursorPos X="57" Y="49"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit51>
       <Unit52>
         <Filename Value="..\lib\own\misc\identities.pas"/>
@@ -495,7 +498,7 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <UnitName Value="jobqueueworkflows"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="89"/>
         <CursorPos X="26" Y="104"/>
@@ -529,7 +532,7 @@
       <Unit62>
         <Filename Value="..\lib\own\coremodules\jobs.pas"/>
         <UnitName Value="jobs"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="9"/>
         <CursorPos X="31" Y="36"/>
@@ -539,7 +542,6 @@
       <Unit63>
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <UnitName Value="computationservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="65"/>
@@ -568,7 +570,7 @@
       <Unit66>
         <Filename Value="..\lib\own\coremodules\stacks.pas"/>
         <UnitName Value="stacks"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="40"/>
         <CursorPos X="70" Y="62"/>
@@ -578,7 +580,7 @@
       <Unit67>
         <Filename Value="..\lib\own\coremodules\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="3" Y="18"/>
@@ -588,7 +590,7 @@
       <Unit68>
         <Filename Value="..\lib\own\misc\utils.pas"/>
         <UnitName Value="utils"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="1" Y="1"/>
@@ -596,7 +598,7 @@
         <Loaded Value="True"/>
       </Unit68>
     </Units>
-    <JumpHistory Count="27" HistoryIndex="26">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <Caret Line="18" Column="47" TopLine="11"/>
@@ -705,6 +707,10 @@
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <Caret Line="74" Column="33" TopLine="58"/>
       </Position27>
+      <Position28>
+        <Filename Value="..\lib\own\coreservices\receivejobresultservices.pas"/>
+        <Caret Line="53" Column="97" TopLine="31"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
