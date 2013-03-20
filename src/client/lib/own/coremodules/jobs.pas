@@ -32,6 +32,9 @@ interface
 
 uses Classes, SysUtils, stacks;
 
+const
+   SECONDS_IN_DAY = 24 * 3600;
+
 type
   TNotifyEvent = procedure(Sender: TObject) of object;
 
@@ -51,8 +54,8 @@ type
     hasError  : Boolean;  // there is an error in the Job structure,
                          // on stack.error
     startTime,
-    stopTime,
-    ComputedTime : TDateTime;
+    stopTime     : TDateTime;
+    ComputedTime : Longint;
 
     constructor Create(); overload;
     constructor Create(jobStr : String); overload;
@@ -107,7 +110,7 @@ end;
 procedure TJob.setEndTime();
 begin
   stopTime := now();
-  computedTime := stopTime-startTime;
+  computedTime := Round( (stopTime-startTime) * SECONDS_IN_DAY);
 end;
 
 destructor TJob.Destroy;

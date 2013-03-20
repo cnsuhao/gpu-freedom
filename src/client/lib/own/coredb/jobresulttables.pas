@@ -29,6 +29,7 @@ type TDbJobResultRow = record
 
    server_id      : Longint;
    create_dt      : TDateTime;
+   walltime       : Longint;    // computation time in seconds
 end;
 
 type TDbJobResultTable = class(TDbCoreTable)
@@ -77,6 +78,7 @@ begin
 
       FieldDefs.Add('server_id', ftInteger);
       FieldDefs.Add('create_dt', ftDateTime);
+      FieldDefs.Add('walltime', ftInteger);
       CreateTable;
     end; {if not TableExists}
   end; {with}
@@ -120,6 +122,7 @@ begin
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
+  dataset_.FieldByName('walltime').AsInteger := row.walltime;
 
   dataset_.Post;
   dataset_.ApplyUpdates;
@@ -156,6 +159,7 @@ begin
      row.nodeid      := dataset_.FieldByName('nodeid').AsString;
      row.nodename    := dataset_.FieldByName('nodename').AsString;
      row.create_dt   := dataset_.FieldByName('create_dt').AsDateTime;
+     row.walltime    := dataset_.FieldByName('walltime').AsInteger;
 end;
 
 end.

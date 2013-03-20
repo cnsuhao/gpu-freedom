@@ -61,9 +61,10 @@ try
                dbrow.nodeid         := node.FindNode('nodeid').TextContent;
                dbrow.nodename       := node.FindNode('nodename').TextContent;
                dbrow.server_id      := srv_.id;
+               dbrow.walltime := 0;
+
                tableman_.getJobResultTable().insertOrUpdate(dbrow);
 
-               //TODO, here we could update jobqueue
                logger_.log(LVL_DEBUG, 'Updated or added '+dbrow.jobresultid+' to TBJOBRESULT table.');
 
                node := node.NextSibling;

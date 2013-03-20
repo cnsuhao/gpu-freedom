@@ -74,6 +74,7 @@ begin
     Exit;
   end;
 
+  Randomize; // init random generator!!!
   mainLoop;
 
   // stop program loop

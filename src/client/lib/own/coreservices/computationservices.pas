@@ -13,7 +13,8 @@ interface
 uses  Classes, Sysutils,
       jobs, methodcontrollers, pluginmanagers, resultcollectors, frontendmanagers,
       jobparsers, managedthreads, computationthreads, workflowmanagers,
-      dbtablemanagers, jobqueuetables, jobresulttables, loggers, stkconstants;
+      dbtablemanagers, jobqueuetables, jobresulttables, loggers, stkconstants,
+      identities;
 
 type
   TComputationServiceThread = class(TComputationThread)
@@ -79,12 +80,25 @@ begin
        parser.parse();
        parser.Free;
 
-       erroneous_ := job_.hasError;
-
        // now it is time to persist the result in TBJOBRESULT
-
+       jobresultrow_.jobresultid := IntToStr(thrdid_);
+       jobresultrow_.jobdefinitionid:=jobqueuerow_.jobdefinitionid;
+       jobresultrow_.jobqueueid:=jobqueuerow_.jobqueueid;
+       jobresultrow_.workunitresult:=jobqueuerow_.workunitresult;
+       jobresultrow_.jobresult:=job_.JobResult;
+       jobresultrow_.iserroneous:=job_.hasError;
+       jobresultrow_.errorid:=job_.stack.error.ErrorID;
+       jobresultrow_.errorarg:=job_.stack.error.ErrorArg;
+       jobresultrow_.errormsg:=job_.stack.error.ErrorMsg;
+       jobresultrow_.create_dt:=Now;
+       jobresultrow_.server_id:= jobqueuerow_.server_id;
+       jobresultrow_.nodeid   := myGPUID.nodeid;
+       jobresultrow_.nodename := myGPUID.nodename;
+       jobresultrow_.walltime := job_.computedTime;
+       tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
        workflowman_.getJobQueueWorkflow().changeStatusFromRunningToCompleted(jobqueuerow_);
 
+       erroneous_ := job_.hasError;
        job_.Free;
     end
  else logger_.log(LVL_DEBUG, logHeader_+'No jobqueue found in status READY');
