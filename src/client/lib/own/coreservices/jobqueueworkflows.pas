@@ -24,8 +24,8 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
        function changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
 
      private
-       function findRowInStatus(row : TDbJobQueueRow; s : TJobStatus) : Boolean;
-       function changeStatus(row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
+       function findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
+       function changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
 end;
 
 implementation
@@ -57,12 +57,6 @@ end;
 
 function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
 begin
-  if (not row.requireack) then
-     begin
-       logger_.log(LVL_SEVERE, 'Internal error: a job which does not require acknowledgmente should not do a transition from NEW to READY ('+row.jobqueueid+')');
-       Result := false;
-       Exit;
-     end;
   Result := changeStatus(row, JS_NEW, JS_READY);
 end;
 
@@ -78,17 +72,10 @@ end;
 
 function TJobQueueWorkflow.changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
 begin
-  if (row.islocal) then
-     begin
-       logger_.log(LVL_SEVERE, 'Internal error: a local job should not do a transition from COMPLETED to TRANSMITTED ('+row.jobqueueid+')');
-       Result := false;
-       Exit;
-     end;
-
   Result := changeStatus(row, JS_COMPLETED, JS_TRANSMITTED);
 end;
 
-function TJobQueueWorkflow.changeStatus(row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
+function TJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
 begin
   Result := false;
   if row.status<>fromS then
@@ -115,7 +102,7 @@ begin
                                          IntToStr(fromS)+' to status '+IntToStr(row.status));
 end;
 
-function TJobQueueWorkflow.findRowInStatus(row : TDbJobQueueRow; s : TJobStatus) : Boolean;
+function TJobQueueWorkflow.findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
 begin
   Result := false;
   CS_.Enter;
