@@ -56,9 +56,10 @@ type
     Progress : TStkFloat;    //  indicates plugin progress from 0 to 100}
    
     
-    workunitIncoming,            // filename of workunit placed in directory workunits/staged
+    workunitIncoming,            // filename of workunit placed in directory workunits/jobs
     workunitOutgoing : String;   // if the plugin outputs something, it will create a file in
-                                 // workunits/outgoing directory
+                                 // workunits/results directory
+    temporaryFolder  : String;   // temporary folder for calculations
     error : TStkError;           // contains errors if there are any
   end;
 

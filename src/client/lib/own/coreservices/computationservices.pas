@@ -10,10 +10,10 @@ unit computationservices;
 }
 interface
 
-uses  Classes,
+uses  Classes, Sysutils,
       jobs, methodcontrollers, pluginmanagers, resultcollectors, frontendmanagers,
       jobparsers, managedthreads, computationthreads, workflowmanagers,
-      dbtablemanagers, jobqueuetables, jobresulttables, loggers;
+      dbtablemanagers, jobqueuetables, jobresulttables, loggers, stkconstants;
 
 type
   TComputationServiceThread = class(TComputationThread)
@@ -34,6 +34,7 @@ type
     jobresultrow_   : TDbJobResultRow;
     logger_         : TLogger;
     logHeader_      : String;
+    appPath_        : String;
 
    end;
 
@@ -49,11 +50,13 @@ begin
   tableman_    := tableman;
   logger_      := logger;
   logHeader_   := 'TComputationServiceThread> ';
+  appPath_     := ExtractFilePath(ParamStr(0));
 end;
 
 
 procedure  TComputationServiceThread.Execute;
 var parser : TJobParser;
+    tempFolder : String;
 begin
  erroneous_ := false;
  // job_ and thrdId_ need to be retrieved from TBJOBQUEUE
@@ -62,16 +65,23 @@ begin
        workflowman_.getJobQueueWorkflow().changeStatusFromReadyToRunning(jobqueuerow_);
 
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
+
+       tempFolder := appPath_+PathDelim+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
        job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjob, jobqueuerow_.workunitresult);
+       job_.stack.temporaryFolder:= tempFolder;
+
        logger_.log(LVL_DEBUG, logHeader_+'Starting computation of job '+jobqueuerow_.job);
        logger_.log(LVL_DEBUG, logHeader_+'Incoming workunit is '+jobqueuerow_.workunitjob);
        logger_.log(LVL_DEBUG, logHeader_+'Outgoing workunit will be '+jobqueuerow_.workunitjob);
+       logger_.log(LVL_DEBUG, logHeader_+'Temporary folder is '+tempFolder);
 
        parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
        parser.parse();
        parser.Free;
 
        erroneous_ := job_.hasError;
+
+       // now it is time to
 
        workflowman_.getJobQueueWorkflow().changeStatusFromRunningToCompleted(jobqueuerow_);
 

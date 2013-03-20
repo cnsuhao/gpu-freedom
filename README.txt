@@ -10,8 +10,8 @@ a note is placed either on the source code or in a license file in the respectiv
 folder.
 
 GPU Homepage:     http://gpu.sourceforge.net
+Project page:     http://sourceforge.net/projects/gpu/
 GPU Mailing List: gpu-world@lists.sourceforge.net
-GPU Team Members: http://sourceforge.net/project/memberlist.php?group_id=58134
 
 Programming languages
 ---------------------
@@ -34,11 +34,15 @@ File Tree structure for this package, codenamed freedom follows:
    /conf        configuration files for the client
       /core        configuration files for core, mainapp and screensaver
       /extensions   configuration files for frontends, plugins
-   /jobs        jobs for the core
-      /input    input jobs come here
-      /loading  jobs being processed by core
-      /output   result of jobs comes here
-   /logs        logfiles for core
+   /data    data for general use
+      /core        data for core, including core.db which is sqllite3 database
+	               and is used for communication between mainapp and core
+      /extensions  data for plugins and frontends
+      /planet      data on earth planet on elevation and population
+      /textures    textures for general OpenGL use
+        /solarysystem textures of solarsystem
+   /locks       lockfile directory
+   /logs        logfiles for core and GUI
    /languages   localization directory
       /mainapp    language for main application
       /extensions language for extensions	  
@@ -48,16 +52,9 @@ File Tree structure for this package, codenamed freedom follows:
       /jar      Java archives
    /temp        temporary directory for general use
    /workunits   directory for workunits
-      /incoming incoming workunits
-      /staged   workunits being processed
-      /outgoing workunits which need upload to server
-   /data    data for general use
-      /core        data for core, including core.db which is sqllite3 database
-	               and is used for communication between mainapp and core
-      /extensions  data for plugins and frontends
-      /planet      data on earth planet on elevation and population
-      /textures    textures for general OpenGL use
-        /solarysystem textures of solarsystem
+      /jobs     incoming workunits
+      /temp     temporary folder for plugins
+      /results  workunits which need upload to server
    /linux-x86-32   libraries for linux support on x86, 32 bit
    /linux-x86-64   libraries for linux support on x86, 64 bit
    /macosx         libraries for macosx support
@@ -82,15 +79,13 @@ File Tree structure for this package, codenamed freedom follows:
      /screensaver source code for screensaver
 
      /frontends    source code for frontends
-       /simclimate Climate simulation frontend
-
+ 
      /plugins      source code for plugins
        /basic      plugin containg basic routines for floats
 	   /strbasic   plugin containg simple routines for strings
  
      /lib          libraries for GPU
        /own        own libraries developed by the project
-         /simclimate   logic of simclimate extension
          /coremodules  Core modules used by core component under client/core
 		 /coreservices Core services used by core component to download/transmit data to servers
          /misc         units for general purpose (like logger)
@@ -103,7 +98,6 @@ File Tree structure for this package, codenamed freedom follows:
        /ext        external packages
 
 /server  Server source code
-   /admin    server administration part
    /channel  source code implementing channels (chat is also a channel)
    /cluster  source code for cluster management of clients
    /conf     server configuration
@@ -111,7 +105,7 @@ File Tree structure for this package, codenamed freedom follows:
    /jobqueue  source code managing the job queue
    /supercluster   source code to inform parent server, so that
                    servers can be organized hierarchically in a tree
-	   /user       user management at supercluster level
+   /stylesheet stylesheet directory to convert XML output into HTML
    /test       scripts to test server integrity	   
    /utils      php scripts for general use
    /workunit   where workunits are stored

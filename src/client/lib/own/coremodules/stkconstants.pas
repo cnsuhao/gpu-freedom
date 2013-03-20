@@ -10,7 +10,12 @@ unit stkconstants;
 interface
 
 const
-  CORE_VERSION = '1.0.0';
+  CORE_VERSION = '1.0';
+
+  WORKUNIT_FOLDER    = 'workunits';
+  INCOMING_WU_FOLDER = 'jobs';
+  OUTGOING_WU_FOLDER = 'results';
+  TEMP_WU_FOLDER     = 'temp';
 
   DEFAULT_COMP_THREADS    = 3;   // default number of computation threads
   DEFAULT_DOWN_THREADS    = 6;   // default number of download threads

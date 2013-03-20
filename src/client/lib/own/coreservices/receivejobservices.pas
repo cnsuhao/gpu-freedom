@@ -13,7 +13,7 @@ interface
 
 uses coreservices, servermanagers, jobqueuetables, dbtablemanagers,
      jobdefinitiontables, loggers, downloadutils, coreconfigurations,
-     Classes, SysUtils, DOM, identities, synacode;
+     Classes, SysUtils, DOM, identities, synacode, stkconstants;
 
 type TReceiveJobServiceThread = class(TReceiveServiceThread)
  public
@@ -22,8 +22,9 @@ type TReceiveJobServiceThread = class(TReceiveServiceThread)
 protected
     procedure Execute; override;
 
-
  private
+   appPath_ : String;
+
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
 
@@ -33,6 +34,7 @@ constructor TReceiveJobServiceThread.Create(var servMan : TServerManager; var sr
                    var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobServiceThread]> ', conf, tableman);
+ appPath_     := ExtractFilePath(ParamStr(0));
 end;
 
 
@@ -62,8 +64,12 @@ try
                dbjobrow.jobdefinitionid := jobdefinitionid;
 
                dbqueuerow.jobqueueid      := node.FindNode('jobqueueid').TextContent;;
-               dbqueuerow.workunitjob     := node.FindNode('workunitjob').TextContent;
-               dbqueuerow.workunitresult  := node.FindNode('workunitresult').TextContent;
+               dbqueuerow.workunitjob     := Trim(node.FindNode('workunitjob').TextContent);
+               dbqueuerow.workunitresult  := Trim(node.FindNode('workunitresult').TextContent);
+               if dbqueuerow.workunitjob<>'' then
+                 dbqueuerow.workunitjob:= appPath_+WORKUNIT_FOLDER+PathDelim+INCOMING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob;
+               if dbqueuerow.workunitresult<>'' then
+                 dbqueuerow.workunitresult:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob;
 
                nodeid := node.FindNode('nodeid').TextContent;
                dbqueuerow.nodeid := nodeid;
