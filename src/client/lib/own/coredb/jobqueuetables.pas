@@ -116,7 +116,7 @@ begin
       dataset_.Append;
 
   dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
-  dataset_.FieldByName('status').AsInteger := JS_READY;
+  dataset_.FieldByName('status').AsInteger := row.status;
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
   dataset_.FieldByName('job').AsString := row.job;
   dataset_.FieldByName('jobtype').AsString := row.jobtype;

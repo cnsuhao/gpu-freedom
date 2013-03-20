@@ -127,6 +127,8 @@ begin
             retrieveJobStats;
             retrieveJobResults;
           end;
+      // TODO: decide here how the coreloop functionality has to tick
+      if (tick_ mod 15 = 0) then transmitAck;
 
 
       Inc(tick_);
