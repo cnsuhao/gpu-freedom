@@ -99,10 +99,8 @@ try
 
                dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
-               if requireack then
-                   dbqueuerow.status    := JS_NEW
-               else
-                   dbqueuerow.status    := JS_READY;
+
+               dbqueuerow.status    := JS_NEW;
 
                tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
                //queuerow.job_id := dbrow.id;  // this could be setup at a later point

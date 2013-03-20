@@ -59,6 +59,8 @@ begin
  // job_ and thrdId_ need to be retrieved from TBJOBQUEUE
  if workflowman_.getJobQueueWorkflow().findRowInStatusReady(jobqueuerow_) then
     begin
+       workflowman_.getJobQueueWorkflow().changeStatusFromReadyToRunning(jobqueuerow_);
+
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
        job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjob, jobqueuerow_.workunitresult);
        logger_.log(LVL_DEBUG, logHeader_+'Starting computation of job '+jobqueuerow_.job);
@@ -70,6 +72,9 @@ begin
        parser.Free;
 
        erroneous_ := job_.hasError;
+
+       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToCompleted(jobqueuerow_);
+
        job_.Free;
     end
  else logger_.log(LVL_DEBUG, logHeader_+'No jobqueue found in status READY');

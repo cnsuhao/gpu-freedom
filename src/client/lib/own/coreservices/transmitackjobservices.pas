@@ -63,13 +63,14 @@ begin
            Exit;
          end;
 
- transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
- if not erroneous_ then
-    begin
-        updateJobQueue();
-    end;
+ if jobqueuerow_.requireack then
+         begin
+           transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
+           if not erroneous_ then updateJobQueue();
+           finishTransmit('Job acknowledged :-)');
+     end
+ else updateJobQueue;
 
- finishTransmit('Job acknowledged :-)');
 end;
 
 

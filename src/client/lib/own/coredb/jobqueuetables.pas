@@ -12,13 +12,18 @@ interface
 uses sqlite3ds, db, coretables, SysUtils;
 
 const
-  // for status column
-  JS_NEW             = 10;
-  JS_READY           = 30;
-  JS_RUNNING         = 40;
-  JS_COMPLETED       = 91;  // local jobs finish in completed
-  JS_TRANSMITTED     = 92;  // global jobs finish in transmitted
-  JS_CLEANUP         = 99;  // global jobs are cleaned up once transmitted (workunits are deleted)
+  // for status column, all jobs go to this workflow
+  JS_NEW                   = 10;
+  JS_RETRIEVING_WORKUNIT   = 20;
+  JS_WORKUNIT_RETRIEVED    = 30;
+  JS_READY                 = 40;
+  JS_RUNNING               = 50;
+  JS_COMPLETED             = 60;
+  JS_TRANSMITTING_WORKUNIT = 70;
+  JS_WORKUNIT_TRANSMITTED  = 80;
+  JS_TRANSMITTED           = 90;
+  JS_CLEANUP               = 100;
+  JS_ERROR                 = 999;
 
 type TJobStatus      = Longint;
 
