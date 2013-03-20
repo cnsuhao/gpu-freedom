@@ -11,8 +11,8 @@ unit receivejobservices;
 }
 interface
 
-uses coreservices, servermanagers, jobqueuetables, dbtablemanagers,
-     jobdefinitiontables, loggers, downloadutils, coreconfigurations,
+uses coreservices, servermanagers, dbtablemanagers,
+     jobdefinitiontables, jobqueuetables, jobqueuehistorytables, loggers, downloadutils, coreconfigurations,
      Classes, SysUtils, DOM, identities, synacode, stkconstants;
 
 type TReceiveJobServiceThread = class(TReceiveServiceThread)
@@ -40,16 +40,17 @@ end;
 
 procedure TReceiveJobServiceThread.parseXml(var xmldoc : TXMLDocument);
 var
-    dbjobrow   : TDbJobDefinitionRow;
-    dbqueuerow : TDbJobQueueRow;
-    node       : TDOMNode;
-    domjobdefinition     : TDOMNode;
+    dbjobrow          : TDbJobDefinitionRow;
+    dbqueuerow        : TDbJobQueueRow;
+    dbqueuehistoryrow : TDbJobQueueHistoryRow;
+    node,
+    domjobdefinition  : TDOMNode;
     nodename,
     nodeid,
     jobdefinitionid,
-    jobtype              : String;
-    job                  : AnsiString;
-    requireack           : Boolean;
+    jobtype           : String;
+    job               : AnsiString;
+    requireack        : Boolean;
 
 begin
   logger_.log(LVL_DEBUG, 'Parsing of XML started...');
@@ -106,12 +107,15 @@ try
 
                dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
-
                dbqueuerow.status    := JS_NEW;
 
+               // jobqueuehistoryrow
+               dbqueuehistoryrow.status     := dbqueuerow.status;
+               dbqueuehistoryrow.jobqueueid := dbqueuerow.jobqueueid;
+
                tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
-               //queuerow.job_id := dbrow.id;  // this could be setup at a later point
                tableman_.getJobQueueTable().insertOrUpdate(dbqueuerow);
+               tableman_.getJobQueueHistoryTable().insert(dbqueuehistoryrow);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOBDEFINITION and to TBJOBQUEUE table.');
 
        node := node.NextSibling;

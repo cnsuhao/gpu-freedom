@@ -184,7 +184,7 @@
       <Unit20>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="111"/>
         <CursorPos X="30" Y="169"/>
@@ -391,10 +391,12 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="85"/>
-        <CursorPos X="157" Y="98"/>
+        <CursorPos X="16" Y="115"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit46>
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
@@ -487,18 +489,23 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <UnitName Value="jobqueueworkflows"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="45" Y="78"/>
+        <TopLine Value="68"/>
+        <CursorPos X="40" Y="97"/>
         <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <UnitName Value="workflowmanagers"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="16" Y="17"/>
         <UsageCount Value="19"/>
+        <Loaded Value="True"/>
       </Unit59>
       <Unit60>
         <Filename Value="..\lib\own\coredb\wandbtables.pas"/>
@@ -577,16 +584,15 @@
       <Unit69>
         <Filename Value="..\lib\own\coredb\jobqueuehistorytables.pas"/>
         <UnitName Value="jobqueuehistorytables"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="17"/>
-        <CursorPos X="41" Y="52"/>
+        <TopLine Value="1"/>
+        <CursorPos X="63" Y="34"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit69>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <Caret Line="16" Column="9" TopLine="1"/>
@@ -671,6 +677,30 @@
         <Filename Value="..\lib\own\coredb\jobqueuehistorytables.pas"/>
         <Caret Line="63" Column="1" TopLine="8"/>
       </Position21>
+      <Position22>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="113" Column="35" TopLine="80"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="15" Column="66" TopLine="1"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
+        <Caret Line="113" Column="35" TopLine="84"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
+        <Caret Line="17" Column="16" TopLine="1"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="100" Column="67" TopLine="64"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="81" Column="30" TopLine="31"/>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

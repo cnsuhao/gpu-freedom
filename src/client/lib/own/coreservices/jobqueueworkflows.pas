@@ -8,7 +8,8 @@ unit jobqueueworkflows;
 interface
 
 uses SyncObjs, SysUtils,
-     dbtablemanagers, jobqueuetables, workflowancestors, loggers;
+     dbtablemanagers, jobqueuetables, jobqueuehistorytables, workflowancestors,
+     loggers;
 
 type TJobQueueWorkflow = class(TWorkflowAncestor)
        constructor Create(var tableman : TDbTableManager; var logger : TLogger);
@@ -76,6 +77,8 @@ begin
 end;
 
 function TJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
+var
+   dbqueuehistoryrow : TDbJobQueueHistoryRow;
 begin
   Result := false;
   if row.status<>fromS then
@@ -89,7 +92,12 @@ begin
   try
     row.status := toS;
     row.update_dt := Now;
+
+    dbqueuehistoryrow.status     := row.status;
+    dbqueuehistoryrow.jobqueueid := row.jobqueueid;
+
     tableman_.getJobQueueTable().insertOrUpdate(row);
+    tableman_.getJobQueueHistoryTable().insert(dbqueuehistoryrow);
     Result := true;
   except
     on e : Exception  do
