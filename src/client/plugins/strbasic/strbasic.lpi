@@ -1,21 +1,23 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
+    <Version Value="9"/>
     <PathDelim Value="\"/>
-    <Version Value="7"/>
     <General>
       <Flags>
         <LRSInOutputDirectory Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
-      <TargetFileExt Value=".exe"/>
-      <ActiveEditorIndexAtStart Value="3"/>
+      <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
-      <ProjectVersion Value=""/>
       <Language Value=""/>
       <CharSet Value=""/>
+      <StringTable ProductVersion=""/>
     </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
@@ -32,90 +34,99 @@
       <Unit0>
         <Filename Value="strbasic.dpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="1" Y="5"/>
-        <TopLine Value="1"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="5"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="strbasicdll.pas"/>
         <UnitName Value="strbasicdll"/>
-        <CursorPos X="44" Y="16"/>
-        <TopLine Value="1"/>
         <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="44" Y="16"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\basic\basicdll.pas"/>
         <UnitName Value="basicdll"/>
-        <CursorPos X="5" Y="116"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="92"/>
-        <EditorIndex Value="8"/>
+        <CursorPos X="5" Y="116"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\..\packages\own\coremodules\stacks.pas"/>
         <UnitName Value="stacks"/>
-        <CursorPos X="1" Y="67"/>
         <TopLine Value="67"/>
+        <CursorPos X="1" Y="67"/>
         <UsageCount Value="10"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\..\..\..\ChangeLog.txt"/>
-        <CursorPos X="37" Y="3"/>
-        <TopLine Value="1"/>
         <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="37" Y="3"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
-        <SyntaxHighlighter Value="None"/>
+        <DefaultSyntaxHighlighter Value="None"/>
       </Unit4>
       <Unit5>
         <Filename Value="..\..\lib\own\misc\identities.pas"/>
         <UnitName Value="identities"/>
-        <CursorPos X="8" Y="46"/>
-        <TopLine Value="22"/>
         <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="22"/>
+        <CursorPos X="8" Y="46"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="..\..\lib\own\coreservices\receiveserverservices.pas"/>
         <UnitName Value="receiveserverservices"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
         <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="..\..\lib\own\coreservices\receivenodeservices.pas"/>
         <UnitName Value="receivenodeservices"/>
-        <CursorPos X="43" Y="60"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="39"/>
-        <EditorIndex Value="5"/>
+        <CursorPos X="43" Y="60"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="..\..\lib\own\coredb\nodetables.pas"/>
         <UnitName Value="nodetables"/>
-        <CursorPos X="31" Y="37"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="18"/>
-        <EditorIndex Value="6"/>
+        <CursorPos X="31" Y="37"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="..\..\..\..\bin\data\core\sqlite\core-schema.sql"/>
-        <CursorPos X="16" Y="72"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="56"/>
-        <EditorIndex Value="7"/>
+        <CursorPos X="16" Y="72"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
-        <SyntaxHighlighter Value="SQL"/>
+        <DefaultSyntaxHighlighter Value="SQL"/>
       </Unit9>
     </Units>
     <JumpHistory Count="12" HistoryIndex="11">
@@ -170,15 +181,16 @@
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="8"/>
+    <Version Value="11"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\..\..\..\src\client\lib\own\coremodules\"/>
+      <OtherUnitFiles Value="..\..\..\..\src\client\lib\own\coremodules"/>
       <UnitOutputDirectory Value="..\..\..\..\bin\plugins\lib"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
         <CStyleOperator Value="False"/>
+        <UseAnsiStrings Value="False"/>
       </SyntaxOptions>
     </Parsing>
     <Linking>

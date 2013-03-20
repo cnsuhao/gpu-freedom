@@ -12,7 +12,7 @@ uses
   receivechannelservices, receivejobservices,
   receivejobstatservices,  receivejobresultservices,
   transmitjobservices, transmitjobresultservices,
-  transmitackjobservices,
+  transmitackjobservices, computationservices,
   jobdefinitiontables,
   coreobjects, coremonitors;
 

@@ -16,10 +16,12 @@ uses  Classes,
 type
   TComputationThread = class(TManagedThread)
    public
-      
+    constructor Create(var plugman : TPluginManager; var meth : TMethodController;
+                       var res : TResultCollector; var frontman : TFrontendManager); overload;
+
     constructor Create(var plugman : TPluginManager; var meth : TMethodController;
                        var res : TResultCollector; var frontman : TFrontendManager;
-                       var job : TJob; thrdId : Longint);
+                       var job : TJob; thrdId : Longint);  overload;
 
    protected
     procedure Execute; override;
@@ -27,7 +29,7 @@ type
     procedure SyncOnJobCreated;
     procedure SyncOnJobFinished;
 	  
-   private
+   protected
       // input parameters
       // the job which needs to be computed
       job_           :  TJob;
@@ -43,18 +45,25 @@ type
 implementation
 
 constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController;
-                                      var res : TResultCollector; var frontman : TFrontendManager;
-                                      var job : TJob; thrdId : Longint);
+                                      var res : TResultCollector; var frontman : TFrontendManager);
 begin
   inherited Create(false); // running
-  job_ := job;
-  thrdId_ := thrdId;
 
   plugman_ := plugman;
   methController_ := meth;
   rescoll_ := res;
   frontman_ := frontman;
 end;
+
+constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController;
+                                      var res : TResultCollector; var frontman : TFrontendManager;
+                                      var job : TJob; thrdId : Longint);
+begin
+  Create(plugman, meth, res, frontman);
+  job_ := job;
+  thrdId_ := thrdId;
+end;
+
 
 
 procedure  TComputationThread.Execute;

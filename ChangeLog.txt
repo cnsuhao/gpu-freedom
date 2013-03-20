@@ -1,6 +1,10 @@
 ******************
 GPU freedom branch
 
+20.3.2013 git
+Core Client: creating a db aware computation thread which takes jobs from jobqueue in status READY,
+			 sets them to RUNNING while computing and to COMPLETED when finished.
+
 19.3.2013 git
 Core Client: added job and jobtype fields to TBJOBQUEUE to simplify workflow
 			 added routines which retrieve a jobqueue in a given status
