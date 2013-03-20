@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="65">
+    <Units Count="67">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="16"/>
         <CursorPos X="165" Y="38"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="73"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -211,7 +211,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="47" Y="15"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -344,11 +344,11 @@
       <Unit40>
         <Filename Value="..\lib\own\coreservices\receivechannelservices.pas"/>
         <UnitName Value="receivechannelservices"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="27" Y="44"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
         <Loaded Value="True"/>
       </Unit40>
       <Unit41>
@@ -489,10 +489,12 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <UnitName Value="jobqueueworkflows"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
-        <CursorPos X="28" Y="53"/>
+        <TopLine Value="1"/>
+        <CursorPos X="17" Y="17"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
@@ -513,42 +515,66 @@
       <Unit61>
         <Filename Value="..\lib\own\coremodules\compthreadmanagers.pas"/>
         <UnitName Value="compthreadmanagers"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="57"/>
+        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit61>
       <Unit62>
         <Filename Value="..\lib\own\coremodules\jobs.pas"/>
         <UnitName Value="jobs"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="3" Y="39"/>
+        <TopLine Value="67"/>
+        <CursorPos X="43" Y="91"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit62>
       <Unit63>
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <UnitName Value="computationservices"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="25"/>
-        <CursorPos X="38" Y="50"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="47"/>
+        <CursorPos X="77" Y="75"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit63>
       <Unit64>
         <Filename Value="..\lib\own\coremodules\computationthreads.pas"/>
         <UnitName Value="computationthreads"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="23"/>
-        <CursorPos X="13" Y="32"/>
+        <TopLine Value="47"/>
+        <CursorPos X="7" Y="37"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit64>
+      <Unit65>
+        <Filename Value="..\lib\own\coremodules\jobparsers.pas"/>
+        <UnitName Value="jobparsers"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="110"/>
+        <CursorPos X="70" Y="131"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="..\lib\own\coremodules\stacks.pas"/>
+        <UnitName Value="stacks"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="31"/>
+        <CursorPos X="3" Y="48"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit66>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="88" Column="3" TopLine="81"/>
@@ -581,6 +607,86 @@
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <Caret Line="54" Column="2" TopLine="25"/>
       </Position8>
+      <Position9>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="53" Column="15" TopLine="30"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="16" Column="9" TopLine="1"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="23" Column="84" TopLine="7"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="41" Column="100" TopLine="7"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="55" Column="14" TopLine="33"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\lib\own\coremodules\jobparsers.pas"/>
+        <Caret Line="19" Column="16" TopLine="44"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\lib\own\coremodules\jobparsers.pas"/>
+        <Caret Line="32" Column="11" TopLine="15"/>
+      </Position15>
+      <Position16>
+        <Filename Value="..\lib\own\coremodules\jobparsers.pas"/>
+        <Caret Line="52" Column="10" TopLine="24"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\lib\own\coremodules\jobparsers.pas"/>
+        <Caret Line="129" Column="81" TopLine="101"/>
+      </Position17>
+      <Position18>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="56" Column="28" TopLine="33"/>
+      </Position18>
+      <Position19>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="58" Column="8" TopLine="9"/>
+      </Position19>
+      <Position20>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="57" Column="41" TopLine="33"/>
+      </Position20>
+      <Position21>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="52" Column="12" TopLine="35"/>
+      </Position21>
+      <Position22>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="57" Column="41" TopLine="35"/>
+      </Position22>
+      <Position23>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="54" Column="73" TopLine="37"/>
+      </Position23>
+      <Position24>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="58" Column="8" TopLine="32"/>
+      </Position24>
+      <Position25>
+        <Filename Value="..\lib\own\coremodules\jobs.pas"/>
+        <Caret Line="59" Column="33" TopLine="62"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\lib\own\coremodules\jobs.pas"/>
+        <Caret Line="46" Column="8" TopLine="34"/>
+      </Position26>
+      <Position27>
+        <Filename Value="..\lib\own\coremodules\jobs.pas"/>
+        <Caret Line="90" Column="9" TopLine="58"/>
+      </Position27>
+      <Position28>
+        <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
+        <Caret Line="66" Column="68" TopLine="42"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

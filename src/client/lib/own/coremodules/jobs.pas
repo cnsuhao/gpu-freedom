@@ -56,6 +56,7 @@ type
 
     constructor Create(); overload;
     constructor Create(jobStr : String); overload;
+    constructor Create(jobStr, workunitIncoming, workunitOutgoing : String); overload;
 
     procedure clear();
     procedure setEndTime();
@@ -81,6 +82,13 @@ begin
   inherited Create;
   clear();
   job := jobStr;
+end;
+
+constructor TJob.Create(jobStr, workunitIncoming, workunitOutgoing : String);
+begin
+  Create(jobStr);
+  stack.workunitIncoming:=workunitIncoming;
+  stack.workunitOutgoing:=workunitOutgoing;
 end;
 
 procedure TJob.clear();
