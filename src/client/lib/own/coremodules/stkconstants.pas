@@ -12,10 +12,13 @@ interface
 const
   CORE_VERSION = '1.0';
 
+  // folder constants
   WORKUNIT_FOLDER    = 'workunits';
   INCOMING_WU_FOLDER = 'jobs';
   OUTGOING_WU_FOLDER = 'results';
   TEMP_WU_FOLDER     = 'temp';
+  PLUGIN_FOLDER      = 'plugins';
+  LIB_FOLDER         = 'lib';
 
   DEFAULT_COMP_THREADS    = 3;   // default number of computation threads
   DEFAULT_DOWN_THREADS    = 6;   // default number of download threads

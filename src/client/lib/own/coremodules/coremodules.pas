@@ -31,7 +31,7 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, loggers;
+  frontendmanagers, loggers, stkconstants;
 
 type TCoreModule = class(TObject)
     constructor Create(logger : TLogger; path, extension : String);
@@ -59,7 +59,7 @@ constructor TCoreModule.Create(logger : TLogger; path, extension : String);
 begin
    inherited Create();
    logger_         := logger;
-   plugman_        := TPluginManager.Create(path+PathDelim+'plugins'+PathDelim+'lib', extension, logger_);
+   plugman_        := TPluginManager.Create(path+PLUGIN_FOLDER+PathDelim+LIB_FOLDER, extension, logger_);
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();

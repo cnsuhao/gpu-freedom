@@ -77,7 +77,7 @@ begin
 
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
 
-       tempFolder := appPath_+PathDelim+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
+       tempFolder := appPath_+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
        job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjobpath, jobqueuerow_.workunitresultpath);
        job_.stack.temporaryFolder:= tempFolder;
 

@@ -52,6 +52,8 @@ type TCoreLoop = class(TObject)
     procedure   transmitJob;
     procedure   transmitJobResult;
     procedure   transmitAck;
+
+    procedure   createComputationService;
 end;
 
 implementation
@@ -128,9 +130,10 @@ begin
             retrieveJobStats;
             retrieveJobResults;
           end;
+
       // TODO: decide here how the coreloop functionality has to tick
       if (tick_ mod 15 = 0) then transmitAck;
-
+      if (tick_ mod 17 = 0) then createComputationService;
 
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
@@ -141,6 +144,7 @@ begin
             Inc(days_);
          end;
       serviceman.clearFinishedThreads;
+      compserviceman.clearFinishedThreads;
 end;
 
 function TCoreLoop.waitingForShutdown : Boolean;
@@ -167,15 +171,14 @@ function    TCoreLoop.launch(var thread : TCoreServiceThread; tname : String; va
 var slot : Longint;
 begin
    Result := true;
-   logger.log(LVL_DEBUG, logHeader_+tname+' started...');
    slot := serviceman.launch(thread);
    if slot=-1 then
          begin
            Result := false;
            logger.log(LVL_SEVERE, logHeader_+tname+' failed, core too busy!');
-         end;
-
-   logger.log(LVL_DEBUG, logHeader_+tname+' over.');
+         end
+   else
+        logger.log(LVL_DEBUG, logHeader_+tname+' started...');
 end;
 
 
@@ -300,6 +303,19 @@ begin
   serverman.getDefaultServer(srv);
   transmitackthread  := servicefactory.createTransmitAckJobService(srv);
   if not launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob', srv) then transmitackthread.Free;
+end;
+
+procedure TCoreLoop.createComputationService;
+var compthread : TComputationServiceThread;
+    slot       : Longint;
+begin
+   compthread := serviceFactory.createComputationService();
+
+   slot := compserviceman.launch(compthread);
+   if slot=-1 then
+           logger.log(LVL_SEVERE, logHeader_+'Computation service launch failed, core too busy!')
+   else
+      logger.log(LVL_DEBUG, logHeader_+'Computation service started...');
 end;
 
 end.
