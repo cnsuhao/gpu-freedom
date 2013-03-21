@@ -60,8 +60,7 @@ begin
  tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
 
-  if workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_) then
-         logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to TRANSMITTED.');
+  workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_);
 end;
 
 
@@ -69,14 +68,18 @@ procedure TTransmitJobResultServiceThread.Execute;
 begin
    if not workflowman_.getJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPLETED. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPUTED. Exit.');
+           done_      := True;
+           erroneous_ := false;
            Exit;
          end;
 
   // retrieve jobresult for this jobqueue
   if not tableman_.getJobResultTable().findRowWithJobQueueId(jobresultrow_, jobqueuerow_.jobqueueid) then
          begin
-           logger_.log(LVL_SEVERE, logHeader_+'Internal error: Could not find jobresult with jobqueueid '+jobqueuerow_.jobqueueid+' although jobqueue is in status COMPLETED!');
+           logger_.log(LVL_SEVERE, logHeader_+'Internal error: Could not find jobresult with jobqueueid '+jobqueuerow_.jobqueueid+' although jobqueue is in status COMPUTED!');
+           done_      := True;
+           erroneous_ := True;
            Exit;
          end;
 

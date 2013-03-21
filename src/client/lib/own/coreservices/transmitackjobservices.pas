@@ -60,6 +60,8 @@ begin
  if not workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW. Exit.');
+           done_      := True;
+           erroneous_ := false;
            Exit;
          end;
 
@@ -71,6 +73,7 @@ begin
      end
  else updateJobQueue;
 
+ done_      := True;
 end;
 
 
