@@ -38,12 +38,11 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="42"/>
-        <CursorPos X="38" Y="56"/>
-        <UsageCount Value="92"/>
+        <TopLine Value="29"/>
+        <CursorPos X="1" Y="58"/>
+        <UsageCount Value="93"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -213,8 +212,8 @@
         <UnitName Value="coreloops"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="9" Y="282"/>
+        <TopLine Value="111"/>
+        <CursorPos X="1" Y="126"/>
         <UsageCount Value="43"/>
         <Loaded Value="True"/>
       </Unit23>
@@ -237,7 +236,7 @@
       <Unit26>
         <Filename Value="..\lib\own\coreservices\servicemanagers.pas"/>
         <UnitName Value="servicemanagers"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="38"/>
         <CursorPos X="1" Y="67"/>
@@ -589,18 +588,21 @@
       <Unit70>
         <Filename Value="..\lib\own\coreservices\compservicemanagers.pas"/>
         <UnitName Value="compservicemanagers"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="2"/>
-        <CursorPos X="14" Y="62"/>
+        <TopLine Value="29"/>
+        <CursorPos X="47" Y="58"/>
         <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit70>
       <Unit71>
         <Filename Value="..\lib\own\coremodules\threadmanagers.pas"/>
         <UnitName Value="threadmanagers"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="114"/>
-        <CursorPos X="17" Y="154"/>
+        <TopLine Value="1"/>
+        <CursorPos X="48" Y="39"/>
         <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit71>
@@ -628,7 +630,7 @@
         <UsageCount Value="11"/>
       </Unit74>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="12" HistoryIndex="11">
       <Position1>
         <Filename Value="..\lib\own\coremodules\threadmanagers.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -669,6 +671,14 @@
         <Filename Value="coreloops.pas"/>
         <Caret Line="152" Column="13" TopLine="115"/>
       </Position10>
+      <Position11>
+        <Filename Value="..\lib\own\coremodules\threadmanagers.pas"/>
+        <Caret Line="138" Column="59" TopLine="115"/>
+      </Position11>
+      <Position12>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="55" Column="3" TopLine="42"/>
+      </Position12>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

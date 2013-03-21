@@ -119,6 +119,11 @@ end;
 procedure TCoreLoop.tick;
 begin
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
+      if (tick_ mod 120 = 0) then
+            begin
+                serviceman.printThreadStatus('Service Manager', logger);
+                compserviceman.printThreadStatus('Computation Manager', logger);
+            end;
       if (tick_ mod myConfID.receive_servers_each = 0) then begin retrieveParams; Sleep(1000); retrieveServers; end;
       if (tick_ mod myConfID.receive_nodes_each = 0) then retrieveClients;
       if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;

@@ -55,6 +55,7 @@ begin
 
   Inc(current_threads_);
   slots_[slot] := compThread;
+  names_[slot] := 'TComputationServiceThread';
   updateStatus;
 
   Result := slot;

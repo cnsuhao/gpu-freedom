@@ -36,7 +36,7 @@ type
     function  hasResources() : Boolean;
     function  getCurrentThreads() : Longint;
 
-    procedure printThreadStatus(var logger : TLogger);
+    procedure printThreadStatus(name : String; var logger : TLogger);
 
 
   protected
@@ -135,12 +135,15 @@ begin
    Result := (current_threads_<max_threads_);
 end;
 
-procedure TThreadManager.printThreadStatus(var logger : TLogger);
+procedure TThreadManager.printThreadStatus(name : String; var logger : TLogger);
 var i   : Longint;
     msg : String;
 begin
   logger.log(LVL_DEBUG, '********************************');
-  logger.log(LVL_DEBUG, 'Service Manager status');
+  logger.log(LVL_DEBUG, name+' status');
+  logger.log(LVL_DEBUG, 'Current threads: '+IntToSTr(current_threads_));
+  logger.log(LVL_DEBUG, 'Max     threads: '+IntToSTr(max_threads_));
+
   for i:=1 to current_threads_ do
      begin
       if Assigned(slots_[i]) then
@@ -149,7 +152,7 @@ begin
                  if slots_[i].isErroneus() then msg := msg+'ERROR ' else msg := msg+'OK    ';
                  if slots_[i].isDone() then msg := msg+'Done.      ' else msg := msg+'Running... ';
                end
-      else msg := 'nil';
+      else msg := 'nil         ';
       logger.log(IntToStr(i)+': '+msg+' '+names_[i]);
      end; // for
 
