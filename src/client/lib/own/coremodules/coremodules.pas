@@ -31,7 +31,7 @@ interface
 uses
   Classes, SysUtils,
   pluginmanagers, methodcontrollers, specialcommands, resultcollectors,
-  frontendmanagers, loggers, stkconstants;
+  frontendmanagers, loggers, stkconstants, stacks;
 
 type TCoreModule = class(TObject)
     constructor Create(logger : TLogger; path, extension : String);
@@ -56,10 +56,14 @@ end;
 implementation
 
 constructor TCoreModule.Create(logger : TLogger; path, extension : String);
+var error : TStkError;
 begin
    inherited Create();
    logger_         := logger;
    plugman_        := TPluginManager.Create(path+PLUGIN_FOLDER+PathDelim+LIB_FOLDER, extension, logger_);
+   logger_.log(LVL_DEBUG, 'TPluginManager> Loading plugins');
+   plugman_.loadAll(error);
+   logger_.log(LVL_DEBUG, 'TPluginManager> Exit status '+IntToStr(error.ErrorID));
    methController_ := TMethodController.Create();
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();

@@ -78,19 +78,32 @@ begin
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
 
        tempFolder := appPath_+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
-       job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjobpath, jobqueuerow_.workunitresultpath);
-       job_.stack.temporaryFolder:= tempFolder;
-
        logger_.log(LVL_DEBUG, logHeader_+'Starting computation of job '+jobqueuerow_.job);
        logger_.log(LVL_DEBUG, logHeader_+'Incoming workunit is '+jobqueuerow_.workunitjobpath);
        logger_.log(LVL_DEBUG, logHeader_+'Outgoing workunit will be '+jobqueuerow_.workunitresultpath);
        logger_.log(LVL_DEBUG, logHeader_+'Temporary folder is '+tempFolder);
 
-       parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
-       parser.parse();
-       parser.Free;
+       try
+          job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjobpath, jobqueuerow_.workunitresultpath);
+          job_.stack.temporaryFolder:= tempFolder;
+
+          parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
+          parser.parse();
+          parser.Free;
+
+       except
+         on e : Exception do
+             begin
+               logger_.log(LVL_SEVERE, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
+               workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
+               erroneous_ := true;
+               done_ := true;
+               Exit;
+             end;
+       end;
 
        // now it is time to persist the result in TBJOBRESULT
+
        jobresultrow_.jobresultid := IntToStr(thrdid_);
        jobresultrow_.jobdefinitionid:=jobqueuerow_.jobdefinitionid;
        jobresultrow_.jobqueueid:=jobqueuerow_.jobqueueid;
