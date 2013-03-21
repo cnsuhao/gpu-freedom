@@ -1,22 +1,22 @@
-unit servicemanagers;
+unit compservicemanagers;
  {
-   TServiceThreadManager handles all services available to the GPU core.servicemanagers
-   and is a TThreadManager descendant
+   TCompServiceThreadManager handles all computational services for the GPU core.
+   compservicemanager is a TThreadManager descendant
 
-   (c) by 2010 HB9TVM and the GPU Team
+   (c) by 2010-2013 HB9TVM and the GPU Team
 }
 
 interface
 
 uses
-  threadmanagers, coreservices, identities, Sysutils;
+  threadmanagers, coreservices, computationservices, identities, Sysutils;
 
-type TServiceThreadManager = class(TThreadManager)
+type TCompServiceThreadManager = class(TThreadManager)
    public
     constructor Create(maxThreads : Longint);
     destructor Destroy;
 
-    function launch(serviceThread : TCoreServiceThread): Longint;
+    function launch(compThread : TComputationServiceThread): Longint;
 
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
@@ -25,17 +25,17 @@ end;
 
 implementation
 
-constructor TServiceThreadManager.Create(maxThreads : Longint);
+constructor TCompServiceThreadManager.Create(maxThreads : Longint);
 begin
   inherited Create(maxThreads);
 end;
 
-destructor TServiceThreadManager.Destroy;
+destructor TCompServiceThreadManager.Destroy;
 begin
 end;
 
 
-function TServiceThreadManager.launch(serviceThread : TCoreServiceThread): Longint;
+function TCompServiceThreadManager.launch(compThread : TComputationServiceThread): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -54,15 +54,15 @@ begin
             end;
 
   Inc(current_threads_);
-  slots_[slot] := serviceThread;
+  slots_[slot] := compThread;
   updateStatus;
 
   Result := slot;
-  serviceThread.Resume();
+  compThread.Resume();
   CS_.Leave;
 end;
 
-procedure TServiceThreadManager.updateStatus;
+procedure TCompServiceThreadManager.updateStatus;
 begin
   TMServiceStatus.maxthreads := max_threads_;
   TMServiceStatus.threads := current_threads_;
@@ -70,13 +70,13 @@ begin
   TMServiceStatus.hasResources := hasResources();
 end;
 
-procedure TServiceThreadManager.setMaxThreads(x: Longint);
+procedure TCompServiceThreadManager.setMaxThreads(x: Longint);
 begin
   inherited setMaxThreads(x);
   updateStatus();
 end;
 
-procedure TServiceThreadManager.clearFinishedThreads;
+procedure TCompServiceThreadManager.clearFinishedThreads;
 begin
   inherited clearFinishedThreads;
   updateStatus();

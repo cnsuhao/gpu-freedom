@@ -5,7 +5,7 @@ interface
 uses
   SysUtils,
   loggers, lockfiles, coreconfigurations,  identities,
-  coremodules, servicefactories, servicemanagers,
+  coremodules, servicefactories, servicemanagers, compservicemanagers,
   servermanagers, dbtablemanagers, coreservices,
   receiveparamservices, receiveserverservices,
   receiveclientservices, transmitclientservices,
@@ -28,6 +28,7 @@ type TCoreLoop = class(TObject)
     procedure stop;
 
     function getCoreMonitor : TCoreMonitor;
+    function waitingForShutdown : Boolean;
 
   private
     path_,
@@ -140,6 +141,12 @@ begin
             Inc(days_);
          end;
       serviceman.clearFinishedThreads;
+end;
+
+function TCoreLoop.waitingForShutdown : Boolean;
+begin
+   serviceman.clearFinishedThreads;
+   Result := not serviceman.isIdle();
 end;
 
 procedure TCoreLoop.stop;

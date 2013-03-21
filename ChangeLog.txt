@@ -4,6 +4,7 @@ GPU freedom branch
 21.3.2013 git
 Core Client: added some more fields to tbjobqueue (statusdesc, workunitjobpath, workunitresultpath) and to tbjobqueuehistory (statusdesc, message)
 			 revised status for tbjobqueue
+			 better core shoutdown, waiting for services to finish
 			 implementeted dbcompthreadmanager to handle db aware computation services
 
 20.3.2013 git
