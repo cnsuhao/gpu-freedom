@@ -10,7 +10,7 @@ uses
   loggers, dbtablemanagers, receiveclientservices, transmitclientservices,
   receiveserverservices, receiveparamservices,
   receivechannelservices, transmitchannelservices,
-  receivejobservices, transmitjobservices, jobtables,
+  receivejobservices, transmitjobservices, jobdefinitiontables,
   receivejobresultservices, transmitjobresultservices, jobresulttables,
   coreconfigurations;
 
@@ -63,7 +63,7 @@ procedure TTestServices.TestReceiveParamService;
 var rcvparamThread : TReceiveParamServiceThread;
     srv            : TServerRecord;
 begin
-  serverMan_.getSuperServer(srv);
+  serverMan_.getDefaultServer(srv);
   rcvparamThread := srvFactory_.createReceiveParamService(srv);
   serviceMan_.launch(rcvparamThread);
   waitForCompletion();
@@ -74,7 +74,7 @@ procedure TTestServices.TestReceiveServerService;
 var rcvserverThread : TReceiveServerServiceThread;
     srv             : TServerRecord;
 begin
-  serverMan_.getSuperServer(srv);
+  serverMan_.getDefaultServer(srv);
   rcvserverThread := srvFactory_.createReceiveServerService(srv);
   serviceMan_.launch(rcvserverThread);
   waitForCompletion();
@@ -104,7 +104,7 @@ procedure TTestServices.TestReceiveChannelService;
 var thread : TReceiveChannelServiceThread;
     srv    : TServerRecord;
 begin
-  serverMan_.getSuperServer(srv);
+  serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createReceiveChannelService(srv, 'Altos', 'CHAT');
   serviceMan_.launch(thread);
   waitForCompletion();
@@ -114,7 +114,7 @@ procedure TTestServices.TestTransmitChannelService;
 var thread : TTransmitChannelServiceThread;
     srv    : TServerRecord;
 begin
-  serverMan_.getSuperServer(srv);
+  serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createTransmitChannelService(srv, 'Altos', 'CHAT', 'hello world :-)');
   serviceMan_.launch(thread);
   waitForCompletion();

@@ -11,7 +11,8 @@ uses
   lockfiles, loggers, SysUtils,
   coreconfigurations, dbtablemanagers, servermanagers,
   coremodules, servicefactories, servicemanagers, compservicemanagers,
-  workflowmanagers, identities;
+  workflowmanagers, identities, pluginmanagers, methodcontrollers,
+  resultcollectors, frontendmanagers;
 
 var
    logger         : TLogger;
@@ -44,15 +45,15 @@ begin
   conf      := TCoreConfiguration.Create(path);
   conf.loadConfiguration();
 
-  tableman := TDbTableManager.Create(path+PathDelim+'gpucore.db');
+  tableman          := TDbTableManager.Create(path+PathDelim+'gpucore.db');
   tableman.OpenAll;
-  serverman := TServerManager.Create(conf, tableman.getServerTable(), logger);
-  workflowman      := TWorkflowManager.Create(tableman, logger);
+  serverman         := TServerManager.Create(conf, tableman.getServerTable(), logger);
+  workflowman       := TWorkflowManager.Create(tableman, logger);
 
-  coremodule       := TCoreModule.Create(logger, path, 'dll');
-  servicefactory   := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
-  serviceman       := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
-  compserviceman   := TCompServiceThreadManager.Create(tmCompStatus.maxthreads);
+  coremodule        := TCoreModule.Create(logger, path, 'dll');
+  servicefactory    := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf, coremodule);
+  serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
+  compserviceman    := TCompServiceThreadManager.Create(tmCompStatus.maxthreads);
 
   lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 
@@ -61,10 +62,10 @@ end;
 procedure discardCoreObjects;
 begin
   serviceman.free;
+  compserviceman.Free;
   servicefactory.free;
   workflowman.free;
   coremodule.free;
-
   serverman.Free;
   tableman.CloseAll;
   tableman.Free;

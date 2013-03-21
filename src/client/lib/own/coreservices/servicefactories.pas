@@ -15,12 +15,15 @@ uses
   receivejobservices, transmitjobservices,
   receivejobresultservices, transmitjobresultservices,
   receivejobstatservices, transmitackjobservices, workflowmanagers,
-  coreconfigurations, jobdefinitiontables, jobresulttables;
+  coreconfigurations, jobdefinitiontables, jobresulttables,
+  computationservices, coremodules, pluginmanagers, frontendmanagers,
+  methodcontrollers, resultcollectors;
 
 type TServiceFactory = class(TObject)
    public
     constructor Create(var workflowMan : TWorkflowManager; var servMan : TServerManager;
-                       var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
+                       var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration;
+                       var coreModule : TCoreModule);
     destructor Destroy;
 
     function createReceiveClientService(var srv : TServerRecord)  : TReceiveClientServiceThread;
@@ -39,6 +42,8 @@ type TServiceFactory = class(TObject)
     function createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;
     function createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
 
+    function createComputationService() : TComputationServiceThread;
+
    private
 
      servMan_      : TServerManager;
@@ -48,18 +53,22 @@ type TServiceFactory = class(TObject)
      proxy_,
      port_         : String;
      conf_         : TCoreConfiguration;
+     core_         : TCoreModule;
+
 
 end;
 
 implementation
 
 constructor TServiceFactory.Create(var workflowMan : TWorkflowManager; var servMan : TServerManager;
-                                   var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration);
+                                   var tableMan : TDbTableManager; proxy, port : String; var logger : TLogger; var conf : TCoreConfiguration;
+                                   var coreModule : TCoreModule);
 begin
  servMan_  := servMan;
  tableMan_ := tableMan;
  logger_   := logger;
  workflowMan_ := workflowMan;
+ core_     := coreModule;
 
  proxy_    := proxy;
  port_     := port;
@@ -68,6 +77,7 @@ end;
 
 destructor TServiceFactory.Destroy;
 begin
+ inherited Destroy;
 end;
 
 function TServiceFactory.createReceiveClientService(var srv : TServerRecord) : TReceiveClientServiceThread;
@@ -131,6 +141,19 @@ end;
 function TServiceFactory.createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
 begin
  Result := TTransmitAckJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+end;
+
+function TServiceFactory.createComputationService() : TComputationServiceThread;
+var plugman : TPluginManager;
+    meth    : TMethodController;
+    res     : TResultCollector;
+    front   : TFrontendManager;
+begin
+ plugman := core_.getPluginManager();
+ meth    := core_.getMethController();
+ res     := core_.getResultCollector();
+ front   := core_.getFrontendManager();
+ Result := TComputationServiceThread.Create(plugman, meth, res, front, workflowman_, tableman_, logger_);
 end;
 
 end.
