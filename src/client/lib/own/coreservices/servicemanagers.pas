@@ -16,11 +16,12 @@ type TServiceThreadManager = class(TThreadManager)
     constructor Create(maxThreads : Longint);
     destructor Destroy;
 
-    function launch(serviceThread : TCoreServiceThread): Longint;
+    function launch(serviceThread : TCoreServiceThread; threadname : String): Longint;
 
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
     procedure updateStatus; virtual;
+
 end;
 
 implementation
@@ -35,7 +36,7 @@ begin
 end;
 
 
-function TServiceThreadManager.launch(serviceThread : TCoreServiceThread): Longint;
+function TServiceThreadManager.launch(serviceThread : TCoreServiceThread; threadname : String): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
@@ -55,12 +56,14 @@ begin
 
   Inc(current_threads_);
   slots_[slot] := serviceThread;
+  names_[slot] := threadName;
   updateStatus;
 
   Result := slot;
   serviceThread.Resume();
   CS_.Leave;
 end;
+
 
 procedure TServiceThreadManager.updateStatus;
 begin

@@ -13,7 +13,7 @@ interface
 uses SyncObjs, SysUtils,
      jobs, computationthreads, stkconstants, identities, pluginmanagers,
      methodcontrollers, resultcollectors, frontendmanagers,
-     managedthreads;
+     managedthreads, loggers;
 
 type
   TThreadManager = class(TObject)
@@ -36,12 +36,16 @@ type
     function  hasResources() : Boolean;
     function  getCurrentThreads() : Longint;
 
+    procedure printThreadStatus(var logger : TLogger);
+
+
   protected
     max_threads_, 
     current_threads_ : Longint;
     is_idle_         : Boolean;
 
     slots_        : Array[1..MAX_MANAGED_THREADS] of TManagedThread;
+    names_        : Array[1..MAX_MANAGED_THREADS] of String;
 
     CS_           : TCriticalSection;
 
@@ -129,6 +133,28 @@ end;
 function  TThreadManager.hasResources() : Boolean;
 begin
    Result := (current_threads_<max_threads_);
+end;
+
+procedure TThreadManager.printThreadStatus(var logger : TLogger);
+var i   : Longint;
+    msg : String;
+begin
+  logger.log(LVL_DEBUG, '********************************');
+  logger.log(LVL_DEBUG, 'Service Manager status');
+  for i:=1 to current_threads_ do
+     begin
+      if Assigned(slots_[i]) then
+               begin
+                 msg := '';
+                 if slots_[i].isErroneus() then msg := msg+'ERROR ' else msg := msg+'OK    ';
+                 if slots_[i].isDone() then msg := msg+'Done.      ' else msg := msg+'Running... ';
+               end
+      else msg := 'nil';
+      logger.log(IntToStr(i)+': '+msg+' '+names_[i]);
+     end; // for
+
+  logger.log(LVL_DEBUG, '********************************');
+
 end;
 
 

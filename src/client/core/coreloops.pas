@@ -171,7 +171,7 @@ function    TCoreLoop.launch(var thread : TCoreServiceThread; tname : String; va
 var slot : Longint;
 begin
    Result := true;
-   slot := serviceman.launch(thread);
+   slot := serviceman.launch(thread, tname);
    if slot=-1 then
          begin
            Result := false;
