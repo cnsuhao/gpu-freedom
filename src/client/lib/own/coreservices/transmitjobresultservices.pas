@@ -60,14 +60,14 @@ begin
  tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
 
-  if workflowman_.getJobQueueWorkflow().changeStatusFromCompletedToTransmitted(jobqueuerow_) then
+  if workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_) then
          logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to TRANSMITTED.');
 end;
 
 
 procedure TTransmitJobResultServiceThread.Execute;
 begin
-   if not workflowman_.getJobQueueWorkflow().findRowInStatusCompleted(jobqueuerow_) then
+   if not workflowman_.getJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPLETED. Exit.');
            Exit;

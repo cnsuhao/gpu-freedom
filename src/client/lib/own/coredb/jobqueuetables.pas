@@ -11,18 +11,23 @@ interface
 
 uses sqlite3ds, db, coretables, SysUtils;
 
+
 const
   // for status column, all jobs go to this workflow
-  JS_NEW                   = 10;
-  JS_RETRIEVING_WORKUNIT   = 20;
-  JS_WORKUNIT_RETRIEVED    = 30;
+  // if you add, remove values, you need to change the function
+  // JobQueueStatusToString
+  JS_NEW                   = 0;
+  JS_RETRIEVING_WORKUNIT   = 10;
+  JS_WORKUNIT_RETRIEVED    = 20;
+  JS_ACKNOWLEDGING         = 30;
   JS_READY                 = 40;
   JS_RUNNING               = 50;
-  JS_COMPLETED             = 60;
+  JS_COMPUTED              = 60;
   JS_TRANSMITTING_WORKUNIT = 70;
   JS_WORKUNIT_TRANSMITTED  = 80;
-  JS_TRANSMITTED           = 90;
-  JS_CLEANUP               = 100;
+  JS_TRANSMITTING_RESULT   = 90;
+  JS_COMPLETED             = 100;
+  JS_WU_CLEANEDUP          = 900;
   JS_ERROR                 = 999;
 
 type TJobStatus      = Longint;
@@ -63,17 +68,42 @@ type TDbJobQueueTable = class(TDbCoreTable)
     procedure delete(var row : TDbJobQueueRow);
     function  findRowInStatus(var row : TDbJobQueueRow; status : TJobStatus) : Boolean;
     function  findRowWithJobQueueId(var row : TDbJobQueueRow; jobqueueid : String) : Boolean;
+
   private
     procedure createDbTable();
     procedure fillRow(var row : TDbJobQueueRow);
   end;
 
+function JobQueueStatusToString(status : Longint) : String;
+
 implementation
+
+
 
 constructor TDbJobQueueTable.Create(filename : String);
 begin
   inherited Create(filename, 'tbjobqueue', 'id');
   createDbTable();
+end;
+
+function JobQueueStatusToString(status : Longint) : String;
+begin
+  Result := 'Unknown Satus in JobQueueStatusToString()';
+  case status of
+    JS_NEW                   : Result := 'NEW';
+    JS_RETRIEVING_WORKUNIT   : Result := 'RETRIEVING_WORKUNIT';
+    JS_WORKUNIT_RETRIEVED    : Result := 'WORKUNIT_RETRIEVED';
+    JS_ACKNOWLEDGING         : Result := 'ACKNOWLEDGING';
+    JS_READY                 : Result := 'READY';
+    JS_RUNNING               : Result := 'RUNNING';
+    JS_COMPUTED              : Result := 'COMPUTED';
+    JS_TRANSMITTING_WORKUNIT : Result := 'TRANSMITING_WORKUNIT';
+    JS_WORKUNIT_TRANSMITTED  : Result := 'WORKUNIT_TRANSMITTED';
+    JS_TRANSMITTING_RESULT   : Result := 'TRANSMITTING_RESULT';
+    JS_COMPLETED             : Result := 'COMPLETED';
+    JS_WU_CLEANEDUP          : Result := 'WORKUNIT_CLEANED_UP';
+    JS_ERROR                 : Result := 'ERROR';
+  end;
 end;
 
 procedure TDbJobQueueTable.createDbTable();
@@ -123,7 +153,7 @@ begin
 
   dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
   dataset_.FieldByName('status').AsInteger := row.status;
-  dataset_.FieldByName('statusdesc').AsString := row.statusdesc;
+  dataset_.FieldByName('statusdesc').AsString := JobQueueStatusToString(row.status);
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
   dataset_.FieldByName('job').AsString := row.job;
   dataset_.FieldByName('jobtype').AsString := row.jobtype;

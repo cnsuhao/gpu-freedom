@@ -96,7 +96,7 @@ begin
        jobresultrow_.nodename := myGPUID.nodename;
        jobresultrow_.walltime := job_.computedTime;
        tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
-       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToCompleted(jobqueuerow_);
+       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
 
        erroneous_ := job_.hasError;
        job_.Free;

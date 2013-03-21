@@ -16,13 +16,13 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
 
        function findRowInStatusNew(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusReady(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusComputed(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusCompleted(var row : TDbJobQueueRow) : Boolean;
-       function findRowInStatusTransmitted(var row : TDbJobQueueRow) : Boolean;
 
        function changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromReadyToRunning(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromRunningToCompleted(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromRunningToComputed(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
 
      private
        function findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
@@ -51,9 +51,9 @@ begin
   Result := findRowInStatus(row, JS_COMPLETED);
 end;
 
-function TJobQueueWorkflow.findRowInStatusTransmitted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.findRowInStatusComputed(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := findRowInStatus(row, JS_TRANSMITTED);
+  Result := findRowInStatus(row, JS_COMPUTED);
 end;
 
 function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
@@ -66,14 +66,14 @@ begin
   Result := changeStatus(row, JS_READY, JS_RUNNING);
 end;
 
-function TJobQueueWorkflow.changeStatusFromRunningToCompleted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromRunningToComputed(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_RUNNING, JS_COMPLETED);
+  Result := changeStatus(row, JS_RUNNING, JS_COMPUTED);
 end;
 
-function TJobQueueWorkflow.changeStatusFromCompletedToTransmitted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPLETED, JS_TRANSMITTED);
+  Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED);
 end;
 
 function TJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
