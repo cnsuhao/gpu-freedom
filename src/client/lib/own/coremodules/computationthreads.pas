@@ -17,7 +17,8 @@ type
   TComputationThread = class(TManagedThread)
    public
     constructor Create(var plugman : TPluginManager; var meth : TMethodController;
-                       var res : TResultCollector; var frontman : TFrontendManager); overload;
+                       var res : TResultCollector; var frontman : TFrontendManager;
+                       waiting : Boolean); overload;
 
     constructor Create(var plugman : TPluginManager; var meth : TMethodController;
                        var res : TResultCollector; var frontman : TFrontendManager;
@@ -45,9 +46,10 @@ type
 implementation
 
 constructor TComputationThread.Create(var plugman : TPluginManager; var meth : TMethodController;
-                                      var res : TResultCollector; var frontman : TFrontendManager);
+                                      var res : TResultCollector; var frontman : TFrontendManager;
+                                      waiting : Boolean);
 begin
-  inherited Create(false); // running
+  inherited Create(waiting);
 
   plugman_ := plugman;
   methController_ := meth;
@@ -59,7 +61,7 @@ constructor TComputationThread.Create(var plugman : TPluginManager; var meth : T
                                       var res : TResultCollector; var frontman : TFrontendManager;
                                       var job : TJob; thrdId : Longint);
 begin
-  Create(plugman, meth, res, frontman);
+  Create(plugman, meth, res, frontman, false); // running thread
   job_ := job;
   thrdId_ := thrdId;
 end;

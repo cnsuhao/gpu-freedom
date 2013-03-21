@@ -46,12 +46,13 @@ constructor TComputationServiceThread.Create(var plugman : TPluginManager; var m
                                              var workflowman : TWorkflowManager; var tableman : TDbTableManager;
                                              var logger : TLogger);
 begin
-  inherited Create(plugman, meth, res, frontman); // running
   workflowman_ := workflowman;
   tableman_    := tableman;
   logger_      := logger;
   logHeader_   := 'TComputationServiceThread> ';
   appPath_     := ExtractFilePath(ParamStr(0));
+
+  inherited Create(plugman, meth, res, frontman, true); // waiting, will be activated by resum in compservicemanagers
 end;
 
 

@@ -64,10 +64,10 @@ end;
 
 procedure TCompServiceThreadManager.updateStatus;
 begin
-  TMServiceStatus.maxthreads := max_threads_;
-  TMServiceStatus.threads := current_threads_;
-  TMServiceStatus.isIdle  := isIdle();
-  TMServiceStatus.hasResources := hasResources();
+  tmCompStatus.maxthreads := max_threads_;
+  tmCompStatus.threads := current_threads_;
+  tmCompStatus.isIdle  := isIdle();
+  tmCompStatus.hasResources := hasResources();
 end;
 
 procedure TCompServiceThreadManager.setMaxThreads(x: Longint);

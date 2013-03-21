@@ -10,8 +10,8 @@ interface
 uses
   lockfiles, loggers, SysUtils,
   coreconfigurations, dbtablemanagers, servermanagers,
-  coremodules, servicefactories, servicemanagers, workflowmanagers,
-  identities;
+  coremodules, servicefactories, servicemanagers, compservicemanagers,
+  workflowmanagers, identities;
 
 var
    logger         : TLogger;
@@ -21,6 +21,7 @@ var
    coremodule     : TCoreModule;
    servicefactory : TServiceFactory;
    serviceman     : TServiceThreadManager;
+   compserviceman : TCompServiceThreadManager;
    workflowman    : TWorkflowManager;
 
    // lockfiles
@@ -51,7 +52,7 @@ begin
   coremodule       := TCoreModule.Create(logger, path, 'dll');
   servicefactory   := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf);
   serviceman       := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
-
+  compserviceman   := TCompServiceThreadManager.Create(tmCompStatus.maxthreads);
 
   lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 
