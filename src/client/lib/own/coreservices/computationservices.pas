@@ -65,6 +65,15 @@ begin
     begin
        workflowman_.getJobQueueWorkflow().changeStatusFromReadyToRunning(jobqueuerow_);
 
+       if (jobqueuerow_.workunitjobpath<>'') and (not FileExists(jobqueuerow_.workunitjobpath)) then
+          begin
+             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job workunit does not exist: '+jobqueuerow_.workunitjobpath);
+             erroneous_ := true;
+             done_ := true;
+             Exit;
+          end;
+
+
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
 
        tempFolder := appPath_+PathDelim+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
@@ -96,8 +105,24 @@ begin
        jobresultrow_.nodename := myGPUID.nodename;
        jobresultrow_.walltime := job_.computedTime;
        tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
-       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
 
+       if job_.stack.workunitOutgoing<>jobqueuerow_.workunitresultpath then
+          begin
+             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job attempted to change outgoing workunit: '+jobqueuerow_.workunitresultpath+' * '+job_.stack.workunitOutgoing);
+             erroneous_ := true;
+             done_ := true;
+             Exit;
+          end;
+
+       if (jobqueuerow_.workunitresultpath<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
+          begin
+             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job did not create outgoing workunit: '+jobqueuerow_.workunitresultpath);
+             erroneous_ := true;
+             done_ := true;
+             Exit;
+          end;
+
+       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
        erroneous_ := job_.hasError;
        job_.Free;
     end
