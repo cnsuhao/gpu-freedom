@@ -68,9 +68,12 @@ try
                dbqueuerow.workunitjob     := Trim(node.FindNode('workunitjob').TextContent);
                dbqueuerow.workunitresult  := Trim(node.FindNode('workunitresult').TextContent);
                if dbqueuerow.workunitjob<>'' then
-                 dbqueuerow.workunitjob:= appPath_+WORKUNIT_FOLDER+PathDelim+INCOMING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob;
+                 dbqueuerow.workunitjobpath:= appPath_+WORKUNIT_FOLDER+PathDelim+INCOMING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob
+               else  dbqueuerow.workunitjobpath:='';
                if dbqueuerow.workunitresult<>'' then
-                 dbqueuerow.workunitresult:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob;
+                 dbqueuerow.workunitresultpath:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+dbqueuerow.workunitjob
+               else
+                 dbqueuerow.workunitresultpath:='';
 
                nodeid := node.FindNode('nodeid').TextContent;
                dbqueuerow.nodeid := nodeid;

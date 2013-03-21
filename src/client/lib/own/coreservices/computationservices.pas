@@ -68,12 +68,12 @@ begin
        thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
 
        tempFolder := appPath_+PathDelim+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
-       job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjob, jobqueuerow_.workunitresult);
+       job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjobpath, jobqueuerow_.workunitresultpath);
        job_.stack.temporaryFolder:= tempFolder;
 
        logger_.log(LVL_DEBUG, logHeader_+'Starting computation of job '+jobqueuerow_.job);
-       logger_.log(LVL_DEBUG, logHeader_+'Incoming workunit is '+jobqueuerow_.workunitjob);
-       logger_.log(LVL_DEBUG, logHeader_+'Outgoing workunit will be '+jobqueuerow_.workunitjob);
+       logger_.log(LVL_DEBUG, logHeader_+'Incoming workunit is '+jobqueuerow_.workunitjobpath);
+       logger_.log(LVL_DEBUG, logHeader_+'Outgoing workunit will be '+jobqueuerow_.workunitresultpath);
        logger_.log(LVL_DEBUG, logHeader_+'Temporary folder is '+tempFolder);
 
        parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);

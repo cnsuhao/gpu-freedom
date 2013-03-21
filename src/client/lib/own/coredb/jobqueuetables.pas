@@ -32,12 +32,15 @@ type TDbJobQueueRow = record
    id              : Longint;
    jobdefinitionid : String;
    status          : Longint;
+   statusdesc      : String;
    server_id       : Longint;
    jobqueueid      : String;
    job             : AnsiString;
    jobtype         : String;
    workunitjob,
-   workunitresult  : String;
+   workunitjobpath,
+   workunitresult,
+   workunitresultpath : String;
    nodeid,
    nodename        : String;
    requireack,
@@ -81,13 +84,16 @@ begin
     begin
       FieldDefs.Clear;
       FieldDefs.Add('id', ftAutoInc);
+      FieldDefs.Add('jobqueueid', ftString);
       FieldDefs.Add('jobdefinitionid', ftString);
       FieldDefs.Add('status', ftInteger);
-      FieldDefs.Add('jobqueueid', ftString);
+      FieldDefs.Add('statusdesc', ftString);
       FieldDefs.Add('job', ftString);
       FieldDefs.Add('jobtype', ftString);
       FieldDefs.Add('workunitjob', ftString);
+      FieldDefs.Add('workunitjobpath', ftString);
       FieldDefs.Add('workunitresult', ftString);
+      FieldDefs.Add('workunitresultpath', ftString);
       FieldDefs.Add('nodeid', ftString);
       FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('requireack', ftBoolean);
@@ -117,11 +123,14 @@ begin
 
   dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
   dataset_.FieldByName('status').AsInteger := row.status;
+  dataset_.FieldByName('statusdesc').AsString := row.statusdesc;
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
   dataset_.FieldByName('job').AsString := row.job;
   dataset_.FieldByName('jobtype').AsString := row.jobtype;
   dataset_.FieldByName('workunitjob').AsString := row.workunitjob;
+  dataset_.FieldByName('workunitjobpath').AsString := row.workunitjobpath;
   dataset_.FieldByName('workunitresult').AsString := row.workunitresult;
+  dataset_.FieldByName('workunitresultpath').AsString := row.workunitresultpath;
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('requireack').AsBoolean := row.requireack;
@@ -184,11 +193,13 @@ procedure TDbJobQueueTable.fillRow(var row : TDbJobQueueRow);
 begin
      row.jobdefinitionid := dataset_.FieldByName('jobdefinitionid').AsString;
      row.status          := dataset_.FieldByName('status').AsInteger;
+     row.statusdesc      := dataset_.FieldByName('statusdesc').AsString;
      row.jobqueueid      := dataset_.FieldByName('jobqueueid').AsString;
      row.job             := dataset_.FieldByName('job').AsString;
      row.jobtype         := dataset_.FieldByName('jobtype').AsString;
      row.workunitjob     := dataset_.FieldByName('workunitjob').AsString;
-     row.workunitresult  := dataset_.FieldByName('workunitresult').AsString;
+     row.workunitjobpath := dataset_.FieldByName('workunitjobpath').AsString;
+     row.workunitresultpath  := dataset_.FieldByName('workunitresultpath').AsString;
      row.nodeid          := dataset_.FieldByName('nodeid').AsString;
      row.nodename        := dataset_.FieldByName('nodename').AsString;
      row.requireack      := dataset_.FieldByName('requireack').AsBoolean;
