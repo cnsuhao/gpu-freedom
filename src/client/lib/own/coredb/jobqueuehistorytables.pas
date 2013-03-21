@@ -6,13 +6,15 @@ unit jobqueuehistorytables;
 }
 interface
 
-uses sqlite3ds, db, coretables, SysUtils;
+uses sqlite3ds, db, coretables, jobqueuetables, SysUtils;
 
 
 type TDbJobQueueHistoryRow = record
    id              : Longint;
    jobqueueid      : String;
    status          : Longint;
+   statusdesc,
+   message         : String;
    create_dt       : TDateTime;
 end;
 
@@ -43,6 +45,8 @@ begin
       FieldDefs.Add('id', ftAutoInc);
       FieldDefs.Add('jobqueueid', ftString);
       FieldDefs.Add('status', ftInteger);
+      FieldDefs.Add('statusdesc', ftString);
+      FieldDefs.Add('message', ftString);
       FieldDefs.Add('create_dt', ftDateTime);
       CreateTable;
     end; {if not TableExists}
@@ -54,6 +58,8 @@ begin
   dataset_.Append;
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
   dataset_.FieldByName('status').AsInteger := row.status;
+  dataset_.FieldByName('statusdesc').AsString := JobQueueStatusToString(row.status);
+  dataset_.FieldByName('message').AsString := row.message;
   dataset_.FieldByName('create_dt').AsDateTime := Now;
   dataset_.Post;
   dataset_.ApplyUpdates;

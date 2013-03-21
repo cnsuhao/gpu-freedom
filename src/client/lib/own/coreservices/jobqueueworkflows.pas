@@ -23,10 +23,11 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
        function changeStatusFromReadyToRunning(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRunningToComputed(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
 
      private
        function findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
-       function changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
+       function changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus; message : String) : Boolean;
 end;
 
 implementation
@@ -58,25 +59,31 @@ end;
 
 function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_NEW, JS_READY);
+  Result := changeStatus(row, JS_NEW, JS_READY, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromReadyToRunning(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_READY, JS_RUNNING);
+  Result := changeStatus(row, JS_READY, JS_RUNNING, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromRunningToComputed(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_RUNNING, JS_COMPUTED);
+  Result := changeStatus(row, JS_RUNNING, JS_COMPUTED, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED);
+  Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED, '');
 end;
 
-function TJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus) : Boolean;
+
+function TJobQueueWorkflow.changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
+begin
+  Result := changeStatus(row, row.status, JS_ERROR, errormsg);
+end;
+
+function TJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus; message : String) : Boolean;
 var
    dbqueuehistoryrow : TDbJobQueueHistoryRow;
 begin
@@ -84,7 +91,7 @@ begin
   if row.status<>fromS then
         begin
           logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
-                                   IntToStr(fromS)+' because row has status '+IntToStr(row.status));
+                                   JobQueueStatusToString(fromS)+' because row has status '+JobQueueStatusToString(row.status));
           Exit;
         end;
 
@@ -95,6 +102,7 @@ begin
 
     dbqueuehistoryrow.status     := row.status;
     dbqueuehistoryrow.jobqueueid := row.jobqueueid;
+    dbqueuehistoryrow.message    := message;
 
     tableman_.getJobQueueTable().insertOrUpdate(row);
     tableman_.getJobQueueHistoryTable().insert(dbqueuehistoryrow);
@@ -102,12 +110,12 @@ begin
   except
     on e : Exception  do
         logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
-                                   IntToStr(fromS)+' because of Exception '+e.ToString);
+                                   JobQueueStatusToString(fromS)+' because of Exception '+e.ToString);
   end;
 
   CS_.Leave;
   if Result then logger_.log(LVL_DEBUG, 'Jobqueue row '+row.jobdefinitionid+' changed status from '+
-                                         IntToStr(fromS)+' to status '+IntToStr(row.status));
+                                         JobQueueStatusToString(fromS)+' to status '+JobQueueStatusToString(row.status));
 end;
 
 function TJobQueueWorkflow.findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
@@ -119,7 +127,7 @@ begin
   except
     on e : Exception  do
         logger_.log(LVL_SEVERE, 'Internal error: Not possible to retrieve row in status '+
-                                   IntToStr(s)+' because of Exception '+e.ToString);
+                                   JobQueueStatusToString(s)+' because of Exception '+e.ToString);
   end;
 
   CS_.Leave;
