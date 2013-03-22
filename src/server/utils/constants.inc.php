@@ -39,4 +39,8 @@ $jobs_to_be_distributed_at_once = 1;
 // Retransmission interval in seconds for jobs which require an acknowledgment
 $retransmission_interval = 7200;
 
+// [Workunit Management]
+$workunitjobs_folder    = "jobs/";
+$workunitresults_folder = "results/";
+
 ?>
