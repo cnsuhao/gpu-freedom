@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="65" Y="76"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="102"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -209,10 +209,13 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="52"/>
-        <CursorPos X="6" Y="72"/>
+        <TopLine Value="251"/>
+        <CursorPos X="34" Y="219"/>
         <UsageCount Value="43"/>
+        <Loaded Value="True"/>
       </Unit23>
       <Unit24>
         <Filename Value="..\lib\own\coreservices\receivejobresultservices.pas"/>
@@ -487,7 +490,6 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <UnitName Value="jobqueueworkflows"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="146"/>
@@ -647,7 +649,7 @@
         <UsageCount Value="10"/>
       </Unit77>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="6" HistoryIndex="5">
       <Position1>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <Caret Line="44" Column="47" TopLine="35"/>
@@ -668,6 +670,10 @@
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
         <Caret Line="46" Column="99" TopLine="20"/>
       </Position5>
+      <Position6>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="72" Column="6" TopLine="52"/>
+      </Position6>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
