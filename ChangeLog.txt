@@ -1,11 +1,16 @@
 ******************
 GPU freedom branch
 
+22.3.2013 git
+Core Client: Fixed ERangeCheckError in TComputationServiceThread
+			 Milestone: the GPU engine is integrated in core. Core computed 13+12 succesfully :-P
+
 21.3.2013 git
 Core Client: added some more fields to tbjobqueue (statusdesc, workunitjobpath, workunitresultpath) and to tbjobqueuehistory (statusdesc, message)
 			 revised status for tbjobqueue
 			 better core shoutdown, waiting for services to finish
 			 implementeted dbcompthreadmanager to handle db aware computation services
+			 implemented routine to implement the internal status of a tthreadmanager
 
 20.3.2013 git
 Core Client: creating a db aware computation thread which takes jobs from jobqueue in status READY,

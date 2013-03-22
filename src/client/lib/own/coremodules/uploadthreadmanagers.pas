@@ -55,6 +55,7 @@ begin
 
   Inc(current_threads_);
   slots_[slot] := TUploadThread.Create(url, sourcePath, sourceFilename, proxy_, port_, logger_);
+  names_[slot] := 'TUploadThread';
   updateStatus;
 
   Result := slot;

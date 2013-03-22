@@ -54,6 +54,7 @@ begin
             end;
 
   Inc(current_threads_);
+  compThread.setSlot(slot);
   slots_[slot] := compThread;
   names_[slot] := 'TComputationServiceThread';
   updateStatus;

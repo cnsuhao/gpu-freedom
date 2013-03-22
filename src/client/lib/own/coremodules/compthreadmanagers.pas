@@ -85,6 +85,7 @@ begin
   
   Inc(current_threads_);  
   slots_[slot] := TComputationThread.Create(plugman_, meth_, rescollector_, frontman_, job, slot);
+  names_[slot] := 'TComputationThread';
   updateStatus;
 
   Result := slot;

@@ -88,6 +88,7 @@ begin
   
   Inc(current_threads_);  
   slots_[slot] := TDownloadThread.Create(url, targetPath, targetFilename, proxy_, port_, logger_);
+  names_[slot] := 'TDownloadThread';
   updateStatus;
 
   Result := slot;

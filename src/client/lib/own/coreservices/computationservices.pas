@@ -25,6 +25,8 @@ type
                        var workflowman : TWorkflowManager; var tableman : TDbTableManager;
                        var logger : TLogger);
 
+    procedure   setSlot(var slot : Longint);
+
    protected
     procedure Execute; override;
 
@@ -36,6 +38,7 @@ type
     logger_         : TLogger;
     logHeader_      : String;
     appPath_        : String;
+    slot_           : Longint; // slot in computationservicemanager
 
    end;
 
@@ -51,10 +54,15 @@ begin
   logger_      := logger;
   logHeader_   := 'TComputationServiceThread> ';
   appPath_     := ExtractFilePath(ParamStr(0));
+  slot_        := 1; // will be reset before the method call with setSlot
 
   inherited Create(plugman, meth, res, frontman, true); // waiting, will be activated by resum in compservicemanagers
 end;
 
+procedure TComputationServiceThread.setSlot(var slot : Longint);
+begin
+  slot_ := slot;
+end;
 
 procedure  TComputationServiceThread.Execute;
 var parser : TJobParser;
@@ -75,8 +83,6 @@ begin
           end;
 
 
-       thrdid_ := Round(Random(1000000)); // TODO: check what is this used for
-
        tempFolder := appPath_+WORKUNIT_FOLDER+PathDelim+TEMP_WU_FOLDER;
        logger_.log(LVL_DEBUG, logHeader_+'Starting computation of job '+jobqueuerow_.job);
        logger_.log(LVL_DEBUG, logHeader_+'Incoming workunit is '+jobqueuerow_.workunitjobpath);
@@ -87,7 +93,7 @@ begin
           job_ := TJob.Create(jobqueuerow_.job, jobqueuerow_.workunitjobpath, jobqueuerow_.workunitresultpath);
           job_.stack.temporaryFolder:= tempFolder;
 
-          parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, thrdId_);
+          parser := TJobParser.Create(plugman_, methController_, rescoll_, frontman_, job_, slot_);
           parser.parse();
           parser.Free;
 

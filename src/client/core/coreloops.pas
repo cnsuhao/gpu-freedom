@@ -65,7 +65,7 @@ begin
   logHeader_ := 'gpucore> ';
 
   coremonitor_ := TCoreMonitor.Create();
-  loadCoreObjects('gpucore');
+  loadCoreObjects('gpucore', 'GPU Core');
 end;
 
 destructor TCoreLoop.Destroy;
@@ -79,11 +79,6 @@ end;
 procedure TCoreLoop.start;
 begin
   coremonitor_.coreStarted;
-  logger.logCR; logger.logCR;
-  logger.logCR; logger.logCR;
-  logger.log(LVL_INFO, logHeader_+'********************');
-  logger.log(LVL_INFO, logHeader_+'* Core launched ...*');
-  logger.log(LVL_INFO, logHeader_+'********************');
   // main loop
   tick_ := 1;
   days_ := 0;

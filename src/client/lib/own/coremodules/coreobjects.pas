@@ -30,18 +30,24 @@ var
 
 
 
-procedure loadCoreObjects(logFile : String);
+procedure loadCoreObjects(logFile, componentname : String);
 procedure discardCoreObjects;
 
 implementation
 
-procedure loadCoreObjects(logFile : String);
+procedure loadCoreObjects(logFile, componentname : String);
 var
    path : String;
 begin
   path := extractFilePath(ParamStr(0));
 
   logger    := TLogger.Create(path+PathDelim+'logs', logFile+'.log', logFile+'.old', LVL_DEBUG, 1024*1024);
+  logger.logCR; logger.logCR;
+  logger.logCR; logger.logCR;
+  logger.log(LVL_INFO, '********************');
+  logger.log(LVL_INFO, '* '+componentname+' launched ...');
+  logger.log(LVL_INFO, '********************');
+
   conf      := TCoreConfiguration.Create(path);
   conf.loadConfiguration();
 
