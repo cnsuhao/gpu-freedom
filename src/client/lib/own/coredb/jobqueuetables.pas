@@ -27,7 +27,7 @@ const
   JS_WORKUNIT_TRANSMITTED  = 80;
   JS_TRANSMITTING_RESULT   = 90;
   JS_COMPLETED             = 100;
-  JS_WU_CLEANEDUP          = 900;
+  JS_WORKUNITS_CLEANEDUP   = 800;
   JS_ERROR                 = 999;
 
 type TJobStatus      = Longint;
@@ -101,7 +101,7 @@ begin
     JS_WORKUNIT_TRANSMITTED  : Result := 'WORKUNIT_TRANSMITTED';
     JS_TRANSMITTING_RESULT   : Result := 'TRANSMITTING_RESULT';
     JS_COMPLETED             : Result := 'COMPLETED';
-    JS_WU_CLEANEDUP          : Result := 'WORKUNIT_CLEANED_UP';
+    JS_WORKUNITS_CLEANEDUP   : Result := 'WORKUNIT_CLEANED_UP';
     JS_ERROR                 : Result := 'ERROR';
   end;
 end;
