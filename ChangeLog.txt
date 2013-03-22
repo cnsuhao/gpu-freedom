@@ -4,6 +4,8 @@ GPU freedom branch
 22.3.2013 git
 Core Client: Fixed ERangeCheckError in TComputationServiceThread
 			 Milestone: the GPU engine is integrated in core. Core computed 9+2=11 succesfully :-P
+			 Documenting the jobqueueworkflow in docs/dev/jobqueue-workflow-client.png
+			 Implementing the workflow in jobqueueworkflows.pas
 
 21.3.2013 git
 Core Client: added some more fields to tbjobqueue (statusdesc, workunitjobpath, workunitresultpath) and to tbjobqueuehistory (statusdesc, message)
