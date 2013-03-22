@@ -1,0 +1,1 @@
+here, processed workunits from clients are stored. The workunits contain computational results.

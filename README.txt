@@ -108,8 +108,8 @@ File Tree structure for this package, codenamed freedom follows:
    /stylesheet stylesheet directory to convert XML output into HTML
    /test       scripts to test server integrity	   
    /utils      php scripts for general use
-   /workunit   where workunits are stored
-      /quests    workunits ready for delivery
+   /workunits    where workunits are stored
+      /jobs      workunits ready for delivery
       /results   computed workunits received from clients
 	  
 /playground       code which could become a plugin or a frontend of GPU
