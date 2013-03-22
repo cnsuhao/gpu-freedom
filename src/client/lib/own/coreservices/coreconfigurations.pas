@@ -2,7 +2,7 @@ unit coreconfigurations;
 
 interface
 
-uses identities, syncObjs, inifiles, SysUtils;
+uses identities, syncObjs, inifiles, loggers, SysUtils;
 
 const
  GPU_CLIENT_VERSION           = 0.1;
@@ -34,8 +34,7 @@ type TCoreConfiguration = class(TObject)
  private
   path_      : String;
 
-  ini_,
-  inicore_   : TInifile;
+  ini_       : TInifile;
 
 end;
 
@@ -47,16 +46,12 @@ begin
   inherited Create;
 
   path_ := path;
-
-  ini_     := TInifile.Create(path_+'appgui.ini');
-  inicore_ := TInifile.Create(path_+'appcore.ini');
-
+  ini_     := TInifile.Create(path_+'gpu.ini');
 end;
 
 destructor TCoreConfiguration.Destroy;
 begin
  ini_.Free;
- inicore_.Free;
  inherited Destroy;
 end;
 
@@ -93,8 +88,8 @@ begin
       bits           := ini_.ReadInteger('core','bits',32);
       isScreensaver  := ini_.ReadBool('core','isrscreensaver',false);
       nbCPUs         := ini_.ReadInteger('core','nbcpus',1);
-      Uptime         := inicore_.ReadFloat('core','uptime',0);
-      TotalUptime    := inicore_.ReadFloat('core','totaluptime',0);
+      Uptime         := ini_.ReadFloat('core','uptime',0);
+      TotalUptime    := ini_.ReadFloat('core','totaluptime',0);
       CPUType        := ini_.ReadString('core','cputype','AMD');
 
       Longitude      := ini_.ReadFloat('core','longitude',7);
@@ -122,18 +117,20 @@ begin
 
       proxy                   := ini_.ReadString('communication','proxy', DEF_PROXY);
       port                    := ini_.ReadString('communication','port',  DEF_PORT);
-      default_superserver_url := inicore_.ReadString('communication','default_superserver_url', DEF_SUPERSERVER_URL);
-      default_server_name     := inicore_.ReadString('communication', 'default_server_name','Altos');
+      default_superserver_url := ini_.ReadString('communication','default_superserver_url', DEF_SUPERSERVER_URL);
+      default_server_name     := ini_.ReadString('communication', 'default_server_name','Altos');
 
-      receive_servers_each   := inicore_.ReadInteger('global','receive_servers_each',14400);
-      receive_nodes_each     := inicore_.ReadInteger('global','receive_nodes_each',120);
-      transmit_node_each     := inicore_.ReadInteger('global','transmit_node_each',180);
-      receive_jobs_each      := inicore_.ReadInteger('global','receive_jobs_each',120);
-      transmit_jobs_each     := inicore_.ReadInteger('global','transmit_jobs_each',120);
-      receive_channels_each  := inicore_.ReadInteger('global','receive_channels_each',120);
-      transmit_channels_each := inicore_.ReadInteger('global','transmit_channels_each',130);
-      receive_chat_each      := inicore_.ReadInteger('global','receive_chat_each',45);
-      purge_server_after_failures := inicore_.ReadInteger('global','purge_server_after_failures',30);
+      loglevel                := ini_.ReadInteger('logger', 'loglevel', LVL_DEFAULT);
+
+      receive_servers_each   := ini_.ReadInteger('global','receive_servers_each',14400);
+      receive_nodes_each     := ini_.ReadInteger('global','receive_nodes_each',120);
+      transmit_node_each     := ini_.ReadInteger('global','transmit_node_each',180);
+      receive_jobs_each      := ini_.ReadInteger('global','receive_jobs_each',120);
+      transmit_jobs_each     := ini_.ReadInteger('global','transmit_jobs_each',120);
+      receive_channels_each  := ini_.ReadInteger('global','receive_channels_each',120);
+      transmit_channels_each := ini_.ReadInteger('global','transmit_channels_each',130);
+      receive_chat_each      := ini_.ReadInteger('global','receive_chat_each',45);
+      purge_server_after_failures := ini_.ReadInteger('global','purge_server_after_failures',30);
  end;
 
  with tmCompStatus do
@@ -210,6 +207,7 @@ begin
 
      ini_.WriteString('communication','proxy', proxy);
      ini_.WriteString('communication','port', port);
+
  end;
 
  with tmCompStatus do
@@ -238,24 +236,26 @@ procedure TCoreConfiguration.saveCoreConfiguration();
 begin
  with myGPUID do
     begin
-      inicore_.WriteFloat('core','uptime', uptime);
-      inicore_.WriteFloat('core','totaluptime', totaluptime);
+      ini_.WriteFloat('core','uptime', uptime);
+      ini_.WriteFloat('core','totaluptime', totaluptime);
     end;
 
  with myConfID do
  begin
-     inicore_.WriteString('communication','default_superserver_url', default_superserver_url);
-     inicore_.WriteString('communication', 'default_server_name', default_server_name);
+     ini_.WriteString('communication','default_superserver_url', default_superserver_url);
+     ini_.WriteString('communication', 'default_server_name', default_server_name);
 
-     inicore_.WriteInteger('global','receive_servers_each', receive_servers_each);
-     inicore_.WriteInteger('global','receive_nodes_each', receive_nodes_each);
-     inicore_.WriteInteger('global','transmit_node_each', transmit_node_each);
-     inicore_.WriteInteger('global','receive_jobs_each', receive_jobs_each);
-     inicore_.WriteInteger('global','transmit_jobs_each', transmit_jobs_each);
-     inicore_.WriteInteger('global','receive_channels_each', receive_channels_each);
-     inicore_.WriteInteger('global','transmit_channels_each', transmit_channels_each);
-     inicore_.WriteInteger('global','receive_chat_each', receive_chat_each);
-     inicore_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
+     ini_.WriteInteger('logger', 'loglevel', loglevel);
+
+     ini_.WriteInteger('global','receive_servers_each', receive_servers_each);
+     ini_.WriteInteger('global','receive_nodes_each', receive_nodes_each);
+     ini_.WriteInteger('global','transmit_node_each', transmit_node_each);
+     ini_.WriteInteger('global','receive_jobs_each', receive_jobs_each);
+     ini_.WriteInteger('global','transmit_jobs_each', transmit_jobs_each);
+     ini_.WriteInteger('global','receive_channels_each', receive_channels_each);
+     ini_.WriteInteger('global','transmit_channels_each', transmit_channels_each);
+     ini_.WriteInteger('global','receive_chat_each', receive_chat_each);
+     ini_.WriteInteger('global','purge_server_after_failures', purge_server_after_failures);
  end;
 end;
 

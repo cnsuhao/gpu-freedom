@@ -70,7 +70,6 @@ end;
 
 destructor TCoreLoop.Destroy;
 begin
- conf.saveCoreConfiguration();
  discardCoreObjects;
  coremonitor_.Free;
  inherited Destroy;
@@ -160,6 +159,8 @@ begin
   myGPUID.Uptime := 0;
   logger.log(LVL_INFO, logHeader_+'Total uptime is '+FloatToStr(myGPUID.TotalUptime)+'.');
   coremonitor_.coreStopped;
+  conf.saveCoreConfiguration();
+  logger.log(LVL_INFO, logHeader_+'Core configuration saved.');
 end;
 
 function TCoreLoop.getCoreMonitor : TCoreMonitor;

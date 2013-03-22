@@ -42,14 +42,20 @@ begin
   path := extractFilePath(ParamStr(0));
 
   logger    := TLogger.Create(path+PathDelim+'logs', logFile+'.log', logFile+'.old', LVL_DEBUG, 1024*1024);
+  conf      := TCoreConfiguration.Create(path);
+  conf.loadConfiguration();
+
+  logger.setLogLevel(myConfId.loglevel);
+  logger.logCR; logger.logCR;
+  logger.logCR; logger.logCR;
+  logger.logCR; logger.logCR;
+  logger.logCR; logger.logCR;
   logger.logCR; logger.logCR;
   logger.logCR; logger.logCR;
   logger.log(LVL_INFO, '********************');
   logger.log(LVL_INFO, '* '+componentname+' launched ...');
   logger.log(LVL_INFO, '********************');
 
-  conf      := TCoreConfiguration.Create(path);
-  conf.loadConfiguration();
 
   tableman          := TDbTableManager.Create(path+PathDelim+'gpucore.db');
   tableman.OpenAll;

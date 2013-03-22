@@ -74,6 +74,8 @@ type TConfIdentity = record
     transmit_channels_each,
     receive_chat_each,
     purge_server_after_failures : Longint;
+
+    loglevel : Longint;
 end;
 
 type

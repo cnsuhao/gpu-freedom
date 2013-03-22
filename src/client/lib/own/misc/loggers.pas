@@ -18,7 +18,7 @@ const
    LVL_INFO     = 20;
    LVL_DEBUG    = 10;
 
-   LVL_DEFAULT = LVL_INFO;
+   LVL_DEFAULT = LVL_DEBUG;
 
 type TLogger = class(TObject)
   public
