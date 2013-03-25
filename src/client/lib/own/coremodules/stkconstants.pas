@@ -21,7 +21,7 @@ const
   LIB_FOLDER         = 'lib';
 
   DEFAULT_COMP_THREADS    = 3;   // default number of computation threads
-  DEFAULT_DOWN_THREADS    = 6;   // default number of download threads
+  DEFAULT_COMM_THREADS    = 4;   // default number of communication threads (downloaders and uploaders)
   MAX_MANAGED_THREADS     = 16;  // maximum number of managed threads in ThreadManager
 
   MAX_STACK_PARAMS   = 256;          // Maximum size of Stack in Virtual Machine

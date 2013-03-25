@@ -14,18 +14,6 @@ uses SyncObjs, SysUtils,
      jobs, downloadthreads, stkconstants, identities, threadmanagers, loggers;
 
 
-type TCommThreadManager = class(TThreadManager)
-  public
-    constructor Create(var logger : TLogger);
-    destructor  Destroy();
-    procedure setProxy(proxy, port : String);
-
-  protected
-    logger_ : TLogger;
-    proxy_,
-    port_   : String;
-end;
-
 type
   TDownloadThreadManager = class(TCommThreadManager)
   public
@@ -41,26 +29,6 @@ end;
   
 implementation
 
-constructor TCommThreadManager.Create(var logger : TLogger);
-begin
-  inherited Create(DEFAULT_DOWN_THREADS);
-  logger_ := logger;
-  proxy_ := '';
-  port_ := '';
-end;
-
-destructor TCommThreadManager.Destroy();
-begin
-  inherited;
-end;
-
-procedure TCommThreadManager.setProxy(proxy, port : String);
-begin
- CS_.Enter;
- proxy_ := proxy;
- port_ := port;
- CS_.Leave;
-end;
 
 constructor TDownloadThreadManager.Create(var logger : TLogger);
 begin

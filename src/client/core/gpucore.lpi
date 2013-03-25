@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="65" Y="76"/>
-        <UsageCount Value="106"/>
+        <UsageCount Value="107"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -324,7 +324,7 @@
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="6"/>
         <CursorPos X="17" Y="30"/>
@@ -397,7 +397,7 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="102"/>
         <CursorPos X="119" Y="129"/>
@@ -471,7 +471,7 @@
       <Unit55>
         <Filename Value="..\lib\own\coreservices\transmitackjobservices.pas"/>
         <UnitName Value="transmitackjobservices"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="50"/>
         <CursorPos X="100" Y="88"/>
@@ -569,10 +569,12 @@
       <Unit67>
         <Filename Value="..\lib\own\coremodules\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="35"/>
-        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <CursorPos X="76" Y="24"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit67>
       <Unit68>
         <Filename Value="..\lib\own\misc\utils.pas"/>
@@ -601,15 +603,18 @@
       <Unit71>
         <Filename Value="..\lib\own\coremodules\threadmanagers.pas"/>
         <UnitName Value="threadmanagers"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="48" Y="39"/>
+        <TopLine Value="155"/>
+        <CursorPos X="32" Y="180"/>
         <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit71>
       <Unit72>
         <Filename Value="..\lib\own\coremodules\managedthreads.pas"/>
         <UnitName Value="managedthreads"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="6" Y="13"/>
@@ -644,8 +649,8 @@
         <UnitName Value="downloadthreadmanagers"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="11"/>
-        <CursorPos X="29" Y="91"/>
+        <TopLine Value="14"/>
+        <CursorPos X="109" Y="16"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit76>
@@ -660,16 +665,15 @@
       <Unit78>
         <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
         <UnitName Value="downloadservices"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="95"/>
+        <TopLine Value="1"/>
         <CursorPos X="26" Y="124"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit78>
     </Units>
-    <JumpHistory Count="15" HistoryIndex="14">
+    <JumpHistory Count="17" HistoryIndex="16">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="72" Column="6" TopLine="52"/>
@@ -730,6 +734,14 @@
         <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
         <Caret Line="44" Column="1" TopLine="85"/>
       </Position15>
+      <Position16>
+        <Filename Value="..\lib\own\coremodules\downloadthreadmanagers.pas"/>
+        <Caret Line="17" Column="1" TopLine="8"/>
+      </Position16>
+      <Position17>
+        <Filename Value="..\lib\own\coremodules\threadmanagers.pas"/>
+        <Caret Line="198" Column="9" TopLine="155"/>
+      </Position17>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

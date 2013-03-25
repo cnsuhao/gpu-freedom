@@ -52,6 +52,20 @@ type
     function findAvailableSlot() : Longint;
 
   end;
+
+
+
+type TCommThreadManager = class(TThreadManager)
+  public
+    constructor Create(var logger : TLogger);
+    destructor  Destroy();
+    procedure setProxy(proxy, port : String);
+
+  protected
+    logger_ : TLogger;
+    proxy_,
+    port_   : String;
+end;
   
 implementation
 
@@ -158,6 +172,29 @@ begin
 
   logger.log(LVL_DEBUG, '********************************');
 
+end;
+
+
+constructor TCommThreadManager.Create(var logger : TLogger);
+begin
+  inherited Create(DEFAULT_COMM_THREADS);
+  logger_ := logger;
+  proxy_ := '';
+  port_ := '';
+end;
+
+destructor TCommThreadManager.Destroy();
+begin
+  inherited;
+end;
+
+
+procedure TCommThreadManager.setProxy(proxy, port : String);
+begin
+ CS_.Enter;
+ proxy_ := proxy;
+ port_ := port;
+ CS_.Leave;
 end;
 
 
