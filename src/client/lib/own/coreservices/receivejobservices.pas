@@ -126,9 +126,9 @@ try
                // fast transition according to workflow in docs/dev/joqueue-workflow-client.jpg
                if Trim(dbqueuerow.workunitjob)='' then
                    begin
-                     workflowman_.getJobQueueWorkflow().changeStatusFromNewToWorkunitRetrieved(dbqueuerow, 'Fast transition: no workunit to be retrieved.');
+                     workflowman_.getJobQueueWorkflow().changeStatusFromNewToWorkunitRetrieved(dbqueuerow, logHeader_+'Fast transition: no workunit to be retrieved.');
                      if not dbqueuerow.requireack then
-                            workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(dbqueuerow, 'Fast transition: jobqueue does not require acknowledgement.');
+                            workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(dbqueuerow, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
                    end;
 
        node := node.NextSibling;

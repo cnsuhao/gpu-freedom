@@ -1,8 +1,8 @@
 unit servicefactories;
  {
-   TServiceFactory creates all services available to the GPU core.servicemanagers
+   TServiceFactory creates all services available to the GPU core.
 
-   (c) by 2010 HB9TVM and the GPU Team
+   (c) by 2002-2013 HB9TVM and the GPU Team
 }
 
 interface
@@ -17,7 +17,8 @@ uses
   receivejobstatservices, transmitackjobservices, workflowmanagers,
   coreconfigurations, jobdefinitiontables, jobresulttables,
   computationservices, coremodules, pluginmanagers, frontendmanagers,
-  methodcontrollers, resultcollectors;
+  methodcontrollers, resultcollectors,
+  downloadservices;
 
 type TServiceFactory = class(TObject)
    public

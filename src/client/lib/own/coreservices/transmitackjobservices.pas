@@ -50,7 +50,6 @@ begin
  jobqueuerow_.server_id := srv_.id;
  jobqueuerow_.ack_dt    := Now;
 
- //TODO: this has to be changed
  if workflowman_.getJobQueueWorkflow().changeStatusFromAcknowledgingToReady(jobqueuerow_) then
          logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
 end;
@@ -68,7 +67,8 @@ begin
 
  if not jobqueuerow_.requireack then
         begin
-          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: found a job in status WORKUNIT_RETRIEVED which does not require acknowledgement.');
+          logger_.log(LVL_WARNING, logHeader_+'Found a job in status WORKUNIT_RETRIEVED which does not require acknowledgement.');
+          // either receivejobservices.pas or downloadservices.pas or local job inserted are charged with this transition.
           done_      := True;
           erroneous_ := True;
           Exit;
@@ -85,8 +85,8 @@ begin
                  end
                else
                  begin
+                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Problem in acknowledging job');
                    finishTransmit('Error in acknowledging job :-(');
-                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Problem in acknowledging job');
                  end;
          end;
 
