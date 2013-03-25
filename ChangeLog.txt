@@ -2,8 +2,9 @@
 GPU freedom branch
 
 25.3.2013 git
-Core Client: implementing some of the transitional shortcuts in the jobqueue workflow. 
+Core Client: implementing some of the transitional shortcuts in the jobqueue workflow in receivejobservices.pas and computationservices.pas. 
              implementing downloadservices.pas and downloadservicemanagers.pas, integrating them into core
+			 implementing uploadservices.pas and uploadservicemanagers.pas, integrating them into core
 
 22.3.2013 git
 Core Client: Fixed ERangeCheckError in TComputationServiceThread

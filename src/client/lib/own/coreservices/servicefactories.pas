@@ -18,7 +18,7 @@ uses
   coreconfigurations, jobdefinitiontables, jobresulttables,
   computationservices, coremodules, pluginmanagers, frontendmanagers,
   methodcontrollers, resultcollectors,
-  downloadservices, identities;
+  downloadservices, uploadservices, identities;
 
 type TServiceFactory = class(TObject)
    public
