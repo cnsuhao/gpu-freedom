@@ -53,12 +53,10 @@ begin
     end;
 
   logger.log(LVL_INFO, 'Normal core shutdown initiated, due to lockfile removal.');
-  serviceman.printThreadStatus('Service Manager', logger);
-  compserviceman.printThreadStatus('Computation Manager', logger);
-  downserviceman.printThreadStatus('Download Manager', logger);
+  coreloop_.clearFinishedThreads;
+  coreloop_.printThreadManagersStatus;
 
   while coreloop_.waitingForShutdown do Sleep(300);
-
   logger.log(LVL_INFO, 'Core was shut down correctly.');
 end;
 

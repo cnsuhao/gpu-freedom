@@ -46,6 +46,7 @@ type TServiceFactory = class(TObject)
     function createComputationService() : TComputationServiceThread;
 
     function createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
+    function createUploadService(var srv : TServerRecord) : TUploadServiceThread;
 
    private
 
@@ -162,6 +163,11 @@ end;
 function TServiceFactory.createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
 begin
   Result := TDownloadServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+end;
+
+function TServiceFactory.createUploadService(var srv : TServerRecord) : TUploadServiceThread;
+begin
+  Result := TUploadServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
 end.

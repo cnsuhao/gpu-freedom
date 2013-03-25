@@ -15,6 +15,7 @@ uses
   transmitackjobservices, computationservices,
   jobdefinitiontables,
   downloadservices, downloadservicemanagers,
+  uploadservices, uploadservicemanagers,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -30,6 +31,9 @@ type TCoreLoop = class(TObject)
 
     function getCoreMonitor : TCoreMonitor;
     function waitingForShutdown : Boolean;
+
+    procedure clearFinishedThreads;
+    procedure printThreadManagersStatus;
 
   private
     path_,
@@ -56,6 +60,7 @@ type TCoreLoop = class(TObject)
 
     procedure   createDownloadService;
     procedure   createComputationService;
+    procedure   createUploadService;
 end;
 
 implementation
@@ -135,8 +140,9 @@ begin
       // ***************************************************
       // TODO: decide here how the coreloop functionality has to tick
       if (tick_ mod 11 = 1) then createDownloadService;
-      if (tick_ mod 13 = 2) then transmitAck;
-      if (tick_ mod 17 = 3) then createComputationService;
+      if (tick_ mod 13 = 1) then transmitAck;
+      if (tick_ mod 17 = 1) then createComputationService;
+      if (tick_ mod 21 = 1) then createUploadService;
 
       // ***************************************************
       // * TCoreLoop clock
@@ -150,19 +156,12 @@ begin
          end;
 
       if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
-      if (tick_ mod 120 = 0) then
-            begin
-                serviceman.printThreadStatus('Service Manager', logger);
-                compserviceman.printThreadStatus('Computation Manager', logger);
-                downserviceman.printThreadStatus('Download Manager', logger);
-            end;
+      if (tick_ mod 120 = 0) then printThreadManagersStatus;
 
       // ***************************************************
       // * Updating internal status of service managers
       // ***************************************************
-      serviceman.clearFinishedThreads;
-      compserviceman.clearFinishedThreads;
-      downserviceman.clearFinishedThreads;
+      clearFinishedThreads;
 end;
 
 function TCoreLoop.waitingForShutdown : Boolean;
@@ -351,6 +350,36 @@ begin
            logger.log(LVL_SEVERE, logHeader_+'Computation service launch failed, core too busy!')
    else
       logger.log(LVL_DEBUG, logHeader_+'Computation service started...');
+end;
+
+procedure  TCoreLoop.createUploadService;
+var upthread  : TUploadServiceThread;
+    srv       : TServerRecord;
+    slot      : Longint;
+begin
+  serverman.getDefaultServer(srv);
+  upThread := servicefactory.createUploadService(srv);
+  slot := upserviceman.launch(upthread);
+  if slot=-1 then
+      logger.log(LVL_SEVERE, logHeader_+'Upload service launch failed, core too busy!')
+  else
+      logger.log(LVL_DEBUG, logHeader_+'Upload service started...');
+end;
+
+procedure TCoreLoop.clearFinishedThreads;
+begin
+  serviceman.clearFinishedThreads;
+  compserviceman.clearFinishedThreads;
+  downserviceman.clearFinishedThreads;
+  upserviceman.clearFinishedThreads;
+end;
+
+procedure TCoreLoop.printThreadManagersStatus;
+begin
+  serviceman.printThreadStatus('Service Manager', logger);
+  compserviceman.printThreadStatus('Computation Manager', logger);
+  downserviceman.printThreadStatus('Download Manager', logger);
+  upserviceman.printThreadStatus('Upload Manager', logger);
 end;
 
 end.
