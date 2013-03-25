@@ -401,7 +401,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="102"/>
         <CursorPos X="119" Y="129"/>
-        <UsageCount Value="18"/>
+        <UsageCount Value="19"/>
         <Loaded Value="True"/>
       </Unit46>
       <Unit47>
@@ -663,13 +663,13 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="83"/>
-        <CursorPos X="95" Y="106"/>
+        <TopLine Value="95"/>
+        <CursorPos X="26" Y="124"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit78>
     </Units>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="72" Column="6" TopLine="52"/>
@@ -706,6 +706,30 @@
         <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
         <Caret Line="106" Column="29" TopLine="83"/>
       </Position9>
+      <Position10>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="102" Column="26" TopLine="85"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="44" Column="1" TopLine="1"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="65" Column="11" TopLine="53"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="116" Column="128" TopLine="94"/>
+      </Position13>
+      <Position14>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="123" Column="21" TopLine="94"/>
+      </Position14>
+      <Position15>
+        <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
+        <Caret Line="44" Column="1" TopLine="85"/>
+      </Position15>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
