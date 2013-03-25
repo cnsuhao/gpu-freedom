@@ -6,6 +6,7 @@ Core Client: implementing some of the transitional shortcuts in the jobqueue wor
              implementing downloadservices.pas and downloadservicemanagers.pas, integrating them into core
 			 implementing uploadservices.pas and uploadservicemanagers.pas, integrating them into core
 			 integrating result transmission into workflow. The full workflow is implemented, but needs to be tested.
+			 refactoring the workflow with additional stati: FOR_WU_RETRIEVAL, FOR_WU_TRANSMISSION, FOR_ACKNOWLEDGMENT, FOR_RESULT_TRANSMISSION
 
 22.3.2013 git
 Core Client: Fixed ERangeCheckError in TComputationServiceThread
