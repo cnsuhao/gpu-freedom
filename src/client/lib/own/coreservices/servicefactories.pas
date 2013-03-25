@@ -18,7 +18,7 @@ uses
   coreconfigurations, jobdefinitiontables, jobresulttables,
   computationservices, coremodules, pluginmanagers, frontendmanagers,
   methodcontrollers, resultcollectors,
-  downloadservices;
+  downloadservices, identities;
 
 type TServiceFactory = class(TObject)
    public
@@ -44,6 +44,8 @@ type TServiceFactory = class(TObject)
     function createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
 
     function createComputationService() : TComputationServiceThread;
+
+    function createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
 
    private
 
@@ -155,6 +157,11 @@ begin
  res     := core_.getResultCollector();
  front   := core_.getFrontendManager();
  Result := TComputationServiceThread.Create(plugman, meth, res, front, workflowman_, tableman_, logger_);
+end;
+
+function TServiceFactory.createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
+begin
+  Result := TDownloadServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
 end.

@@ -9,14 +9,14 @@ unit servicemanagers;
 interface
 
 uses
-  threadmanagers, coreservices, identities, Sysutils;
+  threadmanagers, coreservices, identities, loggers, Sysutils;
 
 type TServiceThreadManager = class(TThreadManager)
    public
-    constructor Create(maxThreads : Longint);
+    constructor Create(maxThreads : Longint; var logger : TLogger);
     destructor Destroy;
 
-    function launch(serviceThread : TCoreServiceThread; threadname : String): Longint;
+    function launch(var serviceThread : TCoreServiceThread; threadname : String): Longint;
 
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
@@ -26,9 +26,9 @@ end;
 
 implementation
 
-constructor TServiceThreadManager.Create(maxThreads : Longint);
+constructor TServiceThreadManager.Create(maxThreads : Longint; var logger : TLogger);
 begin
-  inherited Create(maxThreads);
+  inherited Create(maxThreads, logger);
 end;
 
 destructor TServiceThreadManager.Destroy;
@@ -36,13 +36,15 @@ begin
 end;
 
 
-function TServiceThreadManager.launch(serviceThread : TCoreServiceThread; threadname : String): Longint;
+function TServiceThreadManager.launch(var serviceThread : TCoreServiceThread; threadname : String): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
   Result := -1;
   if not hasResources() then
        begin
+        logger_.log(LVL_WARNING, 'No resources in TServiceThreadManager, releasing service.');
+        if Assigned(serviceThread) then serviceThread.Free;
         CS_.Leave;
         Exit;
        end;

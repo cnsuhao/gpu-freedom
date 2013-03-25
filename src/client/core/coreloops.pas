@@ -14,6 +14,7 @@ uses
   transmitjobservices, transmitjobresultservices,
   transmitackjobservices, computationservices,
   jobdefinitiontables,
+  downloadservices, downloadservicemanagers,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -53,6 +54,7 @@ type TCoreLoop = class(TObject)
     procedure   transmitJobResult;
     procedure   transmitAck;
 
+    procedure   createDownloadService;
     procedure   createComputationService;
 end;
 
@@ -82,6 +84,7 @@ begin
   tick_ := 1;
   days_ := 0;
 
+  logger.log(LVL_INFO, logHeader_+'Bootstrapping core...');
   retrieveParams;
   Sleep(1000);
   //TODO: enable this!!
@@ -96,54 +99,70 @@ begin
   Sleep(1000);
   retrieveJobs;
   Sleep(1000);
-  retrieveJobResults;
-  Sleep(1000);
-  retrieveJobStats;
-
-  { // u./sed to test Job transmission and Joresult transmission
-  Sleep(1000);
-  transmitJob;
-  Sleep(1000);
-  transmitJobResult;
-  Sleep(1000);
-  transmitAck;
-  }
+  logger.log(LVL_INFO, logHeader_+'Core bootstrapped!');
 end;
 
 procedure TCoreLoop.tick;
+var receiveServers,
+    receiveJobs,
+    transmitJobs    : Longint;
 begin
-      if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
-      if (tick_ mod 120 = 0) then
-            begin
-                serviceman.printThreadStatus('Service Manager', logger);
-                compserviceman.printThreadStatus('Computation Manager', logger);
-            end;
-      if (tick_ mod myConfID.receive_servers_each = 0) then begin retrieveParams; Sleep(1000); retrieveServers; end;
-      if (tick_ mod myConfID.receive_nodes_each = 0) then retrieveClients;
-      if (tick_ mod myConfID.transmit_node_each = 0) then transmitClient;
-      if (tick_ mod myConfID.receive_channels_each = 0) then retrieveChannels;
-      if lf_morefrequentupdates.exists  and (tick_ mod 20 = 0) then retrieveChannels;
-      if (tick_ mod myConfId.receive_jobs_each = 0) then
-          begin
-            retrieveJobs;
-            retrieveJobStats;
-            retrieveJobResults;
-          end;
+      // ***************************************************
+      // * Services for synchronization with server
+      // ***************************************************
+      receiveServers := tick_ mod myConfID.receive_servers_each;
+      if (receiveServers = 3) then retrieveParams;
+      //TODO: enable this
+      //if (receiveServers = 4) then retrieveServers;
 
+      if (tick_ mod myConfID.receive_nodes_each = 5) then retrieveClients;
+      if (tick_ mod myConfID.transmit_node_each = 7) then transmitClient;
+      if (tick_ mod myConfID.receive_channels_each = 11) then retrieveChannels;
+      if lf_morefrequentupdates.exists  and (tick_ mod 13 = 0) then retrieveChannels;
+
+      receiveJobs := tick_ mod myConfId.receive_jobs_each;
+      if (receiveJobs = 0)  then retrieveJobs;
+      if (receiveJobs = 13) then retrieveJobResults;
+      if (receiveJobs = 29) then retrieveJobStats;
+
+      transmitJobs := tick_ mod myConfId.transmit_jobs_each;
+      //TODO: how is handling of transmitting jobs regulated?
+      //if (transmitJobs = 0) then transmitJob;
+      if (transmitJobs = 17) then transmitJobResult;
+
+      // ***************************************************
+      // * Services for internal jobqueue workflow
+      // ***************************************************
       // TODO: decide here how the coreloop functionality has to tick
-      if (tick_ mod 15 = 0) then transmitAck;
-      if (tick_ mod 17 = 0) then createComputationService;
+      if (tick_ mod 11 = 1) then createDownloadService;
+      if (tick_ mod 13 = 2) then transmitAck;
+      if (tick_ mod 17 = 3) then createComputationService;
 
+      // ***************************************************
+      // * TCoreLoop clock
+      // ***************************************************
       Inc(tick_);
       myGPUID.Uptime := myGPUID.Uptime+FRAC_SEC;
-
       if (tick_>=86400) then
          begin
             tick_ := 0;
             Inc(days_);
          end;
+
+      if (tick_ mod 60 = 0) then logger.log(LVL_DEBUG, logHeader_+'Running since '+FloatToStr(myGPUID.Uptime)+' days.');
+      if (tick_ mod 120 = 0) then
+            begin
+                serviceman.printThreadStatus('Service Manager', logger);
+                compserviceman.printThreadStatus('Computation Manager', logger);
+                downserviceman.printThreadStatus('Download Manager', logger);
+            end;
+
+      // ***************************************************
+      // * Updating internal status of service managers
+      // ***************************************************
       serviceman.clearFinishedThreads;
       compserviceman.clearFinishedThreads;
+      downserviceman.clearFinishedThreads;
 end;
 
 function TCoreLoop.waitingForShutdown : Boolean;
@@ -304,6 +323,21 @@ begin
   serverman.getDefaultServer(srv);
   transmitackthread  := servicefactory.createTransmitAckJobService(srv);
   if not launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob', srv) then transmitackthread.Free;
+end;
+
+procedure TCoreLoop.createDownloadService;
+var downthread  : TDownloadServiceThread;
+    srv         : TServerRecord;
+    slot        : Longint;
+begin
+  serverman.getDefaultServer(srv);
+  downThread := servicefactory.createDownloadService(srv);
+
+   slot := downserviceman.launch(downthread);
+   if slot=-1 then
+           logger.log(LVL_SEVERE, logHeader_+'Download service launch failed, core too busy!')
+   else
+      logger.log(LVL_DEBUG, logHeader_+'Download service started...');
 end;
 
 procedure TCoreLoop.createComputationService;

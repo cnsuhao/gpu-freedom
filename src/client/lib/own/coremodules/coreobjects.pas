@@ -12,7 +12,7 @@ uses
   coreconfigurations, dbtablemanagers, servermanagers,
   coremodules, servicefactories, servicemanagers, compservicemanagers,
   workflowmanagers, identities, pluginmanagers, methodcontrollers,
-  resultcollectors, frontendmanagers;
+  resultcollectors, frontendmanagers, downloadservicemanagers;
 
 var
    logger         : TLogger;
@@ -24,6 +24,7 @@ var
    serviceman     : TServiceThreadManager;
    compserviceman : TCompServiceThreadManager;
    workflowman    : TWorkflowManager;
+   downserviceman : TDownloadServiceManager;
 
    // lockfiles
    lf_morefrequentupdates : TLockFile;
@@ -64,8 +65,9 @@ begin
 
   coremodule        := TCoreModule.Create(logger, path, 'dll');
   servicefactory    := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf, coremodule);
-  serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads);
-  compserviceman    := TCompServiceThreadManager.Create(tmCompStatus.maxthreads);
+  serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads, logger);
+  compserviceman    := TCompServiceThreadManager.Create(tmCompStatus.maxthreads, logger);
+  downserviceman    := TDownloadServiceManager.Create(tmDownStatus.maxthreads, logger);
 
   lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 
@@ -75,6 +77,7 @@ procedure discardCoreObjects;
 begin
   serviceman.free;
   compserviceman.Free;
+  downserviceman.Free;
   servicefactory.free;
   workflowman.free;
   coremodule.free;

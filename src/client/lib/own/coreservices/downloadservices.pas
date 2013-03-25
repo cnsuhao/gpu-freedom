@@ -21,7 +21,7 @@ uses
 
 type TDownloadServiceThread = class(TManagedThread)
  public
-   constructor Create(var srv : TServerManager; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+   constructor Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                       proxy, port : String; var logger : TLogger);
 
  protected
@@ -34,7 +34,7 @@ type TDownloadServiceThread = class(TManagedThread)
     logHeader_,
     targetPath_,
     targetFile_  : String;
-    srv_         : TServerManager;
+    srv_         : TServerRecord;
     tableman_    : TDbTableManager;
     workflowman_ : TWorkflowManager;
     logger_      : TLogger;
@@ -48,7 +48,7 @@ end;
 implementation
 
 
-constructor TDownloadServiceThread.Create(var srv : TServerManager; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+constructor TDownloadServiceThread.Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                                    proxy, port : String; var logger : TLogger);
 begin
   inherited Create(true); // suspended
@@ -100,7 +100,10 @@ begin
 
           targetPath_ := ExtractFilePath(jobqueuerow_.workunitjobpath);
           targetFile_ := jobqueuerow_.workunitjob;
+          url_ := srv_.url+'/workunits/jobs/'+jobqueuerow_.workunitjob;
+
           adaptFileNameIfItAlreadyExists;
+
 
           erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
                         proxy_, port_,

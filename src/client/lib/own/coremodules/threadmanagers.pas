@@ -19,7 +19,7 @@ type
   TThreadManager = class(TObject)
   public
 
-    constructor Create(maxThreads : Longint);
+    constructor Create(maxThreads : Longint; var logger : TLogger);
     destructor  Destroy();
 
     // at regular intervals, this method needs to be called by the core
@@ -48,6 +48,7 @@ type
     names_        : Array[1..MAX_MANAGED_THREADS] of String;
 
     CS_           : TCriticalSection;
+    logger_       : TLogger;
 
     function findAvailableSlot() : Longint;
 
@@ -62,17 +63,18 @@ type TCommThreadManager = class(TThreadManager)
     procedure setProxy(proxy, port : String);
 
   protected
-    logger_ : TLogger;
     proxy_,
     port_   : String;
 end;
   
 implementation
 
-constructor TThreadManager.Create(maxThreads : Longint);
+constructor TThreadManager.Create(maxThreads : Longint; var logger : TLogger);
 var i : Longint;
 begin
   inherited Create();
+  logger_ := logger;
+
   if maxThreads>MAX_MANAGED_THREADS then
      raise Exception.Create('Internal error in threadmanagers.pas');
 
@@ -177,8 +179,7 @@ end;
 
 constructor TCommThreadManager.Create(var logger : TLogger);
 begin
-  inherited Create(DEFAULT_COMM_THREADS);
-  logger_ := logger;
+  inherited Create(DEFAULT_DOWNLOAD_THREADS, logger);
   proxy_ := '';
   port_ := '';
 end;

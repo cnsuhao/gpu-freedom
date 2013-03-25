@@ -9,14 +9,14 @@ unit compservicemanagers;
 interface
 
 uses
-  threadmanagers, coreservices, computationservices, identities, Sysutils;
+  threadmanagers, coreservices, computationservices, identities, loggers, Sysutils;
 
 type TCompServiceThreadManager = class(TThreadManager)
    public
-    constructor Create(maxThreads : Longint);
+    constructor Create(maxThreads : Longint; var logger : TLogger);
     destructor Destroy;
 
-    function launch(compThread : TComputationServiceThread): Longint;
+    function launch(var compThread : TComputationServiceThread): Longint;
 
     procedure setMaxThreads(x: Longint);
     procedure clearFinishedThreads;
@@ -25,9 +25,9 @@ end;
 
 implementation
 
-constructor TCompServiceThreadManager.Create(maxThreads : Longint);
+constructor TCompServiceThreadManager.Create(maxThreads : Longint; var logger : TLogger);
 begin
-  inherited Create(maxThreads);
+  inherited Create(maxThreads, logger);
 end;
 
 destructor TCompServiceThreadManager.Destroy;
@@ -35,13 +35,15 @@ begin
 end;
 
 
-function TCompServiceThreadManager.launch(compThread : TComputationServiceThread): Longint;
+function TCompServiceThreadManager.launch(var compThread : TComputationServiceThread): Longint;
 var slot : Longint;
 begin
   CS_.Enter;
   Result := -1;
   if not hasResources() then
        begin
+        logger_.log(LVL_WARNING, 'No resources in TCompServiceThreadManager, releasing service.');
+        if Assigned(compThread) then compThread.Free;
         CS_.Leave;
         Exit;
        end;

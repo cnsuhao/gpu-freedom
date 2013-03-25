@@ -20,9 +20,10 @@ const
   PLUGIN_FOLDER      = 'plugins';
   LIB_FOLDER         = 'lib';
 
-  DEFAULT_COMP_THREADS    = 3;   // default number of computation threads
-  DEFAULT_COMM_THREADS    = 4;   // default number of communication threads (downloaders and uploaders)
-  MAX_MANAGED_THREADS     = 16;  // maximum number of managed threads in ThreadManager
+  DEFAULT_COMP_THREADS     = 3;   // default number of computation threads
+  DEFAULT_DOWNLOAD_THREADS = 2;   // default number of downloaders
+  DEFAULT_UPLOAD_THREADS   = 2;   // default number of uploaders
+  MAX_MANAGED_THREADS      = 16;  // maximum number of managed threads in ThreadManager
 
   MAX_STACK_PARAMS   = 256;          // Maximum size of Stack in Virtual Machine
                                      // changes in this value or in TStack structure
