@@ -59,17 +59,14 @@ begin
  jobresultrow_.server_id := srv_.id;
  tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
-
-  //TODO: this has to be changed
-  workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, '');
 end;
 
 
 procedure TTransmitJobResultServiceThread.Execute;
 begin
-   if not workflowman_.getJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) then
+   if not workflowman_.getJobQueueWorkflow().findRowInStatusWorkunitTransmitted(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPUTED. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status WORKUNIT_TRANSMITTED. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
@@ -78,19 +75,26 @@ begin
   // retrieve jobresult for this jobqueue
   if not tableman_.getJobResultTable().findRowWithJobQueueId(jobresultrow_, jobqueuerow_.jobqueueid) then
          begin
-           logger_.log(LVL_SEVERE, logHeader_+'Internal error: Could not find jobresult with jobqueueid '+jobqueuerow_.jobqueueid+' although jobqueue is in status COMPUTED!');
+           logger_.log(LVL_SEVERE, logHeader_+'Internal error: Could not find jobresult with jobqueueid '+jobqueuerow_.jobqueueid+' although jobqueue is in status WORKUNIT_TRANSMITTED!');
            done_      := True;
            erroneous_ := True;
            Exit;
          end;
 
+ workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitTransmittedToTransmittingResult(jobqueuerow_);
  transmit('/jobqueue/report_jobresult.php?'+getPHPArguments(), false);
  if not erroneous_ then
     begin
         insertTransmission();
+        workflowman_.getJobQueueWorkflow().changeStatusFromTransmittingResultToCompleted(jobqueuerow_);
+        finishTransmit('Jobresult transmitted, this job went through the full workflow and reached the COMPLETED status :-)');
+    end
+   else
+    begin
+        workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Could not transmit jobresult!');
+        finishTransmit('Could not transmit jobresult :-(');
     end;
 
- finishTransmit('Jobresult transmitted :-)');
 end;
 
 end.

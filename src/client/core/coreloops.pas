@@ -130,10 +130,11 @@ begin
       if (receiveJobs = 13) then retrieveJobResults;
       if (receiveJobs = 29) then retrieveJobStats;
 
-      transmitJobs := tick_ mod myConfId.transmit_jobs_each;
-      //TODO: how is handling of transmitting jobs regulated?
-      //if (transmitJobs = 0) then transmitJob;
-      if (transmitJobs = 17) then transmitJobResult;
+      // TODO: how is handling of transmitting jobs regulated?
+      // isn't this a task for the GUI?
+      // transmitJobs := tick_ mod myConfId.transmit_jobs_each;
+      // if (transmitJobs = 0) then transmitJob;
+
 
       // ***************************************************
       // * Services for internal jobqueue workflow
@@ -143,6 +144,7 @@ begin
       if (tick_ mod 13 = 1) then transmitAck;
       if (tick_ mod 17 = 1) then createComputationService;
       if (tick_ mod 21 = 1) then createUploadService;
+      if (tick_ mod 23 = 1) then transmitJobResult;
 
       // ***************************************************
       // * TCoreLoop clock
