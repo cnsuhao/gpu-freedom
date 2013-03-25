@@ -39,11 +39,11 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
        function changeStatusFromCompletedToWorkunitsCleanedUp(var row : TDbJobQueueRow) : Boolean;
 
        // transition shortcuts
-       function changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromWorkunitRetrievedToReady(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromNewToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromComputedToCompleted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromWorkunitRetrievedToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 
        // error transition
        function changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
@@ -155,30 +155,30 @@ end;
 // ********************************
 // * transition shortcuts
 // ********************************
-function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromNewToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_NEW, JS_READY, '');
+  Result := changeStatus(row, JS_NEW, JS_READY, msgdesc);
 end;
 
-function TJobQueueWorkflow.changeStatusFromComputedToCompleted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromComputedToCompleted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED, '');
+  Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED, msgdesc);
 end;
 
-function TJobQueueWorkflow.changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_NEW, JS_WORKUNIT_RETRIEVED, '');
+  Result := changeStatus(row, JS_NEW, JS_WORKUNIT_RETRIEVED, msgdesc);
 end;
 
 
-function TJobQueueWorkflow.changeStatusFromWorkunitRetrievedToReady(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromWorkunitRetrievedToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_WORKUNIT_RETRIEVED, JS_READY, '');
+  Result := changeStatus(row, JS_WORKUNIT_RETRIEVED, JS_READY, msgdesc);
 end;
 
-function TJobQueueWorkflow.changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPUTED, JS_WORKUNIT_TRANSMITTED, '');
+  Result := changeStatus(row, JS_COMPUTED, JS_WORKUNIT_TRANSMITTED, msgdesc);
 end;
 
 // ********************************

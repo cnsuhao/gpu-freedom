@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+25.3.2013 git
+Core Client: implementing some of the transitional shortcuts in the jobqueue workflow. 
+
 22.3.2013 git
 Core Client: Fixed ERangeCheckError in TComputationServiceThread
 			 Milestone: the GPU engine is integrated in core. Core computed 9+2=11 succesfully :-P

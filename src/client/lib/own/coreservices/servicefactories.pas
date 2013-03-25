@@ -115,7 +115,7 @@ end;
 
 function TServiceFactory.createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
 begin
- Result := TReceiveJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+ Result := TReceiveJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
 function TServiceFactory.createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobDefinitionRow; var trandetails : TJobTransmissionDetails) : TTransmitJobServiceThread;

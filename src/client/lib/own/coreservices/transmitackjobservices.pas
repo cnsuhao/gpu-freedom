@@ -50,28 +50,45 @@ begin
  jobqueuerow_.server_id := srv_.id;
  jobqueuerow_.ack_dt    := Now;
 
- if workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_) then
+ //TODO: this has to be changed
+ if workflowman_.getJobQueueWorkflow().changeStatusFromAcknowledgingToReady(jobqueuerow_) then
          logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
 end;
 
 
 procedure TTransmitAckJobServiceThread.Execute;
 begin
- if not workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) then
+ if not workflowman_.getJobQueueWorkflow().findRowInStatusWorkUnitRetrieved(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status WORKUNIT_RETRIEVED. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
          end;
 
- if jobqueuerow_.requireack then
+ if not jobqueuerow_.requireack then
+        begin
+          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: found a job in status WORKUNIT_RETRIEVED which does not require acknowledgement.');
+          done_      := True;
+          erroneous_ := True;
+          Exit;
+        end
+ else
          begin
+           workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToAcknowledging(jobqueuerow_);
+           // Transmitting acknowledgement
            transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
-           if not erroneous_ then updateJobQueue();
-           finishTransmit('Job acknowledged :-)');
-     end
- else updateJobQueue;
+           if not erroneous_ then
+                 begin
+                   updateJobQueue();
+                   finishTransmit('Job acknowledged :-)');
+                 end
+               else
+                 begin
+                   finishTransmit('Error in acknowledging job :-(');
+                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Problem in acknowledging job');
+                 end;
+         end;
 
  done_      := True;
 end;

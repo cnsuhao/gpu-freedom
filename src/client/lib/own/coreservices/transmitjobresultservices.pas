@@ -60,7 +60,8 @@ begin
  tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
 
-  workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_);
+  //TODO: this has to be changed
+  workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, '');
 end;
 
 

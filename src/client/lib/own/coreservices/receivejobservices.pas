@@ -13,17 +13,18 @@ interface
 
 uses coreservices, servermanagers, dbtablemanagers,
      jobdefinitiontables, jobqueuetables, jobqueuehistorytables, loggers, downloadutils, coreconfigurations,
-     Classes, SysUtils, DOM, identities, synacode, stkconstants;
+     workflowmanagers, Classes, SysUtils, DOM, identities, synacode, stkconstants;
 
 type TReceiveJobServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; var tableman : TDbTableManager);
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 protected
     procedure Execute; override;
 
  private
-   appPath_ : String;
+   appPath_     : String;
+   workflowman_ : TWorkflowManager;
 
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
@@ -31,10 +32,11 @@ end;
 implementation
 
 constructor TReceiveJobServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                   var conf : TCoreConfiguration; var tableman : TDbTableManager);
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobServiceThread]> ', conf, tableman);
  appPath_     := ExtractFilePath(ParamStr(0));
+ workflowman_ := workflowman;
 end;
 
 
@@ -120,6 +122,14 @@ try
                tableman_.getJobQueueTable().insertOrUpdate(dbqueuerow);
                tableman_.getJobQueueHistoryTable().insert(dbqueuehistoryrow);
                logger_.log(LVL_DEBUG, logHeader_+'Updated or added job with jobdefinitionid: '+dbjobrow.jobdefinitionid+' to TBJOBDEFINITION and to TBJOBQUEUE table.');
+
+               // fast transition according to workflow in docs/dev/joqueue-workflow-client.jpg
+               if Trim(dbqueuerow.workunitjob)='' then
+                   begin
+                     workflowman_.getJobQueueWorkflow().changeStatusFromNewToWorkunitRetrieved(dbqueuerow, 'Fast transition: no workunit to be retrieved.');
+                     if not dbqueuerow.requireack then
+                            workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(dbqueuerow, 'Fast transition: jobqueue does not require acknowledgement.');
+                   end;
 
        node := node.NextSibling;
      end;  // while Assigned(node)
