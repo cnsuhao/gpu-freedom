@@ -136,7 +136,7 @@ begin
       targetFile_ := AltFileName;
 
       logger_.log(LVL_WARNING, logHeader_+'"'+targetFile_+'" exists, writing to "'+targetFile_+'"');
-      jobqueuerow_.workunitjob :=targetFile_;
+      jobqueuerow_.workunitjob     := targetFile_;
       jobqueuerow_.workunitjobpath := targetPath_+targetFile_;
       tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
     end;

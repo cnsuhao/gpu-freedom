@@ -101,7 +101,7 @@ begin
          on e : Exception do
              begin
                logger_.log(LVL_SEVERE, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
-               workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
+               workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
                erroneous_ := true;
                done_ := true;
                Exit;
@@ -128,7 +128,7 @@ begin
 
        if job_.stack.workunitOutgoing<>jobqueuerow_.workunitresultpath then
           begin
-             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job attempted to change outgoing workunit: '+jobqueuerow_.workunitresultpath+' * '+job_.stack.workunitOutgoing);
+             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job attempted to change outgoing workunit: '+jobqueuerow_.workunitresultpath+' * '+job_.stack.workunitOutgoing);
              erroneous_ := true;
              done_ := true;
              Exit;
@@ -136,16 +136,34 @@ begin
 
        if (jobqueuerow_.workunitresultpath<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
           begin
-             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job did not create outgoing workunit: '+jobqueuerow_.workunitresultpath);
+             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job did not create outgoing workunit: '+jobqueuerow_.workunitresultpath);
              erroneous_ := true;
              done_ := true;
              Exit;
           end;
 
        workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
+
+       // fast transitions
+       if jobqueuerow_.islocal then
+          begin
+             if (Trim(jobqueuerow_.workunitresultpath)<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
+                  begin
+                     erroneous_ := True;
+                     workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Result workunit does not exist on filesystem +('+jobqueuerow_.workunitresultpath+')');
+                     done_ := True;
+                     Exit;
+                  end
+             else
+               workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, logHeader_+'Fast transition: job is local');
+          end
+       else
+       if Trim(jobqueuerow_.workunitresult)='' then
+           workflowman_.getJobQueueWorkflow().changeStatusFromComputedToWorkunitTransmitted(jobqueuerow_, logHeader_+'Fast transition: no workunit to be uploaded');
+
        erroneous_ := job_.hasError;
        job_.Free;
-    end
+    end    // findRowInStatusReady
  else logger_.log(LVL_DEBUG, logHeader_+'No jobqueue found in status READY');
 
  done_ := true;
