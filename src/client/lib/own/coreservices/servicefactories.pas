@@ -19,7 +19,8 @@ uses
   computationservices, coremodules, pluginmanagers, frontendmanagers,
   methodcontrollers, resultcollectors,
   downloadservices, uploadservices, identities,
-  fasttransitionsfromnew, fasttransitionsfromcomputed;
+  fasttransitionsfromnew, fasttransitionsfromcomputed,
+  restorestatusservices;
 
 type TServiceFactory = class(TObject)
    public
@@ -52,6 +53,7 @@ type TServiceFactory = class(TObject)
     function createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;
     function createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;
 
+    function createRestoreStatusService() : TRestoreStatusServiceThread;
 
    private
 
@@ -178,6 +180,11 @@ end;
 function TServiceFactory.createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;
 begin
   Result := TFastTransitionFromNewServiceThread.Create(logger_, '[TFastTransitionFromNew]> ', conf_, tableman_, workflowman_);
+end;
+
+function TServiceFactory.createRestoreStatusService() : TRestoreStatusServiceThread;
+begin
+   Result := TRestoreStatusServiceThread.Create(logger_, '[TRestoreStatusService]> ', conf_, tableman_, workflowman_);
 end;
 
 function TServiceFactory.createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;

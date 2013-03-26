@@ -64,6 +64,8 @@ type TCoreLoop = class(TObject)
     procedure   createDownloadService;
     procedure   createComputationService;
     procedure   createUploadService;
+
+    procedure   createRestoreStatusService;
 end;
 
 implementation
@@ -93,6 +95,7 @@ begin
   days_ := 0;
 
   logger.log(LVL_INFO, logHeader_+'Bootstrapping core...');
+  createRestoreStatusService;
   retrieveParams;
   Sleep(1000);
   //TODO: enable this!!
@@ -100,9 +103,9 @@ begin
   Sleep(1000);
   retrieveClients;
   Sleep(1000);
+  serviceman.clearFinishedThreads;
   retrieveChannels;
   Sleep(1000);
-  serviceman.clearFinishedThreads;
   transmitClient;
   Sleep(1000);
   retrieveJobs;
@@ -343,6 +346,13 @@ var thread : TFastTransitionFromComputedServiceThread;
 begin
   thread := serviceFactory.createFastTransitionFromComputedService();
   launch(TCoreServiceThread(thread), 'FastTransitionFromComputed');
+end;
+
+procedure TCoreLoop.createRestoreStatusService;
+var thread : TRestoreStatusServiceThread;
+begin
+  thread := serviceFactory.createRestoreStatusService();
+  launch(TCoreServiceThread(thread), 'RestoreStatusService');
 end;
 
 procedure TCoreLoop.createDownloadService;
