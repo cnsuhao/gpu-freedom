@@ -68,13 +68,14 @@ begin
  if not jobqueuerow_.requireack then
         begin
           logger_.log(LVL_WARNING, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
+          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
           done_      := True;
           erroneous_ := True;
           Exit;
         end
  else
          begin
-           workflowman_.getJobQueueWorkflow().changeStatusFromForAcknowlegementToAcknowledging(jobqueuerow_);
+           workflowman_.getJobQueueWorkflow().changeStatusFromForAcknowledgementToAcknowledging(jobqueuerow_);
            // Transmitting acknowledgement
            transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
            if not erroneous_ then
@@ -84,7 +85,7 @@ begin
                  end
                else
                  begin
-                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Problem in acknowledging job');
+                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem in acknowledging job');
                    finishTransmit('Error in acknowledging job :-(');
                  end;
          end;

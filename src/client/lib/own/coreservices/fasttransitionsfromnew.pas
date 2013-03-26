@@ -3,8 +3,8 @@ unit fasttransitionsfromnew;
 interface
 
 uses
-  coreservices, loggers, configurations, dbtablemanagers, workflowmanagers,
-  Classes, SysUtils;
+  coreservices, loggers, coreconfigurations, dbtablemanagers, workflowmanagers,
+  jobqueuetables, Classes, SysUtils;
 
 type TFastTransitionFromNewServiceThread = class(TCoreServiceThread)
  public
@@ -34,13 +34,13 @@ end;
 
 procedure TFastTransitionFromNewServiceThread.Execute;
 begin
-  logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from new started...');
+  logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW started...');
   while workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) do
         ApplyWorkflow;
 
-  logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from new over...');
+  logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW over...');
   done_ := True;
-  erroneous := false;
+  erroneous_ := false;
 end;
 
 procedure TFastTransitionFromNewServiceThread.applyWorkflow;
@@ -50,17 +50,17 @@ begin
        if (Trim(jobqueuerow_.workunitjobpath)<>'') and (not FileExists(jobqueuerow_.workunitjobpath)) then
           workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job is local, but workunit job does not exist on filesystem ('+jobqueuerow_.workunitjobpath+')')
        else
-          workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader+'Fast transition as job is local and workunit check is ok');
+          workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition as job is local and workunit check is ok');
      end
   else
      begin
         // this is a global job
-        if Trim(dbqueuerow.workunitjob)='' then
+        if Trim(jobqueuerow_.workunitjob)='' then
               begin
-                if dbqueuerow.requireack then
-                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToForAcknowledgement(dbqueuerow, logHeader_+'Fast transition: no workunit to be retrieved but ack required');
+                if jobqueuerow_.requireack then
+                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToForAcknowledgement(jobqueuerow_, logHeader_+'Fast transition: no workunit to be retrieved but ack required')
                 else
-                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(dbqueuerow, logHeader_+'Fast transition: jobqueue does not require acknowledgement and does not have workunits.');
+                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement and does not have workunits to be retrieved.');
               end
         else
            // standard workflow

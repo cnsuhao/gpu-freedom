@@ -143,24 +143,6 @@ begin
           end;
 
        workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
-
-       // fast transitions
-       if jobqueuerow_.islocal then
-          begin
-             if (Trim(jobqueuerow_.workunitresultpath)<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
-                  begin
-                     erroneous_ := True;
-                     workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Result workunit does not exist on filesystem +('+jobqueuerow_.workunitresultpath+')');
-                     done_ := True;
-                     Exit;
-                  end
-             else
-               workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, logHeader_+'Fast transition: job is local');
-          end
-       else
-       if Trim(jobqueuerow_.workunitresult)='' then
-           workflowman_.getJobQueueWorkflow().changeStatusFromComputedToWorkunitTransmitted(jobqueuerow_, logHeader_+'Fast transition: no workunit to be uploaded');
-
        erroneous_ := job_.hasError;
        job_.Free;
     end    // findRowInStatusReady

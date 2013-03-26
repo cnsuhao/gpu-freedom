@@ -61,32 +61,24 @@ end;
 
 procedure TUploadServiceThread.execute();
 begin
-  if not workflowman_.getJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) then
+  if not workflowman_.getJobQueueWorkflow().findRowInStatusForWUTransmission(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status COMPUTED. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_TRANSMISSION. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
          end;
 
-  if (Trim(jobqueuerow_.workunitresultpath)='') and (not jobqueuerow_.islocal) then
+  if (Trim(jobqueuerow_.workunitresultpath)='') then
         begin
-          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: found a global job in status COMPUTED with no workunitresult to be transmitted.');
+          logger_.log(LVL_SEVERE, logHeader_+'Found a job in status FOR_WU_TRANSMISSION with no workunitresult to be transmitted.');
+          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_WU_TRANSMISSION with no workunitresult to be transmitted.');
           // note: computationservices.pas is charged with this transition
           done_      := True;
           erroneous_ := True;
           Exit;
         end
-    else
-    if jobqueuerow_.islocal then
-        begin
-          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: Found a local job in status COMPUTED.');
-          // note: computationservices.pas is charged with this transition
-          erroneous_ := True;
-          done_      := True;
-          Exit;
-        end
-    else
+   else
     begin
         // main workunit transmission loop
         sourcePath_ := ExtractFilePath(jobqueuerow_.workunitresultpath);
@@ -101,7 +93,7 @@ begin
                  Exit;
                end;
 
-        workflowman_.getJobQueueWorkflow().changeStatusFromComputedToTransmittingWorkunit(jobqueuerow_);
+        workflowman_.getJobQueueWorkflow().changeStatusFromForWuTransmissionToTransmittingWorkunit(jobqueuerow_);
 
 
         url_ := srv_.url+'/workunits/http_upload_workunit.php?wuresult=1';
@@ -109,7 +101,10 @@ begin
         if erroneous_ then
                workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Impossible to upload workunit '+sourceFile_+' to URL '+url_)
         else
+         begin
           workflowman_.getJobQueueWorkflow().changeStatusFromTransmittingWorkunitToWorkunitTransmitted(jobqueuerow_);
+          workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitTransmittedToForResultTransmission(jobqueuerow_);
+         end;
 
     end;
 

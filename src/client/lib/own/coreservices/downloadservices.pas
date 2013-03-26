@@ -78,7 +78,8 @@ begin
 
     if (Trim(jobqueuerow_.workunitjobpath)='') then
         begin
-          logger_.log(LVL_WARNING, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
+          logger_.log(LVL_SEVERE, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
+          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
           done_      := True;
           erroneous_ := True;
           Exit;
@@ -103,11 +104,11 @@ begin
           begin
               workflowman_.getJobQueueWorkflow().changeStatusFromRetrievingWorkunitToWorkunitRetrieved(jobqueuerow_);
               if jobqueuerow_.requireack then
-                  workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToForAcknowledgement(jobqueuerow_);
+                  workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToForAcknowledgement(jobqueuerow_)
               else
                   workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
           end
-          else workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Unable to retrieve workunit!');
+          else workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit from server!');
     end;
 
   done_ := true;

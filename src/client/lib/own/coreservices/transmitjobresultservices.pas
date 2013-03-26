@@ -64,9 +64,9 @@ end;
 
 procedure TTransmitJobResultServiceThread.Execute;
 begin
-   if not workflowman_.getJobQueueWorkflow().findRowInStatusWorkunitTransmitted(jobqueuerow_) then
+   if not workflowman_.getJobQueueWorkflow().findRowInStatusForResultTransmission(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status WORKUNIT_TRANSMITTED. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_RESULT_TRANSMISSION. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
@@ -81,7 +81,7 @@ begin
            Exit;
          end;
 
- workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitTransmittedToTransmittingResult(jobqueuerow_);
+ workflowman_.getJobQueueWorkflow().changeStatusFromForResultTransmissionToTransmittingResult(jobqueuerow_);
  transmit('/jobqueue/report_jobresult.php?'+getPHPArguments(), false);
  if not erroneous_ then
     begin
