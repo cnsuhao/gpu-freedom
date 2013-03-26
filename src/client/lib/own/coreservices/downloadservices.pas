@@ -68,35 +68,25 @@ procedure TDownloadServiceThread.execute();
 var AltFilename : String;
     index       : Longint;
 begin
-   if not workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) then
+   if not workflowman_.getJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status NEW. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_RETRIEVAL. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
          end;
 
-    if (Trim(jobqueuerow_.workunitjobpath)='') and (not jobqueuerow_.islocal) then
+    if (Trim(jobqueuerow_.workunitjobpath)='') then
         begin
-          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: found a global job in status NEW with no workunitjob to be retrieved.');
-          // note, receiveservicejobs.pas is charged with this transition
+          logger_.log(LVL_WARNING, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
           done_      := True;
           erroneous_ := True;
-          Exit;
-        end
-    else
-    if jobqueuerow_.islocal then
-        begin
-          logger_.log(LVL_WARNING, logHeader_+'Concurrency problem: Found a local job in status NEW.');
-          // note: the local job inserter is charged with transitions
-          erroneous_ := True;
-          done_      := True;
           Exit;
         end
     else
     begin
           // Here comes the main loop to retrieve a workunit
-          workflowman_.getJobQueueWorkflow().changeStatusFromNewToRetrievingWorkunit(jobqueuerow_);
+          workflowman_.getJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWorkunit(jobqueuerow_);
 
           targetPath_ := ExtractFilePath(jobqueuerow_.workunitjobpath);
           targetFile_ := jobqueuerow_.workunitjob;
@@ -112,7 +102,9 @@ begin
           if not (erroneous_) then
           begin
               workflowman_.getJobQueueWorkflow().changeStatusFromRetrievingWorkunitToWorkunitRetrieved(jobqueuerow_);
-              if not jobqueuerow_.requireack then
+              if jobqueuerow_.requireack then
+                  workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToForAcknowledgement(jobqueuerow_);
+              else
                   workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
           end
           else workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Unable to retrieve workunit!');

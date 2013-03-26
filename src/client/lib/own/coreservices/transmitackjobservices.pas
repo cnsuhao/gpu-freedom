@@ -57,9 +57,9 @@ end;
 
 procedure TTransmitAckJobServiceThread.Execute;
 begin
- if not workflowman_.getJobQueueWorkflow().findRowInStatusWorkUnitRetrieved(jobqueuerow_) then
+ if not workflowman_.getJobQueueWorkflow().findRowInStatusForAcknowledgement(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status WORKUNIT_RETRIEVED. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_ACKNOWLEDGEMENT. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
@@ -67,15 +67,14 @@ begin
 
  if not jobqueuerow_.requireack then
         begin
-          logger_.log(LVL_WARNING, logHeader_+'Found a job in status WORKUNIT_RETRIEVED which does not require acknowledgement.');
-          // either receivejobservices.pas or downloadservices.pas or local job inserted are charged with this transition.
+          logger_.log(LVL_WARNING, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
           done_      := True;
           erroneous_ := True;
           Exit;
         end
  else
          begin
-           workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToAcknowledging(jobqueuerow_);
+           workflowman_.getJobQueueWorkflow().changeStatusFromForAcknowlegementToAcknowledging(jobqueuerow_);
            // Transmitting acknowledgement
            transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
            if not erroneous_ then

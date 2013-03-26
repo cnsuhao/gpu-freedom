@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Classes, SysUtils, CustApp,
   { you can add units after this }
-  coreloops, coreobjects, loggers, geoutils;
+  coreloops, coreobjects, loggers, geoutils, fasttransitionsfromnew;
 
 type
 
