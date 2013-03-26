@@ -44,6 +44,7 @@ begin
   if not hasResources() then
        begin
         logger_.log(LVL_WARNING, 'No resources in TServiceThreadManager, releasing service.');
+        //TODO: check if freeing inside launch does not create memory leak
         if Assigned(serviceThread) then serviceThread.Free;
         CS_.Leave;
         Exit;
@@ -53,6 +54,7 @@ begin
    if slot=-1 then
             begin
               CS_.Leave;
+              //TODO: check if freeing inside launch does not create memory leak
               if Assigned(serviceThread) then serviceThread.Free;
               raise Exception.Create('Internal error in servicemanagers.pas, slot is -1');
             end;

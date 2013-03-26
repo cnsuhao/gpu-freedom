@@ -1,9 +1,12 @@
 del *.o
 del *.ppu
-del .\locks\gpucore.lock
-del .\logs\gpucore.log
+del .\locks\*.lock
+del .\logs\*.log
+del *.log
+del *.a
 del gpucore.db
 del gpucore.compiled
 del *.ini
 del *.or
 del *.res
+del *.compiled

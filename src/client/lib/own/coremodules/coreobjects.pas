@@ -33,18 +33,21 @@ var
 
 
 
-procedure loadCoreObjects(logFile, componentname : String);
+procedure loadCoreObjects(logFile, componentname : String; corenumber : Longint);
 procedure discardCoreObjects;
 
 implementation
 
-procedure loadCoreObjects(logFile, componentname : String);
+procedure loadCoreObjects(logFile, componentname : String; corenumber : Longint);
 var
-   path : String;
+   path,
+   logName : String;
 begin
   path := extractFilePath(ParamStr(0));
 
-  logger    := TLogger.Create(path+PathDelim+'logs', logFile+'.log', logFile+'.old', LVL_DEBUG, 1024*1024);
+  if corenumber=-1 then logName := logfile else logName := logfile+'_'+IntToStr(corenumber);
+
+  logger    := TLogger.Create(path+PathDelim+'logs', logName+'.log', logName+'.old', LVL_DEBUG, 1024*1024);
   conf      := TCoreConfiguration.Create(path);
   conf.loadConfiguration();
 
@@ -56,7 +59,10 @@ begin
   logger.logCR; logger.logCR;
   logger.logCR; logger.logCR;
   logger.log(LVL_INFO, '********************');
-  logger.log(LVL_INFO, '* '+componentname+' launched ...');
+  if corenumber>=0 then
+     logger.log(LVL_INFO, '* '+componentname+' launched (Core '+IntToStr(corenumber)+')')
+  else
+     logger.log(LVL_INFO, '* '+componentname+' launched ...');
   logger.log(LVL_INFO, '********************');
 
 

@@ -40,6 +40,7 @@ type TCoreLoop = class(TObject)
     path_,
     logHeader_   : String;
     coremonitor_ : TCoreMonitor;
+    corenumber_  : Longint;
 
     tick_,
     days_        : Longint;
@@ -74,10 +75,18 @@ constructor TCoreLoop.Create();
 begin
   inherited Create;
   path_ := extractFilePath(ParamStr(0));
+
+  if Trim(ParamStr(1))<>'' then
+    begin
+      corenumber_ := StrToIntDef(ParamStr(1), -1);
+      if corenumber_=-1 then corenumber_ := 1;
+    end
+  else
+    corenumber_ := 1;
   logHeader_ := 'gpucore> ';
 
-  coremonitor_ := TCoreMonitor.Create();
-  loadCoreObjects('gpucore', 'GPU Core');
+  coremonitor_ := TCoreMonitor.Create(corenumber_);
+  loadCoreObjects('gpucore', 'GPU Core', corenumber_);
 end;
 
 destructor TCoreLoop.Destroy;
@@ -200,6 +209,8 @@ function    TCoreLoop.launch(var thread : TCoreServiceThread; tname : String) : 
 var slot : Longint;
 begin
    Result := true;
+
+   //TODO: check if freeing inside launch does not create memory leak
    slot := serviceman.launch(thread, tname);
    if slot=-1 then
          begin

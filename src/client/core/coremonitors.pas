@@ -11,7 +11,7 @@ var coreprocess : TProcess;
 
 type TCoreMonitor = class(TObject)
   public
-    constructor Create();
+    constructor Create(corenumber : Longint);
     destructor Destroy();
 
     // used in core
@@ -32,12 +32,12 @@ end;
 
 implementation
 
-constructor TCoreMonitor.Create();
+constructor TCoreMonitor.Create(corenumber : Longint);
 begin
    inherited Create;
 
    path_ := extractFilePath(ParamStr(0));
-   isrunninglock_     := TLockFile.Create(path_+'locks', 'gpucore.lock');
+   isrunninglock_     := TLockFile.Create(path_+'locks', 'gpucore_'+IntToStr(corenumber)+'.lock');
 end;
 
 destructor  TCoreMonitor.Destroy();

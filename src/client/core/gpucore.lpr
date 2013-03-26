@@ -32,6 +32,7 @@ type
 procedure TGPUCoreApp.mainLoop;
 var msg1, msg2 : String;
 begin
+ coreloop_ := TCoreLoop.Create();
  if coreloop_.getCoreMonitor().coreCanStart then
     coreloop_.start()
  else
@@ -91,8 +92,6 @@ constructor TGPUCoreApp.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   StopOnException:=True;
-
-  coreloop_ := TCoreLoop.Create();
 end;
 
 destructor TGPUCoreApp.Destroy;
