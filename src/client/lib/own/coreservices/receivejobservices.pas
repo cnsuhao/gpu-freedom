@@ -66,6 +66,9 @@ try
                dbqueuerow.jobdefinitionid := jobdefinitionid;
                dbjobrow.jobdefinitionid := jobdefinitionid;
 
+               dbqueuerow.islocal := false;
+               dbjobrow.islocal := false;
+
                dbqueuerow.jobqueueid      := node.FindNode('jobqueueid').TextContent;;
                dbqueuerow.workunitjob     := Trim(node.FindNode('workunitjob').TextContent);
                dbqueuerow.workunitresult  := Trim(node.FindNode('workunitresult').TextContent);
