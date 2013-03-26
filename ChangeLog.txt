@@ -7,6 +7,7 @@ Core Client: Implementing new workflow with additional stati
 		     Implementing RestoreStatusService to be launched while the core bootstraps
 		     Milestone reached: the core is complete :-)
 			 Added machinery to handle multiple GPU cores running at the same time, you can start them e.g. with ./start.sh 1 and ./start.sh 2
+			 Doing changes so that coremodulestests, coreservicestests and GPU GUI build again against newest code
 
 25.3.2013 git
 Core Client: implementing some of the transitional shortcuts in the jobqueue workflow in receivejobservices.pas and computationservices.pas. 

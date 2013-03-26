@@ -1,7 +1,7 @@
 program gpu;
 
 {$mode objfpc}{$H+}
-{$DEFINE COREINCLUDED}
+{ $DEFINE COREINCLUDED}
 
 uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
@@ -16,11 +16,11 @@ var coremonitor : TCoreMonitor;
 
 begin
   Application.Initialize;
-  coremonitor := TCoreMonitor.Create();
+  coremonitor := TCoreMonitor.Create(0);
   {$IFNDEF COREINCLUDED}
   coremonitor.startCore;
   {$ENDIF}
-  loadCoreObjects('gpugui');
+  loadCoreObjects('gpugui', 'GPU GUI', -1);
   Application.CreateForm(TGPUMainApp, GPUMainApp);
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);

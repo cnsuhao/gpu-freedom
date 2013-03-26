@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls, servicefactories, coreobjects, transmitchannelservices,
-  servermanagers,  retrievedtables, identities, lockfiles;
+  servermanagers,  retrievedtables, coreservices, identities, lockfiles;
 
 type
 
@@ -49,7 +49,7 @@ var srv  : TServerRecord;
 begin
   serverman.getDefaultServer(srv);
   thread := servicefactory.createTransmitChannelService(srv, 'Altos', 'CHAT', mmSubmitChat.Text);
-  slot := serviceman.launch(thread);
+  slot := serviceman.launch(TCoreServiceThread(thread), 'TransmitChannelService');
   if (slot<>-1) then
      begin
        mmChat.Append(myGPUID.nodename+'> '+mmSubmitChat.Text);
