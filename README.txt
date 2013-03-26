@@ -22,7 +22,7 @@ plugins and frontends in Freepascal/C/C++/Java and executables targeting the pla
 Targeted platform
 -----------------
 client GUI will run on Windows, Linux and MacOSX (everywhere where Lazarus runs)
-client core will run on Windows, Linux and MacOSX (everywhere where freepascal runs),
+client core will run on Windows, Linux and MacOSX (everywhere where freepascal runs), if the processor has multiple cores, the user can choose to run multiple cores in parallel
  it will also feature an interative console similar to Mutella
 server will run on Windows, Linux, MacOSX, several Unix flavors (everywhere where PHP/mySQL run on Apache)
 
