@@ -8,11 +8,19 @@ const
  GPU_CLIENT_VERSION           = 0.1;
 
  //{
+ //CONF Release
+ DEF_SUPERSERVER_URL          = 'http://gpu.maxmaton.nl';
+ DEF_PROXY                    = '';
+ DEF_PORT                     = '';
+ //}
+
+
+ {
  // CONF External
  DEF_SUPERSERVER_URL          = 'http://gpu.maxmaton.nl';
  DEF_PROXY                    = '192.168.4.2';
  DEF_PORT                     = '8080';
- //}
+ }
 
  {
  // CONF Internal
