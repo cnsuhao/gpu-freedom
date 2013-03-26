@@ -42,8 +42,8 @@ begin
   if not hasResources() then
          begin
           logger_.log(LVL_WARNING, 'No resources in TDownloadServiceManager, releasing service.');
-          if Assigned(downThread) then downThread.Free;
           CS_.Leave;
+          if Assigned(downThread) then downThread.Free;
           Exit;
          end;
 
@@ -51,6 +51,7 @@ begin
      if slot=-1 then
               begin
                 CS_.Leave;
+                if Assigned(downThread) then downThread.Free;
                 raise Exception.Create('Internal error in downloadservicemanagers.pas, slot is -1');
               end;
 

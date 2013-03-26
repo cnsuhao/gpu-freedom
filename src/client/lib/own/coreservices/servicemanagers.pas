@@ -53,6 +53,7 @@ begin
    if slot=-1 then
             begin
               CS_.Leave;
+              if Assigned(serviceThread) then serviceThread.Free;
               raise Exception.Create('Internal error in servicemanagers.pas, slot is -1');
             end;
 

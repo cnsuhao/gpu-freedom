@@ -16,6 +16,7 @@ uses
   jobdefinitiontables,
   downloadservices, downloadservicemanagers,
   uploadservices, uploadservicemanagers,
+  fasttransitionsfromnew, fasttransitionsfromcomputed,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -43,7 +44,7 @@ type TCoreLoop = class(TObject)
     tick_,
     days_        : Longint;
 
-    function    launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
+    function    launch(var thread : TCoreServiceThread; tname : String) : Boolean;
 
     procedure   retrieveParams;
     procedure   retrieveServers;
@@ -58,6 +59,8 @@ type TCoreLoop = class(TObject)
     procedure   transmitJobResult;
     procedure   transmitAck;
 
+    procedure   createFastTransitionFromNewService;
+    procedure   createFastTransitionFromComputedService;
     procedure   createDownloadService;
     procedure   createComputationService;
     procedure   createUploadService;
@@ -140,11 +143,13 @@ begin
       // * Services for internal jobqueue workflow
       // ***************************************************
       // TODO: decide here how the coreloop functionality has to tick
+      if (tick_ mod 9 = 1)  then createFastTransitionFromNewService;
       if (tick_ mod 11 = 1) then createDownloadService;
       if (tick_ mod 13 = 1) then transmitAck;
       if (tick_ mod 17 = 1) then createComputationService;
-      if (tick_ mod 21 = 1) then createUploadService;
-      if (tick_ mod 23 = 1) then transmitJobResult;
+      if (tick_ mod 21 = 1) then createFastTransitionFromComputedService;
+      if (tick_ mod 23 = 1) then createUploadService;
+      if (tick_ mod 27 = 1) then transmitJobResult;
 
       // ***************************************************
       // * TCoreLoop clock
@@ -188,7 +193,7 @@ begin
   Result := coremonitor_;
 end;
 
-function    TCoreLoop.launch(var thread : TCoreServiceThread; tname : String; var srv : TServerRecord) : Boolean;
+function    TCoreLoop.launch(var thread : TCoreServiceThread; tname : String) : Boolean;
 var slot : Longint;
 begin
    Result := true;
@@ -210,7 +215,7 @@ begin
    serverman.getDefaultServer(srv);
 
    receiveparamthread  := servicefactory.createReceiveParamService(srv);
-   if not launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams', srv) then receiveparamthread.Free;
+   launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams');
 end;
 
 procedure TCoreLoop.retrieveServers;
@@ -220,7 +225,7 @@ begin
    serverman.getDefaultServer(srv);
 
    receiveserverthread := servicefactory.createReceiveServerService(srv);
-   if not launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers', srv) then receiveserverthread.Free;
+   launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers');
 end;
 
 procedure TCoreLoop.retrieveClients;
@@ -229,7 +234,7 @@ var receiveclientthread  : TReceiveClientServiceThread;
 begin
    serverman.getDefaultServer(srv);
    receiveclientthread  := servicefactory.createReceiveClientService(srv);
-   if not launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients', srv) then receiveclientthread.Free;
+   launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients');
 end;
 
 procedure TCoreLoop.retrieveChannels;
@@ -238,7 +243,7 @@ var receivechanthread     : TReceiveChannelServiceThread;
 begin
    serverman.getDefaultServer(srv);
    receivechanthread  := servicefactory.createReceiveChannelService(srv, {srv.chatchannel}'Altos', 'CHAT');
-   if not launch(TCoreServiceThread(receivechanthread), 'ReceiveChannels', srv) then receivechanthread.Free;
+   launch(TCoreServiceThread(receivechanthread), 'ReceiveChannels');
 end;
 
 procedure TCoreLoop.retrieveJobs;
@@ -247,7 +252,7 @@ var receivejobthread     : TReceiveJobServiceThread;
 begin
    serverman.getDefaultServer(srv);
    receivejobthread  := servicefactory.createReceiveJobService(srv);
-   if not launch(TCoreServiceThread(receivejobthread), 'ReceiveJobs', srv) then receivejobthread.Free;
+   launch(TCoreServiceThread(receivejobthread), 'ReceiveJobs');
 end;
 
 procedure TCoreLoop.retrieveJobStats;
@@ -256,7 +261,7 @@ var receivejobstatsthread     : TReceiveJobstatServiceThread;
 begin
    serverman.getDefaultServer(srv);
    receivejobstatsthread  := servicefactory.createReceiveJobstatService(srv);
-   if not launch(TCoreServiceThread(receivejobstatsthread), 'ReceiveJobStats', srv) then receivejobstatsthread.Free;
+   launch(TCoreServiceThread(receivejobstatsthread), 'ReceiveJobStats');
 end;
 
 
@@ -267,7 +272,7 @@ begin
    serverman.getDefaultServer(srv);
    //TODO: we do not pass job id for the moment
    receivejobresultthread  := servicefactory.createReceiveJobresultService(srv, '');
-   if not launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult', srv) then receivejobresultthread.Free;
+  launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult');
 end;
 
 
@@ -277,7 +282,7 @@ var transmitclientthread  : TTransmitClientServiceThread;
 begin
    serverman.getDefaultServer(srv);
    transmitclientthread  := servicefactory.createTransmitClientService(srv);
-   if not launch(TCoreServiceThread(transmitclientthread), 'TransmitClient', srv) then transmitclientthread.Free;
+  launch(TCoreServiceThread(transmitclientthread), 'TransmitClient');
 end;
 
 procedure TCoreLoop.transmitJob;
@@ -304,7 +309,7 @@ begin
    trandetails.workunitresult:='';
 
    transmitjobthread  := servicefactory.createTransmitJobService(srv, jobrow, trandetails);
-   if not launch(TCoreServiceThread(transmitjobthread), 'TransmitJob', srv) then transmitjobthread.Free;
+   launch(TCoreServiceThread(transmitjobthread), 'TransmitJob');
 end;
 
 procedure TCoreLoop.transmitJobResult;
@@ -314,7 +319,7 @@ begin
    serverman.getDefaultServer(srv);
 
    transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv);
-   if not launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult', srv) then transmitjobresultthread.Free;
+   launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult');
 end;
 
 procedure TCoreLoop.transmitAck;
@@ -323,7 +328,21 @@ var transmitackthread  : TTransmitAckJobServiceThread;
 begin
   serverman.getDefaultServer(srv);
   transmitackthread  := servicefactory.createTransmitAckJobService(srv);
-  if not launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob', srv) then transmitackthread.Free;
+  launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob');
+end;
+
+procedure TCoreLoop.createFastTransitionFromNewService;
+var thread : TFastTransitionFromNewServiceThread;
+begin
+  thread := serviceFactory.createFastTransitionFromNewService();
+  launch(TCoreServiceThread(thread), 'FastTransitionFromNew');
+end;
+
+procedure TCoreLoop.createFastTransitionFromComputedService;
+var thread : TFastTransitionFromComputedServiceThread;
+begin
+  thread := serviceFactory.createFastTransitionFromComputedService();
+  launch(TCoreServiceThread(thread), 'FastTransitionFromComputed');
 end;
 
 procedure TCoreLoop.createDownloadService;
