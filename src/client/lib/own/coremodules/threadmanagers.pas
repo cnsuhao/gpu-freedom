@@ -19,6 +19,7 @@ type
   TThreadManager = class(TObject)
   public
 
+    constructor Create(maxThreads : Longint);
     constructor Create(maxThreads : Longint; var logger : TLogger);
     destructor  Destroy();
 
@@ -69,11 +70,10 @@ end;
   
 implementation
 
-constructor TThreadManager.Create(maxThreads : Longint; var logger : TLogger);
+constructor TThreadManager.Create(maxThreads : Longint);
 var i : Longint;
 begin
   inherited Create();
-  logger_ := logger;
 
   if maxThreads>MAX_MANAGED_THREADS then
      raise Exception.Create('Internal error in threadmanagers.pas');
@@ -84,6 +84,12 @@ begin
   CS_ := TCriticalSection.Create();
   for i:=1 to MAX_MANAGED_THREADS do slots_[i] := nil;
 
+end;
+
+constructor TThreadManager.Create(maxThreads : Longint; var logger : TLogger);
+begin
+  Create(maxThreads);
+  logger_ := logger;
 end;
 
 destructor TThreadManager.Destroy();

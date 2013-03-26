@@ -12,7 +12,7 @@ uses
   receivechannelservices, transmitchannelservices,
   receivejobservices, transmitjobservices, jobdefinitiontables,
   receivejobresultservices, transmitjobresultservices, jobresulttables,
-  coreconfigurations;
+  coreconfigurations, coreservices, workflowmanagers, coremodules;
 
 type
 
@@ -29,9 +29,7 @@ type
     procedure TestReceiveChannelService;
     procedure TestTransmitChannelService;
     procedure TestReceiveJobService;
-    procedure TestTransmitJobService;
     procedure TestReceiveJobResultService;
-    procedure TestTransmitJobResultService;
 
 
   private
@@ -40,9 +38,11 @@ type
     serverMan_   : TServerManager;
     tableMan_    : TDbTableManager;
     conf_        : TCoreConfiguration;
+    workflowMan_ : TWorkflowManager;
 
     path_          : String;
     logger_        : TLogger;
+    coremodule_    : TCoreModule;
 
     procedure waitForCompletion();
   end; 
@@ -65,7 +65,7 @@ var rcvparamThread : TReceiveParamServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   rcvparamThread := srvFactory_.createReceiveParamService(srv);
-  serviceMan_.launch(rcvparamThread);
+  serviceMan_.launch(TCoreServiceThread(rcvparamThread), 'ReceiveParamThread');
   waitForCompletion();
 end;
 
@@ -76,7 +76,7 @@ var rcvserverThread : TReceiveServerServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   rcvserverThread := srvFactory_.createReceiveServerService(srv);
-  serviceMan_.launch(rcvserverThread);
+  serviceMan_.launch(TCoreServiceThread(rcvserverThread), 'ReceiveServerThread');
   waitForCompletion();
 end;
 
@@ -86,7 +86,7 @@ var trxclientThread : TTransmitClientServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   trxclientThread := srvFactory_.createTransmitClientService(srv);
-  serviceMan_.launch(trxclientThread);
+  serviceMan_.launch(TCoreServiceThread(trxclientThread), 'TransmitClientThread');
   waitForCompletion();
 end;
 
@@ -96,7 +96,7 @@ var rcvclientThread : TReceiveClientServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   rcvclientThread := srvFactory_.createReceiveClientService(srv);
-  serviceMan_.launch(rcvclientThread);
+  serviceMan_.launch(TCoreServiceThread(rcvclientThread), 'ReceiveClientThread');
   waitForCompletion();
 end;
 
@@ -106,7 +106,7 @@ var thread : TReceiveChannelServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createReceiveChannelService(srv, 'Altos', 'CHAT');
-  serviceMan_.launch(thread);
+  serviceMan_.launch(TCoreServiceThread(thread), 'ReceiveChannelThread');
   waitForCompletion();
 end;
 
@@ -116,7 +116,7 @@ var thread : TTransmitChannelServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createTransmitChannelService(srv, 'Altos', 'CHAT', 'hello world :-)');
-  serviceMan_.launch(thread);
+  serviceMan_.launch(TCoreServiceThread(thread), 'TransmitChannelThread');
   waitForCompletion();
 end;
 
@@ -126,27 +126,10 @@ var thread : TReceiveJobServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createReceiveJobService(srv);
-  serviceMan_.launch(thread);
+  serviceMan_.launch(TCoreServiceThread(thread), 'ReceiveJobServiceThread');
   waitForCompletion();
 end;
 
-procedure TTestServices.TestTransmitJobService;
-var thread : TTransmitJobServiceThread;
-    srv    : TServerRecord;
-    jobrow : TDbJobRow;
-begin
-  jobrow.job := '1, 1, add';
-  jobrow.jobid := '12345';
-  jobrow.islocal:=false;
-  jobrow.requests:=3;
-  jobrow.status:=JS_NEW;
-  jobrow.workunitincoming:='pari.txt';
-  jobrow.workunitoutgoing:='para.txt';
-  serverMan_.getDefaultServer(srv);
-  thread := srvFactory_.createTransmitJobService(srv, jobrow);
-  serviceMan_.launch(thread);
-  waitForCompletion();
-end;
 
 procedure TTestServices.TestReceiveJobResultService;
 var thread : TReceiveJobResultServiceThread;
@@ -154,30 +137,7 @@ var thread : TReceiveJobResultServiceThread;
 begin
   serverMan_.getDefaultServer(srv);
   thread := srvFactory_.createReceiveJobResultService(srv, '12345');
-  serviceMan_.launch(thread);
-  waitForCompletion();
-end;
-
-
-procedure TTestServices.TestTransmitJobResultService;
-var thread : TTransmitJobResultServiceThread;
-    srv    : TServerRecord;
-    jobresultrow : TDbJobResultRow;
-begin
-  jobresultrow.jobresult := '2';
-  jobresultrow.jobid := '12345';
-  jobresultrow.requestid := 1;
-  jobresultrow.workunitresult:='';
-  jobresultrow.iserroneous := false;
-  jobresultrow.errorid := 0;
-  jobresultrow.errormsg := '';
-  jobresultrow.errorarg := '';
-  jobresultrow.nodeid := '123';
-  jobresultrow.nodename := 'hola';
-  jobresultrow.job_id := -1;
-  serverMan_.getDefaultServer(srv);
-  thread := srvFactory_.createTransmitJobResultService(srv, jobresultrow);
-  serviceMan_.launch(thread);
+  serviceMan_.launch(TCoreServiceThread(thread), 'ReceiveJobResultService');
   waitForCompletion();
 end;
 
@@ -188,10 +148,10 @@ begin
 
   if not DirectoryExists(path_+'logs') then
      CreateDir(path_+'logs');
-  logger_         := TLogger.Create(path_+'logs', 'services.log');
+  logger_         := TLogger.Create(path_+'logs', 'coreservicestest.log');
   logger_.setLogLevel(LVL_DEBUG);
 
-  tableMan_       := TDbTableManager.Create(path_+'core.db');
+  tableMan_       := TDbTableManager.Create(path_+'coreservicestest.db');
   tableMan_.openAll();
   conf_           := TCoreConfiguration.Create(path_);
   conf_.loadConfiguration();
@@ -200,12 +160,16 @@ begin
                                            logger_);
 
   serviceMan_  := TServiceThreadManager.Create(3);
-  srvFactory_  := TServiceFactory.Create(serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_, conf_);
+  coremodule_  := TCoreModule.Create(logger_, path_, 'dll');
+  workflowMan_ := TWorkflowManager.Create(tableman_, logger_);
+  srvFactory_  := TServiceFactory.Create(workflowMan_, serverMan_, tableMan_, PROXY_HOST, PROXY_PORT, logger_, conf_, coreModule_);
 end;
 
 procedure TTestServices.TearDown;
 begin
  tableMan_.closeAll();
+ coreModule_.Free;
+ workflowMan_.Free;
  serviceMan_.Free;
  srvFactory_.Free;
  tableMan_.Free;

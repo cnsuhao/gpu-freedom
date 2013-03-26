@@ -13,6 +13,7 @@ uses
 
 type TServiceThreadManager = class(TThreadManager)
    public
+    constructor Create(maxThreads : Longint);
     constructor Create(maxThreads : Longint; var logger : TLogger);
     destructor Destroy;
 
@@ -25,6 +26,12 @@ type TServiceThreadManager = class(TThreadManager)
 end;
 
 implementation
+
+constructor TServiceThreadManager.Create(maxThreads : Longint);
+begin
+  inherited Create(maxThreads);
+end;
+
 
 constructor TServiceThreadManager.Create(maxThreads : Longint; var logger : TLogger);
 begin

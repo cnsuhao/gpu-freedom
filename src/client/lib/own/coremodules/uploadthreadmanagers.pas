@@ -11,7 +11,7 @@ unit uploadthreadmanagers;
 interface
 
 uses SyncObjs, SysUtils,
-     jobs, uploadthreads, stkconstants, identities, downloadthreadmanagers, loggers;
+     jobs, uploadthreads, stkconstants, identities, downloadthreadmanagers, threadmanagers, loggers;
 
 type
   TUploadThreadManager = class(TCommThreadManager)

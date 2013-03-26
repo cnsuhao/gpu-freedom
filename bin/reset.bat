@@ -4,9 +4,8 @@ del .\locks\*.lock
 del .\logs\*.log
 del *.log
 del *.a
-del gpucore.db
-del gpucore.compiled
+del *.db
+del *.compiled
 del *.ini
 del *.or
 del *.res
-del *.compiled

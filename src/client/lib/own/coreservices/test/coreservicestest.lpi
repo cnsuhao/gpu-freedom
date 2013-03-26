@@ -38,7 +38,7 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="40">
+    <Units Count="45">
       <Unit0>
         <Filename Value="coreservicestest.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -49,19 +49,23 @@
         <Filename Value="testservices.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="testservices"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="111"/>
-        <CursorPos X="20" Y="136"/>
+        <TopLine Value="128"/>
+        <CursorPos X="45" Y="163"/>
         <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\servicemanagers.pas"/>
         <UnitName Value="servicemanagers"/>
+        <EditorIndex Value="7"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="27" Y="14"/>
+        <CursorPos X="30" Y="32"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\servermanagers.pas"/>
@@ -129,10 +133,10 @@
       <Unit12>
         <Filename Value="..\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="46"/>
-        <CursorPos X="20" Y="80"/>
+        <TopLine Value="1"/>
+        <CursorPos X="52" Y="29"/>
         <UsageCount Value="18"/>
         <Loaded Value="True"/>
       </Unit12>
@@ -272,7 +276,7 @@
       <Unit32>
         <Filename Value="..\transmitjobservices.pas"/>
         <UnitName Value="transmitjobservices"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="33"/>
         <CursorPos X="33" Y="51"/>
@@ -282,7 +286,6 @@
       <Unit33>
         <Filename Value="..\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="52"/>
@@ -308,7 +311,7 @@
       <Unit36>
         <Filename Value="..\receivejobresultservices.pas"/>
         <UnitName Value="receivejobresultservices"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="48"/>
         <CursorPos X="23" Y="91"/>
@@ -318,7 +321,7 @@
       <Unit37>
         <Filename Value="..\transmitjobresultservices.pas"/>
         <UnitName Value="transmitjobresultservices"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="37"/>
         <CursorPos X="6" Y="76"/>
@@ -328,7 +331,7 @@
       <Unit38>
         <Filename Value="..\..\coredb\jobresulttables.pas"/>
         <UnitName Value="jobresulttables"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="111"/>
         <CursorPos X="61" Y="117"/>
@@ -338,79 +341,184 @@
       <Unit39>
         <Filename Value="..\..\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="53"/>
         <CursorPos X="61" Y="63"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit39>
+      <Unit40>
+        <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="163"/>
+        <CursorPos X="23" Y="192"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="..\workflowmanagers.pas"/>
+        <UnitName Value="workflowmanagers"/>
+        <EditorIndex Value="6"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="..\..\coremodules\coremodules.pas"/>
+        <UnitName Value="coremodules"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="19"/>
+        <CursorPos X="6" Y="36"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="..\..\..\..\core\coreloops.pas"/>
+        <UnitName Value="coreloops"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="..\..\coremodules\coreobjects.pas"/>
+        <UnitName Value="coreobjects"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="34"/>
+        <CursorPos X="62" Y="74"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit44>
     </Units>
-    <JumpHistory Count="16" HistoryIndex="15">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\transmitjobservices.pas"/>
-        <Caret Line="55" Column="82" TopLine="36"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\..\coredb\jobqueuetables.pas"/>
-        <Caret Line="18" Column="24" TopLine="4"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\receivejobservices.pas"/>
-        <Caret Line="56" Column="33" TopLine="50"/>
-      </Position3>
-      <Position4>
-        <Filename Value="..\receivejobservices.pas"/>
-        <Caret Line="57" Column="44" TopLine="45"/>
-      </Position4>
-      <Position5>
         <Filename Value="testservices.pas"/>
         <Caret Line="162" Column="39" TopLine="162"/>
-      </Position5>
-      <Position6>
+      </Position1>
+      <Position2>
         <Filename Value="testservices.pas"/>
         <Caret Line="174" Column="80" TopLine="163"/>
-      </Position6>
-      <Position7>
+      </Position2>
+      <Position3>
         <Filename Value="testservices.pas"/>
         <Caret Line="155" Column="34" TopLine="143"/>
+      </Position3>
+      <Position4>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="175" Column="34" TopLine="136"/>
+      </Position4>
+      <Position5>
+        <Filename Value="..\servicefactories.pas"/>
+        <Caret Line="115" Column="85" TopLine="97"/>
+      </Position5>
+      <Position6>
+        <Filename Value="..\servicefactories.pas"/>
+        <Caret Line="153" Column="40" TopLine="108"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\servicefactories.pas"/>
+        <Caret Line="20" Column="7" TopLine="1"/>
       </Position7>
       <Position8>
         <Filename Value="testservices.pas"/>
-        <Caret Line="175" Column="34" TopLine="136"/>
+        <Caret Line="13" Column="44" TopLine="1"/>
       </Position8>
       <Position9>
-        <Filename Value="..\servicefactories.pas"/>
-        <Caret Line="115" Column="85" TopLine="97"/>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position9>
       <Position10>
-        <Filename Value="..\servicefactories.pas"/>
-        <Caret Line="153" Column="40" TopLine="108"/>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="13" Column="57" TopLine="1"/>
       </Position10>
       <Position11>
-        <Filename Value="..\servicefactories.pas"/>
-        <Caret Line="20" Column="7" TopLine="1"/>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="174" Column="24" TopLine="125"/>
       </Position11>
       <Position12>
         <Filename Value="testservices.pas"/>
-        <Caret Line="155" Column="34" TopLine="165"/>
+        <Caret Line="136" Column="20" TopLine="111"/>
       </Position12>
       <Position13>
         <Filename Value="testservices.pas"/>
-        <Caret Line="13" Column="44" TopLine="1"/>
+        <Caret Line="68" Column="37" TopLine="38"/>
       </Position13>
       <Position14>
         <Filename Value="testservices.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="180" Column="55" TopLine="136"/>
       </Position14>
       <Position15>
         <Filename Value="testservices.pas"/>
-        <Caret Line="13" Column="57" TopLine="1"/>
+        <Caret Line="68" Column="36" TopLine="38"/>
       </Position15>
       <Position16>
         <Filename Value="testservices.pas"/>
-        <Caret Line="174" Column="24" TopLine="125"/>
+        <Caret Line="212" Column="48" TopLine="155"/>
       </Position16>
+      <Position17>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="15" Column="35" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="129" Column="75" TopLine="99"/>
+      </Position18>
+      <Position19>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="136" Column="23" TopLine="107"/>
+      </Position19>
+      <Position20>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="134" Column="1" TopLine="119"/>
+      </Position20>
+      <Position21>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="145" Column="1" TopLine="124"/>
+      </Position21>
+      <Position22>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="33" Column="5" TopLine="1"/>
+      </Position22>
+      <Position23>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="160" Column="50" TopLine="122"/>
+      </Position23>
+      <Position24>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="161" Column="104" TopLine="14"/>
+      </Position24>
+      <Position25>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="15" Column="53" TopLine="56"/>
+      </Position25>
+      <Position26>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="162" Column="60" TopLine="124"/>
+      </Position26>
+      <Position27>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="169" Column="20" TopLine="124"/>
+      </Position27>
+      <Position28>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="142" Column="152" TopLine="125"/>
+      </Position28>
+      <Position29>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="171" Column="19" TopLine="127"/>
+      </Position29>
+      <Position30>
+        <Filename Value="testservices.pas"/>
+        <Caret Line="163" Column="51" TopLine="128"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
