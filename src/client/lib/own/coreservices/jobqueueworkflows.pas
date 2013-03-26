@@ -19,31 +19,52 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
 
        // entry points for services
        function findRowInStatusNew(var row : TDbJobQueueRow) : Boolean;
-       function findRowInStatusWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusForWURetrieval(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusForAcknowledgement(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusReady(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusComputed(var row : TDbJobQueueRow) : Boolean;
-       function findRowInStatusWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusForWUTransmission(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusForResultTransmission(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusCompleted(var row : TDbJobQueueRow) : Boolean;
 
+
        // standard workflow
-       function changeStatusFromNewToRetrievingWorkunit(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromNewToForWURetrieval(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromForWURetrievalToRetrievingWorkunit(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRetrievingWorkunitToWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromWorkunitRetrievedToAcknowledging(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromWorkunitRetrievedToForAcknowledgement(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromForAcknowledgementToAcknowledging(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromAcknowledgingToReady(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromReadyToRunning(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRunningToComputed(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromComputedToTransmittingWorkunit(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromComputedToForWUTransmission(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromForWUTransmissionToTransmittingWorkunit(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromTransmittingWorkunitToWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromWorkunitTransmittedToTransmittingResult(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromWorkunitTransmittedToForResultTransmission(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromForResultTransmissionToTransmittingResult(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromTransmittingResultToCompleted(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromCompletedToWorkunitsCleanedUp(var row : TDbJobQueueRow) : Boolean;
 
        // transition shortcuts
        function changeStatusFromNewToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function changeStatusFromComputedToCompleted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
-       function changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromNewToForWURetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromNewToForAcknowledgement(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function changeStatusFromWorkunitRetrievedToReady(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
-       function changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromComputedToForResultTransmission(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+
+       // restore transitions
+       function findRowInStatusRetrievingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusAcknowledingForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusRunningForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusTransmittingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusTransmittingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
+
+       function restoreFromRetrievingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromAcknowledging(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromRunning(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromTransmittingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromTransmittingResult(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 
        // error transition
        function changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
@@ -68,9 +89,14 @@ begin
   Result := findRowInStatus(row, JS_NEW);
 end;
 
-function TJobQueueWorkflow.findRowInStatusWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.findRowInStatusForWURetrieval(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := findRowInStatus(row, JS_WORKUNIT_RETRIEVED);
+  Result := findRowInStatus(row, JS_FOR_WU_RETRIEVAL);
+end;
+
+function TJobQueueWorkflow.findRowInStatusForAcknowledgement(var row : TDbJobQueueRow) : Boolean;
+begin
+   Result := findRowInStatus(row, JS_FOR_ACKNOWLEDGEMENT);
 end;
 
 function TJobQueueWorkflow.findRowInStatusReady(var row : TDbJobQueueRow) : Boolean;
@@ -83,9 +109,14 @@ begin
   Result := findRowInStatus(row, JS_COMPUTED);
 end;
 
-function TJobQueueWorkflow.findRowInStatusWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.findRowInStatusForWUTransmission(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := findRowInStatus(row, JS_WORKUNIT_TRANSMITTED);
+   Result := findRowInStatus(row, JS_FOR_WU_TRANSMISSION);
+end;
+
+function TJobQueueWorkflow.findRowInStatusForResultTransmission(var row : TDbJobQueueRow) : Boolean;
+begin
+     Result := findRowInStatus(row, JS_FOR_RESULT_TRANSMISSION);
 end;
 
 function TJobQueueWorkflow.findRowInStatusCompleted(var row : TDbJobQueueRow) : Boolean;
@@ -96,9 +127,14 @@ end;
 // ********************************
 // * standard workflow
 // ********************************
-function TJobQueueWorkflow.changeStatusFromNewToRetrievingWorkunit(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromNewToForWURetrieval(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_NEW, JS_RETRIEVING_WORKUNIT, '');
+   Result := changeStatus(row, JS_NEW, JS_FOR_WU_RETRIEVAL, '');
+end;
+
+function TJobQueueWorkflow.changeStatusFromForWURetrievalToRetrievingWorkunit(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := changeStatus(row, JS_FOR_WU_RETRIEVAL, JS_RETRIEVING_WORKUNIT, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromRetrievingWorkunitToWorkunitRetrieved(var row : TDbJobQueueRow) : Boolean;
@@ -106,10 +142,14 @@ begin
   Result := changeStatus(row, JS_RETRIEVING_WORKUNIT, JS_WORKUNIT_RETRIEVED, '');
 end;
 
-
-function TJobQueueWorkflow.changeStatusFromWorkunitRetrievedToAcknowledging(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromWorkunitRetrievedToForAcknowledgement(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_WORKUNIT_RETRIEVED, JS_ACKNOWLEDGING, '');
+  Result := changeStatus(row, JS_WORKUNIT_RETRIEVED, JS_FOR_ACKNOWLEDGEMENT, '');
+end;
+
+function TJobQueueWorkflow.changeStatusFromForAcknowledgementToAcknowledging(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := changeStatus(row, JS_FOR_ACKNOWLEDGEMENT, JS_ACKNOWLEDGING, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromAcknowledgingToReady(var row : TDbJobQueueRow) : Boolean;
@@ -127,9 +167,14 @@ begin
   Result := changeStatus(row, JS_RUNNING, JS_COMPUTED, '');
 end;
 
-function TJobQueueWorkflow.changeStatusFromComputedToTransmittingWorkunit(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.changeStatusFromComputedToForWUTransmission(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPUTED, JS_TRANSMITTING_WORKUNIT , '');
+  Result := changeStatus(row, JS_COMPUTED, JS_FOR_WU_TRANSMISSION, '');
+end;
+
+function TJobQueueWorkflow.changeStatusFromForWUTransmissionToTransmittingWorkunit(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := changeStatus(row, JS_FOR_WU_TRANSMISSION, JS_TRANSMITTING_WORKUNIT, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromTransmittingWorkunitToWorkunitTransmitted(var row : TDbJobQueueRow) : Boolean;
@@ -137,9 +182,14 @@ begin
   Result := changeStatus(row, JS_TRANSMITTING_WORKUNIT, JS_WORKUNIT_TRANSMITTED, '');
 end;
 
-function TJobQueueWorkflow.changeStatusFromWorkunitTransmittedToTransmittingResult(var row : TDbJobQueueRow) : Boolean;
+function  TJobQueueWorkflow.changeStatusFromWorkunitTransmittedToForResultTransmission(var row : TDbJobQueueRow) : Boolean;
 begin
-  Result := changeStatus(row, JS_WORKUNIT_TRANSMITTED, JS_TRANSMITTING_RESULT, '');
+  Result := changeStatus(row, JS_WORKUNIT_TRANSMITTED, JS_FOR_RESULT_TRANSMISSION, '');
+end;
+
+function  TJobQueueWorkflow.changeStatusFromForResultTransmissionToTransmittingResult(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := changeStatus(row, JS_FOR_RESULT_TRANSMISSION, JS_TRANSMITTING_RESULT, '');
 end;
 
 function TJobQueueWorkflow.changeStatusFromTransmittingResultToCompleted(var row : TDbJobQueueRow) : Boolean;
@@ -165,9 +215,14 @@ begin
   Result := changeStatus(row, JS_COMPUTED, JS_COMPLETED, msgdesc);
 end;
 
-function TJobQueueWorkflow.changeStatusFromNewToWorkunitRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+function TJobQueueWorkflow.changeStatusFromNewToForWURetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_NEW, JS_WORKUNIT_RETRIEVED, msgdesc);
+  Result := changeStatus(row, JS_NEW, JS_FOR_WU_RETRIEVAL, msgdesc);
+end;
+
+function TJobQueueWorkflow.changeStatusFromNewToForAcknowledgement(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_NEW, JS_FOR_ACKNOWLEDGEMENT, msgdesc);
 end;
 
 
@@ -176,19 +231,75 @@ begin
   Result := changeStatus(row, JS_WORKUNIT_RETRIEVED, JS_READY, msgdesc);
 end;
 
-function TJobQueueWorkflow.changeStatusFromComputedToWorkunitTransmitted(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+function TJobQueueWorkflow.changeStatusFromComputedToForResultTransmission(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-  Result := changeStatus(row, JS_COMPUTED, JS_WORKUNIT_TRANSMITTED, msgdesc);
+  Result := changeStatus(row, JS_COMPUTED, JS_FOR_RESULT_TRANSMISSION, msgdesc);
 end;
 
+
 // ********************************
-// * error status
+// * error transition
 // ********************************
 
 function TJobQueueWorkflow.changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
 begin
   Result := changeStatus(row, row.status, JS_ERROR, errormsg);
 end;
+
+// **********************************
+// * restore from transitional status
+// **********************************
+
+function TJobQueueWorkflow.findRowInStatusRetrievingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_RETRIEVING_WORKUNIT);
+end;
+
+function TJobQueueWorkflow.findRowInStatusAcknowledingForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_ACKNOWLEDGING);
+end;
+
+function TJobQueueWorkflow.findRowInStatusRunningForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_RUNNING);
+end;
+
+function TJobQueueWorkflow.findRowInStatusTransmittingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_TRANSMITTING_WORKUNIT);
+end;
+
+function TJobQueueWorkflow.findRowInStatusTransmittingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, JS_TRANSMITTING_RESULT);
+end;
+
+function TJobQueueWorkflow.restoreFromRetrievingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_RETRIEVING_WORKUNIT, JS_FOR_WU_RETRIEVAL, msgdesc);
+end;
+
+function TJobQueueWorkflow.restoreFromAcknowledging(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_ACKNOWLEDGING, JS_FOR_ACKNOWLEDGEMENT, msgdesc);
+end;
+
+function TJobQueueWorkflow.restoreFromRunning(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_RUNNING, JS_READY, msgdesc);
+end;
+
+function TJobQueueWorkflow.restoreFromTransmittingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_TRANSMITTING_WORKUNIT, JS_FOR_WU_TRANSMISSION, msgdesc);
+end;
+
+function TJobQueueWorkflow.restoreFromTransmittingResult(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+  Result := changeStatus(row, JS_TRANSMITTING_RESULT, JS_FOR_RESULT_TRANSMISSION, msgdesc);
+end;
+
 
 // ********************************
 // * private, internal methods

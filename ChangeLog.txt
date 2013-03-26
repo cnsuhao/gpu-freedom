@@ -1,6 +1,11 @@
 ******************
 GPU freedom branch
 
+26.3.2013 git
+		  Implementing new workflow with additional stati
+		  Revising workflow, implementing both FastTransitionServiceFromNew and FastTransitionServiceFromComputed
+		  Implementing RestoreStatusService to be launched while the core bootstraps
+
 25.3.2013 git
 Core Client: implementing some of the transitional shortcuts in the jobqueue workflow in receivejobservices.pas and computationservices.pas. 
              implementing downloadservices.pas and downloadservicemanagers.pas, integrating them into core
