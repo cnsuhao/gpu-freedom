@@ -3,7 +3,7 @@ GPU freedom branch
 
 26.3.2013 git
 		  Implementing new workflow with additional stati
-		  Revising workflow, implementing both FastTransitionServiceFromNew and FastTransitionServiceFromComputed
+		  Revising workflow, implementing both services FastTransitionServiceFromNew and FastTransitionServiceFromComputed
 		  Implementing RestoreStatusService to be launched while the core bootstraps
 
 25.3.2013 git

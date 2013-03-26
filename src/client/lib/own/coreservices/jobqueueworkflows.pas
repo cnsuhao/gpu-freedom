@@ -55,7 +55,7 @@ type TJobQueueWorkflow = class(TWorkflowAncestor)
 
        // restore transitions
        function findRowInStatusRetrievingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
-       function findRowInStatusAcknowledingForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusAcknowledgingForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusRunningForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusTransmittingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusTransmittingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
@@ -255,7 +255,7 @@ begin
   Result := findRowInStatus(row, JS_RETRIEVING_WORKUNIT);
 end;
 
-function TJobQueueWorkflow.findRowInStatusAcknowledingForRestoral(var row : TDbJobQueueRow) : Boolean;
+function TJobQueueWorkflow.findRowInStatusAcknowledgingForRestoral(var row : TDbJobQueueRow) : Boolean;
 begin
   Result := findRowInStatus(row, JS_ACKNOWLEDGING);
 end;

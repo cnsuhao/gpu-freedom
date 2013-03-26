@@ -16,7 +16,7 @@ uses
   jobdefinitiontables,
   downloadservices, downloadservicemanagers,
   uploadservices, uploadservicemanagers,
-  fasttransitionsfromnew, fasttransitionsfromcomputed,
+  fasttransitionsfromnew, fasttransitionsfromcomputed, restorestatusservices,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
