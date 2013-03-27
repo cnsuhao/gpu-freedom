@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+27.3.2013 git
+GUI Client: stabilizing the GUI, removing the automatic launch of the core for the moment.
+
 26.3.2013 0.5.8
 Core Client: Implementing new workflow with additional stati
 			 Revising workflow, implementing both services FastTransitionServiceFromNew and FastTransitionServiceFromComputed
