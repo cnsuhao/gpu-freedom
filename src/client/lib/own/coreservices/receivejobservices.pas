@@ -120,6 +120,7 @@ try
                // jobqueuehistoryrow
                dbqueuehistoryrow.status     := dbqueuerow.status;
                dbqueuehistoryrow.jobqueueid := dbqueuerow.jobqueueid;
+               dbqueuehistoryrow.message    := logHeader_+'Received a new job from server '+srv_.url;
 
                tableman_.getJobDefinitionTable().insertOrUpdate(dbjobrow);
                tableman_.getJobQueueTable().insertOrUpdate(dbqueuerow);
