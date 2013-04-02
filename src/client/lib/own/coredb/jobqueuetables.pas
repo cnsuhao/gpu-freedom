@@ -17,7 +17,7 @@ const
   // if you add, remove values, you need to change the function
   // JobQueueStatusToString
 
-  // stati for processing on client CP
+  // stati for processing on client, prefix C_ for client
   // these stati are when we process a job for someone else
   C_NEW                     = 100;
   C_FOR_WU_RETRIEVAL        = 105;
@@ -33,9 +33,27 @@ const
   C_WORKUNIT_TRANSMITTED    = 180;
   C_FOR_RESULT_TRANSMISSION = 185;
   C_TRANSMITTING_RESULT     = 190;
-  C_COMPLETED               = 200;
+  C_COMPLETED               = 199;
   C_WORKUNITS_CLEANEDUP     = 800;
-  C_ERROR                   = 900;
+  C_ERROR                   = 910;
+
+
+  // stati when someone else processes a job for us, prefix S_ for server
+  S_NEW                     = 200;
+  S_FOR_WU_UPLOAD           = 205;
+  S_UPLOADING_WORKUNIT      = 210;
+  S_FOR_JOB_UPLOAD          = 220;
+  S_UPLOADING_JOB           = 230;
+  S_FOR_STATUS_RETRIEVAL    = 240;
+  S_RETRIEVING_STATUS       = 250;
+  S_FOR_WU_RETRIEVAL        = 260;
+  S_RETRIEVING_WU           = 270;
+  S_FOR_RESULT_RETRIEVAL    = 280;
+  S_RETRIEVING_RESULT       = 290;
+  S_COMPLETED               = 299;
+  S_ERROR                   = 920;
+
+
 
 type TJobStatus      = Longint;
 
@@ -95,7 +113,7 @@ end;
 
 function JobQueueStatusToString(status : Longint) : String;
 begin
-  Result := 'Unknown Satus in JobQueueStatusToString()';
+  Result := 'Internal error: Unknown Satus in JobQueueStatusToString()';
   case status of
     C_NEW                     : Result := 'C_NEW';
     C_FOR_WU_RETRIEVAL        : Result := 'C_FOR_WU_RETRIEVAL';
@@ -114,6 +132,20 @@ begin
     C_COMPLETED               : Result := 'C_COMPLETED';
     C_WORKUNITS_CLEANEDUP     : Result := 'C_WORKUNITS_CLEANED_UP';
     C_ERROR                   : Result := 'C_ERROR';
+
+    S_NEW                     : Result := 'S_NEW';
+    S_FOR_WU_UPLOAD           : Result := 'S_FOR_WU_UPLOAD';
+    S_UPLOADING_WORKUNIT      : Result := 'S_UPLOADING_WORKUNIT';
+    S_FOR_JOB_UPLOAD          : Result := 'S_FOR_JOB_UPLOAD';
+    S_UPLOADING_JOB           : Result := 'S_UPLOADING_JOB';
+    S_FOR_STATUS_RETRIEVAL    : Result := 'S_FOR_STATUS_RETRIEVAL';
+    S_RETRIEVING_STATUS       : Result := 'S_RETRIEVING_STATUS';
+    S_FOR_WU_RETRIEVAL        : Result := 'S_FOR_WU_RETRIEVAL';
+    S_RETRIEVING_WU           : Result := 'S_RETRIEVING_WU';
+    S_FOR_RESULT_RETRIEVAL    : Result := 'S_FOR_RESULT_RETRIEVAL';
+    S_RETRIEVING_RESULT       : Result := 'S_RETRIEVING_RESULT';
+    S_COMPLETED               : Result := 'S_COMPLETED';
+    S_ERROR                   : Result := 'S_ERROR ';
   end;
 end;
 
