@@ -5,6 +5,7 @@
   Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
   
 */
+ include("../utils/utils.inc.php");	
  include("../conf/config.inc.php");	
 
  $jobqueueid = getparam('jobqueueid', "");
@@ -29,7 +30,7 @@
 		$acknodename     = mysql_result($result, 0, 'acknodename');
 		$create_dt       = mysql_result($result, 0, 'create_dt');
 		$transmission_dt = mysql_result($result, 0, 'transmission_dt');
-		$transmissionid  = mysql_result($result, 0, 'tranmissionid');
+		$transmissionid  = mysql_result($result, 0, 'transmissionid');
 		$ack_dt          = mysql_result($result, 0, 'ack_dt');
 		$reception_dt    = mysql_result($result, 0, 'reception_dt');
 		$nodename        = mysql_result($result, 0, 'nodename');
@@ -44,11 +45,11 @@
 				$nodename="";
 				$message="Internal server error: For jobqueueid $jobqueueid there is no jobresult defined, although reception_dt is set";
 			} else {
-				$nodename = mysql_result($result, 0, 'nodename');
-			    $message  = mysql_result($result, 0, 'jobresultid');
+				$nodename = mysql_result($resjobresult, 0, 'nodename');
+			    $message  = mysql_result($resjobresult, 0, 'jobresultid');
 				$message  = "jobresultid=" . $message;
 				$timestamp = $reception_dt;
-				$status    = "COMPLETED"
+				$status    = "COMPLETED";
 			}	
 		} else
 		if ($ack_dt!="") {
@@ -60,11 +61,11 @@
 		if ($transmission_dt!="") {
 			$nodename="";
 			$message="Transmitted with transmissionid=$transmissionid";
-			$timestamp=$transmitted_dt;
+			$timestamp=$transmission_dt;
 			$status="TRANSMITTED";
 		}
 		else 
-		if (create_dt!="") {
+		if ($create_dt!="") {
 			$nodename="";
 			$message="";
 			$timestamp=$create_dt;
