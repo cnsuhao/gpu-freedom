@@ -1,6 +1,10 @@
 ******************
 GPU freedom branch
 
+2.4.2013 git
+Core Client: Doing first changes to implement global jobqueue workflow (in parallel to the existing one, with different stati)
+Server:      implemented status_jobqueue.php, to retrieve the current status of a job on the server (will be used in the new global jobqueue workflow)
+
 27.3.2013 git
 GUI Client: stabilizing the GUI, removing the automatic launch of the core for the moment.
 

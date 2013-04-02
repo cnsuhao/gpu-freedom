@@ -1,4 +1,12 @@
 <?php
+/*
+  This PHP script retrieves the current status of a single job definition,
+  it retrieves how many jobqueues there are in a particular status.
+  
+  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  
+*/
+
  include("../utils/utils.inc.php");	
  include('../utils/sql2xml/sql2xml.php');
  include('../utils/sql2xml/xsl.php'); 
