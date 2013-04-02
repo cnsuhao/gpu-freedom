@@ -32,33 +32,33 @@ end;
 procedure TRestoreStatusServiceThread.Execute;
 begin
   logger_.log(LVL_INFO, logHeader_+'Restore transitional status service started...');
-  while workflowman_.getJobQueueWorkflow().findRowInStatusRetrievingWorkunitForRestoral(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusRetrievingWorkunitForRestoral(jobqueuerow_) do
         begin
-          workflowman_.getJobQueueWorkflow().restoreFromRetrievingWorkunit(jobqueuerow_, logHeader_+' Restored at bootstrap');
+          workflowman_.getClientJobQueueWorkflow().restoreFromRetrievingWorkunit(jobqueuerow_, logHeader_+' Restored at bootstrap');
           logger_.log(LVL_DEBUG, logHeader_+'Found job in status RETRIEVING_WORKUNIT set to FOR_WU_RETRIEVAL');
         end;
 
-  while workflowman_.getJobQueueWorkflow().findRowInStatusAcknowledgingForRestoral(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusAcknowledgingForRestoral(jobqueuerow_) do
         begin
-          workflowman_.getJobQueueWorkflow().restoreFromAcknowledging(jobqueuerow_, logHeader_+' Restored at bootstrap');
+          workflowman_.getClientJobQueueWorkflow().restoreFromAcknowledging(jobqueuerow_, logHeader_+' Restored at bootstrap');
           logger_.log(LVL_DEBUG, logHeader_+'Found job in status ACKNOWLEDGING set to FOR_ACKNOWLEDGEMENT');
         end;
 
-  while workflowman_.getJobQueueWorkflow().findRowInStatusRunningForRestoral(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusRunningForRestoral(jobqueuerow_) do
         begin
-          workflowman_.getJobQueueWorkflow().restoreFromRunning(jobqueuerow_, logHeader_+' Restored at bootstrap');
+          workflowman_.getClientJobQueueWorkflow().restoreFromRunning(jobqueuerow_, logHeader_+' Restored at bootstrap');
           logger_.log(LVL_DEBUG, logHeader_+'Found job in status RUNNING set to READY');
         end;
 
-  while workflowman_.getJobQueueWorkflow().findRowInStatusTransmittingWorkunitForRestoral(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusTransmittingWorkunitForRestoral(jobqueuerow_) do
         begin
-          workflowman_.getJobQueueWorkflow().restoreFromTransmittingWorkunit(jobqueuerow_, logHeader_+' Restored at bootstrap');
+          workflowman_.getClientJobQueueWorkflow().restoreFromTransmittingWorkunit(jobqueuerow_, logHeader_+' Restored at bootstrap');
           logger_.log(LVL_DEBUG, logHeader_+'Found job in status TRANSMITTING_WORKUNIT set to FOR_WU_TRANSMISSION');
         end;
 
-  while workflowman_.getJobQueueWorkflow().findRowInStatusTransmittingResultForRestoral(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusTransmittingResultForRestoral(jobqueuerow_) do
         begin
-          workflowman_.getJobQueueWorkflow().restoreFromTransmittingResult(jobqueuerow_, logHeader_+' Restored at bootstrap');
+          workflowman_.getClientJobQueueWorkflow().restoreFromTransmittingResult(jobqueuerow_, logHeader_+' Restored at bootstrap');
           logger_.log(LVL_DEBUG, logHeader_+'Found job in status TRANSMITTING_RESULT set to FOR_RESULT_TRANSMISSION');
         end;
 

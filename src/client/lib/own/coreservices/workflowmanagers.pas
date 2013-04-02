@@ -6,7 +6,7 @@ unit workflowmanagers;
 
 interface
 
-uses dbtablemanagers, jobqueueworkflows, loggers;
+uses dbtablemanagers, clientjobqueueworkflows, loggers;
 
 
 type TWorkflowManager = class(TObject)
@@ -14,10 +14,10 @@ type TWorkflowManager = class(TObject)
       constructor Create(var tableman : TDbTableManager; var logger : TLogger);
       destructor  Destroy;
 
-      function getJobQueueWorkflow : TJobQueueWorkflow;
+      function getClientJobQueueWorkflow : TClientJobQueueWorkflow;
 
      private
-      jobqueueworkflow_ : TJobQueueWorkflow;
+      clientjobqueueworkflow_ : TClientJobQueueWorkflow;
 end;
 
 implementation
@@ -25,18 +25,18 @@ implementation
 constructor TWorkflowManager.Create(var tableman : TDbTableManager; var logger : TLogger);
 begin
   inherited Create;
-  jobqueueworkflow_ := TJobQueueWorkflow.Create(tableman, logger);
+  clientjobqueueworkflow_ := TClientJobQueueWorkflow.Create(tableman, logger);
 end;
 
 destructor  TWorkflowManager.Destroy;
 begin
-  jobqueueworkflow_.Free;
+  clientjobqueueworkflow_.Free;
   inherited Destroy;
 end;
 
-function TWorkflowManager.getJobQueueWorkflow : TJobQueueWorkflow;
+function TWorkflowManager.getClientJobQueueWorkflow : TClientJobQueueWorkflow;
 begin
-  Result := jobqueueworkflow_;
+  Result := clientjobqueueworkflow_;
 end;
 
 end.

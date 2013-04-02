@@ -35,7 +35,7 @@ end;
 procedure TFastTransitionFromNewServiceThread.Execute;
 begin
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW started...');
-  while workflowman_.getJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) do
         ApplyWorkflow;
 
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW over...');
@@ -48,9 +48,9 @@ begin
   if jobqueuerow_.islocal then
      begin
        if (Trim(jobqueuerow_.workunitjobpath)<>'') and (not FileExists(jobqueuerow_.workunitjobpath)) then
-          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job is local, but workunit job does not exist on filesystem ('+jobqueuerow_.workunitjobpath+')')
+          workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job is local, but workunit job does not exist on filesystem ('+jobqueuerow_.workunitjobpath+')')
        else
-          workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition as job is local and workunit check is ok');
+          workflowman_.getClientJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition as job is local and workunit check is ok');
      end
   else
      begin
@@ -58,13 +58,13 @@ begin
         if Trim(jobqueuerow_.workunitjob)='' then
               begin
                 if jobqueuerow_.requireack then
-                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToForAcknowledgement(jobqueuerow_, logHeader_+'Fast transition: no workunit to be retrieved but ack required')
+                   workflowman_.getClientJobQueueWorkflow().changeStatusFromNewToForAcknowledgement(jobqueuerow_, logHeader_+'Fast transition: no workunit to be retrieved but ack required')
                 else
-                   workflowman_.getJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement and does not have workunits to be retrieved.');
+                   workflowman_.getClientJobQueueWorkflow().changeStatusFromNewToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement and does not have workunits to be retrieved.');
               end
         else
            // standard workflow
-           workflowman_.getJobQueueWorkflow().changeStatusFromNewToForWURetrieval(jobqueuerow_);
+           workflowman_.getClientJobQueueWorkflow().changeStatusFromNewToForWURetrieval(jobqueuerow_);
      end;
 
 end;

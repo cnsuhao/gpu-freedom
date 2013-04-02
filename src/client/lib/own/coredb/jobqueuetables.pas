@@ -16,23 +16,26 @@ const
   // for status column, all jobs go to this workflow
   // if you add, remove values, you need to change the function
   // JobQueueStatusToString
-  JS_NEW                     = 0;
-  JS_FOR_WU_RETRIEVAL        = 5;
-  JS_RETRIEVING_WORKUNIT     = 10;
-  JS_WORKUNIT_RETRIEVED      = 20;
-  JS_FOR_ACKNOWLEDGEMENT     = 25;
-  JS_ACKNOWLEDGING           = 30;
-  JS_READY                   = 40;
-  JS_RUNNING                 = 50;
-  JS_COMPUTED                = 60;
-  JS_FOR_WU_TRANSMISSION     = 65;
-  JS_TRANSMITTING_WORKUNIT   = 70;
-  JS_WORKUNIT_TRANSMITTED    = 80;
-  JS_FOR_RESULT_TRANSMISSION = 85;
-  JS_TRANSMITTING_RESULT     = 90;
-  JS_COMPLETED               = 100;
-  JS_WORKUNITS_CLEANEDUP     = 800;
-  JS_ERROR                   = 999;
+
+  // stati for processing on client CP
+  // these stati are when we process a job for someone else
+  C_NEW                     = 100;
+  C_FOR_WU_RETRIEVAL        = 105;
+  C_RETRIEVING_WORKUNIT     = 110;
+  C_WORKUNIT_RETRIEVED      = 120;
+  C_FOR_ACKNOWLEDGEMENT     = 125;
+  C_ACKNOWLEDGING           = 130;
+  C_READY                   = 140;
+  C_RUNNING                 = 150;
+  C_COMPUTED                = 160;
+  C_FOR_WU_TRANSMISSION     = 165;
+  C_TRANSMITTING_WORKUNIT   = 170;
+  C_WORKUNIT_TRANSMITTED    = 180;
+  C_FOR_RESULT_TRANSMISSION = 185;
+  C_TRANSMITTING_RESULT     = 190;
+  C_COMPLETED               = 200;
+  C_WORKUNITS_CLEANEDUP     = 800;
+  C_ERROR                   = 900;
 
 type TJobStatus      = Longint;
 
@@ -94,23 +97,23 @@ function JobQueueStatusToString(status : Longint) : String;
 begin
   Result := 'Unknown Satus in JobQueueStatusToString()';
   case status of
-    JS_NEW                     : Result := 'NEW';
-    JS_FOR_WU_RETRIEVAL        : Result := 'FOR_WU_RETRIEVAL';
-    JS_RETRIEVING_WORKUNIT     : Result := 'RETRIEVING_WORKUNIT';
-    JS_WORKUNIT_RETRIEVED      : Result := 'WORKUNIT_RETRIEVED';
-    JS_FOR_ACKNOWLEDGEMENT     : Result := 'FOR_ACKNOWLEDGEMENT';
-    JS_ACKNOWLEDGING           : Result := 'ACKNOWLEDGING';
-    JS_READY                   : Result := 'READY';
-    JS_RUNNING                 : Result := 'RUNNING';
-    JS_COMPUTED                : Result := 'COMPUTED';
-    JS_FOR_WU_TRANSMISSION     : Result := 'FOR_WU_TRANSMISSION';
-    JS_TRANSMITTING_WORKUNIT   : Result := 'TRANSMITING_WORKUNIT';
-    JS_WORKUNIT_TRANSMITTED    : Result := 'WORKUNIT_TRANSMITTED';
-    JS_FOR_RESULT_TRANSMISSION : Result := 'FOR_RESULT_TRANSMISSION';
-    JS_TRANSMITTING_RESULT     : Result := 'TRANSMITTING_RESULT';
-    JS_COMPLETED               : Result := 'COMPLETED';
-    JS_WORKUNITS_CLEANEDUP     : Result := 'WORKUNITS_CLEANED_UP';
-    JS_ERROR                   : Result := 'ERROR';
+    C_NEW                     : Result := 'C_NEW';
+    C_FOR_WU_RETRIEVAL        : Result := 'C_FOR_WU_RETRIEVAL';
+    C_RETRIEVING_WORKUNIT     : Result := 'C_RETRIEVING_WORKUNIT';
+    C_WORKUNIT_RETRIEVED      : Result := 'C_WORKUNIT_RETRIEVED';
+    C_FOR_ACKNOWLEDGEMENT     : Result := 'C_FOR_ACKNOWLEDGEMENT';
+    C_ACKNOWLEDGING           : Result := 'C_ACKNOWLEDGING';
+    C_READY                   : Result := 'C_READY';
+    C_RUNNING                 : Result := 'C_RUNNING';
+    C_COMPUTED                : Result := 'C_COMPUTED';
+    C_FOR_WU_TRANSMISSION     : Result := 'C_FOR_WU_TRANSMISSION';
+    C_TRANSMITTING_WORKUNIT   : Result := 'C_TRANSMITING_WORKUNIT';
+    C_WORKUNIT_TRANSMITTED    : Result := 'C_WORKUNIT_TRANSMITTED';
+    C_FOR_RESULT_TRANSMISSION : Result := 'C_FOR_RESULT_TRANSMISSION';
+    C_TRANSMITTING_RESULT     : Result := 'C_TRANSMITTING_RESULT';
+    C_COMPLETED               : Result := 'C_COMPLETED';
+    C_WORKUNITS_CLEANEDUP     : Result := 'C_WORKUNITS_CLEANED_UP';
+    C_ERROR                   : Result := 'C_ERROR';
   end;
 end;
 

@@ -68,7 +68,7 @@ procedure TDownloadServiceThread.execute();
 var AltFilename : String;
     index       : Longint;
 begin
-   if not workflowman_.getJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
+   if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_RETRIEVAL. Exit.');
            done_      := True;
@@ -79,7 +79,7 @@ begin
     if (Trim(jobqueuerow_.workunitjobpath)='') then
         begin
           logger_.log(LVL_SEVERE, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
-          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
+          workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
           done_      := True;
           erroneous_ := True;
           Exit;
@@ -87,7 +87,7 @@ begin
     else
     begin
           // Here comes the main loop to retrieve a workunit
-          workflowman_.getJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWorkunit(jobqueuerow_);
+          workflowman_.getClientJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWorkunit(jobqueuerow_);
 
           targetPath_ := ExtractFilePath(jobqueuerow_.workunitjobpath);
           targetFile_ := jobqueuerow_.workunitjob;
@@ -102,13 +102,13 @@ begin
 
           if not (erroneous_) then
           begin
-              workflowman_.getJobQueueWorkflow().changeStatusFromRetrievingWorkunitToWorkunitRetrieved(jobqueuerow_);
+              workflowman_.getClientJobQueueWorkflow().changeStatusFromRetrievingWorkunitToWorkunitRetrieved(jobqueuerow_);
               if jobqueuerow_.requireack then
-                  workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitRetrievedToForAcknowledgement(jobqueuerow_)
+                  workflowman_.getClientJobQueueWorkflow().changeStatusFromWorkunitRetrievedToForAcknowledgement(jobqueuerow_)
               else
-                  workflowman_.getJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
+                  workflowman_.getClientJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
           end
-          else workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit from server!');
+          else workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit from server!');
     end;
 
   done_ := true;

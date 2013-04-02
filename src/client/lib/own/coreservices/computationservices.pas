@@ -70,13 +70,13 @@ var parser : TJobParser;
 begin
  erroneous_ := false;
  // job_ and thrdId_ need to be retrieved from TBJOBQUEUE
- if workflowman_.getJobQueueWorkflow().findRowInStatusReady(jobqueuerow_) then
+ if workflowman_.getClientJobQueueWorkflow().findRowInStatusReady(jobqueuerow_) then
     begin
-       workflowman_.getJobQueueWorkflow().changeStatusFromReadyToRunning(jobqueuerow_);
+       workflowman_.getClientJobQueueWorkflow().changeStatusFromReadyToRunning(jobqueuerow_);
 
        if (jobqueuerow_.workunitjobpath<>'') and (not FileExists(jobqueuerow_.workunitjobpath)) then
           begin
-             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job workunit does not exist: '+jobqueuerow_.workunitjobpath);
+             workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Job workunit does not exist: '+jobqueuerow_.workunitjobpath);
              erroneous_ := true;
              done_ := true;
              Exit;
@@ -101,7 +101,7 @@ begin
          on e : Exception do
              begin
                logger_.log(LVL_SEVERE, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
-               workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
+               workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
                erroneous_ := true;
                done_ := true;
                Exit;
@@ -128,7 +128,7 @@ begin
 
        if job_.stack.workunitOutgoing<>jobqueuerow_.workunitresultpath then
           begin
-             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job attempted to change outgoing workunit: '+jobqueuerow_.workunitresultpath+' * '+job_.stack.workunitOutgoing);
+             workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job attempted to change outgoing workunit: '+jobqueuerow_.workunitresultpath+' * '+job_.stack.workunitOutgoing);
              erroneous_ := true;
              done_ := true;
              Exit;
@@ -136,13 +136,13 @@ begin
 
        if (jobqueuerow_.workunitresultpath<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
           begin
-             workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job did not create outgoing workunit: '+jobqueuerow_.workunitresultpath);
+             workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job did not create outgoing workunit: '+jobqueuerow_.workunitresultpath);
              erroneous_ := true;
              done_ := true;
              Exit;
           end;
 
-       workflowman_.getJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
+       workflowman_.getClientJobQueueWorkflow().changeStatusFromRunningToComputed(jobqueuerow_);
        erroneous_ := job_.hasError;
        job_.Free;
     end    // findRowInStatusReady

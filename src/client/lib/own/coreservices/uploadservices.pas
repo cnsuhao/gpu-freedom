@@ -61,7 +61,7 @@ end;
 
 procedure TUploadServiceThread.execute();
 begin
-  if not workflowman_.getJobQueueWorkflow().findRowInStatusForWUTransmission(jobqueuerow_) then
+  if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWUTransmission(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_TRANSMISSION. Exit.');
            done_      := True;
@@ -72,7 +72,7 @@ begin
   if (Trim(jobqueuerow_.workunitresultpath)='') then
         begin
           logger_.log(LVL_SEVERE, logHeader_+'Found a job in status FOR_WU_TRANSMISSION with no workunitresult to be transmitted.');
-          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_WU_TRANSMISSION with no workunitresult to be transmitted.');
+          workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_WU_TRANSMISSION with no workunitresult to be transmitted.');
           // note: computationservices.pas is charged with this transition
           done_      := True;
           erroneous_ := True;
@@ -86,24 +86,24 @@ begin
 
         if not FileExists(jobqueuerow_.workunitresultpath) then
                begin
-                 workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Could not upload workunit as it does not exist on the filesystem ('+jobqueuerow_.workunitresultpath+')');
+                 workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Could not upload workunit as it does not exist on the filesystem ('+jobqueuerow_.workunitresultpath+')');
                  logger_.log(LVL_SEVERE, 'UploadServiceThread ['+sourceFile_+']> File not found: '+jobqueuerow_.workunitresultpath);
                  erroneous_ := True;
                  done_      := True;
                  Exit;
                end;
 
-        workflowman_.getJobQueueWorkflow().changeStatusFromForWuTransmissionToTransmittingWorkunit(jobqueuerow_);
+        workflowman_.getClientJobQueueWorkflow().changeStatusFromForWuTransmissionToTransmittingWorkunit(jobqueuerow_);
 
 
         url_ := srv_.url+'/workunits/http_upload_workunit.php?wuresult=1';
         erroneous_ := not uploadFromFile(url_, sourcePath_, sourceFile_, proxy_, port_, 'UploadServiceThread ['+sourceFile_+']> ', logger_);
         if erroneous_ then
-               workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Impossible to upload workunit '+sourceFile_+' to URL '+url_)
+               workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Impossible to upload workunit '+sourceFile_+' to URL '+url_)
         else
          begin
-          workflowman_.getJobQueueWorkflow().changeStatusFromTransmittingWorkunitToWorkunitTransmitted(jobqueuerow_);
-          workflowman_.getJobQueueWorkflow().changeStatusFromWorkunitTransmittedToForResultTransmission(jobqueuerow_);
+          workflowman_.getClientJobQueueWorkflow().changeStatusFromTransmittingWorkunitToWorkunitTransmitted(jobqueuerow_);
+          workflowman_.getClientJobQueueWorkflow().changeStatusFromWorkunitTransmittedToForResultTransmission(jobqueuerow_);
          end;
 
     end;

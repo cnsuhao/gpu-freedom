@@ -35,7 +35,7 @@ end;
 procedure TFastTransitionFromComputedServiceThread.Execute;
 begin
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from COMPUTED started...');
-  while workflowman_.getJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) do
+  while workflowman_.getClientJobQueueWorkflow().findRowInStatusComputed(jobqueuerow_) do
         ApplyWorkflow;
 
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from COMPUTED over...');
@@ -48,20 +48,20 @@ begin
   if jobqueuerow_.islocal then
      begin
        if (Trim(jobqueuerow_.workunitresultpath)<>'') and (not FileExists(jobqueuerow_.workunitresultpath)) then
-          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job is local, but workunit result does not exist on filesystem ('+jobqueuerow_.workunitresultpath+')')
+          workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job is local, but workunit result does not exist on filesystem ('+jobqueuerow_.workunitresultpath+')')
        else
-          workflowman_.getJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, logHeader_+'Fast transition as job is local and workunit check is ok');
+          workflowman_.getClientJobQueueWorkflow().changeStatusFromComputedToCompleted(jobqueuerow_, logHeader_+'Fast transition as job is local and workunit check is ok');
      end
   else
      begin
         // this is a global job
         if Trim(jobqueuerow_.workunitresult)='' then
               begin
-                   workflowman_.getJobQueueWorkflow().changeStatusFromComputedToForResultTransmission(jobqueuerow_, logHeader_+'Fast transition: no resulting workunit to be uploaded.');
+                   workflowman_.getClientJobQueueWorkflow().changeStatusFromComputedToForResultTransmission(jobqueuerow_, logHeader_+'Fast transition: no resulting workunit to be uploaded.');
               end
         else
            // standard workflow
-           workflowman_.getJobQueueWorkflow().changeStatusFromComputedToForWUTransmission(jobqueuerow_);
+           workflowman_.getClientJobQueueWorkflow().changeStatusFromComputedToForWUTransmission(jobqueuerow_);
      end;
 
 end;

@@ -50,14 +50,14 @@ begin
  jobqueuerow_.server_id := srv_.id;
  jobqueuerow_.ack_dt    := Now;
 
- if workflowman_.getJobQueueWorkflow().changeStatusFromAcknowledgingToReady(jobqueuerow_) then
+ if workflowman_.getClientJobQueueWorkflow().changeStatusFromAcknowledgingToReady(jobqueuerow_) then
          logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
 end;
 
 
 procedure TTransmitAckJobServiceThread.Execute;
 begin
- if not workflowman_.getJobQueueWorkflow().findRowInStatusForAcknowledgement(jobqueuerow_) then
+ if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForAcknowledgement(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_ACKNOWLEDGEMENT. Exit.');
            done_      := True;
@@ -68,14 +68,14 @@ begin
  if not jobqueuerow_.requireack then
         begin
           logger_.log(LVL_WARNING, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
-          workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
+          workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Found a job in status FOR_ACKNOWLEDGEMENT which does not require acknowledgement.');
           done_      := True;
           erroneous_ := True;
           Exit;
         end
  else
          begin
-           workflowman_.getJobQueueWorkflow().changeStatusFromForAcknowledgementToAcknowledging(jobqueuerow_);
+           workflowman_.getClientJobQueueWorkflow().changeStatusFromForAcknowledgementToAcknowledging(jobqueuerow_);
            // Transmitting acknowledgement
            transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
            if not erroneous_ then
@@ -85,7 +85,7 @@ begin
                  end
                else
                  begin
-                   workflowman_.getJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem in acknowledging job');
+                   workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem in acknowledging job');
                    finishTransmit('Error in acknowledging job :-(');
                  end;
          end;

@@ -115,7 +115,7 @@ try
 
                dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
-               dbqueuerow.status    := JS_NEW;
+               dbqueuerow.status    := C_NEW;
 
                // jobqueuehistoryrow
                dbqueuehistoryrow.status     := dbqueuerow.status;
