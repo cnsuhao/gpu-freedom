@@ -6,8 +6,11 @@
   
 */
  include("../utils/utils.inc.php");	
+ include('../utils/sql2xml/sql2xml.php');
+ include('../utils/sql2xml/xsl.php'); 
  include("../conf/config.inc.php");	
 
+ $xml   = getparam('xml', false); 
  $jobqueueid = getparam('jobqueueid', "");
  if ($jobqueueid=="") die("ERROR: parameter jobqueueid is not defined");
 
@@ -79,10 +82,16 @@
  }
   
  // output part
+ echo "<stats>\n";
  echo "<jobstatus>\n";
+ echo "<jobqueueid>$jobqueueid</jobqueueid>\n";
  echo "<status>$status</status>\n";
  echo "<timestamp>$timestamp</timestamp>\n";
  echo "<nodename>$nodename</nodename>\n";
  echo "<message>$message</message>\n";
  echo "</jobstatus>\n";
+ echo "</stats>\n";
+ 
+ mysql_close();
+ if (!$xml) apply_XSLT();
 ?>
