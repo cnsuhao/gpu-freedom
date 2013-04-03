@@ -43,7 +43,24 @@ type TServerJobQueueWorkflow = class(TJobQueueWorkflowAncestor)
        function changeStatusFromForResultRetrievalToRetrievingResult(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRetrievingResultToCompleted(var row : TDbJobQueueRow) : Boolean;
 
+       // transition shortcuts
+       function changeStatusFromNewToForJobUpload(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromRetrievingStatusToForStatusRetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function changeStatusFromRetrievingStatusToForResultRetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 
+       // restore transitions
+       function findRowInStatusUploadingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusUploadingJobForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusRetrievingWuForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusRetrievingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
+
+       function restoreFromUploadingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromUploadingJob(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromRetrievingWU(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromRetrievingResult(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+
+       // error transition
+       function changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
 end;
 
 implementation
@@ -145,6 +162,79 @@ function TServerJobQueueWorkflow.changeStatusFromRetrievingResultToCompleted(var
 begin
    Result := changeStatus(row, S_RETRIEVING_RESULT, S_COMPLETED, '');
 end;
+
+// ********************************
+// * transition shortcuts
+// ********************************
+function TServerJobQueueWorkflow.changeStatusFromNewToForJobUpload(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_NEW, S_FOR_JOB_UPLOAD, msgdesc);
+end;
+
+function TServerJobQueueWorkflow.changeStatusFromRetrievingStatusToForStatusRetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_RETRIEVING_STATUS, S_FOR_STATUS_RETRIEVAL, msgdesc);
+end;
+
+function TServerJobQueueWorkflow.changeStatusFromRetrievingStatusToForResultRetrieval(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_RETRIEVING_STATUS, S_FOR_RESULT_RETRIEVAL, msgdesc);
+end;
+
+// **********************************
+// * restore from transitional status
+// **********************************
+function TServerJobQueueWorkflow.findRowInStatusUploadingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+   Result := findRowInStatus(row, S_UPLOADING_WORKUNIT);
+end;
+
+function TServerJobQueueWorkflow.findRowInStatusUploadingJobForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+   Result := findRowInStatus(row, S_UPLOADING_JOB);
+end;
+
+
+function TServerJobQueueWorkflow.findRowInStatusRetrievingWuForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+   Result := findRowInStatus(row, S_RETRIEVING_WU);
+end;
+
+function TServerJobQueueWorkflow.findRowInStatusRetrievingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+   Result := findRowInStatus(row, S_RETRIEVING_RESULT);
+end;
+
+function TServerJobQueueWorkflow.restoreFromUploadingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_UPLOADING_WORKUNIT, S_FOR_WU_UPLOAD, msgdesc);
+end;
+
+
+function TServerJobQueueWorkflow.restoreFromUploadingJob(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_UPLOADING_JOB, S_FOR_JOB_UPLOAD, msgdesc);
+end;
+
+function TServerJobQueueWorkflow.restoreFromRetrievingWU(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_RETRIEVING_WU, S_FOR_WU_RETRIEVAL, msgdesc);
+end;
+
+function TServerJobQueueWorkflow.restoreFromRetrievingResult(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_RETRIEVING_RESULT, S_FOR_RESULT_RETRIEVAL, msgdesc);
+end;
+
+// ********************************
+// * error transition
+// ********************************
+
+function TServerJobQueueWorkflow.changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
+begin
+  Result := changeStatus(row, row.status, S_ERROR, errormsg);
+end;
+
 
 
 

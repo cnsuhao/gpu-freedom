@@ -487,12 +487,11 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="102"/>
-        <CursorPos X="64" Y="146"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="187"/>
+        <CursorPos X="44" Y="235"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit58>
       <Unit59>
@@ -502,7 +501,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="3"/>
         <CursorPos X="19" Y="48"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit59>
       <Unit60>
@@ -715,15 +714,16 @@
       <Unit86>
         <Filename Value="..\lib\own\coreservices\clientjobqueueworkflows.pas"/>
         <UnitName Value="clientjobqueueworkflows"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="99"/>
-        <CursorPos X="1" Y="128"/>
+        <TopLine Value="249"/>
+        <CursorPos X="9" Y="298"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit86>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="10" HistoryIndex="9">
       <Position1>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <Caret Line="14" Column="19" TopLine="1"/>
@@ -744,6 +744,26 @@
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <Caret Line="48" Column="19" TopLine="3"/>
       </Position5>
+      <Position6>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="47" Column="8" TopLine="15"/>
+      </Position6>
+      <Position7>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="56" Column="1" TopLine="33"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="57" Column="1" TopLine="34"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="135" Column="136" TopLine="126"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="17" Column="152" TopLine="1"/>
+      </Position10>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

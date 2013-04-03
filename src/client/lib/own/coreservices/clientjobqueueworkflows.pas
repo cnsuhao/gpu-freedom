@@ -234,15 +234,6 @@ begin
 end;
 
 
-// ********************************
-// * error transition
-// ********************************
-
-function TClientJobQueueWorkflow.changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
-begin
-  Result := changeStatus(row, row.status, C_ERROR, errormsg);
-end;
-
 // **********************************
 // * restore from transitional status
 // **********************************
@@ -297,5 +288,13 @@ begin
   Result := changeStatus(row, C_TRANSMITTING_RESULT, C_FOR_RESULT_TRANSMISSION, msgdesc);
 end;
 
+// ********************************
+// * error transition
+// ********************************
+
+function TClientJobQueueWorkflow.changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
+begin
+  Result := changeStatus(row, row.status, C_ERROR, errormsg);
+end;
 
 end.
