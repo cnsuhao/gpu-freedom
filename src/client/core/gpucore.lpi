@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="124"/>
+        <UsageCount Value="126"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -487,20 +487,22 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="20" Y="28"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="102"/>
+        <CursorPos X="64" Y="146"/>
+        <UsageCount Value="28"/>
+        <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <UnitName Value="workflowmanagers"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="3"/>
         <CursorPos X="19" Y="48"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit59>
       <Unit60>
@@ -669,7 +671,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="31"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
@@ -713,13 +715,15 @@
       <Unit86>
         <Filename Value="..\lib\own\coreservices\clientjobqueueworkflows.pas"/>
         <UnitName Value="clientjobqueueworkflows"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="47" Y="18"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="99"/>
+        <CursorPos X="1" Y="128"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit86>
     </Units>
-    <JumpHistory Count="4" HistoryIndex="3">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <Caret Line="14" Column="19" TopLine="1"/>
@@ -736,6 +740,10 @@
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <Caret Line="20" Column="34" TopLine="1"/>
       </Position4>
+      <Position5>
+        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
+        <Caret Line="48" Column="19" TopLine="3"/>
+      </Position5>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
