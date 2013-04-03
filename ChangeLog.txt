@@ -1,6 +1,10 @@
 ******************
 GPU freedom branch
 
+3.4.2013 git
+Core Client: documenting server workflow under docs/dev
+			 implementing workflow in serverjobqueueworkflows.pas
+
 2.4.2013 git
 Core Client: Doing refactoring to implement global jobqueue workflow (in parallel to the existing one, with different stati)
 			 Submitting a job to the server will be handled by separate services, still on the jobqueue server.
