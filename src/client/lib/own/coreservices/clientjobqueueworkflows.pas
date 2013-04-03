@@ -15,7 +15,7 @@ uses SyncObjs, SysUtils,
      loggers;
 
 // workflow for jobs that we process for someone else
-type TClientJobQueueWorkflow = class(TWorkflowAncestor)
+type TClientJobQueueWorkflow = class(TJobQueueWorkflowAncestor)
        constructor Create(var tableman : TDbTableManager; var logger : TLogger);
 
        // entry points for services
@@ -69,10 +69,6 @@ type TClientJobQueueWorkflow = class(TWorkflowAncestor)
 
        // error transition
        function changeStatusToError(var row : TDbJobQueueRow; errormsg : String) : Boolean;
-
-     private
-       function findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
-       function changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus; message : String) : Boolean;
 end;
 
 implementation
@@ -301,58 +297,5 @@ begin
   Result := changeStatus(row, C_TRANSMITTING_RESULT, C_FOR_RESULT_TRANSMISSION, msgdesc);
 end;
 
-
-// ********************************
-// * private, internal methods
-// ********************************
-function TClientJobQueueWorkflow.changeStatus(var row : TDbJobQueueRow; fromS, toS : TJobStatus; message : String) : Boolean;
-var
-   dbqueuehistoryrow : TDbJobQueueHistoryRow;
-begin
-  Result := false;
-  if row.status<>fromS then
-        begin
-          logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
-                                   JobQueueStatusToString(fromS)+' because row has status '+JobQueueStatusToString(row.status));
-          Exit;
-        end;
-
-  CS_.Enter;
-  try
-    row.status := toS;
-    row.update_dt := Now;
-
-    dbqueuehistoryrow.status     := row.status;
-    dbqueuehistoryrow.jobqueueid := row.jobqueueid;
-    dbqueuehistoryrow.message    := message;
-
-    tableman_.getJobQueueTable().insertOrUpdate(row);
-    tableman_.getJobQueueHistoryTable().insert(dbqueuehistoryrow);
-    Result := true;
-  except
-    on e : Exception  do
-        logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
-                                   JobQueueStatusToString(fromS)+' because of Exception '+e.ToString);
-  end;
-
-  CS_.Leave;
-  if Result then logger_.log(LVL_DEBUG, 'Jobqueue row '+row.jobdefinitionid+' changed status from '+
-                                         JobQueueStatusToString(fromS)+' to status '+JobQueueStatusToString(row.status));
-end;
-
-function TClientJobQueueWorkflow.findRowInStatus(var row : TDbJobQueueRow; s : TJobStatus) : Boolean;
-begin
-  Result := false;
-  CS_.Enter;
-  try
-     Result := tableman_.getJobQueueTable().findRowInStatus(row, s);
-  except
-    on e : Exception  do
-        logger_.log(LVL_SEVERE, 'Internal error: Not possible to retrieve row in status '+
-                                   JobQueueStatusToString(s)+' because of Exception '+e.ToString);
-  end;
-
-  CS_.Leave;
-end;
 
 end.
