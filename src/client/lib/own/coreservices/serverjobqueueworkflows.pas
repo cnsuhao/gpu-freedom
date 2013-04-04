@@ -51,11 +51,13 @@ type TServerJobQueueWorkflow = class(TJobQueueWorkflowAncestor)
        // restore transitions
        function findRowInStatusUploadingWorkunitForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusUploadingJobForRestoral(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusRetrievingStatusForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusRetrievingWuForRestoral(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusRetrievingResultForRestoral(var row : TDbJobQueueRow) : Boolean;
 
        function restoreFromUploadingWorkunit(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function restoreFromUploadingJob(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+       function restoreFromRetrievingStatus(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function restoreFromRetrievingWU(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function restoreFromRetrievingResult(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 
@@ -194,6 +196,10 @@ begin
    Result := findRowInStatus(row, S_UPLOADING_JOB);
 end;
 
+function TServerJobQueueWorkflow.findRowInStatusRetrievingStatusForRestoral(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, S_RETRIEVING_STATUS);
+end;
 
 function TServerJobQueueWorkflow.findRowInStatusRetrievingWuForRestoral(var row : TDbJobQueueRow) : Boolean;
 begin
@@ -214,6 +220,11 @@ end;
 function TServerJobQueueWorkflow.restoreFromUploadingJob(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
    Result := changeStatus(row, S_UPLOADING_JOB, S_FOR_JOB_UPLOAD, msgdesc);
+end;
+
+function TServerJobQueueWorkflow.restoreFromRetrievingStatus(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
+begin
+   Result := changeStatus(row, S_RETRIEVING_STATUS, S_FOR_STATUS_RETRIEVAL, msgdesc);
 end;
 
 function TServerJobQueueWorkflow.restoreFromRetrievingWU(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
