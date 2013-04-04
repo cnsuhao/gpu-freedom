@@ -40,12 +40,17 @@ type TDownloadServiceThread = class(TManagedThread)
     procedure adaptFileNameIfItAlreadyExists;
 end;
 
-
+// for client workflow
 type TDownloadWUJobServiceThread = class(TDownloadServiceThread)
    protected
     procedure Execute; override;
 end;
 
+// for server workflow
+type TDownloadWUResultServiceThread = class(TDownloadServiceThread)
+   protected
+    procedure Execute; override;
+end;
 
 implementation
 
@@ -92,7 +97,7 @@ begin
     logHeader_   := '[TDownloadWUJobServiceThread]> ';
     if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
          begin
-           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_RETRIEVAL. Exit.');
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status C_FOR_WU_RETRIEVAL. Exit.');
            done_      := True;
            erroneous_ := false;
            Exit;
@@ -100,7 +105,7 @@ begin
 
     if (Trim(jobqueuerow_.workunitjobpath)='') then
         begin
-          logger_.log(LVL_SEVERE, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
+          logger_.log(LVL_SEVERE, logHeader_+'Internal error: found job in status C_FOR_WU_RETRIEVAL, but workunit is not defined.');
           workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
           done_      := True;
           erroneous_ := True;
@@ -120,7 +125,7 @@ begin
 
           erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
                         proxy_, port_,
-                        'DownloadServiceThread ['+targetFile_+']> ', logger_);
+                        'DownloadWUJobServiceThread ['+targetFile_+']> ', logger_);
 
           if not (erroneous_) then
           begin
@@ -130,7 +135,55 @@ begin
               else
                   workflowman_.getClientJobQueueWorkflow().changeStatusFromWorkUnitRetrievedToReady(jobqueuerow_, logHeader_+'Fast transition: jobqueue does not require acknowledgement.');
           end
-          else workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit from server!');
+          else workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit job from server!');
+    end;
+
+  done_ := true;
+end;
+
+
+procedure TDownloadWUResultServiceThread.execute();
+var AltFilename : String;
+    index       : Longint;
+begin
+    logHeader_   := '[TDownloadWUResultServiceThread]> ';
+    if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
+         begin
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_WU_RETRIEVAL. Exit.');
+           done_      := True;
+           erroneous_ := false;
+           Exit;
+         end;
+
+    if (Trim(jobqueuerow_.workunitresultpath)='') then
+        begin
+          logger_.log(LVL_SEVERE, logHeader_+'Internal error: found job in status FOR_WU_RETRIEVAL, but workunit is not defined.');
+          workflowman_.getServerJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Internal error: found job in status S_FOR_WU_RETRIEVAL, but workunit is not defined.');
+          done_      := True;
+          erroneous_ := True;
+          Exit;
+        end
+    else
+    begin
+          // Here comes the main loop to retrieve a workunit
+          workflowman_.getServerJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWU(jobqueuerow_);
+
+          targetPath_ := ExtractFilePath(jobqueuerow_.workunitresultpath);
+          targetFile_ := jobqueuerow_.workunitresult;
+          url_ := srv_.url+'/workunits/results/'+jobqueuerow_.workunitresult;
+
+          adaptFileNameIfItAlreadyExists;
+
+
+          erroneous_ := not downloadToFile(url_, targetPath_, targetFile_,
+                        proxy_, port_,
+                        'DownloadWUResultServiceThread ['+targetFile_+']> ', logger_);
+
+          if not (erroneous_) then
+          begin
+              workflowman_.getServerJobQueueWorkflow().changeStatusFromRetrievingWUToForResultRetrieval(jobqueuerow_);
+          end
+          else workflowman_.getServerJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Communication problem: unable to retrieve workunit result from server!');
     end;
 
   done_ := true;

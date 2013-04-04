@@ -165,6 +165,7 @@ begin
          end;
     end;
 
+  done_ := true;
 end;
 
 end.

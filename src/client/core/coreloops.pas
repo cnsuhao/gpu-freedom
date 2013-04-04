@@ -60,13 +60,16 @@ type TCoreLoop = class(TObject)
     procedure   transmitJobResult;
     procedure   transmitAck;
 
+    // client job processing worfklow
     procedure   createFastTransitionFromNewService;
     procedure   createFastTransitionFromComputedService;
     procedure   createDownloadWUJobService;
     procedure   createComputationService;
     procedure   createUploadWUResultService;
 
+    // server job processing workflow
     procedure   createUploadWUJobService;
+    procedure   createDownloadWUResultService;
 
     procedure   createRestoreStatusService;
 end;
@@ -368,6 +371,10 @@ begin
   launch(TCoreServiceThread(thread), 'RestoreStatusService');
 end;
 
+
+//************************************
+//*  Client Job Processing Workflow
+//************************************
 procedure TCoreLoop.createDownloadWUJobService;
 var downthread  : TDownloadWUJobServiceThread;
     srv         : TServerRecord;
@@ -378,9 +385,9 @@ begin
 
    slot := downserviceman.launch(TDownloadServiceThread(downthread));
    if slot=-1 then
-           logger.log(LVL_SEVERE, logHeader_+'Download service launch failed, core too busy!')
+           logger.log(LVL_SEVERE, logHeader_+'Download WU job service launch failed, core too busy!')
    else
-      logger.log(LVL_DEBUG, logHeader_+'Download service started...');
+      logger.log(LVL_DEBUG, logHeader_+'Download WU job service started...');
 end;
 
 procedure TCoreLoop.createComputationService;
@@ -396,6 +403,25 @@ begin
       logger.log(LVL_DEBUG, logHeader_+'Computation service started...');
 end;
 
+
+procedure  TCoreLoop.createUploadWUResultService;
+var upthread  : TUploadWUResultServiceThread;
+    srv       : TServerRecord;
+    slot      : Longint;
+begin
+  serverman.getDefaultServer(srv);
+  upThread := servicefactory.createUploadWUResultService(srv);
+  slot := upserviceman.launch(TUploadServiceThread(upthread));
+  if slot=-1 then
+      logger.log(LVL_SEVERE, logHeader_+'Upload WU result service launch failed, core too busy!')
+  else
+      logger.log(LVL_DEBUG, logHeader_+'Upload WU result service started...');
+end;
+
+
+//***********************************
+//*  Server Job Processing Workflow
+//***********************************
 procedure  TCoreLoop.createUploadWUJobService;
 var upthread  : TUploadWUJobServiceThread;
     srv       : TServerRecord;
@@ -410,18 +436,19 @@ begin
       logger.log(LVL_DEBUG, logHeader_+'Upload WU job service started...');
 end;
 
-procedure  TCoreLoop.createUploadWUResultService;
-var upthread  : TUploadWUResultServiceThread;
-    srv       : TServerRecord;
-    slot      : Longint;
+procedure TCoreLoop.createDownloadWUResultService;
+var downthread  : TDownloadWUResultServiceThread;
+    srv         : TServerRecord;
+    slot        : Longint;
 begin
   serverman.getDefaultServer(srv);
-  upThread := servicefactory.createUploadWUResultService(srv);
-  slot := upserviceman.launch(TUploadServiceThread(upthread));
-  if slot=-1 then
-      logger.log(LVL_SEVERE, logHeader_+'Upload WU result service launch failed, core too busy!')
-  else
-      logger.log(LVL_DEBUG, logHeader_+'Upload WU result service started...');
+  downThread := servicefactory.createDownloadWUResultService(srv);
+
+   slot := downserviceman.launch(TDownloadServiceThread(downthread));
+   if slot=-1 then
+           logger.log(LVL_SEVERE, logHeader_+'Download WU result service launch failed, core too busy!')
+   else
+      logger.log(LVL_DEBUG, logHeader_+'Download WU result service started...');
 end;
 
 procedure TCoreLoop.clearFinishedThreads;
