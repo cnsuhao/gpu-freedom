@@ -3,6 +3,7 @@ GPU freedom branch
 
 4.4.2013 git
 Core Client: splitting the hierarchy of upload and download services
+             extending fasttransitionfromnew and restoreservicestatus to include server stati
 
 3.4.2013 git
 Core Client: documenting server workflow under docs/dev

@@ -48,6 +48,8 @@ type TServiceFactory = class(TObject)
     function createComputationService() : TComputationServiceThread;
 
     function createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
+
+    function createUploadWUJobService(var srv : TServerRecord) : TUploadWUJobServiceThread;
     function createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
 
     function createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;
@@ -167,9 +169,15 @@ begin
  Result := TComputationServiceThread.Create(plugman, meth, res, front, workflowman_, tableman_, logger_);
 end;
 
+
 function TServiceFactory.createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
 begin
   Result := TDownloadWUJobServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+end;
+
+function TServiceFactory.createUploadWUJobService(var srv : TServerRecord) : TUploadWUJobServiceThread;
+begin
+  Result := TUploadWUJobServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
 function TServiceFactory.createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
