@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="129"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -501,7 +501,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="16" Y="19"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit59>
       <Unit60>
@@ -670,17 +670,16 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
         <UnitName Value="restorestatusservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="52"/>
-        <CursorPos X="105" Y="98"/>
-        <UsageCount Value="12"/>
+        <TopLine Value="43"/>
+        <CursorPos X="142" Y="77"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit81>
       <Unit82>
@@ -709,11 +708,12 @@
       <Unit85>
         <Filename Value="..\lib\own\coreservices\fasttransitionsfromnew.pas"/>
         <UnitName Value="fasttransitionsfromnew"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="24"/>
-        <CursorPos X="34" Y="73"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="38"/>
+        <CursorPos X="96" Y="83"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit85>
       <Unit86>

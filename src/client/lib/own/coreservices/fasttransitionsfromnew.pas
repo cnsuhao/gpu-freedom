@@ -18,8 +18,8 @@ type TFastTransitionFromNewServiceThread = class(TCoreServiceThread)
     procedure Execute; override;
 
   private
-    procedure applyWorkflow;
-
+    procedure applyClientWorkflow;
+    procedure applyServerWorkflow;
 end;
 
 implementation
@@ -36,14 +36,17 @@ procedure TFastTransitionFromNewServiceThread.Execute;
 begin
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW started...');
   while workflowman_.getClientJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) do
-        ApplyWorkflow;
+        ApplyClientWorkflow;
+
+  while workflowman_.getServerJobQueueWorkflow().findRowInStatusNew(jobqueuerow_) do
+        ApplyServerWorkflow;
 
   logger_.log(LVL_DEBUG, logHeader_+'Service fast transition from NEW over...');
   done_ := True;
   erroneous_ := false;
 end;
 
-procedure TFastTransitionFromNewServiceThread.applyWorkflow;
+procedure TFastTransitionFromNewServiceThread.applyClientWorkflow;
 begin
   if jobqueuerow_.islocal then
      begin
@@ -67,6 +70,17 @@ begin
            workflowman_.getClientJobQueueWorkflow().changeStatusFromNewToForWURetrieval(jobqueuerow_);
      end;
 
+end;
+
+procedure TFastTransitionFromNewServiceThread.applyServerWorkflow;
+begin
+   if (Trim(jobqueuerow_.workunitjobpath)='') then
+         workflowman_.getServerJobQueueWorkflow().changeStatusFromNewToForJobUpload(jobqueuerow_, logHeader_+'Fast transition, no workunit job to be uploaded')
+   else
+   if (Trim(jobqueuerow_.workunitjobpath)<>'') and (not FileExists(jobqueuerow_.workunitjobpath)) then
+         workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Workunit job does not exist on filesystem ('+jobqueuerow_.workunitjobpath+')')
+   else
+         workflowman_.getServerJobQueueWorkflow().changeStatusFromNewToForWUUpload(jobqueuerow_);
 end;
 
 end.
