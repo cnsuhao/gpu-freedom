@@ -16,14 +16,10 @@ uses
 
 
 type TUploadServiceThread = class(TManagedThread)
- public
+  public
    constructor Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                       proxy, port : String; var logger : TLogger);
-
- protected
-    procedure Execute; override;
-
- private
+  private
     url_,
     sourcePath_,
     sourceFile_,
@@ -37,9 +33,13 @@ type TUploadServiceThread = class(TManagedThread)
 
     jobqueuerow_ : TDbJobQueueRow;
     logger_      : TLogger;
-
 end;
 
+
+type TUploadWUResultServiceThread = class(TUploadServiceThread)
+ protected
+    procedure Execute; override;
+end;
 
 implementation
 
@@ -51,7 +51,6 @@ begin
   srv_ := srv;
   tableman_ := tableman_;
   workflowman_ := workflowman;
-  logHeader_ := '[TUploadServiceThread]> ';
 
   logger_ := logger;
   proxy_ := proxy;
@@ -59,8 +58,9 @@ begin
 end;
 
 
-procedure TUploadServiceThread.execute();
+procedure TUploadWUResultServiceThread.execute();
 begin
+  logHeader_ := '[TUploadWUResultServiceThread]> ';
   if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWUTransmission(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_TRANSMISSION. Exit.');

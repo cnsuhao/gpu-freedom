@@ -62,9 +62,9 @@ type TCoreLoop = class(TObject)
 
     procedure   createFastTransitionFromNewService;
     procedure   createFastTransitionFromComputedService;
-    procedure   createDownloadService;
+    procedure   createDownloadWUJobService;
     procedure   createComputationService;
-    procedure   createUploadService;
+    procedure   createUploadWUResultService;
 
     procedure   createRestoreStatusService;
 end;
@@ -156,11 +156,11 @@ begin
       // ***************************************************
       // TODO: decide here how the coreloop functionality has to tick
       if (tick_ mod 9 = 1)  then createFastTransitionFromNewService;
-      if (tick_ mod 11 = 1) then createDownloadService;
+      if (tick_ mod 11 = 1) then createDownloadWUJobService;
       if (tick_ mod 13 = 1) then transmitAck;
       if (tick_ mod 17 = 1) then createComputationService;
       if (tick_ mod 21 = 1) then createFastTransitionFromComputedService;
-      if (tick_ mod 23 = 1) then createUploadService;
+      if (tick_ mod 23 = 1) then createUploadWUResultService;
       if (tick_ mod 27 = 1) then transmitJobResult;
 
       // ***************************************************
@@ -366,15 +366,15 @@ begin
   launch(TCoreServiceThread(thread), 'RestoreStatusService');
 end;
 
-procedure TCoreLoop.createDownloadService;
-var downthread  : TDownloadServiceThread;
+procedure TCoreLoop.createDownloadWUJobService;
+var downthread  : TDownloadWUJobServiceThread;
     srv         : TServerRecord;
     slot        : Longint;
 begin
   serverman.getDefaultServer(srv);
-  downThread := servicefactory.createDownloadService(srv);
+  downThread := servicefactory.createDownloadWUJobService(srv);
 
-   slot := downserviceman.launch(downthread);
+   slot := downserviceman.launch(TDownloadServiceThread(downthread));
    if slot=-1 then
            logger.log(LVL_SEVERE, logHeader_+'Download service launch failed, core too busy!')
    else
@@ -394,14 +394,14 @@ begin
       logger.log(LVL_DEBUG, logHeader_+'Computation service started...');
 end;
 
-procedure  TCoreLoop.createUploadService;
-var upthread  : TUploadServiceThread;
+procedure  TCoreLoop.createUploadWUResultService;
+var upthread  : TUploadWUResultServiceThread;
     srv       : TServerRecord;
     slot      : Longint;
 begin
   serverman.getDefaultServer(srv);
-  upThread := servicefactory.createUploadService(srv);
-  slot := upserviceman.launch(upthread);
+  upThread := servicefactory.createUploadWUResultService(srv);
+  slot := upserviceman.launch(TUploadServiceThread(upthread));
   if slot=-1 then
       logger.log(LVL_SEVERE, logHeader_+'Upload service launch failed, core too busy!')
   else

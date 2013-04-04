@@ -20,14 +20,10 @@ uses
 
 
 type TDownloadServiceThread = class(TManagedThread)
- public
+  public
    constructor Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                       proxy, port : String; var logger : TLogger);
-
- protected
-    procedure Execute; override;
-
- private
+   protected
     url_,
     proxy_,
     port_,
@@ -45,6 +41,12 @@ type TDownloadServiceThread = class(TManagedThread)
 end;
 
 
+type TDownloadWUJobServiceThread = class(TDownloadServiceThread)
+   protected
+    procedure Execute; override;
+end;
+
+
 implementation
 
 
@@ -59,16 +61,36 @@ begin
   logger_      := logger;
   proxy_       := proxy;
   port_        := port;
-
-  logHeader_   := '[TDownloadServiceThread]> ';
 end;
 
 
-procedure TDownloadServiceThread.execute();
+procedure TDownloadServiceThread.adaptFileNameIfItAlreadyExists;
+var index : Longint;
+    AltFileName : String;
+begin
+    if FileExists(targetPath_+targetFile_) then
+    begin
+      index := 2;
+      repeat
+        AltFileName := targetFile_ + '.' + IntToStr(index);
+        inc(index);
+      until not FileExists(targetPath_+AltFileName);
+      targetFile_ := AltFileName;
+
+      logger_.log(LVL_WARNING, logHeader_+'"'+targetFile_+'" exists, writing to "'+targetFile_+'"');
+      jobqueuerow_.workunitjob     := targetFile_;
+      jobqueuerow_.workunitjobpath := targetPath_+targetFile_;
+      tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
+    end;
+
+end;
+
+procedure TDownloadWUJobServiceThread.execute();
 var AltFilename : String;
     index       : Longint;
 begin
-   if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
+    logHeader_   := '[TDownloadWUJobServiceThread]> ';
+    if not workflowman_.getClientJobQueueWorkflow().findRowInStatusForWURetrieval(jobqueuerow_) then
          begin
            logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status FOR_WU_RETRIEVAL. Exit.');
            done_      := True;
@@ -112,28 +134,6 @@ begin
     end;
 
   done_ := true;
-end;
-
-
-procedure TDownloadServiceThread.adaptFileNameIfItAlreadyExists;
-var index : Longint;
-    AltFileName : String;
-begin
-    if FileExists(targetPath_+targetFile_) then
-    begin
-      index := 2;
-      repeat
-        AltFileName := targetFile_ + '.' + IntToStr(index);
-        inc(index);
-      until not FileExists(targetPath_+AltFileName);
-      targetFile_ := AltFileName;
-
-      logger_.log(LVL_WARNING, logHeader_+'"'+targetFile_+'" exists, writing to "'+targetFile_+'"');
-      jobqueuerow_.workunitjob     := targetFile_;
-      jobqueuerow_.workunitjobpath := targetPath_+targetFile_;
-      tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
-    end;
-
 end;
 
 end.

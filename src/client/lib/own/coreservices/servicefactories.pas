@@ -47,8 +47,8 @@ type TServiceFactory = class(TObject)
 
     function createComputationService() : TComputationServiceThread;
 
-    function createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
-    function createUploadService(var srv : TServerRecord) : TUploadServiceThread;
+    function createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
+    function createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
 
     function createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;
     function createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;
@@ -167,14 +167,14 @@ begin
  Result := TComputationServiceThread.Create(plugman, meth, res, front, workflowman_, tableman_, logger_);
 end;
 
-function TServiceFactory.createDownloadService(var srv : TServerRecord) : TDownloadServiceThread;
+function TServiceFactory.createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
 begin
-  Result := TDownloadServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TDownloadWUJobServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
-function TServiceFactory.createUploadService(var srv : TServerRecord) : TUploadServiceThread;
+function TServiceFactory.createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
 begin
-  Result := TUploadServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TUploadWUResultServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
 function TServiceFactory.createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;

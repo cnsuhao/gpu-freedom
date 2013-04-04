@@ -1,9 +1,12 @@
 ******************
 GPU freedom branch
 
+4.4.2013 git
+Core Client: splitting the hierarchy of upload and download services
+
 3.4.2013 git
 Core Client: documenting server workflow under docs/dev
-			 implementing workflow in serverjobqueueworkflows.pas
+			 implementing server jobqueue workflow in serverjobqueueworkflows.pas
 
 2.4.2013 git
 Core Client: Doing refactoring to implement global jobqueue workflow (in parallel to the existing one, with different stati)

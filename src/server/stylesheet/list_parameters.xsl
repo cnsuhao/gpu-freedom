@@ -9,7 +9,7 @@
                 <title>GPU Server - Parameters</title>
             </head>
             <body>
-			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
+			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0"></img></a>
                 <h2>Parameters</h2>
                 <table border="1">
 					<tr>
