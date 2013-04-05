@@ -3,6 +3,7 @@ GPU freedom branch
 
 5.4.2013 git 
 Core Client: adapting retrieving result service to server workflow 
+             adapting transmit job service to server workflow 
 
 4.4.2013 git
 Core Client: splitting the hierarchy of upload and download services

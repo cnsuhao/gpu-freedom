@@ -307,27 +307,10 @@ end;
 procedure TCoreLoop.transmitJob;
 var transmitjobthread  : TTransmitJobServiceThread;
     srv                : TServerRecord;
-    jobrow             : TDbJobDefinitionRow;
-    trandetails        : TJobTransmissionDetails;
 begin
    serverman.getDefaultServer(srv);
 
-   // This was added for testing purposes
-   jobrow.islocal:=false;
-   jobrow.job:='13,12,add';
-   jobrow.jobdefinitionid:='ajdflasdfjla';
-   jobrow.jobtype:='GPU_Engine';
-   jobrow.requireack:=true;
-   jobrow.nodeid:=myGPUID.NodeId;
-   jobrow.nodename:=myGPUID.NodeName;
-
-   trandetails.nbrequests:=13;
-   trandetails.tagwuresult:=false;
-   trandetails.tagwujob:=false;
-   trandetails.workunitjob:='';
-   trandetails.workunitresult:='';
-
-   transmitjobthread  := servicefactory.createTransmitJobService(srv, jobrow, trandetails);
+   transmitjobthread  := servicefactory.createTransmitJobService(srv);
    launch(TCoreServiceThread(transmitjobthread), 'TransmitJob');
 end;
 
