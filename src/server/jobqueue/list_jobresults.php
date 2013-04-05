@@ -10,7 +10,11 @@
  include('../utils/utils.inc.php'); 
  
  $jobid = getparam('jobid', "");
+ $jobqueueid = getparam('jobqueueid', "");
  $transmissionid = getparam('transmissionid', "");
+ if ($jobqueueid!="") {
+	$jobclause="and r.jobqueueid='$jobqueueid'"; 
+ } else
  if ($jobid!="") {
 	$jobclause="and r.jobid='$jobid'"; 
  } else

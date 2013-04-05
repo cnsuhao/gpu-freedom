@@ -41,7 +41,7 @@ type TServiceFactory = class(TObject)
     function createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
     function createTransmitJobService(var srv : TServerRecord; var jobrow : TDbJobDefinitionRow; var trandetails : TJobTransmissionDetails) : TTransmitJobServiceThread;
     function createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
-    function createReceiveJobResultService(var srv : TServerRecord; jobid : String) : TReceiveJobResultServiceThread;
+    function createReceiveJobResultService(var srv : TServerRecord) : TReceiveJobResultServiceThread;
     function createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;
     function createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
 
@@ -141,9 +141,9 @@ begin
  Result := TReceiveJobStatServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveJobResultService(var srv : TServerRecord; jobid : String) : TReceiveJobResultServiceThread;
+function TServiceFactory.createReceiveJobResultService(var srv : TServerRecord) : TReceiveJobResultServiceThread;
 begin
- Result := TReceiveJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, jobid);
+ Result := TReceiveJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
 function TServiceFactory.createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;

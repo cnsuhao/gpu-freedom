@@ -4,26 +4,27 @@ unit receivejobresultservices;
   This unit receives a list of job results from GPU II superserver
    and stores it in the TDbJobResultTable object.
 
-  (c) 2011 by HB9TVM and the GPU Team
+  (c) 2011-2013 by HB9TVM and the GPU Team
   This code is licensed under the GPL
 
 }
 interface
 
 uses coreservices, servermanagers, dbtablemanagers,
-     jobresulttables, loggers, downloadutils, coreconfigurations,
-     Classes, SysUtils, DOM, identities;
+     jobresulttables, jobqueuetables, loggers, downloadutils, coreconfigurations,
+     workflowmanagers, Classes, SysUtils, DOM, identities;
 
 type TReceiveJobResultServiceThread = class(TReceiveServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; var tableman : TDbTableManager; jobid : String);
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 
  protected
     procedure Execute; override;
 
  private
-   jobid_  : String;
+   workflowman_  : TWorkflowManager;
+   jobqueuerow_  : TDbJobQueueRow;
 
    procedure parseXml(var xmldoc : TXMLDocument);
 end;
@@ -31,10 +32,10 @@ end;
 implementation
 
 constructor TReceiveJobResultServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                   var conf : TCoreConfiguration; var tableman : TDbTableManager; jobid : String);
+                   var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
  inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobResultServiceThread]> ', conf, tableman);
- jobid_  := jobid;
+ workflowman_ := workflowman;
 end;
 
 procedure TReceiveJobResultServiceThread.parseXml(var xmldoc : TXMLDocument);
@@ -89,11 +90,28 @@ end;
 procedure TReceiveJobResultServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
- receive('/jobqueue/list_jobresults.php?xml=1&jobid='+jobid_, xmldoc, false);
- if not erroneous_ then
-     parseXml(xmldoc);
+  if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForResultRetrieval(jobqueuerow_) then
+         begin
+           logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_RESULT_RETRIEVAL. Exit.');
+           done_      := True;
+           erroneous_ := false;
+           Exit;
+         end;
 
- finishReceive('Service updated table TBJOBRESULT table succesfully :-)', xmldoc);
+ workflowman_.getServerJobQueueWorkflow().changeStatusFromForResultRetrievalToRetrievingResult(jobqueuerow_);
+ receive('/jobqueue/list_jobresults.php?xml=1&jobqueueid='+jobqueuerow_.jobqueueid, xmldoc, false);
+ if not erroneous_ then
+   begin
+     parseXml(xmldoc);
+     workflowman_.getServerJobQueueWorkflow().changeStatusFromRetrievingResultToCompleted(jobqueuerow_);
+     finishReceive('Service updated table TBJOBRESULT table succesfully :-)', xmldoc);
+   end
+ else
+   begin
+     workflowman_.getServerJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Problem in retrieving result from server '+srv_.url);
+     finishReceive('Problem in retrieving result from server '+srv_.url, xmldoc);
+   end;
+
 end;
 
 end.

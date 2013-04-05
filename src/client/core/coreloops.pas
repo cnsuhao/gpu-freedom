@@ -290,7 +290,7 @@ var  receivejobresultthread : TReceiveJobresultServiceThread;
 begin
    serverman.getDefaultServer(srv);
    //TODO: we do not pass job id for the moment
-   receivejobresultthread  := servicefactory.createReceiveJobresultService(srv, '');
+   receivejobresultthread  := servicefactory.createReceiveJobresultService(srv);
   launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult');
 end;
 
