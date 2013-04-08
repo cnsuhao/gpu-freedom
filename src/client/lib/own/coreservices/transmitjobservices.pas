@@ -76,6 +76,9 @@ begin
  if not erroneous_ then
     begin
       workflowman_.getServerJobQueueWorkflow().changeStatusFromUploadingJobToForStatusRetrieval(jobqueuerow_);
+      jobqueuerow_.serverstatus:='NEW';
+      jobqueuerow_.update_dt:=Now;
+      tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
       finishTransmit('Job transmitted :-)');
     end
  else
