@@ -33,7 +33,7 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="90">
+    <Units Count="92">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="133"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -213,7 +213,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="305"/>
         <CursorPos X="77" Y="307"/>
-        <UsageCount Value="53"/>
+        <UsageCount Value="54"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -363,9 +363,9 @@
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\sqlite\customsqliteds.pas"/>
         <UnitName Value="CustomSqliteDS"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1846"/>
-        <CursorPos X="14" Y="269"/>
-        <UsageCount Value="6"/>
+        <TopLine Value="188"/>
+        <CursorPos X="14" Y="212"/>
+        <UsageCount Value="10"/>
       </Unit42>
       <Unit43>
         <Filename Value="..\lib\own\misc\geoutils.pas"/>
@@ -393,12 +393,10 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="80"/>
         <CursorPos X="62" Y="107"/>
         <UsageCount Value="21"/>
-        <Loaded Value="True"/>
       </Unit46>
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
@@ -411,11 +409,12 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="4"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="219"/>
-        <CursorPos X="15" Y="94"/>
-        <UsageCount Value="24"/>
+        <TopLine Value="18"/>
+        <CursorPos X="34" Y="54"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit48>
       <Unit49>
@@ -479,27 +478,25 @@
         <UnitName Value="coretables"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="5" Y="26"/>
         <UsageCount Value="10"/>
       </Unit56>
       <Unit57>
         <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
         <UnitName Value="workflowancestors"/>
-        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="49"/>
         <CursorPos X="17" Y="28"/>
         <UsageCount Value="13"/>
-        <Loaded Value="True"/>
       </Unit57>
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="55"/>
-        <CursorPos X="17" Y="29"/>
-        <UsageCount Value="31"/>
+        <TopLine Value="58"/>
+        <CursorPos X="19" Y="96"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit58>
       <Unit59>
@@ -656,12 +653,10 @@
       <Unit78>
         <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
         <UnitName Value="downloadservices"/>
-        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="140"/>
         <CursorPos X="1" Y="150"/>
         <UsageCount Value="16"/>
-        <Loaded Value="True"/>
       </Unit78>
       <Unit79>
         <Filename Value="..\lib\own\coreservices\uploadservices.pas"/>
@@ -678,7 +673,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="37"/>
+        <UsageCount Value="38"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
@@ -746,16 +741,31 @@
       <Unit89>
         <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
         <UnitName Value="receivejobstatusservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="72"/>
+        <TopLine Value="75"/>
         <CursorPos X="8" Y="106"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit89>
+      <Unit90>
+        <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\base\db.pas"/>
+        <UnitName Value="db"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2420"/>
+        <CursorPos X="3" Y="1264"/>
+        <UsageCount Value="10"/>
+      </Unit90>
+      <Unit91>
+        <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\sqlite\sqlite3ds.pas"/>
+        <UnitName Value="Sqlite3DS"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="341"/>
+        <CursorPos X="3" Y="46"/>
+        <UsageCount Value="10"/>
+      </Unit91>
     </Units>
-    <JumpHistory Count="16" HistoryIndex="15">
+    <JumpHistory Count="15" HistoryIndex="14">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="397" Column="50" TopLine="378"/>
@@ -801,25 +811,21 @@
         <Caret Line="92" Column="23" TopLine="50"/>
       </Position11>
       <Position12>
-        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="118" Column="41" TopLine="62"/>
+        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
+        <Caret Line="106" Column="8" TopLine="75"/>
       </Position12>
       <Position13>
-        <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="96" Column="19" TopLine="58"/>
       </Position13>
       <Position14>
-        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
-        <Caret Line="106" Column="8" TopLine="69"/>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="245" Column="94" TopLine="219"/>
       </Position14>
       <Position15>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="29" Column="17" TopLine="55"/>
+        <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
+        <Caret Line="245" Column="94" TopLine="210"/>
       </Position15>
-      <Position16>
-        <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
-        <Caret Line="28" Column="17" TopLine="49"/>
-      </Position16>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

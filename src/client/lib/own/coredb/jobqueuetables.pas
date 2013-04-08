@@ -20,37 +20,38 @@ const
   // stati for processing on client, prefix C_ for client
   // these stati are when we process a job for someone else
   C_NEW                     = 100;
-  C_FOR_WU_RETRIEVAL        = 105;
-  C_RETRIEVING_WORKUNIT     = 110;
+  C_FOR_WU_RETRIEVAL        = 110;
+  C_RETRIEVING_WORKUNIT     = 115;
   C_WORKUNIT_RETRIEVED      = 120;
-  C_FOR_ACKNOWLEDGEMENT     = 125;
-  C_ACKNOWLEDGING           = 130;
+  C_FOR_ACKNOWLEDGEMENT     = 130;
+  C_ACKNOWLEDGING           = 135;
   C_READY                   = 140;
-  C_RUNNING                 = 150;
-  C_COMPUTED                = 160;
-  C_FOR_WU_TRANSMISSION     = 165;
-  C_TRANSMITTING_WORKUNIT   = 170;
-  C_WORKUNIT_TRANSMITTED    = 180;
-  C_FOR_RESULT_TRANSMISSION = 185;
-  C_TRANSMITTING_RESULT     = 190;
-  C_COMPLETED               = 199;
+  C_RUNNING                 = 145;
+  C_COMPUTED                = 150;
+  C_FOR_WU_TRANSMISSION     = 160;
+  C_TRANSMITTING_WORKUNIT   = 165;
+  C_WORKUNIT_TRANSMITTED    = 170;
+  C_FOR_RESULT_TRANSMISSION = 180;
+  C_TRANSMITTING_RESULT     = 185;
+  C_COMPLETED               = 190;
   C_WORKUNITS_CLEANEDUP     = 800;
   C_ERROR                   = 910;
 
 
   // stati when someone else processes a job for us, prefix S_ for server
   S_NEW                     = 200;
-  S_FOR_WU_UPLOAD           = 205;
-  S_UPLOADING_WORKUNIT      = 210;
+  S_FOR_WU_UPLOAD           = 210;
+  S_UPLOADING_WORKUNIT      = 215;
   S_FOR_JOB_UPLOAD          = 220;
-  S_UPLOADING_JOB           = 230;
-  S_FOR_STATUS_RETRIEVAL    = 240;
-  S_RETRIEVING_STATUS       = 250;
-  S_FOR_WU_RETRIEVAL        = 260;
-  S_RETRIEVING_WU           = 270;
-  S_FOR_RESULT_RETRIEVAL    = 280;
-  S_RETRIEVING_RESULT       = 290;
-  S_COMPLETED               = 299;
+  S_UPLOADING_JOB           = 225;
+  S_FOR_STATUS_RETRIEVAL    = 230;
+  S_RETRIEVING_STATUS       = 235;
+  S_STATUS_RETRIEVED        = 240;
+  S_FOR_WU_RETRIEVAL        = 250;
+  S_RETRIEVING_WU           = 255;
+  S_FOR_RESULT_RETRIEVAL    = 260;
+  S_RETRIEVING_RESULT       = 265;
+  S_COMPLETED               = 290;
   S_ERROR                   = 920;
 
 

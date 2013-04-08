@@ -3,6 +3,8 @@ GPU freedom branch
 
 8.4.2013 git
 Core Client: implementing receivejobstatus.pas
+             added new status S_STATUS_RETRIEVED, modifying server workflow as consequence
+			 modifying restorestatusservice
 
 5.4.2013 git 
 Core Client: adapting retrieving result service to server workflow 
