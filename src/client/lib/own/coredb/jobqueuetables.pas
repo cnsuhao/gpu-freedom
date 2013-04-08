@@ -63,7 +63,8 @@ type TDbJobQueueRow = record
    id              : Longint;
    jobdefinitionid : String;
    status          : Longint;
-   statusdesc      : String;
+   statusdesc,
+   serverstatus    : String;
    server_id       : Longint;
    jobqueueid      : String;
    job             : AnsiString;
@@ -162,6 +163,7 @@ begin
       FieldDefs.Add('jobdefinitionid', ftString);
       FieldDefs.Add('status', ftInteger);
       FieldDefs.Add('statusdesc', ftString);
+      FieldDefs.Add('serverstatus', ftString);
       FieldDefs.Add('job', ftString);
       FieldDefs.Add('jobtype', ftString);
       FieldDefs.Add('workunitjob', ftString);
@@ -198,6 +200,7 @@ begin
   dataset_.FieldByName('jobdefinitionid').AsString := row.jobdefinitionid;
   dataset_.FieldByName('status').AsInteger := row.status;
   dataset_.FieldByName('statusdesc').AsString := JobQueueStatusToString(row.status);
+  dataset_.FieldByName('serverstatus').AsString := row.serverstatus;
   dataset_.FieldByName('jobqueueid').AsString := row.jobqueueid;
   dataset_.FieldByName('job').AsString := row.job;
   dataset_.FieldByName('jobtype').AsString := row.jobtype;
@@ -268,6 +271,7 @@ begin
      row.jobdefinitionid := dataset_.FieldByName('jobdefinitionid').AsString;
      row.status          := dataset_.FieldByName('status').AsInteger;
      row.statusdesc      := dataset_.FieldByName('statusdesc').AsString;
+     row.serverstatus    := dataset_.FieldByName('serverstatus').AsString;
      row.jobqueueid      := dataset_.FieldByName('jobqueueid').AsString;
      row.job             := dataset_.FieldByName('job').AsString;
      row.jobtype         := dataset_.FieldByName('jobtype').AsString;

@@ -115,6 +115,7 @@ try
                dbqueuerow.server_id := srv_.id;
                dbjobrow.server_id   := srv_.id;
                dbqueuerow.status    := C_NEW;
+               dbqueuerow.serverstatus:='TRANSMITTED';
 
                // jobqueuehistoryrow
                dbqueuehistoryrow.status     := dbqueuerow.status;

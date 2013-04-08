@@ -5,6 +5,7 @@ GPU freedom branch
 Core Client: implementing receivejobstatus.pas
              added new status S_STATUS_RETRIEVED, modifying server workflow as consequence
 			 modifying restorestatusservice
+			 adding filed serverstatus to TBJOBQUEUE
 
 5.4.2013 git 
 Core Client: adapting retrieving result service to server workflow 

@@ -74,6 +74,11 @@ try
                status_.timestamp   := node.FindNode('timestamp').TextContent;
                status_.nodename    := node.FindNode('nodename').TextContent;
                status_.message     := node.FindNode('message').TextContent;
+
+               jobqueuerow_.serverstatus:=status_.status;
+               jobqueuerow_.update_dt:=Now;
+               tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow);
+
      end;  // if Assigned(node)
 end; // try
 except

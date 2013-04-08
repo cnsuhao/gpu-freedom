@@ -58,6 +58,9 @@ procedure TTransmitJobResultServiceThread.insertTransmission();
 begin
  jobresultrow_.server_id := srv_.id;
  tableman_.getJobResultTable().insertOrUpdate(jobresultrow_);
+ jobqueuerow_.serverstatus:='COMPLETED';
+ jobqueuerow_.update_dt:=Now;
+ tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
  logger_.log(LVL_DEBUG, logHeader_+'Updated or added '+IntToStr(jobresultrow_.id)+' to TBJOBRESULT table.');
 end;
 

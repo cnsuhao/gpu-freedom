@@ -49,6 +49,8 @@ procedure TTransmitAckJobServiceThread.updateJobQueue();
 begin
  jobqueuerow_.server_id := srv_.id;
  jobqueuerow_.ack_dt    := Now;
+ jobqueuerow_.serverstatus:='ACKNOWLEDGED';
+ jobqueuerow_.update_dt:=Now;
 
  if workflowman_.getClientJobQueueWorkflow().changeStatusFromAcknowledgingToReady(jobqueuerow_) then
          logger_.log(LVL_DEBUG, logHeader_+'Jobqueue '+jobqueuerow_.jobqueueid+' set to READY.');
