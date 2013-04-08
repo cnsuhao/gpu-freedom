@@ -79,6 +79,9 @@ try
                jobqueuerow_.update_dt:=Now;
                tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow);
 
+               //if status_.status=
+               //....
+
      end;  // if Assigned(node)
 end; // try
 except
@@ -96,23 +99,25 @@ end;
 
 procedure TReceiveJobStatusServiceThread.Execute;
 var xmldoc    : TXMLDocument;
-    found     : Boolean;
 begin
- found := false;
- while not found do
-    begin
-      if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForStatusRetrieval(jobqueuerow_) then
+   if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForStatusRetrieval(jobqueuerow_) then
            begin
-               logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_STATUS_RETRIEVAL. Exit.');
+               logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_STATUS_RETRIEVAL. ');
+
+               while workflowman_.getServerJobQueueWorkflow().findRowInStatusStatusRetrieved(jobqueuerow_) do
+                     begin
+                        workflowman_.getServerJobQueueWorkflow().changeStatusFromStatusRetrievedToForStatusRetrieval(jobqueuerow_);
+                     end;
+               logger_.log(LVL_DEBUG, logHeader_+'All jobs (if any) in S_FOR_STATUS_RETRIEVED reset to S_FOR_STATUS_RETRIEVAL.');
+
                done_      := True;
                erroneous_ := false;
                Exit;
            end;
 
-    end;
 
 
- receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(),
+ receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(jobqueuerow_.jobqueueid),
          xmldoc, false);
 
  if not erroneous_ then
@@ -121,8 +126,10 @@ begin
      finishReceive('Service received status of TBJOBQUEUE on server successfully.', xmldoc);
     end
  else
-    finishReceive('Communication problem in receiving status of TBJOBQUEUE on server.', xmldoc);
-
+    begin
+     finishReceive('Communication problem in receiving status of TBJOBQUEUE on server.', xmldoc);
+     workflowman_.getServerJobQueueWorkflow().changeStatusToError(jobqueuerow_, 'Communication problem in receiving status of TBJOBQUEUE on server.');
+    end;
 end;
 
 

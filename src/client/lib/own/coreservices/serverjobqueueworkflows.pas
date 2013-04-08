@@ -27,6 +27,7 @@ type TServerJobQueueWorkflow = class(TJobQueueWorkflowAncestor)
        function findRowInStatusForWUUpload(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusForJobUpload(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusForStatusRetrieval(var row : TDbJobQueueRow) : Boolean;
+       function findRowInStatusStatusRetrieved(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusForWURetrieval(var row : TDbJobQueueRow) : Boolean;
        function findRowInStatusForResultRetrieval(var row : TDbJobQueueRow) : Boolean;
 
@@ -95,6 +96,11 @@ end;
 function TServerJobQueueWorkflow.findRowInStatusForStatusRetrieval(var row : TDbJobQueueRow) : Boolean;
 begin
  Result := findRowInStatus(row, S_FOR_STATUS_RETRIEVAL);
+end;
+
+function TServerJobQueueWorkflow.findRowInStatusStatusRetrieved(var row : TDbJobQueueRow) : Boolean;
+begin
+  Result := findRowInStatus(row, S_STATUS_RETRIEVED);
 end;
 
 function TServerJobQueueWorkflow.findRowInStatusForWURetrieval(var row : TDbJobQueueRow) : Boolean;

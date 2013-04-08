@@ -1,11 +1,10 @@
 ******************
-GPU freedom branch
+GPU freedom codebase
 
 8.4.2013 git
 Core Client: implementing receivejobstatus.pas
              added new status S_STATUS_RETRIEVED, modifying server workflow as consequence
-			 modifying restorestatusservice
-			 adding filed serverstatus to TBJOBQUEUE
+			 adding field serverstatus to TBJOBQUEUE
 
 5.4.2013 git 
 Core Client: adapting retrieving result service to server workflow 
@@ -224,8 +223,9 @@ The FPC unit test framework loaded plugin basic, the plugin computed 1+1
 - initial commit of gpu_freedom on git repository
 - inital tree structure of package
 
-***************************** start of GPU freedom branch
+***************************** start of GPU freedom codebase
 
+***************************** start of GPU solar codebase
 17.10.2012 0.964 Release Notes
 - Added daylength duration to Simclimate
 - Orbit Simulation and Analysis: added planet textures when zooming close to a planet
