@@ -68,7 +68,7 @@ begin
 try
   begin
   node := xmldoc.DocumentElement.FirstChild;
-  if Assigned(node) do
+  if Assigned(node) then
     begin
                status_.jobqueueid  := node.FindNode('jobqueueid').TextContent;
                status_.status      := node.FindNode('status').TextContent;
@@ -95,7 +95,7 @@ try
 
                jobqueuerow_.serverstatus:=status_.status;
                jobqueuerow_.update_dt:=Now;
-               tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow);
+               tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow_);
 
      end;  // if Assigned(node)
 end; // try
@@ -121,7 +121,7 @@ begin
 
                while workflowman_.getServerJobQueueWorkflow().findRowInStatusStatusRetrieved(jobqueuerow_) do
                      begin
-                        workflowman_.getServerJobQueueWorkflow().changeStatusFromStatusRetrievedToForStatusRetrieval(jobqueuerow_);
+                        workflowman_.getServerJobQueueWorkflow().changeStatusFromStatusRetrievedToForStatusRetrieval(jobqueuerow_, 'queuing request again, as job is not completed yet');
                      end;
                logger_.log(LVL_DEBUG, logHeader_+'All jobs (if any) in S_FOR_STATUS_RETRIEVED reset to S_FOR_STATUS_RETRIEVAL.');
 

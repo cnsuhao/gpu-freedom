@@ -20,7 +20,7 @@ uses
   methodcontrollers, resultcollectors,
   downloadservices, uploadservices, identities,
   fasttransitionsfromnew, fasttransitionsfromcomputed,
-  restorestatusservices;
+  restorestatusservices, receivejobstatusservices;
 
 type TServiceFactory = class(TObject)
    public
@@ -40,6 +40,7 @@ type TServiceFactory = class(TObject)
                                           content : AnsiString) : TTransmitChannelServiceThread;
     function createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
     function createTransmitJobService(var srv : TServerRecord) : TTransmitJobServiceThread;
+    function createReceiveJobstatusService(var srv : TServerRecord) : TReceiveJobstatusServiceThread;
     function createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
     function createReceiveJobResultService(var srv : TServerRecord) : TReceiveJobResultServiceThread;
     function createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;
@@ -135,6 +136,12 @@ function TServiceFactory.createTransmitJobService(var srv : TServerRecord) : TTr
 begin
  Result := TTransmitJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
+
+function TServiceFactory.createReceiveJobstatusService(var srv : TServerRecord) : TReceiveJobstatusServiceThread;
+begin
+ Result := TReceiveJobStatusServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+end;
+
 
 function TServiceFactory.createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
 begin

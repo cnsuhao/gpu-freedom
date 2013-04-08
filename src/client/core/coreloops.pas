@@ -17,6 +17,7 @@ uses
   downloadservices, downloadservicemanagers,
   uploadservices, uploadservicemanagers,
   fasttransitionsfromnew, fasttransitionsfromcomputed, restorestatusservices,
+  receivejobstatusservices,
   coreobjects, coremonitors;
 
 const FRAC_SEC=1/24/3600;
@@ -51,25 +52,28 @@ type TCoreLoop = class(TObject)
     procedure   retrieveServers;
     procedure   retrieveClients;
     procedure   retrieveChannels;
-    procedure   retrieveJobs;
     procedure   retrieveJobStats;
-    procedure   retrieveJobResults;
 
     procedure   transmitClient;
     procedure   transmitJob;
-    procedure   transmitJobResult;
-    procedure   transmitAck;
 
     // client job processing worfklow
+    procedure   retrieveJobs;
     procedure   createFastTransitionFromNewService;
-    procedure   createFastTransitionFromComputedService;
+    procedure   transmitAck;
     procedure   createDownloadWUJobService;
     procedure   createComputationService;
+    procedure   createFastTransitionFromComputedService;
     procedure   createUploadWUResultService;
+    procedure   transmitJobResult;
+
 
     // server job processing workflow
     procedure   createUploadWUJobService;
+    procedure   createRetrieveStatusService;
     procedure   createDownloadWUResultService;
+    procedure   retrieveJobResult;
+
 
     procedure   createRestoreStatusService;
 end;
@@ -146,8 +150,7 @@ begin
       if lf_morefrequentupdates.exists  and (tick_ mod 13 = 0) then retrieveChannels;
 
       receiveJobs := tick_ mod myConfId.receive_jobs_each;
-      if (receiveJobs = 0)  then retrieveJobs;
-      if (receiveJobs = 13) then retrieveJobResults;
+      if (receiveJobs = 13) then retrieveJobResult;
       if (receiveJobs = 29) then retrieveJobStats;
 
       // TODO: how is handling of transmitting jobs regulated?
@@ -160,6 +163,7 @@ begin
       // * Services for internal jobqueue workflow
       // ***************************************************
       // TODO: decide here how the coreloop functionality has to tick
+      if (receiveJobs = 0)  then retrieveJobs;
       if (tick_ mod 9 = 1)  then createFastTransitionFromNewService;
       if (tick_ mod 11 = 1) then createDownloadWUJobService;
       if (tick_ mod 13 = 1) then transmitAck;
@@ -284,7 +288,7 @@ begin
 end;
 
 
-procedure TCoreLoop.retrieveJobResults;
+procedure TCoreLoop.retrieveJobResult;
 var  receivejobresultthread : TReceiveJobresultServiceThread;
      srv                    : TServerRecord;
 begin
@@ -417,6 +421,16 @@ begin
       logger.log(LVL_SEVERE, logHeader_+'Upload WU Job service launch failed, core too busy!')
   else
       logger.log(LVL_DEBUG, logHeader_+'Upload WU job service started...');
+end;
+
+
+procedure TCoreLoop.createRetrieveStatusService;
+var  receivejobstatusthread : TReceiveJobStatusServiceThread;
+     srv                    : TServerRecord;
+begin
+   serverman.getDefaultServer(srv);
+   receivejobstatusthread  := servicefactory.createReceiveJobStatusService(srv);
+  launch(TCoreServiceThread(receivejobstatusthread), 'ReceiveJobStatus');
 end;
 
 procedure TCoreLoop.createDownloadWUResultService;
