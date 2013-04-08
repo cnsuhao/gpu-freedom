@@ -103,9 +103,8 @@ try
                dbjobrow.requireack := requireack;
                dbqueuerow.requireack:= requireack;
 
-               //TODO: set this dates according to server
                dbqueuerow.create_dt   := Now;
-               dbqueuerow.update_dt   := Now;
+               dbqueuerow.update_dt   := dbqueuerow.create_dt;
                dbqueuerow.transmission_dt := Now;
                dbqueuerow.transmissionid  := node.FindNode('transmissionid').TextContent;
                dbqueuerow.ack_dt := 0;

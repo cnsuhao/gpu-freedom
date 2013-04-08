@@ -91,7 +91,22 @@ end;
 
 procedure TReceiveJobStatusServiceThread.Execute;
 var xmldoc    : TXMLDocument;
+    found     : Boolean;
 begin
+ found := false;
+ while not found do
+    begin
+      if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForStatusRetrieval(jobqueuerow_) then
+           begin
+               logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_STATUS_RETRIEVAL. Exit.');
+               done_      := True;
+               erroneous_ := false;
+               Exit;
+           end;
+
+    end;
+
+
  receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(),
          xmldoc, false);
 
