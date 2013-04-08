@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="134"/>
+        <UsageCount Value="135"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -393,10 +393,12 @@
       <Unit46>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="80"/>
-        <CursorPos X="67" Y="84"/>
+        <TopLine Value="86"/>
+        <CursorPos X="42" Y="119"/>
         <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit46>
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
@@ -409,10 +411,12 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="55" Y="249"/>
+        <TopLine Value="251"/>
+        <CursorPos X="62" Y="285"/>
         <UsageCount Value="25"/>
+        <Loaded Value="True"/>
       </Unit48>
       <Unit49>
         <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
@@ -489,17 +493,17 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="64"/>
-        <CursorPos X="52" Y="103"/>
+        <TopLine Value="1"/>
+        <CursorPos X="80" Y="152"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <UnitName Value="workflowmanagers"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="16" Y="19"/>
@@ -672,7 +676,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="40"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
@@ -743,8 +747,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="85"/>
-        <CursorPos X="148" Y="131"/>
+        <TopLine Value="61"/>
+        <CursorPos X="121" Y="81"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit89>
@@ -765,7 +769,7 @@
         <UsageCount Value="10"/>
       </Unit91>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="13" HistoryIndex="12">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="397" Column="50" TopLine="378"/>
@@ -810,6 +814,14 @@
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <Caret Line="19" Column="16" TopLine="1"/>
       </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
+        <Caret Line="88" Column="108" TopLine="10"/>
+      </Position12>
+      <Position13>
+        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
+        <Caret Line="80" Column="91" TopLine="55"/>
+      </Position13>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

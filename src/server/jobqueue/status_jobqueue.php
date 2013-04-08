@@ -27,6 +27,7 @@
  if ($result=="") {
 	$status="ERROR";
 	$nodename="";
+	$jobresultid="";
 	$message="Jobqueueid $jobqueueid does not exist on $my_server_url";
  } else {
 		// retrieve everything from jobqueue;
@@ -38,6 +39,8 @@
 		$reception_dt    = mysql_result($result, 0, 'reception_dt');
 		$nodename        = mysql_result($result, 0, 'nodename');
 		
+		$jobresultid     = "";
+				
 		if ($reception_dt!="") {
 			// we received a result for this job
 			// retrieving the corresponding jobresult
@@ -48,11 +51,11 @@
 				$nodename="";
 				$message="Internal server error: For jobqueueid $jobqueueid there is no jobresult defined, although reception_dt is set";
 			} else {
-				$nodename = mysql_result($resjobresult, 0, 'nodename');
-			    $message  = mysql_result($resjobresult, 0, 'jobresultid');
-				$message  = "jobresultid=" . $message;
-				$timestamp = $reception_dt;
-				$status    = "COMPLETED";
+				$nodename     = mysql_result($resjobresult, 0, 'nodename');
+			    $jobresultid  = mysql_result($resjobresult, 0, 'jobresultid');
+				$message      = "";
+				$timestamp    = $reception_dt;
+				$status       = "COMPLETED";
 			}	
 		} else
 		if ($ack_dt!="") {
@@ -89,6 +92,7 @@
  echo "<timestamp>$timestamp</timestamp>\n";
  echo "<nodename>$nodename</nodename>\n";
  echo "<message>$message</message>\n";
+ echo "<jobresultid>$jobresultid</jobresultid>\n";
  echo "</jobstatus>\n";
  echo "</stats>\n";
  

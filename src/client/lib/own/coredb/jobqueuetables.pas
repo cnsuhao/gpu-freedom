@@ -73,6 +73,7 @@ type TDbJobQueueRow = record
    workunitjobpath,
    workunitresult,
    workunitresultpath : String;
+   jobresultid,
    nodeid,
    nodename        : String;
    requireack,
@@ -170,6 +171,7 @@ begin
       FieldDefs.Add('workunitjobpath', ftString);
       FieldDefs.Add('workunitresult', ftString);
       FieldDefs.Add('workunitresultpath', ftString);
+      FieldDefs.Add('jobresultid', ftString);
       FieldDefs.Add('nodeid', ftString);
       FieldDefs.Add('nodename', ftString);
       FieldDefs.Add('requireack', ftBoolean);
@@ -209,6 +211,7 @@ begin
   dataset_.FieldByName('workunitresult').AsString := row.workunitresult;
   dataset_.FieldByName('workunitresultpath').AsString := row.workunitresultpath;
   dataset_.FieldByName('nodeid').AsString := row.nodeid;
+  dataset_.FieldByName('jobresultid').AsString := row.jobresultid;
   dataset_.FieldByName('nodename').AsString := row.nodename;
   dataset_.FieldByName('requireack').AsBoolean := row.requireack;
   dataset_.FieldByName('islocal').AsBoolean := row.islocal;
@@ -279,6 +282,7 @@ begin
      row.workunitjobpath := dataset_.FieldByName('workunitjobpath').AsString;
      row.workunitresultpath  := dataset_.FieldByName('workunitresultpath').AsString;
      row.nodeid          := dataset_.FieldByName('nodeid').AsString;
+     row.jobresultid     := dataset_.FieldByName('jobresultid').AsString;
      row.nodename        := dataset_.FieldByName('nodename').AsString;
      row.requireack      := dataset_.FieldByName('requireack').AsBoolean;
      row.islocal         := dataset_.FieldByName('islocal').AsBoolean;

@@ -38,7 +38,7 @@ type TServerJobQueueWorkflow = class(TJobQueueWorkflowAncestor)
        function changeStatusFromForJobUploadToUploadingJob(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromUploadingJobToForStatusRetrieval(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromForStatusRetrievalToRetrievingStatus(var row : TDbJobQueueRow) : Boolean;
-       function changeStatusFromRetrievingStatusToStatusRetrieved(var row : TDbJobQueueRow) : Boolean;
+       function changeStatusFromRetrievingStatusToStatusRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
        function changeStatusFromStatusRetrievedToForWuRetrieval(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromForWuRetrievalToRetrievingWU(var row : TDbJobQueueRow) : Boolean;
        function changeStatusFromRetrievingWUToForResultRetrieval(var row : TDbJobQueueRow) : Boolean;
@@ -147,9 +147,9 @@ begin
    Result := changeStatus(row, S_FOR_STATUS_RETRIEVAL, S_RETRIEVING_STATUS, '');
 end;
 
-function TServerJobQueueWorkflow.changeStatusFromRetrievingStatusToStatusRetrieved(var row : TDbJobQueueRow) : Boolean;
+function TServerJobQueueWorkflow.changeStatusFromRetrievingStatusToStatusRetrieved(var row : TDbJobQueueRow; msgdesc : String) : Boolean;
 begin
-   Result := changeStatus(row, S_RETRIEVING_STATUS, S_STATUS_RETRIEVED, '');
+   Result := changeStatus(row, S_RETRIEVING_STATUS, S_STATUS_RETRIEVED, msgdesc);
 end;
 
 function TServerJobQueueWorkflow.changeStatusFromStatusRetrievedToForWuRetrieval(var row : TDbJobQueueRow) : Boolean;

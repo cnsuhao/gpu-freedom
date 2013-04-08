@@ -29,7 +29,8 @@ type TJobStatus = record
     status,
     timestamp,
     nodename,
-    message     : String;
+    message,
+    jobresultid  : String;
 end;
 
 type TReceiveJobstatusServiceThread = class(TReceiveServiceThread)
@@ -74,13 +75,27 @@ try
                status_.timestamp   := node.FindNode('timestamp').TextContent;
                status_.nodename    := node.FindNode('nodename').TextContent;
                status_.message     := node.FindNode('message').TextContent;
+               status_.jobresultid := node.FindNode('jobresultid').TextContent;
+
+               workflowman_.getServerJobQueueWorkflow().changeStatusFromRetrievingStatusToStatusRetrieved(jobqueuerow_, 'status='+status_.status+', nodename='+status_.nodename+', timestamp='+status_.timestamp+
+                                                                                                                        ', message='+status_.message+', jobresultid='+status_.jobresultid);
+
+               if status_.status='ERROR' then
+                  workflowman_.getServerJobQueueWorkflow.changeStatusToError(jobqueuerow_, status_.message)
+               else
+               if status_.status='COMPLETED' then
+                  begin
+                     jobqueuerow_.jobresultid:=status_.jobresultid;
+
+                     if Trim(jobqueuerow_.workunitresultpath)='' then
+                        workflowman_.getServerJobQueueWorkflow().changeStatusFromStatusRetrievedToForResultRetrieval(jobqueuerow_, 'Fast transition, no workunit to be retrieved')
+                     else
+                        workflowman_.getServerJobQueueWorkflow().changeStatusFromStatusRetrievedToForWuRetrieval(jobqueuerow_);
+                  end;
 
                jobqueuerow_.serverstatus:=status_.status;
                jobqueuerow_.update_dt:=Now;
                tableman_.getJobQueueTable().insertOrUpdate(jobqueuerow);
-
-               //if status_.status=
-               //....
 
      end;  // if Assigned(node)
 end; // try
@@ -100,7 +115,7 @@ end;
 procedure TReceiveJobStatusServiceThread.Execute;
 var xmldoc    : TXMLDocument;
 begin
-   if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForStatusRetrieval(jobqueuerow_) then
+  if not workflowman_.getServerJobQueueWorkflow().findRowInStatusForStatusRetrieval(jobqueuerow_) then
            begin
                logger_.log(LVL_DEBUG, logHeader_+'No jobs found in status S_FOR_STATUS_RETRIEVAL. ');
 
@@ -117,8 +132,7 @@ begin
 
 
 
- receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(jobqueuerow_.jobqueueid),
-         xmldoc, false);
+ receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(jobqueuerow_.jobqueueid), xmldoc, false);
 
  if not erroneous_ then
     begin

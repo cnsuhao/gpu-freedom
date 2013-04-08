@@ -16,6 +16,7 @@
 						<th>jobqueueid</th>
 						<th>status</th>
 						<th>message</th>
+						<th>jobresultid</th>
 						<th>nodename</th>
 						<th>timestamp</th>
 					</tr>
@@ -38,6 +39,9 @@
             </td>
 			<td>
                 <xsl:value-of select="message"/>			
+            </td>
+			<td>
+                <xsl:value-of select="jobresultid"/>			
             </td>
 			<td>
                 <xsl:value-of select="nodename"/>			
