@@ -1,6 +1,9 @@
 ******************
 GPU freedom branch
 
+8.4.2013 git
+Core Client: implementing receivejobstatus.pas
+
 5.4.2013 git 
 Core Client: adapting retrieving result service to server workflow 
              adapting transmit job service to server workflow 
