@@ -150,20 +150,14 @@ begin
       if lf_morefrequentupdates.exists  and (tick_ mod 13 = 0) then retrieveChannels;
 
       receiveJobs := tick_ mod myConfId.receive_jobs_each;
-      if (receiveJobs = 13) then retrieveJobResult;
+      if (receiveJobs = 0)  then retrieveJobs;
       if (receiveJobs = 29) then retrieveJobStats;
-
-      // TODO: how is handling of transmitting jobs regulated?
-      // isn't this a task for the GUI?
-      // transmitJobs := tick_ mod myConfId.transmit_jobs_each;
-      // if (transmitJobs = 0) then transmitJob;
-
 
       // ***************************************************
       // * Services for internal jobqueue workflow
       // ***************************************************
-      // TODO: decide here how the coreloop functionality has to tick
-      if (receiveJobs = 0)  then retrieveJobs;
+      // client processing workflow, see docs/dev/client-jobqueue-workflow.png
+      // here, we process jobs received from a server
       if (tick_ mod 9 = 1)  then createFastTransitionFromNewService;
       if (tick_ mod 11 = 1) then createDownloadWUJobService;
       if (tick_ mod 13 = 1) then transmitAck;
@@ -171,6 +165,13 @@ begin
       if (tick_ mod 21 = 1) then createFastTransitionFromComputedService;
       if (tick_ mod 23 = 1) then createUploadWUResultService;
       if (tick_ mod 27 = 1) then transmitJobResult;
+
+      // server processing workflow, see docs/dev/server-jobqueue-workflow.png
+      // here, we process jobs received from a server
+      if (tick_ mod 29 = 1) then createUploadWUJobService;
+      if (tick_ mod 31 = 1) then createRetrieveStatusService;
+      if (tick_ mod 33 = 1) then createDownloadWUResultService;
+      if (tick_ mod 37 = 1) then retrieveJobResult;
 
       // ***************************************************
       // * TCoreLoop clock

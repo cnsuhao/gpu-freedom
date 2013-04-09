@@ -1,6 +1,9 @@
 ******************
 GPU freedom codebase
 
+9.4.2013 git
+Core Client. integrating server workflow in coreloops.pas
+
 8.4.2013 git
 Core Client: implementing receivejobstatus.pas
              added new status S_STATUS_RETRIEVED, modifying server workflow as consequence
