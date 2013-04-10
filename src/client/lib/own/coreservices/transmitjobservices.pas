@@ -4,7 +4,7 @@ interface
 
 uses coreconfigurations, coreservices, synacode, stkconstants,
      jobdefinitiontables, jobqueuetables, servermanagers, loggers, identities,
-     dbtablemanagers, workflowmanagers,
+     dbtablemanagers, workflowmanagers, jobapis,
      SysUtils, Classes, DOM;
 
 

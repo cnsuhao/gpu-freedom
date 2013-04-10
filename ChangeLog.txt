@@ -1,8 +1,11 @@
 ******************
 GPU freedom codebase
 
+10.4.2013 git
+Core Client: implementing API to insert global and local jobs on database, to be used by GUI and frontends
+
 9.4.2013 git
-Core Client. integrating server workflow in coreloops.pas
+Core Client: integrating server workflow in coreloops.pas
 
 8.4.2013 git
 Core Client: implementing receivejobstatus.pas
