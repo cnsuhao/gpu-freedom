@@ -12,8 +12,9 @@ interface
 uses SysUtils, {FileUtil,} syncobjs;
 
 const
-   LVL_FATAL    = 50;
-   LVL_SEVERE   = 40;
+   LVL_FATAL    = 60;
+   LVL_SEVERE   = 50;
+   LVL_ERROR    = 40;
    LVL_WARNING  = 30;
    LVL_INFO     = 20;
    LVL_DEBUG    = 10;
@@ -104,6 +105,7 @@ begin
   case level of
    LVL_FATAL   : Result := 'FATAL  ';
    LVL_SEVERE  : Result := 'SEVERE ';
+   LVL_ERROR   : Result := 'ERROR  ';
    LVL_WARNING : Result := 'WARNING';
    LVL_INFO    : Result := 'INFO   ';
    LVL_DEBUG   : Result := 'DEBUG  ';

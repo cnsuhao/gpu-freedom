@@ -9,7 +9,7 @@ unit coreapis;
 }
 interface
 
-uses dbtablemanagers, servermanagers, loggers;
+uses SysUtils, dbtablemanagers, servermanagers, loggers;
 
 type TCoreAPI = class(TObject)
    public
@@ -20,6 +20,7 @@ type TCoreAPI = class(TObject)
      servman_   : TServerManager;
      logger_    : TLogger;
      logHeader_ : String;
+     appPath_   : String;
 end;
 
 implementation
@@ -31,6 +32,7 @@ begin
  servman_   := servman;
  logger_    := logger;
  logHeader_ := 'TCoreAPI';
+ appPath_   := ExtractFilePath(ParamStr(0));
 end;
 
 end.
