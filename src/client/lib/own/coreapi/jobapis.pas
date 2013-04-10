@@ -1,4 +1,11 @@
 unit jobapis;
+{
+     TJobApi is an API for the GUI and frontends to insert jobs into the database
+     managed by the GPU core client and to retrieve its results.
+
+     (c) 2002-2013 by HB9TVM and the Global Processing Unit Team
+     The source code is under GPL license.
+}
 
 interface
 
