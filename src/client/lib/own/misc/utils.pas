@@ -4,10 +4,19 @@ interface
 
 uses SysUtils;
 
+function createUniqueId() : String;
 function ExtractParam(var S: string; Separator: string): string;
 function ExtractParamLong(var S: AnsiString; Separator: string): AnsiString;
 
+
 implementation
+
+function createUniqueId() : String;
+var outG : TGuid;
+begin
+  createGUID(outG);
+  Result := GUIDToString(outG);
+end;
 
 function ExtractParam(var S: string; Separator: string): string;
 var

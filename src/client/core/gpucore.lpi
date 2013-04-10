@@ -389,7 +389,7 @@
         <UnitName Value="jobdefinitiontables"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
+        <TopLine Value="73"/>
         <CursorPos X="41" Y="10"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
@@ -415,7 +415,7 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="62" Y="285"/>
@@ -577,10 +577,12 @@
       <Unit68>
         <Filename Value="..\lib\own\misc\utils.pas"/>
         <UnitName Value="utils"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="16"/>
-        <CursorPos X="1" Y="1"/>
-        <UsageCount Value="9"/>
+        <TopLine Value="1"/>
+        <CursorPos X="69" Y="20"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit68>
       <Unit69>
         <Filename Value="..\lib\own\coredb\jobqueuehistorytables.pas"/>
@@ -770,7 +772,7 @@
       <Unit92>
         <Filename Value="..\lib\own\coreapi\coreapis.pas"/>
         <UnitName Value="coreapis"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="8" Y="12"/>
@@ -783,8 +785,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="30" Y="17"/>
+        <TopLine Value="8"/>
+        <CursorPos X="59" Y="21"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit93>
