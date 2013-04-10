@@ -9,21 +9,28 @@ unit coreapis;
 }
 interface
 
-uses dbtablemanagers;
+uses dbtablemanagers, servermanagers, loggers;
 
 type TCoreAPI = class(TObject)
    public
-     constructor Create(var tableman : TDbTableManager);
+     constructor Create(var tableman : TDbTableManager; var servman : TServerManager;
+                        var logger : TLogger);
    protected
      tableman_  : TDbTableManager;
+     servman_   : TServerManager;
+     logger_    : TLogger;
+     logHeader_ : String;
 end;
 
 implementation
 
 
-constructor TCoreAPI.Create(var tableman : TDbTableManager);
+constructor TCoreAPI.Create(var tableman : TDbTableManager; var servman : TServerManager; var logger : TLogger);
 begin
- tableman_ := tableman;
+ tableman_  := tableman;
+ servman_   := servman;
+ logger_    := logger;
+ logHeader_ := 'TCoreAPI';
 end;
 
 end.
