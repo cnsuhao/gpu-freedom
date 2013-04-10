@@ -11,7 +11,11 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
 type TTransmitJobServiceThread = class(TTransmitServiceThread)
  public
   constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
-                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager); overload;
+  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                     var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+                     var trandetails : TJobTransmissionDetails); overload;
+
  protected
   procedure Execute; override;
 
@@ -37,12 +41,23 @@ begin
  trandetails_.workunitresult:='';
 end;
 
+constructor TTransmitJobServiceThread.CreateCreate(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+                                                   var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+                                                   var trandetails : TJobTransmissionDetails);
+begin
+ inherited Create(servMan, srv, proxy, port, logger, '[TTransmitJobServiceThread]> ', conf, tableman);
+ workflowman_ := workflowman;
+ trandetails_ := trandetails;
+end;
+
 function TTransmitJobServiceThread.getPHPArguments() : AnsiString;
 var rep : AnsiString;
 begin
  rep :=     'nodeid='+encodeURL(myGPUId.nodeid)+'&';
  rep := rep+'nodename='+encodeURL(myGPUId.nodename)+'&';
  rep := rep+'jobid='+encodeURL(jobqueuerow_.jobdefinitionid)+'&';
+ if trandetails_.nbrequests>1 then
+   rep := rep+'jobqueueid='+encodeURL(jobqueuerow_.jobqueueid)+'&';
  rep := rep+'job='+encodeURL(jobqueuerow_.job)+'&';
  rep := rep+'workunitjob='+encodeURL(trandetails_.workunitjob)+'&';
  rep := rep+'workunitresult='+encodeURL(trandetails_.workunitresult)+'&';

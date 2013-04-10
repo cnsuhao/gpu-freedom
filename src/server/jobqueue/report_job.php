@@ -9,10 +9,11 @@
 include("../utils/utils.inc.php");
 include("../utils/constants.inc.php");
 
-$jobid     = getparam('jobid', '');
-$job       = getparam('job', '');
-$nodename  = getparam('nodename', '');
-$nodeid    = getparam('nodeid', '');
+$jobid      = getparam('jobid', '');
+$jobqueueid = getparam('jobqueueid', '');
+$job        = getparam('job', '');
+$nodename   = getparam('nodename', '');
+$nodeid     = getparam('nodeid', '');
 $workunitjob    = getparam('wujob', '');
 $workunitresult = getparam('wuresult', '');
 $nbrequests     = getparam('nbrequests', '1');
@@ -29,7 +30,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 
 include("report_job.inc.php");
 
-$exitmsg = report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip);
+$exitmsg = report_job($jobid, $jobqueueid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip);
 
 if ($exitmsg == "") echo "OK\n"; else echo "ERROR: $exitmsg\n";
 					

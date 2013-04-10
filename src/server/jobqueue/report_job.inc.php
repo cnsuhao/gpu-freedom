@@ -7,9 +7,11 @@
 
 include_once("../utils/utils.inc.php");
 
-function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip) {
+function report_job($jobid, $jobqueueid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip) {
     include("../conf/config.inc.php");	
     $debug=0;	
+	if (($jobqueueid!="") && ($nbrequests>1)) die("ERROR: jobqueueid is provided, but the number of requests is greater than one!");
+			
 	mysql_connect($dbserver, $username, $password);
     @mysql_select_db($database) or die("ERROR: Unable to select database, please check settings in conf/config.inc.php");
 
@@ -27,8 +29,8 @@ function report_job($jobid, $job, $nodename, $nodeid, $workunitjob, $workunitres
 	
 	// 3. Inserting Jobqueue entries, one for each request
 	for ($i=0; $i<$nbrequests; $i++) {
-			// generate unique jobqueueid
-			$jobqueueid  = create_unique_id();
+			// generate unique jobqueueid, if not provided by client
+			if ($jobqueueid=="") $jobqueueid  = create_unique_id();
 			
 			if ($tagworkunitjob==1)    $wujob="$workunitjob"."_"."$i"; else $wujob="$workunitjob";
 			if ($tagworkunitresult==1) $wures="$workunitresult"."_"."$i"; else $wures="$workunitresult";

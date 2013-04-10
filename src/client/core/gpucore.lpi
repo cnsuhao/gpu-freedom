@@ -41,7 +41,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="137"/>
+        <UsageCount Value="138"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -405,10 +405,11 @@
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
         <UnitName Value="transmitjobservices"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
+        <TopLine Value="22"/>
+        <CursorPos X="29" Y="59"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit47>
@@ -678,7 +679,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="43"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
@@ -782,7 +783,6 @@
       <Unit93>
         <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
         <UnitName Value="jobapis"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="8"/>
