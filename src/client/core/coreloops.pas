@@ -168,9 +168,10 @@ begin
       // server processing workflow, see docs/dev/server-jobqueue-workflow.png
       // here, we process jobs received from a server
       if (tick_ mod 29 = 1) then createUploadWUJobService;
-      if (tick_ mod 31 = 1) then createRetrieveStatusService;
-      if (tick_ mod 33 = 1) then createDownloadWUResultService;
-      if (tick_ mod 37 = 1) then retrieveJobResult;
+      if (tick_ mod 31 = 1) then transmitJob;
+      if (tick_ mod 33 = 1) then createRetrieveStatusService;
+      if (tick_ mod 37 = 1) then createDownloadWUResultService;
+      if (tick_ mod 43 = 1) then retrieveJobResult;
 
       // ***************************************************
       // * TCoreLoop clock

@@ -148,7 +148,7 @@ begin
     S_FOR_RESULT_RETRIEVAL    : Result := 'S_FOR_RESULT_RETRIEVAL';
     S_RETRIEVING_RESULT       : Result := 'S_RETRIEVING_RESULT';
     S_COMPLETED               : Result := 'S_COMPLETED';
-    S_ERROR                   : Result := 'S_ERROR ';
+    S_ERROR                   : Result := 'S_ERROR';
   end;
 end;
 
