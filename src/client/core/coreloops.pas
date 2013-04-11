@@ -45,6 +45,7 @@ type TCoreLoop = class(TObject)
 
     tick_,
     days_        : Longint;
+    started_     : Boolean;
 
     function    launch(var thread : TCoreServiceThread; tname : String) : Boolean;
 
@@ -82,6 +83,7 @@ implementation
 
 constructor TCoreLoop.Create();
 begin
+  started_ := False;
   inherited Create;
   path_ := extractFilePath(ParamStr(0));
 
@@ -117,6 +119,9 @@ begin
   logger.log(LVL_INFO, logHeader_+'Bootstrapping core...');
   createRestoreStatusService;
   retrieveParams;
+  transmitClient;
+
+  {
   Sleep(1000);
   //TODO: enable this!!
   //retrieveServers;
@@ -130,7 +135,9 @@ begin
   Sleep(1000);
   retrieveJobs;
   Sleep(1000);
+  }
   logger.log(LVL_INFO, logHeader_+'Core bootstrapped!');
+  started_ := true;
 end;
 
 procedure TCoreLoop.tick;
@@ -138,6 +145,7 @@ var receiveServers,
     receiveJobs,
     transmitJobs    : Longint;
 begin
+    if not started_ then Exit;
       // ***************************************************
       // * Services for synchronization with server
       // ***************************************************
