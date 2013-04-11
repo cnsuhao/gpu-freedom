@@ -14,11 +14,17 @@ type
 
   TJobManagementForm = class(TForm)
     cbJobBox: TComboBox;
+    cbJobType: TComboBox;
+    cbRequireAck: TCheckBox;
+    cgWorkflow: TCheckGroup;
+    gbWorkunits: TGroupBox;
     lblJobType: TLabel;
     lblJob: TLabel;
     lblJobDefinitionIdDesc: TLabel;
     lblJobDefinitionId: TLabel;
     pnCreateJob: TPanel;
+    rbGlobal: TRadioButton;
+    rbLocal: TRadioButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure lblJobDefinitionIdDescClick(Sender: TObject);

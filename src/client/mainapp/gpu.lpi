@@ -47,8 +47,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="51" Y="16"/>
-        <UsageCount Value="104"/>
-        <LoadedDesigner Value="True"/>
+        <UsageCount Value="105"/>
       </Unit0>
       <Unit1>
         <Filename Value="mainapp.pas"/>
@@ -60,7 +59,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="47"/>
         <CursorPos X="19" Y="54"/>
-        <UsageCount Value="104"/>
+        <UsageCount Value="105"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\earthDrawingControl.pas"/>
@@ -178,7 +177,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="55" Y="7"/>
-        <UsageCount Value="83"/>
+        <UsageCount Value="84"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
@@ -198,7 +197,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="59"/>
         <CursorPos X="51" Y="10"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="76"/>
       </Unit18>
       <Unit19>
         <Filename Value="parametersforms.pas"/>
@@ -210,7 +209,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="132"/>
         <CursorPos X="45" Y="134"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="68"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
@@ -265,7 +264,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="37"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -407,9 +406,9 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="12"/>
-        <CursorPos X="3" Y="50"/>
-        <UsageCount Value="27"/>
+        <TopLine Value="18"/>
+        <CursorPos X="3" Y="56"/>
+        <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit43>
@@ -426,13 +425,13 @@
         <UnitName Value="jobapis"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
+        <TopLine Value="7"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit45>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="jobmanagementforms.pas"/>
         <Caret Line="17" Column="65" TopLine="1"/>
@@ -517,6 +516,38 @@
         <Filename Value="jobmanagementforms.pas"/>
         <Caret Line="49" Column="3" TopLine="12"/>
       </Position21>
+      <Position22>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="50" Column="3" TopLine="12"/>
+      </Position22>
+      <Position23>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="51" Column="3" TopLine="13"/>
+      </Position23>
+      <Position24>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="52" Column="3" TopLine="14"/>
+      </Position24>
+      <Position25>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="53" Column="3" TopLine="15"/>
+      </Position25>
+      <Position26>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="54" Column="3" TopLine="1"/>
+      </Position26>
+      <Position27>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="55" Column="3" TopLine="17"/>
+      </Position27>
+      <Position28>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="54" Column="3" TopLine="17"/>
+      </Position28>
+      <Position29>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="55" Column="3" TopLine="17"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
