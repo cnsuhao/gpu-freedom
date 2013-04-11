@@ -48,7 +48,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="13"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="102"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -62,7 +62,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="54"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="102"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\earthDrawingControl.pas"/>
@@ -179,9 +179,9 @@
         <UnitName Value="netmapperforms"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="43"/>
-        <CursorPos X="50" Y="12"/>
-        <UsageCount Value="80"/>
+        <TopLine Value="4"/>
+        <CursorPos X="12" Y="51"/>
+        <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit16>
       <Unit17>
@@ -202,7 +202,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="51" Y="10"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="73"/>
       </Unit18>
       <Unit19>
         <Filename Value="parametersforms.pas"/>
@@ -214,7 +214,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="132"/>
         <CursorPos X="45" Y="134"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="65"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
@@ -269,7 +269,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -404,20 +404,20 @@
       <Unit43>
         <Filename Value="jobmanagementforms.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="frmJobManagement"/>
+        <ComponentName Value="JobManagementForm"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="jobmanagementforms"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="5" Y="15"/>
-        <UsageCount Value="24"/>
+        <CursorPos X="5" Y="39"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit43>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="108" TopLine="1"/>
@@ -462,13 +462,69 @@
         <Filename Value="gpu.lpr"/>
         <Caret Line="3" Column="20" TopLine="1"/>
       </Position11>
+      <Position12>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="17" Column="65" TopLine="1"/>
+      </Position12>
+      <Position13>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="22" Column="65" TopLine="1"/>
+      </Position13>
+      <Position14>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="21" Column="65" TopLine="1"/>
+      </Position14>
+      <Position15>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="22" Column="65" TopLine="1"/>
+      </Position15>
+      <Position16>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="23" Column="65" TopLine="1"/>
+      </Position16>
+      <Position17>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="24" Column="65" TopLine="1"/>
+      </Position17>
+      <Position18>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="25" Column="65" TopLine="1"/>
+      </Position18>
+      <Position19>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="24" Column="65" TopLine="1"/>
+      </Position19>
+      <Position20>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="23" Column="65" TopLine="1"/>
+      </Position20>
+      <Position21>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="22" Column="65" TopLine="1"/>
+      </Position21>
+      <Position22>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="21" Column="65" TopLine="1"/>
+      </Position22>
+      <Position23>
+        <Filename Value="netmapperforms.pas"/>
+        <Caret Line="12" Column="50" TopLine="1"/>
+      </Position23>
+      <Position24>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="9" Column="30" TopLine="1"/>
+      </Position24>
+      <Position25>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="34" Column="5" TopLine="2"/>
+      </Position25>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <SearchPaths>
-      <OtherUnitFiles Value="..\lib\own\coreservices;..\lib\own\coremodules;..\lib\own\misc;..\lib\ext\synapse\src\lib;..\lib\ext\misc;..\lib\own\libsphere;..\lib\own\coredb;..\core;$(LazarusDir)\components\codetools\units\$(TargetCPU)-$(TargetOS);$(LazarusDir)\components\opengl"/>
+      <OtherUnitFiles Value="..\lib\own\coreservices;..\lib\own\coremodules;..\lib\own\misc;..\lib\ext\synapse\src\lib;..\lib\ext\misc;..\lib\own\libsphere;..\lib\own\coredb;..\lib\own\coreapi;..\core;$(LazarusDir)\components\codetools\units\$(TargetCPU)-$(TargetOS);$(LazarusDir)\components\opengl"/>
       <UnitOutputDirectory Value="..\..\..\bin"/>
     </SearchPaths>
     <Parsing>

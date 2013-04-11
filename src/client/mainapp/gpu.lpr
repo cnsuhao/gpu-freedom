@@ -18,7 +18,7 @@ begin
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);
   Application.CreateForm(TParametersForm, ParametersForm);
-  Application.CreateForm(TfrmJobManagement, frmJobManagement);
+  Application.CreateForm(TJobManagementForm, JobManagementForm);
   Application.Run;
   discardCoreObjects;
 end.

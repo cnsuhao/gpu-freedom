@@ -5,10 +5,17 @@ unit jobmanagementforms;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs;
+  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
+  ExtCtrls, ComCtrls, jobapis;
 
 type
-  TfrmJobManagement = class(TForm)
+
+  { TJobManagementForm }
+
+  TJobManagementForm = class(TForm)
+    pnCreateJob: TPanel;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
 
   public
@@ -16,9 +23,21 @@ type
   end;
 
 var
-  frmJobManagement: TfrmJobManagement;
+  JobManagementForm: TJobManagementForm;
 
 implementation
+
+{ TJobManagementForm }
+
+procedure TJobManagementForm.FormCreate(Sender: TObject);
+begin
+  //
+end;
+
+procedure TJobManagementForm.FormDestroy(Sender: TObject);
+begin
+  //
+end;
 
 initialization
   {$I jobmanagementforms.lrs}

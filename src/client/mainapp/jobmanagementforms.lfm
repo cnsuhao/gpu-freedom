@@ -1,8 +1,19 @@
-object frmJobManagement: TfrmJobManagement
-  Left = 638
-  Height = 489
-  Top = 402
-  Width = 794
-  Caption = 'frmJobManagement'
+object JobManagementForm: TJobManagementForm
+  Left = 216
+  Height = 758
+  Top = 151
+  Width = 1151
+  Caption = 'Job Management'
+  ClientHeight = 758
+  ClientWidth = 1151
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   LCLVersion = '1.0.2.0'
+  object pnCreateJob: TPanel
+    Left = -8
+    Height = 184
+    Top = 8
+    Width = 1162
+    TabOrder = 0
+  end
 end
