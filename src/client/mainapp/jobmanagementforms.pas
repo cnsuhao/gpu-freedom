@@ -1,6 +1,6 @@
 unit jobmanagementforms;
 
-{$mode objfpc}
+{$mode objfpc}{$H+}
 
 interface
 

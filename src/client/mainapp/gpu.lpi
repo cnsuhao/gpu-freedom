@@ -47,7 +47,7 @@
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="1" Y="13"/>
+        <CursorPos X="3" Y="23"/>
         <UsageCount Value="102"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -177,10 +177,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="4"/>
-        <CursorPos X="12" Y="51"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="3"/>
         <UsageCount Value="81"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -298,10 +298,13 @@
       <Unit30>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="8"/>
-        <CursorPos X="11" Y="37"/>
+        <TopLine Value="63"/>
+        <CursorPos X="1" Y="96"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit30>
       <Unit31>
         <Filename Value="..\core\coremonitors.pas"/>
@@ -405,19 +408,19 @@
         <Filename Value="jobmanagementforms.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="JobManagementForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="jobmanagementforms"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="5" Y="39"/>
+        <CursorPos X="31" Y="2"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit43>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="108" TopLine="1"/>
@@ -518,6 +521,10 @@
         <Filename Value="jobmanagementforms.pas"/>
         <Caret Line="34" Column="5" TopLine="2"/>
       </Position25>
+      <Position26>
+        <Filename Value="gpu.lpr"/>
+        <Caret Line="23" Column="3" TopLine="1"/>
+      </Position26>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
