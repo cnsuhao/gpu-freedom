@@ -1,7 +1,7 @@
 object JobManagementForm: TJobManagementForm
-  Left = 780
+  Left = 757
   Height = 758
-  Top = 489
+  Top = 213
   Width = 1151
   Caption = 'Job Management'
   ClientHeight = 758
@@ -10,10 +10,55 @@ object JobManagementForm: TJobManagementForm
   OnDestroy = FormDestroy
   LCLVersion = '1.0.2.0'
   object pnCreateJob: TPanel
-    Left = -8
+    Left = -11
     Height = 184
-    Top = 8
+    Top = 0
     Width = 1162
+    ClientHeight = 184
+    ClientWidth = 1162
     TabOrder = 0
+    object lblJobDefinitionIdDesc: TLabel
+      Left = 40
+      Height = 16
+      Top = 0
+      Width = 91
+      Caption = 'Job Definition ID:'
+      ParentColor = False
+      OnClick = lblJobDefinitionIdDescClick
+    end
+    object lblJobDefinitionId: TLabel
+      Left = 144
+      Height = 16
+      Top = 0
+      Width = 86
+      Caption = '-----------------'
+      ParentColor = False
+      OnClick = lblJobDefinitionIdDescClick
+    end
+    object lblJob: TLabel
+      Left = 104
+      Height = 16
+      Top = 20
+      Width = 22
+      Caption = 'Job:'
+      ParentColor = False
+    end
+    object cbJobBox: TComboBox
+      Left = 136
+      Height = 23
+      Top = 16
+      Width = 1008
+      ItemHeight = 15
+      TabOrder = 0
+      Text = '1,1,add'
+    end
+    object lblJobType: TLabel
+      Left = 75
+      Height = 16
+      Top = 41
+      Width = 51
+      Caption = 'Job Type:'
+      ParentColor = False
+    end
   end
 end

@@ -1,10 +1,21 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TJobManagementForm','FORMDATA',[
-  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3#12#3#6'Height'#3
-  +#246#2#3'Top'#3#233#1#5'Width'#3#127#4#7'Caption'#6#14'Job Management'#12'Cl'
-  +'ientHeight'#3#246#2#11'ClientWidth'#3#127#4#8'OnCreate'#7#10'FormCreate'#9
+  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3#245#2#6'Height'
+  +#3#246#2#3'Top'#3#213#0#5'Width'#3#127#4#7'Caption'#6#14'Job Management'#12
+  +'ClientHeight'#3#246#2#11'ClientWidth'#3#127#4#8'OnCreate'#7#10'FormCreate'#9
   +'OnDestroy'#7#11'FormDestroy'#10'LCLVersion'#6#7'1.0.2.0'#0#6'TPanel'#11'pnC'
-  +'reateJob'#4'Left'#2#248#6'Height'#3#184#0#3'Top'#2#8#5'Width'#3#138#4#8'Tab'
-  +'Order'#2#0#0#0#0
+  +'reateJob'#4'Left'#2#245#6'Height'#3#184#0#3'Top'#2#0#5'Width'#3#138#4#12'Cl'
+  +'ientHeight'#3#184#0#11'ClientWidth'#3#138#4#8'TabOrder'#2#0#0#6'TLabel'#22
+  +'lblJobDefinitionIdDesc'#4'Left'#2'('#6'Height'#2#16#3'Top'#2#0#5'Width'#2'['
+  +#7'Caption'#6#18'Job Definition ID:'#11'ParentColor'#8#7'OnClick'#7#27'lblJo'
+  +'bDefinitionIdDescClick'#0#0#6'TLabel'#18'lblJobDefinitionId'#4'Left'#3#144#0
+  +#6'Height'#2#16#3'Top'#2#0#5'Width'#2'V'#7'Caption'#6#17'-----------------'
+  +#11'ParentColor'#8#7'OnClick'#7#27'lblJobDefinitionIdDescClick'#0#0#6'TLabel'
+  +#6'lblJob'#4'Left'#2'h'#6'Height'#2#16#3'Top'#2#20#5'Width'#2#22#7'Caption'#6
+  +#4'Job:'#11'ParentColor'#8#0#0#9'TComboBox'#8'cbJobBox'#4'Left'#3#136#0#6'He'
+  +'ight'#2#23#3'Top'#2#16#5'Width'#3#240#3#10'ItemHeight'#2#15#8'TabOrder'#2#0
+  +#4'Text'#6#7'1,1,add'#0#0#6'TLabel'#10'lblJobType'#4'Left'#2'K'#6'Height'#2
+  +#16#3'Top'#2')'#5'Width'#2'3'#7'Caption'#6#9'Job Type:'#11'ParentColor'#8#0#0
+  +#0#0
 ]);
