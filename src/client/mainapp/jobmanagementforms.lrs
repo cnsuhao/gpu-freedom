@@ -35,6 +35,26 @@ LazarusResources.Add('TJobManagementForm','FORMDATA',[
   +'ents'#8'TabOrder'#2#0#0#0#0#9'TCheckBox'#12'cbRequireAck'#4'Left'#3'H'#1#6
   +'Height'#2#19#3'Top'#3#146#0#5'Width'#3#155#0#7'Caption'#6#22'Require acknow'
   +'ledgment'#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#3#0#0#9'TGroup'
-  +'Box'#11'gbWorkunits'#4'Left'#3'h'#2#6'Height'#2'x'#3'Top'#2'1'#5'Width'#3#8
-  +#2#7'Caption'#6#9'Workunits'#8'TabOrder'#2#4#0#0#0#0
+  +'Box'#11'gbWorkunits'#4'Left'#3'h'#2#6'Height'#3#131#0#3'Top'#2'0'#5'Width'#3
+  +#8#2#7'Caption'#6#9'Workunits'#12'ClientHeight'#2'q'#11'ClientWidth'#3#4#2#8
+  +'TabOrder'#2#4#0#5'TEdit'#16'edtWorkunitInput'#4'Left'#2#14#6'Height'#2#23#3
+  +'Top'#2#23#5'Width'#3#168#1#8'TabOrder'#2#0#0#0#6'TLabel'#16'lblWorkunitInpu'
+  +'t'#4'Left'#2#14#6'Height'#2#16#3'Top'#2#255#5'Width'#2'o'#7'Caption'#6#20'I'
+  +'nput Workunit path:'#11'ParentColor'#8#0#0#7'TButton'#22'btnSelectInputWork'
+  +'unit'#4'Left'#3#190#1#6'Height'#2#25#3'Top'#2#21#5'Width'#2'3'#7'Caption'#6
+  +#3'...'#8'TabOrder'#2#1#0#0#9'TCheckBox'#18'cbTagInputWorkunit'#4'Left'#3#190
+  +#0#6'Height'#2#19#3'Top'#2#255#5'Width'#3#150#0#7'Caption'#6#22'Number input'
+  +' workunits'#8'TabOrder'#2#2#0#0#6'TLabel'#21'lblOutputWorkunitName'#4'Left'
+  +#2#14#6'Height'#2#16#3'Top'#2'8'#5'Width'#2#127#7'Caption'#6#21'Output Worku'
+  +'nit name:'#11'ParentColor'#8#0#0#5'TEdit'#17'edtWorkunitOutput'#4'Left'#2#14
+  +#6'Height'#2#23#3'Top'#2'P'#5'Width'#3#168#1#8'TabOrder'#2#3#0#0#9'TCheckBox'
+  +#19'cbTagOutputWorkunit'#4'Left'#3#189#0#6'Height'#2#19#3'Top'#2'0'#5'Width'
+  +#3#158#0#7'Caption'#6#23'Number output workunits'#8'TabOrder'#2#4#0#0#0#6'TL'
+  +'abel'#19'lblNumberOfRequests'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'S'#5'Wid'
+  +'th'#2'm'#7'Caption'#6#19'Number of requests:'#11'ParentColor'#8#0#0#9'TSpin'
+  +'Edit'#12'seNbRequests'#4'Left'#3#136#0#6'Height'#2#23#3'Top'#2'P'#5'Width'#2
+  +'R'#8'MaxValue'#3#244#1#8'MinValue'#2#1#8'TabOrder'#2#5#5'Value'#2#1#0#0#7'T'
+  +'Button'#12'btnSubmitJob'#4'Left'#2#24#6'Height'#2#29#3'Top'#3#136#0#5'Width'
+  +#3#19#1#7'Caption'#6#10'Submit Job'#8'TabOrder'#2#6#0#0#0#11'TOpenDialog'#10
+  +'OpenDialog'#4'left'#3'?'#4#3'top'#3#140#0#0#0#0
 ]);

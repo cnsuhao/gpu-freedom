@@ -406,8 +406,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="18"/>
-        <CursorPos X="3" Y="56"/>
+        <TopLine Value="29"/>
+        <CursorPos X="3" Y="67"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -431,123 +431,127 @@
         <Loaded Value="True"/>
       </Unit45>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="17" Column="65" TopLine="1"/>
+        <Caret Line="34" Column="5" TopLine="2"/>
       </Position1>
       <Position2>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="22" Column="65" TopLine="1"/>
+        <Caret Line="34" Column="19" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="21" Column="65" TopLine="1"/>
+        <Caret Line="1" Column="127" TopLine="1"/>
       </Position3>
       <Position4>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="22" Column="65" TopLine="1"/>
+        <Caret Line="46" Column="3" TopLine="12"/>
       </Position4>
       <Position5>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="23" Column="65" TopLine="1"/>
+        <Caret Line="47" Column="3" TopLine="12"/>
       </Position5>
       <Position6>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="24" Column="65" TopLine="1"/>
+        <Caret Line="48" Column="3" TopLine="12"/>
       </Position6>
       <Position7>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="25" Column="65" TopLine="1"/>
+        <Caret Line="49" Column="3" TopLine="12"/>
       </Position7>
       <Position8>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="24" Column="65" TopLine="1"/>
+        <Caret Line="48" Column="3" TopLine="12"/>
       </Position8>
       <Position9>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="23" Column="65" TopLine="1"/>
+        <Caret Line="49" Column="3" TopLine="12"/>
       </Position9>
       <Position10>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="22" Column="65" TopLine="1"/>
+        <Caret Line="50" Column="3" TopLine="12"/>
       </Position10>
       <Position11>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="21" Column="65" TopLine="1"/>
+        <Caret Line="51" Column="3" TopLine="13"/>
       </Position11>
       <Position12>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="9" Column="30" TopLine="1"/>
+        <Caret Line="52" Column="3" TopLine="14"/>
       </Position12>
       <Position13>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="34" Column="5" TopLine="2"/>
+        <Caret Line="53" Column="3" TopLine="15"/>
       </Position13>
       <Position14>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="34" Column="19" TopLine="1"/>
+        <Caret Line="54" Column="3" TopLine="1"/>
       </Position14>
       <Position15>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="1" Column="127" TopLine="1"/>
+        <Caret Line="55" Column="3" TopLine="17"/>
       </Position15>
       <Position16>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="46" Column="3" TopLine="12"/>
+        <Caret Line="54" Column="3" TopLine="17"/>
       </Position16>
       <Position17>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="47" Column="3" TopLine="12"/>
+        <Caret Line="55" Column="3" TopLine="17"/>
       </Position17>
       <Position18>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="48" Column="3" TopLine="12"/>
+        <Caret Line="56" Column="3" TopLine="18"/>
       </Position18>
       <Position19>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="49" Column="3" TopLine="12"/>
+        <Caret Line="57" Column="3" TopLine="19"/>
       </Position19>
       <Position20>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="48" Column="3" TopLine="12"/>
+        <Caret Line="56" Column="3" TopLine="18"/>
       </Position20>
       <Position21>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="49" Column="3" TopLine="12"/>
+        <Caret Line="57" Column="3" TopLine="19"/>
       </Position21>
       <Position22>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="50" Column="3" TopLine="12"/>
+        <Caret Line="58" Column="3" TopLine="20"/>
       </Position22>
       <Position23>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="51" Column="3" TopLine="13"/>
+        <Caret Line="59" Column="3" TopLine="21"/>
       </Position23>
       <Position24>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="52" Column="3" TopLine="14"/>
+        <Caret Line="60" Column="3" TopLine="22"/>
       </Position24>
       <Position25>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="53" Column="3" TopLine="15"/>
+        <Caret Line="61" Column="3" TopLine="23"/>
       </Position25>
       <Position26>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="54" Column="3" TopLine="1"/>
+        <Caret Line="62" Column="3" TopLine="24"/>
       </Position26>
       <Position27>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="55" Column="3" TopLine="17"/>
+        <Caret Line="63" Column="3" TopLine="25"/>
       </Position27>
       <Position28>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="54" Column="3" TopLine="17"/>
+        <Caret Line="64" Column="3" TopLine="26"/>
       </Position28>
       <Position29>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="55" Column="3" TopLine="17"/>
+        <Caret Line="65" Column="3" TopLine="27"/>
       </Position29>
+      <Position30>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="66" Column="3" TopLine="28"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
