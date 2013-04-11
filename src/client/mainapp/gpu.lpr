@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms
   { you can add units after this }, mainapp, SQLDBLaz, netmapperforms,
-  chatforms, parametersforms, coreobjects;
+  chatforms, parametersforms, coreobjects, jobmanagementforms;
 
 begin
   Application.Initialize;
@@ -18,6 +18,7 @@ begin
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);
   Application.CreateForm(TParametersForm, ParametersForm);
+  Application.CreateForm(TfrmJobManagement, frmJobManagement);
   Application.Run;
   discardCoreObjects;
 end.

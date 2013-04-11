@@ -1,0 +1,8 @@
+object frmJobManagement: TfrmJobManagement
+  Left = 638
+  Height = 489
+  Top = 402
+  Width = 794
+  Caption = 'frmJobManagement'
+  LCLVersion = '1.0.2.0'
+end

@@ -39,17 +39,16 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="43">
+    <Units Count="44">
       <Unit0>
         <Filename Value="gpu.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpu"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="13"/>
-        <UsageCount Value="97"/>
+        <UsageCount Value="101"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -60,12 +59,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="mainapp"/>
-        <EditorIndex Value="17"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="54"/>
-        <UsageCount Value="97"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="101"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\earthDrawingControl.pas"/>
@@ -120,32 +117,26 @@
       <Unit9>
         <Filename Value="..\lib\own\libsphere\texturestructure.pas"/>
         <UnitName Value="texturestructure"/>
-        <EditorIndex Value="16"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="37"/>
-        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
         <UnitName Value="openglspherecontrol"/>
-        <EditorIndex Value="12"/>
         <WindowIndex Value="0"/>
         <TopLine Value="88"/>
         <CursorPos X="140" Y="116"/>
         <UsageCount Value="35"/>
-        <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
         <UnitName Value="sphere3dplots"/>
-        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="11" Y="22"/>
         <UsageCount Value="36"/>
-        <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\lib\own\misc\conversions.pas"/>
@@ -186,23 +177,20 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="68"/>
-        <CursorPos X="49" Y="61"/>
-        <UsageCount Value="76"/>
+        <TopLine Value="43"/>
+        <CursorPos X="50" Y="12"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
         <UnitName Value="earthtextures"/>
-        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="9"/>
         <CursorPos X="4" Y="24"/>
         <UsageCount Value="33"/>
-        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="chatforms.pas"/>
@@ -211,12 +199,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="chatforms"/>
-        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="51" Y="10"/>
-        <UsageCount Value="68"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="72"/>
       </Unit18>
       <Unit19>
         <Filename Value="parametersforms.pas"/>
@@ -228,17 +214,15 @@
         <WindowIndex Value="0"/>
         <TopLine Value="132"/>
         <CursorPos X="45" Y="134"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="64"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="45" Y="6"/>
         <UsageCount Value="21"/>
-        <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="coreobjects.pas"/>
@@ -285,7 +269,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="33"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -314,22 +298,18 @@
       <Unit30>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="8"/>
         <CursorPos X="11" Y="37"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit30>
       <Unit31>
         <Filename Value="..\core\coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
-        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="69" Y="47"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit31>
       <Unit32>
         <Filename Value="..\core\coreloops.pas"/>
@@ -368,195 +348,120 @@
       </Unit35>
       <Unit36>
         <Filename Value="netmapperforms.lfm"/>
-        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit36>
       <Unit37>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
-        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="163"/>
         <CursorPos X="23" Y="192"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
         <UnitName Value="workflowmanagers"/>
-        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit38>
       <Unit39>
         <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
-        <UnitName Value="jobqueueworkflows"/>
-        <EditorIndex Value="3"/>
+        <UnitName Value="clientjobqueueworkflows"/>
         <WindowIndex Value="0"/>
         <TopLine Value="211"/>
         <CursorPos X="116" Y="70"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit39>
       <Unit40>
         <Filename Value="..\lib\own\coreservices\receivejobservices.pas"/>
         <UnitName Value="receivejobservices"/>
-        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="90"/>
         <CursorPos X="75" Y="123"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
         <UnitName Value="dbtablemanagers"/>
-        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="25"/>
         <CursorPos X="17" Y="18"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit41>
       <Unit42>
         <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
         <UnitName Value="jobstatstables"/>
-        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="6" Y="21"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit42>
+      <Unit43>
+        <Filename Value="jobmanagementforms.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmJobManagement"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="jobmanagementforms"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="5" Y="15"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit43>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="11" HistoryIndex="10">
       <Position1>
-        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
-        <Caret Line="39" Column="33" TopLine="17"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
-        <Caret Line="141" Column="13" TopLine="100"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\lib\own\libsphere\openglspherecontrol.pas"/>
-        <Caret Line="135" Column="1" TopLine="100"/>
-      </Position3>
-      <Position4>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="44" Column="15" TopLine="30"/>
-      </Position4>
-      <Position5>
-        <Filename Value="..\lib\own\libsphere\sphere3dplots.pas"/>
-        <Caret Line="22" Column="11" TopLine="1"/>
-      </Position5>
-      <Position6>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="50" Column="62" TopLine="37"/>
-      </Position6>
-      <Position7>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="16" Column="6" TopLine="1"/>
-      </Position7>
-      <Position8>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="55" Column="1" TopLine="47"/>
-      </Position8>
-      <Position9>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="56" Column="1" TopLine="48"/>
-      </Position9>
-      <Position10>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="55" Column="1" TopLine="47"/>
-      </Position10>
-      <Position11>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="49" Column="44" TopLine="35"/>
-      </Position11>
-      <Position12>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="22" Column="1" TopLine="2"/>
-      </Position12>
-      <Position13>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="44" Column="2" TopLine="40"/>
-      </Position13>
-      <Position14>
-        <Filename Value="netmapperforms.pas"/>
-        <Caret Line="89" Column="2" TopLine="55"/>
-      </Position14>
-      <Position15>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="88" Column="1" TopLine="1"/>
-      </Position15>
-      <Position16>
-        <Filename Value="chatforms.pas"/>
-        <Caret Line="52" Column="29" TopLine="23"/>
-      </Position16>
-      <Position17>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="108" TopLine="1"/>
-      </Position17>
-      <Position18>
+      </Position1>
+      <Position2>
         <Filename Value="gpu.lpr"/>
         <Caret Line="19" Column="39" TopLine="1"/>
-      </Position18>
-      <Position19>
+      </Position2>
+      <Position3>
         <Filename Value="gpu.lpr"/>
         <Caret Line="22" Column="19" TopLine="1"/>
-      </Position19>
-      <Position20>
+      </Position3>
+      <Position4>
         <Filename Value="gpu.lpr"/>
         <Caret Line="23" Column="30" TopLine="1"/>
-      </Position20>
-      <Position21>
+      </Position4>
+      <Position5>
         <Filename Value="gpu.lpr"/>
         <Caret Line="4" Column="3" TopLine="1"/>
-      </Position21>
-      <Position22>
+      </Position5>
+      <Position6>
         <Filename Value="gpu.lpr"/>
         <Caret Line="20" Column="8" TopLine="1"/>
-      </Position22>
-      <Position23>
+      </Position6>
+      <Position7>
         <Filename Value="gpu.lpr"/>
         <Caret Line="24" Column="3" TopLine="1"/>
-      </Position23>
-      <Position24>
+      </Position7>
+      <Position8>
         <Filename Value="gpu.lpr"/>
         <Caret Line="23" Column="3" TopLine="1"/>
-      </Position24>
-      <Position25>
-        <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position25>
-      <Position26>
+      </Position8>
+      <Position9>
         <Filename Value="gpu.lpr"/>
         <Caret Line="19" Column="34" TopLine="1"/>
-      </Position26>
-      <Position27>
-        <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
-        <Caret Line="36" Column="11" TopLine="37"/>
-      </Position27>
-      <Position28>
-        <Filename Value="..\lib\own\coredb\dbtablemanagers.pas"/>
-        <Caret Line="18" Column="17" TopLine="25"/>
-      </Position28>
-      <Position29>
+      </Position9>
+      <Position10>
         <Filename Value="gpu.lpr"/>
         <Caret Line="19" Column="34" TopLine="1"/>
-      </Position29>
-      <Position30>
+      </Position10>
+      <Position11>
         <Filename Value="gpu.lpr"/>
         <Caret Line="3" Column="20" TopLine="1"/>
-      </Position30>
+      </Position11>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
