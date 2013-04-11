@@ -31,7 +31,7 @@ implementation
 
 procedure TJobManagementForm.FormCreate(Sender: TObject);
 begin
-  //
+  Visible := True;
 end;
 
 procedure TJobManagementForm.FormDestroy(Sender: TObject);

@@ -33,12 +33,14 @@ var
 
 
 
-procedure loadCoreObjects(logFile, componentname : String; corenumber : Longint);
+procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint);
+procedure loadCoreObjects();
 procedure discardCoreObjects;
+procedure discardCommonObjects;
 
 implementation
 
-procedure loadCoreObjects(logFile, componentname : String; corenumber : Longint);
+procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint);
 var
    path,
    logName : String;
@@ -69,35 +71,47 @@ begin
   tableman          := TDbTableManager.Create(path+PathDelim+'gpucore.db');
   tableman.OpenAll;
   serverman         := TServerManager.Create(conf, tableman.getServerTable(), logger);
-  workflowman       := TWorkflowManager.Create(tableman, logger);
+  lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 
+  workflowman       := TWorkflowManager.Create(tableman, logger);
   coremodule        := TCoreModule.Create(logger, path, 'dll');
   servicefactory    := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf, coremodule);
   serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads, logger);
+end;
+
+procedure loadCoreObjects();
+var
+   path : String;
+begin
+  path := extractFilePath(ParamStr(0));
+
   compserviceman    := TCompServiceThreadManager.Create(tmCompStatus.maxthreads, logger);
   downserviceman    := TDownloadServiceManager.Create(tmDownStatus.maxthreads, logger);
   upserviceman      := TUploadServiceManager.Create(tmUploadStatus.maxthreads, logger);
-
-  lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
-
 end;
 
 procedure discardCoreObjects;
 begin
-  serviceman.free;
   compserviceman.Free;
   downserviceman.Free;
   upserviceman.Free;
+end;
+
+procedure discardCommonObjects;
+begin
   servicefactory.free;
   workflowman.free;
   coremodule.free;
+  serviceman.free;
   serverman.Free;
+
   tableman.CloseAll;
   tableman.Free;
   conf.Free;
   logger.Free;
 
-  lf_morefrequentupdates.Free;
+  //lf_morefrequentupdates.Free;
 end;
+
 
 end.

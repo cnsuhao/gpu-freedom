@@ -13,13 +13,13 @@ uses
 
 begin
   Application.Initialize;
-  loadCoreObjects('gpugui', 'GPU GUI', -1);
+  loadCommonObjects('gpugui', 'GPU GUI', -1);
   Application.CreateForm(TGPUMainApp, GPUMainApp);
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);
   Application.CreateForm(TParametersForm, ParametersForm);
   Application.CreateForm(TJobManagementForm, JobManagementForm);
   Application.Run;
-  discardCoreObjects;
+  discardCommonObjects;
 end.
 

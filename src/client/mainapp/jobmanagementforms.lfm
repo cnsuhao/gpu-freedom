@@ -1,7 +1,7 @@
 object JobManagementForm: TJobManagementForm
-  Left = 216
+  Left = 780
   Height = 758
-  Top = 151
+  Top = 489
   Width = 1151
   Caption = 'Job Management'
   ClientHeight = 758

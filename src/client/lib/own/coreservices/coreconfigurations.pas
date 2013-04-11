@@ -59,7 +59,7 @@ end;
 
 destructor TCoreConfiguration.Destroy;
 begin
- ini_.Free;
+ //ini_.Free; //TODO: this causes an access violation, why?
  inherited Destroy;
 end;
 

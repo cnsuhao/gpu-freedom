@@ -95,13 +95,15 @@ begin
   logHeader_ := 'gpucore> ';
 
   coremonitor_ := TCoreMonitor.Create(corenumber_);
-  loadCoreObjects('gpucore', 'GPU Core', corenumber_);
+  loadCommonObjects('gpucore', 'GPU Core', corenumber_);
+  loadCoreObjects();
 end;
 
 destructor TCoreLoop.Destroy;
 begin
- discardCoreObjects;
  coremonitor_.Free;
+ discardCoreObjects;
+ discardCommonObjects;
  inherited Destroy;
 end;
 
