@@ -122,19 +122,8 @@ begin
   transmitClient;
 
   {
-  Sleep(1000);
   //TODO: enable this!!
   //retrieveServers;
-  Sleep(1000);
-  retrieveClients;
-  Sleep(1000);
-  serviceman.clearFinishedThreads;
-  retrieveChannels;
-  Sleep(1000);
-  transmitClient;
-  Sleep(1000);
-  retrieveJobs;
-  Sleep(1000);
   }
   logger.log(LVL_INFO, logHeader_+'Core bootstrapped!');
   started_ := true;
