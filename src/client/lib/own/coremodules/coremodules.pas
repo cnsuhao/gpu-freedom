@@ -34,7 +34,7 @@ uses
   frontendmanagers, loggers, stkconstants, stacks;
 
 type TCoreModule = class(TObject)
-    constructor Create(logger : TLogger; path, extension : String);
+    constructor Create(logger : TLogger; path, extension : String; loadPlugins : Boolean);
     destructor Destroy;
 
     // helper structures
@@ -51,30 +51,44 @@ type TCoreModule = class(TObject)
     rescoll_        : TResultCollector;
     frontman_       : TFrontendManager;
     logger_         : TLogger;
+
+    loadPlugins_    : Boolean;
 end;
 
 implementation
 
-constructor TCoreModule.Create(logger : TLogger; path, extension : String);
+constructor TCoreModule.Create(logger : TLogger; path, extension : String; loadPlugins : Boolean);
 var error : TStkError;
 begin
    inherited Create();
    logger_         := logger;
-   plugman_        := TPluginManager.Create(path+PLUGIN_FOLDER+PathDelim+LIB_FOLDER, extension, logger_);
-   logger_.log(LVL_DEBUG, 'TPluginManager> Loading plugins');
-   plugman_.loadAll(error);
-   logger_.log(LVL_DEBUG, 'TPluginManager> Exit status '+IntToStr(error.ErrorID));
-   methController_ := TMethodController.Create();
+   loadPlugins_    := loadPlugins;
+   if loadPlugins_ then
+      begin
+        plugman_        := TPluginManager.Create(path+PLUGIN_FOLDER+PathDelim+LIB_FOLDER, extension, logger_);
+        logger_.log(LVL_DEBUG, 'TPluginManager> Loading plugins');
+        plugman_.loadAll(error);
+        logger_.log(LVL_DEBUG, 'TPluginManager> Exit status '+IntToStr(error.ErrorID));
+        methController_ := TMethodController.Create();
+      end
+   else
+      begin
+        plugman_ := nil;
+        methController_ := nil;
+      end;
    rescoll_        := TResultCollector.Create();
    frontman_       := TFrontendManager.Create();
 end;
 
 destructor TCoreModule.Destroy;
 begin
-  methController_.Free;
   rescoll_.Free;
   frontman_.Free;
-  plugman_.Free;
+  if loadPlugins_ then
+      begin
+       methController_.Free;
+       plugman_.Free;
+      end;
   inherited;
 end;
 

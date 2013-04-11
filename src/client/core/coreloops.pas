@@ -95,7 +95,7 @@ begin
   logHeader_ := 'gpucore> ';
 
   coremonitor_ := TCoreMonitor.Create(corenumber_);
-  loadCommonObjects('gpucore', 'GPU Core', corenumber_);
+  loadCommonObjects('gpucore', 'GPU Core', corenumber_, true);
   loadCoreObjects();
 end;
 

@@ -33,14 +33,14 @@ var
 
 
 
-procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint);
+procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint; loadPlugins : Boolean);
 procedure loadCoreObjects();
 procedure discardCoreObjects;
 procedure discardCommonObjects;
 
 implementation
 
-procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint);
+procedure loadCommonObjects(logfile, componentname : String; corenumber : Longint; loadPlugins : Boolean);
 var
    path,
    logName : String;
@@ -74,7 +74,7 @@ begin
   lf_morefrequentupdates := TLockFile.Create(path+PathDelim+'locks', 'morefrequentchat.lock');
 
   workflowman       := TWorkflowManager.Create(tableman, logger);
-  coremodule        := TCoreModule.Create(logger, path, 'dll');
+  coremodule        := TCoreModule.Create(logger, path, 'dll', loadPlugins);
   servicefactory    := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf, coremodule);
   serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads, logger);
 end;

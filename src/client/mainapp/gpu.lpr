@@ -13,7 +13,7 @@ uses
 
 begin
   Application.Initialize;
-  loadCommonObjects('gpugui', 'GPU GUI', -1);
+  loadCommonObjects('gpugui', 'GPU GUI', -1, false);
   Application.CreateForm(TGPUMainApp, GPUMainApp);
   Application.CreateForm(TNetmapperForm, NetmapperForm);
   Application.CreateForm(TChatForm, ChatForm);
