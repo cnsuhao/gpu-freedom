@@ -13,7 +13,7 @@ uses
   coremodules, servicefactories, servicemanagers, compservicemanagers,
   workflowmanagers, identities, pluginmanagers, methodcontrollers,
   resultcollectors, frontendmanagers, downloadservicemanagers,
-  uploadservicemanagers;
+  uploadservicemanagers, jobapis;
 
 var
    logger         : TLogger;
@@ -27,6 +27,7 @@ var
    workflowman    : TWorkflowManager;
    downserviceman : TDownloadServiceManager;
    upserviceman   : TUploadServiceManager;
+   jobapi         : TJobAPI;
 
    // lockfiles
    lf_morefrequentupdates : TLockFile;
@@ -77,6 +78,7 @@ begin
   coremodule        := TCoreModule.Create(logger, path, 'dll', loadPlugins);
   servicefactory    := TServiceFactory.Create(workflowman, serverman, tableman, myConfId.proxy, myconfId.port, logger, conf, coremodule);
   serviceman        := TServiceThreadManager.Create(tmServiceStatus.maxthreads, logger);
+  jobapi            := TJobAPI.Create(tableman, serverman, logger);
 end;
 
 procedure loadCoreObjects();
@@ -99,6 +101,7 @@ end;
 
 procedure discardCommonObjects;
 begin
+  jobapi.Free;
   servicefactory.free;
   workflowman.free;
   coremodule.free;

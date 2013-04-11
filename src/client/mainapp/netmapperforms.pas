@@ -51,6 +51,7 @@ begin
     Visible := true;
   end;
   resizeWindow;
+  cbRotate.Checked := false;
 
   openGLSphereControl.setColors(earthTexturer_.getTexture());
   Application.AddOnIdleHandler(@OnAppIdle);

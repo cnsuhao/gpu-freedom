@@ -69,6 +69,7 @@ begin
       srvid := srv.id;
 
    jobdefrow.jobdefinitionid:=createUniqueId();
+   job.jobdefinitionid:=jobdefrow.jobdefinitionid;
    jobdefrow.job:=job.job;
    jobdefrow.jobtype:=job.jobtype;
    jobdefrow.requireack:=job.requireack;
@@ -105,18 +106,19 @@ begin
             jobqueuerow.workunitjob:=job.trandetails.workunitjob;
             if job.trandetails.tagwujob then
                jobqueuerow.workunitjob:=jobqueuerow.workunitjob+'_'+IntToStr(i);
-            if jobqueuerow.workunitjob<>'' then
-               jobqueuerow.workunitjobpath:=appPath_+WORKUNIT_FOLDER+PathDelim+INCOMING_WU_FOLDER+PathDelim+jobqueuerow.workunitjob;
-            if not FileExists(jobqueuerow.workunitjobpath) then
-                 begin
-                   erroneous:= true;
-                   logger_.log(LVL_ERROR, logHeader_+'Workunitjob '+jobqueuerow.workunitjobpath+' does not exist. Jobqueue will not be persisted!');
-                 end;
-
+            if Trim(jobqueuerow.workunitjob)<>'' then
+               begin
+                jobqueuerow.workunitjobpath:=appPath_+WORKUNIT_FOLDER+PathDelim+INCOMING_WU_FOLDER+PathDelim+jobqueuerow.workunitjob;
+                if not FileExists(jobqueuerow.workunitjobpath) then
+                    begin
+                      erroneous:= true;
+                      logger_.log(LVL_ERROR, logHeader_+'Workunitjob '+jobqueuerow.workunitjobpath+' does not exist. Jobqueue will not be persisted!');
+                    end;
+               end;
             jobqueuerow.workunitresult:=job.trandetails.workunitresult;
             if job.trandetails.tagwuresult then
                jobqueuerow.workunitresult:=jobqueuerow.workunitresult+'_'+IntToStr(i);
-            if jobqueuerow.workunitresult<>'' then
+            if Trim(jobqueuerow.workunitresult)<>'' then
                jobqueuerow.workunitresultpath:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+jobqueuerow.workunitresult;
 
             jobqueuerow.serverstatus:='';

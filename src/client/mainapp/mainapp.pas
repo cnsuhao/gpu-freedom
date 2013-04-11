@@ -1,7 +1,6 @@
 unit mainapp;
 
 {$mode objfpc}{$H+}
-{$DEFINE COREINCLUDED}
 
 interface
 
@@ -47,10 +46,6 @@ implementation
 procedure TGPUMainApp.FormCreate(Sender: TObject);
 var v : THTMLBrowserHelpViewer;
 begin
-  {$IFDEF COREINCLUDED}
-   coreloop_ := TCoreLoop.Create();
-   coreloop_.start;
-  {$ENDIF}
   appPath_ := ExtractFilePath(ParamStr(0));
 
  try
@@ -95,18 +90,11 @@ end;
 
 procedure TGPUMainApp.FormDestroy(Sender: TObject);
 begin
-  {$IFDEF COREINCLUDED}
-   coreloop_.stop();
-   coreloop_.Free;
-  {$ENDIF}
 end;
 
 procedure TGPUMainApp.MainTimerTimer(Sender: TObject);
 begin
   if serviceman <> nil then serviceman.clearFinishedThreads;
-  {$IFDEF COREINCLUDED}
-  coreloop_.tick;
-  {$ENDIF}
 end;
 
 procedure TGPUMainApp.sbtnChatClick(Sender: TObject);

@@ -1,60 +1,59 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TJobManagementForm','FORMDATA',[
-  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3'h'#2#6'Height'#3
-  +#246#2#3'Top'#3#187#0#5'Width'#3#127#4#7'Caption'#6#14'Job Management'#12'Cl'
-  +'ientHeight'#3#246#2#11'ClientWidth'#3#127#4#8'OnCreate'#7#10'FormCreate'#9
-  +'OnDestroy'#7#11'FormDestroy'#10'LCLVersion'#6#7'1.0.2.0'#0#6'TPanel'#11'pnC'
-  +'reateJob'#4'Left'#2#8#6'Height'#3#184#0#3'Top'#2#8#5'Width'#3#138#4#12'Clie'
-  +'ntHeight'#3#184#0#11'ClientWidth'#3#138#4#8'TabOrder'#2#0#0#6'TLabel'#22'lb'
-  +'lJobDefinitionIdDesc'#4'Left'#2'('#6'Height'#2#16#3'Top'#2#0#5'Width'#2'['#7
-  +'Caption'#6#18'Job Definition ID:'#11'ParentColor'#8#7'OnClick'#7#27'lblJobD'
-  +'efinitionIdDescClick'#0#0#6'TLabel'#18'lblJobDefinitionId'#4'Left'#3#144#0#6
-  +'Height'#2#16#3'Top'#2#0#5'Width'#2'V'#7'Caption'#6#17'-----------------'#11
-  +'ParentColor'#8#7'OnClick'#7#27'lblJobDefinitionIdDescClick'#0#0#6'TLabel'#6
-  +'lblJob'#4'Left'#2'h'#6'Height'#2#16#3'Top'#2#21#5'Width'#2#22#7'Caption'#6#4
-  +'Job:'#11'ParentColor'#8#0#0#9'TComboBox'#8'cbJobBox'#4'Left'#3#136#0#6'Heig'
-  +'ht'#2#23#3'Top'#2#19#5'Width'#3#240#3#10'ItemHeight'#2#15#8'TabOrder'#2#0#4
-  +'Text'#6#7'1,1,add'#0#0#6'TLabel'#10'lblJobType'#4'Left'#2'K'#6'Height'#2#16
-  +#3'Top'#2'1'#5'Width'#2'3'#7'Caption'#6#9'Job Type:'#11'ParentColor'#8#0#0#9
-  +'TComboBox'#9'cbJobType'#4'Left'#3#136#0#6'Height'#2#23#3'Top'#2'.'#5'Width'
-  +#3#161#0#10'ItemHeight'#2#15#9'ItemIndex'#2#0#13'Items.Strings'#1#6#10'GPU_E'
-  +'ngine'#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#1#4'Text'#6#10'GPU_Eng'
-  +'ine'#0#0#11'TCheckGroup'#10'cgWorkflow'#4'Left'#3'@'#1#6'Height'#2'X'#3'Top'
-  +#2'0'#5'Width'#3#24#1#8'AutoFill'#9#7'Caption'#6#8'Workflow'#28'ChildSizing.'
-  +'LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.E'
-  +'nlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVert'
-  +'ical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14
-  +'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'Chil'
-  +'dSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Controls'
-  +'PerLine'#2#1#12'ClientHeight'#2'F'#11'ClientWidth'#3#20#1#8'TabOrder'#2#2#0
-  +#12'TRadioButton'#7'rbLocal'#4'Left'#2#6#6'Height'#2#29#3'Top'#2#6#5'Width'#3
-  +#8#1#7'Caption'#6#20'Local on this client'#7'Checked'#9#8'TabOrder'#2#1#7'Ta'
-  +'bStop'#9#0#0#12'TRadioButton'#8'rbGlobal'#4'Left'#2#6#6'Height'#2#29#3'Top'
-  +#2'#'#5'Width'#3#8#1#7'Caption'#6'-Global distributed on server to other cli'
-  +'ents'#8'TabOrder'#2#0#0#0#0#9'TCheckBox'#12'cbRequireAck'#4'Left'#3'H'#1#6
-  +'Height'#2#19#3'Top'#3#146#0#5'Width'#3#155#0#7'Caption'#6#22'Require acknow'
-  +'ledgment'#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#3#0#0#9'TGroup'
-  +'Box'#11'gbWorkunits'#4'Left'#3'h'#2#6'Height'#3#131#0#3'Top'#2'0'#5'Width'#3
-  +#8#2#7'Caption'#6#9'Workunits'#12'ClientHeight'#2'q'#11'ClientWidth'#3#4#2#8
-  +'TabOrder'#2#4#0#5'TEdit'#16'edtWorkunitInput'#4'Left'#2#14#6'Height'#2#23#3
-  +'Top'#2#23#5'Width'#3#168#1#8'TabOrder'#2#0#0#0#6'TLabel'#16'lblWorkunitInpu'
-  +'t'#4'Left'#2#14#6'Height'#2#16#3'Top'#2#255#5'Width'#2'o'#7'Caption'#6#20'I'
-  +'nput Workunit path:'#11'ParentColor'#8#0#0#7'TButton'#22'btnSelectInputWork'
-  +'unit'#4'Left'#3#190#1#6'Height'#2#25#3'Top'#2#21#5'Width'#2'3'#7'Caption'#6
-  +#3'...'#8'TabOrder'#2#1#0#0#9'TCheckBox'#18'cbTagInputWorkunit'#4'Left'#3#190
-  +#0#6'Height'#2#19#3'Top'#2#255#5'Width'#3#150#0#7'Caption'#6#22'Number input'
-  +' workunits'#8'TabOrder'#2#2#0#0#6'TLabel'#21'lblOutputWorkunitName'#4'Left'
-  +#2#14#6'Height'#2#16#3'Top'#2'8'#5'Width'#2#127#7'Caption'#6#21'Output Worku'
-  +'nit name:'#11'ParentColor'#8#0#0#5'TEdit'#17'edtWorkunitOutput'#4'Left'#2#14
-  +#6'Height'#2#23#3'Top'#2'P'#5'Width'#3#168#1#8'TabOrder'#2#3#0#0#9'TCheckBox'
-  +#19'cbTagOutputWorkunit'#4'Left'#3#189#0#6'Height'#2#19#3'Top'#2'0'#5'Width'
-  +#3#158#0#7'Caption'#6#23'Number output workunits'#8'TabOrder'#2#4#0#0#0#6'TL'
-  +'abel'#19'lblNumberOfRequests'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'S'#5'Wid'
-  +'th'#2'm'#7'Caption'#6#19'Number of requests:'#11'ParentColor'#8#0#0#9'TSpin'
-  +'Edit'#12'seNbRequests'#4'Left'#3#136#0#6'Height'#2#23#3'Top'#2'P'#5'Width'#2
-  +'R'#8'MaxValue'#3#244#1#8'MinValue'#2#1#8'TabOrder'#2#5#5'Value'#2#1#0#0#7'T'
-  +'Button'#12'btnSubmitJob'#4'Left'#2#24#6'Height'#2#29#3'Top'#3#136#0#5'Width'
-  +#3#19#1#7'Caption'#6#10'Submit Job'#8'TabOrder'#2#6#0#0#0#11'TOpenDialog'#10
-  +'OpenDialog'#4'left'#3'?'#4#3'top'#3#140#0#0#0#0
+  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3' '#2#6'Height'#3
+  +#246#2#3'Top'#3'j'#1#5'Width'#3#149#4#7'Caption'#6#14'Job Management'#12'Cli'
+  +'entHeight'#3#246#2#11'ClientWidth'#3#149#4#8'OnCreate'#7#10'FormCreate'#9'O'
+  +'nDestroy'#7#11'FormDestroy'#10'LCLVersion'#6#7'1.0.2.0'#0#6'TPanel'#11'pnCr'
+  +'eateJob'#4'Left'#2#8#6'Height'#3#184#0#3'Top'#2#8#5'Width'#3#138#4#12'Clien'
+  +'tHeight'#3#184#0#11'ClientWidth'#3#138#4#8'TabOrder'#2#0#0#6'TLabel'#22'lbl'
+  +'JobDefinitionIdDesc'#4'Left'#2'('#6'Height'#2#16#3'Top'#2#0#5'Width'#2'['#7
+  +'Caption'#6#18'Job Definition ID:'#11'ParentColor'#8#0#0#6'TLabel'#18'lblJob'
+  +'DefinitionId'#4'Left'#3#144#0#6'Height'#2#16#3'Top'#2#0#5'Width'#2'V'#7'Cap'
+  +'tion'#6#17'-----------------'#11'ParentColor'#8#0#0#6'TLabel'#6'lblJob'#4'L'
+  +'eft'#2'h'#6'Height'#2#16#3'Top'#2#21#5'Width'#2#22#7'Caption'#6#4'Job:'#11
+  +'ParentColor'#8#0#0#9'TComboBox'#8'cbJobBox'#4'Left'#3#136#0#6'Height'#2#23#3
+  +'Top'#2#19#5'Width'#3#232#3#10'ItemHeight'#2#15#8'TabOrder'#2#0#4'Text'#6#7
+  +'1,1,add'#0#0#6'TLabel'#10'lblJobType'#4'Left'#2'K'#6'Height'#2#16#3'Top'#2
+  +'1'#5'Width'#2'3'#7'Caption'#6#9'Job Type:'#11'ParentColor'#8#0#0#9'TComboBo'
+  +'x'#9'cbJobType'#4'Left'#3#136#0#6'Height'#2#23#3'Top'#2'.'#5'Width'#3#161#0
+  +#10'ItemHeight'#2#15#9'ItemIndex'#2#0#13'Items.Strings'#1#6#10'GPU_Engine'#0
+  +#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#1#4'Text'#6#10'GPU_Engine'#0#0
+  +#11'TCheckGroup'#10'cgWorkflow'#4'Left'#3'@'#1#6'Height'#2'X'#3'Top'#2'0'#5
+  +'Width'#3#24#1#8'AutoFill'#9#7'Caption'#6#8'Workflow'#28'ChildSizing.LeftRig'
+  +'htSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeH'
+  +'orizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7
+  +#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScale'
+  +'Childs'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.'
+  +'Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'
+  +#2#1#12'ClientHeight'#2'F'#11'ClientWidth'#3#20#1#8'TabOrder'#2#2#0#12'TRadi'
+  +'oButton'#7'rbLocal'#4'Left'#2#6#6'Height'#2#29#3'Top'#2#6#5'Width'#3#8#1#7
+  +'Caption'#6#20'Local on this client'#7'Checked'#9#8'TabOrder'#2#1#7'TabStop'
+  +#9#0#0#12'TRadioButton'#8'rbGlobal'#4'Left'#2#6#6'Height'#2#29#3'Top'#2'#'#5
+  +'Width'#3#8#1#7'Caption'#6'-Global distributed on server to other clients'#8
+  +'TabOrder'#2#0#0#0#0#9'TCheckBox'#12'cbRequireAck'#4'Left'#3'H'#1#6'Height'#2
+  +#19#3'Top'#3#146#0#5'Width'#3#155#0#7'Caption'#6#22'Require acknowledgment'#7
+  +'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#3#0#0#9'TGroupBox'#11'gbWo'
+  +'rkunits'#4'Left'#3'h'#2#6'Height'#3#131#0#3'Top'#2'0'#5'Width'#3#8#2#7'Capt'
+  +'ion'#6#9'Workunits'#12'ClientHeight'#2'q'#11'ClientWidth'#3#4#2#8'TabOrder'
+  +#2#4#0#5'TEdit'#16'edtWorkunitInput'#4'Left'#2#14#6'Height'#2#23#3'Top'#2#23
+  +#5'Width'#3#168#1#8'TabOrder'#2#0#0#0#6'TLabel'#16'lblWorkunitInput'#4'Left'
+  +#2#14#6'Height'#2#16#3'Top'#2#2#5'Width'#2'o'#7'Caption'#6#20'Input Workunit'
+  +' path:'#11'ParentColor'#8#0#0#7'TButton'#22'btnSelectInputWorkunit'#4'Left'
+  +#3#190#1#6'Height'#2#25#3'Top'#2#21#5'Width'#2'3'#7'Caption'#6#3'...'#8'TabO'
+  +'rder'#2#1#0#0#9'TCheckBox'#18'cbTagInputWorkunit'#4'Left'#3#190#0#6'Height'
+  +#2#19#3'Top'#2#255#5'Width'#3#150#0#7'Caption'#6#22'Number input workunits'#8
+  +'TabOrder'#2#2#0#0#6'TLabel'#21'lblOutputWorkunitName'#4'Left'#2#14#6'Height'
+  +#2#16#3'Top'#2'8'#5'Width'#2#127#7'Caption'#6#21'Output Workunit name:'#11'P'
+  +'arentColor'#8#0#0#5'TEdit'#17'edtWorkunitOutput'#4'Left'#2#14#6'Height'#2#23
+  +#3'Top'#2'P'#5'Width'#3#168#1#8'TabOrder'#2#3#0#0#9'TCheckBox'#19'cbTagOutpu'
+  +'tWorkunit'#4'Left'#3#189#0#6'Height'#2#19#3'Top'#2'5'#5'Width'#3#158#0#7'Ca'
+  +'ption'#6#23'Number output workunits'#8'TabOrder'#2#4#0#0#0#6'TLabel'#19'lbl'
+  +'NumberOfRequests'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'S'#5'Width'#2'm'#7'C'
+  +'aption'#6#19'Number of requests:'#11'ParentColor'#8#0#0#9'TSpinEdit'#12'seN'
+  +'bRequests'#4'Left'#3#136#0#6'Height'#2#23#3'Top'#2'P'#5'Width'#2'R'#8'MaxVa'
+  +'lue'#3#244#1#8'MinValue'#2#1#8'TabOrder'#2#5#5'Value'#2#1#0#0#7'TButton'#12
+  +'btnSubmitJob'#4'Left'#2#24#6'Height'#2#29#3'Top'#3#136#0#5'Width'#3#19#1#7
+  +'Caption'#6#10'Submit Job'#7'OnClick'#7#17'btnSubmitJobClick'#8'TabOrder'#2#6
+  +#0#0#0#11'TOpenDialog'#10'OpenDialog'#4'left'#3'?'#4#3'top'#3#140#0#0#0#0
 ]);
