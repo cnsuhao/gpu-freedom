@@ -27,6 +27,7 @@ type TServerManager = class(TObject)
 
     procedure getServer(var srv : TServerRecord);
     procedure getDefaultServer(var srv : TServerRecord);
+    procedure getServerIndex(var srv : TServerRecord; idx : Longint);
 
     procedure reloadServers();
     procedure increaseFailures(url : String);
@@ -61,6 +62,38 @@ end;
 destructor TServerManager.Destroy;
 begin
   cs_.Free;
+end;
+
+
+procedure TServerManager.getServerIndex(var srv : TServerRecord; idx : Longint);
+var i : Longint;
+begin
+  if (idx=-1) then
+              begin
+                // this is a local job
+                srv.id:=-1;
+                srv.url:='';
+                srv.chatchannel:='';
+                logger_.log(LVL_SEVERE, 'srvid:=-1 in servMan.getServerIndex!!');
+                Exit;
+              end;
+  if (idx<2) or (idx>currentservers_) then raise Exception.Create('getServerIndex: '+IntToStr(idx)+' is out of range!!');
+  // locate the server with this idx
+  CS_.Enter;
+
+  for i:=1 to currentservers_ do
+    begin
+      if (idx=servers_[i].id) then
+             begin
+                  srv.id  := servers_[i].id;
+                  srv.url := servers_[i].url;
+                  srv.chatchannel := servers_[i].chatchannel;
+                  CS_.Leave;
+                  Exit;
+             end;
+    end;
+  CS_.Leave;
+  raise Exception.Create('getServerIndex: '+IntToStr(idx)+' is not loaded in memory (and database)!!');
 end;
 
 procedure TServerManager.getServerInternal(var srv : TServerRecord; i : Longint);

@@ -35,7 +35,7 @@ end;
 
 type TReceiveJobstatusServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 protected
     workflowman_ : TWorkflowManager;
@@ -50,10 +50,10 @@ end;
 
 implementation
 
-constructor TReceiveJobstatusServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TReceiveJobstatusServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobstatusServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TReceiveJobstatusServiceThread]> ', conf, tableman);
  workflowman_ := workflowman;
 end;
 
@@ -131,7 +131,7 @@ begin
            end;
 
 
-
+ setServer(jobqueuerow_.server_id);
  receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(jobqueuerow_.jobqueueid), xmldoc, false);
 
  if not erroneous_ then

@@ -9,7 +9,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
 
 type TTransmitClientServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager);
  protected
   procedure Execute; override;
@@ -23,10 +23,10 @@ end;
 
 implementation
 
-constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TTransmitClientServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TTransmitClientServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TTransmitClientServiceThread]> ', conf, tableman);
 end;
 
 function TTransmitClientServiceThread.getPHPArguments() : AnsiString;

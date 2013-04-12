@@ -17,7 +17,7 @@ uses
 
 type TUploadServiceThread = class(TManagedThread)
   public
-   constructor Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+   constructor Create(var srvMan : TServerManager; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                       proxy, port : String; var logger : TLogger);
   private
     url_,
@@ -27,6 +27,7 @@ type TUploadServiceThread = class(TManagedThread)
     proxy_,
     port_        : String;
 
+    srvMan_      : TserverManager;
     srv_         : TServerRecord;
     tableman_    : TDbTableManager;
     workflowman_ : TWorkflowManager;
@@ -50,11 +51,11 @@ end;
 implementation
 
 
-constructor TUploadServiceThread.Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+constructor TUploadServiceThread.Create(var srvMan : TServerManager;  var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                                         proxy, port : String; var logger : TLogger);
 begin
   inherited Create(true); // suspended
-  srv_ := srv;
+  srvMan_ := srvMan;
   tableman_ := tableman_;
   workflowman_ := workflowman;
 
@@ -89,6 +90,7 @@ begin
         // main workunit transmission loop
         sourcePath_ := ExtractFilePath(jobqueuerow_.workunitresultpath);
         sourceFile_ := jobqueuerow_.workunitresult;
+        srvMan_.getServerIndex(srv_, jobqueuerow_.server_id);
 
         if not FileExists(jobqueuerow_.workunitresultpath) then
                begin

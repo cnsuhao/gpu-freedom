@@ -10,9 +10,9 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
 
 type TTransmitJobServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager); overload;
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                      var trandetails : TJobTransmissionDetails); overload;
 
@@ -29,10 +29,10 @@ end;
 
 implementation
 
-constructor TTransmitJobServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TTransmitJobServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TTransmitJobServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TTransmitJobServiceThread]> ', conf, tableman);
  workflowman_ := workflowman;
  trandetails_.nbrequests:=1;
  trandetails_.tagwujob:=false;
@@ -41,11 +41,11 @@ begin
  trandetails_.workunitresult:='';
 end;
 
-constructor TTransmitJobServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TTransmitJobServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                                                    var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                                                    var trandetails : TJobTransmissionDetails);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TTransmitJobServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TTransmitJobServiceThread]> ', conf, tableman);
  workflowman_ := workflowman;
  trandetails_ := trandetails;
 end;

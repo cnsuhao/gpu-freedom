@@ -9,7 +9,7 @@ uses coreconfigurations, coreservices, synacode, stkconstants,
 
 type TTransmitJobResultServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
  protected
   procedure Execute; override;
@@ -25,10 +25,10 @@ end;
 
 implementation
 
-constructor TTransmitJobResultServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TTransmitJobResultServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TTransmitJobResultServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TTransmitJobResultServiceThread]> ', conf, tableman);
  workflowman_  := workflowman;
 end;
 

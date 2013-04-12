@@ -1,6 +1,9 @@
 ******************
 GPU freedom codebase
 
+12.4.2013 git
+Core Client: revised method on how serverid is passed to services: services now mostly take the server_id stored in tbjobqueue.
+
 11.4.2013 git
 GUI: creating form to insert new job, loading less common objects into GUI
 

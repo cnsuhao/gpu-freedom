@@ -8,7 +8,7 @@ uses coreconfigurations, coreservices, synacode, dbtablemanagers,
 
 type TTransmitChannelServiceThread = class(TTransmitServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager;
                      channame, chantype : String; content : AnsiString);
  protected
@@ -25,12 +25,12 @@ end;
 
 implementation
 
-constructor TTransmitChannelServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord;
+constructor TTransmitChannelServiceThread.Create(var servMan : TServerManager;
                      proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager;
                      channame, chantype : String; content : AnsiString);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TTransmitChannelServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TTransmitChannelServiceThread]> ', conf, tableman);
  content_  := content;
  channame_ := channame;
  chantype_ := chantype;

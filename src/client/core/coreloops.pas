@@ -96,7 +96,6 @@ begin
     corenumber_ := 1;
 
   coremonitor_ := TCoreMonitor.Create(corenumber_);
-  coremonitor_.createLockFile;
   logHeader_ := 'gpucore> ';
 
   loadCommonObjects('gpucore', 'GPU Core', corenumber_, true);
@@ -113,11 +112,12 @@ end;
 
 procedure TCoreLoop.start;
 begin
-  // main loop
+  coremonitor_.createLockFile;
+
+  logger.log(LVL_INFO, logHeader_+'Bootstrapping core...');
   tick_ := 1;
   days_ := 0;
 
-  logger.log(LVL_INFO, logHeader_+'Bootstrapping core...');
   createRestoreStatusService;
   retrieveParams;
   transmitClient;
@@ -236,88 +236,66 @@ end;
 
 procedure TCoreLoop.retrieveParams;
 var receiveparamthread  : TReceiveParamServiceThread;
-    srv                 : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-
-   receiveparamthread  := servicefactory.createReceiveParamService(srv);
+   receiveparamthread  := servicefactory.createReceiveParamService();
    launch( TCoreServiceThread(receiveparamthread), 'ReceiveParams');
 end;
 
 procedure TCoreLoop.retrieveServers;
 var receiveserverthread : TReceiveServerServiceThread;
-    srv                 : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-
-   receiveserverthread := servicefactory.createReceiveServerService(srv);
+   receiveserverthread := servicefactory.createReceiveServerService();
    launch(TCoreServiceThread(receiveserverthread), 'ReceiveServers');
 end;
 
 procedure TCoreLoop.retrieveClients;
 var receiveclientthread  : TReceiveClientServiceThread;
-    srv                  : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   receiveclientthread  := servicefactory.createReceiveClientService(srv);
+   receiveclientthread  := servicefactory.createReceiveClientService();
    launch(TCoreServiceThread(receiveclientthread), 'ReceiveClients');
 end;
 
 procedure TCoreLoop.retrieveChannels;
 var receivechanthread     : TReceiveChannelServiceThread;
-    srv                   : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   receivechanthread  := servicefactory.createReceiveChannelService(srv, {srv.chatchannel}'Altos', 'CHAT');
+   receivechanthread  := servicefactory.createReceiveChannelService({srv.chatchannel}'Altos', 'CHAT');
    launch(TCoreServiceThread(receivechanthread), 'ReceiveChannels');
 end;
 
 procedure TCoreLoop.retrieveJobs;
 var receivejobthread     : TReceiveJobServiceThread;
-    srv                  : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   receivejobthread  := servicefactory.createReceiveJobService(srv);
+   receivejobthread  := servicefactory.createReceiveJobService();
    launch(TCoreServiceThread(receivejobthread), 'ReceiveJobs');
 end;
 
 procedure TCoreLoop.retrieveJobStats;
 var receivejobstatsthread     : TReceiveJobstatServiceThread;
-    srv                       : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   receivejobstatsthread  := servicefactory.createReceiveJobstatService(srv);
+   receivejobstatsthread  := servicefactory.createReceiveJobstatService();
    launch(TCoreServiceThread(receivejobstatsthread), 'ReceiveJobStats');
 end;
 
 
 procedure TCoreLoop.retrieveJobResult;
 var  receivejobresultthread : TReceiveJobresultServiceThread;
-     srv                    : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   //TODO: we do not pass job id for the moment
-   receivejobresultthread  := servicefactory.createReceiveJobresultService(srv);
+  receivejobresultthread  := servicefactory.createReceiveJobresultService();
   launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult');
 end;
 
 
 procedure TCoreLoop.transmitClient;
 var transmitclientthread  : TTransmitClientServiceThread;
-    srv                   : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   transmitclientthread  := servicefactory.createTransmitClientService(srv);
+  transmitclientthread  := servicefactory.createTransmitClientService();
   launch(TCoreServiceThread(transmitclientthread), 'TransmitClient');
 end;
 
 procedure TCoreLoop.transmitJob;
 var transmitjobthread  : TTransmitJobServiceThread;
-    srv                : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-
-   transmitjobthread  := servicefactory.createTransmitJobService(srv);
+   transmitjobthread  := servicefactory.createTransmitJobService();
    launch(TCoreServiceThread(transmitjobthread), 'TransmitJob');
 end;
 
@@ -325,18 +303,14 @@ procedure TCoreLoop.transmitJobResult;
 var transmitjobresultthread  : TTransmitJobResultServiceThread;
     srv                      : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-
-   transmitjobresultthread  := servicefactory.createTransmitJobResultService(srv);
+   transmitjobresultthread  := servicefactory.createTransmitJobResultService();
    launch(TCoreServiceThread(transmitjobresultthread), 'TransmitJobResult');
 end;
 
 procedure TCoreLoop.transmitAck;
 var transmitackthread  : TTransmitAckJobServiceThread;
-    srv                : TServerRecord;
 begin
-  serverman.getDefaultServer(srv);
-  transmitackthread  := servicefactory.createTransmitAckJobService(srv);
+  transmitackthread  := servicefactory.createTransmitAckJobService();
   launch(TCoreServiceThread(transmitackthread), 'TransmitAckJob');
 end;
 
@@ -367,16 +341,13 @@ end;
 //************************************
 procedure TCoreLoop.createDownloadWUJobService;
 var downthread  : TDownloadWUJobServiceThread;
-    srv         : TServerRecord;
     slot        : Longint;
 begin
-  serverman.getDefaultServer(srv);
-  downThread := servicefactory.createDownloadWUJobService(srv);
-
-   slot := downserviceman.launch(TDownloadServiceThread(downthread));
-   if slot=-1 then
-           logger.log(LVL_SEVERE, logHeader_+'Download WU job service launch failed, core too busy!')
-   else
+  downThread := servicefactory.createDownloadWUJobService();
+  slot := downserviceman.launch(TDownloadServiceThread(downthread));
+  if slot=-1 then
+      logger.log(LVL_SEVERE, logHeader_+'Download WU job service launch failed, core too busy!')
+  else
       logger.log(LVL_DEBUG, logHeader_+'Download WU job service started...');
 end;
 
@@ -396,11 +367,9 @@ end;
 
 procedure  TCoreLoop.createUploadWUResultService;
 var upthread  : TUploadWUResultServiceThread;
-    srv       : TServerRecord;
     slot      : Longint;
 begin
-  serverman.getDefaultServer(srv);
-  upThread := servicefactory.createUploadWUResultService(srv);
+  upThread := servicefactory.createUploadWUResultService();
   slot := upserviceman.launch(TUploadServiceThread(upthread));
   if slot=-1 then
       logger.log(LVL_SEVERE, logHeader_+'Upload WU result service launch failed, core too busy!')
@@ -414,11 +383,9 @@ end;
 //***********************************
 procedure  TCoreLoop.createUploadWUJobService;
 var upthread  : TUploadWUJobServiceThread;
-    srv       : TServerRecord;
     slot      : Longint;
 begin
-  serverman.getDefaultServer(srv);
-  upThread := servicefactory.createUploadWUJobService(srv);
+  upThread := servicefactory.createUploadWUJobService();
   slot := upserviceman.launch(TUploadServiceThread(upthread));
   if slot=-1 then
       logger.log(LVL_SEVERE, logHeader_+'Upload WU Job service launch failed, core too busy!')
@@ -429,21 +396,16 @@ end;
 
 procedure TCoreLoop.createRetrieveStatusService;
 var  receivejobstatusthread : TReceiveJobStatusServiceThread;
-     srv                    : TServerRecord;
 begin
-   serverman.getDefaultServer(srv);
-   receivejobstatusthread  := servicefactory.createReceiveJobStatusService(srv);
+  receivejobstatusthread  := servicefactory.createReceiveJobStatusService();
   launch(TCoreServiceThread(receivejobstatusthread), 'ReceiveJobStatus');
 end;
 
 procedure TCoreLoop.createDownloadWUResultService;
 var downthread  : TDownloadWUResultServiceThread;
-    srv         : TServerRecord;
     slot        : Longint;
 begin
-  serverman.getDefaultServer(srv);
-  downThread := servicefactory.createDownloadWUResultService(srv);
-
+   downThread := servicefactory.createDownloadWUResultService();
    slot := downserviceman.launch(TDownloadServiceThread(downthread));
    if slot=-1 then
            logger.log(LVL_SEVERE, logHeader_+'Download WU result service launch failed, core too busy!')

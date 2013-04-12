@@ -17,7 +17,7 @@ uses coreservices, servermanagers, dbtablemanagers,
 
 type TReceiveParamServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager);
 
  protected
@@ -32,10 +32,10 @@ end;
 
 implementation
 
-constructor TReceiveParamServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TReceiveParamServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                                               var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TReceiveParamServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TReceiveParamServiceThread]> ', conf, tableman);
 end;
 
 procedure TReceiveParamServiceThread.parseXml(var xmldoc : TXMLDocument);

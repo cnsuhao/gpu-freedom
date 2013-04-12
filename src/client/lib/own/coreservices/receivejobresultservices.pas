@@ -16,7 +16,7 @@ uses coreservices, servermanagers, dbtablemanagers,
 
 type TReceiveJobResultServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 
  protected
@@ -31,10 +31,10 @@ end;
 
 implementation
 
-constructor TReceiveJobResultServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TReceiveJobResultServiceThread.Create(var servMan : TServerManager;proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager; var workflowman : TWorkflowManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TReceiveJobResultServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TReceiveJobResultServiceThread]> ', conf, tableman);
  workflowman_ := workflowman;
 end;
 

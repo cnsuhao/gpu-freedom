@@ -15,7 +15,7 @@ uses coreservices, servermanagers, coreconfigurations, clienttables,
 
 type TReceiveClientServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager);
  protected
     procedure Execute; override;
@@ -26,10 +26,10 @@ end;
 
 implementation
 
-constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TReceiveClientServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TReceiveClientServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TReceiveClientServiceThread]> ', conf, tableman);
 end;
 
 

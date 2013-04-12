@@ -27,7 +27,7 @@ end;
 
 type TCommServiceThread = class(TCoreServiceThread)
   public
-    constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger; logHeader : String;
+    constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger; logHeader : String;
                        var conf : TCoreConfiguration; var tableman : TDbTableManager);
 
   protected
@@ -37,6 +37,8 @@ type TCommServiceThread = class(TCoreServiceThread)
     proxy_,
     port_     : String;
 
+    procedure setServer(srvid : Longint);
+    procedure setDefaultServer();
     procedure finishComm(logSuccess : String);
 
 end;
@@ -70,16 +72,26 @@ begin
   tableman_ := tableman;
 end;
 
-constructor TCommServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger; logHeader : String;
+constructor TCommServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger; logHeader : String;
                    var conf : TCoreConfiguration; var tableman : TDbTableManager);
 begin
   inherited Create(logger, logHeader, conf, tableman);
-  srv_      := srv;
   servMan_  := servMan;
   proxy_    := proxy;
   port_     := port;
+  setDefaultServer();
 end;
 
+
+procedure TCommServiceThread.setServer(srvid : Longint);
+begin
+  servMan_.getServerIndex(srv_, srvid);
+end;
+
+procedure TCommServiceThread.setDefaultServer();
+begin
+ servMan_.getDefaultServer(srv_);
+end;
 
 procedure TTransmitServiceThread.transmit(request : AnsiString; noargs : Boolean);
 var

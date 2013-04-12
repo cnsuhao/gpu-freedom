@@ -15,7 +15,7 @@ uses coreservices, servermanagers, coreconfigurations,
 
 type TReceiveChannelServiceThread = class(TReceiveServiceThread)
  public
-  constructor Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+  constructor Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager;
                      channame, chantype : String);
  protected
@@ -31,11 +31,11 @@ end;
 
 implementation
 
-constructor TReceiveChannelServiceThread.Create(var servMan : TServerManager; var srv : TServerRecord; proxy, port : String; var logger : TLogger;
+constructor TReceiveChannelServiceThread.Create(var servMan : TServerManager; proxy, port : String; var logger : TLogger;
                      var conf : TCoreConfiguration; var tableman : TDbTableManager;
                      channame, chantype : String);
 begin
- inherited Create(servMan, srv, proxy, port, logger, '[TReceiveChannelServiceThread]> ', conf, tableman);
+ inherited Create(servMan, proxy, port, logger, '[TReceiveChannelServiceThread]> ', conf, tableman);
  channame_ := channame;
  chantype_ := chantype;
 end;

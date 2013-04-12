@@ -29,29 +29,27 @@ type TServiceFactory = class(TObject)
                        var coreModule : TCoreModule);
     destructor Destroy;
 
-    function createReceiveClientService(var srv : TServerRecord)  : TReceiveClientServiceThread;
-    function createTransmitClientService(var srv : TServerRecord) : TTransmitClientServiceThread;
-    function createReceiveServerService(var srv : TServerRecord)  : TReceiveServerServiceThread;
-    function createReceiveParamService(var srv : TServerRecord)   : TReceiveParamServiceThread;
-    function createReceiveChannelService(var srv : TServerRecord;
-                                         channame, chantype : String) : TReceiveChannelServiceThread;
-    function createTransmitChannelService(var srv : TServerRecord;
-                                          channame, chantype : String;
+    function createReceiveClientService()  : TReceiveClientServiceThread;
+    function createTransmitClientService() : TTransmitClientServiceThread;
+    function createReceiveServerService()  : TReceiveServerServiceThread;
+    function createReceiveParamService()   : TReceiveParamServiceThread;
+    function createReceiveChannelService(channame, chantype : String) : TReceiveChannelServiceThread;
+    function createTransmitChannelService(channame, chantype : String;
                                           content : AnsiString) : TTransmitChannelServiceThread;
-    function createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
-    function createTransmitJobService(var srv : TServerRecord) : TTransmitJobServiceThread;
-    function createReceiveJobstatusService(var srv : TServerRecord) : TReceiveJobstatusServiceThread;
-    function createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
-    function createReceiveJobResultService(var srv : TServerRecord) : TReceiveJobResultServiceThread;
-    function createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;
-    function createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
+    function createReceiveJobService() : TReceiveJobServiceThread;
+    function createTransmitJobService() : TTransmitJobServiceThread;
+    function createReceiveJobstatusService() : TReceiveJobstatusServiceThread;
+    function createReceiveJobstatService() : TReceiveJobstatServiceThread;
+    function createReceiveJobResultService() : TReceiveJobResultServiceThread;
+    function createTransmitJobResultService() : TTransmitJobResultServiceThread;
+    function createTransmitAckJobService() : TTransmitAckJobServiceThread;
 
     function createComputationService() : TComputationServiceThread;
 
-    function createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
-    function createDownloadWUResultService(var srv : TServerRecord) : TDownloadWUResultServiceThread;
-    function createUploadWUJobService(var srv : TServerRecord) : TUploadWUJobServiceThread;
-    function createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
+    function createDownloadWUJobService() : TDownloadWUJobServiceThread;
+    function createDownloadWUResultService() : TDownloadWUResultServiceThread;
+    function createUploadWUJobService() : TUploadWUJobServiceThread;
+    function createUploadWUResultService() : TUploadWUResultServiceThread;
 
     function createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;
     function createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;
@@ -94,73 +92,71 @@ begin
  inherited Destroy;
 end;
 
-function TServiceFactory.createReceiveClientService(var srv : TServerRecord) : TReceiveClientServiceThread;
+function TServiceFactory.createReceiveClientService() : TReceiveClientServiceThread;
 begin
- Result := TReceiveClientServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+ Result := TReceiveClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createTransmitClientService(var srv : TServerRecord) : TTransmitClientServiceThread;
+function TServiceFactory.createTransmitClientService() : TTransmitClientServiceThread;
 begin
- Result := TTransmitClientServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+ Result := TTransmitClientServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveServerService(var srv : TServerRecord)  : TReceiveServerServiceThread;
+function TServiceFactory.createReceiveServerService()  : TReceiveServerServiceThread;
 begin
-  Result := TReceiveServerServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+  Result := TReceiveServerServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveParamService(var srv : TServerRecord) : TReceiveParamServiceThread;
+function TServiceFactory.createReceiveParamService() : TReceiveParamServiceThread;
 begin
- Result := TReceiveParamServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+ Result := TReceiveParamServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveChannelService(var srv : TServerRecord;
-                                     channame, chantype : String) : TReceiveChannelServiceThread;
+function TServiceFactory.createReceiveChannelService(channame, chantype : String) : TReceiveChannelServiceThread;
 begin
-  Result := TReceiveChannelServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, channame, chantype);
+  Result := TReceiveChannelServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, channame, chantype);
 end;
 
-function TServiceFactory.createTransmitChannelService(var srv : TServerRecord;
-                                                      channame, chantype : String;
+function TServiceFactory.createTransmitChannelService(channame, chantype : String;
                                                       content : AnsiString) : TTransmitChannelServiceThread;
 begin
- Result := TTransmitChannelServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, channame, chantype, content);
+ Result := TTransmitChannelServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, channame, chantype, content);
 end;
 
-function TServiceFactory.createReceiveJobService(var srv : TServerRecord) : TReceiveJobServiceThread;
+function TServiceFactory.createReceiveJobService() : TReceiveJobServiceThread;
 begin
- Result := TReceiveJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TReceiveJobServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
-function TServiceFactory.createTransmitJobService(var srv : TServerRecord) : TTransmitJobServiceThread;
+function TServiceFactory.createTransmitJobService() : TTransmitJobServiceThread;
 begin
- Result := TTransmitJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TTransmitJobServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
-function TServiceFactory.createReceiveJobstatusService(var srv : TServerRecord) : TReceiveJobstatusServiceThread;
+function TServiceFactory.createReceiveJobstatusService() : TReceiveJobstatusServiceThread;
 begin
- Result := TReceiveJobStatusServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TReceiveJobStatusServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
 
-function TServiceFactory.createReceiveJobstatService(var srv : TServerRecord) : TReceiveJobstatServiceThread;
+function TServiceFactory.createReceiveJobstatService() : TReceiveJobstatServiceThread;
 begin
- Result := TReceiveJobStatServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_);
+ Result := TReceiveJobStatServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_);
 end;
 
-function TServiceFactory.createReceiveJobResultService(var srv : TServerRecord) : TReceiveJobResultServiceThread;
+function TServiceFactory.createReceiveJobResultService() : TReceiveJobResultServiceThread;
 begin
- Result := TReceiveJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TReceiveJobResultServiceThread.Create(servMan_,proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
-function TServiceFactory.createTransmitJobResultService(var srv : TServerRecord) : TTransmitJobResultServiceThread;
+function TServiceFactory.createTransmitJobResultService() : TTransmitJobResultServiceThread;
 begin
- Result := TTransmitJobResultServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TTransmitJobResultServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
-function TServiceFactory.createTransmitAckJobService(var srv : TServerRecord) : TTransmitAckJobServiceThread;
+function TServiceFactory.createTransmitAckJobService() : TTransmitAckJobServiceThread;
 begin
- Result := TTransmitAckJobServiceThread.Create(servMan_, srv, proxy_, port_, logger_, conf_, tableman_, workflowman_);
+ Result := TTransmitAckJobServiceThread.Create(servMan_, proxy_, port_, logger_, conf_, tableman_, workflowman_);
 end;
 
 function TServiceFactory.createComputationService() : TComputationServiceThread;
@@ -177,24 +173,24 @@ begin
 end;
 
 
-function TServiceFactory.createDownloadWUJobService(var srv : TServerRecord) : TDownloadWUJobServiceThread;
+function TServiceFactory.createDownloadWUJobService() : TDownloadWUJobServiceThread;
 begin
-  Result := TDownloadWUJobServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TDownloadWUJobServiceThread.Create(servMan_, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
-function TServiceFactory.createDownloadWUResultService(var srv : TServerRecord) : TDownloadWUResultServiceThread;
+function TServiceFactory.createDownloadWUResultService() : TDownloadWUResultServiceThread;
 begin
-  Result := TDownloadWUResultServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TDownloadWUResultServiceThread.Create(servMan_, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
-function TServiceFactory.createUploadWUJobService(var srv : TServerRecord) : TUploadWUJobServiceThread;
+function TServiceFactory.createUploadWUJobService() : TUploadWUJobServiceThread;
 begin
-  Result := TUploadWUJobServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TUploadWUJobServiceThread.Create(servMan_,tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
-function TServiceFactory.createUploadWUResultService(var srv : TServerRecord) : TUploadWUResultServiceThread;
+function TServiceFactory.createUploadWUResultService() : TUploadWUResultServiceThread;
 begin
-  Result := TUploadWUResultServiceThread.Create(srv, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
+  Result := TUploadWUResultServiceThread.Create(servMan_, tableman_, workflowman_, myConfId.proxy, myConfId.port, logger_);
 end;
 
 function TServiceFactory.createFastTransitionFromNewService() : TFastTransitionFromNewServiceThread;

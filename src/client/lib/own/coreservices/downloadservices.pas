@@ -21,7 +21,7 @@ uses
 
 type TDownloadServiceThread = class(TManagedThread)
   public
-   constructor Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+   constructor Create(var servMan : TServerManager; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                       proxy, port : String; var logger : TLogger);
    protected
     url_,
@@ -30,12 +30,13 @@ type TDownloadServiceThread = class(TManagedThread)
     logHeader_,
     targetPath_,
     targetFile_  : String;
-    srv_         : TServerRecord;
+    srvman_      : TServerManager;
     tableman_    : TDbTableManager;
     workflowman_ : TWorkflowManager;
     logger_      : TLogger;
 
     jobqueuerow_ : TDbJobQueueRow;
+    srv_         : TServerRecord;
 
     procedure adaptFileNameIfItAlreadyExists;
 end;
@@ -55,12 +56,12 @@ end;
 implementation
 
 
-constructor TDownloadServiceThread.Create(var srv : TServerRecord; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
+constructor TDownloadServiceThread.Create(var servMan : TServerManager; var tableman : TDbTableManager; var workflowman : TWorkflowManager;
                                    proxy, port : String; var logger : TLogger);
 begin
   inherited Create(true); // suspended
 
-  srv_         := srv;
+  srvman_      := servMan;
   tableman_    := tableman;
   workflowman_ := workflowman;
   logger_      := logger;
@@ -115,6 +116,7 @@ begin
     begin
           // Here comes the main loop to retrieve a workunit
           workflowman_.getClientJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWorkunit(jobqueuerow_);
+          srvMan_.getServerIndex(srv_, jobqueuerow_.server_id);
 
           targetPath_ := ExtractFilePath(jobqueuerow_.workunitjobpath);
           targetFile_ := jobqueuerow_.workunitjob;
@@ -167,6 +169,7 @@ begin
     begin
           // Here comes the main loop to retrieve a workunit
           workflowman_.getServerJobQueueWorkflow().changeStatusFromForWURetrievalToRetrievingWU(jobqueuerow_);
+          srvMan_.getServerIndex(srv_, jobqueuerow_.server_id);
 
           targetPath_ := ExtractFilePath(jobqueuerow_.workunitresultpath);
           targetFile_ := jobqueuerow_.workunitresult;
