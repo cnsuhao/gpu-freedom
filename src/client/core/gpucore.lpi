@@ -33,15 +33,17 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="94">
+    <Units Count="95">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="23"/>
-        <CursorPos X="44" Y="36"/>
+        <TopLine Value="77"/>
+        <CursorPos X="15" Y="99"/>
         <UsageCount Value="142"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\packages\own\tgpu\TGPU_component.pas"/>
@@ -209,10 +211,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="82"/>
-        <CursorPos X="38" Y="171"/>
+        <TopLine Value="115"/>
+        <CursorPos X="1" Y="213"/>
         <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit23>
@@ -275,10 +278,12 @@
       <Unit31>
         <Filename Value="coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="25"/>
-        <CursorPos X="15" Y="19"/>
+        <TopLine Value="14"/>
+        <CursorPos X="40" Y="50"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit31>
       <Unit32>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
@@ -401,22 +406,18 @@
       <Unit47>
         <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
         <UnitName Value="transmitjobservices"/>
-        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="52"/>
         <CursorPos X="48" Y="49"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit47>
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="122"/>
         <CursorPos X="87" Y="137"/>
         <UsageCount Value="27"/>
-        <Loaded Value="True"/>
       </Unit48>
       <Unit49>
         <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
@@ -493,12 +494,10 @@
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
-        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="151"/>
         <CursorPos X="67" Y="183"/>
         <UsageCount Value="32"/>
-        <Loaded Value="True"/>
       </Unit58>
       <Unit59>
         <Filename Value="..\lib\own\coreservices\workflowmanagers.pas"/>
@@ -710,12 +709,10 @@
       <Unit85>
         <Filename Value="..\lib\own\coreservices\fasttransitionsfromnew.pas"/>
         <UnitName Value="fasttransitionsfromnew"/>
-        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="49"/>
         <CursorPos X="58" Y="43"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit85>
       <Unit86>
         <Filename Value="..\lib\own\coreservices\clientjobqueueworkflows.pas"/>
@@ -744,13 +741,10 @@
       <Unit89>
         <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
         <UnitName Value="receivejobstatusservices"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="112"/>
         <CursorPos X="183" Y="124"/>
         <UsageCount Value="16"/>
-        <Loaded Value="True"/>
       </Unit89>
       <Unit90>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\base\db.pas"/>
@@ -784,48 +778,50 @@
         <CursorPos X="6" Y="5"/>
         <UsageCount Value="13"/>
       </Unit93>
+      <Unit94>
+        <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-base\src\custapp.pp"/>
+        <UnitName Value="CustApp"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="55"/>
+        <CursorPos X="3" Y="29"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit94>
     </Units>
-    <JumpHistory Count="10" HistoryIndex="9">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="186" Column="91" TopLine="70"/>
       </Position1>
       <Position2>
-        <Filename Value="..\lib\own\coreservices\fasttransitionsfromnew.pas"/>
-        <Caret Line="43" Column="58" TopLine="44"/>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="106" Column="30" TopLine="81"/>
       </Position2>
       <Position3>
-        <Filename Value="..\lib\own\coreservices\transmitjobservices.pas"/>
-        <Caret Line="49" Column="48" TopLine="52"/>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="43" Column="5" TopLine="24"/>
       </Position3>
       <Position4>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="28" Column="44" TopLine="9"/>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="101" Column="3" TopLine="81"/>
       </Position4>
       <Position5>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="37" Column="64" TopLine="9"/>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="203" Column="36" TopLine="212"/>
       </Position5>
       <Position6>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="38" Column="45" TopLine="9"/>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="99" Column="15" TopLine="68"/>
       </Position6>
       <Position7>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="49" Column="50" TopLine="17"/>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="32" Column="15" TopLine="133"/>
       </Position7>
       <Position8>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="91" Column="61" TopLine="59"/>
+        <Filename Value="gpucore.lpr"/>
+        <Caret Line="99" Column="15" TopLine="11"/>
       </Position8>
-      <Position9>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="130" Column="81" TopLine="98"/>
-      </Position9>
-      <Position10>
-        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
-        <Caret Line="135" Column="62" TopLine="103"/>
-      </Position10>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

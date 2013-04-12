@@ -94,9 +94,11 @@ begin
     end
   else
     corenumber_ := 1;
-  logHeader_ := 'gpucore> ';
 
   coremonitor_ := TCoreMonitor.Create(corenumber_);
+  coremonitor_.createLockFile;
+  logHeader_ := 'gpucore> ';
+
   loadCommonObjects('gpucore', 'GPU Core', corenumber_, true);
   loadCoreObjects();
 end;
@@ -111,7 +113,6 @@ end;
 
 procedure TCoreLoop.start;
 begin
-  coremonitor_.coreStarted;
   // main loop
   tick_ := 1;
   days_ := 0;
@@ -205,9 +206,10 @@ begin
   myGPUID.TotalUptime:=myGPUID.TotalUptime+myGPUID.Uptime;
   myGPUID.Uptime := 0;
   logger.log(LVL_INFO, logHeader_+'Total uptime is '+FloatToStr(myGPUID.TotalUptime)+'.');
-  coremonitor_.coreStopped;
   conf.saveCoreConfiguration();
   logger.log(LVL_INFO, logHeader_+'Core configuration saved.');
+
+  coremonitor_.removeLockFile;
 end;
 
 function TCoreLoop.getCoreMonitor : TCoreMonitor;

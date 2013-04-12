@@ -15,10 +15,10 @@ type TCoreMonitor = class(TObject)
     destructor Destroy();
 
     // used in core
-    procedure coreStarted;
+    procedure createLockFile;
     function  coreCanRun : Boolean;
     function  coreCanStart : Boolean;
-    procedure coreStopped;
+    procedure removeLockFile;
 
     // called by GUI
     procedure startCore;
@@ -47,12 +47,12 @@ begin
    inherited Destroy;
 end;
 
-procedure   TCoreMonitor.coreStarted;
+procedure   TCoreMonitor.createLockFile;
 begin
   isrunninglock_.createLF;
 end;
 
-procedure TCoreMonitor.coreStopped;
+procedure TCoreMonitor.removeLockFile;
 begin
  isrunninglock_.delete;
 end;
