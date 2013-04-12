@@ -43,12 +43,11 @@ implementation
 { TChatForm }
 
 procedure TChatForm.btnSendClick(Sender: TObject);
-var srv  : TServerRecord;
+var
     slot : Longint;
     thread : TTransmitChannelServiceThread;
 begin
-  serverman.getDefaultServer(srv);
-  thread := servicefactory.createTransmitChannelService(srv, 'Altos', 'CHAT', mmSubmitChat.Text);
+  thread := servicefactory.createTransmitChannelService('Altos', 'CHAT', mmSubmitChat.Text);
   slot := serviceman.launch(TCoreServiceThread(thread), 'TransmitChannelService');
   if (slot<>-1) then
      begin
