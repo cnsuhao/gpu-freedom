@@ -5,7 +5,7 @@ GPU freedom codebase
 Core Client: revised method on how serverid is passed to services: services now mostly take the server_id stored in tbjobqueue.
 
 11.4.2013 git
-GUI: creating form to insert new job, loading less common objects into GUI
+GUI:         creating form to insert new job, loading less common objects into GUI
 
 10.4.2013 git
 Core Client: implementing API to insert global and local jobs on database, to be used by GUI and frontends
