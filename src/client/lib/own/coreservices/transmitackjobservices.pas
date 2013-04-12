@@ -78,6 +78,8 @@ begin
  else
          begin
            workflowman_.getClientJobQueueWorkflow().changeStatusFromForAcknowledgementToAcknowledging(jobqueuerow_);
+           setServer(jobqueuerow_.server_id);
+
            // Transmitting acknowledgement
            transmit('/jobqueue/ack_job.php?'+getPHPArguments(), false);
            if not erroneous_ then

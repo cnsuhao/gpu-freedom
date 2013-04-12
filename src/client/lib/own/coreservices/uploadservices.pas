@@ -144,6 +144,7 @@ begin
        // main workunit transmission loop
         sourcePath_ := ExtractFilePath(jobqueuerow_.workunitjobpath);
         sourceFile_ := jobqueuerow_.workunitjob;
+        srvMan_.getServerIndex(srv_, jobqueuerow_.server_id);
 
         if not FileExists(jobqueuerow_.workunitjobpath) then
                begin

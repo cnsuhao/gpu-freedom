@@ -85,6 +85,7 @@ begin
          end;
 
  workflowman_.getClientJobQueueWorkflow().changeStatusFromForResultTransmissionToTransmittingResult(jobqueuerow_);
+ setServer(jobqueuerow_.server_id);
  transmit('/jobqueue/report_jobresult.php?'+getPHPArguments(), false);
  if not erroneous_ then
     begin

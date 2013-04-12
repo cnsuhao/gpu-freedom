@@ -38,11 +38,11 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="25"/>
         <CursorPos X="15" Y="99"/>
-        <UsageCount Value="144"/>
+        <UsageCount Value="145"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -126,10 +126,12 @@
       <Unit12>
         <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
         <UnitName Value="servicefactories"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="34"/>
-        <CursorPos X="14" Y="51"/>
+        <TopLine Value="30"/>
+        <CursorPos X="14" Y="49"/>
         <UsageCount Value="33"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\lib\own\misc\loggers.pas"/>
@@ -165,10 +167,13 @@
       <Unit17>
         <Filename Value="..\lib\own\coreservices\servermanagers.pas"/>
         <UnitName Value="servermanagers"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="65"/>
-        <CursorPos X="82" Y="77"/>
+        <TopLine Value="80"/>
+        <CursorPos X="22" Y="84"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\..\..\..\gpu_solar\lib\libclimate\initmodel.pas"/>
@@ -211,12 +216,11 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="105"/>
-        <CursorPos X="1" Y="115"/>
-        <UsageCount Value="60"/>
+        <TopLine Value="319"/>
+        <CursorPos X="47" Y="342"/>
+        <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
@@ -278,11 +282,11 @@
       <Unit31>
         <Filename Value="coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
         <CursorPos X="6" Y="12"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit31>
       <Unit32>
@@ -327,10 +331,12 @@
       <Unit37>
         <Filename Value="..\lib\own\coreservices\coreservices.pas"/>
         <UnitName Value="coreservices"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="134"/>
-        <CursorPos X="30" Y="91"/>
+        <TopLine Value="60"/>
+        <CursorPos X="15" Y="40"/>
         <UsageCount Value="23"/>
+        <Loaded Value="True"/>
       </Unit37>
       <Unit38>
         <Filename Value="..\lib\own\coredb\servertables.pas"/>
@@ -438,10 +444,12 @@
       <Unit51>
         <Filename Value="..\lib\own\coreservices\transmitjobresultservices.pas"/>
         <UnitName Value="transmitjobresultservices"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="52" Y="12"/>
+        <TopLine Value="52"/>
+        <CursorPos X="58" Y="54"/>
         <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit51>
       <Unit52>
         <Filename Value="..\lib\own\misc\identities.pas"/>
@@ -470,10 +478,12 @@
       <Unit55>
         <Filename Value="..\lib\own\coreservices\transmitackjobservices.pas"/>
         <UnitName Value="transmitackjobservices"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="13"/>
-        <CursorPos X="52" Y="13"/>
-        <UsageCount Value="19"/>
+        <TopLine Value="1"/>
+        <CursorPos X="48" Y="81"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
       </Unit55>
       <Unit56>
         <Filename Value="..\lib\own\coredb\coretables.pas"/>
@@ -653,18 +663,22 @@
       <Unit78>
         <Filename Value="..\lib\own\coreservices\downloadservices.pas"/>
         <UnitName Value="downloadservices"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="18"/>
-        <CursorPos X="34" Y="39"/>
+        <TopLine Value="13"/>
+        <CursorPos X="64" Y="119"/>
         <UsageCount Value="16"/>
+        <Loaded Value="True"/>
       </Unit78>
       <Unit79>
         <Filename Value="..\lib\own\coreservices\uploadservices.pas"/>
         <UnitName Value="uploadservices"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="79"/>
-        <CursorPos X="60" Y="93"/>
+        <TopLine Value="121"/>
+        <CursorPos X="63" Y="147"/>
         <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit79>
       <Unit80>
         <Filename Value="..\lib\own\coreservices\fasttransitionsfromcomputed.pas"/>
@@ -673,7 +687,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="21"/>
         <CursorPos X="34" Y="64"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="50"/>
       </Unit80>
       <Unit81>
         <Filename Value="..\lib\own\coreservices\restorestatusservices.pas"/>
@@ -741,10 +755,12 @@
       <Unit89>
         <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
         <UnitName Value="receivejobstatusservices"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="36"/>
-        <CursorPos X="52" Y="38"/>
+        <TopLine Value="108"/>
+        <CursorPos X="2" Y="134"/>
         <UsageCount Value="17"/>
+        <Loaded Value="True"/>
       </Unit89>
       <Unit90>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-db\src\base\db.pas"/>
@@ -773,10 +789,12 @@
       <Unit93>
         <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
         <UnitName Value="jobapis"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="57"/>
         <CursorPos X="6" Y="5"/>
         <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit93>
       <Unit94>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\packages\fcl-base\src\custapp.pp"/>
@@ -787,7 +805,7 @@
         <UsageCount Value="11"/>
       </Unit94>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="9" HistoryIndex="8">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="343" Column="48" TopLine="326"/>
@@ -800,6 +818,30 @@
         <Filename Value="gpucore.lpr"/>
         <Caret Line="99" Column="15" TopLine="25"/>
       </Position3>
+      <Position4>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="130" Column="43" TopLine="144"/>
+      </Position4>
+      <Position5>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="65" Column="43" TopLine="48"/>
+      </Position5>
+      <Position6>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="162" Column="60" TopLine="130"/>
+      </Position6>
+      <Position7>
+        <Filename Value="coreloops.pas"/>
+        <Caret Line="342" Column="47" TopLine="319"/>
+      </Position7>
+      <Position8>
+        <Filename Value="..\lib\own\coreservices\servicefactories.pas"/>
+        <Caret Line="49" Column="14" TopLine="30"/>
+      </Position8>
+      <Position9>
+        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
+        <Caret Line="134" Column="1" TopLine="108"/>
+      </Position9>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

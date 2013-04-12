@@ -74,10 +74,20 @@ begin
                 srv.id:=-1;
                 srv.url:='';
                 srv.chatchannel:='';
-                logger_.log(LVL_SEVERE, 'srvid:=-1 in servMan.getServerIndex!!');
+                logger_.log(LVL_SEVERE, 'srvid:=-1 in servMan.getServerIndex, this is reserved for local jobs!!');
                 Exit;
               end;
-  if (idx<2) or (idx>currentservers_) then raise Exception.Create('getServerIndex: '+IntToStr(idx)+' is out of range!!');
+  if (idx=0) then
+              begin
+                getDefaultServer(srv);
+                logger_.log(LVL_INFO, 'srvid:=0 in servMan.getServerIndex, returning default server');
+                Exit;
+              end;
+  if (idx<2) or (idx>currentservers_) then
+          begin
+           logger_.log(LVL_ERROR, 'getServerIndex: '+IntToStr(idx)+' is out of range!!');
+           raise Exception.Create('getServerIndex: '+IntToStr(idx)+' is out of range!!');
+          end;
   // locate the server with this idx
   CS_.Enter;
 
@@ -94,6 +104,7 @@ begin
     end;
   CS_.Leave;
   raise Exception.Create('getServerIndex: '+IntToStr(idx)+' is not loaded in memory (and database)!!');
+  logger_.log(LVL_ERROR, 'getServerIndex: '+IntToStr(idx)+' is not loaded in memory (and database)!!');
 end;
 
 procedure TServerManager.getServerInternal(var srv : TServerRecord; i : Longint);
