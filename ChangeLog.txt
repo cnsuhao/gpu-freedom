@@ -2,7 +2,8 @@
 GPU freedom codebase
 
 13.4.2013 git
-Core Client: minor changes to compile core under Linux Debian
+Core Client: minor changes to compile core under Linux Debian:
+             error while linking: missing library lsqlite3 
 
 12.4.2013 git
 Core Client: revised method on how serverid is passed to services: services now mostly take the server_id stored in tbjobqueue.
