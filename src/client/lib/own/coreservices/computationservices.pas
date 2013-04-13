@@ -100,8 +100,8 @@ begin
        except
          on e : Exception do
              begin
-               logger_.log(LVL_SEVERE, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
-               workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job threw exception '+e.ToString+' '+e.Message+' '+e.UnitName);
+               logger_.log(LVL_SEVERE, logHeader_+'Job threw exception '+e.Message);
+               workflowman_.getClientJobQueueWorkflow().changeStatusToError(jobqueuerow_, logHeader_+'Job threw exception '+e.Message);
                erroneous_ := true;
                done_ := true;
                Exit;

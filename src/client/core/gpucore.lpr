@@ -110,8 +110,6 @@ end;
 var
   Application: TGPUCoreApp;
 
-{$R *.res}
-
 begin
   Application:=TGPUCoreApp.Create(nil);
   Application.Title:='gpucore';

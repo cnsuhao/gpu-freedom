@@ -72,7 +72,7 @@ begin
   except
     on e : Exception  do
         logger_.log(LVL_SEVERE, 'Internal error: Not possible to change status for jobqueue row '+row.jobdefinitionid+' from '+
-                                   JobQueueStatusToString(fromS)+' because of Exception '+e.ToString);
+                                   JobQueueStatusToString(fromS)+' because of Exception '+e.Message);
   end;
 
   CS_.Leave;
@@ -89,7 +89,7 @@ begin
   except
     on e : Exception  do
         logger_.log(LVL_SEVERE, 'Internal error: Not possible to retrieve row in status '+
-                                   JobQueueStatusToString(s)+' because of Exception '+e.ToString);
+                                   JobQueueStatusToString(s)+' because of Exception '+e.Message);
   end;
 
   CS_.Leave;

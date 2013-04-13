@@ -96,7 +96,7 @@ const
   
   STK_ARG_ERROR        = 999;
   
-  INF = 1.0/0.0; // used to retrieve minimums
+  INF = 1.0/0.000001; // used to retrieve minimums
 
 implementation
 
