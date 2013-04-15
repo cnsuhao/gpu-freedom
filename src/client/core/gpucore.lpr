@@ -61,6 +61,7 @@ begin
   logger.log(LVL_INFO, 'Core was shut down correctly.');
 end;
 
+
 procedure TGPUCoreApp.DoRun;
 var
   ErrorMsg : String;

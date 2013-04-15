@@ -1,6 +1,8 @@
 ******************
 GPU freedom codebase
 
+15.4.2013 Releasing 0.5.9 as preview
+
 13.4.2013 git
 Core Client: minor changes to compile core under Linux Debian:
              error while linking: missing library lsqlite3 
