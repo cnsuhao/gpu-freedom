@@ -180,7 +180,6 @@
       <Unit19>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
@@ -271,7 +270,7 @@
       <Unit31>
         <Filename Value="coremonitors.pas"/>
         <UnitName Value="coremonitors"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <WindowIndex Value="0"/>
         <TopLine Value="4"/>
         <CursorPos X="6" Y="12"/>
@@ -460,7 +459,7 @@
       <Unit57>
         <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
         <UnitName Value="workflowancestors"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <WindowIndex Value="0"/>
         <TopLine Value="76"/>
         <CursorPos X="96" Y="92"/>
@@ -505,7 +504,7 @@
       <Unit63>
         <Filename Value="..\lib\own\coreservices\computationservices.pas"/>
         <UnitName Value="computationservices"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="16"/>
         <WindowIndex Value="0"/>
         <TopLine Value="93"/>
         <CursorPos X="134" Y="104"/>
@@ -536,7 +535,7 @@
       <Unit67>
         <Filename Value="..\lib\own\coremodules\stkconstants.pas"/>
         <UnitName Value="stkconstants"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
         <CursorPos X="21" Y="99"/>
@@ -546,9 +545,13 @@
       <Unit68>
         <Filename Value="..\lib\own\misc\utils.pas"/>
         <UnitName Value="utils"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="12"/>
+        <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="69" Y="20"/>
+        <CursorPos X="17" Y="22"/>
         <UsageCount Value="12"/>
+        <Loaded Value="True"/>
       </Unit68>
       <Unit69>
         <Filename Value="..\lib\own\coredb\jobqueuehistorytables.pas"/>

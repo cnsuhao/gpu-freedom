@@ -13,9 +13,13 @@ implementation
 
 function createUniqueId() : String;
 var outG : TGuid;
+    tmp  : String;
 begin
   createGUID(outG);
-  Result := GUIDToString(outG);
+  tmp := GUIDToString(outG);
+  Delete(tmp, 1, 1);
+  Delete(tmp, length(tmp), 1);
+  Result := tmp;
 end;
 
 function ExtractParam(var S: string; Separator: string): string;

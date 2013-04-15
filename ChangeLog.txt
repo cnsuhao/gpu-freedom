@@ -1,9 +1,9 @@
 ******************
 GPU freedom codebase
 
-15.4.2013 Releasing 0.5.9 as preview
+15.4.2013 git changing id generation code
 
-13.4.2013 git
+13.4.2013    Releasing 0.5.9 as preview
 Core Client: minor changes to compile core under Linux Debian:
              error while linking: missing library lsqlite3 
 
