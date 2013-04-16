@@ -1,6 +1,9 @@
 ******************
 GPU freedom codebase
 
+16.4.2013 git
+Core Client: fixing bug in retrievejobstatusservice
+
 15.4.2013 git 
              changing id generation code, removing the two brackets
 

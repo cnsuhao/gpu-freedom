@@ -130,7 +130,7 @@ begin
                Exit;
            end;
 
-
+ workflowman_.getServerJobQueueWorkflow.changeStatusFromForStatusRetrievalToRetrievingStatus(jobqueuerow_);
  setServer(jobqueuerow_.server_id);
  receive('/jobqueue/status_jobqueue.php?xml=1&jobqueueid='+encodeURL(jobqueuerow_.jobqueueid), xmldoc, false);
 
