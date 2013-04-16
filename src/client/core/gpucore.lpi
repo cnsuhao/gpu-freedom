@@ -32,7 +32,7 @@
         <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <Units Count="95">
+    <Units Count="96">
       <Unit0>
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -378,9 +378,13 @@
       <Unit48>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <TopLine Value="122"/>
-        <CursorPos X="87" Y="137"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="123"/>
+        <CursorPos X="64" Y="146"/>
         <UsageCount Value="27"/>
+        <Loaded Value="True"/>
       </Unit48>
       <Unit49>
         <Filename Value="..\lib\own\coredb\jobstatstables.pas"/>
@@ -443,18 +447,20 @@
       <Unit57>
         <Filename Value="..\lib\own\coreservices\workflowancestors.pas"/>
         <UnitName Value="workflowancestors"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="76"/>
-        <CursorPos X="96" Y="92"/>
+        <TopLine Value="23"/>
+        <CursorPos X="17" Y="29"/>
         <UsageCount Value="13"/>
+        <Loaded Value="True"/>
       </Unit57>
       <Unit58>
         <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
         <UnitName Value="serverjobqueueworkflows"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="13"/>
-        <CursorPos X="17" Y="40"/>
+        <TopLine Value="104"/>
+        <CursorPos X="83" Y="150"/>
         <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit58>
@@ -675,11 +681,10 @@
       <Unit89>
         <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
         <UnitName Value="receivejobstatusservices"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="97"/>
-        <CursorPos X="106" Y="133"/>
+        <TopLine Value="67"/>
+        <CursorPos X="93" Y="111"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
       </Unit89>
@@ -719,8 +724,18 @@
         <CursorPos X="3" Y="29"/>
         <UsageCount Value="11"/>
       </Unit94>
+      <Unit95>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <UnitName Value="clientjobqueueworkflows"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit95>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="12" HistoryIndex="11">
       <Position1>
         <Filename Value="coreloops.pas"/>
         <Caret Line="343" Column="48" TopLine="326"/>
@@ -753,6 +768,22 @@
         <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
         <Caret Line="139" Column="97" TopLine="97"/>
       </Position8>
+      <Position9>
+        <Filename Value="..\lib\own\coreservices\receivejobstatusservices.pas"/>
+        <Caret Line="124" Column="91" TopLine="69"/>
+      </Position9>
+      <Position10>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="41" Column="66" TopLine="14"/>
+      </Position10>
+      <Position11>
+        <Filename Value="..\lib\own\coreservices\serverjobqueueworkflows.pas"/>
+        <Caret Line="150" Column="83" TopLine="104"/>
+      </Position11>
+      <Position12>
+        <Filename Value="..\lib\own\coreservices\jobqueueworkflows.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position12>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

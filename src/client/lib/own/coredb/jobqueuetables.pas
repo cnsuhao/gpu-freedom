@@ -116,7 +116,7 @@ end;
 
 function JobQueueStatusToString(status : Longint) : String;
 begin
-  Result := 'Internal error: Unknown Satus in JobQueueStatusToString()';
+  Result := 'Internal error: Unknown Status in JobQueueStatusToString()';
   case status of
     C_NEW                     : Result := 'C_NEW';
     C_FOR_WU_RETRIEVAL        : Result := 'C_FOR_WU_RETRIEVAL';
@@ -143,6 +143,7 @@ begin
     S_UPLOADING_JOB           : Result := 'S_UPLOADING_JOB';
     S_FOR_STATUS_RETRIEVAL    : Result := 'S_FOR_STATUS_RETRIEVAL';
     S_RETRIEVING_STATUS       : Result := 'S_RETRIEVING_STATUS';
+    S_STATUS_RETRIEVED        : Result := 'S_STATUS_RETRIEVED';
     S_FOR_WU_RETRIEVAL        : Result := 'S_FOR_WU_RETRIEVAL';
     S_RETRIEVING_WU           : Result := 'S_RETRIEVING_WU';
     S_FOR_RESULT_RETRIEVAL    : Result := 'S_FOR_RESULT_RETRIEVAL';
