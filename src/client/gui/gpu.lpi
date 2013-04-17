@@ -39,7 +39,7 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="46">
+    <Units Count="47">
       <Unit0>
         <Filename Value="gpu.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -177,7 +177,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="69" Y="27"/>
@@ -199,7 +199,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="chatforms"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="24"/>
         <CursorPos X="5" Y="46"/>
@@ -221,10 +221,11 @@
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="92" Y="19"/>
+        <TopLine Value="58"/>
+        <CursorPos X="58" Y="81"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -302,7 +303,7 @@
       <Unit30>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="76"/>
         <CursorPos X="22" Y="92"/>
@@ -362,7 +363,7 @@
       </Unit36>
       <Unit37>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="173"/>
         <CursorPos X="23" Y="192"/>
@@ -416,11 +417,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="jobmanagementforms"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="36"/>
-        <CursorPos X="97" Y="64"/>
+        <CursorPos X="26" Y="38"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -436,13 +436,23 @@
       <Unit45>
         <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
         <UnitName Value="jobapis"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="48"/>
         <CursorPos X="50" Y="72"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit45>
+      <Unit46>
+        <Filename Value="..\lib\own\misc\utils.pas"/>
+        <UnitName Value="utils"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="26" Y="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit46>
     </Units>
     <JumpHistory Count="29" HistoryIndex="28">
       <Position1>

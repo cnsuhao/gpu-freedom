@@ -2,7 +2,7 @@ unit coreconfigurations;
 
 interface
 
-uses identities, syncObjs, inifiles, loggers, SysUtils;
+uses identities, syncObjs, inifiles, loggers, utils, SysUtils;
 
 const
  GPU_CLIENT_VERSION           = 0.1;
@@ -78,11 +78,7 @@ begin
       description := ini_.ReadString('core','description','');
       NodeId    := ini_.ReadString('core','nodeid','nodeid');
       // create a new GUID if it does not exist
-      if NodeId='nodeid' then
-        begin
-          createGUID(guid);
-          NodeId := GuidToString(guid);
-        end;
+      if NodeId='nodeid' then NodeId := createUniqueId();
       IP        := ini_.ReadString('core','ip','ip');
       localIP   := ini_.ReadString('core','localip','localip');
       OS        := ini_.ReadString('core','os','test os');
