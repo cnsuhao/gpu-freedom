@@ -130,6 +130,8 @@ begin
             jobqueuerow.acknodeid:='';
             jobqueuerow.acknodename:='';
             jobqueuerow.ack_dt:=0;
+            jobqueuerow.transmission_dt := 0;
+            jobqueuerow.transmissionid := '';
             jobqueuerow.reception_dt:=0;
 
             if not erroneous then
