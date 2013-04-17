@@ -1,6 +1,9 @@
 ******************
 GPU freedom codebase
 
+17.4.2013 git
+Core Client: testing complete server workflow (without workunits)
+
 16.4.2013 git
 Core Client: fixing bug in retrievejobstatusservice
 
