@@ -8,8 +8,7 @@ object GPUMainApp: TGPUMainApp
   ClientWidth = 517
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '1.0.2.0'
   Visible = True
   object sbtnChat: TSpeedButton
     Left = 8
@@ -17,7 +16,6 @@ object GPUMainApp: TGPUMainApp
     Top = 6
     Width = 80
     AllowAllUp = True
-    Color = clBtnFace
     Glyph.Data = {
       161B0000424D161B00000000000036000000280000002B000000280000000100
       200000000000E01A000064000000640000000000000000000000FFFFFFFFFFFF
@@ -246,7 +244,6 @@ object GPUMainApp: TGPUMainApp
     Top = 6
     Width = 80
     AllowAllUp = True
-    Color = clBtnFace
     Glyph.Data = {
       EE590000424DEE59000000000000360000002800000057000000420000000100
       200000000000B859000064000000640000000000000000000000DFECF2FFDFEC
@@ -978,7 +975,6 @@ object GPUMainApp: TGPUMainApp
     Top = 6
     Width = 80
     AllowAllUp = True
-    Color = clBtnFace
     Glyph.Data = {
       42120000424D4212000000000000360000002800000023000000210000000100
       2000000000000C12000064000000640000000000000000000000D8E9ECFFD8E9

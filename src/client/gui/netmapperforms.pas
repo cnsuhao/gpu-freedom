@@ -41,6 +41,7 @@ implementation
 
 procedure TNetmapperForm.FormCreate(Sender: TObject);
 begin
+  Visible := false;
   earthTexturer_ := TEarthTexturer.Create();
 
   openGLSphereControl := TOpenGLSphereControl.Create(self);

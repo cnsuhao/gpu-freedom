@@ -59,7 +59,7 @@
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
-        <CursorPos X="1" Y="98"/>
+        <CursorPos X="6" Y="92"/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -180,7 +180,7 @@
         <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
-        <CursorPos X="69" Y="27"/>
+        <CursorPos X="78" Y="27"/>
         <UsageCount Value="86"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -199,10 +199,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="chatforms"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="24"/>
-        <CursorPos X="5" Y="46"/>
+        <TopLine Value="42"/>
+        <CursorPos X="19" Y="87"/>
         <UsageCount Value="78"/>
         <Loaded Value="True"/>
       </Unit18>
@@ -213,15 +214,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="parametersforms"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="132"/>
-        <CursorPos X="45" Y="134"/>
+        <TopLine Value="55"/>
+        <CursorPos X="19" Y="91"/>
         <UsageCount Value="70"/>
+        <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="58"/>
@@ -438,8 +440,8 @@
         <UnitName Value="jobapis"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="48"/>
-        <CursorPos X="50" Y="72"/>
+        <TopLine Value="27"/>
+        <CursorPos X="26" Y="54"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit45>

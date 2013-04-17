@@ -88,6 +88,7 @@ end;
 
 procedure TParametersForm.FormCreate(Sender: TObject);
 begin
+ visible := false;
  displayConfiguration;
 end;
 

@@ -84,6 +84,7 @@ procedure TChatForm.FormCreate(Sender: TObject);
 var srv : TServerRecord;
     row : TDbRetrievedRow;
 begin
+ visible := false;
  serverman.getDefaultServer(srv);
  currentid_ := -1;
  firstTime_ := true;
