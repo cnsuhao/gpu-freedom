@@ -62,7 +62,7 @@ procedure TJobManagementForm.btnSubmitJobClick(Sender: TObject);
 var job : TGPUJobApi;
 begin
   job.job        := cbJobBox.Text;
-  job.jobtype    := cbJobBox.Text;
+  job.jobtype    := 'GPU_Engine';
   job.islocal    := rbLocal.Checked;
   job.requireack := cbRequireAck.Checked;
   job.trandetails.nbrequests     := seNbRequests.Value;

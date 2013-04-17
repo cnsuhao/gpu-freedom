@@ -418,10 +418,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="jobmanagementforms"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="36"/>
-        <CursorPos X="26" Y="38"/>
+        <TopLine Value="35"/>
+        <CursorPos X="33" Y="65"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -437,11 +438,10 @@
       <Unit45>
         <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
         <UnitName Value="jobapis"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="101"/>
-        <CursorPos X="31" Y="133"/>
+        <TopLine Value="55"/>
+        <CursorPos X="124" Y="61"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit45>

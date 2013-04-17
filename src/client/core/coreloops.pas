@@ -150,8 +150,7 @@ begin
       if lf_morefrequentupdates.exists  and (tick_ mod 13 = 0) then retrieveChannels;
 
       receiveJobs := tick_ mod myConfId.receive_jobs_each;
-      //TODO: enable this:
-      //if (receiveJobs = 0)  then retrieveJobs;
+      if (receiveJobs = 0)  then retrieveJobs;
       if (receiveJobs = 29) then retrieveJobStats;
 
       // ***************************************************
