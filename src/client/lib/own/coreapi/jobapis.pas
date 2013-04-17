@@ -114,12 +114,15 @@ begin
                       erroneous:= true;
                       logger_.log(LVL_ERROR, logHeader_+'Workunitjob '+jobqueuerow.workunitjobpath+' does not exist. Jobqueue will not be persisted!');
                     end;
-               end;
+               end
+            else jobqueuerow.workunitjobpath:= '';
+
             jobqueuerow.workunitresult:=job.trandetails.workunitresult;
             if job.trandetails.tagwuresult then
                jobqueuerow.workunitresult:=jobqueuerow.workunitresult+'_'+IntToStr(i);
             if Trim(jobqueuerow.workunitresult)<>'' then
-               jobqueuerow.workunitresultpath:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+jobqueuerow.workunitresult;
+               jobqueuerow.workunitresultpath:=appPath_+WORKUNIT_FOLDER+PathDelim+OUTGOING_WU_FOLDER+PathDelim+jobqueuerow.workunitresult
+            else jobqueuerow.workunitresultpath:= '';
 
             jobqueuerow.serverstatus:='';
             jobqueuerow.jobresultid:='';
@@ -127,6 +130,7 @@ begin
             jobqueuerow.nodename:=myGPUID.Nodename;
             jobqueuerow.server_id:=srvid;
             jobqueuerow.create_dt:=Now;
+            jobqueuerow.update_dt:=Now;
             jobqueuerow.acknodeid:='';
             jobqueuerow.acknodename:='';
             jobqueuerow.ack_dt:=0;
