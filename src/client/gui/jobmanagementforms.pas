@@ -5,8 +5,9 @@ unit jobmanagementforms;
 interface
 
 uses
-  Classes, SysUtils, sqlite3conn, FileUtil, LResources, Forms, Controls,
-  Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls, Spin, jobapis, coreobjects;
+  Classes, SysUtils, sqlite3conn, sqldb, db, BufDataset, memds, FileUtil,
+  LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls,
+  Spin, DBGrids, jobapis, coreobjects;
 
 type
 
@@ -21,6 +22,8 @@ type
     cbTagOutputWorkunit: TCheckBox;
     cgWorkflow: TCheckGroup;
     cbTagInputWorkunit: TCheckBox;
+    dsCoreDB: TDatasource;
+    dbgJobQueue: TDBGrid;
     edtWorkunitInput: TEdit;
     edtWorkunitOutput: TEdit;
     gbWorkunits: TGroupBox;
@@ -31,16 +34,17 @@ type
     lblJob: TLabel;
     lblJobDefinitionIdDesc: TLabel;
     lblJobDefinitionId: TLabel;
+    memDataset: TMemDataset;
     OpenDialog: TOpenDialog;
     pnCreateJob: TPanel;
     rbGlobal: TRadioButton;
     rbLocal: TRadioButton;
     seNbRequests: TSpinEdit;
-    SQLite3Connection1: TSQLite3Connection;
+    SQLite3conn: TSQLite3Connection;
     procedure btnSubmitJobClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure SQLite3Connection1AfterConnect(Sender: TObject);
+    procedure SQLite3connAfterConnect(Sender: TObject);
 
   private
 
@@ -83,7 +87,7 @@ begin
   //
 end;
 
-procedure TJobManagementForm.SQLite3Connection1AfterConnect(Sender: TObject);
+procedure TJobManagementForm.SQLite3connAfterConnect(Sender: TObject);
 begin
 
 end;

@@ -1,7 +1,7 @@
 object JobManagementForm: TJobManagementForm
-  Left = 279
+  Left = 113
   Height = 758
-  Top = 410
+  Top = 301
   Width = 1173
   Caption = 'Job Management'
   ClientHeight = 758
@@ -211,19 +211,39 @@ object JobManagementForm: TJobManagementForm
       TabOrder = 6
     end
   end
+  object dbgJobQueue: TDBGrid
+    Left = 16
+    Height = 400
+    Top = 208
+    Width = 1152
+    Color = clWindow
+    Columns = <>
+    DataSource = dsCoreDB
+    TabOrder = 1
+  end
   object OpenDialog: TOpenDialog
     left = 1087
     top = 140
   end
-  object SQLite3Connection1: TSQLite3Connection
+  object SQLite3conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    AfterConnect = SQLite3Connection1AfterConnect
+    AfterConnect = SQLite3connAfterConnect
     DatabaseName = 'gpucore.db'
     KeepConnection = False
     LogEvents = []
     Options = []
     left = 1128
     top = 144
+  end
+  object dsCoreDB: TDatasource
+    DataSet = memDataset
+    left = 1137
+    top = 107
+  end
+  object memDataset: TMemDataset
+    FieldDefs = <>
+    left = 1136
+    top = 70
   end
 end
