@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, sqlite3conn, sqldb, db, BufDataset, memds, dbf, FileUtil,
   LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls,
-  Spin, DBGrids, jobapis, coreobjects;
+  Spin, DBGrids, DbCtrls, jobapis, coreobjects;
 
 type
 
@@ -24,6 +24,7 @@ type
     cbTagInputWorkunit: TCheckBox;
     datasource: TDatasource;
     dbgJobQueue: TDBGrid;
+    DBNavigator: TDBNavigator;
     edtWorkunitInput: TEdit;
     edtWorkunitOutput: TEdit;
     gbWorkunits: TGroupBox;
@@ -77,6 +78,8 @@ begin
 
   dbgJobQueue.DataSource:=DataSource;
   dbgJobQueue.AutoFillColumns:=true;
+
+  dbNavigator.DataSource := DataSource;
 
 end;
 

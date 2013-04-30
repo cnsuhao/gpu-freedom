@@ -1,7 +1,7 @@
 object JobManagementForm: TJobManagementForm
-  Left = 499
+  Left = 220
   Height = 752
-  Top = 428
+  Top = 111
   Width = 1173
   Caption = 'Job Management'
   ClientHeight = 752
@@ -214,12 +214,29 @@ object JobManagementForm: TJobManagementForm
   object dbgJobQueue: TDBGrid
     Left = 16
     Height = 400
-    Top = 208
+    Top = 240
     Width = 1152
     Color = clWindow
     Columns = <>
     DataSource = datasource
     TabOrder = 1
+  end
+  object DBNavigator: TDBNavigator
+    Left = 16
+    Height = 25
+    Top = 208
+    Width = 241
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    Options = []
+    TabOrder = 2
   end
   object OpenDialog: TOpenDialog
     left = 1087
