@@ -1,7 +1,7 @@
 object JobManagementForm: TJobManagementForm
-  Left = 544
+  Left = 279
   Height = 758
-  Top = 362
+  Top = 410
   Width = 1173
   Caption = 'Job Management'
   ClientHeight = 758
@@ -214,5 +214,16 @@ object JobManagementForm: TJobManagementForm
   object OpenDialog: TOpenDialog
     left = 1087
     top = 140
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    AfterConnect = SQLite3Connection1AfterConnect
+    DatabaseName = 'gpucore.db'
+    KeepConnection = False
+    LogEvents = []
+    Options = []
+    left = 1128
+    top = 144
   end
 end

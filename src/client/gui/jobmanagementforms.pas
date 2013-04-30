@@ -5,8 +5,8 @@ unit jobmanagementforms;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  ExtCtrls, ComCtrls, StdCtrls, Spin, jobapis, coreobjects;
+  Classes, SysUtils, sqlite3conn, FileUtil, LResources, Forms, Controls,
+  Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls, Spin, jobapis, coreobjects;
 
 type
 
@@ -36,9 +36,11 @@ type
     rbGlobal: TRadioButton;
     rbLocal: TRadioButton;
     seNbRequests: TSpinEdit;
+    SQLite3Connection1: TSQLite3Connection;
     procedure btnSubmitJobClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure SQLite3Connection1AfterConnect(Sender: TObject);
 
   private
 
@@ -79,6 +81,11 @@ end;
 procedure TJobManagementForm.FormDestroy(Sender: TObject);
 begin
   //
+end;
+
+procedure TJobManagementForm.SQLite3Connection1AfterConnect(Sender: TObject);
+begin
+
 end;
 
 

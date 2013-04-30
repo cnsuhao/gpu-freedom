@@ -1,7 +1,7 @@
 object GPUMainApp: TGPUMainApp
-  Left = 508
+  Left = 132
   Height = 84
-  Top = 260
+  Top = 123
   Width = 517
   Caption = 'GPU II'
   ClientHeight = 84

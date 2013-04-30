@@ -1,6 +1,9 @@
 ******************
 GPU freedom codebase
 
+30.4.2013 git
+GUI: added SQLite3 connector to job management form
+
 17.4.2013 git
 Core Client: testing complete server workflow (without workunits)
 
