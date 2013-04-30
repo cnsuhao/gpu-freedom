@@ -1,8 +1,8 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TJobManagementForm','FORMDATA',[
-  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3#220#0#6'Height'
-  +#3#240#2#3'Top'#2'o'#5'Width'#3#149#4#7'Caption'#6#14'Job Management'#12'Cli'
+  'TPF0'#18'TJobManagementForm'#17'JobManagementForm'#4'Left'#3'Q'#1#6'Height'#3
+  +#240#2#3'Top'#3'h'#1#5'Width'#3#149#4#7'Caption'#6#14'Job Management'#12'Cli'
   +'entHeight'#3#240#2#11'ClientWidth'#3#149#4#8'OnCreate'#7#10'FormCreate'#9'O'
   +'nDestroy'#7#11'FormDestroy'#10'LCLVersion'#6#7'1.0.2.0'#0#6'TPanel'#11'pnCr'
   +'eateJob'#4'Left'#2#8#6'Height'#3#184#0#3'Top'#2#8#5'Width'#3#138#4#12'Clien'
