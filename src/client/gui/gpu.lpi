@@ -30,20 +30,23 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="4">
+    <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="MemDSLaz"/>
+        <PackageName Value="DBFLaz"/>
       </Item1>
       <Item2>
-        <PackageName Value="FCL"/>
+        <PackageName Value="MemDSLaz"/>
       </Item2>
       <Item3>
-        <PackageName Value="SQLDBLaz"/>
-        <MinVersion Major="1" Release="1" Valid="True"/>
+        <PackageName Value="FCL"/>
       </Item3>
       <Item4>
-        <PackageName Value="LCL"/>
+        <PackageName Value="SQLDBLaz"/>
+        <MinVersion Major="1" Release="1" Valid="True"/>
       </Item4>
+      <Item5>
+        <PackageName Value="LCL"/>
+      </Item5>
     </RequiredPackages>
     <Units Count="48">
       <Unit0>
@@ -53,7 +56,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="51" Y="16"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="109"/>
       </Unit0>
       <Unit1>
         <Filename Value="mainapp.pas"/>
@@ -62,11 +65,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="mainapp"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="69"/>
         <CursorPos X="6" Y="92"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="109"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -183,12 +186,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="netmapperforms"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <WindowIndex Value="0"/>
         <TopLine Value="23"/>
         <CursorPos X="78" Y="27"/>
-        <UsageCount Value="87"/>
+        <UsageCount Value="88"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\lib\own\libsphere\earthtextures.pas"/>
@@ -205,11 +209,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="chatforms"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <WindowIndex Value="0"/>
         <TopLine Value="42"/>
         <CursorPos X="65" Y="45"/>
-        <UsageCount Value="79"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
@@ -219,17 +223,17 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="parametersforms"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <WindowIndex Value="0"/>
         <TopLine Value="55"/>
         <CursorPos X="19" Y="91"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="58"/>
         <CursorPos X="58" Y="81"/>
@@ -281,7 +285,7 @@
         <UnitName Value="corelaunchers"/>
         <TopLine Value="1"/>
         <CursorPos X="19" Y="1"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="41"/>
       </Unit26>
       <Unit27>
         <Filename Value="..\lib\own\coredb\channeltables.pas"/>
@@ -310,7 +314,7 @@
       <Unit30>
         <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
         <UnitName Value="coreobjects"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="76"/>
         <CursorPos X="22" Y="92"/>
@@ -362,15 +366,17 @@
       </Unit35>
       <Unit36>
         <Filename Value="netmapperforms.lfm"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit36>
       <Unit37>
         <Filename Value="D:\met\apps\lazarus\fpc\2.6.0\source\rtl\inc\objpash.inc"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
         <TopLine Value="173"/>
         <CursorPos X="23" Y="192"/>
@@ -427,9 +433,9 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="54"/>
-        <CursorPos X="3" Y="92"/>
-        <UsageCount Value="31"/>
+        <TopLine Value="61"/>
+        <CursorPos X="53" Y="97"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit43>
@@ -444,7 +450,7 @@
       <Unit45>
         <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
         <UnitName Value="jobapis"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <WindowIndex Value="0"/>
         <TopLine Value="55"/>
         <CursorPos X="124" Y="61"/>
@@ -454,7 +460,7 @@
       <Unit46>
         <Filename Value="..\lib\own\misc\utils.pas"/>
         <UnitName Value="utils"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="26" Y="7"/>
@@ -464,7 +470,7 @@
       <Unit47>
         <Filename Value="..\lib\own\coredb\jobqueuetables.pas"/>
         <UnitName Value="jobqueuetables"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <WindowIndex Value="0"/>
         <TopLine Value="153"/>
         <CursorPos X="28" Y="184"/>
@@ -475,123 +481,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="58" Column="3" TopLine="20"/>
+        <Caret Line="73" Column="3" TopLine="35"/>
       </Position1>
       <Position2>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="59" Column="3" TopLine="21"/>
+        <Caret Line="68" Column="18" TopLine="42"/>
       </Position2>
       <Position3>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="60" Column="3" TopLine="22"/>
+        <Caret Line="44" Column="5" TopLine="11"/>
       </Position3>
       <Position4>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="61" Column="3" TopLine="23"/>
+        <Caret Line="9" Column="59" TopLine="1"/>
       </Position4>
       <Position5>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="62" Column="3" TopLine="24"/>
+        <Caret Line="67" Column="22" TopLine="47"/>
       </Position5>
       <Position6>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="63" Column="3" TopLine="25"/>
+        <Caret Line="72" Column="64" TopLine="47"/>
       </Position6>
       <Position7>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="64" Column="3" TopLine="26"/>
+        <Caret Line="35" Column="38" TopLine="1"/>
       </Position7>
       <Position8>
-        <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="65" Column="3" TopLine="27"/>
+        <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
+        <Caret Line="81" Column="34" TopLine="67"/>
       </Position8>
       <Position9>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="66" Column="3" TopLine="28"/>
+        <Caret Line="75" Column="44" TopLine="47"/>
       </Position9>
       <Position10>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="73" Column="3" TopLine="35"/>
+        <Caret Line="71" Column="65" TopLine="36"/>
       </Position10>
       <Position11>
-        <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="68" Column="18" TopLine="42"/>
+        <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
+        <Caret Line="124" Column="138" TopLine="79"/>
       </Position11>
       <Position12>
-        <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="44" Column="5" TopLine="11"/>
+        <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
+        <Caret Line="125" Column="48" TopLine="99"/>
       </Position12>
       <Position13>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="9" Column="59" TopLine="1"/>
+        <Caret Line="65" Column="33" TopLine="35"/>
       </Position13>
       <Position14>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="67" Column="22" TopLine="47"/>
+        <Caret Line="67" Column="33" TopLine="35"/>
       </Position14>
       <Position15>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="72" Column="64" TopLine="47"/>
+        <Caret Line="88" Column="3" TopLine="50"/>
       </Position15>
       <Position16>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="35" Column="38" TopLine="1"/>
+        <Caret Line="90" Column="3" TopLine="52"/>
       </Position16>
       <Position17>
-        <Filename Value="..\lib\own\coremodules\coreobjects.pas"/>
-        <Caret Line="81" Column="34" TopLine="67"/>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="91" Column="3" TopLine="53"/>
       </Position17>
       <Position18>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="75" Column="44" TopLine="47"/>
+        <Caret Line="90" Column="3" TopLine="52"/>
       </Position18>
       <Position19>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="71" Column="65" TopLine="36"/>
+        <Caret Line="91" Column="3" TopLine="53"/>
       </Position19>
       <Position20>
-        <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
-        <Caret Line="124" Column="138" TopLine="79"/>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="92" Column="3" TopLine="54"/>
       </Position20>
       <Position21>
-        <Filename Value="..\lib\own\coreapi\jobapis.pas"/>
-        <Caret Line="125" Column="48" TopLine="99"/>
+        <Filename Value="jobmanagementforms.pas"/>
+        <Caret Line="91" Column="3" TopLine="53"/>
       </Position21>
       <Position22>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="65" Column="33" TopLine="35"/>
+        <Caret Line="56" Column="5" TopLine="55"/>
       </Position22>
       <Position23>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="67" Column="33" TopLine="35"/>
+        <Caret Line="88" Column="3" TopLine="60"/>
       </Position23>
       <Position24>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="88" Column="3" TopLine="50"/>
+        <Caret Line="89" Column="3" TopLine="61"/>
       </Position24>
       <Position25>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="90" Column="3" TopLine="52"/>
+        <Caret Line="88" Column="3" TopLine="60"/>
       </Position25>
       <Position26>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="91" Column="3" TopLine="53"/>
+        <Caret Line="98" Column="3" TopLine="60"/>
       </Position26>
       <Position27>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="90" Column="3" TopLine="52"/>
+        <Caret Line="99" Column="3" TopLine="61"/>
       </Position27>
       <Position28>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="91" Column="3" TopLine="53"/>
+        <Caret Line="89" Column="3" TopLine="61"/>
       </Position28>
       <Position29>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="92" Column="3" TopLine="54"/>
+        <Caret Line="88" Column="3" TopLine="60"/>
       </Position29>
       <Position30>
         <Filename Value="jobmanagementforms.pas"/>
-        <Caret Line="91" Column="3" TopLine="53"/>
+        <Caret Line="66" Column="32" TopLine="60"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

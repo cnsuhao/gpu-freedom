@@ -1,7 +1,7 @@
 object NetmapperForm: TNetmapperForm
-  Left = 40
+  Left = 669
   Height = 380
-  Top = 153
+  Top = 368
   Width = 500
   Caption = 'Netmapper'
   ClientHeight = 380

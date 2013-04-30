@@ -8,8 +8,8 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms
-  { you can add units after this }, mainapp, SQLDBLaz, memdslaz, netmapperforms,
-  chatforms, parametersforms, coreobjects, jobmanagementforms;
+  { you can add units after this }, mainapp, SQLDBLaz, memdslaz, dbflaz,
+  netmapperforms, chatforms, parametersforms, coreobjects, jobmanagementforms;
 
 begin
   Application.Initialize;

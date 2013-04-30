@@ -2,7 +2,7 @@
 GPU freedom codebase
 
 30.4.2013 git
-GUI: added SQLite3 connector to job management form, added grid, datasource and dataset, however did not manage to populate them
+GUI: added SQLite3 connector to job management form, added grid, datasource and dataset and managed to populate dbgrid
 
 17.4.2013 git
 Core Client: testing complete server workflow (without workunits)

@@ -5,7 +5,7 @@ unit jobmanagementforms;
 interface
 
 uses
-  Classes, SysUtils, sqlite3conn, sqldb, db, BufDataset, memds, FileUtil,
+  Classes, SysUtils, sqlite3conn, sqldb, db, BufDataset, memds, dbf, FileUtil,
   LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls,
   Spin, DBGrids, jobapis, coreobjects;
 
@@ -22,7 +22,7 @@ type
     cbTagOutputWorkunit: TCheckBox;
     cgWorkflow: TCheckGroup;
     cbTagInputWorkunit: TCheckBox;
-    dsCoreDB: TDatasource;
+    datasource: TDatasource;
     dbgJobQueue: TDBGrid;
     edtWorkunitInput: TEdit;
     edtWorkunitOutput: TEdit;
@@ -34,14 +34,16 @@ type
     lblJob: TLabel;
     lblJobDefinitionIdDesc: TLabel;
     lblJobDefinitionId: TLabel;
-    memDataset: TMemDataset;
     OpenDialog: TOpenDialog;
     pnCreateJob: TPanel;
     rbGlobal: TRadioButton;
     rbLocal: TRadioButton;
     seNbRequests: TSpinEdit;
     SQLite3conn: TSQLite3Connection;
+    SQLQuery: TSQLQuery;
+    SQLTransaction: TSQLTransaction;
     procedure btnSubmitJobClick(Sender: TObject);
+    procedure datasourceDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SQLite3connAfterConnect(Sender: TObject);
@@ -62,6 +64,20 @@ implementation
 procedure TJobManagementForm.FormCreate(Sender: TObject);
 begin
   Visible := True;
+  sqlite3Conn.DatabaseName := 'gpucore.db';
+  sqlite3Conn.Connected := true;
+
+  SQLTransaction.Database:=SQLite3Conn;
+
+  SQLQuery.Database:=SQLite3Conn;
+  SQLQuery.SQL.text:='select * from tbjobqueue';
+  SQLQuery.open;
+
+  DataSource.DataSet:=SQLQuery;
+
+  dbgJobQueue.DataSource:=DataSource;
+  dbgJobQueue.AutoFillColumns:=true;
+
 end;
 
 procedure TJobManagementForm.btnSubmitJobClick(Sender: TObject);
@@ -79,6 +95,11 @@ begin
 
   jobapi.createJob(job);
   lblJobDefinitionId.Caption := job.jobdefinitionid;
+
+end;
+
+procedure TJobManagementForm.datasourceDataChange(Sender: TObject; Field: TField);
+begin
 
 end;
 
