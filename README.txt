@@ -113,6 +113,7 @@ File Tree structure for this package, codenamed freedom follows:
       /results   computed workunits received from clients
 	  
 /playground       code which could become a plugin or a frontend of GPU
+   /bitcoin       code to help in bitcoin trading
    /discochal     parsing and comparing users on hacker.org 
    /enigma        freepascal code to simulate an Enigma machine
    /ioc           index of coincidence code to gain insights in unknown ciphertext

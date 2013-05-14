@@ -1,0 +1,1 @@
+<a href="index.php"><img src="pictures/linuxbc.jpg" border=0 /></a>

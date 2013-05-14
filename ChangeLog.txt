@@ -195,6 +195,7 @@ Exploring new development ways for the coming GPU III release, codenamed Becquer
 1.2012-1.2013 git
 
 in the playground subfolder:
+- added code to do bitcoin trading on mtgox (4-2013)
 - added code to create stereograms out of Z-pictures (could see a stereogram, works)
 - added code to simulate parliament with random quota of indipendents (does not work well)
 - added code to simulate Enigma machine (works fine)

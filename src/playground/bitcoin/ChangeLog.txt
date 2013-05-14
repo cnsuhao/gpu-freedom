@@ -1,0 +1,15 @@
+10.5.2013 0.5
+- unfortunately, retrieval with wget does not work anymore, same for iMacros
+- they implemented a JavaScript redirect...
+- added more tables to dabase schema
+- now retrieving price information from bitcoincharts
+
+8.5.2013 0.4
+- Changed retrieval method of prices with wget
+- Added treshold calculation
+- Showing if to BUY or if to SELL
+- Added graph to show last prices and volumes
+
+7.5.2013 0.2
+Initial release: prices are retrieved and stored into database upon launch of iMacros script.
+                 main page shows prices
