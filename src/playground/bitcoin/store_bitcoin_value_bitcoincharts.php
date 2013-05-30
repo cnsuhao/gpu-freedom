@@ -76,12 +76,12 @@
  $th_high=mysql_result($thhighresult, 0, "max(price)");
  
  
- $highquery = "select max(price) from pricevalue where create_dt >= (NOW() - INTERVAL 3 DAY);";
+ $highquery = "select max(price) from pricevalue where create_dt >= (NOW() - INTERVAL 5 DAY);";
  echo "<p>$highquery</p>";
  $highresult = mysql_query($highquery);
  $high=mysql_result($highresult, 0, "max(price)");
 
- $lowquery = "select min(price) from pricevalue where create_dt >= (NOW() - INTERVAL 3 DAY);";
+ $lowquery = "select min(price) from pricevalue where create_dt >= (NOW() - INTERVAL 5 DAY);";
  echo "<p>$lowquery</p>";
  $lowresult = mysql_query($lowquery);
  $low=mysql_result($lowresult, 0, "min(price)");

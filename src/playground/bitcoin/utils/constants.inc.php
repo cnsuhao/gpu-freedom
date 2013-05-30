@@ -1,4 +1,4 @@
 <?php
    // time interval for threshold calculation in days
-   $th_day_interval = 5;
+   $th_day_interval = 9;
 ?>
