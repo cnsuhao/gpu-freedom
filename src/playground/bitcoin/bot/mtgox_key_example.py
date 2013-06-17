@@ -1,7 +1,15 @@
+# mtgox key
 key = ''
 secret = ''
 
+# mySQL db settings
+mysql_host='localhost'
+mysql_database='bitcoin';
+mysql_username='';
+mysql_password='';
+
+# proxy for external communication
 proxy = ''
 
-version = '0.4'
-
+# current bot version
+version = '0.5'

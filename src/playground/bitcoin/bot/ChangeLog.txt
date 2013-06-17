@@ -1,3 +1,6 @@
+17.6.2013 0.5
+- added db connection to mySQL to store ticker prices
+
 17.6.2013 0.4
 - adapted for commit to sourceforge
 
