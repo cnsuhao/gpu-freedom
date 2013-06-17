@@ -1,0 +1,28 @@
+17.6.2013 0.4
+- adapted for commit to sourceforge
+
+12.6.2013 0.3
+- added random sleeping time
+
+12.6.2013 0.2
+- "python main.py wallets" works (urka!)
+- added python main.py help
+- launched the bot 
+
+12.6.2013 0.15
+- added proxy to ticker with urllib2
+
+12.6.2013 0.1
+- Added RampBot strategy
+- Bot strategy is named StableBot strategy
+
+Commands modified as follows:
+Playing with stable price
+python main.py stablebot max_btc max_usd init_action init_price trigger_percent
+python main.py stablebot 0.5 50 buy 93.73 0.03
+
+Playing with price which goes up
+python main.py stablebot max_btc max_usd init_action init_price trigger_percent
+python main.py stablebot 0.5 50 buy 93.73 0.03
+
+Initial version by perol, see README.md for details.

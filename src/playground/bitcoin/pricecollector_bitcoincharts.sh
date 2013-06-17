@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -rf bitcoincharts.html
-wget -O bitcoincharts.html --no-check-certificate -U "Mozilla/5.0 (Windows NT 6.1; rv:2.0b7pre) Gecko/20100921 Firefox/4.0b7pre" http://www.bitcoincharts.com 
+wget -O bitcoincharts.html --no-check-certificate -U "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.26 Safari/537.4" http://www.bitcoincharts.com 
 ./removeif0.sh bitcoincharts.html
 if [ -f bitcoincharts.html ] 
 then
