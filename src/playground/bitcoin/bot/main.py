@@ -78,7 +78,8 @@ if __name__=='__main__':
             print "***********************"
             print "* tiz bitcoin bot "+version+' *'
             print "***********************"
-            print "Adapted from perol's funny bitcoinbot available at http://github.com/perol/funny-bot-bitcoin"
+            print "Adapted from perol's funny bitcoinbot available "
+            print "at http://github.com/perol/funny-bot-bitcoin"
             print ""
             print "Usage:"
             print " python main.py ticker"
