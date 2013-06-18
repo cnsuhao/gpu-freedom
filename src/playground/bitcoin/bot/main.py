@@ -79,6 +79,7 @@ if __name__=='__main__':
             print " high:  "+str(get_thhigh())
             print " avg:   "+str(get_avg())
             print " low:   "+str(get_thlow())
+            print " last:  "+str(get_last())
                      
         elif sys.argv[1]=='help':
             print "***********************"

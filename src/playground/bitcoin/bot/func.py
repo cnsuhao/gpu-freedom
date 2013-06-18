@@ -1,7 +1,7 @@
 import urllib2, json, datetime, time
 from mtgox import mtgox
 from conf import key, secret, proxy
-from dbadapter import db_store_ticker, db_get_avg, db_get_thhigh, db_get_thlow
+from dbadapter import db_store_ticker, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -90,4 +90,7 @@ def get_thlow():
 
 def get_thhigh():
     return db_get_thhigh()
+
+def get_last():
+    return db_get_last()
 
