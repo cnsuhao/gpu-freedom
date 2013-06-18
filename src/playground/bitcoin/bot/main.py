@@ -1,7 +1,7 @@
 import sys
 
 from func import *
-#from dbadapter import *
+from dbadapter import *
 from stablebot import StableBot
 from rampbot import RampBot
 from mtgox_key import version
@@ -23,7 +23,7 @@ if __name__=='__main__':
             if len(sys.argv)>=4:
                 price = int(float(sys.argv[3])*rusd)
             else:
-                price = None 
+                price = None
             print buy(amount, price)
 
         elif sys.argv[1]=='sell':
@@ -31,7 +31,7 @@ if __name__=='__main__':
             if len(sys.argv)>=4:
                 price = int(float(sys.argv[3])*rusd)
             else:
-                price = None 
+                price = None
             print sell(amount, price)
 
         elif sys.argv[1]=='cancel':
@@ -50,15 +50,14 @@ if __name__=='__main__':
             res = ticker2()
             for k in ['last', 'high', 'low', 'avg', 'vwap', 'buy', 'sell', 'vol']:
                 print k, res[k]['display_short']
-            '''    
             db_store_ticker(res['last']['display_short'],
                             res['high']['display_short'],
                             res['low']['display_short'],
                             res['avg']['display_short'],
                             res['vwap']['display_short'],
                             res['buy']['display_short'],
-                            res['sell']['vol'])
-            '''
+                            res['sell']['display_short'],
+                            res['vol']['display_short'])
 
         elif sys.argv[1]=='lag':
             print lag()
@@ -97,7 +96,7 @@ if __name__=='__main__':
             print " python main.py orders"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
-            
+
         else:
             pass
 

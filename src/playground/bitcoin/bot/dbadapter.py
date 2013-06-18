@@ -1,8 +1,10 @@
-import MySQLdb
+import mysql.connector
 
 from mtgox_key import mysql_host, mysql_username, mysql_password, mysql_database
 
 def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):
-    db=MySQLdb.connect(mysql_host, mysql_username, mysql_password, mysql_database)
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
     print "hello database"
-    db.close()
+    cnx.close()
