@@ -1,7 +1,7 @@
 import urllib2, json, datetime, time
 from mtgox import mtgox
-from conf import key, secret, proxy
-from dbadapter import db_store_ticker, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last
+from conf import key, secret, proxy, rbtc, rusd
+from dbadapter import db_store_ticker, db_store_trade, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -10,8 +10,6 @@ if proxy:
     urllib2.install_opener(opener)
 
 gox = mtgox(key, secret, 'funny-bot-bitcoin')
-rbtc = 100000000
-rusd = 100000
 
 import traceback, cStringIO
 def get_err():
@@ -46,15 +44,29 @@ def get_orders():
 
 def buy(amount, price=None):
     if price is None:
-        return gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'bid'})
+        res=gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'bid'})
+        myamount = float(amount)/rbtc
+        db_store_trade("BUY", myamount, get_last(), 1)
+        return res
     else:
-        return gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'bid', 'price_int': price})
+        res=gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'bid', 'price_int': price})
+        myamount = float(amount)/rbtc
+        myprice  = float(price)/rusd
+        db_store_trade("BUY", myamount, myprice, 0)
+        return res
 
 def sell(amount, price=None):
     if price is None:
-        return gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'ask'})
+        res=gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'ask'})
+        myamount = float(amount)/rbtc
+        db_store_trade("SELL", myamount, get_last(), 1)
+        return res
     else:
-        return gox.req('BTCUSD/money/order/add', {'amount_int':amount, 'type': 'ask', 'price_int': price})
+        res=gox.req('BTCUSD/money/order/add', {'amount_int':amount, 'type': 'ask', 'price_int': price})
+        myamount = float(amount)/rbtc
+        myprice  = float(price)/rusd
+        db_store_trade("SELL", myamount, myprice, 0)
+        return res
 
 def cancel(order_id):
     return gox.req('money/order/cancel', {'oid': order_id})

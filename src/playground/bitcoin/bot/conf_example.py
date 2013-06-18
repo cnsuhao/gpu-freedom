@@ -16,3 +16,7 @@ version = '0.6'
 
 #th day interval
 th_day_interval = '9'
+
+#constants to convert data from API
+rbtc = 100000000
+rusd = 100000
