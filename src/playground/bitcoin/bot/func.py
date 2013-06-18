@@ -1,6 +1,7 @@
 import urllib2, json, datetime, time
 from mtgox import mtgox
 from mtgox_key import key, secret, proxy
+from dbadapter import db_store_ticker
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -25,7 +26,16 @@ def ticker():
     return json.loads(urllib2.urlopen('http://data.mtgox.com/api/1/BTCUSD/ticker').read())['return']
 
 def ticker2():
-    return json.loads(urllib2.urlopen('http://data.mtgox.com/api/2/BTCUSD/money/ticker').read())['data']
+    res = json.loads(urllib2.urlopen('http://data.mtgox.com/api/2/BTCUSD/money/ticker').read())['data']
+    db_store_ticker(res['last']['display_short'],
+                    res['high']['display_short'],
+                    res['low']['display_short'],
+                    res['avg']['display_short'],
+                    res['vwap']['display_short'],
+                    res['buy']['display_short'],
+                    res['sell']['display_short'],
+                    res['vol']['display_short'])
+    return res
 
 def get_wallets():
     info = gox.req('money/info', {})

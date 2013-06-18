@@ -1,7 +1,6 @@
 import sys
 
 from func import *
-from dbadapter import *
 from stablebot import StableBot
 from rampbot import RampBot
 from mtgox_key import version
@@ -50,14 +49,6 @@ if __name__=='__main__':
             res = ticker2()
             for k in ['last', 'high', 'low', 'avg', 'vwap', 'buy', 'sell', 'vol']:
                 print k, res[k]['display_short']
-            db_store_ticker(res['last']['display_short'],
-                            res['high']['display_short'],
-                            res['low']['display_short'],
-                            res['avg']['display_short'],
-                            res['vwap']['display_short'],
-                            res['buy']['display_short'],
-                            res['sell']['display_short'],
-                            res['vol']['display_short'])
 
         elif sys.argv[1]=='lag':
             print lag()

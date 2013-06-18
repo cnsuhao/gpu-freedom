@@ -46,6 +46,7 @@
  <th>threshold low</th>
  <th>threshold high</th>
  <th>action</th>
+ <th>create_user</th>
  </tr>
  ";
  
@@ -53,6 +54,7 @@
  while ($i<$num) {
     $id        = mysql_result($result, $i, 'id');
     $create_dt = mysql_result($result, $i, 'create_dt');
+    $create_user    = mysql_result($result, $i, 'create_user');
     $price     = mysql_result($result, $i, 'price');
     $low       = mysql_result($result, $i, 'low');
     $high      = mysql_result($result, $i, 'high');
@@ -100,6 +102,7 @@
     <td>$thlow</td>
     <td>$thhigh</td>
     <td>$action</td>
+    <td>$create_user</td>
     </tr>
     ";
  

@@ -95,8 +95,8 @@
  echo "<p>Storing...</p>";
  
  if ($lastprice!="") {
-    $query="INSERT INTO pricevalue (id, create_dt, price, high, low, volume, avgexchange, myavg, th_low, th_high, changepct) VALUES('',
-                                    NOW(), $lastprice, $high, $low, $volume, $avg, $myavg, $th_low, $th_high, $change);";
+    $query="INSERT INTO pricevalue (id, create_dt, price, high, low, volume, avgexchange, myavg, th_low, th_high, changepct, create_user) VALUES('',
+                                    NOW(), $lastprice, $high, $low, $volume, $avg, $myavg, $th_low, $th_high, $change, 'mainloop');";
                                  
  } else {
     $query="INSERT INTO log (id, message, level, create_dt) VALUES('', 'Could not retrieve prices!', 'ERROR', NOW());";
