@@ -3,7 +3,7 @@ import sys
 from func import *
 from stablebot import StableBot
 from rampbot import RampBot
-from mtgox_key import version, th_day_interval
+from conf import version, th_day_interval
 
 if __name__=='__main__':
     try:

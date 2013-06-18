@@ -4,7 +4,7 @@
 # Don't request results more often than every 10 seconds, you risk being blocked by the anti-DDoS filters
 
 import time,hmac,base64,hashlib,urllib,urllib2,json
-from mtgox_key import key, secret, proxy
+from conf import key, secret, proxy
 import sys
 
 try:

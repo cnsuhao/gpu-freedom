@@ -1,6 +1,6 @@
 import mysql.connector
 from datetime import date, datetime, timedelta
-from mtgox_key import mysql_host, mysql_username, mysql_password, mysql_database, th_day_interval
+from conf import mysql_host, mysql_username, mysql_password, mysql_database, th_day_interval
 create_user="bitcoinbot"
 
 
