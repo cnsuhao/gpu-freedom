@@ -3,7 +3,7 @@ import sys
 from func import *
 from stablebot import StableBot
 from rampbot import RampBot
-from mtgox_key import version
+from mtgox_key import version, th_day_interval
 
 if __name__=='__main__':
     try:
@@ -74,6 +74,12 @@ if __name__=='__main__':
             trigger_percent = float(sys.argv[6])
             rampbot = RampBot(max_btc, max_usd, init_action, init_price, trigger_percent)
             rampbot.run()
+        elif sys.argv[1]=='thresholds':            
+            print " days:  "+str(th_day_interval)
+            print " high:  "+str(get_thhigh())
+            print " avg:   "+str(get_avg())
+            print " low:   "+str(get_thlow())
+                     
         elif sys.argv[1]=='help':
             print "***********************"
             print "* tiz bitcoin bot "+version+' *'
@@ -85,6 +91,7 @@ if __name__=='__main__':
             print " python main.py ticker"
             print " python main.py wallets"
             print " python main.py orders"
+            print " python main.py thresholds"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
 

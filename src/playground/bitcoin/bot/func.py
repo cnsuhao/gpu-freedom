@@ -1,7 +1,7 @@
 import urllib2, json, datetime, time
 from mtgox import mtgox
 from mtgox_key import key, secret, proxy
-from dbadapter import db_store_ticker
+from dbadapter import db_store_ticker, db_get_avg, db_get_thhigh, db_get_thlow
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -81,4 +81,13 @@ def current_bid_price():
 
 def current_ask_price():
     return quote('ask', rbtc)['data']['amount']
+    
+def get_avg():
+    return db_get_avg()
+    
+def get_thlow():
+    return db_get_thlow()
+
+def get_thhigh():
+    return db_get_thhigh()
 
