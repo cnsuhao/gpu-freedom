@@ -12,7 +12,7 @@ mysql_password='mypass';
 proxy = ''
 
 # current bot version
-version = '0.6'
+version = '0.7'
 
 #th day interval
 th_day_interval = '9'
