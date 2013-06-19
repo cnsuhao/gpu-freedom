@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2013 at 01:38 PM
+-- Generation Time: Jun 19, 2013 at 02:05 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `pricevalue` (
   `th_high` double DEFAULT NULL,
   `create_user` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=400 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=402 ;
 
 --
 -- Dumping data for table `pricevalue`
@@ -484,7 +484,9 @@ INSERT INTO `pricevalue` (`id`, `create_dt`, `price`, `high`, `low`, `volume`, `
 (396, '2013-06-19 12:35:55', 109.51, 111.98, 99.85, 33287, NULL, NULL, NULL, 114.422, -0.04293, 106.03750366972477, 99.85, 111.98, 'mainloop'),
 (397, '2013-06-19 12:45:40', 109.5485, 111.98, 99.85, 33290, NULL, NULL, NULL, 114.421, -0.04259, 106.06907181818183, 99.85, 111.98, 'mainloop'),
 (398, '2013-06-19 13:19:52', 108.86, 111.98, 99.85, 33300, NULL, NULL, NULL, 114.42, -0.04859, 106.10439363636367, 99.85, 111.98, 'mainloop'),
-(399, '2013-06-19 13:35:48', 109.011, 111.98, 99.85, 33301, NULL, NULL, NULL, 114.42, -0.04727, 106.12921891891895, 99.85, 111.98, 'mainloop');
+(399, '2013-06-19 13:35:48', 109.011, 111.98, 99.85, 33301, NULL, NULL, NULL, 114.42, -0.04727, 106.12921891891895, 99.85, 111.98, 'mainloop'),
+(400, '2013-06-19 13:39:51', 108.62, 113.3, 103.7, 61767, 108.62, 109, 108.14, 107.96, 0, 106.155444144, 99.85, 111.98, 'bitcoinbot'),
+(401, '2013-06-19 14:02:36', 108, 111.98, 99.85, 33316, NULL, NULL, NULL, 114.417, -0.05608, 106.1774491071429, 99.85, 111.98, 'mainloop');
 
 -- --------------------------------------------------------
 
@@ -513,6 +515,33 @@ INSERT INTO `trade` (`id`, `direction`, `amount`, `price`, `total`, `marketorder
 (5, 'SELL', 0.01, 109.001, 1.09001, 1, '2013-06-18 00:00:00', 'bitcoinbot'),
 (7, 'SELL', 0.01, 108.8, 1.088, 0, '2013-06-18 00:00:00', 'bitcoinbot'),
 (8, 'BUY', 0.01, 108.8, 1.088, 0, '2013-06-18 00:00:00', 'bitcoinbot');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wallet`
+--
+
+CREATE TABLE IF NOT EXISTS `wallet` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) NOT NULL,
+  `btc` double NOT NULL,
+  `usd` double NOT NULL,
+  `eur` double NOT NULL,
+  `marketprice_usd` double DEFAULT NULL,
+  `marketvalue_usd` double DEFAULT NULL,
+  `total_usd` double DEFAULT NULL,
+  `create_user` varchar(16) NOT NULL,
+  `create_dt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `wallet`
+--
+
+INSERT INTO `wallet` (`id`, `name`, `btc`, `usd`, `eur`, `marketprice_usd`, `marketvalue_usd`, `total_usd`, `create_user`, `create_dt`) VALUES
+(1, 'mtgox', 2.60208723, 42.35725, 0, 108, 281.02542084, 323.38267084, 'bitcoinbot', '2013-06-19 14:04:02');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -108,3 +108,29 @@ def db_store_trade(direction, amount, price, marketorder):
     cursor.close()
     cnx.close()
     print "trade inserted into database"
+    
+    
+def db_store_wallet(name, btc, usd, eur):
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
+    cursor = cnx.cursor()
+    
+    mynow = datetime.now()
+    
+    marketprice_usd = float(db_get_last());
+    marketvalue_usd = marketprice_usd * float(btc)
+    total_usd       = float(usd) + marketvalue_usd
+    
+    add_trade = ("INSERT INTO wallet "
+                  "(name, btc, usd, eur, create_dt, create_user, marketprice_usd, marketvalue_usd, total_usd)"
+                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+
+    data_trade = (name, btc, usd, eur, mynow, create_user, marketprice_usd, marketvalue_usd, total_usd)
+    
+    cursor.execute(add_trade, data_trade)
+    cnx.commit()
+    
+    cursor.close()
+    cnx.close()
+    print "wallet inserted into database"

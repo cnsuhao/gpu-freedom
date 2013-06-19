@@ -1,7 +1,8 @@
+# This Python file uses the following encoding: iso-8859-15
 import urllib2, json, datetime, time
 from mtgox import mtgox
 from conf import key, secret, proxy, rbtc, rusd
-from dbadapter import db_store_ticker, db_store_trade, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last
+from dbadapter import db_store_ticker, db_store_trade, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last, db_store_wallet
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -37,7 +38,15 @@ def ticker2():
 
 def get_wallets():
     info = gox.req('money/info', {})
-    return info['data']['Wallets']
+    res = info['data']['Wallets']
+    
+    usd = res['USD']['Balance']['display'].replace("$","")
+    #eur = res['EUR']['Balance']['display'].replace("€","") # does not work, see first line with encoding
+    eur = 0
+    btc = res['BTC']['Balance']['display'].replace("BTC","")
+    db_store_wallet('mtgox', btc, usd, eur)
+    
+    return res
 
 def get_orders():
     return gox.req('money/orders')['data']
