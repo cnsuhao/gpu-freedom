@@ -5,8 +5,8 @@ secret = ''
 # mySQL db settings
 mysql_host='localhost'
 mysql_database='bitcoin';
-mysql_username='';
-mysql_password='';
+mysql_username='myuser';
+mysql_password='mypass';
 
 # proxy for external communication
 proxy = ''

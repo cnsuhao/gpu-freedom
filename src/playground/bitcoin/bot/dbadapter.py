@@ -74,10 +74,10 @@ def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):
     thhigh = db_get_thhigh()
     
     add_ticker = ("INSERT INTO pricevalue "
-                  "(create_dt, price, high, low, volume, avgexchange, myavg, th_low, th_high, changepct, create_user) "
-                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                  "(create_dt, price, high, low, volume, avgexchange, myavg, th_low, th_high, changepct, create_user, buy, sell, vwap) "
+                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
-    data_ticker = (mynow, last, high, low, vol, avg, myavg, thlow, thhigh, 0, create_user)
+    data_ticker = (mynow, last, high, low, vol, avg, myavg, thlow, thhigh, 0, create_user, buy, sell, vwap)
     
     cursor.execute(add_ticker, data_ticker)
     cnx.commit()

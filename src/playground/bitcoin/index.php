@@ -39,6 +39,9 @@
  <th>low</th>
  <th>high</th>
  <th>volume</th>
+ <th>buy</th>
+ <th>sell</th>
+ <th>vwap</th>
  <th>my avg</th>
  <th>avg exchange</th>
  <th>delta avg</th>
@@ -64,6 +67,9 @@
     $myavg     = mysql_result($result, $i, 'myavg');
     $thlow     = mysql_result($result, $i, 'th_low');
     $thhigh    = mysql_result($result, $i, 'th_high');
+    $buy       = mysql_result($result, $i, 'buy');
+    $sell      = mysql_result($result, $i, 'sell');
+    $vwap       = mysql_result($result, $i, 'buy');
     
     $deltaavg  = abs($avg - $myavg);
     
@@ -95,6 +101,9 @@
     <td>$low</td>
     <td>$high</td>
     <td>$volume</td>
+    <td>$buy</td>
+    <td>$sell</td>
+    <td>$vwap</td>
     <td>$myavg</td>
     <td>$avg</td>
     <td>$deltaavg</td>
