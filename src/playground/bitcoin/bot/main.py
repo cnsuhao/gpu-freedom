@@ -97,6 +97,9 @@ if __name__=='__main__':
             print " python main.py sell 0.01"            
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
+            print ""
+            print "Warning: this bot is Jack of all trades and master of none!"
+            print "         Use at your own risk :-)"
 
         else:
             pass
