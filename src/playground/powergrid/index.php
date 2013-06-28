@@ -10,15 +10,20 @@
  include("conf/config.inc.php");
 
  echo "<p><tt>./mainloop.sh to update frequencies</tt></p>";
+ include ("frequencygraph.html");
+ echo "<hr>";
  
  echo "<table>";
  echo "<tr><td>";
  open_flash_chart_object( 500, 250, $dns_name . '/graph/lastfrequencies.php');
  echo "</td>";
+ echo "<td>";
+ echo "</td>";
  echo '<td><img src="pictures/pylons.jpg" border=0 /></td>';
  echo "</tr>";
  echo "</table>";
  
+
  echo "<hr>";
 
  mysql_connect($dbserver, $username, $password);

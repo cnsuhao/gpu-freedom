@@ -24,6 +24,10 @@
  echo "<br><b>Table</b><br>";
  echo $table;
  
+ $fh = fopen("frequencygraph.html", 'w');
+ fwrite($fh, "$table");
+ fclose($fh);
+ 
  echo "<br><b>Strings</b><br>";
  $frequencyrow = return_between($table, '<strong>Aktuelle Frequenz</strong>','</tr>', EXCL);
  $frequencystr = return_between($frequencyrow, '<span>','</span>', EXCL);
