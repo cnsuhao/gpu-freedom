@@ -43,7 +43,9 @@ $g->title( 'Last Frequencies', '{font-size:18px; color: #d01f3c}' );
 $g->set_data($data);
 $g->set_x_labels($labels);
 $g->set_x_label_style( 10, '#9933CC', 0, 2 );
-$g->set_y_max($max);
+$g->set_y_max(50.35);
+$g->set_y_min(49.65);
+
 
 $g->set_tool_tip( '#val#' );
 
