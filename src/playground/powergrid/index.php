@@ -37,11 +37,12 @@
  <table border='1'>
  <tr>
  <th>id</th>
+ <th>create_dt</th>
  <th>frequency (Hz)</th>
  <th>networkdiff (s)</th>
+ <th>balance action</th>
  <th>controlarea</th>
  <th>tso</th>
- <th>create_dt</th>
  <th>create_user</th>
  </tr>
  ";
@@ -56,12 +57,25 @@
     $controlarea = mysql_result($result, $i, 'controlarea');
     $tso         = mysql_result($result, $i, 'tso');
     
+    if ($netdiff<-20) {
+        $action = "BUY";
+        $bgcolor = "#6698FF";
+    } else
+    if ($netdiff>20) {
+        $action = "SELL";
+        $bgcolor = "#E41B17";
+    } else {
+        $action = "-";
+        $bgcolor = "#C0C0C0";
+    }
+    
     echo "
-    <tr>
+    <tr bgcolor='$bgcolor'>
     <td>$id</td>
     <td>$create_dt</td>
     <td>$frequency</td>
     <td>$netdiff</td>
+    <td>$action</td>
     <td>$controlarea</td>
     <td>$tso</td>
     <td>$create_user</td>
