@@ -52,7 +52,7 @@
     $id          = mysql_result($result, $i, 'id');
     $create_dt   = mysql_result($result, $i, 'create_dt');
     $create_user = mysql_result($result, $i, 'create_user');
-    $frequency   = mysql_result($result, $i, 'frequency');
+    $frequency   = mysql_result($result, $i, 'frequencyhz');
     $netdiff     = mysql_result($result, $i, 'networkdiff');
     $controlarea = mysql_result($result, $i, 'controlarea');
     $tso         = mysql_result($result, $i, 'tso');

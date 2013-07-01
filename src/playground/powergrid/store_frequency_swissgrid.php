@@ -29,14 +29,14 @@
  fclose($fh);
  
  echo "<br><b>Strings</b><br>";
- $frequencyrow = return_between($table, '<strong>Aktuelle Frequenz</strong>','</tr>', EXCL);
- $frequencystr = return_between($frequencyrow, '<span>','</span>', EXCL);
+ $spans=parse_array($table,"<span>","</span>",EXCL);
+ 
+ $frequencystr = $spans[0];
  echo "*$frequencystr*<br>";
  
- $netdiffrow = return_between($table, '<strong>Aktuelle Netzabweichung</strong>','</tr>', EXCL);
- $netdiffstr = return_between($netdiffrow, '<span>','</span>', EXCL);
+ $netdiffstr = $spans[1];
  echo "*$netdiffstr*<br>";
- 
+
  echo "<br><b>Values</b><br>";
  $frequency = str_replace(" Hz", "", $frequencystr);
  $frequency = str_replace(",", ".", $frequency);
@@ -50,14 +50,14 @@
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
  
- $query="INSERT INTO frequency (id, frequency, networkdiff, controlarea, tso, create_dt, create_user) 
-                                VALUES('', $frequency, $netdiff, 'SG_ST', 'Swissgrid', NOW(), 'php');";
+ $query="INSERT INTO frequency (id, frequencyhz, networkdiff, controlarea, tso, create_dt, create_user) VALUES('', ".$frequency.", ".$netdiff.", 'SG_ST', 'Swissgrid', NOW(), 'php');";
  
  echo "<p>$query</p>";                                 
- mysql_query($query);
- 
+ $result=mysql_query($query);
+ echo "Result: *$result*"; 
  mysql_close();
  echo "<p>Over.</p>";
+
  
 ?>
 </body>
