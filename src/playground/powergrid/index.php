@@ -57,13 +57,14 @@
     $controlarea = mysql_result($result, $i, 'controlarea');
     $tso         = mysql_result($result, $i, 'tso');
     
-    if ($netdiff<-20) {
-        $action = "BUY";
-        $bgcolor = "#6698FF";
-    } else
     if ($netdiff>20) {
-        $action = "SELL";
-        $bgcolor = "#E41B17";
+        if ($frequency>50) {
+            $action = "SELL";
+            $bgcolor = "#E41B17";
+        } else {
+            $action = "BUY";
+            $bgcolor = "#6698FF";
+        }
     } else {
         $action = "-";
         $bgcolor = "#C0C0C0";
