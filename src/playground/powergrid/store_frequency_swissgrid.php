@@ -15,8 +15,8 @@
  $lines = file("frequency.html");
  $hugepage = '';
  for ( $i = 0; $i < sizeof( $lines ); $i++ ) {
-   if (strpos($lines[$i], 'frequencymark.gif"')>0) $lines[$i]='    src="gadgets/netfrequency/img/frequencymark.gif"';
-   if (strpos($lines[$i], 'frequencyband.gif"')>0) $lines[$i]='    src="gadgets/netfrequency/img/frequencyband.gif"';
+   if (strpos($lines[$i], 'frequencymark.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencymark.gif" alt="|" />';
+   if (strpos($lines[$i], 'frequencyband.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencyband.gif" alt="Frequenzspektrum" /></div>';
    
    $hugepage = $hugepage . $lines[$i];
  }
