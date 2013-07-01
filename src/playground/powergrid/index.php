@@ -56,7 +56,7 @@
     $netdiff     = mysql_result($result, $i, 'networkdiff');
     $controlarea = mysql_result($result, $i, 'controlarea');
     $tso         = mysql_result($result, $i, 'tso');
-    
+    /*
     if ($netdiff>20) {
         if ($frequency>50) {
             $action = "SELL";
@@ -65,6 +65,18 @@
             $action = "BUY";
             $bgcolor = "#6698FF";
         }
+    } else {
+        $action = "-";
+        $bgcolor = "#C0C0C0";
+    }
+    */
+    if ($netdiff<-20) {
+        $action = "BUY";
+        $bgcolor = "#6698FF";
+    } else
+    if ($netdiff>20) {
+        $action = "SELL";
+        $bgcolor = "#E41B17";
     } else {
         $action = "-";
         $bgcolor = "#C0C0C0";
