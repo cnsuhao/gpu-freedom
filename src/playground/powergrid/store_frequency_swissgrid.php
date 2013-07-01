@@ -39,11 +39,11 @@
 
  echo "<br><b>Values</b><br>";
  $frequency = str_replace(" Hz", "", $frequencystr);
- $frequency = str_replace(",", ".", $frequency);
+ //$frequency = str_replace(",", ".", $frequency);
  echo "*$frequency*<br>";
  
  $netdiff = str_replace(" s", "", $netdiffstr);
- $netdiff = str_replace(",", ".", $netdiff);
+ //$netdiff = str_replace(",", ".", $netdiff);
  echo "*$netdiff*<br>";
 
  echo "<p>Connecting...</p>";
