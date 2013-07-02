@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2013 at 04:10 PM
+-- Generation Time: Jul 01, 2013 at 05:49 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `frequency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `frequencyhz` double NOT NULL,
-  `networkdiff` double DEFAULT NULL,
+  `frequencyhz` float NOT NULL,
+  `networkdiff` float DEFAULT NULL,
   `controlarea` varchar(16) NOT NULL,
   `tso` varchar(16) NOT NULL,
   `create_dt` datetime NOT NULL,
   `create_user` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `frequency`

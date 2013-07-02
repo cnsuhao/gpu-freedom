@@ -5,7 +5,7 @@ include("../conf/config.inc.php");
  // preparing data for chart
  mysql_connect($dbserver, $username, $password);
  @mysql_select_db($database) or die("Unable to select database");
- $query="select frequencyhz from frequency where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 300;";
+ $query="select frequencyhz from tbfrequency where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 300;";
  $result=mysql_query($query);
  
  if ($result=="") {
@@ -20,7 +20,7 @@ include("../conf/config.inc.php");
  $i=0;
  $max=100;
  while ($i<$num) { 
-   $freq=mysql_result($result,$i,"frequency");          
+   $freq=mysql_result($result,$i,"frequencyhz");          
    
    $data[$i] = $freq;
    $labels[$i] = '';

@@ -29,7 +29,7 @@
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
 
- $query="select * from frequency order by id desc LIMIT 20;";
+ $query="select * from tbfrequency order by id desc LIMIT 20;";
  $result = mysql_query($query);
  $num = mysql_numrows($result);
  

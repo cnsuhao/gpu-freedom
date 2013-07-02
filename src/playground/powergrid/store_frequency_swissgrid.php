@@ -50,14 +50,14 @@
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
  
- $query="INSERT INTO frequency (id, frequencyhz, networkdiff, controlarea, tso, create_dt, create_user) VALUES('', ".$frequency.", ".$netdiff.", 'SG_ST', 'Swissgrid', NOW(), 'php');";
+ $query="INSERT INTO tbfrequency (id, frequencyhz, networkdiff, controlarea, tso, create_dt, create_user) VALUES('', ".$frequency.", ".$netdiff.", 'SG_ST', 'Swissgrid', NOW(), 'php')";
  
  echo "<p>$query</p>";                                 
  $result=mysql_query($query);
  echo "Result: *$result*"; 
- mysql_close();
+ 
  echo "<p>Over.</p>";
-
+ mysql_close();
  
 ?>
 </body>
