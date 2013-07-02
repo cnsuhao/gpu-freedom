@@ -5,7 +5,7 @@ include("../conf/config.inc.php");
  // preparing data for chart
  mysql_connect($dbserver, $username, $password);
  @mysql_select_db($database) or die("Unable to select database");
- $query="select frequencyhz from tbfrequency where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 300;";
+ $query="select networkdiff from tbfrequency where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 300;";
  $result=mysql_query($query);
  
  if ($result=="") {
@@ -20,9 +20,9 @@ include("../conf/config.inc.php");
  $i=0;
  $max=100;
  while ($i<$num) { 
-   $freq=mysql_result($result,$i,"frequencyhz");          
+   $net=mysql_result($result,$i,"networkdiff");          
    
-   $data[$i] = $freq;
+   $data[$i] = $net;
    $labels[$i] = '';
    
    if ($freq>$max) $max=$freq;
@@ -35,7 +35,7 @@ include("../conf/config.inc.php");
 
 // use the chart class to build the chart:
 $g = new graph();
-$g->title( 'Last Frequencies (Hz)', '{font-size:18px; color: #d01f3c}' );
+$g->title( 'Network/Real time diff (s)', '{font-size:18px; color: #d01f3c}' );
 
 //
 // pass in two arrays, one of data, the other data labels
@@ -43,8 +43,8 @@ $g->title( 'Last Frequencies (Hz)', '{font-size:18px; color: #d01f3c}' );
 $g->set_data($data);
 $g->set_x_labels($labels);
 $g->set_x_label_style( 10, '#9933CC', 0, 2 );
-$g->set_y_max(50.35);
-$g->set_y_min(49.65);
+$g->set_y_max(45);
+$g->set_y_min(-45);
 
 
 $g->set_tool_tip( '#val#' );
