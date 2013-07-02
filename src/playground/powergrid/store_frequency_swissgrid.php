@@ -14,10 +14,20 @@
  
  $lines = file("frequency.html");
  $hugepage = '';
+ $flag = 1;
  for ( $i = 0; $i < sizeof( $lines ); $i++ ) {
    if (strpos($lines[$i], 'frequencymark.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencymark.gif" alt="|" />';
    if (strpos($lines[$i], 'frequencyband.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencyband.gif" alt="Frequenzspektrum" /></div>';
    
+   // ugly, but parse_array does not work for some strange reason
+   if (strpos($lines[$i], '<span>')>0) {
+            if ($flag==1) {
+                $frequencystr=$lines[$i];
+                $flag=0;
+            } else {
+                $netdiffstr=$lines[$i];
+            }
+   }
    $hugepage = $hugepage . $lines[$i];
  }
  $table = return_between($hugepage, '<table class="data">', '</table>', INCL);
@@ -29,12 +39,11 @@
  fclose($fh);
  
  echo "<br><b>Strings</b><br>";
- $spans=parse_array($table,"<span>","</span>",EXCL);
  
- $frequencystr = $spans[0];
+ $frequencystr = return_between($frequencystr, '<span>', '</span>', EXCL);;
  echo "*$frequencystr*<br>";
  
- $netdiffstr = $spans[1];
+ $netdiffstr = return_between($netdiffstr, '<span>', '</span>', EXCL);;
  echo "*$netdiffstr*<br>";
 
  echo "<br><b>Values</b><br>";
@@ -46,18 +55,17 @@
  //$netdiff = str_replace(",", ".", $netdiff);
  echo "*$netdiff*<br>";
 
+ 
  echo "<p>Connecting...</p>";
- mysql_connect($dbserver, $username, $password);
+  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
+ $query="INSERT INTO tbfrequency (create_dt, controlarea, tso, create_user, frequencyhz, networkdiff) 
+         VALUES(NOW(), 'SG_ST', 'Swissgrid', 'script', $frequency, $netdiff);";
  
- $query="INSERT INTO tbfrequency (id, frequencyhz, networkdiff, controlarea, tso, create_dt, create_user) VALUES('', ".$frequency.", ".$netdiff.", 'SG_ST', 'Swissgrid', NOW(), 'php')";
- 
- echo "<p>$query</p>";                                 
- $result=mysql_query($query);
- echo "Result: *$result*"; 
- 
- echo "<p>Over.</p>";
+ echo "<p>*$query*</p>";                                 
+ if (!mysql_query($query)) echo mysql_error();
  mysql_close();
+ echo "<p>Over.</p>";
  
 ?>
 </body>
