@@ -8,7 +8,7 @@ include("utils/utils.inc.php");
 include("utils/constants.inc.php");
 include_once('utils/openflashchart/open_flash_chart_object.php');
 include("conf/config.inc.php");
-include("head.inc.php");
+include("head.inc.html");
 
 echo "<center><h3>Welcome to $my_server_name $server_version by <a href='$my_homepage'>$my_username</a></center></h3>";
 echo "<table>";
@@ -26,6 +26,6 @@ echo "</td></tr>";
 echo "</table>";
 
 ?>
-<?php include "bottom.inc.php" ?>
+<?php include "bottom.inc.html" ?>
 </body>
 </html>
