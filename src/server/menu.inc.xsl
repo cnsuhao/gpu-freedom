@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0"
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
       xml:space="preserve">
-<xsl:template match="MENU">
+<xsl:template name="MENU">
 <td>
 <b>Navigation</b><br />
 <br/>
