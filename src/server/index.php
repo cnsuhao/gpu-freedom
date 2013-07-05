@@ -8,8 +8,15 @@ include("utils/utils.inc.php");
 include("utils/constants.inc.php");
 include_once('utils/openflashchart/open_flash_chart_object.php');
 include("conf/config.inc.php");
-include("stylesheet/head.inc.html");
 
+echo "<table>";
+echo "<tr>";
+include("stylesheet/head.inc.xsl");
+echo "</tr>";
+echo "<tr>";
+include("stylesheet/menu.inc.xsl");
+
+echo "<td>";
 echo "<center><h3>Welcome to $my_server_name $server_version by <a href='$my_homepage'>$my_username</a></center></h3>";
 echo "<table>";
 echo "<tr><td>";
@@ -22,10 +29,14 @@ echo "<tr><td>";
 open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdata-jobresultspermonth.php');
 echo "</td><td>";
 //open_flash_chart_object( 500, 250, "http://" . $my_server_url . '/graph/graphdata-scriptsperproject.php');
-echo "</td></tr>";
+echo "</td>";
+
+echo "</tr>";
 echo "</table>";
 
 ?>
-<?php include "stylesheet/bottom.inc.html" ?>
+<?php include "stylesheet/bottom.inc.xsl" ?>
+</td></tr>
+</table>
 </body>
 </html>

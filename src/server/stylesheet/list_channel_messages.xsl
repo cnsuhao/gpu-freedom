@@ -3,6 +3,10 @@
     <xsl:output method="html" doctype-public="-//W3C//DTD HTML 4.01//EN"
                 doctype-system="http://www.w3.org/TR/html4/strict.dtd" />
  
+    <xsl:include href="head.inc.xsl"/>
+    <xsl:include href="menu.inc.xsl"/>
+    <xsl:include href="bottom.inc.xsl"/>
+ 
     <xsl:template match="channel">
         <html>
             <head>
@@ -10,7 +14,14 @@
                 <title>GPU Server - List latest channel messages (refreshes each 20 seconds)</title>
             </head>
             <body>
-			    <a href="../index.php"><img src="../images/gpu-inverse.jpg" border="0" /></a>
+                <table>
+                <tr>
+                <xsl:apply-templates select="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:apply-templates select="MENU"/>
+                <td>
+                
                 <h2>List latest channel messages</h2>
                 <table border="1">
 					<tr>
@@ -28,8 +39,12 @@
                     <!-- msg loop -->
                     <xsl:apply-templates select="msg"/>
                 </table>
-				<hr />
-				<a href="../index.php">Back</a><br />
+				
+                <xsl:apply-templates select="BOTTOM"/>
+                </td>
+                </tr>
+                </table>
+                
             </body>
         </html>
     </xsl:template>
