@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                 <xsl:call-template name="MENU"/>
-                <td>
+                <td valign="top">
 			   
                 <h2>List Job Definitions</h2>
                 <table border="1">

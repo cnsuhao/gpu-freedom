@@ -5,9 +5,7 @@
 <xsl:template name="HEAD">
 <td></td>
 <td>
-<center>
 <img src='../images/gpu-inverse.jpg' border='0' />
-</center>
 </td>
 </xsl:template>
 </xsl:stylesheet>

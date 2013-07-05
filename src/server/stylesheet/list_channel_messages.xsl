@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                 <xsl:call-template name="MENU"/>
-                <td>
+                <td valign="top">
                 
                 <h2>List latest channel messages</h2>
                 <table border="1">

@@ -3,7 +3,7 @@
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
       xml:space="preserve">
 <xsl:template name="MENU">
-<td>
+<td valign="top">
 <b>Navigation</b><br />
 <br/>
 <a href='../index.php'>Home</a><br/>
