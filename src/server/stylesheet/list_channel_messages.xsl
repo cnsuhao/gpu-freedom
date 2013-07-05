@@ -16,10 +16,10 @@
             <body>
                 <table>
                 <tr>
-                <xsl:apply-templates select="HEAD"/>
+                <!--<xsl:apply-templates select="HEAD"/>-->
                 </tr>
                 <tr>
-                <xsl:apply-templates select="MENU"/>
+                <!--<xsl:apply-templates select="MENU"/>-->
                 <td>
                 
                 <h2>List latest channel messages</h2>
@@ -40,7 +40,7 @@
                     <xsl:apply-templates select="msg"/>
                 </table>
 				
-                <xsl:apply-templates select="BOTTOM"/>
+                <!--<xsl:apply-templates select="BOTTOM"/>-->
                 </td>
                 </tr>
                 </table>
