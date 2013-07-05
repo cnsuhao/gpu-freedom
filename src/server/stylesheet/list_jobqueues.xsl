@@ -13,6 +13,13 @@
 			    <title>GPU Server - List Job Queue</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			    
                 <h2>List Job Queues</h2>
                 <table border="1">
@@ -33,6 +40,11 @@
 						<th>nodename of requester</th>
 					</tr>
                     <xsl:apply-templates select="jobqueue"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
             </body>

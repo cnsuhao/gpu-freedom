@@ -13,6 +13,13 @@
                 <title>GPU Server - Jobqueue Status</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			    
                 <h2>Jobqueue Status</h2>
                 <table border="1">
@@ -28,6 +35,10 @@
                     <xsl:apply-templates select="jobstatus"/>
                 </table>
 				
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
+                </table>
             </body>
         </html>
     </xsl:template>

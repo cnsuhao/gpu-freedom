@@ -14,7 +14,14 @@
                 <title>GPU Server - List Servers (refreshs each three minutes)</title>
             </head>
             <body>
-			    
+			    <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
+                
                 <h2>List Online Servers</h2>
 				
                 <table border="1">
@@ -32,6 +39,11 @@
 					</tr>
                     <!-- msg loop -->
                     <xsl:apply-templates select="server"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
             </body>

@@ -13,7 +13,14 @@
                 <title>GPU Server - Available channels</title>
             </head>
             <body>
-			    
+			    <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
+                
                 <h2>Available Channels</h2>
                 <table border="1">
 					<tr>
@@ -22,6 +29,11 @@
 					</tr>
                     
                     <xsl:apply-templates select="channeltype"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
 				

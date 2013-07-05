@@ -13,6 +13,13 @@
                 <title>GPU Server - Job Statistics</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			    
                 <h2>Job Statistics</h2>
                 <table border="1">
@@ -29,6 +36,11 @@
 					</tr>
                     
                     <xsl:apply-templates select="jobstat"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
             </body>

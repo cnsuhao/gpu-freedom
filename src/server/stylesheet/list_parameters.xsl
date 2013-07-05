@@ -13,7 +13,14 @@
                 <title>GPU Server - Parameters</title>
             </head>
             <body>
-			    
+			    <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
+                
                 <h2>Parameters</h2>
                 <table border="1">
 					<tr>
@@ -26,6 +33,11 @@
 					</tr>
                     
                     <xsl:apply-templates select="parameter"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
             </body>

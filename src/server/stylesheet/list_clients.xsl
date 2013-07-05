@@ -14,6 +14,13 @@
                 <title>GPU Server - List Clients (refreshs each minute)</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			    
                 <h2>List Online Clients</h2>
                 <table border="1">
@@ -32,6 +39,10 @@
                     <xsl:apply-templates select="client"/>
                 </table>
 				
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
+                </table>
 				
             </body>
         </html>

@@ -6,7 +6,7 @@
 <td>
 <b>Navigation</b><br />
 <br/>
-<a href='index.php'>Home</a><br/>
+<a href='../index.php'>Home</a><br/>
 <br/>
 
 <b>Jobs</b><br/>

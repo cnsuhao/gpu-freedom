@@ -13,6 +13,13 @@
 			    <title>GPU Server - List Job Definitions</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			   
                 <h2>List Job Definitions</h2>
                 <table border="1">
@@ -27,6 +34,11 @@
 					</tr>
                     <!-- msg loop -->
                     <xsl:apply-templates select="jobdefinition"/>
+                </table>
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
                 </table>
 				
 				

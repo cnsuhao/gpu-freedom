@@ -13,6 +13,13 @@
 			    <title>GPU Server - List Job Results</title>
             </head>
             <body>
+                <table>
+                <tr>
+                <xsl:call-template name="HEAD"/>
+                </tr>
+                <tr>
+                <xsl:call-template name="MENU"/>
+                <td>
 			    
                 <h2>List Job Results</h2>
                 <table border="1">
@@ -38,6 +45,11 @@
                     <xsl:apply-templates select="jobresult"/>
                 </table>
 				<hr />
+                
+                <xsl:call-template name="BOTTOM"/>
+                </td>
+                </tr>
+                </table>
 				
             </body>
         </html>
