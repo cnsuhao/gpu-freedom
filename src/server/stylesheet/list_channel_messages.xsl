@@ -12,6 +12,7 @@
             <head>
 			    <meta http-equiv="refresh" content="20" />
                 <title>GPU Server - List latest channel messages (refreshes each 20 seconds)</title>
+				<link rel="stylesheet" type="text/css" href="../stylesheet/gpu.css" />
             </head>
             <body>
                 <table>

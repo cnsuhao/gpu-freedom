@@ -3,6 +3,7 @@ GPU freedom codebase
 
 5.7.2013 git
 Server: added navigation bar to the left
+		added css stylesheet
 
 5-6.2013 git
 played around with bitcoin bot under /src/playground/bitcoin

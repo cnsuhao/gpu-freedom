@@ -11,6 +11,7 @@
         <html>
             <head>
                 <title>GPU Server - Jobqueue Status</title>
+				<link rel="stylesheet" type="text/css" href="../stylesheet/gpu.css" />
             </head>
             <body>
                 <table>

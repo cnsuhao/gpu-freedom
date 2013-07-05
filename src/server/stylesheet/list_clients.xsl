@@ -12,6 +12,7 @@
             <head>
 			    <meta http-equiv="refresh" content="60" />
                 <title>GPU Server - List Clients (refreshs each minute)</title>
+				<link rel="stylesheet" type="text/css" href="../stylesheet/gpu.css" />
             </head>
             <body>
                 <table>

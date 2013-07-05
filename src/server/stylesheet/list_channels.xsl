@@ -11,6 +11,7 @@
         <html>
             <head>
                 <title>GPU Server - Available channels</title>
+				<link rel="stylesheet" type="text/css" href="../stylesheet/gpu.css" />
             </head>
             <body>
 			    <table>

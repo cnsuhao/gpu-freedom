@@ -11,6 +11,7 @@
         <html>
             <head>
 			    <title>GPU Server - List Job Definitions</title>
+				<link rel="stylesheet" type="text/css" href="../stylesheet/gpu.css" />
             </head>
             <body>
                 <table>
