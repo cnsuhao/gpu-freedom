@@ -11,10 +11,10 @@ include("conf/config.inc.php");
 
 echo "<table>";
 echo "<tr>";
-include("head.inc.xsl");
+include("head.inc.html");
 echo "</tr>";
 echo "<tr>";
-include("menu.inc.xsl");
+include("menu.inc.html");
 
 echo "<td>";
 echo "<center><h3>Welcome to $my_server_name $server_version by <a href='$my_homepage'>$my_username</a></center></h3>";
@@ -35,7 +35,7 @@ echo "</tr>";
 echo "</table>";
 
 ?>
-<?php include "bottom.inc.xsl" ?>
+<?php include "bottom.inc.html" ?>
 </td></tr>
 </table>
 </body>
