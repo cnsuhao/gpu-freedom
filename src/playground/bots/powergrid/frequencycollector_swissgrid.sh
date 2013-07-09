@@ -5,5 +5,5 @@ wget -O frequency.html --no-check-certificate -U "Mozilla/5.0 (Windows NT 6.1; r
 ./removeif0.sh frequency.html
 if [ -f frequency.html ] 
 then
-    wget -O store_frequency_swissgrid.html --no-proxy http://127.0.0.1:8090/gpu_freedom/src/playground/powergrid/store_frequency_swissgrid.php
+    wget -O store_frequency_swissgrid.html --no-proxy http://127.0.0.1:8090/gpu_freedom/src/playground/bots/powergrid/store_frequency_swissgrid.php
 fi

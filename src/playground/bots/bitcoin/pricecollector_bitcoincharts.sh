@@ -4,5 +4,5 @@ wget -O bitcoincharts.html --no-check-certificate -U "Mozilla/5.0 (Windows NT 6.
 ./removeif0.sh bitcoincharts.html
 if [ -f bitcoincharts.html ] 
 then
-    wget -O store_bitcoin_value_bitcoincharts.html --no-proxy http://127.0.0.1:8090/gpu_freedom/src/playground/bitcoin/store_bitcoin_value_bitcoincharts.php
+    wget -O store_bitcoin_value_bitcoincharts.html --no-proxy http://127.0.0.1:8090/gpu_freedom/src/playground/bots/bitcoin/store_bitcoin_value_bitcoincharts.php
 fi
