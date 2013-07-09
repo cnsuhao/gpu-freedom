@@ -6,9 +6,7 @@
 <?php
  include("spiderbook/LIB_parse.php");
  include("conf/config.inc.php");
- 
  if (isset($_GET['ticker'])) $ticker = $_GET['ticker']; else $ticker="";
- if (isset($_GET['description'])) $description   = $_GET['description']; else $description="";
  
  if ($ticker=="") {
 	die("<b>Ticker parameter not defined!</b>");
@@ -16,65 +14,36 @@
   
  echo "<h3>Storing Yahoo Ticker $ticker</h3>";
  echo "<p>Parsing...</p>";
- /*
- $frequency=-1;
- $networkdiff=-1;
  
- $lines = file("frequency.html");
+ // we are intersted in:
+ // <span class="time_rtq_ticker"><span id="yfs_l10_^vix">14.78</span></span>
+ 
+ $lines = file("finance.html");
  $hugepage = '';
- $flag = 1;
  for ( $i = 0; $i < sizeof( $lines ); $i++ ) {
-   if (strpos($lines[$i], 'frequencymark.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencymark.gif" alt="|" />';
-   if (strpos($lines[$i], 'frequencyband.gif"')>0) $lines[$i]='   <img style="margin-left: 0px; margin-right: 0px" src="gadgets/netfrequency/img/frequencyband.gif" alt="Frequenzspektrum" /></div>';
-   
-   // ugly, but parse_array does not work for some strange reason
-   if (strpos($lines[$i], '<span>')>0) {
-            if ($flag==1) {
-                $frequencystr=$lines[$i];
-                $flag=0;
-            } else {
-                $netdiffstr=$lines[$i];
-            }
-   }
    $hugepage = $hugepage . $lines[$i];
  }
- $table = return_between($hugepage, '<table class="data">', '</table>', INCL);
+ 
+ $table = return_between($hugepage, "<span class=\"time_rtq_ticker\">", '</span>', INCL);
  echo "<br><b>Table</b><br>";
  echo $table;
  
- $fh = fopen("frequencygraph.html", 'w');
- fwrite($fh, "$table");
- fclose($fh);
+ echo "<br><b>Value</b><br>";
+ $value = trim(return_between($hugepage, "<span id=\"yfs_l10_^$ticker\">", '</span>', EXCL));
+ $myvalue = str_replace(',','',$value);
+ echo "$myvalue<br>";
  
- echo "<br><b>Strings</b><br>";
- 
- $frequencystr = return_between($frequencystr, '<span>', '</span>', EXCL);;
- echo "*$frequencystr*<br>";
- 
- $netdiffstr = return_between($netdiffstr, '<span>', '</span>', EXCL);;
- echo "*$netdiffstr*<br>";
-
- echo "<br><b>Values</b><br>";
- $frequency = str_replace(" Hz", "", $frequencystr);
- $frequency = str_replace(",", ".", $frequency);
- echo "*$frequency*<br>";
- 
- $netdiff = str_replace(" s", "", $netdiffstr);
- $netdiff = str_replace(",", ".", $netdiff);
- echo "*$netdiff*<br>";
-
  
  echo "<p>Connecting...</p>";
-  mysql_connect($dbserver, $username, $password);
+ mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
- $query="INSERT INTO tbfrequency (create_dt, controlarea, tso, create_user, frequencyhz, networkdiff) 
-         VALUES(NOW(), 'SG_ST', 'Swissgrid', 'script', $frequency, $netdiff);";
+ $query="INSERT INTO tickers (create_dt, name, value, changepct, create_user) 
+         VALUES(NOW(), '$ticker', $myvalue, 0, 'php');";
  
  echo "<p>*$query*</p>";                                 
  if (!mysql_query($query)) echo mysql_error();
  mysql_close();
  echo "<p>Over.</p>";
- */
 ?>
 </body>
 </html>
