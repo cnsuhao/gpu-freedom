@@ -6,3 +6,4 @@ if [ -f finance.html ]
 then
     wget -O store_yahoo_ticker.html --no-proxy "http://127.0.0.1:8090/gpu_freedom/src/playground/bots/finance/store_yahoo_ticker.php?ticker=$1"
 fi
+./sleeprandom.sh
