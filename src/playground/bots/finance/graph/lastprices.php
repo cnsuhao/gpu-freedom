@@ -30,13 +30,19 @@ if (isset($_GET['ticker'])) $ticker=$_GET['ticker']; else die("<b>Ticker Paramet
    
    $i++;
  }
+ 
+ // retrieve description of the ticker
+ $querydesc="select description from tickernames where name='$ticker';";
+ $resultdesc=mysql_query($querydesc);
+ $description=mysql_result($resultdesc, 0, "description");
+ 
  mysql_close();
  
 
 
 // use the chart class to build the chart:
 $g = new graph();
-$g->title( "Last Prices for $ticker", '{font-size:18px; color: #d01f3c}' );
+$g->title( "$description ($ticker)", '{font-size:18px; color: #d01f3c}' );
 
 //
 // pass in two arrays, one of data, the other data labels

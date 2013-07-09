@@ -8,8 +8,6 @@
 <?php
  include_once('utils/openflashchart/open_flash_chart_object.php');
  include("conf/config.inc.php");
-
- echo "<h2>Finance</h2>";
  
  echo "<p><tt>./mainloop.sh to update prices</tt></p>";
  
