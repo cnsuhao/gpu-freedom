@@ -19,7 +19,7 @@ if (isset($_GET['ticker'])) $ticker=$_GET['ticker']; else die("<b>Ticker Paramet
  $data = array();
  $labels = array();
  $i=0;
- $max=100;
+ $max=0;
  while ($i<$num) { 
    $price=mysql_result($result,$i,"value");          
    
