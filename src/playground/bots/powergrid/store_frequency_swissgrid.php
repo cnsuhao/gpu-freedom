@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php
- include("spiderbook/LIB_parse.php");
+ include("../lib/spiderbook/LIB_parse.php");
  include("conf/config.inc.php");
  
  echo "<h3>Store Frequency Swissgrid</h3>";

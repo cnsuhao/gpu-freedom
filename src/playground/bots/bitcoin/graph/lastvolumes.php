@@ -6,7 +6,7 @@ include("../conf/config.inc.php");
  // preparing data for chart
  mysql_connect($dbserver, $username, $password);
  @mysql_select_db($database) or die("Unable to select database");
- $query="select volume from pricevalue where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 300;";
+ $query="select volume from pricevalue where (create_dt>NOW() - INTERVAL 30 DAY) order by create_dt asc LIMIT 1000;";
  $result=mysql_query($query);
  
  if ($result=="") {

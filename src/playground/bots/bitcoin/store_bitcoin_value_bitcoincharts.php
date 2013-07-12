@@ -5,7 +5,7 @@
 <body>
 <?php
  include("head.inc.php");
- include("spiderbook/LIB_parse.php");
+ include("../lib/spiderbook/LIB_parse.php");
  include("conf/config.inc.php");
  include("utils/constants.inc.php");
 
