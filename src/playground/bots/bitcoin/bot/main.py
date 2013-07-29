@@ -7,7 +7,10 @@ from conf import version, th_day_interval
 
 if __name__=='__main__':
     try:
-        if sys.argv[1]=='wallets':
+        if len(sys.argv)==1:
+            print "For help, type python ./main.py help"
+            
+        elif sys.argv[1]=='wallets':
             wallets = get_wallets()
             for wallet in wallets:
                 print wallet, wallets[wallet]['Balance']['display']
