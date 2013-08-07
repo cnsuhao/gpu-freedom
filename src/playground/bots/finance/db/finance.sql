@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2013 at 04:13 PM
+-- Generation Time: Aug 07, 2013 at 05:05 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `tickernames` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(4) NOT NULL,
+  `name` varchar(8) NOT NULL,
   `description` varchar(255) NOT NULL,
   `type` varchar(16) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `tickernames`
@@ -41,7 +41,23 @@ CREATE TABLE IF NOT EXISTS `tickernames` (
 
 INSERT INTO `tickernames` (`id`, `name`, `description`, `type`, `url`) VALUES
 (1, 'VIX', 'VOLATILITY S&P 500', 'YAHOO', 'http://finance.yahoo.com/q?s=^VIX'),
-(2, 'GSPC', 'Standard&Poors 500', 'YAHOO', 'http://finance.yahoo.com/q?s=^gspc');
+(2, 'GSPC', 'Standard&Poors 500', 'YAHOO', 'http://finance.yahoo.com/q?s=^gspc'),
+(3, 'QQQX', 'NASDAQ Premium Income and Growt', 'YAHOO', 'http://finance.yahoo.com/q?s=QQQX'),
+(4, 'GOOG', 'Google', 'YAHOO', 'http://finance.yahoo.com/q?s=GOOG'),
+(5, '2498.TW', 'HTC', 'YAHOO', 'http://finance.yahoo.com/q?s=HTC'),
+(7, 'REPI.SW', 'Repower', 'YAHOO', 'http://finance.yahoo.com/q?s=REPI.SW'),
+(8, 'AMZN', 'Amazon', 'YAHOO', 'http://finance.yahoo.com/q?s=AMZN'),
+(9, 'NVDA', 'NVidia', 'YAHOO', 'http://finance.yahoo.com/q?s=NVDA'),
+(10, 'SAP', 'SAP', 'YAHOO', 'http://finance.yahoo.com/q?s=NVDA'),
+(11, 'SAP', 'SAP', 'YAHOO', 'http://finance.yahoo.com/q?s=SAP'),
+(12, 'PLWTF', 'Panalpina', 'YAHOO', 'http://finance.yahoo.com/q?s=PLWTF'),
+(13, 'INTC', 'Intel', 'YAHOO', 'http://finance.yahoo.com/q?s=INTC'),
+(14, 'AMD', 'AMD', 'YAHOO', 'http://finance.yahoo.com/q?s=AMD'),
+(15, 'TSLA', 'Tesla Motors', 'YAHOO', 'http://finance.yahoo.com/q?s=TSLA'),
+(16, 'MSFT', 'Microsoft', 'YAHOO', 'http://finance.yahoo.com/q?s=MSFT'),
+(17, 'RHT', 'Red Hat', 'YAHOO', 'http://finance.yahoo.com/q?s=RHT'),
+(18, 'GKNT', 'Geeknet', 'YAHOO', 'http://finance.yahoo.com/q?s=GKNT'),
+(19, 'LNKD', 'Linkedin', 'YAHOO', 'http://finance.yahoo.com/q?s=LNKD');
 
 -- --------------------------------------------------------
 
@@ -52,12 +68,12 @@ INSERT INTO `tickernames` (`id`, `name`, `description`, `type`, `url`) VALUES
 CREATE TABLE IF NOT EXISTS `tickers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_dt` datetime NOT NULL,
-  `name` varchar(4) NOT NULL,
+  `name` varchar(8) NOT NULL,
   `value` double NOT NULL,
   `changepct` double DEFAULT NULL,
   `create_user` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `tickers`
@@ -68,7 +84,33 @@ INSERT INTO `tickers` (`id`, `create_dt`, `name`, `value`, `changepct`, `create_
 (2, '2013-07-09 15:59:49', 'VIX', 14.52, 0, 'php'),
 (3, '2013-07-09 16:08:17', 'VIX', 14.37, 0, 'php'),
 (4, '2013-07-09 16:08:21', 'VIX', 14.37, 0, 'php'),
-(5, '2013-07-09 16:09:01', 'GSPC', 1645.09, 0, 'php');
+(5, '2013-07-09 16:09:01', 'GSPC', 1645.09, 0, 'php'),
+(6, '2013-07-09 16:29:09', 'GSPC', 1645.48, 0, 'php'),
+(7, '2013-07-09 16:55:58', 'VIX', 14.51, 0, 'php'),
+(8, '2013-07-09 16:58:16', 'GSPC', 1648.22, 0, 'php'),
+(9, '2013-07-09 17:24:42', 'VIX', 14.31, 0, 'php'),
+(10, '2013-07-10 08:28:56', 'VIX', 14.35, 0, 'php'),
+(11, '2013-07-10 08:31:29', 'GSPC', 1652.32, 0, 'php'),
+(12, '2013-07-11 09:30:00', 'VIX', 14.21, 0, 'php'),
+(13, '2013-07-11 09:33:17', 'GSPC', 1652.62, 0, 'php'),
+(14, '2013-07-12 07:37:12', 'VIX', 14.01, 0, 'php'),
+(15, '2013-07-12 07:40:18', 'GSPC', 1675.02, 0, 'php'),
+(16, '2013-07-29 09:17:20', 'VIX', 12.72, 0, 'php'),
+(17, '2013-07-29 09:20:23', 'GSPC', 1691.65, 0, 'php'),
+(18, '2013-07-30 09:14:07', 'VIX', 13.39, 0, 'php'),
+(19, '2013-07-30 09:16:38', 'GSPC', 1685.33, 0, 'php'),
+(20, '2013-07-31 08:35:32', 'VIX', 13.39, 0, 'php'),
+(21, '2013-07-31 08:37:55', 'GSPC', 1685.96, 0, 'php'),
+(22, '2013-08-02 09:32:01', 'VIX', 12.94, 0, 'php'),
+(23, '2013-08-02 09:32:22', 'VIX', 12.94, 0, 'php'),
+(24, '2013-08-02 09:34:36', 'GSPC', 1706.87, 0, 'php'),
+(25, '2013-08-02 09:35:01', 'GSPC', 1706.87, 0, 'php'),
+(26, '2013-08-05 08:09:30', 'VIX', 11.98, 0, 'php'),
+(27, '2013-08-05 08:12:12', 'GSPC', 1709.67, 0, 'php'),
+(28, '2013-08-06 08:18:36', 'VIX', 11.84, 0, 'php'),
+(29, '2013-08-06 08:21:19', 'GSPC', 1707.14, 0, 'php'),
+(30, '2013-08-07 08:36:31', 'VIX', 12.72, 0, 'php'),
+(31, '2013-08-07 08:39:50', 'GSPC', 1697.37, 0, 'php');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
