@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 07, 2013 at 05:05 PM
+-- Generation Time: Aug 20, 2013 at 01:25 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `tickers` (
   `changepct` double DEFAULT NULL,
   `create_user` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `tickers`
@@ -110,7 +110,29 @@ INSERT INTO `tickers` (`id`, `create_dt`, `name`, `value`, `changepct`, `create_
 (28, '2013-08-06 08:18:36', 'VIX', 11.84, 0, 'php'),
 (29, '2013-08-06 08:21:19', 'GSPC', 1707.14, 0, 'php'),
 (30, '2013-08-07 08:36:31', 'VIX', 12.72, 0, 'php'),
-(31, '2013-08-07 08:39:50', 'GSPC', 1697.37, 0, 'php');
+(31, '2013-08-07 08:39:50', 'GSPC', 1697.37, 0, 'php'),
+(32, '2013-08-07 17:06:48', 'VIX', 13.76, 0, 'php'),
+(33, '2013-08-07 17:09:04', 'GSPC', 1687.76, 0, 'php'),
+(34, '2013-08-08 13:30:39', 'VIX', 12.98, 0, 'php'),
+(35, '2013-08-08 13:33:19', 'GSPC', 1690.91, 0, 'php'),
+(36, '2013-08-09 07:19:20', 'VIX', 12.73, 0, 'php'),
+(37, '2013-08-09 07:22:29', 'GSPC', 1697.48, 0, 'php'),
+(38, '2013-08-09 09:01:06', 'VIX', 12.73, 0, 'php'),
+(39, '2013-08-09 09:03:59', 'GSPC', 1697.48, 0, 'php'),
+(40, '2013-08-12 08:26:00', 'VIX', 13.41, 0, 'php'),
+(41, '2013-08-12 08:29:01', 'GSPC', 1691.42, 0, 'php'),
+(42, '2013-08-13 08:26:02', 'VIX', 12.81, 0, 'php'),
+(43, '2013-08-13 08:29:07', 'GSPC', 1689.47, 0, 'php'),
+(44, '2013-08-14 08:22:13', 'VIX', 12.31, 0, 'php'),
+(45, '2013-08-14 08:25:31', 'GSPC', 1694.16, 0, 'php'),
+(46, '2013-08-15 07:14:23', 'VIX', 13.04, 0, 'php'),
+(47, '2013-08-15 07:17:34', 'GSPC', 1685.39, 0, 'php'),
+(48, '2013-08-16 14:08:01', 'VIX', 14.73, 0, 'php'),
+(49, '2013-08-16 14:11:02', 'GSPC', 1661.32, 0, 'php'),
+(50, '2013-08-19 11:14:04', 'VIX', 14.37, 0, 'php'),
+(51, '2013-08-19 11:17:13', 'GSPC', 1655.83, 0, 'php'),
+(52, '2013-08-20 08:23:45', 'VIX', 15.1, 0, 'php'),
+(53, '2013-08-20 08:27:01', 'GSPC', 1646.06, 0, 'php');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
