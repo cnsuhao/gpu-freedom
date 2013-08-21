@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 20, 2013 at 01:23 PM
+-- Generation Time: Aug 21, 2013 at 09:30 AM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `pricevalue` (
   `th_high` double DEFAULT NULL,
   `create_user` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=807 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=810 ;
 
 --
 -- Dumping data for table `pricevalue`
@@ -892,7 +892,10 @@ INSERT INTO `pricevalue` (`id`, `create_dt`, `price`, `high`, `low`, `volume`, `
 (803, '2013-08-20 09:02:30', 121.5, 123.75, 116.5, 39874, 121.02, 121.67, 120.18, 119.85, 0, 109.626911765, 103.72, 121.98, 'bitcoinbot'),
 (804, '2013-08-20 11:05:04', 121, 123.4, 116.5, 30922, 120.51, 121, 119.97, 119.59, 0, 109.798985507, 103.72, 121.98, 'bitcoinbot'),
 (805, '2013-08-20 11:44:39', 120.2, 123.01, 116.5, 28222, 120.2, 121.07, 119.85, 119.48, 0, 109.959, 103.72, 121.98, 'bitcoinbot'),
-(806, '2013-08-20 12:36:03', 120.3, 123.01, 116.5, 25572, 120.2, 120.3, 119.83, 119.46, 0, 110.103239437, 103.72, 121.98, 'bitcoinbot');
+(806, '2013-08-20 12:36:03', 120.3, 123.01, 116.5, 25572, 120.2, 120.3, 119.83, 119.46, 0, 110.103239437, 103.72, 121.98, 'bitcoinbot'),
+(807, '2013-08-20 13:24:11', 120.5, 123.01, 116.5, 24708, 120.34, 120.5, 119.86, 119.49, 0, 110.244861111, 103.72, 121.98, 'bitcoinbot'),
+(808, '2013-08-20 14:04:03', 120.75, 123.01, 116.5, 24616, 120.15, 120.75, 119.87, 119.5, 0, 110.385342466, 103.72, 121.98, 'bitcoinbot'),
+(809, '2013-08-21 09:04:22', 121.5, 124.94, 118.5, 22561, 121.5, 121.8, 121.83, 121.47, 0, 110.703055556, 103.72, 121.98, 'bitcoinbot');
 
 -- --------------------------------------------------------
 
@@ -940,7 +943,7 @@ CREATE TABLE IF NOT EXISTS `wallet` (
   `create_user` varchar(16) NOT NULL,
   `create_dt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `wallet`
@@ -948,7 +951,12 @@ CREATE TABLE IF NOT EXISTS `wallet` (
 
 INSERT INTO `wallet` (`id`, `name`, `btc`, `usd`, `eur`, `marketprice_usd`, `marketvalue_usd`, `total_usd`, `create_user`, `create_dt`) VALUES
 (1, 'mtgox', 2.60208723, 42.35725, 0, 108, 281.02542084, 323.38267084, 'bitcoinbot', '2013-06-19 14:04:02'),
-(2, 'mtgox', 2.53755863, 54.17455, 0, 106.31, 269.767857955, 323.942407955, 'bitcoinbot', '2013-08-05 08:09:09');
+(2, 'mtgox', 2.53755863, 54.17455, 0, 106.31, 269.767857955, 323.942407955, 'bitcoinbot', '2013-08-05 08:09:09'),
+(3, 'mtgox', 0.03755863, 332.1539, 0, 121.5, 4.563373545, 336.717273545, 'bitcoinbot', '2013-08-21 09:25:03'),
+(4, 'shortterm', 0, 25, 0, 25, 0, 25, 'tiz', '2013-08-21 00:00:00'),
+(5, 'midterm', 0, 75, 0, 75, 0, 75, 'tiz', '2013-08-21 00:00:00'),
+(6, 'longterm', 0, 150, 0, 150, 0, 150, 'tiz', '2013-08-21 00:00:00'),
+(7, 'manual', 0, 50, 0, 50, 0, 50, 'tiz', '2013-08-21 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

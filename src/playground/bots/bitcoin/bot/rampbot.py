@@ -3,7 +3,7 @@ import random
 
 class RampBot(object):
     def __init__(self, max_btc, max_usd, init_action, init_price, trigger_percent):
-        print now(), 'init_bot', max_btc, max_usd, init_action, init_price, trigger_percent
+        print now(), 'rampbot:init_bot', max_btc, max_usd, init_action, init_price, trigger_percent
         self.max_btc = max_btc
         self.max_usd = max_usd
         self.trigger_percent = trigger_percent
@@ -16,25 +16,25 @@ class RampBot(object):
         my_btc = int(wallets['BTC']['Balance']['value_int'])
         if self.next_action=='sell':
             current_price = current_ask_price()
-            print now(), 'run_once', my_btc, my_usd, current_price, self.next_action, self.next_price
+            print now(), 'rampbot:run_once', my_btc, my_usd, current_price, self.next_action, self.next_price
             amount = min(self.max_btc, my_btc)
             if current_price>=self.next_price or random.random()<=0.01:
-                print now(), 'begin sell ', amount
-                print 'sell result', sell(amount)
+                print now(), 'rampbot:begin sell ', amount
+                print 'rampbot:sell result', sell(amount)
                 self.next_action = 'buy'
                 self.next_price = int(current_price*(1+self.trigger_percent))
-                print now(), 'sell ', amount
+                print now(), 'rampbot:sell ', amount
         elif self.next_action=='buy':
             current_price = current_bid_price()
             print now(), 'run_once', my_btc, my_usd, current_price, self.next_action, self.next_price
             money = min(self.max_usd, my_usd)
             amount = int(money*1.0/current_price*rbtc)
             if current_price<=self.next_price or random.random()>=0.99:
-                print now(), 'begin buy', amount
-                print 'buy result', buy(amount)
+                print now(), 'rampbot:begin buy', amount
+                print 'rampbot:buy result', buy(amount)
                 self.next_action = 'sell'
                 self.next_price = int(current_price*(1+self.trigger_percent))
-                print now(), 'buy', amount
+                print now(), 'rampbot:buy', amount
 
     def run(self):
         while 1:
@@ -43,9 +43,9 @@ class RampBot(object):
                 #time.sleep(60)
                 #print 'cancel all orders:', cancel_all()
             except:
-                print now(), "Error - ", get_err()
+                print now(), "rampbot:Error - ", get_err()
             
             mysleep = 240+random.randrange(0,300);
-            print 'Sleeping for '+str(mysleep)+' seconds...'            
+            print 'rampbot:Sleeping for '+str(mysleep)+' seconds...'            
             time.sleep(mysleep)
 

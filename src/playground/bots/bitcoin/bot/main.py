@@ -3,6 +3,7 @@ import sys
 from func import *
 from stablebot import StableBot
 from rampbot import RampBot
+from dbbot import DbBot
 from conf import version, th_day_interval
 
 if __name__=='__main__':
@@ -78,13 +79,11 @@ if __name__=='__main__':
             rampbot = RampBot(max_btc, max_usd, init_action, init_price, trigger_percent)
             rampbot.run()
         elif sys.argv[1]=='dbbot':
-            max_btc = int(float(sys.argv[2])*rbtc)
-            max_usd = int(float(sys.argv[3])*rusd)
-            init_action = sys.argv[4] #sell, buy
-            init_price = int(float(sys.argv[5])*rusd)
-            trigger_percent = float(sys.argv[6])
-            rampbot = RampBot(max_btc, max_usd, init_action, init_price, trigger_percent)
-            rampbot.run()
+            mywallet = sys.argv[2]
+            myfrequency = int(sys.argv[3])
+            mytimewindow = int(sys.argv[4])
+            dbbot = DbBot(mywallet, myfrequency, mytimewindow)
+            dbbot.run()
         elif sys.argv[1]=='thresholds':            
             print " days:  "+str(th_day_interval)
             print " high:  "+str(get_thhigh())
@@ -108,10 +107,10 @@ if __name__=='__main__':
             print " python main.py sell 0.01"            
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
-            print " python main.py dbbot [wallet] [frequency in minutes]"
-            print " python main.py dbbot shortterm 4"
-            print " python main.py dbbot midterm 120"
-            print " python main.py dbbot longterm 120"
+            print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes]"
+            print " python main.py dbbot shortterm 8 60 [1 hour]"
+            print " python main.py dbbot midterm 60 1440 [1 day]"
+            print " python main.py dbbot longterm 240 12960 [9 days]"
             print ""
             print "Warning: this bot is Jack of all trades and master of none!"
             print "         Use at your own risk :-)"

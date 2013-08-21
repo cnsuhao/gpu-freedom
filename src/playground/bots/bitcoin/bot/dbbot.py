@@ -2,15 +2,15 @@ from func import *
 import random
 
 class DbBot(object):
-    def __init__(self, max_btc, max_usd, init_action, init_price, trigger_percent):
-        print now(), 'init_bot', max_btc, max_usd, init_action, init_price, trigger_percent
-        self.max_btc = max_btc
-        self.max_usd = max_usd
-        self.trigger_percent = trigger_percent
-        self.next_action = init_action
-        self.next_price = init_price
+    def __init__(self, wallet, frequency, timewindow):
+        self.logstr = 'dbbot('+wallet+'):'
+        print now(), self.logstr, wallet, frequency, timewindow
+        self.wallet = wallet
+        self.frequency = frequency
+        self.timewindow = timewindow
 
     def run_once(self):
+	    '''
         wallets = get_wallets()
         my_usd = int(wallets['USD']['Balance']['value_int'])
         my_btc = int(wallets['BTC']['Balance']['value_int'])
@@ -21,7 +21,7 @@ class DbBot(object):
             if current_price>=self.next_price or random.random()<=0.01:
                 print now(), 'begin sell ', amount
                 print 'sell result', sell(amount)
-                self.next_action = 'buy'
+                self.next_action = 'dbbot:buy'
                 self.next_price = int(current_price*(1+self.trigger_percent))
                 print now(), 'sell ', amount
         elif self.next_action=='buy':
@@ -32,20 +32,18 @@ class DbBot(object):
             if current_price<=self.next_price or random.random()>=0.99:
                 print now(), 'begin buy', amount
                 print 'buy result', buy(amount)
-                self.next_action = 'sell'
+                self.next_action = 'dbbot:sell'
                 self.next_price = int(current_price*(1+self.trigger_percent))
                 print now(), 'buy', amount
-
+        '''
     def run(self):
         while 1:
             try:
                 self.run_once()
-                #time.sleep(60)
-                #print 'cancel all orders:', cancel_all()
             except:
-                print now(), "Error - ", get_err()
+                print now(), self.logstr, "Error - ", get_err()
             
-            mysleep = 240+random.randrange(0,300);
-            print 'Sleeping for '+str(mysleep)+' seconds...'            
+            mysleep = (self.frequency*60) + random.randrange(0,120);
+            print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'            
             time.sleep(mysleep)
 
