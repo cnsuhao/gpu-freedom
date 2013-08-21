@@ -51,6 +51,18 @@ def db_get_last():
     cursor.close()
     cnx.close()
     return last[0]
+	
+def db_get_wallet(mywallet):
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
+    cursor = cnx.cursor()
+    query = ("select usd,btc from wallet where id=(select max(id) from wallet where name='"+mywallet+"');")
+    cursor.execute(query)
+    wallet = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+    return wallet[0],wallet[1]
     
 
 def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):

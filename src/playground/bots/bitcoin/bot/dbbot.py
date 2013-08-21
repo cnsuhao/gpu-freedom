@@ -1,4 +1,6 @@
 from func import *
+from dbadapter import *
+from sys import exit
 import random
 
 class DbBot(object):
@@ -11,10 +13,16 @@ class DbBot(object):
 
     def run_once(self):
         print now(), self.logstr, 'retrieving my wallet...'
-        '''
+        my_usd,my_btc=db_get_wallet(self.wallet)
+        print now(), 'USD: ', my_usd, 'BTC: ',my_btc
+        # now verifying that wallet is not outofsync with mtgox
         wallets = get_wallets()
-        my_usd = int(wallets['USD']['Balance']['value_int'])
-        my_btc = int(wallets['BTC']['Balance']['value_int'])
+        mtgox_usd = int(wallets['USD']['Balance']['value_int'])
+        mtgox_btc = int(wallets['BTC']['Balance']['value_int'])
+        if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
+            print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
+            exit()
+        '''
         if self.next_action=='sell':
             current_price = current_ask_price()
             print now(), 'run_once', my_btc, my_usd, current_price, self.next_action, self.next_price
@@ -43,8 +51,8 @@ class DbBot(object):
                 self.run_once()
             except:
                 print now(), self.logstr, "Error - ", get_err()
-            
+
             mysleep = (self.frequency*60) + random.randrange(0,120);
-            print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'            
+            print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'
             time.sleep(mysleep)
 
