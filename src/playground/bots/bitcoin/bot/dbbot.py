@@ -59,7 +59,7 @@ class DbBot(object):
             resbuy = buy(btctobuy*rbtc)
             print resbuy
             new_btc = my_btc + btctobuy
-            new_usd = my_usd - (btctobuy*curprice)
+            new_usd = my_usd - float(btctobuy*curprice)
             print now(), self.logstr, 'New wallet is approximately'
             print now(), 'USD: ', new_usd, 'BTC: ', new_btc
             db_store_wallet(self.wallet, new_btc, new_usd)
@@ -71,7 +71,7 @@ class DbBot(object):
                 ressell = sell(btctosell*rbtc)
                 print ressell
                 new_btc = my_btc - btctosell
-                new_usd = my_usd + (btctosell*curprice)
+                new_usd = my_usd + float(btctosell*curprice)
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(self.wallet, new_btc, new_usd)
