@@ -2,6 +2,8 @@ from func import *
 from dbadapter import *
 from sys import exit
 import random
+#parameters
+checkwalletconsistency=0
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow):
@@ -16,12 +18,22 @@ class DbBot(object):
         my_usd,my_btc=db_get_wallet(self.wallet)
         print now(), 'USD: ', my_usd, 'BTC: ',my_btc
         # now verifying that wallet is not outofsync with mtgox
-        wallets = get_wallets()
-        mtgox_usd = int(wallets['USD']['Balance']['value_int'])
-        mtgox_btc = int(wallets['BTC']['Balance']['value_int'])
-        if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
-            print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
-            exit()
+        if (checkwalletconsistency==1):
+            wallets = get_wallets()
+            mtgox_usd = int(wallets['USD']['Balance']['value_int'])
+            mtgox_btc = int(wallets['BTC']['Balance']['value_int'])
+            if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
+                print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
+                exit()
+
+                print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
+                print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
+                time.sleep(125)
+        else:
+            print now(),self.logstr, "wallet consistency check disabled."
+
+        print now(),self.logstr, "retrieving mtgox ticker..."
+        ticker2()
         '''
         if self.next_action=='sell':
             current_price = current_ask_price()

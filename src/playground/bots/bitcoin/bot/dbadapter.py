@@ -4,42 +4,43 @@ from conf import mysql_host, mysql_username, mysql_password, mysql_database, th_
 create_user="bitcoinbot"
 
 
-def db_get_avg():
+def db_get_avg(myinterval):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    query = ("select avg(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+th_day_interval+" DAY);")
+    query = ("select avg(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+str(myinterval)+" MINUTE);")
+    print query
     cursor.execute(query)
     myavg = cursor.fetchone()
     cursor.close()
     cnx.close()
     return myavg[0]
-    
-def db_get_thlow():
+
+def db_get_thlow(myinterval):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    query = ("select min(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+th_day_interval+" DAY);")
+    query = ("select min(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+str(myinterval)+" MINUTE);")
     cursor.execute(query)
     thlow = cursor.fetchone()
     cursor.close()
     cnx.close()
     return thlow[0]
 
-def db_get_thhigh():
+def db_get_thhigh(myinterval):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    query = ("select max(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+th_day_interval+" DAY);")
+    query = ("select max(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+str(myinterval)+" MINUTE);")
     cursor.execute(query)
     thhigh = cursor.fetchone()
     cursor.close()
     cnx.close()
     return thhigh[0]
-    
+
 def db_get_last():
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
@@ -51,7 +52,7 @@ def db_get_last():
     cursor.close()
     cnx.close()
     return last[0]
-	
+
 def db_get_wallet(mywallet):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
@@ -63,7 +64,7 @@ def db_get_wallet(mywallet):
     cursor.close()
     cnx.close()
     return wallet[0],wallet[1]
-    
+
 
 def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
@@ -81,68 +82,68 @@ def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):
     vol = vol.replace("BTC","")
     vol = vol.replace(",","")
     mynow = datetime.now()
-    myavg = db_get_avg()
-    thlow = db_get_thlow()
-    thhigh = db_get_thhigh()
-    
+    myavg = db_get_avg(th_day_interval*24*60)
+    thlow = db_get_thlow(th_day_interval*24*60)
+    thhigh = db_get_thhigh(th_day_interval*24*60)
+
     add_ticker = ("INSERT INTO pricevalue "
                   "(create_dt, price, high, low, volume, avgexchange, myavg, th_low, th_high, changepct, create_user, buy, sell, vwap) "
                   "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
     data_ticker = (mynow, last, high, low, vol, avg, myavg, thlow, thhigh, 0, create_user, buy, sell, vwap)
-    
+
     cursor.execute(add_ticker, data_ticker)
     cnx.commit()
-    
+
     cursor.close()
     cnx.close()
    #print "ticker inserted into database"
-   
-   
+
+
 def db_store_trade(direction, amount, price, marketorder):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    
+
     mynow = datetime.now()
     total = amount*price
-    
+
     add_trade = ("INSERT INTO trade "
                   "(direction, amount, price, total, marketorder, create_dt, create_user)"
                   "VALUES (%s, %s, %s, %s, %s, %s, %s)")
 
     data_trade = (direction, amount, price, total, marketorder, mynow, create_user)
-    
+
     cursor.execute(add_trade, data_trade)
     cnx.commit()
-    
+
     cursor.close()
     cnx.close()
     print "trade inserted into database"
-    
-    
+
+
 def db_store_wallet(name, btc, usd, eur):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    
+
     mynow = datetime.now()
-    
+
     marketprice_usd = float(db_get_last());
     marketvalue_usd = marketprice_usd * float(btc)
     total_usd       = float(usd) + marketvalue_usd
-    
+
     add_trade = ("INSERT INTO wallet "
                   "(name, btc, usd, eur, create_dt, create_user, marketprice_usd, marketvalue_usd, total_usd)"
                   "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
     data_trade = (name, btc, usd, eur, mynow, create_user, marketprice_usd, marketvalue_usd, total_usd)
-    
+
     cursor.execute(add_trade, data_trade)
     cnx.commit()
-    
+
     cursor.close()
     cnx.close()
     print "wallet inserted into database"
