@@ -52,7 +52,7 @@ class DbBot(object):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
             exit()
 
-        if (curprice<thlow) and (usdtobuy>0):
+        if (curprice<=thlow) and (usdtobuy>0):
             print now(), '*** Decided to BUY'
             btctobuy = (usdtobuy/curprice)
             print now(), ' Buying ', btctobuy, ' bitcoins...'
@@ -62,10 +62,10 @@ class DbBot(object):
             new_usd = my_usd - float(btctobuy*curprice)
             print now(), self.logstr, 'New wallet is approximately'
             print now(), 'USD: ', new_usd, 'BTC: ', new_btc
-            db_store_wallet(self.wallet, new_btc, new_usd)
+            db_store_wallet(self.wallet, new_btc, new_usd, 0)
 
         else:
-            if (curprice>thhigh) and (btctosell>0):
+            if (curprice>=thhigh) and (btctosell>0):
                 print now(), '*** Decided to SELL'
                 print now(), ' Selling ', btctosell, ' bitcoins...'
                 ressell = sell(btctosell*rbtc)
@@ -74,7 +74,7 @@ class DbBot(object):
                 new_usd = my_usd + float(btctosell*curprice)
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
-                db_store_wallet(self.wallet, new_btc, new_usd)
+                db_store_wallet(self.wallet, new_btc, new_usd, 0)
 
         '''
         if self.next_action=='sell':
