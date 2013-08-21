@@ -4,6 +4,7 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0
+parttotrade=4 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow):
@@ -34,6 +35,47 @@ class DbBot(object):
 
         print now(),self.logstr, "retrieving mtgox ticker..."
         ticker2()
+
+        # now retrieving all parameters to start trading decision
+        curprice  = db_get_last();
+        thlow     = db_get_thlow(self.timewindow);
+        thhigh    = db_get_thhigh(self.timewindow);
+        usdtobuy  = float(my_usd/parttotrade)
+        btctosell = float(my_btc/parttotrade)
+
+        print now(), '*** Parameters to start trading decision'
+        print now(), 'Frequency: ', self.frequency, 'Timewindow: ', self.timewindow
+        print now(), 'Curprice: ', curprice, '$ Th_low: ', thlow, '$ Th_high: ', thhigh, '$'
+        print now(), 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
+
+        if (thlow>thhigh):
+            print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
+            exit()
+
+        if (curprice<thlow) and (usdtobuy>0):
+            print now(), '*** Decided to BUY'
+            btctobuy = (usdtobuy/curprice)
+            print now(), ' Buying ', btctobuy, ' bitcoins...'
+            resbuy = buy(btctobuy*rbtc)
+            print resbuy
+            new_btc = my_btc + btctobuy
+            new_usd = my_usd - (btctobuy*curprice)
+            print now(), self.logstr, 'New wallet is approximately'
+            print now(), 'USD: ', new_usd, 'BTC: ', new_btc
+            db_store_wallet(self.wallet, new_btc, new_usd)
+
+        else:
+            if (curprice>thhigh) and (btctosell>0):
+                print now(), '*** Decided to SELL'
+                print now(), ' Selling ', btctosell, ' bitcoins...'
+                ressell = sell(btctosell*rbtc)
+                print ressell
+                new_btc = my_btc - btctosell
+                new_usd = my_usd + (btctosell*curprice)
+                print now(), self.logstr, 'New wallet is approximately'
+                print now(), 'USD: ', new_usd, 'BTC: ', new_btc
+                db_store_wallet(self.wallet, new_btc, new_usd)
+
         '''
         if self.next_action=='sell':
             current_price = current_ask_price()

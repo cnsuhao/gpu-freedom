@@ -10,7 +10,6 @@ def db_get_avg(myinterval):
                               database=mysql_database)
     cursor = cnx.cursor()
     query = ("select avg(price) from pricevalue where create_dt >= (NOW() - INTERVAL "+str(myinterval)+" MINUTE);")
-    print query
     cursor.execute(query)
     myavg = cursor.fetchone()
     cursor.close()
