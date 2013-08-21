@@ -10,7 +10,8 @@ class DbBot(object):
         self.timewindow = timewindow
 
     def run_once(self):
-	    '''
+        print now(), self.logstr, 'retrieving my wallet...'
+        '''
         wallets = get_wallets()
         my_usd = int(wallets['USD']['Balance']['value_int'])
         my_btc = int(wallets['BTC']['Balance']['value_int'])
