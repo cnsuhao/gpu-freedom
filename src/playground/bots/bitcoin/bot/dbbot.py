@@ -26,10 +26,9 @@ class DbBot(object):
             if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
                 print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
                 exit()
-
-                print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
-                print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
-                time.sleep(120+random.randrange(0,5));
+            print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
+            print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
+            time.sleep(120+random.randrange(0,5));
         else:
             print now(),self.logstr, "wallet consistency check disabled."
 
