@@ -57,11 +57,11 @@ class DbBot(object):
 
         print now(), self.logstr, 'Preliminary trading decision:'
         if (curprice<=thlow) and (usdtobuy>0.01):
-              curprice = current_bid_price();
+              curprice = current_bid_price()/rusd;
               print now(), self.logstr, 'If buying, current bid price is ',curprice
         else:
               if (curprice>=thhigh) and (btctosell>0.01):
-                 curprice = current_ask_price();
+                 curprice = current_ask_price()/rusd;
                  print now(), self.logstr, 'If selling, current ask price is ',curprice
               else:
                  print now(), self.logstr, 'Doing no trade.'
