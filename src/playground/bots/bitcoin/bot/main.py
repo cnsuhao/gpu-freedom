@@ -10,7 +10,7 @@ if __name__=='__main__':
     try:
         if len(sys.argv)==1:
             print "For help, type python ./main.py help"
-            
+
         elif sys.argv[1]=='wallets':
             wallets = get_wallets()
             for wallet in wallets:
@@ -84,13 +84,13 @@ if __name__=='__main__':
             mytimewindow = int(sys.argv[4])
             dbbot = DbBot(mywallet, myfrequency, mytimewindow)
             dbbot.run()
-        elif sys.argv[1]=='thresholds':            
+        elif sys.argv[1]=='thresholds':
             print " days:  "+str(th_day_interval)
             print " high:  "+str(get_thhigh())
             print " avg:   "+str(get_avg())
             print " low:   "+str(get_thlow())
             print " last:  "+str(get_last())
-                     
+
         elif sys.argv[1]=='help':
             print "***********************"
             print "* tiz bitcoin bot "+version+' *'
@@ -104,13 +104,13 @@ if __name__=='__main__':
             print " python main.py orders"
             print " python main.py thresholds"
             print " python main.py buy 0.01"
-            print " python main.py sell 0.01"            
+            print " python main.py sell 0.01"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
             print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes]"
-            print " python main.py dbbot shortterm 8 60 [1 hour]"
-            print " python main.py dbbot midterm 60 1440 [1 day]"
-            print " python main.py dbbot longterm 240 12960 [9 days]"
+            print " python main.py dbbot shortterm 16 120 [2 hours]"
+            print " python main.py dbbot midterm 120 2880 [2 day]"
+            print " python main.py dbbot longterm 480 12960 [9 days]"
             print ""
             print "Warning: this bot is Jack of all trades and master of none!"
             print "         Use at your own risk :-)"

@@ -3,7 +3,7 @@ from dbadapter import *
 from sys import exit
 import random
 #parameters
-checkwalletconsistency=0
+checkwalletconsistency=1
 parttotrade=4 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
@@ -29,7 +29,7 @@ class DbBot(object):
 
                 print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
                 print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
-                time.sleep(125)
+                time.sleep(120)+random.randrange(0,5);
         else:
             print now(),self.logstr, "wallet consistency check disabled."
 
@@ -52,12 +52,26 @@ class DbBot(object):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
             exit()
 
-        if (curprice<=thlow) and (usdtobuy>0):
+        print now(), self.logstr, 'Sleeping 125 seconds before taking trading decision.'
+        time.sleep(120)+random.randrange(0,5);
+
+        print now(), self.logstr, 'Preliminary trading decision'
+        if (curprice<=thlow) and (usdtobuy>0.01):
+              curprice = current_bid_price();
+              print now(), self.logstr, 'If buying, current bid price is ',curprice
+        else:
+              if (curprice>=thhigh) and (btctosell>0.01):
+                 curprice = current_ask_price();
+                 print now(), self.logstr, 'If selling, current ask price is ',curprice
+              else:
+                 print now(), self.logstr, 'Doing no trade.'
+
+        if (curprice<=thlow) and (usdtobuy>0.01):
             print now(), '*** Decided to BUY'
             btctobuy = (usdtobuy/curprice)
             print now(), ' Buying ', btctobuy, ' bitcoins...'
             resbuy = buy(btctobuy*rbtc)
-            print resbuy
+            print 'Buy result: ', resbuy
             new_btc = my_btc + btctobuy
             new_usd = my_usd - float(btctobuy*curprice)
             print now(), self.logstr, 'New wallet is approximately'
@@ -65,11 +79,11 @@ class DbBot(object):
             db_store_wallet(self.wallet, new_btc, new_usd, 0)
 
         else:
-            if (curprice>=thhigh) and (btctosell>0):
+            if (curprice>=thhigh) and (btctosell>0.01):
                 print now(), '*** Decided to SELL'
                 print now(), ' Selling ', btctosell, ' bitcoins...'
                 ressell = sell(btctosell*rbtc)
-                print ressell
+                print 'Sell result: ', ressell
                 new_btc = my_btc - btctosell
                 new_usd = my_usd + float(btctosell*curprice)
                 print now(), self.logstr, 'New wallet is approximately'
