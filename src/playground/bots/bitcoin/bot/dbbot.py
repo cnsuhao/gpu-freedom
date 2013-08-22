@@ -3,7 +3,7 @@ from dbadapter import *
 from sys import exit
 import random
 #parameters
-checkwalletconsistency=1
+checkwalletconsistency=0
 parttotrade=4 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
@@ -29,7 +29,7 @@ class DbBot(object):
 
                 print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
                 print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
-                time.sleep(120)+random.randrange(0,5);
+                time.sleep(120+random.randrange(0,5));
         else:
             print now(),self.logstr, "wallet consistency check disabled."
 
@@ -53,9 +53,9 @@ class DbBot(object):
             exit()
 
         print now(), self.logstr, 'Sleeping 125 seconds before taking trading decision.'
-        time.sleep(120)+random.randrange(0,5);
+        time.sleep(120+random.randrange(0,5));
 
-        print now(), self.logstr, 'Preliminary trading decision'
+        print now(), self.logstr, 'Preliminary trading decision:'
         if (curprice<=thlow) and (usdtobuy>0.01):
               curprice = current_bid_price();
               print now(), self.logstr, 'If buying, current bid price is ',curprice
