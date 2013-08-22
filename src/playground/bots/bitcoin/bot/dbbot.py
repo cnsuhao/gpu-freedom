@@ -4,7 +4,7 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0
-parttotrade=4 # buys or sells 1/parttotrade of the wallet amount
+parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow):
@@ -57,12 +57,12 @@ class DbBot(object):
 
         print now(), self.logstr, 'Preliminary trading decision:'
         if (curprice<=thlow) and (usdtobuy>0.01):
-              curprice = current_bid_price()/rusd;
-              print now(), self.logstr, 'If buying, current bid price is ',curprice
+              curprice = float(current_ask_price()/rusd);
+              print now(), self.logstr, 'If buying, current ask price is ',curprice
         else:
-              if (curprice>=thhigh) and (btctosell>0.01):
-                 curprice = current_ask_price()/rusd;
-                 print now(), self.logstr, 'If selling, current ask price is ',curprice
+              if (curprice>=thhigh) and (btctosell>0.001):
+                 curprice = float(current_bid_price()/rusd);
+                 print now(), self.logstr, 'If selling, current bid price is ',curprice
               else:
                  print now(), self.logstr, 'Doing no trade.'
 
@@ -79,7 +79,7 @@ class DbBot(object):
             db_store_wallet(self.wallet, new_btc, new_usd, 0)
 
         else:
-            if (curprice>=thhigh) and (btctosell>0.01):
+            if (curprice>=thhigh) and (btctosell>0.001):
                 print now(), '*** Decided to SELL'
                 print now(), ' Selling ', btctosell, ' bitcoins...'
                 ressell = sell(btctosell*rbtc)
