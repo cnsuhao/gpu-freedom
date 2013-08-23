@@ -5,6 +5,11 @@ GPU freedom codebase
 Server: added navigation bar to the left
 		added css stylesheet
 
+7.2013 git
+played around with
+/src/playground/finance - a bot to retrieve stock quotation
+/src/playground/powergrid - a bot to retrieve powergrid network frequency
+		
 5-6.2013 git
 played around with bitcoin bot under /src/playground/bitcoin
 
