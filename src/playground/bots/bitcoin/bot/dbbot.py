@@ -4,6 +4,7 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0
+refinecurrprice=0
 parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
@@ -54,13 +55,14 @@ class DbBot(object):
         print now(), self.logstr, 'Sleeping 125 seconds before taking trading decision.'
         time.sleep(120+random.randrange(0,5));
 
-        print now(), self.logstr, 'Preliminary trading decision:'
-        if (curprice<=thlow) and (usdtobuy>0.01):
-              curprice = float(current_ask_price()/rusd);
+        if refinecurrprice==1:
+            print now(), self.logstr, 'Preliminary trading decision:'
+            if (curprice<=thlow) and (usdtobuy>0.01):
+              curprice = float(current_ask_price())/rusd;
               print now(), self.logstr, 'If buying, current ask price is ',curprice
-        else:
+            else:
               if (curprice>=thhigh) and (btctosell>0.001):
-                 curprice = float(current_bid_price()/rusd);
+                 curprice = float(current_bid_price())/rusd;
                  print now(), self.logstr, 'If selling, current bid price is ',curprice
               else:
                  print now(), self.logstr, 'Doing no trade.'
