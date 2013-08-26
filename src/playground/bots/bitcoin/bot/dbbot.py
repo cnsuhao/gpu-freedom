@@ -8,7 +8,7 @@ refinecurrprice=0
 parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
-    def __init__(self, wallet, frequency, timewindow):
+    def __init__(self, wallet, frequency, timewindow, freshprices):
         self.logstr = 'dbbot('+wallet+'):'
         print now(), self.logstr, wallet, frequency, timewindow
         self.wallet = wallet
@@ -34,7 +34,8 @@ class DbBot(object):
             print now(),self.logstr, "wallet consistency check disabled."
 
         print now(),self.logstr, "retrieving mtgox ticker..."
-        ticker2()
+        if freshprices:
+           ticker2()
 
         # now retrieving all parameters to start trading decision
         curprice  = db_get_last();
