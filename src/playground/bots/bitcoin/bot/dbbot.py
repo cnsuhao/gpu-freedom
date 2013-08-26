@@ -34,8 +34,8 @@ class DbBot(object):
         else:
             print now(),self.logstr, "wallet consistency check disabled."
 
-        print now(),self.logstr, "retrieving mtgox ticker..."
         if (self.freshprices==1):
+           print now(),self.logstr, "retrieving mtgox ticker..."
            ticker2()
 
         # now retrieving all parameters to start trading decision
