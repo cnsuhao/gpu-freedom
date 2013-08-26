@@ -82,7 +82,8 @@ if __name__=='__main__':
             mywallet = sys.argv[2]
             myfrequency = int(sys.argv[3])
             mytimewindow = int(sys.argv[4])
-            dbbot = DbBot(mywallet, myfrequency, mytimewindow)
+            freshprice = int(sys.argv[5])
+            dbbot = DbBot(mywallet, myfrequency, mytimewindow, freshprice)
             dbbot.run()
         elif sys.argv[1]=='thresholds':
             print " days:  "+str(th_day_interval)
