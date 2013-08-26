@@ -14,6 +14,7 @@ class DbBot(object):
         self.wallet = wallet
         self.frequency = frequency
         self.timewindow = timewindow
+        self.freshprices = freshprices
 
     def run_once(self):
         print now(), self.logstr, 'retrieving my wallet...'
@@ -34,7 +35,7 @@ class DbBot(object):
             print now(),self.logstr, "wallet consistency check disabled."
 
         print now(),self.logstr, "retrieving mtgox ticker..."
-        if freshprices:
+        if (self.freshprices==1):
            ticker2()
 
         # now retrieving all parameters to start trading decision
