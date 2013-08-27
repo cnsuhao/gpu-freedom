@@ -117,7 +117,6 @@ File Tree structure for this package, codenamed freedom follows:
    /discochal     parsing and comparing users on hacker.org 
    /enigma        freepascal code to simulate an Enigma machine
    /ioc           index of coincidence code to gain insights in unknown ciphertext
-   /parlimanetsim parliament simulation with a quota of random indipendents
    /powergrid     bot that collects data about network frequency and other parameters relevant to the power grid
    /stereograms   code to calculate stereograms out of Z-pictures   
     

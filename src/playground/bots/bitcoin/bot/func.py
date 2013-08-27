@@ -15,9 +15,9 @@ gox = mtgox(key, secret, 'funny-bot-bitcoin')
 import traceback, cStringIO
 def get_err():
     f = cStringIO.StringIO( )
-    traceback.print_exc(file=f)
+    #traceback.print_exc(file=f)
     return f.getvalue( )
-        
+
 def now():
     return datetime.datetime.utcnow()
 
@@ -39,13 +39,13 @@ def ticker2():
 def get_wallets():
     info = gox.req('money/info', {})
     res = info['data']['Wallets']
-    
+
     usd = res['USD']['Balance']['display'].replace("$","")
     #eur = res['EUR']['Balance']['display'].replace("€","") # does not work, see first line with encoding
     eur = 0
     btc = res['BTC']['Balance']['display'].replace("BTC","")
     db_store_wallet('mtgox', btc, usd, eur)
-    
+
     return res
 
 def get_orders():
@@ -95,17 +95,17 @@ def lag():
     return gox.req('money/order/lag')
 
 def quote(ctype, amount):
-    return gox.req('BTCUSD/money/order/quote', {'amount': amount, 'type': ctype}) 
+    return gox.req('BTCUSD/money/order/quote', {'amount': amount, 'type': ctype})
 
 def current_bid_price():
     return quote('bid', rbtc)['data']['amount']
 
 def current_ask_price():
     return quote('ask', rbtc)['data']['amount']
-    
+
 def get_avg():
     return db_get_avg()
-    
+
 def get_thlow():
     return db_get_thlow()
 
