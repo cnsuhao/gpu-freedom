@@ -4,7 +4,7 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0
-refinecurrprice=0
+refinecurrprice=1
 parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
@@ -27,7 +27,7 @@ class DbBot(object):
             mtgox_btc = int(wallets['BTC']['Balance']['value_int'])
             if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
                 print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
-                exit()
+                #exit()
             print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
             print now(), self.logstr, 'Sleeping 125 seconds before attempting anything.'
             time.sleep(120+random.randrange(0,5));
@@ -52,7 +52,7 @@ class DbBot(object):
 
         if (thlow>thhigh):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
-            exit()
+            #exit()
 
         print now(), self.logstr, 'Sleeping 125 seconds before taking trading decision.'
         time.sleep(120+random.randrange(0,5));
@@ -60,11 +60,11 @@ class DbBot(object):
         if refinecurrprice==1:
             print now(), self.logstr, 'Preliminary trading decision:'
             if (curprice<=thlow) and (usdtobuy>0.01):
-              curprice = float(current_ask_price())/rusd;
+              curprice = float(current_ask_price()/rusd);
               print now(), self.logstr, 'If buying, current ask price is ',curprice
             else:
               if (curprice>=thhigh) and (btctosell>0.001):
-                 curprice = float(current_bid_price())/rusd;
+                 curprice = float(current_bid_price()/rusd);
                  print now(), self.logstr, 'If selling, current bid price is ',curprice
               else:
                  print now(), self.logstr, 'Doing no trade.'
@@ -120,8 +120,13 @@ class DbBot(object):
         while 1:
             try:
                 self.run_once()
+            except IOError as e:
+                print "I/O error({0}): {1}".format(e.errno, e.strerror)
+            except ValueError:
+                print "Could not convert data to an integer."
             except:
-                print now(), self.logstr, "Error - ", get_err()
+                print "Unexpected error:", sys.exc_info()[0]
+                #raise
 
             mysleep = (self.frequency*60) + random.randrange(0,120);
             print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'
