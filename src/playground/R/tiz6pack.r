@@ -47,3 +47,13 @@ sness <- function(x, sample=FALSE) {
 bmi <- function(weight, height) {
 	return(weight/height^2)
 }
+
+analyze <- function(x) {
+    cat(" mean:                 ")
+	cat(mean(x))
+	cat("\n standard deviation: ")
+	cat(sd(x))
+	cat("\n smoothness:         ")
+	cat(sness(x))
+	cat("\n")
+}

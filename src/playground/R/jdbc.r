@@ -17,3 +17,12 @@ f_conn <- dbConnect(drv, "jdbc:mysql://127.0.0.1:3306/finance", username, passwo
 f_tickerstable <- dbReadTable(f_conn, "tickers")
 f_vix  <- dbGetQuery(f_conn, "select value from tickers where name='VIX' order by id asc")
 f_sp   <- dbGetQuery(f_conn, "select value from tickers where name='GSPC' order by id asc")
+
+# analyze(b_price$price)
+# analyze(b_lastprice$price)
+#
+# analyze(p_freq$frequencyhz)
+# analyze(p_netdiff$networkdiff)
+#
+# analyze(f_sp$value)
+# analyze(f_vix$value)
