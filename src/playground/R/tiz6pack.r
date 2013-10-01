@@ -1,17 +1,7 @@
 # tiz6pack, a library with some utils for R
 # (c) by 2013 HB9TVM, source code is under GPL
 
-# This function retrieves a measure of smoothness for a given curve
-# This is similar concept to Variance.
-# Formula is
-# smoothness= Sum_i[ (x_i - ((x_i+1+x_i-1)/2)]/n or n-1 if sample is set to true
-# test with:
-# 
-#
-#  library(ISwR)
-#  snessvar(thuesen$blood.glucose)
-#  sness(thuesen$blood.glucose)
-snessvar <- function(x, sample=FALSE) {
+xbarcalc <- function(x) {
   N <- length(x)
   xbar <- 1:N
   
@@ -25,7 +15,22 @@ snessvar <- function(x, sample=FALSE) {
             xbar[i] = (x[i+1] + x[i-1])/2; 
 	   }
   }
-  
+  return(xbar)
+}
+
+# This function retrieves a measure of smoothness for a given curve
+# This is similar concept to Variance.
+# Formula is
+# smoothness= Sum_i[ (x_i - ((x_i+1+x_i-1)/2)]/n or n-1 if sample is set to true
+# test with:
+# 
+#
+#  library(ISwR)
+#  snessvar(thuesen$blood.glucose)
+#  sness(thuesen$blood.glucose)
+snessvar <- function(x, sample=FALSE) {
+  N <- length(x)
+  xbar <- xbarcalc(x)
   smoothsst = sum((x - xbar)^2)
   
   if (sample) {
@@ -41,6 +46,13 @@ snessvar <- function(x, sample=FALSE) {
 # This is similar to Standard Deviation
 sness <- function(x, sample=FALSE) {
    return( sqrt( snessvar(x, sample) ) )
+}
+
+# This is used as a function smoother to remove
+# ripples from functions
+smoother <- function(x, threshold, nbpasses) {
+
+
 }
 
 # body mass index
