@@ -51,8 +51,29 @@ sness <- function(x, sample=FALSE) {
 # This is used as a function smoother to remove
 # ripples from functions
 smoother <- function(x, threshold, nbpasses) {
-
-
+  N <- length(x)
+  xbar <- xbarcalc(x)
+  smoothness<-sness(x)
+  newx = 0
+  
+  dist = x - xbar  
+  for(i in 1:N) {
+       if (i==1) {
+			newx[1]=x[1];
+	   } else
+	   if (i==N) {
+	        newx[N]=x[N];  
+	   } else {
+            if (dist[i]>threshold*smoothness) {
+              newx[i] = x[i]-(dist[i]/2)
+			  newx[i+1] = (dist[i]/2)
+			} else {
+			  newx[i] = newx[i]+x[i]
+			}
+	   }
+  }
+  
+  return(newx)
 }
 
 # body mass index
