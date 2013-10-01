@@ -36,6 +36,7 @@ def ticker2():
                     res['vol']['display_short'])
     return res
 
+
 def get_wallets():
     info = gox.req('money/info', {})
     res = info['data']['Wallets']
