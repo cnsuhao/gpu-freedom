@@ -1,6 +1,7 @@
 # tiz6pack, a library with some utils for R
 # (c) by 2013 HB9TVM, source code is under GPL
 
+# helper function for smoothness routines
 xbarcalc <- function(x) {
   N <- length(x)
   xbar <- 1:N
@@ -56,18 +57,21 @@ sness <- function(x, sample=FALSE) {
 #
 # it smoothes a distance if it is threshold*sness(x) of the curve  x
 #
-# invariant (but does not work yet)
+# invariant 
 # sum(f_sp$value)
 # sum(smoother(f_sp$value,1.3,10))
+#> sum(f_sp$value)
+#[1] 93919.49
+# sum(smoother(f_sp$value, 1.3, 8))
+#[1] 93919.49
 #> analyze(f_sp$value)
 # mean:                 1677.134
 # standard deviation: 26.0068
 # smoothness:         6.511637
 #> analyze(smoother(f_sp$value, 1.3, 8))
-# mean:                 1679.109
-# standard deviation: 52.34892
-# smoothness:         4.766099
-# very strange smoothness decreased, but sd increased :-#
+# mean:                 1677.134
+# standard deviation: 24.78741
+# smoothness:         3.730078
 smoother <- function(x, threshold, nbpasses) {
   N <- length(x)
   xbar <- xbarcalc(x)
