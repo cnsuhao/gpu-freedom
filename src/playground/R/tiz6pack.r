@@ -4,7 +4,7 @@
 # helper function for smoothness routines
 xbarcalc <- function(x) {
   N <- length(x)
-  xbar <- 1:N
+  xbar <- numeric(N)
   
   for(i in 1:N) {
        if (i==1) {
@@ -76,7 +76,7 @@ smoother <- function(x, threshold, nbpasses) {
   N <- length(x)
   xbar <- xbarcalc(x)
   smoothness<-sness(x)
-  newx <- 1:N
+  newx <- numeric(N)
   
   for (pass in 1:nbpasses) {
     
