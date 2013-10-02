@@ -59,7 +59,15 @@ sness <- function(x, sample=FALSE) {
 # invariant (but does not work yet)
 # sum(f_sp$value)
 # sum(smoother(f_sp$value,1.3,10))
-
+#> analyze(f_sp$value)
+# mean:                 1677.134
+# standard deviation: 26.0068
+# smoothness:         6.511637
+#> analyze(smoother(f_sp$value, 1.3, 8))
+# mean:                 1679.109
+# standard deviation: 52.34892
+# smoothness:         4.766099
+# very strange smoothness decreased, but sd increased :-#
 smoother <- function(x, threshold, nbpasses) {
   N <- length(x)
   xbar <- xbarcalc(x)
