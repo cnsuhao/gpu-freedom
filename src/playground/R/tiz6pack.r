@@ -50,28 +50,52 @@ sness <- function(x, sample=FALSE) {
 
 # This is used as a function smoother to remove
 # ripples from functions
+# test with:
+# plot(f_sp$value)
+# plot(smoother(f_sp$value,1.3,10))
+#
+# it smoothes a distance if it is threshold*sness(x) of the curve  x
+#
+# invariant (but does not work yet)
+# sum(f_sp$value)
+# sum(smoother(f_sp$value,1.3,10))
+
 smoother <- function(x, threshold, nbpasses) {
   N <- length(x)
   xbar <- xbarcalc(x)
   smoothness<-sness(x)
-  newx = 0
+  newx <- 1:N
   
-  dist = x - xbar  
-  for(i in 1:N) {
+  for (pass in 1:nbpasses) {
+    
+	dist = x - xbar  
+	for(i in 1:N) {
+	   newx[i]=0
+	   
        if (i==1) {
 			newx[1]=x[1];
 	   } else
 	   if (i==N) {
 	        newx[N]=x[N];  
 	   } else {
-            if (dist[i]>threshold*smoothness) {
+            if (
+			    (dist[i]>threshold*smoothness) ||
+   			    (dist[i]<threshold*smoothness)
+			   ) {
               newx[i] = x[i]-(dist[i]/2)
-			  newx[i+1] = (dist[i]/2)
-			} else {
-			  newx[i] = newx[i]+x[i]
+			  x[i+1] = x[i+1] + (dist[i]/2)
+			  
+			  dist[i+1] = x[i+1] - xbar[i+1]
+			} 
+			else {
+			  newx[i] = x[i]
 			}
-	   }
-  }
+	   } # giant if block
+	   
+	} #i
+	
+    x = newx	
+  }  #pass
   
   return(newx)
 }
