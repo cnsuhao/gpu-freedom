@@ -124,5 +124,11 @@ analyze <- function(x) {
 	cat(sd(x))
 	cat("\n smoothness:         ")
 	cat(sness(x))
+	cat("\n summary: \n")
+	print(summary(x))
+	#cat("\n skewness: ")
+    #cat(skewness(x))
+	#cat("\n kurtosis: ")
+	#cat(kurtosis(x))
 	cat("\n")
 }
