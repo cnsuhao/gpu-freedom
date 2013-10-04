@@ -19,10 +19,9 @@ sigma = sqrt(log(v/(m^2)+1));
 
 # normal and lognormal series
 cmplognormal <- rlnorm(N, meanlog=mu, sdlog=sigma)
-cmpnormal<- rnorm(N, mean=bitcoinm, sd=bitcoinsd)
+cmpnormal<- rnorm(N, mean=m, sd=sd(x))
 
 # plots
-
 hist(cmpnormal, breaks=12, col = "lightyellow", border = "pink", main="", xlab="", ylab="")
 hist(cmplognormal, breaks=12, col = "lightblue", border = "pink", add=T, main="", xlab="", ylab="")
 hist(x,col= "gray", add=T, main="", xlab="", ylab="")

@@ -20,7 +20,7 @@ f_conn <- dbConnect(drv, "jdbc:mysql://127.0.0.1:3306/finance", username, passwo
 f_tickerstable <- dbReadTable(f_conn, "tickers")
 f_vix       <- dbGetQuery(f_conn, "select value from tickers where name='VIX' order by id asc")
 f_avg_vix   <- dbGetQuery(f_conn, "select DATE_FORMAT( create_dt,  '%Y-%m-%d' ) AS date, AVG(value) as usd from tickers where name='VIX' GROUP BY date ORDER BY date")
-f_sp        <- dbGetQuery(f_conn, "select value bfrom tickers where name='GSPC' order by id asc")
+f_sp        <- dbGetQuery(f_conn, "select value from tickers where name='GSPC' order by id asc")
 f_avg_sp    <- dbGetQuery(f_conn, "select DATE_FORMAT( create_dt,  '%Y-%m-%d' ) AS date, AVG(value) as usd from tickers where name='GSPC' GROUP BY date ORDER BY date")
 
 # analyze(b_price$price)
