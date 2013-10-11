@@ -4,9 +4,8 @@ from dbadapter import *
 from sys import exit
 import random
 #parameters
-checkwalletconsistency=0
-parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
-#refinecurrprice=0
+checkwalletconsistency=0 # causes interface to timeout
+parttotrade=2 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow, freshprices):
@@ -53,38 +52,23 @@ class DbBot(object):
         usdtobuy  = float(my_usd/parttotrade)
         btctosell = float(my_btc/parttotrade)
 
-        print now(),self.logstr, "Current parameters retrieved."
+        #print now(),self.logstr, "Current parameters retrieved."
         if (self.freshprices==1):
             db_store_ticker(curprice, thhigh, thlow, avg, 0, bid, ask, vol, 0)
 
-        print now(),self.logstr, "Storing data into local database."
+        #print now(),self.logstr, "Storing data into local database."
 
-        print now(), '*** Parameters to start trading decision'
-        print now(), 'Frequency: ', self.frequency, 'Timewindow: ', self.timewindow
-        print now(), 'Curprice: ', curprice, '$ Th_low: ', thlow, '$ Th_high: ', thhigh, '$'
-        print now(), 'Bid: ', bid, '$ Ask: ', ask, '$ Spread: ', (ask-bid), '$'
-        print now(), 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
+        print now(), '*** Parameters to start trading decision ***'
+        print 'frequency: ', self.frequency, 'Timewindow: ', self.timewindow
+        print 'mid: ', curprice, '$ thlow: ', thlow, '$ thhigh: ', thhigh, '$'
+        print 'bid: ', bid, '$ ask: ', ask, '$ spread: ', (ask-bid), '$'
+        print 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
+        print now(), '********************************************'
 
         if (thlow>thhigh):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
             exit()
 
-        #print now(), self.logstr, 'Sleeping 180 seconds before taking trading decision.'
-        #time.sleep(180+random.randrange(0,5));
-
-        '''
-        if refinecurrprice==1:
-            print now(), self.logstr, 'Preliminary trading decision:'
-            if (curprice<=thlow) and (usdtobuy>0.01):
-              curprice = float(current_ask_price()/rusd);
-              print now(), self.logstr, 'If buying, current ask price is ',curprice
-            else:
-              if (curprice>=thhigh) and (btctosell>0.001):
-                 curprice = float(current_bid_price()/rusd);
-                 print now(), self.logstr, 'If selling, current bid price is ',curprice
-              else:
-                 print now(), self.logstr, 'Doing no trade.'
-        '''
         if (ask<=thlow) and (usdtobuy>0.01):
             print now(), '*** Decided to BUY at ', ask, '$'
             btctobuy = (usdtobuy/ask)

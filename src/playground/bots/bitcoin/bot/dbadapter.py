@@ -114,7 +114,7 @@ def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol, arestrings=1):
 
     cursor.close()
     cnx.close()
-    print "ticker inserted into database"
+    #print "ticker inserted into database"
 
 
 def db_store_trade(direction, amount, price, marketorder):
