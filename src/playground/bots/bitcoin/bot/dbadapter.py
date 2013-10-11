@@ -126,6 +126,9 @@ def db_store_trade(direction, amount, price, marketorder):
     mynow = datetime.now()
     total = amount*price
 
+    if (direction=="BUY"):
+        total=-total
+
     add_trade = ("INSERT INTO trade "
                   "(direction, amount, price, total, marketorder, create_dt, create_user)"
                   "VALUES (%s, %s, %s, %s, %s, %s, %s)")
