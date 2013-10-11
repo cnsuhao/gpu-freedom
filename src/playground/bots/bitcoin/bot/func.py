@@ -98,11 +98,13 @@ def lag():
 def quote(ctype, amount):
     return gox.req('BTCUSD/money/order/quote', {'amount': amount, 'type': ctype})
 
+# error in interface bid/ask is inverted!
 def current_bid_price():
-    return quote('bid', rbtc)['data']['amount']
-
-def current_ask_price():
     return quote('ask', rbtc)['data']['amount']
+
+# error in interface bid/ask is inverted!
+def current_ask_price():
+    return quote('bid', rbtc)['data']['amount']
 
 def get_avg():
     return db_get_avg()

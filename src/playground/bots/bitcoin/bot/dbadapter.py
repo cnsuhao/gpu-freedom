@@ -16,6 +16,19 @@ def db_get_avg(myinterval):
     cnx.close()
     return myavg[0]
 
+
+def db_get_vol():
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
+    cursor = cnx.cursor()
+    query = ("select volume from pricevalue where id=(select max(id) from pricevalue);")
+    cursor.execute(query)
+    myvol = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+    return myvol[0]
+
 def db_get_thlow(myinterval):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
@@ -65,21 +78,26 @@ def db_get_wallet(mywallet):
     return wallet[0],wallet[1]
 
 
-def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol):
+def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol, arestrings=1):
+    #print "I am here 1"
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
 
-    last  = last.replace("$","")
-    high = high.replace("$","")
-    low  = low.replace("$","")
-    avg = avg.replace("$","")
-    vwap = vwap.replace("$","")
-    buy = buy.replace("$","")
-    sell = sell.replace("$","")
-    vol = vol.replace("BTC","")
-    vol = vol.replace(",","")
+    #print "I am here 2"
+    if arestrings==1:
+        last  = last.replace("$","")
+        high = high.replace("$","")
+        low  = low.replace("$","")
+        avg = avg.replace("$","")
+        vwap = vwap.replace("$","")
+        buy = buy.replace("$","")
+        sell = sell.replace("$","")
+        vol = vol.replace("BTC","")
+        vol = vol.replace(",","")
+
+    #print "I am here 3"
     mynow = datetime.now()
     myavg = db_get_avg(th_day_interval*24*60)
     thlow = db_get_thlow(th_day_interval*24*60)
