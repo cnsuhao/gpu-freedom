@@ -69,13 +69,11 @@ def sell(amount, price=None):
     if price is None:
         res=gox.req('BTCUSD/money/order/add', {'amount_int': amount, 'type': 'ask'})
         myamount = float(amount)/rbtc
-        db_store_trade("SELL", myamount, get_last(), 1)
         return res
     else:
         res=gox.req('BTCUSD/money/order/add', {'amount_int':amount, 'type': 'ask', 'price_int': price})
         myamount = float(amount)/rbtc
         myprice  = float(price)/rusd
-        db_store_trade("SELL", myamount, myprice, 0)
         return res
 
 def cancel(order_id):
