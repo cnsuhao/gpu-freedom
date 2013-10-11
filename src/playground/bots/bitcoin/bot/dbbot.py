@@ -59,9 +59,9 @@ class DbBot(object):
         #print now(),self.logstr, "Storing data into local database."
 
         print now(), '*** Parameters to start trading decision ***'
-        print 'frequency: ', self.frequency, 'Timewindow: ', self.timewindow
-        print 'mid: ', curprice, '$ thlow: ', thlow, '$ thhigh: ', thhigh, '$'
-        print 'bid: ', bid, '$ ask: ', ask, '$ spread: ', (ask-bid), '$'
+        print 'frequency: ', self.frequency, ' min. timewindow: ', self.timewindow, ' min.'
+        print 'mid: ', curprice, '$ thhigh: ', thhigh, '$ thlow: ', thlow, '$'
+        print 'spread: ', (ask-bid), '$ bid: ', bid, '$ ask: ', ask, '$'
         print 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
         print now(), '********************************************'
 
