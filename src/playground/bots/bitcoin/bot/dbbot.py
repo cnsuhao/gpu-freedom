@@ -40,8 +40,8 @@ class DbBot(object):
             curprice = (bid + ask) / 2
         else:
             curprice = db_get_last();
-            bid = curprice
-            ask = curprice
+            bid = db_get_bid();
+            ask = db_get_ask();
 
         print now(),self.logstr, "Current prices retrieved."
         # now retrieving all parameters to start trading decision

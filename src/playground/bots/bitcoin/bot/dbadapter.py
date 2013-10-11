@@ -65,6 +65,31 @@ def db_get_last():
     cnx.close()
     return last[0]
 
+
+def db_get_bid():
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
+    cursor = cnx.cursor()
+    query = ("select buy from pricevalue where id=(select max(id) from pricevalue);")
+    cursor.execute(query)
+    buy = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+    return buy[0]
+
+def db_get_ask():
+    cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
+                              host=mysql_host,
+                              database=mysql_database)
+    cursor = cnx.cursor()
+    query = ("select sell from pricevalue where id=(select max(id) from pricevalue);")
+    cursor.execute(query)
+    sell = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+    return sell[0]
+
 def db_get_wallet(mywallet):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
