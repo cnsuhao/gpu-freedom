@@ -4,8 +4,8 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0
-refinecurrprice=0
 parttotrade=3 # buys or sells 1/parttotrade of the wallet amount
+#refinecurrprice=0
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow, freshprices):
@@ -35,11 +35,12 @@ class DbBot(object):
             print now(),self.logstr, "wallet consistency check disabled."
 
         if (self.freshprices==1):
-           print now(),self.logstr, "retrieving mtgox ticker..."
-           ticker2()
+            curprice = (float(current_bid_price()/rusd) + float(current_ask_price()/rusd)) / 2
+        else:
+            curprice = db_get_last();
+
 
         # now retrieving all parameters to start trading decision
-        curprice  = db_get_last();
         thlow     = db_get_thlow(self.timewindow);
         thhigh    = db_get_thhigh(self.timewindow);
         usdtobuy  = float(my_usd/parttotrade)
@@ -54,9 +55,10 @@ class DbBot(object):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
             exit()
 
-        print now(), self.logstr, 'Sleeping 180 seconds before taking trading decision.'
-        time.sleep(180+random.randrange(0,5));
+        #print now(), self.logstr, 'Sleeping 180 seconds before taking trading decision.'
+        #time.sleep(180+random.randrange(0,5));
 
+        '''
         if refinecurrprice==1:
             print now(), self.logstr, 'Preliminary trading decision:'
             if (curprice<=thlow) and (usdtobuy>0.01):
@@ -68,7 +70,7 @@ class DbBot(object):
                  print now(), self.logstr, 'If selling, current bid price is ',curprice
               else:
                  print now(), self.logstr, 'Doing no trade.'
-
+        '''
         if (curprice<=thlow) and (usdtobuy>0.01):
             print now(), '*** Decided to BUY'
             btctobuy = (usdtobuy/curprice)
