@@ -105,7 +105,7 @@ class DbBot(object):
                 print "Unexpected error:", sys.exc_info()[0]
                 #raise
 
-            mysleep = (self.frequency*60) + random.randrange(0,120);
+            mysleep = (self.frequency*60) + random.randrange(0,300);
             print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'
             time.sleep(mysleep)
 
