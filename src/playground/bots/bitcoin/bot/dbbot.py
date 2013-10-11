@@ -92,6 +92,8 @@ class DbBot(object):
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(self.wallet, new_btc, new_usd, 0)
+            else:
+                print now(), self.logstr, 'Decided to wait...'
 
     def run(self):
         while 1:
