@@ -1,3 +1,4 @@
+from __future__ import division
 from func import *
 from dbadapter import *
 from sys import exit
