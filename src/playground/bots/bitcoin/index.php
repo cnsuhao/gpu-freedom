@@ -112,7 +112,7 @@
 
  echo "<table>"; 
  echo "<td>";
- $query="select * from pricevalue order by id desc LIMIT 20;";
+ $query="select * from pricevalue order by id desc LIMIT 10;";
  $result = mysql_query($query);
  $num = mysql_numrows($result);
  
@@ -223,6 +223,7 @@
  printWallet("shortterm");
  printWallet("midterm");
  printWallet("longterm");
+ printWallet("tiz");
  printWallet("mtgox");
  echo "</table>";
  echo "</td>";
