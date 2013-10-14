@@ -142,7 +142,7 @@ def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol, arestrings=1):
     #print "ticker inserted into database"
 
 
-def db_store_trade(direction, amount, price, marketorder):
+def db_store_trade(direction, amount, price, marketorder, description=""):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
@@ -155,10 +155,10 @@ def db_store_trade(direction, amount, price, marketorder):
         total=-total
 
     add_trade = ("INSERT INTO trade "
-                  "(direction, amount, price, total, marketorder, create_dt, create_user)"
-                  "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+                  "(direction, amount, price, total, marketorder, description, create_dt, create_user)"
+                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
-    data_trade = (direction, amount, price, total, marketorder, mynow, create_user)
+    data_trade = (direction, amount, price, total, marketorder, description, mynow, create_user)
 
     cursor.execute(add_trade, data_trade)
     cnx.commit()

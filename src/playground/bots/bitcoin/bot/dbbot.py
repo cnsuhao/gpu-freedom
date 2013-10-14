@@ -80,7 +80,7 @@ class DbBot(object):
             print now(), self.logstr, 'New wallet is approximately'
             print now(), 'USD: ', new_usd, 'BTC: ', new_btc
             db_store_wallet(self.wallet, new_btc, new_usd, 0)
-            db_store_trade('BUY', btctobuy, ask, 1)
+            db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
 
         else:
             if (bid>=thhigh) and (btctosell>0.001):
@@ -93,7 +93,7 @@ class DbBot(object):
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(self.wallet, new_btc, new_usd, 0)
-                db_store_trade('SELL', btctosell, bid, 1)
+                db_store_trade('SELL', btctosell, bid, 1, self.wallet)
             else:
                 print now(), self.logstr, 'Decided to wait...'
 
