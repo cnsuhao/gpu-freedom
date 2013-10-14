@@ -9,23 +9,109 @@
  include_once('utils/openflashchart/open_flash_chart_object.php');
  include("conf/config.inc.php");
 
+ mysql_connect($dbserver, $username, $password);
+@mysql_select_db($database) or die("Unable to select database");
+
+
+ function printWallet($name) {
+		$query="select * from wallet where (name='$name') and (id=(select max(w.id) from wallet w where w.name='$name'))";
+        $result = mysql_query($query);
+        
+		$id          = mysql_result($result, 0, 'id');
+		$btc         = mysql_result($result, 0, 'btc');
+		$usd         = mysql_result($result, 0, 'usd');
+		$price       = mysql_result($result, 0, 'marketprice_usd');
+		$total       = mysql_result($result, 0, 'total_usd');
+		$createdt       = mysql_result($result, 0, 'create_dt');
+		
+		echo "
+		<tr BGCOLOR=\"#FDD017\">
+		<td>$id</td>
+		<td>$name</td>
+		<td>$btc</td>
+		<td>$usd</td>
+		<td>$price</td>
+		<td>$total</td>
+		<td>$createdt</td>
+		</tr>
+		";
+ }
+
+ 
  echo "<p><tt>./mainloop.sh to update prices</tt></p>";
  
  echo "<table>";
  echo "<tr><td>";
  open_flash_chart_object( 500, 250, $dns_name . '/graph/lastprices.php');
- echo "</td><td>";
+ echo "</td>";
+
+ echo "<td>";
+ /* last trades done by bot */
+ $query="select * from trade order by id desc LIMIT 10;";
+ $result = mysql_query($query);
+ $num = mysql_numrows($result);
+ 
+ echo "
+ <table border='1'>
+ <tr>
+ <th>id</th>
+ <th>direction</th>
+ <th>amount</th>
+ <th>price</th>
+ <th>total</th>
+ <th>marketorder</th>
+ <th>description</th>
+ <th>create_dt</th>
+ </tr>
+ ";
+ 
+ $i=0;
+ while ($i<$num) {
+    $id          = mysql_result($result, $i, 'id');
+    $direction  = mysql_result($result, $i, 'direction');
+    $amount    = mysql_result($result, $i, 'amount');
+    $price     = mysql_result($result, $i, 'price');
+    $total       = mysql_result($result, $i, 'total');
+    $mo          = mysql_result($result, $i, 'marketorder');
+    $desc       = mysql_result($result, $i, 'description');
+    $createdt       = mysql_result($result, $i, 'create_dt');
+	
+	if ($direction=="BUY") {
+        $bgcolor = "#6698FF";
+    } else {
+        $bgcolor = "#E41B17";
+    }
+ 
+    echo "
+	<tr bgcolor='$bgcolor'>
+	<td>$id</td>
+	<td>$direction</td>
+	<td>$amount</td>
+	<td>$price</td>
+	<td>$total</td>
+	<td>$mo</td>
+	<td>$desc</td>
+	<td>$createdt</td>
+	</tr>
+	";
+	
+	$i++;
+ }
+ 
+ echo "</table></td>";
+
+ echo "<td>";
  open_flash_chart_object( 500, 250, $dns_name . '/graph/lastvolumes.php');
  echo "</td>";
+  
  echo '<td><img src="pictures/linuxbc.jpg" border=0 /></td>';
  echo "</tr>";
  echo "</table>";
  
  echo "<hr>";
- 
- mysql_connect($dbserver, $username, $password);
-@mysql_select_db($database) or die("Unable to select database");
 
+ echo "<table>"; 
+ echo "<td>";
  $query="select * from pricevalue order by id desc LIMIT 20;";
  $result = mysql_query($query);
  $num = mysql_numrows($result);
@@ -118,6 +204,30 @@
     $i++;
  }
  echo "</table>";
+ 
+ echo "</td>";
+ 
+ echo "<td>";
+ /* wallets*/
+ echo "<table border='1'>";
+ echo "<tr>
+      <th>id</th>
+	  <th>name</th>
+	  <th>btc</th>
+	  <th>usd</th>
+	  <th>marketprice</th>
+	  <th>total</th>
+	  <th>create_dt</th>
+      </tr>	  
+      ";
+ printWallet("shortterm");
+ printWallet("midterm");
+ printWallet("longterm");
+ printWallet("mtgox");
+ echo "</table>";
+ echo "</td>";
+ echo "</table>"; 
+ 
  
  mysql_close();
 ?>
