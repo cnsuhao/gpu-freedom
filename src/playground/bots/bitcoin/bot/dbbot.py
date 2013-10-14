@@ -71,7 +71,7 @@ class DbBot(object):
 
         if (ask<=thlow) and (usdtobuy>0.01):
             print now(), '*** Decided to BUY at ', ask, '$'
-            btctobuy = (usdtobuy/ask)
+            btctobuy = float(usdtobuy/ask)
             print now(), ' Buying ', btctobuy, ' bitcoins...'
             resbuy = buy(btctobuy*rbtc)
             print 'Buy result: ', resbuy
