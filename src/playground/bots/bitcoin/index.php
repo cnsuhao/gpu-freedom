@@ -22,6 +22,7 @@
 		$usd         = mysql_result($result, 0, 'usd');
 		$price       = mysql_result($result, 0, 'marketprice_usd');
 		$total       = mysql_result($result, 0, 'total_usd');
+		$bucket      = mysql_result($result, 0, 'bucket_usd');
 		$createdt       = mysql_result($result, 0, 'create_dt');
 		
 		echo "
@@ -32,6 +33,7 @@
 		<td>$usd</td>
 		<td>$price</td>
 		<td>$total</td>
+		<td>$bucket</td>
 		<td>$createdt</td>
 		</tr>
 		";
@@ -217,6 +219,7 @@
 	  <th>usd</th>
 	  <th>marketprice</th>
 	  <th>total</th>
+	  <th>bucket</th>
 	  <th>create_dt</th>
       </tr>	  
       ";
