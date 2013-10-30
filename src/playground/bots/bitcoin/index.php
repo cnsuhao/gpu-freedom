@@ -124,12 +124,14 @@
  <th>id</th>
  <th>create_dt</th>
  <th>price</th>
+ <th>low</th>
+ <th>high</th>
+ <th>volume</th>
+ <th></th>
  <th>bid</th>
  <th>ask</th>
  <th>spread</th>
- <th>volume</th>
- <th>buy</th>
- <th>sell</th>
+ <th></th>
  <th>vwap</th>
  <th>my avg</th>
  <th>avg exchange</th>
@@ -159,7 +161,7 @@
     $buy       = mysql_result($result, $i, 'buy');
     $sell      = mysql_result($result, $i, 'sell');
     $vwap       = mysql_result($result, $i, 'buy');
-	$spread    = $high-$low;
+	$spread    = $sell-$buy;
     
     $deltaavg  = abs($avg - $myavg);
     
@@ -190,11 +192,13 @@
     <td>$price</td>
     <td>$low</td>
     <td>$high</td>
-	<td>$spread</td>
-    <td>$volume</td>
+	<td>$volume</td>
+	<td></td>
     <td>$buy</td>
     <td>$sell</td>
-    <td>$vwap</td>
+    <td>$spread</td>
+	<td></td>
+	<td>$vwap</td>
     <td>$myavg</td>
     <td>$avg</td>
     <td>$deltaavg</td>
