@@ -5,7 +5,6 @@ from sys import exit
 import random
 #parameters
 checkwalletconsistency=0 # causes interface to timeout
-parttotrade=2 # buys or sells 1/parttotrade of the wallet amount
 
 class DbBot(object):
     def __init__(self, wallet, frequency, timewindow, freshprices):
@@ -18,8 +17,8 @@ class DbBot(object):
 
     def run_once(self):
         print now(), self.logstr, 'retrieving my wallet...'
-        my_usd,my_btc=db_get_wallet(self.wallet)
-        print now(), 'USD: ', my_usd, 'BTC: ',my_btc
+        my_usd,my_btc,my_bucket_usd=db_get_wallet(self.wallet)
+        print now(), 'USD: ', my_usd, '$ BTC: ',my_btc, 'Bucket: ', my_bucket_usd, '$'
         # now verifying that wallet is not outofsync with mtgox
         if (checkwalletconsistency==1):
             wallets = get_wallets()
@@ -49,8 +48,8 @@ class DbBot(object):
         thhigh    = db_get_thhigh(self.timewindow);
         avg       = db_get_avg(self.timewindow)
         vol       = db_get_vol()
-        usdtobuy  = float(my_usd/parttotrade)
-        btctosell = float(my_btc/parttotrade)
+        usdtobuy  = min(my_usd, my_bucket_usd)
+        btctosell = min(my_btc, float(my_bucket_usd/curprice))
 
         #print now(),self.logstr, "Current parameters retrieved."
         if (self.freshprices==1):
@@ -79,7 +78,7 @@ class DbBot(object):
             new_usd = my_usd - float(btctobuy*ask)
             print now(), self.logstr, 'New wallet is approximately'
             print now(), 'USD: ', new_usd, 'BTC: ', new_btc
-            db_store_wallet(self.wallet, new_btc, new_usd, 0)
+            db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
             db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
 
         else:

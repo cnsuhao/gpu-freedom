@@ -95,12 +95,12 @@ def db_get_wallet(mywallet):
                               host=mysql_host,
                               database=mysql_database)
     cursor = cnx.cursor()
-    query = ("select usd,btc from wallet where id=(select max(id) from wallet where name='"+mywallet+"');")
+    query = ("select usd,btc,bucket_usd from wallet where id=(select max(id) from wallet where name='"+mywallet+"');")
     cursor.execute(query)
     wallet = cursor.fetchone()
     cursor.close()
     cnx.close()
-    return wallet[0],wallet[1]
+    return wallet[0],wallet[1],wallet[2]
 
 
 def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol, arestrings=1):
@@ -168,7 +168,7 @@ def db_store_trade(direction, amount, price, marketorder, description=""):
     print "trade inserted into database"
 
 
-def db_store_wallet(name, btc, usd, eur):
+def db_store_wallet(name, btc, usd, eur, bucket=0):
     cnx = mysql.connector.connect(user=mysql_username, password=mysql_password,
                               host=mysql_host,
                               database=mysql_database)
@@ -181,10 +181,10 @@ def db_store_wallet(name, btc, usd, eur):
     total_usd       = float(usd) + marketvalue_usd
 
     add_trade = ("INSERT INTO wallet "
-                  "(name, btc, usd, eur, create_dt, create_user, marketprice_usd, marketvalue_usd, total_usd)"
-                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                  "(name, btc, usd, eur, create_dt, create_user, marketprice_usd, marketvalue_usd, total_usd, bucket_usd)"
+                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
-    data_trade = (name, btc, usd, eur, mynow, create_user, marketprice_usd, marketvalue_usd, total_usd)
+    data_trade = (name, btc, usd, eur, mynow, create_user, marketprice_usd, marketvalue_usd, total_usd, bucket)
 
     cursor.execute(add_trade, data_trade)
     cnx.commit()
