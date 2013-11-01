@@ -91,7 +91,7 @@ class DbBot(object):
                 new_usd = my_usd + float(btctosell*bid)
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
-                db_store_wallet(self.wallet, new_btc, new_usd, 0)
+                db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
                 db_store_trade('SELL', btctosell, bid, 1, self.wallet)
             else:
                 print now(), self.logstr, 'Decided to wait...'
