@@ -24,3 +24,14 @@ curve(pnorm(x), from=-4, to=4)
 curve(qnorm(x), from=-4, to=4)
 curve(rnorm(x), from=-4, to=4)
 plot(x,dbinom(x,size=50,prob=.33),type="h")
+
+
+x<-rnorm(50)
+mean(x)
+sd(x)
+var(x)
+median(x)
+quantile(x)
+
+pvec <- seq(0,1,0.1)
+quantile(x, pvec)
