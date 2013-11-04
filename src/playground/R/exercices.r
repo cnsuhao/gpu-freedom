@@ -87,5 +87,12 @@ t.test(expend~stature)
 var.test(expend~stature)
 # there is no evidence against the assumption that the two distributions have the same variance
 
+attach(intake)
+intake
+post-pre
+t.test(pre, post, paired=T)
+wilcox.test(pre,post, paired=T)
+
+
 
 
