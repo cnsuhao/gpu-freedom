@@ -1,3 +1,4 @@
+library(ISwR)
 print
 methods(print)
 aq <- edit(airquality)
@@ -77,10 +78,14 @@ quantile(daily.intake)
 t.test(daily.intake, mu=7725)
 
 #same as t.test, but no assumption on normal distribution, distribution simply symmetric around mu_0
-wilcox.test(daily.intake, mu=7725)
+#expend is described by stature: expend~stature 
+attach(energy)
+t.test(expend~stature)
+# the test is significant p<0.05, therefore expend is not described by stature
 
-
-
+#testing the variances
+var.test(expend~stature)
+# there is no evidence against the assumption that the two distributions have the same variance
 
 
 
