@@ -1,4 +1,3 @@
-library(ISwR)
 print
 methods(print)
 aq <- edit(airquality)
@@ -62,12 +61,24 @@ plot(sort(x), (1:n)/n,type="s",ylim=c(0,1))
 qqnorm(x)
 # bitcoin data after sourcing from jdbc.r
 qqnorm(b_price$price)
+qqnorm(b_avg_price$usd)
 
 #boxplot
 par(mfrow=c(1,2))
 boxplot(IgM)
 boxplot(log(IgM))
 par(mfrow=c(1,1))
+
+#t-test, testing if a sample has a particular mean mu
+daily.intake <- c(5260, 5470, 5640, 6180, 6390, 6515, 6805, 7515, 7515, 8230, 8770)
+mean(daily.intake)
+sd(daily.intake)
+quantile(daily.intake)
+t.test(daily.intake, mu=7725)
+
+#same as t.test, but no assumption on normal distribution, distribution simply symmetric around mu_0
+wilcox.test(daily.intake, mu=7725)
+
 
 
 

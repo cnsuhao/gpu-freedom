@@ -28,6 +28,6 @@ f_avg_sp    <- dbGetQuery(f_conn, "select DATE_FORMAT( create_dt,  '%Y-%m-%d' ) 
 #
 # analyze(p_freq$frequencyhz)
 # analyze(p_netdiff$networkdiff)
-#
+
 # analyze(f_sp$value)
 # analyze(f_vix$value)
