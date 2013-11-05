@@ -90,8 +90,19 @@ var.test(expend~stature)
 attach(intake)
 intake
 post-pre
+#paired=T if both measurements types were taken at the same time for the same patient
 t.test(pre, post, paired=T)
 wilcox.test(pre,post, paired=T)
+
+#linear regression
+attach(thuesen)
+object.model<-lm(short.velocity~blood.glucose)
+#short.velocity=1.098+0.022*blood.glucose
+summary(object.model)
+plot(blood.glucose,short.velocity)
+abline(object.model)
+fitted(object.model)
+resid(object.model)
 
 
 
