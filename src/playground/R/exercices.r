@@ -104,6 +104,13 @@ abline(object.model)
 fitted(object.model)
 resid(object.model)
 
+#correlation
+cor(blood.glucose,short.velocity)
+cor(blood.glucose,short.velocity,use="complete.obs")
+cor(thuesen,use="complete.obs")
+cor.test(blood.glucose, short.velocity)
+
+
 
 
 
