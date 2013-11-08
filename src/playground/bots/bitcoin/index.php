@@ -236,11 +236,18 @@
  printWallet("tiz");
  printWallet("mtgox");
  echo "</table>";
+ //from http://www.1archive.com/java/lunarphases/
+ echo "<br>";
+ echo '<center><applet width="400" height="168" align="middle" code="LunarPhases.class" CODEBASE="LunarPhases/"></center>';
  echo "</td>";
  echo "</table>"; 
  
  
  mysql_close();
-?>
+
+ 
+ 
+ ?>
+
 </body>
 </html>

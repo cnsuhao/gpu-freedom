@@ -1,0 +1,28 @@
+LunarPhases V1.0
+
+Place the files in this archive in a subdirectory off the directory where you
+keep your HTML files (e.g. name the subdirectory: LunarPhases). Add the
+following lines to the HTML file in which the applet will be displayed:
+
+<P ALIGN=CENTER><applet code="LunarPhases.class" CODEBASE="LunarPhases/"
+width="400" height="160" ALIGN="ABSMIDDLE"></applet></CENTER></P>
+
+That's it!
+
+You can test the applet using the included LunarPhases.htm file.
+
+
+Notes
+
+This applet displays the current phase of the moon and the time/date of the 
+next four major lunar phases. The current age of the moon, its distance and 
+apogee/perigee dates are also displayed. All times displayed are in UT except 
+for the clock which displays the local time.
+
+If anyone finds any bugs or problems with a specific browser (or version) drop 
+me a line.
+
+Gary Nugent
+gnugent@indigo.ie
+http://indigo.ie/~gnugent/dnso
+
