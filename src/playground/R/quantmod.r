@@ -16,3 +16,6 @@ chartSeries(AAPL)
 addMACD()
 addBBands()
 
+
+getSymbols("KO",src="yahoo") # Coca Cola
+barChart(KO)
