@@ -19,3 +19,5 @@ addBBands()
 
 getSymbols("KO",src="yahoo") # Coca Cola
 barChart(KO)
+getSymbols("TWTR",src="yahoo")
+TWTR

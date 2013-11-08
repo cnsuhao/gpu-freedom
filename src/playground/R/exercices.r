@@ -126,8 +126,14 @@ levels(agegroup) <- c("10-11","12-13","14-15")
 table(ageQ)
 table(agegroup)
 
+#working with dates
+stroke <- read.csv2( system.file("rawdata","stroke.csv", package="ISwR"), na.strings=".")
+names(stroke) <- tolower(names(stroke))
+head(stroke)
 
-
+stroke <- transform(stroke, died=as.Date(died, format("%d.%m.%Y")), dstr=as.Date(died, format("%d.%m.%Y")))
+summary(stroke$died)
+summary(stroke$dstr)
 
 
 
