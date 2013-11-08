@@ -110,6 +110,23 @@ cor(blood.glucose,short.velocity,use="complete.obs")
 cor(thuesen,use="complete.obs")
 cor.test(blood.glucose, short.velocity)
 
+#advanced data handling
+age <- subset(juul, age>=10 & age <=16)$age
+range(age)
+length(age)
+agegroup <- cut(age, seq(10,16,2), right=F, include.lowest=T)
+table(agegroup)
+
+q<-quantile(age, c(0, 0.25, 0.5, 0.75, 1))
+ageQ <- cut(age, q, include.lowest=T)
+table(ageQ)
+
+levels(ageQ) <- c("1st", "2nd", "3rd", "4th")
+levels(agegroup) <- c("10-11","12-13","14-15")
+table(ageQ)
+table(agegroup)
+
+
 
 
 
