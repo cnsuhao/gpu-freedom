@@ -27,3 +27,10 @@ TWTR
  library(quantstrat)
  ??quantstrat
 
+ 
+ # in stats package
+ library(stats)
+ ?fft
+ ?spectrum
+ spectrum(b_avg_price$usd)
+ 
