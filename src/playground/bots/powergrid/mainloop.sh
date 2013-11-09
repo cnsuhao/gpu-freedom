@@ -1,5 +1,5 @@
 #!/bin/bash
-for (( i=1; i<=16; i++ ))
+for (( ; ;  ))
 do
    ./frequencycollector_swissgrid.sh
    r=$(( $RANDOM % 1200 ));

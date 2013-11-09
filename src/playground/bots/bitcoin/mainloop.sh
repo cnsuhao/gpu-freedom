@@ -1,5 +1,5 @@
 #!/bin/bash
-for (( i=1; i<=16; i++ ))
+for (( ; ; ))
 do
    python ./bot/main.py ticker
    r=$(( $RANDOM % 1200 ));
