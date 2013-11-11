@@ -28,9 +28,12 @@ TWTR
  ??quantstrat
 
  
- # in stats package
- library(stats)
- ?fft
- ?spectrum
- spectrum(b_avg_price$usd)
- 
+# in stats package
+library(stats)
+?fft
+?spectrum
+spectrum(b_avg_price$usd)
+b_avg_price$usd-mean(b_avg_price$usd)
+spectrum(b_avg_price$usd-mean(b_avg_price$usd))
+fft(b_avg_price$usd)
+plot(fft(b_avg_price$usd), type="l") #eh?
