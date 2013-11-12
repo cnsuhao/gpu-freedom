@@ -40,7 +40,7 @@ class DbBot(object):
             bid = db_get_bid();
             ask = db_get_ask();
 
-        curprice = (bid + ask) / 2
+        curprice = float((bid + ask) / 2)
 
         print now(),self.logstr, "Current prices retrieved."
         # now retrieving all parameters to start trading decision
@@ -82,7 +82,7 @@ class DbBot(object):
             db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
 
         else:
-            if (bid>=thhigh) and (btctosell>0.001):
+            if (bid>=thhigh) and (btctosell>0.01):
                 print now(), '*** Decided to SELL at ', bid, '$'
                 print now(), ' Selling ', btctosell, ' bitcoins...'
                 ressell = sell(btctosell*rbtc)
