@@ -36,11 +36,11 @@ class DbBot(object):
         if (self.freshprices==1):
             bid = float(current_bid_price()/rusd)
             ask = float(current_ask_price()/rusd)
-            curprice = (bid + ask) / 2
         else:
-            curprice = db_get_last();
             bid = db_get_bid();
             ask = db_get_ask();
+
+        curprice = (bid + ask) / 2
 
         print now(),self.logstr, "Current prices retrieved."
         # now retrieving all parameters to start trading decision
