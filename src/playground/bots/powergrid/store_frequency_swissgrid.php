@@ -30,20 +30,21 @@
    }
    $hugepage = $hugepage . $lines[$i];
  }
- $table = return_between($hugepage, '<table class="data">', '</table>', INCL);
+ $table = return_between($hugepage, '<table cellspacing="0" style="border: 0pt;">', '</table>', INCL);
  echo "<br><b>Table</b><br>";
  echo $table;
  
  $fh = fopen("frequencygraph.html", 'w');
- fwrite($fh, "$table");
+ //fwrite($fh, "$table");
+ fwrite($fh, "$hugepage");
  fclose($fh);
  
  echo "<br><b>Strings</b><br>";
  
- $frequencystr = return_between($frequencystr, '<span>', '</span>', EXCL);;
+ $frequencystr = return_between($frequencystr, '<span>&nbsp;', '</span>', EXCL);;
  echo "*$frequencystr*<br>";
  
- $netdiffstr = return_between($netdiffstr, '<span>', '</span>', EXCL);;
+ $netdiffstr = return_between($netdiffstr, '<span>&nbsp;', '</span>', EXCL);;
  echo "*$netdiffstr*<br>";
 
  echo "<br><b>Values</b><br>";

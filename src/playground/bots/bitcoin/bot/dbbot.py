@@ -105,7 +105,7 @@ class DbBot(object):
             except ValueError:
                 print "Could not convert data to an integer."
             except:
-                print "Unexpected error:", sys.exc_info()[0]
+                print "Unexpected error!" #, sys.exc_info()[0]
                 #raise
 
             mysleep = (self.frequency*60) + random.randrange(0,300);
