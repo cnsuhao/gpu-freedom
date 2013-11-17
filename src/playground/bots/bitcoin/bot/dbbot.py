@@ -68,31 +68,35 @@ class DbBot(object):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
             exit()
 
-        if (ask<=thlow) and (usdtobuy>0.01):
-            print now(), '*** Decided to BUY at ', ask, '$'
-            btctobuy = float(usdtobuy/ask)
-            print now(), ' Buying ', btctobuy, ' bitcoins...'
-            resbuy = buy(btctobuy*rbtc)
-            print 'Buy result: ', resbuy
-            new_btc = my_btc + btctobuy
-            new_usd = my_usd - float(btctobuy*ask)
-            print now(), self.logstr, 'New wallet is approximately'
-            print now(), 'USD: ', new_usd, 'BTC: ', new_btc
-            db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
-            db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
-
-        else:
-            if (bid>=thhigh) and (btctosell>0.01):
-                print now(), '*** Decided to SELL at ', bid, '$'
-                print now(), ' Selling ', btctosell, ' bitcoins...'
-                ressell = sell(btctosell*rbtc)
-                print 'Sell result: ', ressell
-                new_btc = my_btc - btctosell
-                new_usd = my_usd + float(btctosell*bid)
+        if (ask<=thlow):
+            print now(), 'I would like to buy...'
+            if (usdtobuy>0.01):
+                print now(), '*** Decided to BUY at ', ask, '$'
+                btctobuy = float(usdtobuy/ask)
+                print now(), ' Buying ', btctobuy, ' bitcoins...'
+                resbuy = buy(btctobuy*rbtc)
+                print 'Buy result: ', resbuy
+                new_btc = my_btc + btctobuy
+                new_usd = my_usd - float(btctobuy*ask)
                 print now(), self.logstr, 'New wallet is approximately'
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
-                db_store_trade('SELL', btctosell, bid, 1, self.wallet)
+                db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
+
+        else:
+            if (bid>=thhigh):
+                print now(), 'I would like to sell...'
+                if (btctosell>0.01):
+                    print now(), '*** Decided to SELL at ', bid, '$'
+                    print now(), ' Selling ', btctosell, ' bitcoins...'
+                    ressell = sell(btctosell*rbtc)
+                    print 'Sell result: ', ressell
+                    new_btc = my_btc - btctosell
+                    new_usd = my_usd + float(btctosell*bid)
+                    print now(), self.logstr, 'New wallet is approximately'
+                    print now(), 'USD: ', new_usd, 'BTC: ', new_btc
+                    db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
+                    db_store_trade('SELL', btctosell, bid, 1, self.wallet)
             else:
                 print now(), self.logstr, 'Decided to wait...'
 
