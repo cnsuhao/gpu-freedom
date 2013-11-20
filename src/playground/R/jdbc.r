@@ -31,3 +31,6 @@ f_avg_sp    <- dbGetQuery(f_conn, "select DATE_FORMAT( create_dt,  '%Y-%m-%d' ) 
 
 # analyze(f_sp$value)
 # analyze(f_vix$value)
+
+# csv export example
+write.table(b_avg_price,file="bitcoin_price.csv",sep=";",row.names=T)
