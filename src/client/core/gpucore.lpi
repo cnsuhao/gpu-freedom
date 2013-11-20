@@ -37,7 +37,6 @@
         <Filename Value="gpucore.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gpucore"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="67"/>
@@ -206,6 +205,7 @@
       <Unit23>
         <Filename Value="coreloops.pas"/>
         <UnitName Value="coreloops"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="129"/>

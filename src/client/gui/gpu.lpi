@@ -233,10 +233,11 @@
       <Unit20>
         <Filename Value="..\lib\own\coreservices\coreconfigurations.pas"/>
         <UnitName Value="coreconfigurations"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="58"/>
-        <CursorPos X="58" Y="81"/>
+        <TopLine Value="16"/>
+        <CursorPos X="34" Y="19"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -430,7 +431,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="jobmanagementforms"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="72"/>
