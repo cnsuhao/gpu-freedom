@@ -20,7 +20,8 @@
  echo "<td>";
  open_flash_chart_object( 500, 250, $dns_name . '/graph/lastnetdiff.php');
  echo "</td>";
- echo '<td><img src="pictures/pylons.jpg" border=0 /></td>';
+ //echo '<td><img src="pictures/pylons.jpg" border=0 /></td>';
+ echo "<td></td>";
  echo "</tr>";
  echo "</table>";
  
