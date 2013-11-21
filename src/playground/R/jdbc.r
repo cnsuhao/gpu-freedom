@@ -1,12 +1,15 @@
 library(RJDBC);
-source("D:\\xampp\\htdocs\\gpu_freedom\\src\\playground\\R\\config.r")
-drv <- JDBC("com.mysql.jdbc.Driver", "D:\\jdbc\\mysql-connector-java-5.1.5-bin.jar",identifier.quote="`");
+drive="D:"
+source(paste(drive,"\\xampp\\htdocs\\gpu_freedom\\src\\playground\\R\\config.r",sep=""))
+drv <- JDBC("com.mysql.jdbc.Driver", paste(drive,"\\jdbc\\mysql-connector-java-5.1.5-bin.jar",sep=""),identifier.quote="`");
 
 b_conn  <- dbConnect(drv, "jdbc:mysql://127.0.0.1:3306/bitcoin", username, password);
 b_pricetable <- dbReadTable(b_conn, "pricevalue")
 b_price      <- dbGetQuery(b_conn, "select price from pricevalue order by id asc")
 b_last_price  <- dbGetQuery(b_conn, "select price from pricevalue where create_dt>(NOW() - INTERVAL 7 DAY)  order by id asc")
 b_avg_price   <- dbGetQuery(b_conn, "SELECT DATE_FORMAT( create_dt,  '%Y-%m-%d' ) AS date, AVG( price ) as usd  FROM pricevalue GROUP BY date ORDER BY date")
+
+b_avg_price_last_60 <- dbGetQuery(b_conn, "SELECT DATE_FORMAT( create_dt,  '%Y-%m-%d' ) AS date, AVG( price ) as usd  FROM pricevalue GROUP BY date ORDER BY date LIMIT 60")
 
 p_conn      <- dbConnect(drv, "jdbc:mysql://127.0.0.1:3306/powergrid", username, password);
 p_freqtable <- dbReadTable(p_conn, "tbfrequency")
