@@ -7,3 +7,6 @@ moon(jday)
 phase = moon()$phase
 
 
+# full moon
+fm=jd(2013,12,17)
+print(moon(fm)$phase)
