@@ -1,5 +1,5 @@
 library(RJDBC);
-drive="D:"
+drive="C:"
 source(paste(drive,"\\xampp\\htdocs\\gpu_freedom\\src\\playground\\R\\config.r",sep=""))
 drv <- JDBC("com.mysql.jdbc.Driver", paste(drive,"\\jdbc\\mysql-connector-java-5.1.5-bin.jar",sep=""),identifier.quote="`");
 
