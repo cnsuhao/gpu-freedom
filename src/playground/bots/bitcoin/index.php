@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-if ($_SESSION['userbot'] == "") die("Please login");
+if ($_SESSION['userbot'] == "") die("<html><body><a href='../session/login.php'>Please login</a></body></html>");
 ?>
 <html>
 <head>
