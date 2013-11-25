@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+if ($_SESSION['userbot'] == "") die("Please login");
+?>
 <html>
 <head>
 <meta http-equiv="refresh" content="180" />
@@ -236,9 +240,13 @@
  printWallet("tiz");
  printWallet("mtgox");
  echo "</table>";
+ 
+ /*
  //from http://www.1archive.com/java/lunarphases/
  echo "<br>";
  echo '<center><applet width="400" height="168" align="middle" code="LunarPhases.class" CODEBASE="LunarPhases/"></center>';
+ */
+ 
  echo "</td>";
  echo "</table>"; 
  

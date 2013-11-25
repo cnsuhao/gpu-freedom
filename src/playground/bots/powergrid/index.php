@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+if ($_SESSION['userbot'] == "") die("Please login");
+?>
 <html>
 <head>
 <meta http-equiv="refresh" content="180" />

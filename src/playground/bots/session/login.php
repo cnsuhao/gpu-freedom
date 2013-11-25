@@ -1,4 +1,5 @@
 <html>
+<title>Login</title>
 <body>
 <form method="post" action="login_2.php">
 <b>Username:</b><br>
