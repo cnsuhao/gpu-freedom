@@ -2,7 +2,7 @@
 <html>
 <body>
 <?php
-include("config.inc.php");
+include("login.inc.php");
 $name=mysql_real_escape_string($_POST['name']);
 $pwd=mysql_real_escape_string($_POST['pwd']);
 If ($name=="") exit;
@@ -10,8 +10,10 @@ If ($name=="") exit;
 if (($name==$username) && ($pwd==$password)) {
     echo "<b>login ok :-)</b>";
 	$_SESSION['userbot'] = $name;
+	$_SESSION['userpwd'] = $pwd;
 } else {
     $_SESSION['userbot'] = "";
+	$_SESSION['userpwd'] = "";
 	die("<b>login failed</b>");
 }
 

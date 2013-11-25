@@ -1,6 +1,8 @@
 <?php 
 session_start(); 
-if ($_SESSION['userbot'] == "") die("<html><body><a href='../session/login.php'>Please login</a></body></html>");
+include("../session/login.inc.php");
+if (($_SESSION['userbot'] <> $username) && ($_SESSION['userpwd'] <> $password)) 
+   die("<html><body><a href='../session/login.php'>Please login</a></body></html>");
 ?>
 <html>
 <head>
