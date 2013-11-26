@@ -88,6 +88,21 @@ if __name__=='__main__':
                 db_store_wallet(from_wallet, from_btc, from_usd, 0, from_bucket_usd)
                 db_store_wallet(to_wallet, to_btc, to_usd, 0, to_bucket_usd)
 
+        elif sys.argv[1]=='move_usd':
+            usdtomove=float(sys.argv[2])
+            from_wallet=sys.argv[3]
+            to_wallet=sys.argv[4]
+
+            from_usd,from_btc,from_bucket_usd=db_get_wallet(from_wallet)
+            if usdtomove>from_usd:
+                print 'Error, can not move so many USD, max is ', from_usd
+            else:
+                to_usd,to_btc,to_bucket_usd=db_get_wallet(to_wallet)
+                to_usd = to_usd + usdtomove
+                from_usd = from_usd - usdtomove
+                db_store_wallet(from_wallet, from_btc, from_usd, 0, from_bucket_usd)
+                db_store_wallet(to_wallet, to_btc, to_usd, 0, to_bucket_usd)
+
 
         elif sys.argv[1]=='cancel':
             order_id = sys.argv[2]
