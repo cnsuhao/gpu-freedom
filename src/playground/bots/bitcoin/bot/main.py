@@ -73,6 +73,22 @@ if __name__=='__main__':
                 db_store_wallet(my_wallet, new_btc, new_usd, 0, my_bucket_usd)
                 db_store_trade('SELL', btctosell, bid, 1, my_wallet)
 
+        elif sys.argv[1]=='move_btc':
+            btctomove=float(sys.argv[2])
+            from_wallet=sys.argv[3]
+            to_wallet=sys.argv[4]
+
+            from_usd,from_btc,from_bucket_usd=db_get_wallet(from_wallet)
+            if btctomove>from_btc:
+                print 'Error, can not move so many BTC, max is ', from_btc
+            else:
+                to_usd,to_btc,to_bucket_usd=db_get_wallet(to_wallet)
+                to_btc = to_btc + btctomove
+                from_btc = from_btc - btctomove
+                db_store_wallet(from_wallet, from_btc, from_usd, 0, from_bucket_usd)
+                db_store_wallet(to_wallet, to_btc, to_usd, 0, to_bucket_usd)
+
+
         elif sys.argv[1]=='cancel':
             order_id = sys.argv[2]
             print cancel(order_id)
@@ -142,6 +158,8 @@ if __name__=='__main__':
             print " python main.py thresholds"
             print " python main.py buy 40 [wallet] {price}"
             print " python main.py sell 0.01 [wallet] {price}"
+            print " python main.py move_btc 0.01 [from_wallet] [to_wallet]"
+            print " python main.py move_usd 50 [from_wallet] [to_wallet]"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
             print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes] [freshprices]"
