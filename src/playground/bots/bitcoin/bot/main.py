@@ -60,7 +60,9 @@ if __name__=='__main__':
                 price = None
                 bid = db_get_bid()
 
-            if my_btc<btctosell:
+            if btctosell<0.01:
+                print 'Error, need to sell at least 0.01 BTC!'
+            elif my_btc<btctosell:
                 print 'Error, I have only', my_btc, 'BTC available...'
             else:
                 print sell(amount, price)
