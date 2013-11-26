@@ -5,6 +5,7 @@ from stablebot import StableBot
 from rampbot import RampBot
 from dbbot import DbBot
 from conf import version, th_day_interval
+from dbadapter import *
 
 if __name__=='__main__':
     try:
@@ -22,20 +23,53 @@ if __name__=='__main__':
                     'amount: ', order['amount']['display']
 
         elif sys.argv[1]=='buy':
-            amount = int(float(sys.argv[2])*rbtc)
-            if len(sys.argv)>=4:
-                price = int(float(sys.argv[3])*rusd)
+            usdtobuy=float(sys.argv[2])
+            my_wallet=sys.argv[3]
+            if len(sys.argv)>=5:
+                price = int(float(sys.argv[4])*rusd)
+                ask=float(sys.argv[4])
             else:
                 price = None
-            print buy(amount, price)
+                ask=db_get_ask()
+            my_usd,my_btc,my_bucket_usd=db_get_wallet(my_wallet)
+            if usdtobuy>my_usd:
+                print 'Error, I have only', my_usd, '$ available...'
+            else:
+                btctobuy=float(usdtobuy/ask)
+                if btctobuy<0.01:
+                    print 'Error, need to buy at least 0.01 BTC, you tried to buy '+btctobuy
+                else:
+                    amount = int(float(btctobuy)*rbtc)
+                    print buy(amount, price)
+                    new_btc = my_btc + btctobuy
+                    new_usd = my_usd - float(btctobuy*ask)
+                    print now(), 'New wallet is approximately'
+                    print now(), 'USD: ', new_usd, 'BTC: ', new_btc
+                    db_store_wallet(my_wallet, new_btc, new_usd, 0, my_bucket_usd)
+                    db_store_trade('BUY', btctobuy, ask, 1, my_wallet)
 
         elif sys.argv[1]=='sell':
-            amount = int(float(sys.argv[2])*rbtc)
-            if len(sys.argv)>=4:
-                price = int(float(sys.argv[3])*rusd)
+            btctosell=float(sys.argv[2])
+            my_wallet=sys.argv[3]
+            amount = int(btctosell*rbtc)
+            my_usd,my_btc,my_bucket_usd=db_get_wallet(my_wallet)
+            if len(sys.argv)>=5:
+                price = int(float(sys.argv[4])*rusd)
+                bid = sys.argv[4]
             else:
                 price = None
-            print sell(amount, price)
+                bid = db_get_bid()
+
+            if my_btc<btctosell:
+                print 'Error, I have only', my_btc, 'BTC available...'
+            else:
+                print sell(amount, price)
+                new_btc = my_btc - btctosell
+                new_usd = my_usd + float(btctosell*bid)
+                print now(), 'New wallet is approximately'
+                print now(), 'USD: ', new_usd, 'BTC: ', new_btc
+                db_store_wallet(my_wallet, new_btc, new_usd, 0, my_bucket_usd)
+                db_store_trade('SELL', btctosell, bid, 1, my_wallet)
 
         elif sys.argv[1]=='cancel':
             order_id = sys.argv[2]
@@ -104,8 +138,8 @@ if __name__=='__main__':
             print " python main.py wallets"
             print " python main.py orders"
             print " python main.py thresholds"
-            print " python main.py buy 0.01"
-            print " python main.py sell 0.01"
+            print " python main.py buy 40 [wallet] {price}"
+            print " python main.py sell 0.01 [wallet] {price}"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
             print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes] [freshprices]"
