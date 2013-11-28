@@ -12,8 +12,8 @@ if __name__=='__main__':
         if len(sys.argv)==1:
             print "For help, type python ./main.py help"
 
-        elif sys.argv[1]=='wallets':
-            wallets = get_wallets()
+        elif sys.argv[1]=='sync_wallets':
+            wallets = sync_wallets()
             for wallet in wallets:
                 print wallet, wallets[wallet]['Balance']['display']
 
@@ -170,7 +170,7 @@ if __name__=='__main__':
             print ""
             print "Usage:"
             print " python main.py ticker"
-            print " python main.py wallets"
+            print " python main.py sync_wallets"
             print " python main.py orders"
             print " python main.py thresholds"
             print " python main.py buy 40 [wallet] {price}"

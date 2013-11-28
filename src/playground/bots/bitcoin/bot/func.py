@@ -2,7 +2,7 @@
 import urllib2, json, datetime, time
 from mtgox import mtgox
 from conf import key, secret, proxy, rbtc, rusd
-from dbadapter import db_store_ticker, db_store_trade, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last, db_store_wallet
+from dbadapter import db_store_ticker, db_store_trade, db_get_avg, db_get_thhigh, db_get_thlow, db_get_last, db_store_wallet, db_get_wallet, db_adjust_wallet_usd, db_adjust_wallet_btc
 
 if proxy:
     myproxy = urllib2.ProxyHandler({'http': proxy})
@@ -37,7 +37,7 @@ def ticker2():
     return res
 
 
-def get_wallets():
+def sync_wallets():
     info = gox.req('money/info', {})
     res = info['data']['Wallets']
 
@@ -46,6 +46,49 @@ def get_wallets():
     eur = 0
     btc = res['BTC']['Balance']['display'].replace("BTC","")
     db_store_wallet('mtgox', btc, usd, eur)
+
+    # compute adjustment
+    total_usd,total_btc,total_bucket = db_get_wallet("total")
+    mt_usd, mt_btc, mt_bucket = db_get_wallet("mtgox")
+
+    adjust_usd = mt_usd - total_usd
+    adjust_btc = mt_btc - total_btc
+
+    print ""
+    print "USD adjustment:", adjust_usd, "$"
+    print "BTC adjustmnet:", adjust_btc, "BTC"
+
+    if (adjust_usd==0) & (adjust_btc==0):
+        print "mtgox and total wallet already synchronized :-)"
+        return res
+
+    print ""
+
+    if db_adjust_wallet_usd("shortterm", adjust_usd)==1:
+        print "USD adjustment done on shortterm portfolio"
+    elif db_adjust_wallet_usd("midterm", adjust_usd)==1:
+        print "USD adjustment done on midterm portfolio"
+    elif db_adjust_wallet_usd("longterm", adjust_usd)==1:
+        print "USD adjustment done on longterm portfolio"
+    elif db_adjust_wallet_usd("tiz", adjust_usd)==1:
+        print "USD adjustment done on tiz portfolio"
+    else:
+        print "Could not perform USD adjustment, try to move all USD in one portfolio!"
+        adjust_usd=0
+
+    if db_adjust_wallet_btc("shortterm", adjust_btc)==1:
+        print "BTC adjustment done on shortterm portfolio"
+    elif db_adjust_wallet_btc("midterm", adjust_btc)==1:
+        print "BTC adjustment done on midterm portfolio"
+    elif db_adjust_wallet_btc("longterm", adjust_btc)==1:
+        print "BTC adjustment done on longterm portfolio"
+    elif db_adjust_wallet_btc("tiz", adjust_btc)==1:
+        print "BTC adjustment done on tiz portfolio"
+    else:
+        print "Could not perform BTC adjustment, try to move all BTC in one portfolio!"
+        adjust_btc=0
+
+    db_store_wallet('total', total_btc+adjust_btc, total_usd+adjust_usd, 0)
 
     return res
 

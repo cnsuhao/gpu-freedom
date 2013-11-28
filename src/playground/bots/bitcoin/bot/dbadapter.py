@@ -102,6 +102,25 @@ def db_get_wallet(mywallet):
     cnx.close()
     return wallet[0],wallet[1],wallet[2]
 
+def db_adjust_wallet_usd(name, usd):
+    my_usd,my_btc,my_bucket=db_get_wallet(name)
+
+    if (my_usd+usd)>0:
+        db_store_wallet(name, my_btc,my_usd+usd,0)
+        return 1
+    else:
+        return 0
+
+def db_adjust_wallet_btc(name, btc):
+    my_usd,my_btc,my_bucket=db_get_wallet(name)
+
+    if (my_btc+btc)>0:
+        db_store_wallet(name, my_btc+btc,my_usd,0)
+        return 1
+    else:
+        return 0
+
+
 def db_store_total_wallet():
     short_usd,short_btc,short_bucket_usd=db_get_wallet("shortterm")
     mid_usd,mid_btc,mid_bucket_usd=db_get_wallet("midterm")
@@ -203,4 +222,4 @@ def db_store_wallet(name, btc, usd, eur, bucket=0):
 
     cursor.close()
     cnx.close()
-    print "wallet inserted into database"
+    print "wallet", name, "inserted into database"
