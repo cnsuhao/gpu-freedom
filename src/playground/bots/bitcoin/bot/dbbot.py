@@ -82,6 +82,7 @@ class DbBot(object):
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
                 db_store_trade('BUY', btctobuy, ask, 1, self.wallet)
+                db_store_total_wallet()
 
         else:
             if (bid>=thhigh):
@@ -97,6 +98,7 @@ class DbBot(object):
                     print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                     db_store_wallet(self.wallet, new_btc, new_usd, 0, my_bucket_usd)
                     db_store_trade('SELL', btctosell, bid, 1, self.wallet)
+                    db_store_total_wallet()
             else:
                 print now(), self.logstr, 'Decided to wait...'
 
