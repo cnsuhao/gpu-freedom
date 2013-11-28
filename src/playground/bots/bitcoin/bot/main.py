@@ -72,6 +72,7 @@ if __name__=='__main__':
                 print now(), 'USD: ', new_usd, 'BTC: ', new_btc
                 db_store_wallet(my_wallet, new_btc, new_usd, 0, my_bucket_usd)
                 db_store_trade('SELL', btctosell, bid, 1, my_wallet)
+                db_store_total_wallet()
 
         elif sys.argv[1]=='move_btc':
             btctomove=float(sys.argv[2])

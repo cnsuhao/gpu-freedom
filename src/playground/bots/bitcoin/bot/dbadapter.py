@@ -102,6 +102,18 @@ def db_get_wallet(mywallet):
     cnx.close()
     return wallet[0],wallet[1],wallet[2]
 
+def db_store_total_wallet():
+    short_usd,short_btc,short_bucket_usd=db_get_wallet("shortterm")
+    mid_usd,mid_btc,mid_bucket_usd=db_get_wallet("midterm")
+    long_usd,long_btc,long_bucket_usd=db_get_wallet("longterm")
+    tiz_usd,tiz_btc,tiz_bucket_usd=db_get_wallet("tiz")
+
+    total_usd = short_usd + mid_usd + long_usd + tiz_usd
+    total_btc = short_btc + mid_btc + long_btc + tiz_btc
+
+    db_store_wallet("total", total_btc, total_usd, 0)
+
+
 
 def db_store_ticker(last, high, low, avg, vwap, buy, sell, vol, arestrings=1):
     #print "I am here 1"

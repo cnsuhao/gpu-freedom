@@ -242,6 +242,7 @@ if (($_SESSION['userbot'] <> $username) || ($_SESSION['userpwd'] <> $password))
  printWallet("midterm");
  printWallet("longterm");
  printWallet("tiz");
+ printWallet("total");
  printWallet("mtgox");
  echo "</table>";
  
