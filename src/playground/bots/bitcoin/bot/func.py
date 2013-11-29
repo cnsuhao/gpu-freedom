@@ -62,6 +62,7 @@ def sync_wallets():
         print "mtgox and total wallet already synchronized :-)"
         return res
 
+
     print ""
 
     if db_adjust_wallet_usd("shortterm", adjust_usd)==1:

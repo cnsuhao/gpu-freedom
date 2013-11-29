@@ -22,6 +22,9 @@ if __name__=='__main__':
                 print order['oid'], order['status'], order['type'], 'price: ', order['price']['display'], \
                     'amount: ', order['amount']['display']
 
+        elif sys.argv[1]=="total":
+            db_store_total_wallet()
+
         elif sys.argv[1]=='buy':
             usdtobuy=float(sys.argv[2])
             my_wallet=sys.argv[3]
