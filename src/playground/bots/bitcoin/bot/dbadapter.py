@@ -106,7 +106,7 @@ def db_adjust_wallet_usd(name, usd):
     my_usd,my_btc,my_bucket=db_get_wallet(name)
 
     if (my_usd+usd)>0:
-        db_store_wallet(name, my_btc,my_usd+usd,0)
+        db_store_wallet(name, my_btc,my_usd+usd,0,my_bucket)
         return 1
     else:
         return 0
@@ -115,7 +115,7 @@ def db_adjust_wallet_btc(name, btc):
     my_usd,my_btc,my_bucket=db_get_wallet(name)
 
     if (my_btc+btc)>0:
-        db_store_wallet(name, my_btc+btc,my_usd,0)
+        db_store_wallet(name, my_btc+btc,my_usd,0,my_bucket)
         return 1
     else:
         return 0
