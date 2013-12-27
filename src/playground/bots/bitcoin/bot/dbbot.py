@@ -63,10 +63,10 @@ class DbBot(object):
         print 'mid: ', curprice, '$ thhigh: ', thhigh, '$ thlow: ', thlow, '$'
         print 'spread: ', (ask-bid), '$ bid: ', bid, '$ ask: ', ask, '$'
         print 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
-        print 'Stop loss', stoploss, 'USD'
+        print 'Stop loss:', self.stoploss, 'USD'
         print now(), '********************************************'
 
-        if (curprice<stoploss):
+        if (curprice<self.stoploss):
             print now(), 'Price is ', price, 'and is lower than stoploss! ', stoploss
             print now(), 'Selling immediately ', my_btc, 'BTC'
             ressell = sell(my_btc*rbtc)
