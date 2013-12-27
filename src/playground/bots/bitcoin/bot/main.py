@@ -155,7 +155,8 @@ if __name__=='__main__':
             myfrequency = int(sys.argv[3])
             mytimewindow = int(sys.argv[4])
             freshprice = int(sys.argv[5])
-            dbbot = DbBot(mywallet, myfrequency, mytimewindow, freshprice)
+            stoploss = int(sys.argv[6])
+            dbbot = DbBot(mywallet, myfrequency, mytimewindow, freshprice, stoploss)
             dbbot.run()
         elif sys.argv[1]=='thresholds':
             print " days:  "+str(th_day_interval)
@@ -181,10 +182,10 @@ if __name__=='__main__':
             print " python main.py move_usd 50 [from_wallet] [to_wallet]"
             print " python main.py stablebot 0.01 2 buy 110.0 0.01"
             print " python main.py rampbot 0.01 2 buy 110.0 0.01"
-            print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes] [freshprices]"
-            print " python main.py dbbot shortterm 2 180 [3 hours] 1"
-            print " python main.py dbbot midterm 3 360 [6 hours] 0"
-            print " python main.py dbbot longterm 3 1440 [1 days] 0"
+            print " python main.py dbbot [wallet] [frequency in minutes] [time window in minutes] [freshprices] [stoploss in USD]"
+            print " python main.py dbbot shortterm 2 180 [3 hours] 1 600"
+            print " python main.py dbbot midterm 3 360 [6 hours] 0 600"
+            print " python main.py dbbot longterm 3 1440 [1 days] 0 600"
             print ""
             print "Warning: this bot is Jack of all trades and master of none!"
             print "         Use at your own risk :-)"

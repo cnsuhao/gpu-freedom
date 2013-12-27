@@ -7,13 +7,14 @@ import random
 checkwalletconsistency=0 # causes interface to timeout
 
 class DbBot(object):
-    def __init__(self, wallet, frequency, timewindow, freshprices):
+    def __init__(self, wallet, frequency, timewindow, freshprices, stoploss):
         self.logstr = 'dbbot('+wallet+'):'
         print now(), self.logstr, wallet, frequency, timewindow
         self.wallet = wallet
         self.frequency = frequency
         self.timewindow = timewindow
         self.freshprices = freshprices
+        self.stoploss = stoploss
 
     def run_once(self):
         print now(), self.logstr, 'retrieving my wallet...'
@@ -26,7 +27,7 @@ class DbBot(object):
             mtgox_btc = int(wallets['BTC']['Balance']['value_int'])
             if (my_usd>mtgox_usd) or (my_btc>mtgox_btc):
                 print now(), 'Internal error, exiting bot: strategy wallet has more than mtgox wallet!' 'USD: ', my_usd, 'BTC: ',my_btc, 'mtgox_USD', mtgox_usd, 'mtgox_BTC', mtgox_btc
-                exit()
+                os._exit()
             print now(), self.logstr, 'Wallet '+self.wallet+' is consistent with mtgox one.'
             print now(), self.logstr, 'Sleeping 180 seconds before attempting anything.'
             time.sleep(180+random.randrange(0,5));
@@ -62,11 +63,22 @@ class DbBot(object):
         print 'mid: ', curprice, '$ thhigh: ', thhigh, '$ thlow: ', thlow, '$'
         print 'spread: ', (ask-bid), '$ bid: ', bid, '$ ask: ', ask, '$'
         print 'USDtobuy: ', usdtobuy, '$ BTCtosell: ', btctosell, ' BTC'
+        print 'Stop loss', stoploss, 'USD'
         print now(), '********************************************'
+
+        if (curprice<stoploss):
+            print now(), 'Price is ', price, 'and is lower than stoploss! ', stoploss
+            print now(), 'Selling immediately ', my_btc, 'BTC'
+            ressell = sell(my_btc*rbtc)
+            print 'Sell result: ', ressell
+            db_store_wallet(self.wallet, 0, my_usd+float(my_btc*curprice), 0, my_bucket_usd)
+            db_store_trade('SELL', my_btc, curprice, 1, self.wallet)
+            db_store_total_wallet()
+            os._exit()
 
         if (thlow>thhigh):
             print now(), 'Internal error, exiting bot: (thlow>thhigh) thlow: ', thlow, ' thhigh: ', thhigh
-            exit()
+            os._exit()
 
         if (ask<=thlow):
             print now(), 'I would like to buy...'
