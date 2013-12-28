@@ -11,6 +11,8 @@ if (($name==$username) && ($pwd==$password)) {
     echo "<b>login ok :-)</b>";
 	$_SESSION['userbot'] = $name;
 	$_SESSION['userpwd'] = $pwd;
+	
+	js_redirect("../bitcoin/index.php");
 } else {
     $_SESSION['userbot'] = "";
 	$_SESSION['userpwd'] = "";
