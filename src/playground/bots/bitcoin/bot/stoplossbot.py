@@ -7,7 +7,7 @@ import random
 class StopLossBot(object):
     def __init__(self, wallet, frequency, freshprices, stoploss):
         self.logstr = 'stoplossbot('+wallet+'):'
-        print now(), self.logstr, wallet, frequency, timewindow
+        print now(), self.logstr, wallet, frequency
         self.wallet = wallet
         self.frequency = frequency
         self.freshprices = freshprices
