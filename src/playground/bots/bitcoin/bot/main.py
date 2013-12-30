@@ -4,6 +4,7 @@ from func import *
 from stablebot import StableBot
 from rampbot import RampBot
 from dbbot import DbBot
+from stoplossbot import StopLossBot
 from conf import version, th_day_interval
 from dbadapter import *
 
@@ -158,6 +159,13 @@ if __name__=='__main__':
             stoploss = int(sys.argv[6])
             dbbot = DbBot(mywallet, myfrequency, mytimewindow, freshprice, stoploss)
             dbbot.run()
+        elif sys.argv[1]=='stoplossbot':
+            mywallet = sys.argv[2]
+            myfrequency = int(sys.argv[3])
+            freshprice = int(sys.argv[4])
+            stoploss = int(sys.argv[5])
+            dbbot = StopLossBot(mywallet, myfrequency, freshprice, stoploss)
+            dbbot.run()
         elif sys.argv[1]=='thresholds':
             print " days:  "+str(th_day_interval)
             print " high:  "+str(get_thhigh())
@@ -186,6 +194,8 @@ if __name__=='__main__':
             print " python main.py dbbot shortterm 2 180 [3 hours] 1 600"
             print " python main.py dbbot midterm 3 360 [6 hours] 0 600"
             print " python main.py dbbot longterm 3 1440 [1 days] 0 600"
+            print " python main.py stoplossbot [wallet] [frequency in minutes] [freshprices] [stoploss in USD]"
+            print " python main.py stoplossbot tiz 2 0 750"
             print ""
             print "Warning: this bot is Jack of all trades and master of none!"
             print "         Use at your own risk :-)"

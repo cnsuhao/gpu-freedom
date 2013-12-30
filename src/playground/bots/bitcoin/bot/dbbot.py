@@ -124,9 +124,10 @@ class DbBot(object):
                 print "Could not convert data to an integer."
             except:
                 print "Unexpected error!" #, sys.exc_info()[0]
+                print "Error({0}): {1}".format(e.errno, e.strerror)
                 #raise
 
-            mysleep = (self.frequency*60) + random.randrange(0,300);
+            mysleep = (self.frequency*60) + random.randrange(0,120);
             print now(), self.logstr, 'Sleeping for '+str(mysleep)+' seconds...'
             time.sleep(mysleep)
 
