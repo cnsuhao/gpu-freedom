@@ -1,4 +1,4 @@
-		Copyright (C) 2002-2013  The GPU Development Team
+		Copyright (C) 2002-2014  The GPU Development Team
 		    contact us at gpu-world@lists.sourceforge.net
 
 WARNING: Source code is available at http://gpu.sourceforge.net in the zip package, 
