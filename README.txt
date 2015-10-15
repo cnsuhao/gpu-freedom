@@ -1,5 +1,5 @@
 GPU, a Global Processing Unit
-(c) 2002-2014 the GPU Development Team
+(c) 2002-2015 the GPU Development Team
 
 Most source is under GNU General Public License (see GPL_license.txt).
 The PPL is a modified GPL license to prohibit military use (see PPL_license.txt). 
@@ -115,6 +115,7 @@ File Tree structure for this package, codenamed freedom follows:
 /playground       code which could become a plugin or a frontend of GPU
    /bitcoin       code to help in bitcoin trading
    /discochal     parsing and comparing users on hacker.org 
+   /glpk          linear programming examples
    /enigma        freepascal code to simulate an Enigma machine
    /ioc           index of coincidence code to gain insights in unknown ciphertext
    /powergrid     bot that collects data about network frequency and other parameters relevant to the power grid
