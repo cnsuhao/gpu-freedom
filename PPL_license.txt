@@ -1,5 +1,5 @@
                 PPL - THE PACIFIST PUBLIC LICENSE - VERSION 1.1
-               Copyright (C) 2002-2015  The GPU Development Team
+               Copyright (C) 2002-2016  The GPU Development Team
 
 # Contact us at gpu-world@lists.sourceforge.net
 # Source code is available under GPL at http://gpu.sourceforge.net as zip

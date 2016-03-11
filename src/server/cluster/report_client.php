@@ -16,6 +16,8 @@
 
 */
 include("../utils/utils.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
 $nodename = getparam('nodename', '');
 $nodeid   = getparam('nodeid', '');

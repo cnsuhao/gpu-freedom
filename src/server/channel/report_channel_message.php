@@ -2,11 +2,13 @@
 /*
   This PHP script stores a message from a client into TBCHANNEL
   
-  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  Source code is under GPL, (c) 2002-2016 the Global Processing Unit Team
   
 */
 include("../utils/utils.inc.php");
 include("../conf/config.inc.php");
+ if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
 $nodename = getparam('nodename', '');
 $nodeid   = getparam('nodeid', '');

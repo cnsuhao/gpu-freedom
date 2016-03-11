@@ -2,10 +2,12 @@
 /*
  This class is used to report a job result to the server.
 
- Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+ Source code is under GPL, (c) 2002-2016 the Global Processing Unit Team
 */
 include("../utils/utils.inc.php");
 include("../utils/constants.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
 $jobqueueid     = getparam('jobqueueid', '');
 $jobid          = getparam('jobid', '');

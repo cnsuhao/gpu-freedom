@@ -2,6 +2,9 @@
 
 include_once( '../utils/openflashchart/open-flash-chart.php' );
 include("../conf/config.inc.php");
+include("../utils/utils.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
  // preparing data for chart
  mysql_connect($dbserver, $username, $password);
@@ -13,7 +16,7 @@ include("../conf/config.inc.php");
     mysql_close();
     exit();
  } else {
-  $num=mysql_numrows($result); 
+  $num=mysql_num_rows($result); 
  }
 
  $bar = new bar_outline( 50, '#9933CC', '#8010A0' );

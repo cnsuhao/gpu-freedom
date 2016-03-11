@@ -1,14 +1,14 @@
 object GPUMainApp: TGPUMainApp
-  Left = 132
+  Left = 332
   Height = 84
-  Top = 123
+  Top = 321
   Width = 517
   Caption = 'GPU II'
   ClientHeight = 84
   ClientWidth = 517
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '1.0.2.0'
+  LCLVersion = '0.9.30.4'
   Visible = True
   object sbtnChat: TSpeedButton
     Left = 8

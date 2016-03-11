@@ -7,6 +7,7 @@
 
 include_once("../utils/utils.inc.php");
 include_once("ack_job.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
 
 
 function check_if_job_already_reported($jobqueueid) {

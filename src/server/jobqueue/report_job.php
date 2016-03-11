@@ -4,10 +4,12 @@
  Internally, the server will create a TBJOBDEFINITION entry and several TBJOBQUEUE entries.
  Later, the server will distribute the TBJOBQUEUE entries to clients willing to compute it.
 
- Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+ Source code is under GPL, (c) 2002-2016 the Global Processing Unit Team
 */
 include("../utils/utils.inc.php");
 include("../utils/constants.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
 $jobid      = getparam('jobid', '');
 $jobqueueid = getparam('jobqueueid', '');

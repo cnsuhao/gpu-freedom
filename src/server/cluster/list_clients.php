@@ -3,7 +3,7 @@
   This PHP script retrieves the clients which are currently registered with this server
   and displays it as a HTML page.
   
-  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  Source code is under GPL, (c) 2002-2016 the Global Processing Unit Team
   
 */
 
@@ -11,6 +11,8 @@
  include('../utils/sql2xml/xsl.php');
  include('../utils/utils.inc.php');
  include('../utils/constants.inc.php');
+ if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
  $nodeid = getparam("nodeid", "");
  if ($nodeid=="") $nodeclause = ""; else $nodeclause = "and nodeid<>'$nodeid'";

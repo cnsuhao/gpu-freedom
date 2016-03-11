@@ -8,7 +8,7 @@
  * @param string  $structure - XML hierarchy
  *                             (at which column the inner XML starts)
  */
- 
+  
 function sql2xml($sql, $level_list, $structure = 0) {
     include("../conf/config.inc.php"); 
 

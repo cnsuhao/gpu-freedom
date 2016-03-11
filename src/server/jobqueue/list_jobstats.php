@@ -11,6 +11,7 @@
  include('../utils/sql2xml/sql2xml.php');
  include('../utils/sql2xml/xsl.php'); 
  include("../conf/config.inc.php");	
+ if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
 
  function retrieve_count($query) {
 	// a connection needs to be established
@@ -44,7 +45,7 @@
 			   where $selectclause;
 			  ";
  $resultjobs = mysql_query($queryjobs);
- if ($resultjobs=="") $num=0; else $num=mysql_numrows($resultjobs); 
+ if ($resultjobs=="") $num=0; else $num=mysql_num_rows($resultjobs); 
 
  for ($i=0; $i<$num; $i++) {
 	$jobdefinitionid  = mysql_result($resultjobs, $i, 'jobdefinitionid');

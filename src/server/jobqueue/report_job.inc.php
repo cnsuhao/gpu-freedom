@@ -6,6 +6,8 @@
 */
 
 include_once("../utils/utils.inc.php");
+if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
 function report_job($jobid, $jobqueueid, $job, $nodename, $nodeid, $workunitjob, $workunitresult, $nbrequests, $tagworkunitjob, $tagworkunitresult, $requireack, $jobtype, $ip) {
     include("../conf/config.inc.php");	

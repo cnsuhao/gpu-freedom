@@ -2,13 +2,15 @@
 /*
   This PHP script retrieves the current status of a single job queue.
   
-  Source code is under GPL, (c) 2002-2013 the Global Processing Unit Team
+  Source code is under GPL, (c) 2002-2016 the Global Processing Unit Team
   
 */
  include("../utils/utils.inc.php");	
  include('../utils/sql2xml/sql2xml.php');
  include('../utils/sql2xml/xsl.php'); 
  include("../conf/config.inc.php");	
+ if (getPHPVersion()>=50500) include_once('../utils/mydql2i/mysql2i.class.php');
+
 
  $xml   = getparam('xml', false); 
  $jobqueueid = getparam('jobqueueid', "");
