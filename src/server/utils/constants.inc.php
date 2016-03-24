@@ -4,7 +4,7 @@
 */
 
 // current server version
-$server_version = 0.1;
+$server_version = 0.2;
 
 
 // [Cluster Management]

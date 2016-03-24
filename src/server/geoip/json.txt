@@ -1,0 +1,4 @@
+array(4) { ["city"]=> string(10) "Pregassona" 
+           ["country"]=> array(2) { ["name"]=> string(11) "Switzerland" ["code"]=> string(2) "CH" } 
+		   ["location"]=> array(3) { ["latitude"]=> float(46.0186) ["longitude"]=> float(8.9865) ["time_zone"]=> string(13) "Europe/Zurich" } 
+		   ["ip"]=> string(14) "212.243.72.167" }

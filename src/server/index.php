@@ -36,7 +36,6 @@ echo "</td>";
 echo "</tr>";
 echo "</table>";
 
-
 ?>
 <?php include "bottom.inc.html" ?>
 </td></tr>
