@@ -5,8 +5,18 @@
 	
 	
 	$ip = getparam('ip', false); 
+	if (!$ip) { 
+		// if the ip is not provided, we use the external ip of thecaller
+		$ip = $_SERVER['SERVER_ADDR'];
+		if (($ip=="127.0.0.1") || (substr($ip,0,7)=="192.168") || (substr($ip,0,3)=="10.")) {
+			echo "<geoip>\n";
+			echo "   <ip>$ip</ip>\n";
+			echo "   <error>Could not retrieve external ip address</error>\n";
+			echo "<geoip>\n";
+			die("");
+		}
+	}
 	
-	if ($ip) {
 		$resarray = get_geoip_info($ip);
 		echo "<geoip>\n";
 		echo "   <longitude>";
@@ -31,6 +41,5 @@
 		echo $resarray["ip"];
 		echo "</ip>\n";
 	    echo "</geoip>\n";
-    }
 
 ?>
