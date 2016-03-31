@@ -10,7 +10,7 @@ interface
 
 uses clienttables, servertables, channeltables, retrievedtables,
      jobdefinitiontables, jobqueuetables, jobresulttables, parametertables,
-     jobstatstables, wandbtables, jobqueuehistorytables;
+     jobstatstables, wandbtables, jobqueuehistorytables, geoiptables;
 
 
 type TDbTableManager = class(TObject)
@@ -35,6 +35,7 @@ type TDbTableManager = class(TObject)
     function getParameterTable() : TDbParameterTable;
     function getWanDbParameterTable() : TDbWanParameterTable;
 
+    function getGeoIPTable() : TDbGeoIPTable;
 
   private
     clienttable_     : TDbClientTable;
@@ -48,6 +49,7 @@ type TDbTableManager = class(TObject)
     parametertable_  : TDbParameterTable;
     wandbtable_      : TDbWanParameterTable;
     jobqueuehistory_ : TDbJobQueueHistoryTable;
+    geoiptable_      : TDbGeoIPTable;
 end;
 
 implementation
@@ -65,6 +67,7 @@ begin
   parametertable_ := TDbParameterTable.Create(filename);
   wandbtable_     := TDbWanParameterTable.Create(filename);
   jobqueuehistory_:= TDbJobQueueHistoryTable.Create(filename);
+  geoiptable_ := TDbGeoIPTable.Create(filename);
 end;
 
 
@@ -81,6 +84,7 @@ begin
  parametertable_.Free;
  wandbtable_.Free;
  jobqueuehistory_.Free;
+ geoiptable_.Free;
 end;
 
 procedure TDbTableManager.openAll();
@@ -96,6 +100,7 @@ begin
   parametertable_.Open;
   wandbtable_.Open;
   jobqueuehistory_.Open;
+  geoiptable_.Open;
 end;
 
 procedure TDbTableManager.closeAll();
@@ -111,6 +116,7 @@ begin
   parametertable_.Close;
   wandbtable_.Close;
   jobqueuehistory_.Close;
+  geoiptable_.Close;
 end;
 
 function TDbTableManager.getClientTable() : TDbClientTable;
@@ -167,6 +173,11 @@ end;
 function TDbTableManager.getJobQueueHistoryTable() : TDbJobQueueHistoryTable;
 begin
   Result := jobqueuehistory_;
+end;
+
+function TDbTableManager.getGeoIPTable() : TDbGeoIPTable;
+begin
+  Result := geoiptable_;
 end;
 
 end.
