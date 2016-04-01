@@ -20,7 +20,8 @@ uses
   methodcontrollers, resultcollectors,
   downloadservices, uploadservices, identities,
   fasttransitionsfromnew, fasttransitionsfromcomputed,
-  restorestatusservices, receivejobstatusservices;
+  restorestatusservices, receivejobstatusservices,
+  receivegeoipservices;
 
 type TServiceFactory = class(TObject)
    public
@@ -55,6 +56,8 @@ type TServiceFactory = class(TObject)
     function createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;
 
     function createRestoreStatusService() : TRestoreStatusServiceThread;
+
+    function createReceiveGeoIPService() : TReceiveGeoIpServiceThread;
 
    private
 
@@ -206,6 +209,11 @@ end;
 function TServiceFactory.createFastTransitionFromComputedService() : TFastTransitionFromComputedServiceThread;
 begin
   Result := TFastTransitionFromComputedServiceThread.Create(logger_, '[TFastTransitionFromComputed]> ', conf_, tableman_, workflowman_);
+end;
+
+function TServiceFactory.createReceiveGeoIPService() : TReceiveGeoIpServiceThread;
+begin
+  Result := TReceiveGeoIPServiceThread.Create(servMan_,proxy_, port_, logger_, conf_, tableman_);
 end;
 
 end.

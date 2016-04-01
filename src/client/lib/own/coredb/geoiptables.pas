@@ -92,12 +92,14 @@ end;
 
 function TDbGeoIPTable.getLongitude : Double;
 begin
+   // TODO: implement me
    Result := 0;
 end;
 
 function TDbGeoIPTable.getLatitude : Double;
 begin
-   Result := 0;
+  // TODO: implement me
+  Result := 0;
 end;
 
 

@@ -13,6 +13,7 @@ uses
   receivejobstatservices,  receivejobresultservices,
   transmitjobservices, transmitjobresultservices,
   transmitackjobservices, computationservices,
+  receivegeoipservices,
   jobdefinitiontables,
   downloadservices, downloadservicemanagers,
   uploadservices, uploadservicemanagers,
@@ -54,6 +55,7 @@ type TCoreLoop = class(TObject)
     procedure   retrieveClients;
     procedure   retrieveChannels;
     procedure   retrieveJobStats;
+    procedure   retrieveGeoIP;
 
     procedure   transmitClient;
     procedure   transmitJob;
@@ -120,6 +122,7 @@ begin
 
   createRestoreStatusService;
   retrieveParams;
+  retrieveGeoIP;
   transmitClient;
 
   {
@@ -282,6 +285,13 @@ var  receivejobresultthread : TReceiveJobresultServiceThread;
 begin
   receivejobresultthread  := servicefactory.createReceiveJobresultService();
   launch(TCoreServiceThread(receivejobresultthread), 'ReceiveJobResult');
+end;
+
+procedure TCoreLoop.retrieveGeoIP;
+var  receivegeoipthread : TReceiveGeoIPServiceThread;
+begin
+  receivegeoipthread  := servicefactory.createReceiveGeoIPService();
+  launch(TCoreServiceThread(receivegeoipthread), 'ReceiveGeoIP');
 end;
 
 
