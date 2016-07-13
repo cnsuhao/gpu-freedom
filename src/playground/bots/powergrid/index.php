@@ -1,10 +1,5 @@
 <?php 
 session_start(); 
-include("../session/login.inc.php");
-if (!isset($_SESSION['userbot'])) $_SESSION['userbot']="";
-if (!isset($_SESSION['userpwd'])) $_SESSION['userpwd']="";
-if (($_SESSION['userbot'] <> $username) || ($_SESSION['userpwd'] <> $password)) 
-   die("<html><body><a href='../session/login.php'>Please login</a></body></html>");
 ?>
 <html>
 <head>
@@ -15,6 +10,7 @@ if (($_SESSION['userbot'] <> $username) || ($_SESSION['userpwd'] <> $password))
 <h3>Frequencies (refresh each three minutes)</h3>
 <?php
  include_once('utils/openflashchart/open_flash_chart_object.php');
+ include_once('../../../server/utils/mydql2i/mysql2i.class.php');
  include("conf/config.inc.php");
 
  echo "<p><tt>./mainloop.sh to update frequencies</tt></p>";

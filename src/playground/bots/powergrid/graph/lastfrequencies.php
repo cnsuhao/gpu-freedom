@@ -1,4 +1,5 @@
 <?php
+include_once('../../../../server/utils/mydql2i/mysql2i.class.php');
 include_once( '../utils/openflashchart/open-flash-chart.php' );
 include("../conf/config.inc.php");
 

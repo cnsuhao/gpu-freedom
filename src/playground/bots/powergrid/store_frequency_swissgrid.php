@@ -5,6 +5,7 @@
 <body>
 <?php
  include("../lib/spiderbook/LIB_parse.php");
+ include_once('../../../server/utils/mydql2i/mysql2i.class.php');
  include("conf/config.inc.php");
  
  echo "<h3>Store Frequency Swissgrid</h3>";
