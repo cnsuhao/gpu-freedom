@@ -5,5 +5,5 @@ wget -O data.csv --no-check-certificate -U "Mozilla/5.0 (Windows NT 6.1; rv:2.0b
 ./removeif0.sh data.csv
 if [ -f data.csv ] 
 then
-    #wget -O store_frequency_swissgrid.html --no-proxy http://127.0.0.1/gpu_freedom/src/playground/bots/powergrid/store_frequency_swissgrid.php
+    wget -O store_meteo_bafu --no-proxy http://127.0.0.1/gpu_freedom/src/playground/bots/meteo/store_meteo_bafu.php
 fi
