@@ -43,7 +43,7 @@ session_start();
     $hour          = mysql_result($result, $i, 'hour');
     $minute        = mysql_result($result, $i, 'minute');
     $name          = mysql_result($result, $i, 'name');
-    $type          = mysql_result($result, $i, 'type');
+    $type          = mysql_result($result, $i, 'id_type');
     $value         = mysql_result($result, $i, 'value');
     $create_dt     = mysql_result($result, $i, 'create_dt');
  	
