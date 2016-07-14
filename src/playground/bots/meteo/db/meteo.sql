@@ -81,7 +81,7 @@ INSERT INTO `tbparameter_desc` (`countrycode`, `id_parameter`, `fieldname`, `uni
 -- Struttura della tabella `tbstation`
 --
 
-CREATE TABLE `tbstation` (
+CREATE TABLE `tbmeteo_station` (
   `countrycode` varchar(5) NOT NULL,
   `id_station` varchar(16) NOT NULL,
   `name` varchar(128) DEFAULT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE `tbstation` (
 -- Dump dei dati per la tabella `tbstation`
 --
 
-INSERT INTO `tbstation` (`countrycode`, `id_station`, `name`, `longlat`, `km_coordinates`, `altitude`) VALUES
+INSERT INTO `tbmeteo_station` (`countrycode`, `id_station`, `name`, `longlat`, `km_coordinates`, `altitude`) VALUES
 ('CH', 'ABO', 'Adelboden', '7°34/46°30', '609400/148975', 1320),
 ('CH', 'AIG', 'Aigle', '6°55/46°20', '560400/130713', 381),
 ('CH', 'ALT', 'Altdorf', '8°37/46°53', '690174/193558', 438),
