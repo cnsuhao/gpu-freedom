@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Store Meteo BAFU</title>
+<title>Store Run Of River CH</title>
 </head>
 <body>
 <?php
@@ -8,7 +8,7 @@
  include_once('../../../server/utils/mydql2i/mysql2i.class.php');
  include("conf/config.inc.php");
  
- echo "<h3>Store Meteo BAFU</h3>";
+ echo "<h3>Store Run Of River CH</h3>";
  
  echo "<table>";
  echo "<p>Connecting...</p>";
@@ -17,120 +17,63 @@
  
  echo "<p>Parsing...</p>";
  
- $lines = file("data.csv");
- $startrow = 3;
- for ( $i = $startrow; $i < sizeof( $lines ); $i++ ) {
+ libxml_use_internal_errors(true);
+ 
+ $xml = simplexml_load_file("data.xml") or die("Error: Cannot create object");
+ //print_r($xml);
+ 
+ foreach ($xml as $mespar) {
+   echo "Type: " . $mespar['Typ'] . '<br/>';
+   echo "Var: " . $mespar['Var'] . '<br/>';
+   $type = $mespar['Typ'];
    
-   $data = explode("|", $lines[$i]);
-   echo "<tr>";
-   
-   $countrycode="CH";
-   
-   echo "<td>";
-   echo $data[0];
-   $id_station=$data[0];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[1];
-   
-   $referencedatestr = substr($data[1], 0, 8);
-   $referencedate = substr($referencedatestr,0,4)."-".substr($referencedatestr,4,2)."-".substr($referencedatestr,6,2);
-   echo " ";
-   echo $referencedate;
-   echo " ";
-   $hour = substr($data[1], 8, 2);
-   echo $hour;
-   echo " ";
-   $minute = substr($data[1], 10, 2);
-   echo $minute;
-   
-   echo "</td>";
-   
-   /* check if data is already inserted */
-   if ($i==$startrow) {
-		$query_check="select count(*) from tbmeteo_spot where referencedate='$referencedate' and hour='$hour' and minute='$minute'";
-		$result_check=mysql_query($query_check);
-		$count=mysql_result($result_check, 0, "count(*)");
-		if ($count>0) { 
-		    mysql_close();
-		    die("<b>We already have this data in the database</b>");
-		}
+   $i=0;
+   foreach($mespar as $child) {  
+	 $i++;
+	 echo "Child node: " . $child . "<br>";
+	 
+	 switch ($i) {
+		case 1:
+			$name = addslashes($child);
+		break;
+		case 2:
+		    $refdatestr = $child;
+			$year=substr($refdatestr, 6, 4);
+			$month=substr($refdatestr, 3, 2);
+			$day=substr($refdatestr,0,2);
+			
+			$referencedate=$year."-".$month."-".$day;
+			
+			echo "*$referencedate*<br>";
+		break;
+		case 3:
+			$timestamp = $child;
+			$hour = substr($timestamp, 0, 2);
+			$minute = substr($timestamp,3,2);
+			echo "$hour*$minute<br>";
+		break;
+		case 4:
+			$value = str_replace("'", "", $child);
+		break;
+	 
+	 } // switch
+	 
+	 $query_delete = "DELETE FROM tbhydro_spot where countrycode='CH' and referencedate='$referencedate'
+	                  and hour='$hour' and minute='$minute' and name='$name' and id_type=$type";
+	 
+	 //echo "*$query_delete*";
+	 if (!mysql_query($query_delete)) echo mysql_error();
+	 
+	 $query="INSERT INTO tbhydro_spot (countrycode, referencedate, hour, minute, name, id_type, value, create_dt) 
+          VALUES('CH', '$referencedate', '$hour', '$minute', '$name', $type, $value, NOW());";
+ 
+     //echo "$query<br/>";       
+     if (!mysql_query($query)) echo mysql_error();
+     
    }
-   
-   echo "<td>";
-   echo $data[2];
-   if ($data[2]=="-") $data[2]="NULL";
-   $temperature=$data[2];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[3];
-   if ($data[3]=="-") $data[3]="NULL";
-   $sun_duration=$data[3];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[4];
-   if ($data[4]=="-") $data[4]="NULL";
-   $rain=$data[4];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[5];
-   if ($data[5]=="-") $data[5]="NULL";
-   $wind_direction=$data[5];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[6];
-   if ($data[6]=="-") $data[6]="NULL";
-   $wind_speed=$data[6];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[7];
-   if ($data[7]=="-") $data[7]="NULL";
-   $pressure_QNH=$data[7];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[8];
-   if ($data[8]=="-") $data[8]="NULL";
-   $wind_max=$data[8];
-   echo "</td>";
-         
-   echo "<td>";
-   echo $data[9];
-   if ($data[9]=="-") $data[9]="NULL";
-   $relative_humidity = $data[9];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[10];
-   if ($data[10]=="-") $data[10]="NULL";
-   $pressure_QFE = $data[10];
-   echo "</td>";
-   
-   echo "<td>";
-   echo $data[11];
-   if (substr($data[11],0,1)=="-") $data[11]="NULL";
-   $pressure_QFF = $data[11];
-   echo "</td>";
-   
-   $query="INSERT INTO tbmeteo_spot (countrycode, referencedate, hour, minute, id_station, temperature, sun_duration, rain, wind_direction, wind_speed, wind_max, relative_humidity, pressure_QNH, pressure_QFE, pressure_QFF, insertdate) 
-          VALUES('$countrycode', '$referencedate', '$hour', '$minute', '$id_station', $temperature, $sun_duration, $rain, $wind_direction, $wind_speed, $wind_max, $relative_humidity, $pressure_QNH, $pressure_QFE, $pressure_QFF, NOW());";
- 
-   echo "<td>$query ";       
-   if (!mysql_query($query)) echo mysql_error();
-   echo "</td>";
-   
-   echo "</tr>";
-  
  }
- 
- echo "</table>";
- 
+
+   
  
                              
  mysql_close();

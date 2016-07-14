@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 14, 2016 alle 10:57
+-- Creato il: Lug 14, 2016 alle 11:50
 -- Versione del server: 10.1.10-MariaDB
 -- Versione PHP: 5.6.15
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbhydro_spot` (
+  `countrycode` varchar(5) NOT NULL,
   `referencedate` date NOT NULL,
   `hour` varchar(3) NOT NULL,
   `minute` varchar(2) NOT NULL,
