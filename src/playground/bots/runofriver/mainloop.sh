@@ -2,7 +2,7 @@
 for (( ; ;  ))
 do
    ./runofriver_collector.sh
-   cp ./data.csv ../../../../../  
+
    r=$(( $RANDOM % 50 ));
    TIMEOUT=1750
    let "TIMEOUT = $TIMEOUT + $r"
