@@ -2,6 +2,7 @@
 for (( ; ;  ))
 do
    ./meteocollector_meteoswiss.sh
+   cp ./data.csv ../../../../../  
    r=$(( $RANDOM % 50 ));
    TIMEOUT=550
    let "TIMEOUT = $TIMEOUT + $r"
