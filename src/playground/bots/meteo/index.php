@@ -12,7 +12,7 @@ session_start();
  include("conf/config.inc.php");
  include_once('../../../server/utils/mydql2i/mysql2i.class.php');
 
- echo "<p><tt>./mainloop.sh to update frequencies</tt></p>";
+ echo "<p><tt>./mainloop.sh to update meteo data</tt></p>";
  echo "<hr>";
  
  mysql_connect($dbserver, $username, $password);
