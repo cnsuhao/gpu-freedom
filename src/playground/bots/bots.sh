@@ -1,4 +1,5 @@
 #!/bin/bash
-./finance/mainloop.sh &
+#./finance/mainloop.sh &
+#./bitcoin/mainloop.sh &
 ./powergrid/mainloop.sh &
-./bitcoin/mainloop.sh &
+./meteo/mainloop.sh &
