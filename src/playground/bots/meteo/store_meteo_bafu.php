@@ -91,19 +91,19 @@
    echo "<td>";
    echo $data[7];
    if ($data[7]=="-") $data[7]="NULL";
-   $wind_max=$data[7];
+   $pressure_QNH=$data[7];
    echo "</td>";
    
    echo "<td>";
    echo $data[8];
    if ($data[8]=="-") $data[8]="NULL";
-   $relative_humidity=$data[8];
+   $wind_max=$data[8];
    echo "</td>";
          
    echo "<td>";
    echo $data[9];
    if ($data[9]=="-") $data[9]="NULL";
-   $pressure_QNH = $data[9];
+   $relative_humidity = $data[9];
    echo "</td>";
    
    echo "<td>";
