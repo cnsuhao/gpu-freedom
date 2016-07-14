@@ -25,14 +25,14 @@
  $j=0;
  foreach ($xml as $mespar) {
    $j++;
-   echo "Type: " . $mespar['Typ'] . '<br/>';
-   echo "Var: " . $mespar['Var'] . '<br/>';
+   //echo "Type: " . $mespar['Typ'] . '<br/>';
+   //echo "Var: " . $mespar['Var'] . '<br/>';
    $type = $mespar['Typ'];
    
    $i=0;
    foreach($mespar as $child) {  
 	 $i++;
-	 echo "Child node: " . $child . "<br>";
+	 //echo "Child node: " . $child . "<br>";
 	 
 	 switch ($i) {
 		case 1:
@@ -46,13 +46,13 @@
 			
 			$referencedate=$year."-".$month."-".$day;
 			
-			echo "*$referencedate*<br>";
+			//echo "*$referencedate*<br>";
 		break;
 		case 3:
 			$timestamp = $child;
 			$hour = substr($timestamp, 0, 2);
 			$minute = substr($timestamp,3,2);
-			echo "$hour*$minute<br>";
+			//echo "$hour*$minute<br>";
 		break;
 		case 4:
 			$value = str_replace("'", "", $child);
