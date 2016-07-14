@@ -22,7 +22,9 @@
  $xml = simplexml_load_file("data.xml") or die("Error: Cannot create object");
  //print_r($xml);
  
+ $j=0;
  foreach ($xml as $mespar) {
+   $j++;
    echo "Type: " . $mespar['Typ'] . '<br/>';
    echo "Var: " . $mespar['Var'] . '<br/>';
    $type = $mespar['Typ'];
@@ -34,7 +36,7 @@
 	 
 	 switch ($i) {
 		case 1:
-			$name = addslashes($child);
+			$name = mysql_real_escape_string($child);
 		break;
 		case 2:
 		    $refdatestr = $child;
@@ -77,7 +79,7 @@
  
                              
  mysql_close();
- echo "<p>Over.</p>";
+ echo "<p>Over, processed $j records.</p>";
  
 ?>
 </body>
