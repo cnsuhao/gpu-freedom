@@ -47,6 +47,18 @@ session_start();
     $value         = mysql_result($result, $i, 'value');
     $create_dt     = mysql_result($result, $i, 'create_dt');
  	
+	$type_desc = "Unknown";
+	if (($type==1) || ($type==2)) {
+		$type_desc="m";
+	}
+	else 
+	if ($type==3) {
+		$type_desc="Celsius";
+	}
+	else
+	if (($type==10) || ($type==22)) {
+		$type_desc="m3/s";
+	}
 	
     echo "
     <tr>
@@ -55,7 +67,7 @@ session_start();
     <td>$hour</td>
     <td>$minute</td>
     <td>$name</td>
-    <td>$type</td>
+    <td>$type_desc</td>
     <td>$value</td>
     <td>$create_dt</td>
     </tr>
