@@ -18,7 +18,7 @@ session_start();
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
 
- $query="select * from tbhydro_spot order by create_dt desc, name LIMIT 5000;";
+ $query="select * from tbhydro_spot order by referencedate desc, hour desc, minute desc, name LIMIT 5000;";
  $result = mysql_query($query);
  $num = mysql_num_rows($result);
  
@@ -48,7 +48,7 @@ session_start();
     $create_dt     = mysql_result($result, $i, 'create_dt');
  	
 	$type_desc = "Unknown";
-	if (($type==1) || ($type==2)) {
+	if (($type==1) || ($type==2) ) {
 		$type_desc="m";
 	}
 	else 
@@ -56,9 +56,11 @@ session_start();
 		$type_desc="Celsius";
 	}
 	else
-	if (($type==10) || ($type==22)) {
+	if (($type==10) || ($type==22))  {
 		$type_desc="m3/s";
 	}
+	
+	//if ($type==22) $value=$value/1000;
 	
     echo "
     <tr>

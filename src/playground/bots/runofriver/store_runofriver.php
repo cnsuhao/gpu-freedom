@@ -24,10 +24,10 @@
  
  $j=0;
  foreach ($xml as $mespar) {
-   $j++;
    //echo "Type: " . $mespar['Typ'] . '<br/>';
    //echo "Var: " . $mespar['Var'] . '<br/>';
    $type = $mespar['Typ'];
+   $id_station = $mespar['StrNr'];
    
    $i=0;
    foreach($mespar as $child) {  
@@ -59,20 +59,25 @@
 		break;
 	 
 	 } // switch
+   } 
 	 
-	 $query_delete = "DELETE FROM tbhydro_spot where countrycode='CH' and referencedate='$referencedate'
-	                  and hour='$hour' and minute='$minute' and name='$name' and id_type=$type";
-	 
-	 //echo "*$query_delete*";
-	 if (!mysql_query($query_delete)) echo mysql_error();
-	 
-	 $query="INSERT INTO tbhydro_spot (countrycode, referencedate, hour, minute, name, id_type, value, create_dt) 
-          VALUES('CH', '$referencedate', '$hour', '$minute', '$name', $type, $value, NOW());";
- 
-     //echo "$query<br/>";       
-     if (!mysql_query($query)) echo mysql_error();
-     
-   }
+	 if (($value!="") && ($id_station!="")) {
+	    $j++;
+   
+	    $query_delete = "DELETE FROM tbhydro_spot where countrycode='CH' and referencedate='$referencedate'
+	                  and hour='$hour' and minute='$minute' and id_station=$id_station and id_type=$type";
+
+       if (!mysql_query($query_delete)) echo mysql_error();
+
+  	   if ($type==22) $value=$value/1000.0;
+	   $query="INSERT INTO tbhydro_spot (countrycode, referencedate, hour, minute, id_station, name, id_type, value, create_dt) 
+          VALUES('CH', '$referencedate', '$hour', '$minute', $id_station, '$name', $type, $value, NOW());";
+       //echo "$query<br/>";       
+       if (!mysql_query($query)) echo mysql_error();
+
+    }
+		  
+   
  }
 
    
