@@ -18,7 +18,7 @@ session_start();
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
 
- $query="select * from tbmeteo_spot order by referencedate desc, hour desc, minute desc, id_station LIMIT 5000;";
+ $query="select * from tbmeteo_spot order by referencedate desc, hour desc, minute desc, id_station LIMIT 500;";
  $result = mysql_query($query);
  $num = mysql_num_rows($result);
  
