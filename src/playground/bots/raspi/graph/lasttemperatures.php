@@ -6,7 +6,7 @@ include("../conf/config.inc.php");
  // preparing data for chart
  mysql_connect($dbserver, $username, $password);
  @mysql_select_db($database) or die("Unable to select database");
- $query="select temperature_raspi from tbtemperature where (insert_dt>NOW() - INTERVAL 5 DAY) order by insert_dt asc LIMIT 1000;";
+ $query="select temperature_raspi from tbtemperature where (insert_dt>NOW() - INTERVAL 30 DAY) order by insert_dt asc LIMIT 3000;";
  $result=mysql_query($query);
  
  if ($result=="") {
