@@ -10,6 +10,7 @@
 <li><a href="meteo/index.php">Meteo</a></li>
 <li><a href="runofriver/index.php">Run Of River</a></li>
 <li><a href="raspi/index.php">Raspberry</a></li>
+<li><a href="news/index.php">News</a></li>
 </ul>
 
 </body>
