@@ -24,6 +24,7 @@ session_start();
  <tr>
  <th>create_dt</th>
  <th>newstitle</th>
+ <th>source</th>
  </tr>
  ";
  
@@ -31,10 +32,11 @@ session_start();
  while ($i<$num) {
     $create_dt = mysql_result($result, $i, 'create_dt');
     $newstitle = mysql_result($result, $i, 'newstitle');
- 	
+ 	$source = mysql_result($result, $i, 'source');
     echo "
     <td>$create_dt</td>
     <td>$newstitle</td>
+	<td>$source</td>
     </tr>
     ";
  

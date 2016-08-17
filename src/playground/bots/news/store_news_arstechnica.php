@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Store News Google</title>
+<title>Store News Arstechnica</title>
 </head>
 <body>
 <?php
@@ -8,7 +8,7 @@
  include_once('../../../server/utils/mydql2i/mysql2i.class.php');
  include("conf/config.inc.php");
  
- echo "<h3>Store News Google</h3>";
+ echo "<h3>Store News Arstechnica</h3>";
  echo "<p>Parsing...</p>";
  $frequency=-1;
  $networkdiff=-1;
@@ -16,22 +16,19 @@
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
 
- $lines = file("news.html");
+ $lines = file("arstechnica.html");
  for ( $i = 0; $i < sizeof( $lines ); $i++ ) {
-	$news = return_between($lines[$i], '<span class="titletext">', '</span>', EXCL);
+	$news = return_between($lines[$i], '<h2><a href="', '</a></h2>', EXCL);
+	$news = return_between($news."\/", '/">', '\/', EXCL);
 	$news = addslashes($news);
     if ( 
 	      ($news!="") && 
-		  (strpos($news, "notify-box") == false) && 
-		  (strpos($news, "2016 Google")==false) &&
-		  (strpos($news, "display: none")==false) &&
-		  (strpos($news, "2016 Google")==false) &&
-		  (strpos($news, "www.google.com")==false) &&
+		  //(strpos($news, "notify-box") == false) && 
 		  strlen($news)>10
 		)  
 		{
 		
-		 $query_check="select count(*) from tbnews where newstitle='$news' and (create_dt>=NOW() - INTERVAL 1 DAY) and source='GOOGLENEWS'";
+		 $query_check="select count(*) from tbnews where newstitle='$news' and (create_dt>=NOW() - INTERVAL 1 DAY) and source='ARSTECHNICA'";
 	     $res_check = mysql_query($query_check);
 		 if ($res_check!="") $count=mysql_result($res_check, 0, "count(*)"); else $count=0;
 		 
@@ -40,7 +37,7 @@
 		 
 		 if ($count==0) {
 			$query="INSERT INTO tbnews (create_dt, newstitle, source) 
-					VALUES(NOW(), '$news', 'GOOGLENEWS');";
+					VALUES(NOW(), '$news', 'ARSTECHNICA');";
 			if (!mysql_query($query)) echo mysql_error();
 		 
 		 } 

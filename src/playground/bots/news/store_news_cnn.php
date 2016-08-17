@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Store News Google</title>
+<title>Store News CNN</title>
 </head>
 <body>
 <?php
@@ -8,7 +8,7 @@
  include_once('../../../server/utils/mydql2i/mysql2i.class.php');
  include("conf/config.inc.php");
  
- echo "<h3>Store News Google</h3>";
+ echo "<h3>Store News CNN</h3>";
  echo "<p>Parsing...</p>";
  $frequency=-1;
  $networkdiff=-1;
@@ -16,31 +16,37 @@
  mysql_connect($dbserver, $username, $password);
 @mysql_select_db($database) or die("Unable to select database");
 
- $lines = file("news.html");
+ $lines = file("cnn.html");
+ $hugepage = "";
+ 
  for ( $i = 0; $i < sizeof( $lines ); $i++ ) {
-	$news = return_between($lines[$i], '<span class="titletext">', '</span>', EXCL);
-	$news = addslashes($news);
-    if ( 
-	      ($news!="") && 
-		  (strpos($news, "notify-box") == false) && 
-		  (strpos($news, "2016 Google")==false) &&
-		  (strpos($news, "display: none")==false) &&
-		  (strpos($news, "2016 Google")==false) &&
-		  (strpos($news, "www.google.com")==false) &&
-		  strlen($news)>10
+    $hugepage = $hugepage . $lines[$i] . "\n";
+ }
+ 
+ 
+ $news= parse_array($hugepage, '<span class="cd__headline-text">', '</span>');
+ 
+ for ( $i = 0; $i < sizeof( $news ); $i++ ) {
+
+    $mynews = addslashes($news[$i]); 
+	if ( 
+	      ($mynews!="") && 
+		  //(strpos($mynews, "notify-box") == false) && 
+		  strlen($mynews)>10
 		)  
 		{
 		
-		 $query_check="select count(*) from tbnews where newstitle='$news' and (create_dt>=NOW() - INTERVAL 1 DAY) and source='GOOGLENEWS'";
+		 $query_check="select count(*) from tbnews where newstitle='$mynews' and (create_dt>=NOW() - INTERVAL 1 DAY) and source='CNN'";
 	     $res_check = mysql_query($query_check);
 		 if ($res_check!="") $count=mysql_result($res_check, 0, "count(*)"); else $count=0;
 		 
-		 echo "<p>$news</p>";
+		 echo "<p>$mynews</p>";
 		 echo "$count\n";
+		 
 		 
 		 if ($count==0) {
 			$query="INSERT INTO tbnews (create_dt, newstitle, source) 
-					VALUES(NOW(), '$news', 'GOOGLENEWS');";
+					VALUES(NOW(), '$mynews', 'CNN');";
 			if (!mysql_query($query)) echo mysql_error();
 		 
 		 } 
