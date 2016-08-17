@@ -36,7 +36,7 @@
 		)  
 		{
 		
-		 $query_check="select count(*) from tbnews where newstitle='$mynews' and (create_dt>=NOW() - INTERVAL 1 DAY) and source='CNN'";
+		 $query_check="select count(*) from tbnews where newstitle='$mynews' and (create_dt>=NOW() - INTERVAL 2 DAY) and source='CNN'";
 	     $res_check = mysql_query($query_check);
 		 if ($res_check!="") $count=mysql_result($res_check, 0, "count(*)"); else $count=0;
 		 
