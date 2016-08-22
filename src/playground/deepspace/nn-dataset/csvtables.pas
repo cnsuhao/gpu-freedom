@@ -25,6 +25,7 @@ type TCSVTable = class(TObject)
 
 
      tablemem_       : Array of AnsiString;
+     tablememFloat   : Array of Array of Extended; // dynamic array containing floats
 
      constructor Create(filename, tablename, separator  : String);
      destructor  Destroy;

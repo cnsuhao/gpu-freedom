@@ -45,6 +45,7 @@
         <Filename Value="nndatasetformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="NNdataSetForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="nndatasetformunit"/>
       </Unit1>
