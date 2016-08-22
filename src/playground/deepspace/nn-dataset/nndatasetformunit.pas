@@ -109,7 +109,6 @@ type
 
   private
     inputCSV_ : TCSVTable;
-    outputCSV_ : TCSVTable;
 
     function getSeparator(): AnsiString;
   public

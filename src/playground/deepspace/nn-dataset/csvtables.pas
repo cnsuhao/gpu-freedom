@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, utils, quicksort, Dialogs;
 
 const
-     MAX_COLUMNS = 128; // if a table has so many columns, consider
+     MAX_COLUMNS = 22; // if a table has so many columns, consider
                          // refactoring :-D
 
 type TCSVTable = class(TObject)
@@ -31,7 +31,9 @@ type TCSVTable = class(TObject)
      function    countRows() : Longint;
 
      function    retrieveNFieldValue(Str : AnsiString; pos : Longint) : AnsiString;
+     function    retrieveField(fieldname : AnsiString) : Longint;
      function    retrieveRow(pos : Longint) : AnsiString;
+     function    retrieveRowField(startrow,endrow : Longint; field : Ansistring) : AnsiString;
      procedure   loadInMemory;
 
    private
@@ -122,7 +124,33 @@ begin
 end;
 
 
+function TCSVTable.retrieveField(fieldname : AnsiString) : Longint;
+var i : Longint;
+begin
+ Result := -1;
+ for i:=1 to totalfields_ do
+     if fields_[i]=fieldName then
+        begin
+           Result:=i;
+           Exit;
+        end;
+end;
 
+function  TCSVTable.retrieveRowField(startrow, endrow : Longint; field : Ansistring) : AnsiString;
+var str : AnsiString;
+    pos : Longint;
+    j   : Longint;
+begin
+ Result := '';
+
+ pos := retrieveField(field);
+
+ for j:=startrow to endrow do
+     begin
+        str := retrieveRow(j);
+        Result := Result + retrieveNFieldValue(str, pos) + separator_;
+     end;
+end;
 
 
 function TCSVTable.retrieveRow(pos : Longint) : AnsiString;
