@@ -1,0 +1,8 @@
+object NNdataSetForm: TNNdataSetForm
+  Left = 581
+  Height = 240
+  Top = 293
+  Width = 320
+  Caption = 'Neural Network Dataset'
+  LCLVersion = '1.0.12.0'
+end
