@@ -14,7 +14,6 @@ const
 type TCSVTable = class(TObject)
    public // we know what we are doing with our datastructure anyway
      filename_,
-     tablename_,
      header_,
      separator_   : String;
 
@@ -25,9 +24,8 @@ type TCSVTable = class(TObject)
 
 
      tablemem_       : Array of AnsiString;
-     tablememFloat   : Array of Array of Extended; // dynamic array containing floats
 
-     constructor Create(filename, tablename, separator  : String);
+     constructor Create(filename, separator  : String);
      destructor  Destroy;
      function    readHeader() : AnsiString;
      function    countRows() : Longint;
@@ -44,12 +42,11 @@ end;
 
 implementation
 
-constructor TCSVTable.Create(filename, tablename, separator  : String);
+constructor TCSVTable.Create(filename, separator  : String);
 var column : AnsiString;
     i      : Longint;
 begin
  filename_  := filename;
- tablename_ := tablename;
  separator_ := separator;
  header_    := readHeader();
 

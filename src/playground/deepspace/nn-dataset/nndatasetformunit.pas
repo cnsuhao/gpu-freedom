@@ -13,9 +13,10 @@ type
   { TNNdataSetForm }
 
   TNNdataSetForm = class(TForm)
+    btnLoad: TButton;
     btnSelectInputFileName: TButton;
-    btnSelectOutputFileName: TButton;
     btnGenerateDataSet: TButton;
+    btnSave: TButton;
     cbFieldInput1: TComboBox;
     cbFieldInput10: TComboBox;
     cbFieldInput11: TComboBox;
@@ -40,9 +41,11 @@ type
     cbFieldOutput8: TComboBox;
     cbRandomizeRows: TCheckBox;
     edtInputFilename: TEdit;
-    edtOutputFilename: TEdit;
+    edtTrainFilename: TEdit;
     edtSeparator: TEdit;
+    edtTestFilename: TEdit;
     InputBox: TGroupBox;
+    lblInputFilename2: TLabel;
     lblPercentOfTestSet: TLabel;
     lblEndOffset1: TLabel;
     lblFieldname1: TLabel;
@@ -103,9 +106,12 @@ type
     spnOutOffsetStart7: TSpinEdit;
     spnOutOffsetStart8: TSpinEdit;
     procedure btnSelectInputFileNameClick(Sender: TObject);
-    procedure btnSelectOutputFileNameClick(Sender: TObject);
+
   private
-    { private declarations }
+    inputCSV_ : TCSVTable;
+    outputCSV_ : TCSVTable;
+
+    function getSeparator(): AnsiString;
   public
     { public declarations }
   end;
@@ -119,17 +125,60 @@ implementation
 
 { TNNdataSetForm }
 
-procedure TNNdataSetForm.btnSelectInputFileNameClick(Sender: TObject);
+function TNNdataSetForm.getSeparator(): AnsiString;
 begin
-   if myOpenDialog.Execute then
-          edtInputFileName.Text := myOpenDialog.FileName;
+  if rbSeparatorEdit.Checked then
+      Result := edtSeparator.Text
+  else
+  if rbSeparatorTab.Checked then
+      Result := Chr(9)
+  else
+    ShowMessage('Internal error: undefined radio box');
 end;
 
-procedure TNNdataSetForm.btnSelectOutputFileNameClick(Sender: TObject);
+procedure TNNdataSetForm.btnSelectInputFileNameClick(Sender: TObject);
+var i : Longint;
 begin
    if myOpenDialog.Execute then
-          edtOutputFileName.Text := myOpenDialog.FileName;
+        begin
+          edtInputFileName.Text := myOpenDialog.FileName;
+          edtTrainFileName.Text := extractFileName(myOpenDialog.FileName)+'.train';
+          edtTestFileName.Text := extractFileName(myOpenDialog.FileName)+'.test';
+
+          inputCSV_ :=  TCSVTable.Create(myOpenDialog.FileName, getSeparator());
+          inputCSV_.loadInMemory;
+
+          for i:=1 to inputCSV_.totalfields_ do
+              begin
+                   cbFieldInput1.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput2.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput3.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput4.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput5.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput6.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput7.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput8.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput9.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput10.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput11.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput12.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput13.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldInput14.Items.Add(inputCSV_.fields_[i]);
+
+                   cbFieldOutput1.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput2.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput3.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput4.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput5.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput6.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput7.Items.Add(inputCSV_.fields_[i]);
+                   cbFieldOutput8.Items.Add(inputCSV_.fields_[i]);
+              end;
+
+
+        end;
 end;
+
 
 end.
 
