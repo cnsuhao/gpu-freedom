@@ -1,5 +1,5 @@
 unit csvtables;
-{(c) by 2013 HB9TVM an the deltasql team. Source code is under GPL}
+{(c) by 2016 HB9TVM an the GPU team. Source code is under GPL}
 {$mode objfpc}{$H+}
 
 interface
@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, utils, quicksort, Dialogs;
 
 const
-     MAX_COLUMNS = 2048; // if a table has so many columns, consider
+     MAX_COLUMNS = 128; // if a table has so many columns, consider
                          // refactoring :-D
 
 type TCSVTable = class(TObject)
@@ -22,31 +22,15 @@ type TCSVTable = class(TObject)
      totalfields_ : Longint;
 
      totalrows_      : Longint;
-     primarykeyIdx_  : Longint;
-     isNumeric_,
-     isFloat_        : Array[1..MAX_COLUMNS] of Boolean;
-     singleTest_     : Array[1..MAX_COLUMNS] of Boolean;
 
-     idxvalues       : Array of Longint;
-     idxvaluesF      : Array of Extended;
-     idxvaluesS      : Array of AnsiString;
-     idxpos          : Array of Longint;
 
      tablemem_       : Array of AnsiString;
 
-     useIndex       : Boolean;
-
-     constructor Create(filename, tablename, primarykey, separator  : String);
+     constructor Create(filename, tablename, separator  : String);
      destructor  Destroy;
      function    readHeader() : AnsiString;
      function    countRows() : Longint;
-     procedure   inferFieldsFromData;
-     procedure   createIndex();
-     procedure   sortIndex();
-     function    checkIndexForUniqueness() : Boolean;
-     procedure   disposeIndex();
-     function    retrievePosFromKey(key : AnsiString) : Longint;
-     function    retrievePrimaryKey(row : AnsiString) : AnsiString;
+
      function    retrieveNFieldValue(Str : AnsiString; pos : Longint) : AnsiString;
      function    retrieveRow(pos : Longint) : AnsiString;
      procedure   loadInMemory;
@@ -54,16 +38,12 @@ type TCSVTable = class(TObject)
    private
      F : TextFile;
      loadedInMemory_ : Boolean;
-     procedure initFieldTypes;
-     function    retrievePosFromKeyBinary(key : Longint; keyF : Extended; keyS : AnsiString) : Longint;
-     function    retrievePosFromKeyLinear(key : Longint; keyF : Extended; keyS : AnsiString) : Longint;
-
 
 end;
 
 implementation
 
-constructor TCSVTable.Create(filename, tablename, primarykey, separator  : String);
+constructor TCSVTable.Create(filename, tablename, separator  : String);
 var column : AnsiString;
     i      : Longint;
 begin
@@ -71,7 +51,7 @@ begin
  tablename_ := tablename;
  separator_ := separator;
  header_    := readHeader();
- useIndex   := false;
+
  loadedInMemory_ := false;
 
  i:=0;
@@ -83,15 +63,8 @@ begin
            column := Trim(ExtractParamLong(header_, separator_));
          end;
  totalfields_ := i;
-
- primarykeyIdx_:=-1;
- for i:=1 to totalfields_ do
-        if fields_[i]=primarykey then primarykeyIdx_:=i;
- if (primarykeyIdx_=-1) then raise Exception.Create('ERROR: Could not locate primary key!');
-
  totalrows_ := countRows();
 
- initFieldTypes;
 end;
 
 function TCSVTable.readHeader() : AnsiString;
@@ -137,110 +110,7 @@ begin
   Result := count;
 end;
 
-procedure TCSVTable.initFieldTypes;
-var i : Longint;
-begin
-  for i:=1 to MAX_COLUMNS do
-   begin
-     isnumeric_[i] := false;
-     isfloat_[i] := false;
-     singleTest_[i] := true;
-   end;
-end;
 
-procedure TCSVTable.inferFieldsFromData;
-var
-    str,
-    msg : AnsiString;
-    j,
-    nbcolumns : Longint;
-
-    function scanFieldsForNumeric(str : AnsiString) : Longint;
-    var column     : AnsiString;
-        i          : Longint;
-        val        : Extended;
-        nbcolumns  : Longint;
-        myStr      : Ansistring;
-        singleTest : Boolean;
-    begin
-      myStr := str;
-      i := 0;
-
-      column:=extractParamLong(myStr, separator_);
-      while (Length(myStr)>0) or (column<>'') do
-           begin
-             i := i+1;
-             if (column<>'NULL') and singleTest_[i] then
-                begin
-                  // test if this column is really numeric
-                     try
-                        val := StrToFloat(Trim(column));
-                        isnumeric_[i] := true;
-                        if Frac(val)<>0 then
-                                isfloat_[i] := true;
-
-
-                     except
-                           on E : EConvertError do
-                             begin
-                              isnumeric_[i] := false;
-                              isfloat_[i]   := false;
-                              singleTest_[i] := false;
-                             end;
-                     end;
-                end;
-
-             // go to next column
-             column:=extractParamLong(myStr, separator_);
-           end;
-
-       Result := i; // number of columns as result
-    end;
-
-begin
- AssignFile(F, filename_);
-
-  try
-    Reset(F);
-    ReadLn(F, Str); // skip header
-    while not EOF(F) do
-        begin
-          Readln(F, str);
-          //ShowMessage(str);
-          if Trim(str)='' then continue; // we skip blank lines completely
-
-          nbcolumns:=scanFieldsForNumeric(str);
-        end;
-
-  finally
-    CloseFile(F);
-  end;
-
-  {
-  // enable this to debug field inference
-  msg := '';
-  for j:=1 to nbcolumns do
-      begin
-        msg := msg + IntToStr(j)+' '+fields_[j]+':';
-        if isnumeric_[j] then
-            begin
-               if isfloat_[j]
-                  then msg := msg + 'float '
-               else
-                  msg := msg + 'numeric ';
-            end
-        else
-            msg := msg + 'text ';
-      end;
-  ShowMessage(msg);
-  }
-end;
-
-
-function TCSVTable.retrievePrimaryKey(row : AnsiString) : AnsiString;
-begin
-  Result := retrieveNFieldValue(row, primaryKeyIdx_);
-end;
 
 function TCSVTable.retrieveNFieldValue(Str : AnsiString; pos : Longint) : AnsiString;
 var i : Longint;
@@ -253,180 +123,9 @@ begin
   Result := value;
 end;
 
-procedure   TCSVTable.createIndex();
-var i   : Longint;
-    str, pkfield : AnsiString;
-    isFloat, isNumeric : Boolean;
-begin
-   isFloat := isfloat_[primarykeyIdx_];
-   isNumeric := isnumeric_[primarykeyIdx_];
-
-   setLength(idxpos, totalrows_);
-   if isFloat then
-     setLength(idxvaluesF, totalrows_)
-   else
-   if isNumeric then
-      setLength(idxvalues, totalrows_)
-   else
-     setLength(idxvaluesS, totalrows_);
-
-   AssignFile(F, filename_);
-
-  try
-    Reset(F);
-    Readln(F, str); // skip header
-
-    i:=0;
-    while not EOF(F) do
-        begin
-          Readln(F, str);
-          if Trim(str)='' then continue; // we skip blank lines completely
-
-          if str='NULL' then raise Exception.Create('Internal error: Primary key can not contain NULL values');
-
-          pkfield := retrieveNFieldValue(Str, primaryKeyIdx_);
-          if isFloat then
-             idxvaluesF[i] := StrToFloat(pkfield)
-          else
-          if isNumeric then
-             idxvalues[i] := StrToInt(pkfield)
-          else
-             idxvaluesS[i] := pkfield;
-
-          idxpos[i] := i;
-          Inc(i);
-        end;
-
-  finally
-    CloseFile(F);
-  end;
-
-  //TODO: add index creation for floats and strings
-  useIndex := isNumeric and (not isFloat);
-end;
-
-procedure TCSVTable.sortIndex();
-begin
-  if useIndex then QuickSortRelations(idxvalues, idxpos, 0, totalrows_-1);
-end;
-
-function    TCSVTable.checkIndexForUniqueness() : Boolean;
-var i : Longint;
-begin
-  Result := true;
-  for i:=1 to totalrows_-1 do
-     begin
-       if idxvalues[i]=idxvalues[i-1] then
-          begin
-               Result := false;
-               Exit;
-          end;
-     end;
-end;
-
-procedure   TCSVTable.disposeIndex();
-var i : Longint;
-begin
- setLength(idxvalues, 0);
- setLength(idxvaluesF, 0);
- setLength(idxvaluesS, 0);
- setLength(idxpos, 0);
-end;
 
 
-function TCSVTable.retrievePosFromKey(key : AnsiString) : Longint;
-var isFloat, isNumeric : Boolean;
-begin
-  isFloat := isfloat_[primarykeyIdx_];
-  isNumeric := isnumeric_[primarykeyIdx_];
 
-  if key='NULL' then raise Exception.Create('Internal error: Primary key can not contain NULL values');
-
-  if useIndex then
-     Result := retrievePosFromKeyBinary(StrToInt(key), 0, '')
-  else
-    begin
-      if isFloat then
-       Result := retrievePosFromKeyLinear(0, StrToFloat(key), '')
-      else
-       Result := retrievePosFromKeyLinear(0, 0, key);
-    end;
-end;
-
-
-function TCSVTable.retrievePosFromKeyLinear(key : Longint; keyF : Extended; keyS : AnsiString) : Longint;
-var i : Longint;
-    isFloat, isNumeric : Boolean;
-begin
-  if key<>0 then raise Exception.Create('Internal error in retrievePosFromKeyLinear');
-
-  isFloat := isfloat_[primarykeyIdx_];
-  isNumeric := isnumeric_[primarykeyIdx_];
-
-  for i:=0 to totalrows_-1 do
-     begin
-       if isFloat then
-           begin
-             if (idxvaluesF[i]=keyF) then
-                begin
-                     Result := idxpos[i];
-                     Exit;
-                end;
-           end
-       else
-       if isNumeric then
-          begin
-             if (idxvalues[i]=key) then
-                 begin
-                      Result := idxpos[i];
-                      Exit;
-                 end;
-          end
-       else
-       if idxvaluesS[i]=keyS then
-          begin
-              Result := idxpos[i];
-              Exit;
-          end;
-     end;
-
-  Result := -1;
-end;
-
-function    TCSVTable.retrievePosFromKeyBinary(key : Longint; keyF : Extended; keyS : AnsiString) : Longint;
-var val, pos, low, high : Longint;
-begin
-    // binary search in a sorted array, iterative, from scratch
-    if keyF<>0 then raise Exception.Create('Internal error 1 in retrievePosFromKeyBinary');
-    if keyS<>'' then raise Exception.Create('Internal error 2 in retrievePosFromKeyBinary');
-
-    low := 0;
-    high := totalrows_-1;
-
-    while (high>=low) do
-      begin
-        pos := (low+high) div 2;
-        val := idxvalues[pos];
-
-        if val<key then
-           begin
-              low:=pos+1;
-           end
-        else
-        if val>key then
-           begin
-              high := pos-1;
-           end
-        else
-           begin
-              Result := idxpos[pos];
-              Exit;
-           end;
-
-      end; // while
-
-   Result := -1; // not found
-end;
 
 function TCSVTable.retrieveRow(pos : Longint) : AnsiString;
 var i : Longint;
@@ -500,7 +199,6 @@ end;
 
 destructor TCSVTable.Destroy;
 begin
-  disposeIndex;
   if loadedInMemory_ then setLength(tablemem_, 0);
   inherited Destroy;
 end;
