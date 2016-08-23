@@ -7,8 +7,8 @@ object NNdataSetForm: TNNdataSetForm
   ClientHeight = 545
   ClientWidth = 783
   LCLVersion = '1.0.12.0'
-  object InputBox: TGroupBox
-    Left = 16
+  object grpInput: TGroupBox
+    Left = 15
     Height = 257
     Top = 120
     Width = 745
@@ -22,6 +22,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 24
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 0
     end
     object spnOffsetStart1: TSpinEdit
@@ -72,6 +73,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 52
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 3
     end
     object spnOffsetStart2: TSpinEdit
@@ -98,6 +100,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 80
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 6
     end
     object spnOffsetStart3: TSpinEdit
@@ -124,6 +127,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 108
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 9
     end
     object spnOffsetStart4: TSpinEdit
@@ -141,6 +145,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 136
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 11
     end
     object spnOffsetStart5: TSpinEdit
@@ -167,6 +172,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 168
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 14
     end
     object spnOffsetStart6: TSpinEdit
@@ -193,6 +199,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 200
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 17
     end
     object spnOffsetStart7: TSpinEdit
@@ -219,6 +226,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 24
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 20
     end
     object spnOffsetStart8: TSpinEdit
@@ -245,6 +253,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 52
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 23
     end
     object spnOffsetStart9: TSpinEdit
@@ -271,6 +280,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 80
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 26
     end
     object spnOffsetStart10: TSpinEdit
@@ -306,6 +316,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 108
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 30
     end
     object spnOffsetStart11: TSpinEdit
@@ -332,6 +343,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 136
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 33
     end
     object spnOffsetStart12: TSpinEdit
@@ -358,6 +370,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 168
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 36
     end
     object spnOffsetStart13: TSpinEdit
@@ -384,6 +397,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 200
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 39
     end
     object spnOffsetStart14: TSpinEdit
@@ -428,6 +442,246 @@ object NNdataSetForm: TNNdataSetForm
       Caption = 'End Offset'
       ParentColor = False
     end
+    object lblNormalize: TLabel
+      Left = 318
+      Height = 14
+      Top = 6
+      Width = 47
+      Caption = 'Normalize'
+      ParentColor = False
+    end
+    object lblNormalize1: TLabel
+      Left = 686
+      Height = 14
+      Top = 6
+      Width = 47
+      Caption = 'Normalize'
+      ParentColor = False
+    end
+    object edtNorm1: TComboBox
+      Left = 318
+      Height = 21
+      Top = 24
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 42
+    end
+    object edtNorm2: TComboBox
+      Left = 319
+      Height = 21
+      Top = 52
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 43
+    end
+    object edtNorm3: TComboBox
+      Left = 319
+      Height = 21
+      Top = 80
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 44
+    end
+    object edtNorm4: TComboBox
+      Left = 318
+      Height = 21
+      Top = 108
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 45
+    end
+    object edtNorm5: TComboBox
+      Left = 318
+      Height = 21
+      Top = 136
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 46
+    end
+    object edtNorm6: TComboBox
+      Left = 319
+      Height = 21
+      Top = 168
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 47
+    end
+    object edtNorm7: TComboBox
+      Left = 318
+      Height = 21
+      Top = 200
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 48
+    end
+    object edtNorm8: TComboBox
+      Left = 686
+      Height = 21
+      Top = 24
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 49
+    end
+    object edtNorm9: TComboBox
+      Left = 686
+      Height = 21
+      Top = 52
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 50
+    end
+    object edtNorm10: TComboBox
+      Left = 687
+      Height = 21
+      Top = 80
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 51
+    end
+    object edtNorm11: TComboBox
+      Left = 687
+      Height = 21
+      Top = 108
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 52
+    end
+    object edtNorm12: TComboBox
+      Left = 687
+      Height = 21
+      Top = 136
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 53
+    end
+    object edtNorm13: TComboBox
+      Left = 687
+      Height = 21
+      Top = 168
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 54
+    end
+    object edtNorm14: TComboBox
+      Left = 687
+      Height = 21
+      Top = 200
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 55
+    end
   end
   object edtInputFilename: TEdit
     Left = 152
@@ -469,7 +723,7 @@ object NNdataSetForm: TNNdataSetForm
     TabOrder = 2
   end
   object OutputBox: TGroupBox
-    Left = 15
+    Left = 16
     Height = 137
     Top = 392
     Width = 745
@@ -483,6 +737,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 0
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 0
     end
     object spnOutOffsetStart1: TSpinEdit
@@ -509,6 +764,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 28
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 3
     end
     object spnOutOffsetStart2: TSpinEdit
@@ -535,6 +791,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 56
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 6
     end
     object spnOutOffsetStart3: TSpinEdit
@@ -561,6 +818,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 88
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 9
     end
     object spnOutOffsetStart4: TSpinEdit
@@ -586,6 +844,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 0
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 12
     end
     object spnOutOffsetStart5: TSpinEdit
@@ -612,6 +871,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 28
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 15
     end
     object spnOutOffsetStart6: TSpinEdit
@@ -638,6 +898,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 56
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 18
     end
     object spnOutOffsetStart7: TSpinEdit
@@ -664,6 +925,7 @@ object NNdataSetForm: TNNdataSetForm
       Top = 88
       Width = 136
       ItemHeight = 13
+      Style = csDropDownList
       TabOrder = 21
     end
     object spnOutOffsetStart8: TSpinEdit
@@ -683,6 +945,134 @@ object NNdataSetForm: TNNdataSetForm
       MaxValue = 1000
       MinValue = -1000
       TabOrder = 23
+    end
+    object edtOutNorm1: TComboBox
+      Left = 319
+      Height = 21
+      Top = 0
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 24
+    end
+    object edtOutNorm2: TComboBox
+      Left = 319
+      Height = 21
+      Top = 28
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 25
+    end
+    object edtOutNorm3: TComboBox
+      Left = 319
+      Height = 21
+      Top = 56
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 26
+    end
+    object edtOutNorm4: TComboBox
+      Left = 318
+      Height = 21
+      Top = 88
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 27
+    end
+    object edtOutNorm5: TComboBox
+      Left = 686
+      Height = 21
+      Top = 0
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 28
+    end
+    object edtOutNorm6: TComboBox
+      Left = 685
+      Height = 21
+      Top = 28
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 29
+    end
+    object edtOutNorm7: TComboBox
+      Left = 685
+      Height = 21
+      Top = 56
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 30
+    end
+    object edtOutNorm8: TComboBox
+      Left = 685
+      Height = 21
+      Top = 88
+      Width = 56
+      ItemHeight = 13
+      Items.Strings = (
+        'z-Score'
+        'Min-Max'
+        'Binary'
+        'Pct'
+      )
+      OnChange = edtNorm1Change
+      Style = csDropDownList
+      TabOrder = 31
     end
   end
   object edtSeparator: TEdit
@@ -719,10 +1109,10 @@ object NNdataSetForm: TNNdataSetForm
     TabOrder = 7
   end
   object btnGenerateDataSet: TButton
-    Left = 264
-    Height = 25
-    Top = 75
-    Width = 128
+    Left = 384
+    Height = 24
+    Top = 97
+    Width = 152
     Caption = 'Generate Dataset'
     TabOrder = 8
   end
@@ -753,17 +1143,17 @@ object NNdataSetForm: TNNdataSetForm
     TabOrder = 10
   end
   object btnSave: TButton
-    Left = 392
+    Left = 384
     Height = 25
-    Top = 75
+    Top = 72
     Width = 75
     Caption = 'Save'
     TabOrder = 11
   end
   object btnLoad: TButton
-    Left = 472
+    Left = 464
     Height = 25
-    Top = 75
+    Top = 72
     Width = 75
     Caption = 'Load'
     TabOrder = 12
@@ -783,8 +1173,26 @@ object NNdataSetForm: TNNdataSetForm
     Width = 163
     TabOrder = 13
   end
+  object lblStepSize: TLabel
+    Left = 248
+    Height = 14
+    Top = 75
+    Width = 49
+    Caption = 'Step Size:'
+    ParentColor = False
+  end
+  object spnStepSize: TSpinEdit
+    Left = 304
+    Height = 21
+    Top = 72
+    Width = 50
+    MaxValue = 1000
+    MinValue = 24
+    TabOrder = 14
+    Value = 24
+  end
   object myOpenDialog: TOpenDialog
-    left = 720
-    top = 488
+    left = 648
+    top = 368
   end
 end

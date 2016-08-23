@@ -23,6 +23,7 @@ type
     cbFieldInput12: TComboBox;
     cbFieldInput13: TComboBox;
     cbFieldInput14: TComboBox;
+    edtNorm1: TComboBox;
     cbFieldOutput1: TComboBox;
     cbFieldInput2: TComboBox;
     cbFieldInput3: TComboBox;
@@ -41,10 +42,34 @@ type
     cbFieldOutput8: TComboBox;
     cbRandomizeRows: TCheckBox;
     edtInputFilename: TEdit;
+    edtNorm10: TComboBox;
+    edtNorm11: TComboBox;
+    edtNorm12: TComboBox;
+    edtNorm13: TComboBox;
+    edtNorm14: TComboBox;
+    edtOutNorm1: TComboBox;
+    edtNorm2: TComboBox;
+    edtNorm3: TComboBox;
+    edtNorm4: TComboBox;
+    edtNorm5: TComboBox;
+    edtNorm6: TComboBox;
+    edtNorm7: TComboBox;
+    edtNorm8: TComboBox;
+    edtNorm9: TComboBox;
+    edtOutNorm2: TComboBox;
+    edtOutNorm3: TComboBox;
+    edtOutNorm4: TComboBox;
+    edtOutNorm5: TComboBox;
+    edtOutNorm6: TComboBox;
+    edtOutNorm7: TComboBox;
+    edtOutNorm8: TComboBox;
     edtTrainFilename: TEdit;
     edtSeparator: TEdit;
     edtTestFilename: TEdit;
-    InputBox: TGroupBox;
+    grpInput: TGroupBox;
+    lblNormalize: TLabel;
+    lblNormalize1: TLabel;
+    lblStepSize: TLabel;
     lblInputFilename2: TLabel;
     lblPercentOfTestSet: TLabel;
     lblEndOffset1: TLabel;
@@ -60,6 +85,7 @@ type
     myOpenDialog: TOpenDialog;
     rbSeparatorEdit: TRadioButton;
     rbSeparatorTab: TRadioButton;
+    spnStepSize: TSpinEdit;
     spnOffsetEnd10: TSpinEdit;
     spnOffsetEnd11: TSpinEdit;
     spnOffsetEnd12: TSpinEdit;
@@ -106,6 +132,7 @@ type
     spnOutOffsetStart7: TSpinEdit;
     spnOutOffsetStart8: TSpinEdit;
     procedure btnSelectInputFileNameClick(Sender: TObject);
+    procedure edtNorm1Change(Sender: TObject);
 
   private
     inputCSV_ : TCSVTable;
@@ -175,6 +202,11 @@ begin
 
 
         end;
+end;
+
+procedure TNNdataSetForm.edtNorm1Change(Sender: TObject);
+begin
+
 end;
 
 
