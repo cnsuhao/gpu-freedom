@@ -145,7 +145,6 @@ begin
           edtTestFileName.Text := extractFileName(myOpenDialog.FileName)+'.test';
 
           inputCSV_ :=  TCSVTable.Create(myOpenDialog.FileName, getSeparator());
-          inputCSV_.loadInMemory;
 
           for i:=1 to inputCSV_.totalfields_ do
               begin

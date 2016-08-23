@@ -21,9 +21,12 @@ type TCSVTable = class(TObject)
      totalfields_ : Longint;
 
      totalrows_      : Longint;
-
+     totalcolumns_   : Longint;
+     isFloat_,
+     singleTest_     : Array[1..MAX_COLUMNS] of Boolean;
 
      tablemem_       : Array of AnsiString;
+     tablememFloat_  : Array[1..MAX_COLUMNS] of Array of Extended;
 
      constructor Create(filename, separator  : String);
      destructor  Destroy;
@@ -34,7 +37,9 @@ type TCSVTable = class(TObject)
      function    retrieveField(fieldname : AnsiString) : Longint;
      function    retrieveRow(pos : Longint) : AnsiString;
      function    retrieveRowField(startrow,endrow : Longint; field : Ansistring) : AnsiString;
-     procedure   loadInMemory;
+     procedure   loadInMemory;     // fills tablemem_
+     procedure   inferFieldsFromData; // fills isFloat_
+     procedure   loadInFloatMemory; // fills tablememFloat_
 
    private
      F : TextFile;
@@ -65,7 +70,11 @@ begin
  totalfields_ := i;
  totalrows_ := countRows();
 
+ loadInMemory();
+ inferFieldsFromData();
+ loadInFloatMemory();
 end;
+
 
 function TCSVTable.readHeader() : AnsiString;
 var str : AnsiString;
@@ -110,6 +119,116 @@ begin
   Result := count;
 end;
 
+procedure TCSVTable.inferFieldsFromData;
+var
+    str,
+    msg : AnsiString;
+    j,
+    nbcolumns,
+    oldnbcolumns : Longint;
+
+    function scanFieldsForNumeric(str : AnsiString) : Longint;
+    var column     : AnsiString;
+        i          : Longint;
+        val        : Extended;
+        nbcolumns  : Longint;
+        myStr      : Ansistring;
+        singleTest : Boolean;
+    begin
+      myStr := str;
+      i := 0;
+
+      column:=extractParamLong(myStr, separator_);
+      while (Length(myStr)>0) or (column<>'') do
+           begin
+             i := i+1;
+             if singleTest_[i] then
+                begin
+                  // test if this column is really numeric
+                     try
+                        val := StrToFloat(Trim(column));
+                        isfloat_[i] := true;
+
+                     except
+                           on E : EConvertError do
+                             begin
+                              isfloat_[i]   := false;
+                              singleTest_[i] := false;
+                             end;
+                     end;
+                end;
+
+             // go to next column
+             column:=extractParamLong(myStr, separator_);
+           end;
+
+       Result := i; // number of columns as result
+    end;
+
+begin
+  for j:=1 to MAX_COLUMNS do
+    begin
+      singleTest_[j] := true;
+      isFloat_[j] := false;
+    end;
+
+  oldnbcolumns := 0;
+  for j:=2 to totalrows_ do
+      begin
+          str := retrieveRow(j);
+          if Trim(str)='' then continue;
+          nbcolumns:=scanFieldsForNumeric(str);
+          if (j>=3) and (oldnbcolumns<>nbcolumns) then
+                Raise Exception.Create('The csv file has an unequal number of columns across rows!');
+          oldnbcolumns := nbcolumns;
+      end;
+
+  totalcolumns_ := nbcolumns;
+  {
+  // enable this to debug field inference
+  msg := '';
+  for j:=1 to nbcolumns do
+      begin
+        msg := msg + IntToStr(j)+' '+fields_[j]+':';
+               if isfloat_[j]
+                  then msg := msg + 'float '
+               else
+                       msg := msg + 'text ';
+      end;
+  ShowMessage(msg);
+  }
+end;
+
+procedure TCSVTable.loadInFloatMemory();
+var i, j : Longint;
+    str  : AnsiString;
+begin
+  for i:=1 to totalcolumns_ do
+   begin
+      if isFloat_[i] then
+         SetLength(tablememFloat_[i], totalrows_); // this goes to 0 to totalrows_-1, 0 contains header
+   end;
+
+   // now parse the values into the memory monster:
+   for j:=2 to totalrows_ do
+       begin
+            str := retrieveRow(j);
+            if Trim(str)='' then
+               begin
+                   for i:=1 to totalcolumns_ do
+                   if isFloat_[i] then
+                      tablememFloat_[i][j-1] := 0;
+                   continue;
+               end;
+
+            for i:=1 to totalcolumns_ do
+                begin
+                   if isFloat_[i] then
+                      tablememFloat_[i][j-1] := StrToFloat(retrieveNFieldValue(str,i));
+                end;
+       end;
+
+end;
 
 
 function TCSVTable.retrieveNFieldValue(Str : AnsiString; pos : Longint) : AnsiString;
