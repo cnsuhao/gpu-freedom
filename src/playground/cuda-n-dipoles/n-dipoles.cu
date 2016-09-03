@@ -15,7 +15,7 @@
 #define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
 #define Nd Np/2 // number of dipoles
 //TODO: adjust these constants
-#define T          0.0001 // timestamp
+#define TIMESTEP   0.0001 // timestep
 #define R          5.291772106712E−11  // Bohr radius in meter
 #define Q          1.6021773349E-19 //elementar charge in Coulomb
 #define Q2         Q*Q
@@ -56,6 +56,17 @@ __device__ void projectVectorXY(double magnitude,
 	*py = magnitude * deltay / distance;
 	
 }  
+
+__device__ void projectAonB(double a_x, double a_y, double b_x, double b_y, 
+                            double* ab_x, double* ab_y) {
+	// a_proj_on_b = dotproduct(a,b)/length(b)^2 * b	
+	double dotproduct = a_x*b_x + a_y*b_y;
+	double len_b_2 = sqr(b_x)+sqr(b_y);
+	double factor = dotproduct/len_b_2;	
+
+	*ab_x = *ab_x * factor;
+	*ab_y = *ab_y * factor;
+}
 
 __device__ void getElectricAcceleration(int p1, int p2, 
                                         double *x, double *y, double *ax, double *ay) {
@@ -106,7 +117,7 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 		// 2. update omega (angular velocity) with the projected acceleration,
 		//    we do it only on half of the cores
 		if (tid%2==0) {
-                        int did = tid / 2; // dipole number
+                        int did = tid / 2; // dipole identifier
        
 			// the axis of projection is perpendicular
 			// of (x1,y1)<-->(x2,y2)
@@ -120,25 +131,49 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
                         double center_x = deltax/2 + x[tid];
                         double center_y = deltay/2 + y[tid];
 
-			double angle_a1 = atan2f(ax[tid],ay[tid]);
-                        double angle_a2 = atan2f(ax[tid+1],ay[tid+1]);
+			// now we need to project a=(ax[tid], ay[tid]) on 
+                        double tan_x_1 = center_x + cos(angle[did]+PIHALF) * r_did;
+			double tan_y_1 = center_y + sin(angle[did]+PIHALF) * r_did;
+			double a_on_b_1_x;
+			double a_on_b_1_y;
+			projectAonB(ax[tid],ay[tid],tan_x_1,tan_y_1,&a_on_b_1_x,&a_on_b_1_y);
+			double len_proj_acc_1 = sqrt(sqr(a_on_b_1_x)+sqr( a_on_b_1_y));
+
+			// now we need to project a=(ax[tid+1], ay[tid+2]) on 
+                        double tan_x_2 = center_x - cos(angle[did]+PIHALF) * r_did;
+			double tan_y_2 = center_y - sin(angle[did]+PIHALF) * r_did;
+			double a_on_b_2_x;
+			double a_on_b_2_y;
+                        projectAonB(ax[tid+1],ay[tid+1],tan_x_2,tan_y_2,&a_on_b_2_x,&a_on_b_2_y);
+			double len_proj_acc_2 = sqrt(sqr(a_on_b_2_x)+sqr( a_on_b_2_y));
+
+			// if they have the same sign, they slow down the dipole,
+			// if they have opposite sign, they accelerate it
+			double len_proj_acc = len_proj_acc_1 - len_proj_acc_2;
+
+			// now we add this acceleration to the current angular velocity omega
+			// TODO: double check if 2*PI is necessary
+			omega[did] = omega[did] + (len_proj_acc * TIMESTEP)/(r_did/*2*PI*/);
+			angle[did] = angle[did] + omega[did]*TIMESTEP;
+
+			//TODO: this part we could calculate on all cores
+			// we calculate now the new position for the dipoles
+			x[tid] = center_x + cos(angle[did])*r_did;
+			y[tid] = center_y + sin(angle[did])*r_did;
 			
-			double angle_at1 = PIHALF-(angle_a1-angle[did]);
-			double angle_at2 = PIHALF-(angle_a2-angle[did]);
+			x[tid+1] = center_x - cos(angle[did])*r_did;
+			y[tid+1] = center_y - sin(angle[did])*r_did;
 
-			// TODO: this is wrong, as the dipole is fix, we can not simply add
-                        // the forces, some cancel out in the direction of the dipole
-			// the dipole should move as well... but we want it fix
-                        double new_ax = ax[tid]+ax[tid+1];
-			double new_ay = ay[tid]+ay[tid+1];
-
-
-				
+			// and we clear accelerations as we will recalculate them in the next round
+			ax[tid]=0;
+			ay[tid]=0;
+			ax[tid+1]=0;
+			ay[tid+1]=0;
 		}
 		
 		__syncthreads();
 
-		// 3. calculate new x and y again on all cores
+		
 		
 	   }
 }
@@ -196,8 +231,8 @@ int main(void) {
 	cudaMemcpy(E_pot, dev_E_pot, Nd*sizeof(double), cudaMemcpyDeviceToHost);
 	
 	for (int i=0; i<Np; i++) {
-		printf("i: %d x: %g y: %g ax: %g ay %g angle %g \n", 
-                        i, x[i], y[i], ax[i], ay[i], angle[(int)i/2]);
+		printf("i: %d x: %g y: %g ax: %g ay %g angle %g omega %g \n", 
+                        i, x[i], y[i], ax[i], ay[i], angle[(int)i/2], omega[(int)i/2]);
 	}
 	
 	cudaFree(dev_x);
