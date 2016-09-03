@@ -65,7 +65,7 @@ __device__ void getElectricAcceleration(int p1, int p2,
 
 
 __global__ void simulate_dipoles(double *x, double *y, double *omega, double *E_pot) {
-	double ax[N*2]; double ay[N*2]; 
+	double ax[N*2]; double ay[N*2]; double angle[N*2];
         	
 	int tid = blockIdx.x; 
         int iselectron;
