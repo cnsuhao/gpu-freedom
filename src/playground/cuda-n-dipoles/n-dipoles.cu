@@ -15,14 +15,16 @@
 #define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
 #define Nd Np/2 // number of dipoles
 //TODO: adjust these constants
-#define T 0.0001 // timestamp
-#define R 5.291772106712E−11  // Bohr radius in meter
-#define Q 1.6021773349E-19 //elementar charge in Coulomb
-#define Q2 Q*Q
-#define PI 3.1415926535
-#define COULOMB 1/(4*PI)
-#define Mp 1.672623110E-27  // proton mass in kg
-#define Me 9.109389754E-31  // electron mass in kg
+#define T          0.0001 // timestamp
+#define R          5.291772106712E−11  // Bohr radius in meter
+#define Q          1.6021773349E-19 //elementar charge in Coulomb
+#define Q2         Q*Q
+#define PI         3.1415926535
+#define PIHALF     PI/2
+#define DIELECTRIC 1
+#define COULOMB    1/(4*PI*DIELECTRIC)
+#define Mp         1.672623110E-27  // proton mass in kg
+#define Me         9.109389754E-31  // electron mass in kg
 
 __device__ double sqr(double x) {
 	return x*x;
@@ -109,6 +111,11 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			// the axis of projection is perpendicular
 			// of (x1,y1)<-->(x2,y2)
 		        // we take the angle and add 90 degrees
+                        // see definition of atan2 on wikipedia for polar coordinates conversion
+			// https://en.wikipedia.org/wiki/Polar_coordinate_system
+			double deltax = x[tid+1]-x[tid];
+			double deltay = y[tid+1]-y[tid];			
+			angle[did] = atan2f(deltax, deltay);
 				
 		}
 		
@@ -143,7 +150,7 @@ int main(void) {
         //      for two bodies with different centers and radia
 	for (int i=0; i<Np; i++) {
 		x[i] = (i*i)/1E6;
-		y[i] = i/1000;
+		y[i] = i/1000.0;
 		ax[i] = 0;
 		ay[i] = 0;
 	}
@@ -156,9 +163,9 @@ int main(void) {
         cudaMemcpy(dev_x, x, Np*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_y, y, Np*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_omega, omega, Nd*sizeof(double), cudaMemcpyHostToDevice);
-	cudaMemcpy(dev_ax, x, Np*sizeof(double), cudaMemcpyHostToDevice);
-	cudaMemcpy(dev_ay, x, Np*sizeof(double), cudaMemcpyHostToDevice);
-	cudaMemcpy(dev_angle, x, Nd*sizeof(double), cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_ax, ax, Np*sizeof(double), cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_ay, ay, Np*sizeof(double), cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_angle, angle, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_E_pot, E_pot, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	
 	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot);
@@ -172,7 +179,8 @@ int main(void) {
 	cudaMemcpy(E_pot, dev_E_pot, Nd*sizeof(double), cudaMemcpyDeviceToHost);
 	
 	for (int i=0; i<Np; i++) {
-		printf("i: %d ax: %g ay %g\n", i, ax[i], ay[i]);
+		printf("i: %d x: %g y: %g ax: %g ay %g angle %g \n", 
+                        i, x[i], y[i], ax[i], ay[i], angle[(int)i/2]);
 	}
 	
 	cudaFree(dev_x);
