@@ -7,12 +7,13 @@
 #define Nd Np/2 // number of dipoles
 //TODO: adjust these constants
 #define T 0.0001 // timestamp
-#define R 10e-15 // rutheford radius
-#define Q 1 //electric quant
+#define R 5.291772106712E−11  // Bohr radius in meter
+#define Q 1.6021773349E-19 //elementar charge in Coulomb
+#define Q2 Q*Q
 #define PI 3.1415926535
 #define COULOMB 1/(4*PI)
-#define Mp 1  // proton mass
-#define Me 1  // electron mass
+#define Mp 1.672623110E-27  // proton mass in kg
+#define Me 9.109389754E-31  // electron mass in kg
 
 __device__ double sqr(double x) {
 	return x*x;
@@ -57,7 +58,7 @@ __device__ void getElectricAcceleration(int p1, int p2,
 		
 
 	if ((p1<Np) && (p2<Np)) {
-		acceleration = COULOMB * Q * Q * getDistanceSquared(p1, p2, x, y) / mass;  
+		acceleration = COULOMB * Q2 * getDistanceSquared(p1, p2, x, y) / mass;  
 		// now we need to project acceleration along (x1-x2) and (y1-y2)
 		projectVector(acceleration, x[p1], x[p2], y[p1], y[p2], ax, ay);
 	}
@@ -112,8 +113,8 @@ int main(void) {
 
 	//TODO: init variables with Box-Muller
 	for (int i=0; i<Np; i++) {
-		x[i] = -i,
-		y[i] = i*i;
+		x[i] = (i*i)/1E6;
+		y[i] = i/1000;
 		ax[i] = 0;
 		ay[i] = 0;
 	}
