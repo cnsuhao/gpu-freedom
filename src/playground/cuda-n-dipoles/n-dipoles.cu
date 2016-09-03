@@ -116,6 +116,23 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			double deltax = x[tid+1]-x[tid];
 			double deltay = y[tid+1]-y[tid];			
 			angle[did] = atan2f(deltax, deltay);
+                        double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
+                        double center_x = deltax/2 + x[tid];
+                        double center_y = deltay/2 + y[tid];
+
+			double angle_a1 = atan2f(ax[tid],ay[tid]);
+                        double angle_a2 = atan2f(ax[tid+1],ay[tid+1]);
+			
+			double angle_at1 = PIHALF-(angle_a1-angle[did]);
+			double angle_at2 = PIHALF-(angle_a2-angle[did]);
+
+			// TODO: this is wrong, as the dipole is fix, we can not simply add
+                        // the forces, some cancel out in the direction of the dipole
+			// the dipole should move as well... but we want it fix
+                        double new_ax = ax[tid]+ax[tid+1];
+			double new_ay = ay[tid]+ay[tid+1];
+
+
 				
 		}
 		
