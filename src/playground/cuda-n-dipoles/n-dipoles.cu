@@ -1,9 +1,18 @@
-/* (c) 2016 Livio and Tiziano Mengotti */
-/* n-dipoles simulation */
-// to make it: nvcc n-dipoles.cu -o n-dipoles.out
-// to execute the example ./n-dipoles.out
+/* 
+   n-dipoles simulation on CUDA architecture 
+   (c) 2016 Livio and Tiziano Mengotti 
+
+   to compile it: nvcc n-dipoles.cu -o n-dipoles.out
+   to execute the example ./n-dipoles.out
+
+   arrangement of arrays is
+   index      0 1 2 3 4 5 ...  n-2 n-1
+   particle   p e p e p e      p   e      with p proton and e electron
+   dipole nb  0 0 1 1 2 2      n-1 n-1    this is the dipole number
+
+*/
 #include <stdio.h>
-#define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count
+#define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
 #define Nd Np/2 // number of dipoles
 //TODO: adjust these constants
 #define T 0.0001 // timestamp
@@ -29,7 +38,7 @@ __device__ double getDistanceSquared(int p1, int p2, double *x, double *y) {
 
 
 // Projects a magnitude along x and y axis
-__device__ void projectVector(double magnitude,
+__device__ void projectVectorXY(double magnitude,
                               double x1, double x2, double y1, double y2, 
                               double *px, double* py) {
 
@@ -60,7 +69,7 @@ __device__ void getElectricAcceleration(int p1, int p2,
 	if ((p1<Np) && (p2<Np)) {
 		acceleration = COULOMB * Q2 * getDistanceSquared(p1, p2, x, y) / mass;  
 		// now we need to project acceleration along (x1-x2) and (y1-y2)
-		projectVector(acceleration, x[p1], x[p2], y[p1], y[p2], ax, ay);
+		projectVectorXY(acceleration, x[p1], x[p2], y[p1], y[p2], ax, ay);
 	}
 
 }
@@ -88,6 +97,22 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			ax[tid]=ax[tid]+ax_temp;
 			ay[tid]=ay[tid]+ay_temp;
 		}
+
+		__syncthreads();
+
+		// 2. update omega (angular velocity) with the projected acceleration,
+		//    we do it only on half of the cores
+		if (tid%2==0) {
+			// the axis of projection is perpendicular
+			// of (x1,y1)<-->(x2,y2)
+		
+				
+		}
+		
+		__syncthreads();
+
+		// 3. calculate new x and y again on all cores
+		
 	   }
 }
 
@@ -111,7 +136,8 @@ int main(void) {
 	cudaMalloc( (void**)&dev_angle, Nd*sizeof(double));
         cudaMalloc( (void**)&dev_E_pot, Nd*sizeof(int));
 
-	//TODO: init variables with Box-Muller
+	//TODO: init variables with Box-Muller and 2D gauss curve
+        //      for two bodies with different centers and radia
 	for (int i=0; i<Np; i++) {
 		x[i] = (i*i)/1E6;
 		y[i] = i/1000;
