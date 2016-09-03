@@ -78,7 +78,8 @@ __device__ void getElectricAcceleration(int p1, int p2,
 __global__ void simulate_dipoles(double *x, double *y, double *omega, 
 				 double *ax, double *ay, double *angle,
                                  double *E_pot) {
-	int tid = blockIdx.x; 
+	int tid = blockIdx.x; // particle number (thread id)
+        
         int iselectron;
 	double ax_temp; double ay_temp;
 
@@ -103,9 +104,11 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 		// 2. update omega (angular velocity) with the projected acceleration,
 		//    we do it only on half of the cores
 		if (tid%2==0) {
+                        int did = tid / 2; // dipole number
+       
 			// the axis of projection is perpendicular
 			// of (x1,y1)<-->(x2,y2)
-		
+		        // we take the angle and add 90 degrees
 				
 		}
 		
