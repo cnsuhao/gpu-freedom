@@ -13,9 +13,9 @@
 */
 #include <stdio.h>
 #define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
-#define Nd Np/2 // number of dipoles
+#define Nd 640 // number of dipoles, has to be Np/2
 //TODO: adjust these constants
-#define TIMESTEP   0.0001 // timestep
+#define TIMESTEP   1E-15 // timestep in seconds
 #define R          5.291772106712E−11  // Bohr radius in meter
 #define Q          1.6021773349E-19 //elementar charge in Coulomb
 #define Q2         Q*Q
@@ -42,7 +42,7 @@ __device__ double getDistanceSquared(int p1, int p2, double *x, double *y) {
 // Projects a magnitude along x and y axis
 __device__ void projectVectorXY(double magnitude,
                               double x1, double x2, double y1, double y2, 
-                              double *px, double* py) {
+                              double *px, double *py) {
 
 	double distance;
 	double deltax; double deltay;
@@ -58,7 +58,7 @@ __device__ void projectVectorXY(double magnitude,
 }  
 
 __device__ void projectAonB(double a_x, double a_y, double b_x, double b_y, 
-                            double* ab_x, double* ab_y) {
+                            double *ab_x, double *ab_y) {
 	// a_proj_on_b = dotproduct(a,b)/length(b)^2 * b	
 	double dotproduct = a_x*b_x + a_y*b_y;
 	double len_b_2 = sqr(b_x)+sqr(b_y);
@@ -95,7 +95,12 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
         
         int iselectron;
 	double ax_temp; double ay_temp;
-
+        
+        double a_on_b_1_x;
+	double a_on_b_1_y;
+	double a_on_b_2_x;
+	double a_on_b_2_y;
+			
 	   if (tid<Np) {
 		// 1. calculate acceleration on tid particle
 		ax[tid]=0; ay[tid]=0;
@@ -112,13 +117,15 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			ay[tid]=ay[tid]+ay_temp;
 		}
 
+                
 		__syncthreads();
+
 
 		// 2. update omega (angular velocity) with the projected acceleration,
 		//    we do it only on half of the cores
 		if (tid%2==0) {
-                        int did = tid / 2; // dipole identifier
-       
+                        int did = (int)tid / 2; // dipole identifier
+
 			// the axis of projection is perpendicular
 			// of (x1,y1)<-->(x2,y2)
 		        // we take the angle and add 90 degrees
@@ -126,25 +133,27 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			// https://en.wikipedia.org/wiki/Polar_coordinate_system
 			double deltax = x[tid+1]-x[tid];
 			double deltay = y[tid+1]-y[tid];			
+			
 			angle[did] = atan2f(deltax, deltay);
-                        double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
+
+			double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
                         double center_x = deltax/2 + x[tid];
                         double center_y = deltay/2 + y[tid];
 
 			// now we need to project a=(ax[tid], ay[tid]) on 
                         double tan_x_1 = center_x + cos(angle[did]+PIHALF) * r_did;
 			double tan_y_1 = center_y + sin(angle[did]+PIHALF) * r_did;
-			double a_on_b_1_x;
-			double a_on_b_1_y;
+								
 			projectAonB(ax[tid],ay[tid],tan_x_1,tan_y_1,&a_on_b_1_x,&a_on_b_1_y);
+
+						
 			double len_proj_acc_1 = sqrt(sqr(a_on_b_1_x)+sqr( a_on_b_1_y));
 
 			// now we need to project a=(ax[tid+1], ay[tid+2]) on 
                         double tan_x_2 = center_x - cos(angle[did]+PIHALF) * r_did;
 			double tan_y_2 = center_y - sin(angle[did]+PIHALF) * r_did;
-			double a_on_b_2_x;
-			double a_on_b_2_y;
-                        projectAonB(ax[tid+1],ay[tid+1],tan_x_2,tan_y_2,&a_on_b_2_x,&a_on_b_2_y);
+			                        
+			projectAonB(ax[tid+1],ay[tid+1],tan_x_2,tan_y_2,&a_on_b_2_x,&a_on_b_2_y);
 			double len_proj_acc_2 = sqrt(sqr(a_on_b_2_x)+sqr( a_on_b_2_y));
 
 			// if they have the same sign, they slow down the dipole,
@@ -152,9 +161,11 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			double len_proj_acc = len_proj_acc_1 - len_proj_acc_2;
 
 			// now we add this acceleration to the current angular velocity omega
-			// TODO: double check if 2*PI is necessary
-			omega[did] = omega[did] + (len_proj_acc * TIMESTEP)/(r_did/*2*PI*/);
+			// TODO: double check if /2*PI is necessary
+			// TODO: why on Earth is len_proj_acc here zero?
+			omega[did] = omega[did] + (len_proj_acc* TIMESTEP)/(r_did);//2*PI);
 			angle[did] = angle[did] + omega[did]*TIMESTEP;
+			//omega[did] = a_on_b_1_x;
 
 			//TODO: this part we could calculate on all cores
 			// we calculate now the new position for the dipoles
@@ -165,14 +176,17 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			y[tid+1] = center_y - sin(angle[did])*r_did;
 
 			// and we clear accelerations as we will recalculate them in the next round
+			/*			
 			ax[tid]=0;
 			ay[tid]=0;
 			ax[tid+1]=0;
 			ay[tid+1]=0;
+			*/
+					
 		}
 		
 		__syncthreads();
-
+		
 		
 		
 	   }
@@ -192,11 +206,11 @@ int main(void) {
 
 	cudaMalloc( (void**)&dev_x,     Np*sizeof(double));
         cudaMalloc( (void**)&dev_y,     Np*sizeof(double));
-        cudaMalloc( (void**)&dev_omega, Nd*sizeof(int));
+        cudaMalloc( (void**)&dev_omega, Nd*sizeof(double));
 	cudaMalloc( (void**)&dev_ax,    Np*sizeof(double));
 	cudaMalloc( (void**)&dev_ay,    Np*sizeof(double));
 	cudaMalloc( (void**)&dev_angle, Nd*sizeof(double));
-        cudaMalloc( (void**)&dev_E_pot, Nd*sizeof(int));
+        cudaMalloc( (void**)&dev_E_pot, Nd*sizeof(double));
 
 	//TODO: init variables with Box-Muller and 2D gauss curve
         //      for two bodies with different centers and radia
