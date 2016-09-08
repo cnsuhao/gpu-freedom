@@ -60,12 +60,12 @@ __device__ void projectVectorXY(double magnitude,
 __device__ void projectAonB(double a_x, double a_y, double b_x, double b_y, 
                             double *ab_x, double *ab_y) {
 	// a_proj_on_b = dotproduct(a,b)/length(b)^2 * b	
-	double dotproduct = a_x*b_x + a_y*b_y;
-	double len_b_2 = sqr(b_x)+sqr(b_y);
-	double factor = dotproduct/len_b_2;	
+	double dotproduct = a_x*b_x + a_y*b_y; //4
+	double len_b_2 = sqr(b_x)+sqr(b_y); //16
+	double factor = dotproduct/len_b_2; //0.25	
 
-	*ab_x = *ab_x * factor;
-	*ab_y = *ab_y * factor;
+	*ab_x = b_x * factor;
+	*ab_y = b_y * factor;
 }
 
 __device__ void getElectricAcceleration(int p1, int p2, 
@@ -90,7 +90,7 @@ __device__ void getElectricAcceleration(int p1, int p2,
 
 __global__ void simulate_dipoles(double *x, double *y, double *omega, 
 				 double *ax, double *ay, double *angle,
-                                 double *E_pot) {
+                                 double *E_pot, int steps) {
 	int tid = blockIdx.x; // particle number (thread id)
         
         int iselectron;
@@ -100,96 +100,111 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 	double a_on_b_1_y;
 	double a_on_b_2_x;
 	double a_on_b_2_y;
-			
-	   if (tid<Np) {
-		// 1. calculate acceleration on tid particle
-		ax[tid]=0; ay[tid]=0;
 
-		for (int i=0; i<Np; i++) {
-			if (i==tid) continue; // we do not calculate on ourself
-			iselectron = (i % 2);
-			// we do not calculate acceleration on the partner particle on the dipole
-			if ((iselectron==1) && (i==tid-1)) continue;
-			if ((iselectron==0) && (i==tid+1)) continue;	
+	
+	for (int j=0; j<steps; j++) {
+		
+	   	if (tid<Np) {
+			// 1. calculate acceleration on tid particle
+			ax[tid]=0; ay[tid]=0;
+
+			for (int i=0; i<Np; i++) {
+				if (i==tid) continue; // we do not calculate on ourself
+				iselectron = (i % 2);
+				// we do not calculate acceleration on the partner particle on the dipole
+				if ((iselectron==1) && (i==tid-1)) continue;
+				if ((iselectron==0) && (i==tid+1)) continue;	
 			
-			getElectricAcceleration(tid, i, x, y, &ax_temp, &ay_temp);
-			ax[tid]=ax[tid]+ax_temp;
-			ay[tid]=ay[tid]+ay_temp;
-		}
+				getElectricAcceleration(tid, i, x, y, &ax_temp, &ay_temp);
+				ax[tid]=ax[tid]+ax_temp;
+				ay[tid]=ay[tid]+ay_temp;
+			}
 
                 
-		__syncthreads();
+			__syncthreads();
 
 
-		// 2. update omega (angular velocity) with the projected acceleration,
-		//    we do it only on half of the cores
-		if (tid%2==0) {
-                        int did = (int)tid / 2; // dipole identifier
+			// 2. update omega (angular velocity) with the projected acceleration,
+			//    we do it only on half of the cores
+			if (tid%2==0) {
+                        	int did = (int)tid / 2; // dipole identifier
 
-			// the axis of projection is perpendicular
-			// of (x1,y1)<-->(x2,y2)
-		        // we take the angle and add 90 degrees
-                        // see definition of atan2 on wikipedia for polar coordinates conversion
-			// https://en.wikipedia.org/wiki/Polar_coordinate_system
-			double deltax = x[tid+1]-x[tid];
-			double deltay = y[tid+1]-y[tid];			
+				// the axis of projection is perpendicular
+				// of (x1,y1)<-->(x2,y2)
+		        	// we take the angle and add 90 degrees
+                        	// see definition of atan2 on wikipedia for polar coordinates conversion
+				// https://en.wikipedia.org/wiki/Polar_coordinate_system
+				double deltax = x[tid+1]-x[tid];
+				double deltay = y[tid+1]-y[tid];			
 			
-			angle[did] = atan2f(deltax, deltay);
+				angle[did] = atan2f(deltax, deltay);
 
-			double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
-                        double center_x = deltax/2 + x[tid];
-                        double center_y = deltay/2 + y[tid];
+				double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
+                        	double center_x = deltax/2 + x[tid];
+                        	double center_y = deltay/2 + y[tid];
 
-			// now we need to project a=(ax[tid], ay[tid]) on 
-                        double tan_x_1 = center_x + cos(angle[did]+PIHALF) * r_did;
-			double tan_y_1 = center_y + sin(angle[did]+PIHALF) * r_did;
+				// now we need to project a=(ax[tid], ay[tid]) on 
+                        	double tan_x_1 = center_x + cos(angle[did]+PIHALF) * r_did;
+				double tan_y_1 = center_y + sin(angle[did]+PIHALF) * r_did;
 								
-			projectAonB(ax[tid],ay[tid],tan_x_1,tan_y_1,&a_on_b_1_x,&a_on_b_1_y);
+				projectAonB(ax[tid],ay[tid],tan_x_1,tan_y_1,&a_on_b_1_x,&a_on_b_1_y);
 
 						
-			double len_proj_acc_1 = sqrt(sqr(a_on_b_1_x)+sqr( a_on_b_1_y));
+				double len_proj_acc_1 = sqrt(sqr(a_on_b_1_x)+sqr( a_on_b_1_y));
 
-			// now we need to project a=(ax[tid+1], ay[tid+2]) on 
-                        double tan_x_2 = center_x - cos(angle[did]+PIHALF) * r_did;
-			double tan_y_2 = center_y - sin(angle[did]+PIHALF) * r_did;
+				// now we need to project a=(ax[tid+1], ay[tid+2]) on 
+                        	double tan_x_2 = center_x - cos(angle[did]+PIHALF) * r_did;
+				double tan_y_2 = center_y - sin(angle[did]+PIHALF) * r_did;
 			                        
-			projectAonB(ax[tid+1],ay[tid+1],tan_x_2,tan_y_2,&a_on_b_2_x,&a_on_b_2_y);
-			double len_proj_acc_2 = sqrt(sqr(a_on_b_2_x)+sqr( a_on_b_2_y));
+				projectAonB(ax[tid+1],ay[tid+1],tan_x_2,tan_y_2,&a_on_b_2_x,&a_on_b_2_y);
+				double len_proj_acc_2 = sqrt(sqr(a_on_b_2_x)+sqr( a_on_b_2_y));
 
-			// if they have the same sign, they slow down the dipole,
-			// if they have opposite sign, they accelerate it
-			double len_proj_acc = len_proj_acc_1 - len_proj_acc_2;
+				// if they have the same sign, they slow down the dipole,
+				// if they have opposite sign, they accelerate it
+				double len_proj_acc = len_proj_acc_1 - len_proj_acc_2;
 
-			// now we add this acceleration to the current angular velocity omega
-			// TODO: double check if /2*PI is necessary
-			// TODO: why on Earth is len_proj_acc here zero?
-			omega[did] = omega[did] + (len_proj_acc* TIMESTEP)/(r_did);//2*PI);
-			angle[did] = angle[did] + omega[did]*TIMESTEP;
-			//omega[did] = a_on_b_1_x;
-
-			//TODO: this part we could calculate on all cores
-			// we calculate now the new position for the dipoles
-			x[tid] = center_x + cos(angle[did])*r_did;
-			y[tid] = center_y + sin(angle[did])*r_did;
+				// now we add this acceleration to the current angular velocity omega
+				// TODO: double check if /2*PI is necessary
 			
-			x[tid+1] = center_x - cos(angle[did])*r_did;
-			y[tid+1] = center_y - sin(angle[did])*r_did;
+			
+				/*
+		 		// This is a test for method projectAonB
+				double t_ax=1;
+				double t_ay=1;
+				double t_bx=4;
+				double t_by=0;
+				double res_x=0;
+				double res_y=0;
+			
+				projectAonB(t_ax, t_ay, t_bx, t_by, &res_x, &res_y);
+				angle[did]=res_x;
+				omega[did]=res_y;
+				*/
 
-			// and we clear accelerations as we will recalculate them in the next round
-			/*			
-			ax[tid]=0;
-			ay[tid]=0;
-			ax[tid+1]=0;
-			ay[tid+1]=0;
-			*/
+			
+                        	omega[did] = omega[did] + (len_proj_acc* TIMESTEP)/(r_did);//2*PI);
+				angle[did] = angle[did] + omega[did]*TIMESTEP;
+
+				//TODO: we could calculate this part on all cores
+				// we calculate now the new position for the dipoles
+				x[tid] = center_x + cos(angle[did])*r_did;
+				y[tid] = center_y + sin(angle[did])*r_did;
+			
+				x[tid+1] = center_x - cos(angle[did])*r_did;
+				y[tid+1] = center_y - sin(angle[did])*r_did;
+
+				// and we clear accelerations as we will recalculate them in the next round
+				ax[tid]=0;
+				ay[tid]=0;
+				ax[tid+1]=0;
+				ay[tid+1]=0;
 					
-		}
+			} // tid%2==0
 		
-		__syncthreads();
-		
-		
-		
-	   }
+			__syncthreads();
+	   	}  // tid<Np
+	} // for j<steps
+
 }
 
 
@@ -234,7 +249,7 @@ int main(void) {
 	cudaMemcpy(dev_angle, angle, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_E_pot, E_pot, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	
-	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot);
+	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot, 1000);
 	
 	cudaMemcpy(x, dev_x, Np*sizeof(double), cudaMemcpyDeviceToHost);
 	cudaMemcpy(y, dev_y, Np*sizeof(double), cudaMemcpyDeviceToHost);
