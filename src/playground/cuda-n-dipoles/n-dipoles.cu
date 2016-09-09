@@ -80,7 +80,7 @@ __device__ void getElectricAcceleration(int p1, int p2,
 		
 
 	if ((p1<Np) && (p2<Np)) {
-		acceleration = COULOMB * Q2 * getDistanceSquared(p1, p2, x, y) / mass;  
+		acceleration = COULOMB * Q2 / getDistanceSquared(p1, p2, x, y) / mass;  
 		// now we need to project acceleration along (x1-x2) and (y1-y2)
 		projectVectorXY(acceleration, x[p1], x[p2], y[p1], y[p2], ax, ay);
 	}
