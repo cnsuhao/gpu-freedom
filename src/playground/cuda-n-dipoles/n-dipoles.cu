@@ -10,6 +10,8 @@
    particle   p e p e p e      p   e      with p proton and e electron
    dipole nb  0 0 1 1 2 2      n-1 n-1    this is the dipole number
 
+   TODO: replace %2==1 with &1==1 for performance when detecting electrons/protons
+
 */
 #include <stdio.h>
 #define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
@@ -74,13 +76,18 @@ __device__ void getElectricAcceleration(int p1, int p2,
 	// acceleration is calculated on p1	
 	double acceleration=0;
 	double mass;
-	if ((p1 % 2) == 0) // even indexes are proton
+        double sign = 1;
+	if ((p1 % 2) == 0) { // even indexes are proton
 		mass = Mp;
-	else    mass = Me; // odd indexes are electrons
-		
+		if ((p2%2) == 0) sign=-1; // both are protons, invert sign
+        }
+	else {
+               mass = Me; // odd indexes are electrons
+	       	if ((p2%2) == 1) sign=-1; // both are electrons, invert sign
+        }
 
 	if ((p1<Np) && (p2<Np)) {
-		acceleration = COULOMB * Q2 / getDistanceSquared(p1, p2, x, y) / mass;  
+		acceleration = sign * COULOMB * Q2 / getDistanceSquared(p1, p2, x, y) / mass;  
 		// now we need to project acceleration along (x1-x2) and (y1-y2)
 		projectVectorXY(acceleration, x[p1], x[p2], y[p1], y[p2], ax, ay);
 	}
@@ -249,7 +256,7 @@ int main(void) {
 	cudaMemcpy(dev_angle, angle, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_E_pot, E_pot, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	
-	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot, 1000);
+	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot, 10);
 	
 	cudaMemcpy(x, dev_x, Np*sizeof(double), cudaMemcpyDeviceToHost);
 	cudaMemcpy(y, dev_y, Np*sizeof(double), cudaMemcpyDeviceToHost);
