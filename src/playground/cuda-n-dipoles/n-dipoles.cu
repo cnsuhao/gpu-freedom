@@ -10,8 +10,6 @@
    particle   p e p e p e      p   e      with p proton and e electron
    dipole nb  0 0 1 1 2 2      n-1 n-1    this is the dipole number
 
-   TODO: replace %2==1 with &1==1 for performance when detecting electrons/protons
-
 */
 #include <stdio.h>
 #define Np 1280 // number of particles (dipoles are half of them), should be CUDA core count and even
@@ -78,13 +76,13 @@ __device__ void getElectricAcceleration(int p1, int p2,
 	double acceleration=0;
 	double mass;
         double sign = 1;
-	if ((p1 % 2) == 0) { // even indexes are proton
+	if ((p1 & 1) == 0) { // even indexes are proton
 		mass = Mp;
-		if ((p2%2) == 0) sign=-1; // both are protons, invert sign
+		if ((p2 & 1) == 0) sign=-1; // both are protons, invert sign
         }
 	else {
                mass = Me; // odd indexes are electrons
-	       	if ((p2%2) == 1) sign=-1; // both are electrons, invert sign
+	       	if ((p2 & 1) == 1) sign=-1; // both are electrons, invert sign
         }
 
 	if ((p1<Np) && (p2<Np)) {
@@ -118,7 +116,7 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 
 			for (int i=0; i<Np; i++) {
 				if (i==tid) continue; // we do not calculate on ourself
-				iselectron = (i % 2);
+				iselectron = (i & 1);
 				// we do not calculate acceleration on the partner particle on the dipole
 				if ((iselectron==1) && (i==tid-1)) continue;
 				if ((iselectron==0) && (i==tid+1)) continue;	
@@ -147,6 +145,10 @@ __global__ void simulate_dipoles(double *x, double *y, double *omega,
 			
 				angle[did] = atan2f(deltax, deltay);
 
+				/*
+					TODO: the real center of the dipole is not in the middle
+					      but on the barycenter very close to the proton
+				*/
 				double r_did = sqrt(sqr(deltax)+sqr(deltay))/2;
                         	double center_x = deltax/2 + x[tid];
                         	double center_y = deltay/2 + y[tid];
@@ -272,7 +274,7 @@ int main(void) {
 	cudaMemcpy(dev_angle, angle, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_E_pot, E_pot, Nd*sizeof(double), cudaMemcpyHostToDevice);
 	
-	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot, 10);
+	simulate_dipoles<<<Np,1>>>(dev_x, dev_y, dev_omega, dev_ax, dev_ay, dev_angle, dev_E_pot, 100);
 	
 	cudaMemcpy(x, dev_x, Np*sizeof(double), cudaMemcpyDeviceToHost);
 	cudaMemcpy(y, dev_y, Np*sizeof(double), cudaMemcpyDeviceToHost);
