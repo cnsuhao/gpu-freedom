@@ -18,7 +18,8 @@
 #define Nd 640 // number of dipoles, has to be Np/2
 //TODO: adjust these constants
 #define TIMESTEP   1E-15 // timestep in seconds
-#define R          5.291772106712E−11  // Bohr radius in meter
+#define RPE        5.291772106712E−11  // Bohr radius in meter
+#define DIPDIST    25E-11 // about 5*R... distance between dipoles in lattice
 #define Q          1.6021773349E-19 //elementar charge in Coulomb
 #define Q2         Q*Q
 #define PI         3.1415926535
@@ -234,14 +235,29 @@ int main(void) {
 	cudaMalloc( (void**)&dev_angle, Nd*sizeof(double));
         cudaMalloc( (void**)&dev_E_pot, Nd*sizeof(double));
 
-	//TODO: init variables with Box-Muller and 2D gauss curve
-        //      for two bodies with different centers and radia
-	for (int i=0; i<Np; i++) {
-		x[i] = (i*i)/1E6;
-		y[i] = i/1000.0;
-		ax[i] = 0;
-		ay[i] = 0;
-	}
+	// we init a simple crystal lattice
+	for (int j=0; j<20; j++) {
+		for (int i=0; i<32; i++) {
+			
+			int idx_p1 = 2*(j*32+i);
+			int idx_p2 = idx_p1 + 1;
+
+			
+			x[idx_p1] = i*DIPDIST;
+			y[idx_p1] = j*DIPDIST;
+			
+			x[idx_p2] = i*DIPDIST;
+			y[idx_p2] = j*DIPDIST - 5E-11 /*RPE*/;
+			
+
+			ax[idx_p1] = 0;
+			ay[idx_p1] = 0;
+			
+			ax[idx_p2] = 0;
+			ay[idx_p2] = 0;
+
+		}
+        }
 	for (int i=0; i<Nd; i++) {
 		omega[i] = 0;
 		angle[i] = 0;
