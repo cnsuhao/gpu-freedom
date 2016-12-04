@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import os
 import MySQLdb
+import SimpleConfigParser
+
 def getCPUtemperature():
 	res=os.popen("/opt/vc/bin/vcgencmd measure_temp").readline()
 	strtemp=(res.replace("temp=","").replace("'C\n",""))
@@ -11,7 +13,12 @@ temp=getCPUtemperature()
 print temp
 
 try:
-	db=MySQLdb.connect("localhost", "raspi", "pwd$2016", "raspi")
+	
+        cp = SimpleConfigParser.SimpleConfigParser()
+        cp.read('config.ini')
+
+	db=MySQLdb.connect("localhost", cp.getoption("username"), cp.getoption("password"), 
+                           cp.getoption("database"))
 	c=db.cursor()
         sqlstr="INSERT INTO tbtemperature (insert_dt, temperature_raspi) VALUES(NOW(), "+temp+");"
         print sqlstr
