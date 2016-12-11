@@ -15,7 +15,7 @@ print temp
 try:
 	
         cp = SimpleConfigParser.SimpleConfigParser()
-        cp.read('config.ini')
+        cp.read('/var/www/html/gpu_freedom/src/playground/bots/raspi/config.ini')
 
 	db=MySQLdb.connect("localhost", cp.getoption("username"), cp.getoption("password"), 
                            cp.getoption("database"))
