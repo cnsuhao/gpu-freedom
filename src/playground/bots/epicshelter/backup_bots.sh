@@ -9,3 +9,4 @@ sudo mysqldump -u mybots -pbots13? --databases meteo news powergrid raspi runofr
 sudo tar -cf dump_bots.tar dump_bots.sql
 sudo gzip dump_bots.tar
 scp dump_bots.tar.gz pi@firstlight:backup/
+scp dump_bots.tar.gz dm@deepmind:backup/
