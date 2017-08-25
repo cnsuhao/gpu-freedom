@@ -14,7 +14,7 @@
 			$this->api_key = $api_key;
 			$this->api_secret = $api_secret;
 		}
-			
+		
 		private function query(array $req = array()) {
 			// API settings
 			$key = $this->api_key;
@@ -92,15 +92,8 @@
 			);
 		}
 		
-		public function get_order_book($pair) {		
-			return $this->query( 
-				array(
-					'command' => 'returnOrderBook',
-					'currencyPair' => strtoupper($pair)
-				)
-			);
-		}
 		
+
 		public function get_my_trade_history($pair) {
 			return $this->query(
 				array(
@@ -220,6 +213,6 @@
 			}
 
 			return $tot_btc;
-		}
+		} 
 	}
 ?>

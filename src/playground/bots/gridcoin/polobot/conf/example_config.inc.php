@@ -1,4 +1,4 @@
 <?php
-$api_key=
-$api_secret=
+$my_api_key="";
+$my_api_secret="";
 ?>

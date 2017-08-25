@@ -3,9 +3,10 @@
 	// (c) by 2017 dangermouse, GPL licence
 	// API reference is at https://poloniex.com/support/api/
 
-	include("conf/config.inc.php");
-	include("poloniex_api.php");
 	
+	require_once("poloniex_api.php");
+        require_once("conf/config.inc.php");	
+
 	$date = date('Y-m-d H:i:s');
 	echo "$date\n";
 	
@@ -17,6 +18,7 @@
 	// currency to be traded
 	$currency_1 = "GRC";
 	$max_tradable_1 = 100; // maximum amount tradable in currency 1
+
 	$tradable_amount_1 = $max_tradable_1/10.0; // tradable amount when setting order
 	
 	$currency_2 = "BTC";
@@ -25,32 +27,50 @@
 	//$tradable_amount_2 = $max_tradable_2/10.0; // tradable amount when setting order
 	
 	$currency_ref = "USDT"; // tether as reference currency to maximize portfolio
+        
 
 	// currency pairs
 	$curpair_1_2 = $currency_1 . "_" . $currency_2;
 	$curpair_2_ref = $currency_2 . "_" . $currency_ref;
+        
+        echo "API key: ";
+        echo $my_api_key;
+        echo "\n";
+        echo "API secret: ";
+        echo $my_api_secret;
+        echo "\n";
 
-	$api = new poloniex($api_key, $api_secret);
+        
+	$api = new poloniex($my_api_key, $my_api_secret);
 	
 	// 0. cancel existing orders lying around from previous bot calls 
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
-	$openorders = $api -> get_open_orders($curpair_1_2)
+	/*
+        TODO: enable me
+        $openorders = $api -> get_open_orders($curpair_1_2)
 	for (int i=0; i<count($openorders); i++) {
 			$api-> cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
 	}
+        */
    
 	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
-	$price_1_in_2 = ($api->ticker($curpair_1_2))["last"];
-	$price_2_in_ref = ($api->ticker($curpair_2_ref))["last"];
-	$price_1_in_ref = $price_1_in_2 * $price_2_in_ref;
+	//echo $curpair_1_2;
+        $res = $api->get_ticker($curpair_1_2);
+        echo $res["GRC_BTC"]["last"];
+        //$price_1_in_2 = ($api->get_ticker($curpair_1_2)->"last"); //["last"];
+        //echo "\n£";
+        //echo $price_1_in_2;
+	//echo "£\n";
+        //$price_2_in_ref = ($api->get_ticker($curpair_2_ref))["last"];
+	//$price_1_in_ref = $price_1_in_2 * $price_2_in_ref;
 	
-	echo "$price_1_in_ref $currency_1/$currency_ref      $price_2_in_ref $currency_2/$currency_ref      $price_1_in_2 $currency_1/$currency_2   \n";
+	//echo "$price_1_in_ref $currency_1/$currency_ref      $price_2_in_ref $currency_2/$currency_ref      $price_1_in_2 $currency_1/$currency_2   \n";
 	
-	
+	/*
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
 	$balances = $api->get_balances();
@@ -100,7 +120,7 @@
 			}	
 			
 	}
-	
+	*/
 	echo "Bot iteration over... \n\n";
 
 ?>
