@@ -59,8 +59,10 @@
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	//echo $curpair_1_2;
-        $res = $api->get_ticker($curpair_1_2);
-        echo $res["GRC_BTC"]["last"];
+        $myres = $api->get_ticker();
+        echo "*\n";
+        print_r(array_values($myres));
+        echo "*\n";
         //$price_1_in_2 = ($api->get_ticker($curpair_1_2)->"last"); //["last"];
         //echo "\n£";
         //echo $price_1_in_2;

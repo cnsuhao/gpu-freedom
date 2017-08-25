@@ -60,6 +60,7 @@
 			}else{
 				return $dec;
 			}
+
 		}
 		
 		protected function retrieveJSON($URL) {
@@ -82,6 +83,15 @@
 				)
 			);
 		}
+
+ public function get_currencies() {
+         return $this->query(
+                 array(
+                         'command' => 'returnCurrencies'
+                 )
+         );
+ }		
+
 		
 		public function get_open_orders($pair) {		
 			return $this->query( 
