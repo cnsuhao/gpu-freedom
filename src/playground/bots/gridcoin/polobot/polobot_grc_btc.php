@@ -43,14 +43,28 @@
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
-	/*
-        TODO: enable me
-        $openorders = $api -> get_open_orders($curpair_1_2)
-	for (int i=0; i<count($openorders); i++) {
-			$api-> cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
+	
+        echo "Retrieving open orders...\n";
+        $openorders = $api -> get_open_orders($curpair_1_2);
+	//print_r($openorders);
+        echo count($openorders);
+        echo "\n";
+        /*
+        for (int i=0; i<count($openorders); i++) {
+                   if ($openorders[i]["amount"])<=$max_tradable_1) {                        
+                        echo "Cancelling order ";
+                        echo $openorders[i]["orderNumber"];
+                        echo "\n";
+			$api->cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
+                   } else {
+                        echo "Order ";
+                        echo $openorders[i]["orderNumber"];
+                        echo " not cancelled due to high amount\n";
+
+		   }
 	}
         */
-   
+           
 	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
