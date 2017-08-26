@@ -45,13 +45,17 @@
 	// iterate over and do cancel_order($pair, $order_number)
 	
         echo "Retrieving open orders...\n";
-        $openorders = $api -> get_open_orders($curpair_1_2);
-	//print_r($openorders);
+        $openorders = array_values($api -> get_open_orders($curpair_1_2));
+	
+        print_r($openorders);
+        echo "open orders ";
         echo count($openorders);
         echo "\n";
-        /*
-        for (int i=0; i<count($openorders); i++) {
-                   if ($openorders[i]["amount"])<=$max_tradable_1) {                        
+        
+        $i=0;   
+        while ($i<count($openorders)) {
+                 
+                   if (($openorders[i]["amount"])<=$max_tradable_1) {                        
                         echo "Cancelling order ";
                         echo $openorders[i]["orderNumber"];
                         echo "\n";
@@ -59,12 +63,13 @@
                    } else {
                         echo "Order ";
                         echo $openorders[i]["orderNumber"];
-                        echo " not cancelled due to high amount\n";
-
+                        echo " not cancelled due to high amount, not set by this bot\n";
 		   }
+                 
+              $i=$i+1;
 	}
-        */
-           
+
+                   
 	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
