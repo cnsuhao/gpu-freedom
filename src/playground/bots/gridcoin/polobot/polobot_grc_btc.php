@@ -19,13 +19,9 @@
 	$currency_1 = "GRC";
 	$max_tradable_1 = 100; // maximum amount tradable in currency 1
 
-	$tradable_amount_1 = $max_tradable_1/10.0; // tradable amount when setting order
-	
 	$currency_2 = "BTC";
         $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
-	//TODO: remove me
-	//$tradable_amount_2 = $max_tradable_2/10.0; // tradable amount when setting order
-	
+		
 	$currency_ref = "USDT"; // tether as reference currency to maximize portfolio
         
 
@@ -95,47 +91,58 @@
         
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
 	$orderbook = $api->get_order_book($curpair_1_2);
-	print_r($orderbook);
+	//print_r($orderbook);
+        if ($orderbook["isFrozen"]==1) die("Frozen orderbook!");
+        
+        $bestbid = $orderbook["bids"][0][0]; // best offer when we want to sell
+	$bestask = $orderbook["asks"][0][0]; // best offer when we want to buy
+        
+        echo "bestbid: $bestbid     bestask: $bestask $currency_2/$currency_1\n";	
 
-        /*
-        $bestbid = $orderbook["bids"][0]; // best offer when we want to sell
-	$bestask = $orderbook["ask"][0]; // best offer when we want to buy
-	
+        $tradable_amount_bid = min($max_tradable_1, $orderbook["bids"][0][1]);
+        $tradable_amount_ask = min($max_tradable_1, $orderbook["asks"][0][1]);
+        echo "tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask\n";
+        
 	// 4. now we check if selling the tradable amount makes our portfolio look better in refcurrency
-	if (($balance_cur_1 - $tradable_amount_1)>0) {
-		$new_portfolio_value_ref_sell = (($balance_cur_1 - $tradable_amount_1) * $price_1_in_ref) + // balance in currency 1 is decreased
-		                           (($balance_cur_2 + $tradable_amount_1*$bestbid  ) * $price_2_in_ref) // balance in currency 2 is increased
-		                           - ($tradable_amount_1*$bestbid*$fee_taker) * $price_2_in_ref;  // fees
+	if (($balance_cur_1 - $tradable_amount_bid)>0) {
+		$new_portfolio_value_ref_sell = (($balance_cur_1 - $tradable_amount_bid) * $price_1_in_ref) + // balance in currency 1 is decreased
+		                           (($balance_cur_2 + $tradable_amount_bid*$bestbid  ) * $price_2_in_ref) // balance in currency 2 is increased
+		                           - ($tradable_amount_bid*$bestbid*$fee_taker) * $price_2_in_ref;  // fees
 								   
-	}
+	} else {
+		$new_portfolio_value_ref_sell = 0;
+        }
 	
 	// 5. specularly we check if buying the tradable amount makes our portfolio look better in refcurrency
-	if (($balance_cur_2 - $tradable_amount_1*$bestask)>0) {
-		$new_portfolio_value_ref_buy = (($balance_cur_1 + $tradable_amount_1) * $price_1_in_ref) + // balance in currency 1 is increased
-		                           (($balance_cur_2 - $tradable_amount_1*$bestask  ) * $price_2_in_ref) // balance in currency 2 is decreased
-		                           - ($tradable_amount_1*$bestask*$fee_taker) * $price_2_in_ref;  // fees
+	if (($balance_cur_2 - $tradable_amount_sell*$bestask)>0) {
+		$new_portfolio_value_ref_buy = (($balance_cur_1 + $tradable_amount_sell) * $price_1_in_ref) + // balance in currency 1 is increased
+		                           (($balance_cur_2 - $tradable_amount_sell*$bestask  ) * $price_2_in_ref) // balance in currency 2 is decreased
+		                           - ($tradable_amount_sell*$bestask*$fee_taker) * $price_2_in_ref;  // fees
 								   
-	}
-	
+	} else {
+		$new_porfolio_value_ref_buy=0;
+        }
+        
+        echo "new portfolio sell: $new_portfolio_value_ref_sell  buy: $new_portfolio_value_ref_buy $currency_ref\n";	
 	// 6. now comes the decision what to do
     if (  ($new_portfolio_value_ref_sell <= $cur_portfolio_value_ref) && ($new_portfolio_value_ref_buy <= $cur_portfolio_value_ref) ) {
 			// we do nothing here!!
-			echo "no existing order is appealing to us...";
+			echo "no existing order is appealing to us...\n";
 	} else {
 			if ($new_portfolio_value_ref_buy>$new_portfolio_value_ref_sell) {
 					// we do buy
-					echo "We do buy $tradable_amount_1 $currency_1\n";
+					echo "We do buy $tradable_amount_ask $currency_1\n";
 					echo "Portfolio value should go to $new_portfolio_value_ref_buy $currency_ref\n";
-					$api->buy($curpair_1_2, $bestask, $tradable_amount_1);
+					//$api->buy($curpair_1_2, $bestask, $tradable_amount_ask);
 			} else {
 					// we do sell
-					echo "We do sell $tradable_amount_1 $currency_1\n";
+					echo "We do sell $tradable_amount_sell $currency_1\n";
 					echo "Portfolio value should go to $new_portfolio_value_ref_sell $currency_ref\n";
-					$api->sell($curpair_1_2, $bestbid, $tradable_amount_1);
+					//$api->sell($curpair_1_2, $bestbid, $tradable_amount_sell);
 			}	
 			
 	}
-	*/
+	
 	echo "Bot iteration over... \n\n";
 
 ?>
