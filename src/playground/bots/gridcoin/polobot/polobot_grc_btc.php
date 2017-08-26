@@ -58,10 +58,9 @@
 	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
-	//echo $curpair_1_2;
-        //$myres = $api->get_ticker("USDT_BTC");
+	
+        //$myres = $api->get_trading_pairs();
         //echo "*\n";
-        //echo $myres["last"];
         //print_r(array_values($myres));
         //echo "*\n";
         $myres_curpair_1_2   = $api->get_ticker($curpair_1_2);
@@ -76,20 +75,22 @@
 	
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
-	$balances = $api->get_balances();
-	echo $balances["GRC"];
-        echo "\n";
-        echo $balances["BTC"];
-        echo "\n";
+	sleep(1);
+        $balances = $api->get_balances();
+	//print_r(array_values($balances));
+        //echo $balances["GRC"]["available"];
+        //echo "\n";
+        //echo $balances["BTC"]["available"];
+        //echo "\n";
 
-        //$balance_cur_1 = min($balances[$currency_1],$max_tradable_1);
-	//$balance_cur_2 = min($balances[$currency_2],$max_tradable_2);
+        $balance_cur_1 = min($balances[$currency_1]["available"],$max_tradable_1);
+	$balance_cur_2 = min($balances[$currency_2]["available"],$max_tradable_2);
 	
         
 
-	//$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
+	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
 	
-	//echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
+	echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
 	
         /*
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency

@@ -79,7 +79,7 @@
 		public function get_balances() {
 			return $this->query( 
 				array(
-					'command' => 'returnBalances'
+					'command' => 'returnCompleteBalances'
 				)
 			);
 		}
