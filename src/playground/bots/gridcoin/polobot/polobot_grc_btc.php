@@ -22,7 +22,7 @@
 	$tradable_amount_1 = $max_tradable_1/10.0; // tradable amount when setting order
 	
 	$currency_2 = "BTC";
-    $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
+        $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
 	//TODO: remove me
 	//$tradable_amount_2 = $max_tradable_2/10.0; // tradable amount when setting order
 	
@@ -61,7 +61,7 @@
 	
         //$myres = $api->get_trading_pairs();
         //echo "*\n";
-        //print_r(array_values($myres));
+        //print_r($myres);
         //echo "*\n";
         $myres_curpair_1_2   = $api->get_ticker($curpair_1_2);
         $myres_curpair_2_ref = $api->get_ticker($curpair_2_ref); 
@@ -77,7 +77,7 @@
 	//    and calculate current portfolio value in reference currency
 	sleep(1);
         $balances = $api->get_balances();
-	//print_r(array_values($balances));
+	//print_r($balances);
         //echo $balances["GRC"]["available"];
         //echo "\n";
         //echo $balances["BTC"]["available"];
@@ -92,10 +92,13 @@
 	
 	echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
 	
-        /*
+        
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
 	$orderbook = $api->get_order_book($curpair_1_2);
-	$bestbid = $orderbook["bids"][0]; // best offer when we want to sell
+	print_r($orderbook);
+
+        /*
+        $bestbid = $orderbook["bids"][0]; // best offer when we want to sell
 	$bestask = $orderbook["ask"][0]; // best offer when we want to buy
 	
 	// 4. now we check if selling the tradable amount makes our portfolio look better in refcurrency
