@@ -84,13 +84,13 @@
 			);
 		}
 
- public function get_currencies() {
-         return $this->query(
-                 array(
-                         'command' => 'returnCurrencies'
-                 )
-         );
- }		
+                public function get_currencies() {
+                        return $this->query(
+                                array(
+                                        'command' => 'returnCurrencies'
+                                )
+                        );
+                }		
 
 		
 		public function get_open_orders($pair) {		

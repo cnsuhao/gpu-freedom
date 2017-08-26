@@ -30,15 +30,15 @@
         
 
 	// currency pairs
-	$curpair_1_2 = $currency_1 . "_" . $currency_2;
-	$curpair_2_ref = $currency_2 . "_" . $currency_ref;
+	$curpair_1_2 = $currency_2 . "_" . $currency_1;
+	$curpair_2_ref = $currency_ref . "_" . $currency_2;
         
-        echo "API key: ";
-        echo $my_api_key;
-        echo "\n";
-        echo "API secret: ";
-        echo $my_api_secret;
-        echo "\n";
+        //echo "API key: ";
+        //echo $my_api_key;
+        //echo "\n";
+        //echo "API secret: ";
+        //echo $my_api_secret;
+        //echo "\n";
 
         
 	$api = new poloniex($my_api_key, $my_api_secret);
@@ -59,30 +59,39 @@
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	//echo $curpair_1_2;
-        $myres = $api->get_ticker();
-        echo "*\n";
-        print_r(array_values($myres));
-        echo "*\n";
-        //$price_1_in_2 = ($api->get_ticker($curpair_1_2)->"last"); //["last"];
-        //echo "\n£";
-        //echo $price_1_in_2;
-	//echo "£\n";
-        //$price_2_in_ref = ($api->get_ticker($curpair_2_ref))["last"];
-	//$price_1_in_ref = $price_1_in_2 * $price_2_in_ref;
+        //$myres = $api->get_ticker("USDT_BTC");
+        //echo "*\n";
+        //echo $myres["last"];
+        //print_r(array_values($myres));
+        //echo "*\n";
+        $myres_curpair_1_2   = $api->get_ticker($curpair_1_2);
+        $myres_curpair_2_ref = $api->get_ticker($curpair_2_ref); 
+
+        $price_1_in_2 = $myres_curpair_1_2["last"]; 
+        $price_2_in_ref = $myres_curpair_2_ref["last"];
+	$price_1_in_ref = $price_1_in_2 * $price_2_in_ref;
 	
-	//echo "$price_1_in_ref $currency_1/$currency_ref      $price_2_in_ref $currency_2/$currency_ref      $price_1_in_2 $currency_1/$currency_2   \n";
+	echo "$price_1_in_ref $currency_1/$currency_ref      $price_2_in_ref $currency_ref/$currency_2      $price_1_in_2 $currency_2/$currency_1   \n";
 	
-	/*
+	
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
 	$balances = $api->get_balances();
-	$balance_cur_1 = min($balances[$currency_1],$max_tradable_1);
-	$balance_cur_2 = min($balances[$currency_2],$max_tradable_2);
+	echo $balances["GRC"];
+        echo "\n";
+        echo $balances["BTC"];
+        echo "\n";
+
+        //$balance_cur_1 = min($balances[$currency_1],$max_tradable_1);
+	//$balance_cur_2 = min($balances[$currency_2],$max_tradable_2);
 	
-	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
+        
+
+	//$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
 	
-	echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref";
+	//echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
 	
+        /*
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
 	$orderbook = $api->get_order_book($curpair_1_2);
 	$bestbid = $orderbook["bids"][0]; // best offer when we want to sell
