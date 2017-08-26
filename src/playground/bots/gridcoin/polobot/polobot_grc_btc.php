@@ -146,18 +146,18 @@
 	// 6. now comes the decision what to do
     if (  ($new_portfolio_value_ref_sell <= $cur_portfolio_value_ref) && ($new_portfolio_value_ref_buy <= $cur_portfolio_value_ref) ) {
 			// we do nothing here!!
-			echo "no existing order is appealing to us...\n";
+			echo "No existing order is appealing to us...\n";
 	} else {
 			if ($new_portfolio_value_ref_buy>$new_portfolio_value_ref_sell) {
 					// we do buy
-					echo "We do buy $tradable_amount_ask $currency_1\n";
+					echo "We do BUY $tradable_amount_ask $currency_1\n";
 					echo "Portfolio value should go to $new_portfolio_value_ref_buy $currency_ref\n";
-					//$api->buy($curpair_1_2, $bestask, $tradable_amount_ask);
+					$api->buy($curpair_1_2, $bestask, $tradable_amount_ask);
 			} else {
 					// we do sell
-					echo "We do sell $tradable_amount_sell $currency_1\n";
+					echo "We do SELL $tradable_amount_sell $currency_1\n";
 					echo "Portfolio value should go to $new_portfolio_value_ref_sell $currency_ref\n";
-					//$api->sell($curpair_1_2, $bestbid, $tradable_amount_sell);
+					$api->sell($curpair_1_2, $bestbid, $tradable_amount_sell);
 			}	
 			
 	}
