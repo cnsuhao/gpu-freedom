@@ -182,15 +182,13 @@
                 echo "Tradable: $tradable_A $currency_1\n";
                 $gain_A = (1-$fee_rex_taker)*($tradable_A*$bestbid_rex) // sell on Rex
                           -
-                          (1+$fee_polo_taker)*($tradable_A*bestask);     // buy on Poloniex
-                         
+                          (1+$fee_polo_taker)*($tradable_A*$bestask);     // buy on Poloniex
                 $gain_A_in_ref = $gain_A * ($price_2_in_ref+$price_2_in_ref_rex)/2;
-
-                echo "Gain: $gain_A $currency_2     $gain_A_in_ref $currency_ref";
+                echo "Gain A: $gain_A $currency_2     $gain_A_in_ref $currency_ref\n";
 	        echo "---\n";
         } else {
-             $gain_A = 0;
-             $gain_A_in_ref = 0;
+             $gain_A = -1;
+             $gain_A_in_ref = -1;
              echo "Not possible: Buy on Poloniex, Sell on Bittrex\n";
         }
         
@@ -199,12 +197,34 @@
                 echo "Analyzing Buy on Bittrex, Sell on Poloniex\n";
                 $tradable_B = min($tradable_amount_ask_rex, $tradable_amount_bid);
                 echo "Tradable: $tradable_B $currency_1\n";
-
+                $gain_B = (1-$fee_polo_taker)*($tradable_B*$bestbid)
+                           -
+                          (1+$fee_rex_taker)*($tradable_B*$bestask_rex);
+                $gain_B_in_ref = $gain_B * ($price_2_in_ref+$price_2_in_ref_rex)/2;
+                echo "Gain B: $gain_B $currency_2    $gain_B_in_ref $currency_ref";
 		echo "---\n";
         } else {
-             $gain_B = 0;
-             $gain_B_in_ref = 0;
+             $gain_B = -1;
+             $gain_B_in_ref = -1;
              echo "Not possible: Buy on Bittrex, Sell on Poloniex\n";
+        }
+
+        echo "\nTrading...\n"; 
+        if (($gain_A>0) || ($gain_B>0)) {
+		if ($gain_A>$gain_B)  {
+                     // buy on poloniex, sell on bittrex
+                     $api_polo->buy($curpair_1_2, $bestask, $tradable_A);
+                     $api_rex->sell($curpair_1_2_rex, $tradable_A, $bestbid_rex);
+                     echo "Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex";
+                } else {
+                     // buy on bittrex, sell on poloniex
+                     $api_rex->buy($curpair_1_2_rex, $tradable_B, $bestask_rex);
+                     $api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
+                     echo "Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid";
+                }
+          
+        } else {
+		echo "Nothing to do, no winning arbitrage...\n";
         }
 
         /*
