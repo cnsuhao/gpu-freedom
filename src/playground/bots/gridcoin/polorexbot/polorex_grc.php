@@ -33,7 +33,8 @@
 	// currency pairs
 	$curpair_1_2 = $currency_2 . "_" . $currency_1;
 	$curpair_2_ref = $currency_ref . "_" . $currency_2;
-        
+        $curpair_1_2_rex = $currency_2 . "-" . $currency_1;
+        $curpair_2_ref_rex = $currency_ref . "-" . $currency_2;
         /*
         echo "API poloniex key: ";
         echo $poloniex_api_key;
@@ -104,7 +105,20 @@
 	
         echo "Polo: $price_1_in_ref $currency_1/$currency_ref  $price_2_in_ref $currency_ref/$currency_2   $price_1_in_2 $currency_2/$currency_1\n";
 	
+        //$res = $api_rex->getMarkets();
+        //print_r($res); // format for markets is BTC-GRC
+        $myres_curpair_1_2_rex = $api_rex->getTicker($curpair_1_2_rex);
+        //print_r($myres_curpair_1_2_rex);
+        $myres_curpair_2_ref_rex = $api_rex->getTicker($curpair_2_ref_rex);
+        //print_r($myres_curpair_2_ref_rex);        
+
+        $price_1_in_2_rex = $myres_curpair_1_2_rex->Last;
+        $price_2_in_ref_rex = $myres_curpair_2_ref_rex->Last;
+        $price_1_in_ref_rex = $price_1_in_2_rex * $price_2_in_ref_rex;
+
+        echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
 	
+        /*
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
 	sleep(1);
