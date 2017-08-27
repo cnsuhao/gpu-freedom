@@ -13,20 +13,28 @@
 	
 
 	// fee structure
-	$fee_maker = 0.0015;
-	$fee_taker = 0.0025;
+	$fee_polo_maker = 0.0015;
+	$fee_polo_taker = 0.0025;
+        
+        $fee_rex_maker  = 0.0015;
+        $fee_rex_taker  = 0.0025;
+
 	
 	// currency to be arbitraged
 	$currency_1 = "GRC";
 	$max_tradable_1 = 100; // maximum amount tradable in currency 1
 
-	$currency_ref = "BTC"; // currency reference in both markets
+	$currency_2 = "BTC"; // currency 2
+        $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
+
+        $currency_ref = "USDT"; // used to get an idea of portfolio value
         
 
 	// currency pairs
 	$curpair_1_2 = $currency_2 . "_" . $currency_1;
 	$curpair_2_ref = $currency_ref . "_" . $currency_2;
         
+        /*
         echo "API poloniex key: ";
         echo $poloniex_api_key;
         echo "\n";
@@ -40,15 +48,19 @@
         echo "API bittrex secret: ";
 	echo $bittrex_api_secret;
         echo "\n";
+        */
+        
+	$api_polo = new poloniex($poloniex_api_key, $poloniex_api_secret);
+        $api_rex  = new bittrex_api($bittrex_api_key, $bittrex_api_secret);	
 
         /*
-	$api = new poloniex($my_api_key, $my_api_secret);
-	
 	// 0. cancel existing orders lying around from previous bot calls 
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
 	
+        //TODO: add bittrex order cancellation
+
         echo "Retrieving open orders...\n";
         $openorders = array_values($api -> get_open_orders($curpair_1_2));
 	
@@ -73,7 +85,7 @@
                  
               $i=$i+1;
 	}
-
+        */
                    
 	
 	// 1. retrieve current prices
@@ -83,20 +95,20 @@
         //echo "*\n";
         //print_r($myres);
         //echo "*\n";
-        $myres_curpair_1_2   = $api->get_ticker($curpair_1_2);
-        $myres_curpair_2_ref = $api->get_ticker($curpair_2_ref); 
+        $myres_curpair_1_2   = $api_polo->get_ticker($curpair_1_2);
+        $myres_curpair_2_ref = $api_polo->get_ticker($curpair_2_ref); 
 
         $price_1_in_2 = $myres_curpair_1_2["last"]; 
         $price_2_in_ref = $myres_curpair_2_ref["last"];
 	$price_1_in_ref = $price_1_in_2 * $price_2_in_ref;
 	
-	echo "$price_1_in_ref $currency_1/$currency_ref      $price_2_in_ref $currency_ref/$currency_2      $price_1_in_2 $currency_2/$currency_1   \n";
+        echo "Polo: $price_1_in_ref $currency_1/$currency_ref  $price_2_in_ref $currency_ref/$currency_2   $price_1_in_2 $currency_2/$currency_1\n";
 	
 	
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
 	sleep(1);
-        $balances = $api->get_balances();
+        $balances = $api_polo->get_balances();
 	//print_r($balances);
         //echo $balances["GRC"]["available"];
         //echo "\n";
@@ -110,9 +122,9 @@
 
 	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
 	
-	echo "$balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
+	echo "Polo: $balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
 	
-        
+        /*
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
 	$orderbook = $api->get_order_book($curpair_1_2);
 	//print_r($orderbook);
