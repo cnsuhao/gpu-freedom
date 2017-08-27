@@ -4,7 +4,7 @@
 	// API reference is at https://poloniex.com/support/api/
 
 	
-	require_once("poloniex_api.php");
+	require_once("../lib/poloniex_api.php");
         require_once("conf/config.inc.php");	
 
 	$date = date('Y-m-d H:i:s');
