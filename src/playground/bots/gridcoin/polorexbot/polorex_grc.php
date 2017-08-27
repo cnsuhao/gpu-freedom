@@ -118,10 +118,10 @@
 
         echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
 	
-        /*
+        
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
-	sleep(1);
+	//sleep(1);
         $balances = $api_polo->get_balances();
 	//print_r($balances);
         //echo $balances["GRC"]["available"];
@@ -131,13 +131,17 @@
 
         $balance_cur_1 = min($balances[$currency_1]["available"],$max_tradable_1);
 	$balance_cur_2 = min($balances[$currency_2]["available"],$max_tradable_2);
-	
-        
-
 	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
-	
 	echo "Polo: $balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
 	
+        $balances_rex_1 = $api_rex->getBalance($currency_1)->Available;
+        $balances_rex_2 = $api_rex->getBalance($currency_2)->Available;
+        //print_r($balances_rex_1);
+        $balance_cur_1_rex = min($balances_rex_1, $max_tradable_1);
+        $balance_cur_2_rex = min($balances_rex_2, $max_tradable_2);
+        $cur_portfolio_value_ref_rex = ($balance_cur_1_rex * $price_1_in_ref_rex) + ($balance_cur_2_rex * $price_2_in_ref_rex);
+        echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
+ 
         /*
 	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
 	$orderbook = $api->get_order_book($curpair_1_2);
