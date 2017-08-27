@@ -172,6 +172,41 @@
         $tradable_amount_bid_rex = min($balance_cur_1_rex, $bidqty_rex);
         $tradable_amount_ask_rex = min($balance_cur_2_rex/$bestask_rex, $askqty_rex);
         echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
+        
+        echo "\nAnalysis...\n";
+
+        if (($tradable_amount_ask>0) && ($tradable_amount_bid_rex>0)) {
+        	echo "---";
+                echo "Analyzing Buy on Poloniex, Sell on Bittrex\n";
+                $tradable_A = min($tradable_amount_ask, $tradable_amount_bid_rex);
+                echo "Tradable: $tradable_A $currency_1\n";
+                $gain_A = (1-$fee_rex_taker)*($tradable_A*$bestbid_rex) // sell on Rex
+                          -
+                          (1+$fee_polo_taker)*($tradable_A*bestask);     // buy on Poloniex
+                         
+                $gain_A_in_ref = $gain_A * ($price_2_in_ref+$price_2_in_ref_rex)/2;
+
+                echo "Gain: $gain_A $currency_2     $gain_A_in_ref $currency_ref";
+	        echo "---\n";
+        } else {
+             $gain_A = 0;
+             $gain_A_in_ref = 0;
+             echo "Not possible: Buy on Poloniex, Sell on Bittrex\n";
+        }
+        
+        if (($tradable_amount_ask_rex>0) && ($tradable_amount_bid>0)) {
+		echo "---";
+                echo "Analyzing Buy on Bittrex, Sell on Poloniex\n";
+                $tradable_B = min($tradable_amount_ask_rex, $tradable_amount_bid);
+                echo "Tradable: $tradable_B $currency_1\n";
+
+		echo "---\n";
+        } else {
+             $gain_B = 0;
+             $gain_B_in_ref = 0;
+             echo "Not possible: Buy on Bittrex, Sell on Poloniex\n";
+        }
+
         /*
 	// 4. now we check if selling the tradable amount makes our portfolio look better in refcurrency
 	if (($balance_cur_1 - $tradable_amount_bid)>0) {
