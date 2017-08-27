@@ -142,21 +142,30 @@
         $cur_portfolio_value_ref_rex = ($balance_cur_1_rex * $price_1_in_ref_rex) + ($balance_cur_2_rex * $price_2_in_ref_rex);
         echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
  
-        /*
-	// 3. now go through order book and see which order would maximize our portfolio value in ref currency
-	$orderbook = $api->get_order_book($curpair_1_2);
+        
+	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
+	$orderbook = $api_polo->get_order_book($curpair_1_2);
 	//print_r($orderbook);
-        if ($orderbook["isFrozen"]==1) die("Frozen orderbook!");
+        if ($orderbook["isFrozen"]==1) die("Poloniex frozen orderbook!");
         
         $bestbid = $orderbook["bids"][0][0]; // best offer when we want to sell
 	$bestask = $orderbook["asks"][0][0]; // best offer when we want to buy
-        
-        echo "bestbid: $bestbid     bestask: $bestask $currency_2/$currency_1\n";	
-
+        echo "Polo: bestbid: $bestbid     bestask: $bestask $currency_2/$currency_1\n";	
         $tradable_amount_bid = min($max_tradable_1, $orderbook["bids"][0][1]);
         $tradable_amount_ask = min($max_tradable_1, $orderbook["asks"][0][1]);
-        echo "tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask\n";
+        echo "Polo: tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask $currency_1\n";
         
+        $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*/, 1 /*market depth*/);
+        //print_r($orderbook_bid_rex[0]);
+        $orderbook_ask_rex = $api_rex->getOrderBook($curpair_1_2_rex, "sell", 1);
+        //print_r($orderbook_ask_rex[0]);
+        $bestbid_rex=$orderbook_bid_rex[0]->Rate;
+        $bestask_rex=$orderbook_ask_rex[0]->Rate;
+        echo "Rex : bestbid: $bestbid_rex    bestask: $bestask_rex   $currency_2/$currency_1\n";
+        $tradable_amount_bid_rex = min($max_tradable_1, ($orderbook_bid_rex[0]->Quantity));
+        $tradable_amount_ask_rex = min($max_tradable_1, ($orderbook_ask_rex[0]->Quantity));
+        echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
+        /*
 	// 4. now we check if selling the tradable amount makes our portfolio look better in refcurrency
 	if (($balance_cur_1 - $tradable_amount_bid)>0) {
 		$new_portfolio_value_ref_sell = (($balance_cur_1 - $tradable_amount_bid) * $price_1_in_ref) + // balance in currency 1 is decreased
