@@ -118,8 +118,8 @@
         
         echo "bestbid: $bestbid     bestask: $bestask $currency_2/$currency_1\n";	
 
-        $tradable_amount_bid = min($max_tradable_1, $orderbook["bids"][0][1]);
-        $tradable_amount_ask = min($max_tradable_1, $orderbook["asks"][0][1]);
+        $tradable_amount_bid = min($balance_cur_1, $orderbook["bids"][0][1]);
+        $tradable_amount_ask = min($balance_cur_2/$bestask, $orderbook["asks"][0][1]);
         echo "tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask\n";
         
 	// 4. now we check if selling the tradable amount makes our portfolio look better in refcurrency
