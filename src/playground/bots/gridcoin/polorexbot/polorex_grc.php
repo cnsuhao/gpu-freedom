@@ -1,4 +1,4 @@
-<?php
+OB<?php
 	// A simple arbitrage trading bot (a taker bot)
 	// (c) by 2017 dangermouse, GPL licence
 	// API reference is at https://poloniex.com/support/api/
@@ -19,10 +19,12 @@
         $fee_rex_maker  = 0.0015;
         $fee_rex_taker  = 0.0025;
 
+        $trans_treshold_in_ref = 3; // transactions have to be at least
+                                    // this amount in $currency_ref
 	
 	// currency to be arbitraged
 	$currency_1 = "GRC";
-	$max_tradable_1 = 100; // maximum amount tradable in currency 1
+	$max_tradable_1 = 1000; // maximum amount tradable in currency 1
 
 	$currency_2 = "BTC"; // currency 2
         $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
@@ -54,22 +56,19 @@
 	$api_polo = new poloniex($poloniex_api_key, $poloniex_api_secret);
         $api_rex  = new bittrex_api($bittrex_api_key, $bittrex_api_secret);	
 
-        /*
+        
 	// 0. cancel existing orders lying around from previous bot calls 
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
+        //echo "Retrieving open orders on Poloniex...\n";
+        //$openorders = array_values($api_polo->get_open_orders($curpair_1_2));
 	
-        //TODO: add bittrex order cancellation
-
-        echo "Retrieving open orders...\n";
-        $openorders = array_values($api -> get_open_orders($curpair_1_2));
-	
-        print_r($openorders);
-        echo "open orders ";
-        echo count($openorders);
-        echo "\n";
-        
+        //print_r($openorders);
+        // echo "open orders ";
+        //echo count($openorders);
+        // echo "\n";
+        /* 
         $i=0;   
         while ($i<count($openorders)) {
                  
@@ -77,7 +76,7 @@
                         echo "Cancelling order ";
                         echo $openorders[i]["orderNumber"];
                         echo "\n";
-			$api->cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
+			$api_polo->cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
                    } else {
                         echo "Order ";
                         echo $openorders[i]["orderNumber"];
@@ -86,13 +85,15 @@
                  
               $i=$i+1;
 	}
-        */
-                   
-	
+                
+	echo "Retrieving open orders on bittrex";
+        $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
+        print_r($openorders_rex);
+        */	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
-        //$myres = $api->get_trading_pairs();
+        //$myres = $api_polo->get_trading_pairs();
         //echo "*\n";
         //print_r($myres);
         //echo "*\n";
@@ -175,7 +176,9 @@
         
         echo "\nAnalysis...\n";
 
-        if (($tradable_amount_ask>0) && ($tradable_amount_bid_rex>0)) {
+        if (($tradable_amount_ask>0) && ($tradable_amount_bid_rex>0)
+
+           ) {
         	echo "---";
                 echo "Analyzing Buy on Poloniex, Sell on Bittrex\n";
                 $tradable_A = min($tradable_amount_ask, $tradable_amount_bid_rex);
@@ -185,7 +188,16 @@
                           (1+$fee_polo_taker)*($tradable_A*$bestask);     // buy on Poloniex
                 $gain_A_in_ref = $gain_A * ($price_2_in_ref+$price_2_in_ref_rex)/2;
                 echo "Gain A: $gain_A $currency_2     $gain_A_in_ref $currency_ref\n";
-	        echo "---\n";
+	        $transize_A_in_ref = $tradable_A * ($price_1_in_ref+$price_1_in_ref_rex)/2;
+                echo "Transaction size: $transize_A_in_ref $currency_ref ";
+                if ($transize_A_in_ref>=$trans_treshold_in_ref) {
+			echo "OK\n";
+                }
+                else   {
+			echo "NOT OK\n";
+                }
+                        
+                echo "---\n";
         } else {
              $gain_A = -1;
              $gain_A_in_ref = -1;
@@ -201,8 +213,17 @@
                            -
                           (1+$fee_rex_taker)*($tradable_B*$bestask_rex);
                 $gain_B_in_ref = $gain_B * ($price_2_in_ref+$price_2_in_ref_rex)/2;
-                echo "Gain B: $gain_B $currency_2    $gain_B_in_ref $currency_ref";
-		echo "---\n";
+                echo "Gain B: $gain_B $currency_2    $gain_B_in_ref $currency_ref\n";
+		$transize_B_in_ref = $tradable_B * ($price_1_in_ref + $price_1_in_ref_rex)/2;
+                echo "Transaction size: $transize_B_in_ref $currency_ref ";
+                if ($transize_B_in_ref>=$trans_treshold_in_ref) {
+                       echo "OK\n";
+                }
+                else   {
+                       echo "NOT OK\n";
+                }
+
+                echo "---\n";
         } else {
              $gain_B = -1;
              $gain_B_in_ref = -1;
@@ -212,15 +233,19 @@
         echo "\nTrading...\n"; 
         if (($gain_A>0) || ($gain_B>0)) {
 		if ($gain_A>$gain_B)  {
-                     // buy on poloniex, sell on bittrex
-                     $api_polo->buy($curpair_1_2, $bestask, $tradable_A);
-                     $api_rex->sell($curpair_1_2_rex, $tradable_A, $bestbid_rex);
-                     echo "Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex";
-                } else {
-                     // buy on bittrex, sell on poloniex
-                     $api_rex->buy($curpair_1_2_rex, $tradable_B, $bestask_rex);
-                     $api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
-                     echo "Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid";
+                     if ($transize_A_in_ref>=$trans_treshold_in_ref) {
+                        // buy on poloniex, sell on bittrex
+                        $api_polo->buy($curpair_1_2, $bestask, $tradable_A);
+                        $api_rex->sellLimit($curpair_1_2_rex, $tradable_A, $bestbid_rex);
+                        echo "Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex";
+                     }
+                  } else {
+                     if ($transize_B_in_ref>=$trans_treshold_in_ref) {
+                        // buy on bittrex, sell on poloniex
+                        $api_rex->buyLimit($curpair_1_2_rex, $tradable_B, $bestask_rex);
+                        $api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
+                        echo "Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid";
+                     }
                 }
           
         } else {
