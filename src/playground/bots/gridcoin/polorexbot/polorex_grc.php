@@ -7,7 +7,7 @@
 	require_once("../lib/poloniex_api.php");
         require_once("../lib/bittrex_api.php");
         require_once("conf/config.inc.php");	
-
+  
   $iter = 0;
   while ($iter<3) {
 
@@ -22,7 +22,7 @@
         $fee_rex_maker  = 0.0015;
         $fee_rex_taker  = 0.0025;
 
-        $trans_treshold_in_ref = 2.3; // transactions have to be at least
+        $trans_treshold_in_ref = 3.0; // transactions have to be at least
                                     // this amount in $currency_ref
 	
 	// currency to be arbitraged
