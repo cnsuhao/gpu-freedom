@@ -1,4 +1,4 @@
-OB<?php
+<?php
 	// A simple arbitrage trading bot (a taker bot)
 	// (c) by 2017 dangermouse, GPL licence
 	// API reference is at https://poloniex.com/support/api/
@@ -62,12 +62,13 @@ OB<?php
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
         //echo "Retrieving open orders on Poloniex...\n";
-        //$openorders = array_values($api_polo->get_open_orders($curpair_1_2));
-	
+        //$openorders = $api_polo->get_open_orders($curpair_1_2);
+	//echo "*";
         //print_r($openorders);
-        // echo "open orders ";
+        //echo "*\n";
+        //echo "open orders ";
         //echo count($openorders);
-        // echo "\n";
+        //echo "\n";
         /* 
         $i=0;   
         while ($i<count($openorders)) {
@@ -85,11 +86,11 @@ OB<?php
                  
               $i=$i+1;
 	}
-                
+          */      
 	echo "Retrieving open orders on bittrex";
-        $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
-        print_r($openorders_rex);
-        */	
+        //$openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
+        //print_r($openorders_rex);
+        	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	

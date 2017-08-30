@@ -133,16 +133,22 @@
         }
 	
 	// 5. specularly we check if buying the tradable amount makes our portfolio look better in refcurrency
-	if (($balance_cur_2 - $tradable_amount_sell*$bestask)>0) {
-		$new_portfolio_value_ref_buy = (($balance_cur_1 + $tradable_amount_sell) * $price_1_in_ref) + // balance in currency 1 is increased
-		                           (($balance_cur_2 - $tradable_amount_sell*$bestask  ) * $price_2_in_ref) // balance in currency 2 is decreased
-		                           - ($tradable_amount_sell*$bestask*$fee_taker) * $price_2_in_ref;  // fees
+	if (($balance_cur_2 - $tradable_amount_ask *  $bestask)>0) {
+		
+                $new_portfolio_value_ref_buy = (($balance_cur_1 + $tradable_amount_ask) * $price_1_in_ref) + // balance in currency 1 is increased
+		                           (($balance_cur_2 - $tradable_amount_ask*$bestask  ) * $price_2_in_ref) // balance in currency 2 is decreased
+		                           - ($tradable_amount_ask*$bestask*$fee_taker) * $price_2_in_ref;  // fees
+                
 								   
 	} else {
-		$new_porfolio_value_ref_buy=0;
+		$new_portfolio_value_ref_buy=0;
         }
         
-        echo "new portfolio sell: $new_portfolio_value_ref_sell  buy: $new_portfolio_value_ref_buy $currency_ref\n";	
+        echo "new portfolio sell: ";
+        echo $new_portfolio_value_ref_sell;
+        echo "  buy: ";
+        echo $new_portfolio_value_ref_buy;
+        echo " $currency_ref\n";	
 	// 6. now comes the decision what to do
     if (  ($new_portfolio_value_ref_sell <= $cur_portfolio_value_ref) && ($new_portfolio_value_ref_buy <= $cur_portfolio_value_ref) ) {
 			// we do nothing here!!
@@ -157,7 +163,7 @@
 					// we do sell
 					echo "We do SELL $tradable_amount_sell $currency_1\n";
 					echo "Portfolio value should go to $new_portfolio_value_ref_sell $currency_ref\n";
-					$api->sell($curpair_1_2, $bestbid, $tradable_amount_sell);
+					$api->sell($curpair_1_2, $bestbid, $tradable_amount_bid);
 			}	
 			
 	}
