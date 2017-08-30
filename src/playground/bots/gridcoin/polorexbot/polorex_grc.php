@@ -74,6 +74,7 @@
         while ($i<count($openorders[0])) {
                  
                    if (($openorders[0][$i]["amount"])<=$max_tradable_1) {                        
+                        //todo: check me
                         echo "Cancelling order ";
                         echo $openorders[0][$i]["orderNumber"];
                         echo "\n";
@@ -88,9 +89,17 @@
 	}
               
 	//echo "Retrieving open orders on bittrex";
-        //$openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
-        //print_r($openorders_rex);
-        	
+        $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
+        print_r($openorders_rex);
+        /*
+        $i=0;
+        while ($i<count($openorders_rex[0])) {
+                //TODO: check me
+                $api_rex->cancelOrder($openorders_rex[0][$i]->uuidOrder);
+                $i=$i+1;
+        }
+        */ 
+	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
