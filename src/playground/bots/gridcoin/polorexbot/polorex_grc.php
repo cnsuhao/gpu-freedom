@@ -8,8 +8,11 @@
         require_once("../lib/bittrex_api.php");
         require_once("conf/config.inc.php");	
 
+  $iter = 0;
+  while ($iter<3) {
+
 	$date = date('Y-m-d H:i:s');
-	echo "$date\n";
+	echo "$date  iter $iter\n";
 	
 
 	// fee structure
@@ -63,7 +66,7 @@
 	// iterate over and do cancel_order($pair, $order_number)
         echo "Retrieving open orders on Poloniex...\n";
         $openorders = $api_polo->get_open_orders($curpair_1_2);
-	echo "*";
+	echo "* openorders poloniex result: \n";
         print_r($openorders);
         echo "*\n";
         echo "open orders ";
@@ -90,8 +93,10 @@
               
 	//echo "Retrieving open orders on bittrex";
         $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
+        echo "* openorders bittrex result: \n";
         print_r($openorders_rex);
-        /*
+        echo "*\n"; 
+       /*
         $i=0;
         while ($i<count($openorders_rex[0])) {
                 //TODO: check me
@@ -127,7 +132,7 @@
         $price_2_in_ref_rex = $myres_curpair_2_ref_rex->Last;
         $price_1_in_ref_rex = $price_1_in_2_rex * $price_2_in_ref_rex;
 
-        echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
+        echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref_rex  $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
 	echo "\n";
         
 	// 2. retrieve our current balance in currency 1 and 2
@@ -305,4 +310,7 @@
 	*/
 	echo "Bot iteration over... \n\n";
 
+        $iter=$iter+1;
+        sleep(10);
+   }
 ?>
