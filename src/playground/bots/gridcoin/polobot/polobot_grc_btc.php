@@ -45,24 +45,25 @@
 	// iterate over and do cancel_order($pair, $order_number)
 	
         echo "Retrieving open orders...\n";
-        $openorders = array_values($api -> get_open_orders($curpair_1_2));
+        $openorders = $api -> get_open_orders($curpair_1_2);
 	
         print_r($openorders);
         echo "open orders ";
-        echo count($openorders);
+        echo count($openorders[0]);
         echo "\n";
         
+        
         $i=0;   
-        while ($i<count($openorders)) {
+        while ($i<count($openorders[0])) {
                  
-                   if (($openorders[i]["amount"])<=$max_tradable_1) {                        
+                   if (($openorders[0][$i]["amount"])<=$max_tradable_1) {                        
                         echo "Cancelling order ";
-                        echo $openorders[i]["orderNumber"];
+                        echo $openorders[0][$i]["orderNumber"];
                         echo "\n";
-			$api->cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
+			$api->cancel_order($curpair_1_2, $openorders[0][$i]["orderNumber"]);
                    } else {
                         echo "Order ";
-                        echo $openorders[i]["orderNumber"];
+                        echo $openorders[0][$i]["orderNumber"];
                         echo " not cancelled due to high amount, not set by this bot\n";
 		   }
                  

@@ -19,7 +19,7 @@
         $fee_rex_maker  = 0.0015;
         $fee_rex_taker  = 0.0025;
 
-        $trans_treshold_in_ref = 3; // transactions have to be at least
+        $trans_treshold_in_ref = 2.3; // transactions have to be at least
                                     // this amount in $currency_ref
 	
 	// currency to be arbitraged
@@ -61,33 +61,33 @@
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
-        //echo "Retrieving open orders on Poloniex...\n";
-        //$openorders = $api_polo->get_open_orders($curpair_1_2);
-	//echo "*";
-        //print_r($openorders);
-        //echo "*\n";
-        //echo "open orders ";
-        //echo count($openorders);
-        //echo "\n";
-        /* 
+        echo "Retrieving open orders on Poloniex...\n";
+        $openorders = $api_polo->get_open_orders($curpair_1_2);
+	echo "*";
+        print_r($openorders);
+        echo "*\n";
+        echo "open orders ";
+        echo count($openorders[0]);
+        echo "\n";
+        
         $i=0;   
-        while ($i<count($openorders)) {
+        while ($i<count($openorders[0])) {
                  
-                   if (($openorders[i]["amount"])<=$max_tradable_1) {                        
+                   if (($openorders[0][$i]["amount"])<=$max_tradable_1) {                        
                         echo "Cancelling order ";
-                        echo $openorders[i]["orderNumber"];
+                        echo $openorders[0][$i]["orderNumber"];
                         echo "\n";
-			$api_polo->cancel_order($curpair_1_2, $openorders[i]["orderNumber"]);
+			$api_polo->cancel_order($curpair_1_2, $openorders[0][$i]["orderNumber"]);
                    } else {
                         echo "Order ";
-                        echo $openorders[i]["orderNumber"];
+                        echo $openorders[0][$i]["orderNumber"];
                         echo " not cancelled due to high amount, not set by this bot\n";
 		   }
                  
               $i=$i+1;
 	}
-          */      
-	echo "Retrieving open orders on bittrex";
+              
+	//echo "Retrieving open orders on bittrex";
         //$openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
         //print_r($openorders_rex);
         	
