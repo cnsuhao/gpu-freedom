@@ -73,37 +73,45 @@
         echo count($openorders[0]);
         echo "\n";
         
-        $i=0;   
-        while ($i<count($openorders[0])) {
+        if (count($openorders[0])>0) { //hack due to API inconsistency
+            $i=0;   
+            while ($i<count($openorders)) {
                  
-                   if (($openorders[0][$i]["amount"])<=$max_tradable_1) {                        
+                   if (($openorders[$i]["amount"])<=$max_tradable_1) {                        
                         //todo: check me
-                        echo "Cancelling order ";
-                        echo $openorders[0][$i]["orderNumber"];
+                        echo "Cancelling Polo order ";
+                        echo $openorders[$i]["orderNumber"];
                         echo "\n";
-			$api_polo->cancel_order($curpair_1_2, $openorders[0][$i]["orderNumber"]);
+			$api_polo->cancel_order($curpair_1_2, $openorders[$i]["orderNumber"]);
                    } else {
-                        echo "Order ";
-                        echo $openorders[0][$i]["orderNumber"];
+                        echo "Polo order ";
+                        echo $openorder[$i]["orderNumber"];
                         echo " not cancelled due to high amount, not set by this bot\n";
 		   }
                  
               $i=$i+1;
-	}
-              
+	    }
+        }
 	//echo "Retrieving open orders on bittrex";
         $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
         echo "* openorders bittrex result: \n";
         print_r($openorders_rex);
         echo "*\n"; 
-       /*
+        echo count($openorders_rex);
+        echo "\n";
         $i=0;
-        while ($i<count($openorders_rex[0])) {
-                //TODO: check me
-                $api_rex->cancelOrder($openorders_rex[0][$i]->uuidOrder);
+        while ($i<count($openorders_rex)) {
+                $orderid_rex = $openorders_rex[$i]->OrderUuid;
+                $quantity_rex = $openorders_rex[$i]->Quantity;
+                if ($quantity_rex<=$max_tradable_1) {
+                     echo "Cancelling Rex order $orderid_rex ($quantity_rex $currency_1) \n";
+                     $api_rex->cancel($orderid_rex);
+                } else {
+                     echo "Not cancelling Rex order $orderid_rex ($quantity_rex $currency_1 because not done by bot \n";
+                }
                 $i=$i+1;
         }
-        */ 
+        
 	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
