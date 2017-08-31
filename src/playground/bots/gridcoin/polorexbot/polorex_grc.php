@@ -260,14 +260,14 @@
                         // buy on poloniex, sell on bittrex
                         $api_polo->buy($curpair_1_2, $bestask, $tradable_A);
                         $api_rex->sellLimit($curpair_1_2_rex, $tradable_A, $bestbid_rex);
-                        echo "Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex";
+                        echo "Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex Gain_A: $gain_A $currency_ref\n";
                      }
                   } else {
                      if ($transize_B_in_ref>=$trans_treshold_in_ref) {
                         // buy on bittrex, sell on poloniex
                         $api_rex->buyLimit($curpair_1_2_rex, $tradable_B, $bestask_rex);
                         $api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
-                        echo "Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid";
+                        echo "Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid Gain_B: $gain_B $currency_ref\n";
                      }
                 }
           
