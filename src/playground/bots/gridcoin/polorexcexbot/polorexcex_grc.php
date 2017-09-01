@@ -3,16 +3,16 @@
 	// (c) by 2017 dangermouse, GPL licence
 	// API reference is at https://poloniex.com/support/api/
 
-  //require_once("../lib/poloniex_api.php");
-  //require_once("../lib/bittrex_api.php");
+  require_once("../lib/poloniex_api.php");
+  require_once("../lib/bittrex_api.php");
   require_once("../lib/ccex_api.php");
-  //require_once("conf/config.inc.php");	
+  require_once("conf/config.inc.php");	
   /*  
   $iter = 0;
   while ($iter<3) {
-
+  */
 	$date = date('Y-m-d H:i:s');
-	echo "$date  iter $iter\n";
+	//echo "$date  iter $iter\n";
 	
 
 	// fee structure
@@ -29,26 +29,26 @@
     $trans_treshold_in_ref = 3.0; // transactions have to be at least
                                     // this amount in $currency_ref
 	
-	// currency to be arbitraged
-	$currency_1 = "GRC";
-	$max_tradable_1 = 1000; // maximum amount tradable in currency 1
+    // currency to be arbitraged
+    $currency_1 = "GRC";
+    $max_tradable_1 = 1000; // maximum amount tradable in currency 1
 
-	$currency_2 = "BTC"; // currency 2
+    $currency_2 = "BTC"; // currency 2
     $max_tradable_2 = 0.01; // maximum amount tradable in currency 2
 
     $currency_ref = "USDT"; // used to get an idea of portfolio value
         
 
-	// currency pairs
-	$curpair_1_2 = $currency_2 . "_" . $currency_1;
-	$curpair_2_ref = $currency_ref . "_" . $currency_2;
+    // currency pairs
+    $curpair_1_2 = $currency_2 . "_" . $currency_1;
+    $curpair_2_ref = $currency_ref . "_" . $currency_2;
     $curpair_1_2_rex = $currency_2 . "-" . $currency_1;
     $curpair_2_ref_rex = $currency_ref . "-" . $currency_2;
     if ($currecy_ref="USDT") $currency_ref_cex="USD"; else $currency_ref_cex=$currency_ref;
     $curpair_1_2_cex = strtolower($currency_2) . "-" . strtolower($currency_1);
     $curpair_2_ref_cex = strtolower($currency_ref_cex) . "-" . strtolower($currency_2);   
 
-
+    /*
         echo "API poloniex key: ";
         echo $poloniex_api_key;
         echo "\n";
@@ -63,19 +63,19 @@
 	    echo $bittrex_api_secret;
         echo "\n";
 		
-		echo "C-CEX bittrex key: ";
+	echo "API C-CEX key: ";
         echo $ccex_api_key;
         echo "\n";
-        echo "API bittrex secret: ";
-	    echo $ccex_api_secret;
+        echo "API C-CEX secret: ";
+	echo $ccex_api_secret;
         echo "\n";
-
+    */
         
 	$api_polo = new poloniex($poloniex_api_key, $poloniex_api_secret);
-    $api_rex  = new bittrex_api($bittrex_api_key, $bittrex_api_secret);	
+        $api_rex  = new bittrex_api($bittrex_api_key, $bittrex_api_secret);	
 	$api_cex  = new ccex_api($bittrex_api_key, $bittrex_api_secret);	
-
-        
+ 
+      
 	// 0. cancel existing orders lying around from previous bot calls 
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
@@ -130,7 +130,7 @@
                 $i=$i+1;
     }
 	
-	echo "Retrieving open orders on c-cex";
+    echo "Retrieving open orders on c-cex";
     $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_cex);
     echo "* openorders ccex result: \n";
     print_r($openorders_cex);
@@ -150,7 +150,7 @@
                 $i=$i+1;
     }
         
-	
+    /*	
 	// 1. retrieve current prices
 	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	

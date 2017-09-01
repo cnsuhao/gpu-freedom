@@ -225,5 +225,5 @@
 			return $tot_btc;
 		} 
 	}
-   }
+   
 ?>
