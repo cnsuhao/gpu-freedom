@@ -73,7 +73,7 @@
         
 	$api_polo = new poloniex($poloniex_api_key, $poloniex_api_secret);
         $api_rex  = new bittrex_api($bittrex_api_key, $bittrex_api_secret);	
-	$api_cex  = new ccex_api($bittrex_api_key, $bittrex_api_secret);	
+	$api_cex  = new ccex_api($ccex_api_key, $ccex_api_secret);	
  
       
 	// 0. cancel existing orders lying around from previous bot calls 
@@ -198,7 +198,7 @@
 
     echo "Cex : $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
 	echo "\n";
-    /*    
+        
         
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency
@@ -224,9 +224,12 @@
     echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
     echo "\n";
     
-    $balances_cex_1 = $api_cex->getBalance($currency_1)->Available;
-    $balances_cex_2 = $api_cex->getBalance($currency_2)->Available;
-    //print_r($balances_cex_1);
+    $balances_cex_1 = $api_cex->getBalance($currency_1);
+    //$balances_cex_2 = $api_cex->getBalance($currency_2);
+    echo "*\n";
+    print_r($balances_cex_1);
+    echo "*\n";
+    /*
     $balance_cur_1_cex = min($balances_cex_1, $max_tradable_1);
     $balance_cur_2_cex = min($balances_cex_2, $max_tradable_2);
     $cur_portfolio_value_ref_cex = ($balance_cur_1_cex * $price_1_in_ref_cex) + ($balance_cur_2_cex * $price_2_in_ref_cex);

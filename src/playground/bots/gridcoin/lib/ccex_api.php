@@ -48,7 +48,7 @@ class ccex_api {
 		}
 
 		if ((!empty($params)) && (!$isdirect)) {
-			$uri .= '?'.http_build_query($params);
+			$uri .= '&'.http_build_query($params);
 		}
 
 		$sign = hash_hmac ('sha512', $uri, $this->apiSecret);
@@ -58,13 +58,17 @@ class ccex_api {
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
 
-		$answer = json_decode($result);
+                $answer = json_decode($result);
 
-		if ((!$isdirect) && ($answer->success == false)) {
+                if ((!$isdirect) && ($answer->success == false)) {
 			throw new \Exception ($answer->message);
 		}
 
-		return $answer;
+                if ($isdirect)
+                     return $answer;
+                else
+		     return $answer->result;
+
 	}
 	
 	   
