@@ -183,7 +183,6 @@
     $price_1_in_ref_rex = $price_1_in_2_rex * $price_2_in_ref_rex;
 
     echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref_rex  $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
-	echo "\n";
 	
     //$myres_markets = $api_cex->getMarkets();
     //print_r($myres_markets);	
@@ -197,8 +196,8 @@
     $price_2_in_ref_cex = 1/$myres_curpair_2_ref_cex->lastprice;
     $price_1_in_ref_cex = $price_1_in_2_cex * $price_2_in_ref_cex;
 
-    echo "Cex : $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
-	echo "\n";
+    echo "Ccex: $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
+    echo "\n";
         
         
 	// 2. retrieve our current balance in currency 1 and 2
@@ -223,7 +222,7 @@
     $balance_cur_2_rex = min($balances_rex_2, $max_tradable_2);
     $cur_portfolio_value_ref_rex = ($balance_cur_1_rex * $price_1_in_ref_rex) + ($balance_cur_2_rex * $price_2_in_ref_rex);
     echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
-    echo "\n";
+    
     
     $balances_cex_1 = $api_cex->getBalance($currency_1)->Available;
     sleep(1);  // the two calls need to be spaced by 1 second TODO: implement getBalances
@@ -272,7 +271,7 @@
     $tradable_amount_bid_rex = min($balance_cur_1_rex, $bidqty_rex);
     $tradable_amount_ask_rex = min($balance_cur_2_rex/$bestask_rex, $askqty_rex);
     echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
-        
+    echo "------------------------\n";    
     
     $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*/, 1 /*market depth*/)->buy;
     //print_r($orderbook_bid_cex[0]);
@@ -282,11 +281,11 @@
     $bestask_cex=$orderbook_ask_cex[0]->Rate;
     $bidqty_cex =$orderbook_bid_cex[0]->Quantity;
     $askqty_cex =$orderbook_ask_cex[0]->Quantity;
-    echo "cex : bestbid: $bestbid_cex    bestask: $bestask_cex   $currency_2/$currency_1\n";
-    echo "cex :  bidqty: $bidqty_cex      askqty: $askqty_cex   $currency_1\n";
+    echo "Ccex: bestbid: $bestbid_cex    bestask: $bestask_cex   $currency_2/$currency_1\n";
+    echo "Ccex:  bidqty: $bidqty_cex      askqty: $askqty_cex   $currency_1\n";
     $tradable_amount_bid_cex = min($balance_cur_1_cex, $bidqty_cex);
     $tradable_amount_ask_cex = min($balance_cur_2_cex/$bestask_cex, $askqty_cex);
-    echo "cex : tradable amount bid: $tradable_amount_bid_cex  ask: $tradable_amount_ask_cex  $currency_1\n";
+    echo "Ccex: tradable amount bid: $tradable_amount_bid_cex  ask: $tradable_amount_ask_cex  $currency_1\n";
     /* 
 	 
 	 echo "\nAnalysis...\n";

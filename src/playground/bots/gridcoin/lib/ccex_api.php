@@ -52,7 +52,7 @@ class ccex_api {
 		}
 
 		$sign = hash_hmac ('sha512', $uri, $this->apiSecret);
-                echo "\n".$uri."\n";
+                //echo "\n".$uri."\n";
 		$ch = curl_init ($uri);
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, array('apisign: '.$sign));
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
