@@ -99,7 +99,7 @@ class ccex_api {
 			'type'   => $type,
 			'depth'  => $depth
 		);
-		return $this->call ('getorderbook', $params, $ispub=true);
+		return $this->call ('getorderbook', $params, false, true, false);
 	}
     
     /**

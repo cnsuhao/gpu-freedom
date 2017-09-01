@@ -240,7 +240,7 @@
     echo "Ccex: $balance_cur_1_cex $currency_1   +   $balance_cur_2_cex $currency_2   -> $cur_portfolio_value_ref_cex $currency_ref\n";
     echo "\n";
     
-    /*
+    
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
 	$orderbook = $api_polo->get_order_book($curpair_1_2);
 	//print_r($orderbook);
@@ -257,10 +257,10 @@
     echo "Polo: tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask $currency_1\n";
     echo "-------------------------\n";
         
-    $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*//*, 1 /*market depth*//*);
+    $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*/, 1 /*market depth*/);
     //print_r($orderbook_bid_rex[0]);
     
-    /*
+    
     $orderbook_ask_rex = $api_rex->getOrderBook($curpair_1_2_rex, "sell", 1);
     //print_r($orderbook_ask_rex[0]);
     $bestbid_rex=$orderbook_bid_rex[0]->Rate;
@@ -273,10 +273,10 @@
     $tradable_amount_ask_rex = min($balance_cur_2_rex/$bestask_rex, $askqty_rex);
     echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
         
-    $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*//*, 1 /*market depth*//*);
+    
+    $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*/, 1 /*market depth*/)->buy;
     //print_r($orderbook_bid_cex[0]);
-    /*
-    $orderbook_ask_cex = $api_cex->getOrderBook($curpair_1_2_cex, "sell", 1);
+    $orderbook_ask_cex = $api_cex->getOrderBook($curpair_1_2_cex, "sell", 1)->sell;
     //print_r($orderbook_ask_cex[0]);
     $bestbid_cex=$orderbook_bid_cex[0]->Rate;
     $bestask_cex=$orderbook_ask_cex[0]->Rate;
@@ -287,7 +287,7 @@
     $tradable_amount_bid_cex = min($balance_cur_1_cex, $bidqty_cex);
     $tradable_amount_ask_cex = min($balance_cur_2_cex/$bestask_cex, $askqty_cex);
     echo "cex : tradable amount bid: $tradable_amount_bid_cex  ask: $tradable_amount_ask_cex  $currency_1\n";
-     
+    /* 
 	 
 	 echo "\nAnalysis...\n";
 
