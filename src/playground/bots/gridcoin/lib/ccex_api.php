@@ -18,9 +18,9 @@ class ccex_api {
 	{
 		$this->apiKey    = $apiKey;
 		$this->apiSecret = $apiSecret;
-		$this->baseUrl   = 'https://c-cex.com/t/';
-		$this->apiUrl   = 'api.html?a=';
-		$this->apiPubUrl = 'api_pub.html?a='
+		$this->baseUrl   = "https://c-cex.com/t/";
+		$this->apiUrl   = "api.html?a='";
+		$this->apiPubUrl = "api_pub.html?a=";
 	}
 
 	/**
@@ -33,7 +33,7 @@ class ccex_api {
 	private function call ($method, $params = array(), $apiKey = false, $ispub = false, $isdirect = false)
 	{
 		if ($isdirect==true) {
-			$uri  = $this->baseUrl 
+			$uri  = $this->baseUrl; 
 		} else {
 					if ($ispub==true) 
 						$uri  = $this->baseUrl . $this->apiPubUrl . $method;

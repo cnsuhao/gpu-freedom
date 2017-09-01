@@ -3,12 +3,11 @@
 	// (c) by 2017 dangermouse, GPL licence
 	// API reference is at https://poloniex.com/support/api/
 
-	
-	require_once("../lib/poloniex_api.php");
-    require_once("../lib/bittrex_api.php");
-	require_once("../lib/ccex_api.php");
-    require_once("conf/config.inc.php");	
-  
+  //require_once("../lib/poloniex_api.php");
+  //require_once("../lib/bittrex_api.php");
+  require_once("../lib/ccex_api.php");
+  //require_once("conf/config.inc.php");	
+  /*  
   $iter = 0;
   while ($iter<3) {
 
@@ -246,8 +245,10 @@
     echo "Polo: tradable amount bid: $tradable_amount_bid  ask: $tradable_amount_ask $currency_1\n";
     echo "-------------------------\n";
         
-    $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*/, 1 /*market depth*/);
+    $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*//*, 1 /*market depth*//*);
     //print_r($orderbook_bid_rex[0]);
+    
+    /*
     $orderbook_ask_rex = $api_rex->getOrderBook($curpair_1_2_rex, "sell", 1);
     //print_r($orderbook_ask_rex[0]);
     $bestbid_rex=$orderbook_bid_rex[0]->Rate;
@@ -260,8 +261,9 @@
     $tradable_amount_ask_rex = min($balance_cur_2_rex/$bestask_rex, $askqty_rex);
     echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
         
-    $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*/, 1 /*market depth*/);
+    $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*//*, 1 /*market depth*//*);
     //print_r($orderbook_bid_cex[0]);
+    /*
     $orderbook_ask_cex = $api_cex->getOrderBook($curpair_1_2_cex, "sell", 1);
     //print_r($orderbook_ask_cex[0]);
     $bestbid_cex=$orderbook_bid_cex[0]->Rate;
@@ -515,11 +517,13 @@
 				} 
                 
 		   */	
-		} // end of trading section
+		/*
+                } // end of trading section
       
 		echo "Bot iteration over... \n\n";
 
         $iter=$iter+1;
         sleep(10);
    } // end of iteration section
+*/
 ?>
