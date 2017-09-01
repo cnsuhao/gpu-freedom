@@ -481,7 +481,7 @@
 				 if (($gain_F>$gain_A) && ($gain_F>$gain_B) && ($gain_F>$gain_C) && ($gain_F>$gain_D) && ($gain_F>$gain_E)) {
 				   $trade_F = 1;
 				 }
-		
+		/*
 				echo "\nTrading...\n"; 
                 if ($trade_A==1) {
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_A);
@@ -514,7 +514,7 @@
 					echo "$datetrading Order: BUY $tradable_F $currency_1 on Cex at $bestask_cex, SELL on Bittrex at $bestbid_rex Gain_F: $gain_F $currency_ref\n";
 				} 
                 
-			
+		   */	
 		} // end of trading section
       
 		echo "Bot iteration over... \n\n";
