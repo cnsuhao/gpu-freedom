@@ -9,10 +9,10 @@
   require_once("conf/config.inc.php");	
     
   $iter = 0;
-  while ($iter<1) {
+  while ($iter<4) {
   
 	$date = date('Y-m-d H:i:s');
-	//echo "$date  iter $iter\n";
+	echo "$date  iter $iter\n";
 	
 
 	// fee structure
@@ -286,9 +286,8 @@
     $tradable_amount_bid_cex = min($balance_cur_1_cex, $bidqty_cex);
     $tradable_amount_ask_cex = min($balance_cur_2_cex/$bestask_cex, $askqty_cex);
     echo "Ccex: tradable amount bid: $tradable_amount_bid_cex  ask: $tradable_amount_ask_cex  $currency_1\n";
-    /* 
-	 
-	 echo "\nAnalysis...\n";
+     
+    echo "\nAnalysis...\n";
 
      if (($tradable_amount_ask>0) && ($tradable_amount_bid_rex>0)) {
         	echo "---";
@@ -458,11 +457,12 @@
              $gain_F_in_ref = -1;
              echo "Not possible: Buy on Cex, Sell on Bittrex: no money.\n";
         }
-		
+
+        		
 		$datetrading = date('Y-m-d H:i:s');
 		// do we trade?
 		if (($gain_A<=0) && ($gain_B<=0) && ($gain_C<=0) && ($gain_D<=0) && ($gain_E<=0) && ($gain_F<=0)) {
-				echo "Nothing to do: poloniex, bittrex and cex are already arbitraged...\n";
+				echo "$datetrading: Nothing to do: poloniex, bittrex and cex are already arbitraged...\n";
 		} else {
 			     // identify which is the best possible trade
 				 $trade_A = 0;
@@ -494,9 +494,9 @@
 				 if (($gain_F>$gain_A) && ($gain_F>$gain_B) && ($gain_F>$gain_C) && ($gain_F>$gain_D) && ($gain_F>$gain_E)) {
 				   $trade_F = 1;
 				 }
-		/*
+		
 				echo "\nTrading...\n"; 
-                if ($trade_A==1) {
+                               if ($trade_A==1) {
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_A);
 					$api_rex->sellLimit($curpair_1_2_rex, $tradable_A, $bestbid_rex);
 					echo "$datetrading Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex Gain_A: $gain_A $currency_ref\n";
@@ -527,12 +527,12 @@
 					echo "$datetrading Order: BUY $tradable_F $currency_1 on Cex at $bestask_cex, SELL on Bittrex at $bestbid_rex Gain_F: $gain_F $currency_ref\n";
 				} 
                 
-		   */	
-		/*
+		   
+		
                 } // end of trading section
       
 		echo "Bot iteration over... \n\n";
-        */
+        
         $iter=$iter+1;
         //sleep(10);
    } // end of iteration section
