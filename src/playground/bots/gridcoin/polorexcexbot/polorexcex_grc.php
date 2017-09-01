@@ -7,10 +7,10 @@
   require_once("../lib/bittrex_api.php");
   require_once("../lib/ccex_api.php");
   require_once("conf/config.inc.php");	
-  /*  
+    
   $iter = 0;
-  while ($iter<3) {
-  */
+  while ($iter<1) {
+  
 	$date = date('Y-m-d H:i:s');
 	//echo "$date  iter $iter\n";
 	
@@ -83,9 +83,9 @@
     echo "Retrieving open orders on Poloniex...\n";
     $openorders = $api_polo->get_open_orders($curpair_1_2);
 	
-	echo "* openorders poloniex result: \n";
-    print_r($openorders);
-    echo "*\n";
+    //echo "* openorders poloniex result: \n";
+    //print_r($openorders);
+    //echo "*\n";
     echo "open orders ";
     echo count($openorders[0]);
     echo "\n";
@@ -112,9 +112,9 @@
 	
     echo "Retrieving open orders on bittrex\n";
     $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
-    echo "* openorders bittrex result: \n";
-    print_r($openorders_rex);
-    echo "*\n"; 
+    //echo "* openorders bittrex result: \n";
+    //print_r($openorders_rex);
+    echo "*\n Count open orders bittrex: "; 
     
     echo count($openorders_rex);
     echo "\n";
@@ -131,15 +131,16 @@
                 $i=$i+1;
     }
     
-    /*	
+    
     echo "Retrieving open orders on c-cex";
     $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_rex);
     echo "* openorders ccex result: \n";
-    //print_r($openorders_cex);
+    print_r($openorders_cex);
     
     echo "*\n"; 
     echo count($openorders_cex);
     echo "\n";
+    
     $i=0;
         while ($i<count($openorders_cex)) {
                 $orderid_cex = $openorders_cex[$i]->OrderUuid;
@@ -152,7 +153,7 @@
                 }
                 $i=$i+1;
     }
-    */  
+      
     	
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
@@ -224,19 +225,22 @@
     echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
     echo "\n";
     
-    $balances_cex_1 = $api_cex->getBalance($currency_1);
-    //$balances_cex_2 = $api_cex->getBalance($currency_2);
-    echo "*\n";
-    print_r($balances_cex_1);
-    echo "*\n";
-    /*
+    $balances_cex_1 = $api_cex->getBalance($currency_1)->Available;
+    sleep(1);  // the two calls need to be spaced by 1 second TODO: implement getBalances
+    $balances_cex_2 = $api_cex->getBalance($currency_2)->Available;
+    //echo "*\n";
+    //print_r($balances_cex_1);
+    //echo "\*\n";
+    //print_r($balances_cex_2);
+    //echo "\n*\n";    
+    
     $balance_cur_1_cex = min($balances_cex_1, $max_tradable_1);
     $balance_cur_2_cex = min($balances_cex_2, $max_tradable_2);
     $cur_portfolio_value_ref_cex = ($balance_cur_1_cex * $price_1_in_ref_cex) + ($balance_cur_2_cex * $price_2_in_ref_cex);
-    echo "cex : $balance_cur_1_cex $currency_1   +   $balance_cur_2_cex $currency_2   -> $cur_portfolio_value_ref_cex $currency_ref\n";
+    echo "Ccex: $balance_cur_1_cex $currency_1   +   $balance_cur_2_cex $currency_2   -> $cur_portfolio_value_ref_cex $currency_ref\n";
     echo "\n";
     
-    
+    /*
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
 	$orderbook = $api_polo->get_order_book($curpair_1_2);
 	//print_r($orderbook);
@@ -529,9 +533,9 @@
                 } // end of trading section
       
 		echo "Bot iteration over... \n\n";
-
+        */
         $iter=$iter+1;
-        sleep(10);
+        //sleep(10);
    } // end of iteration section
-*/
+
 ?>
