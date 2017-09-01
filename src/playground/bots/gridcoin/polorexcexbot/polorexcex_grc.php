@@ -45,7 +45,7 @@
     $curpair_1_2_rex = $currency_2 . "-" . $currency_1;
     $curpair_2_ref_rex = $currency_ref . "-" . $currency_2;
     if ($currecy_ref="USDT") $currency_ref_cex="USD"; else $currency_ref_cex=$currency_ref;
-    $curpair_1_2_cex = strtolower($currency_2) . "-" . strtolower($currency_1);
+    $curpair_1_2_cex = strtolower($currency_1) . "-" . strtolower($currency_2);
     $curpair_2_ref_cex = strtolower($currency_ref_cex) . "-" . strtolower($currency_2);   
 
     /*
@@ -110,11 +110,12 @@
 	    }
         }
 	
-	echo "Retrieving open orders on bittrex";
+    echo "Retrieving open orders on bittrex\n";
     $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
     echo "* openorders bittrex result: \n";
     print_r($openorders_rex);
     echo "*\n"; 
+    
     echo count($openorders_rex);
     echo "\n";
     $i=0;
@@ -129,11 +130,13 @@
                 }
                 $i=$i+1;
     }
-	
+    
+    /*	
     echo "Retrieving open orders on c-cex";
-    $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_cex);
+    $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_rex);
     echo "* openorders ccex result: \n";
-    print_r($openorders_cex);
+    //print_r($openorders_cex);
+    
     echo "*\n"; 
     echo count($openorders_cex);
     echo "\n";
@@ -149,10 +152,10 @@
                 }
                 $i=$i+1;
     }
-        
-    /*	
-	// 1. retrieve current prices
-	// TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
+    */  
+    	
+   // 1. retrieve current prices
+    // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
     //$myres = $api_polo->get_trading_pairs();
     //echo "*\n";
@@ -181,19 +184,21 @@
     echo "Rex : $price_1_in_ref_rex $currency_1/$currency_ref $price_2_in_ref_rex  $currency_ref/$currency_2 $price_1_in_2_rex $currency_2/$currency_1\n";
 	echo "\n";
 	
-	
-	$myres_curpair_1_2_cex = $api_cex->getTicker($curpair_1_2_cex);
+    //$myres_markets = $api_cex->getMarkets();
+    //print_r($myres_markets);	
+    $myres_curpair_1_2_cex = $api_cex->getTicker($curpair_1_2_cex);
     //print_r($myres_curpair_1_2_cex);
+    
     $myres_curpair_2_ref_cex = $api_cex->getTicker($curpair_2_ref_cex);
     //print_r($myres_curpair_2_ref_cex);        
-
-    $price_1_in_2_cex = $myres_curpair_1_2_cex->Last;
-    $price_2_in_ref_cex = $myres_curpair_2_ref_cex->Last;
+    
+    $price_1_in_2_cex = $myres_curpair_1_2_cex->lastprice;
+    $price_2_in_ref_cex = 1/$myres_curpair_2_ref_cex->lastprice;
     $price_1_in_ref_cex = $price_1_in_2_cex * $price_2_in_ref_cex;
 
     echo "Cex : $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
 	echo "\n";
-        
+    /*    
         
 	// 2. retrieve our current balance in currency 1 and 2
 	//    and calculate current portfolio value in reference currency

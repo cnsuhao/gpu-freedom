@@ -19,7 +19,7 @@ class ccex_api {
 		$this->apiKey    = $apiKey;
 		$this->apiSecret = $apiSecret;
 		$this->baseUrl   = "https://c-cex.com/t/";
-		$this->apiUrl   = "api.html?a='";
+		$this->apiUrl   = "api.html?a=";
 		$this->apiPubUrl = "api_pub.html?a=";
 	}
 
@@ -33,7 +33,7 @@ class ccex_api {
 	private function call ($method, $params = array(), $apiKey = false, $ispub = false, $isdirect = false)
 	{
 		if ($isdirect==true) {
-			$uri  = $this->baseUrl; 
+			$uri  = $this->baseUrl.$method; 
 		} else {
 					if ($ispub==true) 
 						$uri  = $this->baseUrl . $this->apiPubUrl . $method;
@@ -47,12 +47,12 @@ class ccex_api {
 			$params['nonce']  = time();
 		}
 
-		if (!empty($params)) {
+		if ((!empty($params)) && (!$isdirect)) {
 			$uri .= '?'.http_build_query($params);
 		}
 
 		$sign = hash_hmac ('sha512', $uri, $this->apiSecret);
-
+                echo "\n".$uri."\n";
 		$ch = curl_init ($uri);
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, array('apisign: '.$sign));
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
@@ -60,23 +60,25 @@ class ccex_api {
 
 		$answer = json_decode($result);
 
-		if ($answer->success == false) {
+		if ((!$isdirect) && ($answer->success == false)) {
 			throw new \Exception ($answer->message);
 		}
 
-		return $answer->result;
+		return $answer;
 	}
 	
 	   
     public function getTicker($pair){
-        $json = $this->call($pair.'.json', $isdirect=true);
-        return $json['ticker'];
+        $params=array();
+        $json = $this->call($pair.'.json', $params, false, false, true);
+        return $json->ticker;
     }
     
     
     public function getMarkets(){
-       $json = $this->call('pairs.json', $isdirect=true); 
-       return $json['pairs'];
+       $params=array();
+       $json = $this->call('pairs.json',$params, false, false, true); 
+       return $json;
     }
     
     /**
