@@ -512,7 +512,7 @@
 					echo "$datetrading Order: BUY $tradable_C $currency_1 on Poloniex at $bestask, SELL on Cex at $bestbid_cex Gain_C: $gain_C $currency_ref\n";
 				} else
                 if ($trade_D==1) {
-					$api_rex->buyLimit($curpair_1_2_cex, $tradable_D, $bestask_cex);
+					$api_cex->buyLimit($curpair_1_2_cex, $tradable_D, $bestask_cex);
 					$api_polo->sell($curpair_1_2, $bestbid, $tradable_D);
 					echo "$datetrading Order: BUY $tradable_D $currency_1 on Cex at $bestask_cex, SELL on Poloniex at $bestbid Gain_D: $gain_D $currency_ref\n";
 				} else
