@@ -9,7 +9,7 @@
   require_once("conf/config.inc.php");	
     
   $iter = 0;
-  while ($iter<4) {
+  while ($iter<2) {
   
 	$date = date('Y-m-d H:i:s');
 	echo "$date  iter $iter\n";
@@ -23,7 +23,7 @@
     $fee_rex_taker  = 0.0025;
 
 	$fee_cex_maker  = 0.0015;
-    $fee_cex_taker  = 0.0025;
+    $fee_cex_taker  = 0.0020;
 
 	
     $trans_treshold_in_ref = 3.0; // transactions have to be at least
