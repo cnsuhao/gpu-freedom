@@ -19,7 +19,7 @@
 	$fee_polo_maker = 0.0015;
 	$fee_polo_taker = 0.0025;
         
-    $fee_rex_maker  = 0.0015;
+    $fee_rex_maker  = 0.0025;
     $fee_rex_taker  = 0.0025;
 
 	$fee_cex_maker  = 0.0015;
@@ -80,13 +80,13 @@
 	// (they lay around for example if the order could be only partially fullfilled)
 	// get_open_orders($pair), retrieves ordernumber
 	// iterate over and do cancel_order($pair, $order_number)
-    echo "Retrieving open orders on Poloniex...\n";
+    //echo "Retrieving open orders on Poloniex...\n";
     $openorders = $api_polo->get_open_orders($curpair_1_2);
 	
     //echo "* openorders poloniex result: \n";
     //print_r($openorders);
     //echo "*\n";
-    echo "open orders ";
+    echo "Open orders on Poloniex ";
     echo count($openorders[0]);
     echo "\n";
         
@@ -110,11 +110,11 @@
 	    }
         }
 	
-    echo "Retrieving open orders on bittrex\n";
+    //echo "Retrieving open orders on bittrex\n";
     $openorders_rex = $api_rex->getOpenOrders($curpair_1_2_rex);
     //echo "* openorders bittrex result: \n";
     //print_r($openorders_rex);
-    echo "*\n Count open orders bittrex: "; 
+    echo "Count open orders bittrex: "; 
     
     echo count($openorders_rex);
     echo "\n";
@@ -132,12 +132,12 @@
     }
     
     
-    echo "Retrieving open orders on c-cex";
+    //echo "Retrieving open orders on c-cex";
     $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_rex);
-    echo "* openorders ccex result: \n";
-    print_r($openorders_cex);
+    echo "Openorders ccex result: ";
+    //print_r($openorders_cex);
     
-    echo "*\n"; 
+    //echo "*\n"; 
     echo count($openorders_cex);
     echo "\n";
     
@@ -210,34 +210,54 @@
     //echo $balances["BTC"]["available"];
     //echo "\n";
 
-    $balance_cur_1 = min($balances[$currency_1]["available"],$max_tradable_1);
-	$balance_cur_2 = min($balances[$currency_2]["available"],$max_tradable_2);
-	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);
-	echo "Polo: $balance_cur_1 $currency_1  +   $balance_cur_2 $currency_2      ->    $cur_portfolio_value_ref $currency_ref\n";
+	$balance_polo_tot_1 = $balances[$currency_1]["available"];
+	$balance_polo_tot_2 = $balances[$currency_2]["available"];
+    $balance_cur_1 = min($balance_polo_tot_1,$max_tradable_1);
+	$balance_cur_2 = min($balance_polo_tot_2,$max_tradable_2);
+	$cur_portfolio_value_ref = ($balance_cur_1 * $price_1_in_ref) + ($balance_cur_2 * $price_2_in_ref);	
+	$cur_portfolio_value_polo_ref_tot = ($balance_polo_tot_1 * $price_1_in_ref) + ($balance_polo_tot_2 * $price_2_in_ref);	
+	$cur_portfolio_value_polo_1_tot = $balance_polo_tot_1 + ($balance_polo_tot_2/$price_1_in_2);
 	
-    $balances_rex_1 = $api_rex->getBalance($currency_1)->Available;
-    $balances_rex_2 = $api_rex->getBalance($currency_2)->Available;
+	echo "Polo: $balance_polo_tot_1 $currency_1  +   $balance_polo_tot_2 $currency_2      ->    $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot) $currency_1)\n";
+	
+    $balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
+    $balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
     //print_r($balances_rex_1);
-    $balance_cur_1_rex = min($balances_rex_1, $max_tradable_1);
-    $balance_cur_2_rex = min($balances_rex_2, $max_tradable_2);
+    $balance_cur_1_rex = min($balances_rex_tot_1, $max_tradable_1);
+    $balance_cur_2_rex = min($balances_rex_tot_2, $max_tradable_2);
     $cur_portfolio_value_ref_rex = ($balance_cur_1_rex * $price_1_in_ref_rex) + ($balance_cur_2_rex * $price_2_in_ref_rex);
-    echo "Rex : $balance_cur_1_rex $currency_1   +   $balance_cur_2_rex $currency_2   -> $cur_portfolio_value_ref_rex $currency_ref\n";
+    $cur_portfolio_value_rex_ref_tot = ($balances_rex_tot_1 * $price_1_in_ref_rex) + ($balances_rex_tot_2 * $price_2_in_ref_rex);	
+	$cur_portfolio_value_rex_1_tot = $balances_rex_tot_1 + ($balances_rex_tot_2/$price_1_in_2_rex);
+
+	echo "Rex : $balances_rex_tot_1 $currency_1  +   $balances_rex_tot_2 $currency_2      ->    $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
-    
-    $balances_cex_1 = $api_cex->getBalance($currency_1)->Available;
+    $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
     sleep(1);  // the two calls need to be spaced by 1 second TODO: implement getBalances
-    $balances_cex_2 = $api_cex->getBalance($currency_2)->Available;
+    $balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
     //echo "*\n";
     //print_r($balances_cex_1);
     //echo "\*\n";
     //print_r($balances_cex_2);
     //echo "\n*\n";    
     
-    $balance_cur_1_cex = min($balances_cex_1, $max_tradable_1);
-    $balance_cur_2_cex = min($balances_cex_2, $max_tradable_2);
+    $balance_cur_1_cex = min($balances_cex_tot_1, $max_tradable_1);
+    $balance_cur_2_cex = min($balances_cex_tot_2, $max_tradable_2);
     $cur_portfolio_value_ref_cex = ($balance_cur_1_cex * $price_1_in_ref_cex) + ($balance_cur_2_cex * $price_2_in_ref_cex);
-    echo "Ccex: $balance_cur_1_cex $currency_1   +   $balance_cur_2_cex $currency_2   -> $cur_portfolio_value_ref_cex $currency_ref\n";
-    echo "\n";
+    $cur_portfolio_value_cex_ref_tot = ($balances_cex_tot_1 * $price_1_in_ref_cex) + ($balances_cex_tot_2 * $price_2_in_ref_cex);	
+	$cur_portfolio_value_cex_1_tot = $balances_cex_tot_1 + ($balances_cex_tot_2/$price_1_in_2_cex);
+
+	echo "Ccex : $balances_cex_tot_1 $currency_1  +   $balances_cex_tot_2 $currency_2      ->    $cur_portfolio_value_cex_ref_tot $currency_ref (=$cur_portfolio_value_cex_1_tot $currency_1)\n";	
+	
+	
+	$balances_tot_1 = $balance_polo_tot_1 + $balances_rex_tot_1 + $balances_cex_tot_1;
+	$balances_tot_2 = $balance_polo_tot_2 + $balances_rex_tot_2 + $balances_cex_tot_2;
+	$tot_portfolio_value_ref = ($balances_tot_1 * $price_1_in_ref) + ($balances_tot_2 * $price_2_in_ref);	
+	$tot_portfolio_value_1  = $balances_tot_1 + ($balances_tot_2/$price_1_in_2);
+    echo "Total: $balances_tot_1 $currency_1  +   $balances_tot_2 $currency_2      ->    $tot_portfolio_value_ref $currency_ref (=$tot_portfolio_value_1  $currency_1)\n";	
+	
+	
+	
+	echo "\n";
     
     
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
