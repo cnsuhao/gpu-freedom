@@ -9,7 +9,7 @@
   require_once("conf/config.inc.php");	
     
   $iter = 0;
-  while ($iter<2) {
+  while ($iter<3) {
   
 	$date = date('Y-m-d H:i:s');
 	echo "$date  iter $iter\n";
