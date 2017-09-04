@@ -499,32 +499,32 @@
                                if ($trade_A==1) {
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_A);
 					$api_rex->sellLimit($curpair_1_2_rex, $tradable_A, $bestbid_rex);
-					echo "$datetrading Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex Gain_A: $gain_A $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex Gain_A: $gain_A_in_ref $currency_ref\n";
 				} else
 		        if ($trade_B==1) {
 					$api_rex->buyLimit($curpair_1_2_rex, $tradable_B, $bestask_rex);
 					$api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
-					echo "$datetrading Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid Gain_B: $gain_B $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid Gain_B: $gain_B_in_ref $currency_ref\n";
 				} else
                 if ($trade_C==1) {
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_C);
 					$api_cex->sellLimit($curpair_1_2_cex, $tradable_C, $bestbid_cex);
-					echo "$datetrading Order: BUY $tradable_C $currency_1 on Poloniex at $bestask, SELL on Cex at $bestbid_cex Gain_C: $gain_C $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_C $currency_1 on Poloniex at $bestask, SELL on Cex at $bestbid_cex Gain_C: $gain_C_in_ref $currency_ref\n";
 				} else
                 if ($trade_D==1) {
 					$api_cex->buyLimit($curpair_1_2_cex, $tradable_D, $bestask_cex);
 					$api_polo->sell($curpair_1_2, $bestbid, $tradable_D);
-					echo "$datetrading Order: BUY $tradable_D $currency_1 on Cex at $bestask_cex, SELL on Poloniex at $bestbid Gain_D: $gain_D $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_D $currency_1 on Cex at $bestask_cex, SELL on Poloniex at $bestbid Gain_D: $gain_D_in_ref $currency_ref\n";
 				} else
 				if ($trade_E==1) {
 					$api_rex->buyLimit($curpair_1_2_rex, $tradable_E, $bestask_rex);
 					$api_cex->sellLimit($curpair_1_2_cex, $tradable_E, $bestbid_cex);
-					echo "$datetrading Order: BUY $tradable_E $currency_1 on Rex at $bestask_rex, SELL on Cex at $bestbid_cex Gain_E: $gain_E $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_E $currency_1 on Rex at $bestask_rex, SELL on Cex at $bestbid_cex Gain_E: $gain_E_in_ref $currency_ref\n";
 				} else
 			    if ($trade_F==1) {
 					$api_cex->buyLimit($curpair_1_2_cex, $tradable_F, $bestask_cex);
 					$api_rex->sellLimit($curpair_1_2_rex, $tradable_F, $bestbid_rex);
-					echo "$datetrading Order: BUY $tradable_F $currency_1 on Cex at $bestask_cex, SELL on Bittrex at $bestbid_rex Gain_F: $gain_F $currency_ref\n";
+					echo "$datetrading Order: BUY $tradable_F $currency_1 on Cex at $bestask_cex, SELL on Bittrex at $bestbid_rex Gain_F: $gain_F_in_ref $currency_ref\n";
 				} 
                 
 		   
