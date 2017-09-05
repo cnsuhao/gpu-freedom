@@ -7,9 +7,20 @@
   require_once("../lib/bittrex_api.php");
   require_once("../lib/ccex_api.php");
   require_once("conf/config.inc.php");	
+
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+$time_start = microtime_float();
+
+
     
   $iter = 0;
   while ($iter<3) {
+        if ((microtime_float()-$time_start)>46) die("timeout 1 reached.");
+
   
 	$date = date('Y-m-d H:i:s');
 	echo "$date  iter $iter\n";
@@ -154,7 +165,7 @@
                 $i=$i+1;
     }
       
-    	
+    if ((microtime_float()-$time_start)>50) die("timeout 2 reached.");
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
@@ -232,7 +243,7 @@
 	echo "Rex : $balances_rex_tot_1 $currency_1  +   $balances_rex_tot_2 $currency_2      ->    $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
     $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
-    sleep(1);  // the two calls need to be spaced by 1 second TODO: implement getBalances
+    sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
     $balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
     //echo "*\n";
     //print_r($balances_cex_1);
@@ -258,7 +269,7 @@
 	
 	
 	echo "\n";
-    
+     if ((microtime_float()-$time_start)>53) die("timeout 3 reached.");
     
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
 	$orderbook = $api_polo->get_order_book($curpair_1_2);
@@ -484,6 +495,8 @@
 		if (($gain_A<=0) && ($gain_B<=0) && ($gain_C<=0) && ($gain_D<=0) && ($gain_E<=0) && ($gain_F<=0)) {
 				echo "$datetrading: Nothing to do: poloniex, bittrex and cex are already arbitraged...\n";
 		} else {
+
+                         if ((microtime_float()-$time_start)>56) die("timeout 4 reached.");
 			     // identify which is the best possible trade
 				 $trade_A = 0;
 				 $trade_B = 0;
