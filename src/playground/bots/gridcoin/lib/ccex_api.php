@@ -2,10 +2,20 @@
 /**
  * PHP API for c-cex.com exchange
  *
- * @author dangermouse 
+ * @author dangermouse (HB9TVM)
  * derived from
  * @license MIT License - https://github.com/Remdev/PHP-ccex-api
- */
+ 
+   If you like this library consider donating 
+   gridcoins to this gridcoin address:
+   SEtxQ4SePHSP2xSfjy4MATvCWGoFMCcahn
+   and send an email to
+   dangermaus@users.sourceforge.net
+   to notify the transaction.   
+
+   Thank you!
+   
+*/
 class ccex_api {
     
     private $baseUrl;

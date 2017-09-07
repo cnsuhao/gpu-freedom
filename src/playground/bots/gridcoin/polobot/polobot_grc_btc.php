@@ -1,9 +1,22 @@
 <?php
-	// A simple arbitrage trading bot (a taker bot)
-	// (c) by 2017 dangermouse, GPL licence
-	// API reference is at https://poloniex.com/support/api/
+/*
+   A simple arbitrage trading bot 
+   (c) by 2017 dangermouse (HB9TVM) 
+   Source code under GNU Public Licence (GPL)
 
-	
+   Any currency available on Poloniex, Bittrex and C-Cex
+   can be configured below.
+   
+   If you like this bot consider donating 
+   gridcoins to this gridcoin address:
+   SEtxQ4SePHSP2xSfjy4MATvCWGoFMCcahn
+   and send an email to
+   dangermaus@users.sourceforge.net
+   to notify the transaction.   
+
+   Thank you!
+   
+*/	
 	require_once("../lib/poloniex_api.php");
         require_once("conf/config.inc.php");	
 
