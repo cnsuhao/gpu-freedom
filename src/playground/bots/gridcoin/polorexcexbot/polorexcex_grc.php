@@ -244,7 +244,7 @@ $time_start = microtime_float();
 	$cur_portfolio_value_polo_ref_tot = ($balance_polo_tot_1 * $price_1_in_ref) + ($balance_polo_tot_2 * $price_2_in_ref);	
 	$cur_portfolio_value_polo_1_tot = $balance_polo_tot_1 + ($balance_polo_tot_2/$price_1_in_2);
 	
-	echo "Polo: $balance_polo_tot_1 $currency_1  +   $balance_polo_tot_2 $currency_2      ->    $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot) $currency_1)\n";
+	echo "Polo: $balance_polo_tot_1 $currency_1 + $balance_polo_tot_2 $currency_2 -> $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot $currency_1)\n";
 	
     $balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
     $balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
@@ -255,7 +255,7 @@ $time_start = microtime_float();
     $cur_portfolio_value_rex_ref_tot = ($balances_rex_tot_1 * $price_1_in_ref_rex) + ($balances_rex_tot_2 * $price_2_in_ref_rex);	
 	$cur_portfolio_value_rex_1_tot = $balances_rex_tot_1 + ($balances_rex_tot_2/$price_1_in_2_rex);
 
-	echo "Rex : $balances_rex_tot_1 $currency_1  +   $balances_rex_tot_2 $currency_2      ->    $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
+	echo "Rex : $balances_rex_tot_1 $currency_1 + $balances_rex_tot_2 $currency_2 -> $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
     $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
     sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
@@ -272,14 +272,14 @@ $time_start = microtime_float();
     $cur_portfolio_value_cex_ref_tot = ($balances_cex_tot_1 * $price_1_in_ref_cex) + ($balances_cex_tot_2 * $price_2_in_ref_cex);	
 	$cur_portfolio_value_cex_1_tot = $balances_cex_tot_1 + ($balances_cex_tot_2/$price_1_in_2_cex);
 
-	echo "Ccex : $balances_cex_tot_1 $currency_1  +   $balances_cex_tot_2 $currency_2      ->    $cur_portfolio_value_cex_ref_tot $currency_ref (=$cur_portfolio_value_cex_1_tot $currency_1)\n";	
+	echo "Ccex : $balances_cex_tot_1 $currency_1 + $balances_cex_tot_2 $currency_2 -> $cur_portfolio_value_cex_ref_tot $currency_ref (=$cur_portfolio_value_cex_1_tot $currency_1)\n";	
 	
 	
 	$balances_tot_1 = $balance_polo_tot_1 + $balances_rex_tot_1 + $balances_cex_tot_1;
 	$balances_tot_2 = $balance_polo_tot_2 + $balances_rex_tot_2 + $balances_cex_tot_2;
 	$tot_portfolio_value_ref = ($balances_tot_1 * $price_1_in_ref) + ($balances_tot_2 * $price_2_in_ref);	
 	$tot_portfolio_value_1  = $balances_tot_1 + ($balances_tot_2/$price_1_in_2);
-    echo "Total: $balances_tot_1 $currency_1  +   $balances_tot_2 $currency_2      ->    $tot_portfolio_value_ref $currency_ref (=$tot_portfolio_value_1  $currency_1)\n";	
+    echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 -> $tot_portfolio_value_ref $currency_ref (=$tot_portfolio_value_1  $currency_1)\n";	
 	
 	
 	
@@ -579,7 +579,7 @@ $time_start = microtime_float();
 		
                 } // end of trading section
       
-		echo "Bot iteration over... \n\n";
+		echo "Bot iteration $iter over... \n\n";
         
         $iter=$iter+1;
         //sleep(10);
