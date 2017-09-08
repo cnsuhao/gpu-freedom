@@ -34,7 +34,7 @@ $time_start = microtime_float();
     
   $iter = 0;
   while ($iter<3) {
-        if ((microtime_float()-$time_start)>46) die("timeout 1 reached.");
+    if ((microtime_float()-$time_start)>46) die("timeout 0 reached.");
 
   
 	$date = date('Y-m-d H:i:s');
@@ -180,7 +180,7 @@ $time_start = microtime_float();
                 $i=$i+1;
     }
       
-    if ((microtime_float()-$time_start)>50) die("timeout 2 reached.");
+    if ((microtime_float()-$time_start)>49) die("timeout 1 reached.");
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
@@ -224,6 +224,8 @@ $time_start = microtime_float();
 
     echo "Ccex: $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
     echo "\n";
+	
+	if ((microtime_float()-$time_start)>52) die("timeout 2 reached.");
         
         
 	// 2. retrieve our current balance in currency 1 and 2
@@ -284,7 +286,7 @@ $time_start = microtime_float();
 	
 	
 	echo "\n";
-     if ((microtime_float()-$time_start)>53) die("timeout 3 reached.");
+     if ((microtime_float()-$time_start)>55) die("timeout 3 reached.");
     
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
 	$orderbook = $api_polo->get_order_book($curpair_1_2);
@@ -304,6 +306,7 @@ $time_start = microtime_float();
         
     $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*/, 1 /*market depth*/);
     //print_r($orderbook_bid_rex[0]);
+	if ((microtime_float()-$time_start)>57) die("timeout 4.1 reached.");
     
     
     $orderbook_ask_rex = $api_rex->getOrderBook($curpair_1_2_rex, "sell", 1);
@@ -318,6 +321,8 @@ $time_start = microtime_float();
     $tradable_amount_ask_rex = min($balance_cur_2_rex/$bestask_rex, $askqty_rex);
     echo "Rex : tradable amount bid: $tradable_amount_bid_rex  ask: $tradable_amount_ask_rex  $currency_1\n";
     echo "------------------------\n";    
+	
+	if ((microtime_float()-$time_start)>59) die("timeout 4.2 reached.");
     
     $orderbook_bid_cex = $api_cex->getOrderBook($curpair_1_2_cex, "buy" /* or buy or sell*/, 1 /*market depth*/)->buy;
     //print_r($orderbook_bid_cex[0]);
@@ -511,7 +516,7 @@ $time_start = microtime_float();
 				echo "$datetrading: Nothing to do: poloniex, bittrex and cex are already arbitraged...\n";
 		} else {
 
-                         if ((microtime_float()-$time_start)>56) die("timeout 4 reached.");
+                 
 			     // identify which is the best possible trade
 				 $trade_A = 0;
 				 $trade_B = 0;
