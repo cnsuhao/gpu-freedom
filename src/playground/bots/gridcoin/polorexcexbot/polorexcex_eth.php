@@ -260,7 +260,7 @@ $time_start = microtime_float();
 	echo "Rex : $balances_rex_tot_1 $currency_1 + $balances_rex_tot_2 $currency_2 -> $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
     $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
-    sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
+    sleep(5);  // the two calls need to be spaced by 1 second TODO: implement getBalances
     $balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
     //echo "*\n";
     //print_r($balances_cex_1);

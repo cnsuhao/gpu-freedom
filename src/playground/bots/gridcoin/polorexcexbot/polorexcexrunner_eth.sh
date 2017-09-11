@@ -7,4 +7,4 @@ wget -O store_polorexcex_eth_log --no-proxy http://127.0.0.1/gpu_freedom/src/pla
 cat store_polorexcex_eth_log >> polorexcex_eth.log
 cat store_polorexcex_eth_log
 
-
+#php polorexcex_eth.php 
