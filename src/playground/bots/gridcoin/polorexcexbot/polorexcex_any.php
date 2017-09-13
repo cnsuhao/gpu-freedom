@@ -637,7 +637,7 @@ $time_start = microtime_float();
                 } // end of trading section
         
 		$perc_arbitrages = round($possible_arbitrages / 6 * 100);
-		echo "*** Possible Arbitrages: $possible_arbitrages out of 6 ( $perc_arbitrages %) ***\n";
+		echo "*** Possible Arbitrages: $possible_arbitrages out of 6 ($perc_arbitrages%) ***\n";
 		echo "Bot iteration $iter/$max_iter over... \n\n";
         
         $iter=$iter+1;
