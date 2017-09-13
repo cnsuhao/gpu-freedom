@@ -254,9 +254,28 @@ $time_start = microtime_float();
 	print_r($balances_rex);
 	echo "* \n";
 	sleep(4);
+
+    // only one call to getBalances instead of two calls to getBalance!	
+	$balances_rex_tot_1 = -1;
+	$balances_rex_tot_2 = -1;
+	$i=0;
+    while ($i<count($balances_rex)) {
+                $currency_rex = $balances_rex[$i]->Currency;
+                $available_rex = $balances_rex[$i]->Available;
+                if ($currency_rex==$currency_1) {
+                     $balances_rex_tot_1 = $available_rex;
+                } else 
+				if ($currency_rex==$currency_2) {
+                     $balances_rex_tot_2 = $available_rex;
+                } else 
+					
+                $i=$i+1;
+    }
+	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances!\n");
 	
-    $balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
-    $balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
+	
+    //$balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
+    //$balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
     //print_r($balances_rex_1);
     $balance_cur_1_rex = min($balances_rex_tot_1, $max_tradable_1);
     $balance_cur_2_rex = min($balances_rex_tot_2, $max_tradable_2);
@@ -266,6 +285,8 @@ $time_start = microtime_float();
 
 	echo "Rex : $balances_rex_tot_1 $currency_1 + $balances_rex_tot_2 $currency_2 -> $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
+	die("Finished\n");
+	
 	$balances_cex = $api_cex->getBalances();
 	echo "Balances Cex\n.";
 	print_r($balances_cex);
