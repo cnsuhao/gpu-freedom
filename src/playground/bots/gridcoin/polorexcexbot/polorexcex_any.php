@@ -31,9 +31,9 @@ function microtime_float()
 $time_start = microtime_float();
 
 
-    
-  $iter = 0;
-  while ($iter<7) {
+  $max_iter=7;  
+  $iter = 1;
+  while ($iter<=$max_iter) {
     if ((microtime_float()-$time_start)>46) die("timeout 0 reached.");
 
   
@@ -532,8 +532,6 @@ $time_start = microtime_float();
              echo "Not possible: Buy on Bittrex, Sell on Cex: no money.\n";
         }
 		
-		$perc_arbitrages = round($possible_arbitrages / 6 * 100);
-		echo "*** Possible Arbitrages: $possible_arbitrages out of 6 ( $perc_arbitrages %) ***\n";
 		
 		if (($tradable_amount_ask_cex>0) && ($tradable_amount_bid_rex>0)) {
 		echo "---";
@@ -637,8 +635,10 @@ $time_start = microtime_float();
 		   
 		
                 } // end of trading section
-      
-		echo "Bot iteration $iter over... \n\n";
+        
+		$perc_arbitrages = round($possible_arbitrages / 6 * 100);
+		echo "*** Possible Arbitrages: $possible_arbitrages out of 6 ( $perc_arbitrages %) ***\n";
+		echo "Bot iteration $iter/$max_iter over... \n\n";
         
         $iter=$iter+1;
         //sleep(10);
