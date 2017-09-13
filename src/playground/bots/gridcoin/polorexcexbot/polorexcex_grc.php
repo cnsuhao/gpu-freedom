@@ -541,7 +541,7 @@ $time_start = microtime_float();
              echo "Not possible: Buy on Bittrex, Sell on Cex: no money.\n";
         }
 		
-		echo "Possible Arbitrages: $possible_arbitrages\n";
+		echo "*** Possible Arbitrages: $possible_arbitrages ***\n";
 		
 		if (($tradable_amount_ask_cex>0) && ($tradable_amount_bid_rex>0)) {
 		echo "---";
