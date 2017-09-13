@@ -159,6 +159,7 @@ $time_start = microtime_float();
     
     
     //echo "Retrieving open orders on c-cex";
+    /*
     $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_rex);
     echo "Openorders ccex result: ";
     //print_r($openorders_cex);
@@ -179,7 +180,7 @@ $time_start = microtime_float();
                 }
                 $i=$i+1;
     }
-      
+    */  
     if ((microtime_float()-$time_start)>49) die("timeout 1 reached.");
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
