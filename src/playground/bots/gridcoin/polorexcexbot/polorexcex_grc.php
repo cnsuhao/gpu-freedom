@@ -399,7 +399,7 @@ $time_start = microtime_float();
     echo "Ccex: tradable amount bid: $tradable_amount_bid_cex  ask: $tradable_amount_ask_cex  $currency_1\n";
      
     echo "\nAnalysis...\n";
-
+    $possible_arbitrages=0;
      if (($tradable_amount_ask>0) && ($tradable_amount_bid_rex>0)) {
         	echo "---";
                 echo "A: Analyzing Buy on Poloniex, Sell on Bittrex\n";
@@ -413,7 +413,7 @@ $time_start = microtime_float();
 	        $transize_A_in_ref = $tradable_A * ($price_1_in_ref+$price_1_in_ref_rex)/2;
                 echo "Transaction size: $transize_A_in_ref $currency_ref ";
                 if ($transize_A_in_ref>=$trans_treshold_in_ref) {
-						echo "OK\n";
+						echo "OK\n"; $possible_arbitrages++;
                 }
                 else   {
 						echo "NOT OK\n";
@@ -441,7 +441,7 @@ $time_start = microtime_float();
 				$transize_B_in_ref = $tradable_B * ($price_1_in_ref + $price_1_in_ref_rex)/2;
                 echo "Transaction size: $transize_B_in_ref $currency_ref ";
                 if ($transize_B_in_ref>=$trans_treshold_in_ref) {
-                       echo "OK\n";
+                       echo "OK\n"; $possible_arbitrages++;
                 }
                 else   {
                        echo "NOT OK\n";
@@ -469,7 +469,7 @@ $time_start = microtime_float();
 	            $transize_C_in_ref = $tradable_C * ($price_1_in_ref+$price_1_in_ref_cex)/2;
                 echo "Transaction size: $transize_C_in_ref $currency_ref ";
                 if ($transize_C_in_ref>=$trans_treshold_in_ref) {
-			        echo "OK\n";
+			        echo "OK\n"; $possible_arbitrages++;
                 }
                 else   {
 					echo "NOT OK\n";
@@ -497,7 +497,7 @@ $time_start = microtime_float();
 		        $transize_D_in_ref = $tradable_D * ($price_1_in_ref + $price_1_in_ref_cex)/2;
                 echo "Transaction size: $transize_D_in_ref $currency_ref ";
                 if ($transize_D_in_ref>=$trans_treshold_in_ref) {
-                       echo "OK\n";
+                       echo "OK\n"; $possible_arbitrages++;
                 }
                 else   {
                        echo "NOT OK\n";
@@ -526,7 +526,7 @@ $time_start = microtime_float();
 	            $transize_E_in_ref = $tradable_E * ($price_1_in_ref_rex+$price_1_in_ref_cex)/2;
                 echo "Transaction size: $transize_E_in_ref $currency_ref ";
                 if ($transize_E_in_ref>=$trans_treshold_in_ref) {
-			        echo "OK\n";
+			        echo "OK\n"; $possible_arbitrages++;
                 }
                 else   {
 					echo "NOT OK\n";
@@ -540,6 +540,8 @@ $time_start = microtime_float();
              $gain_E_in_ref = -1;
              echo "Not possible: Buy on Bittrex, Sell on Cex: no money.\n";
         }
+		
+		echo "Possible Arbitrages: $possible_arbitrages\n";
 		
 		if (($tradable_amount_ask_cex>0) && ($tradable_amount_bid_rex>0)) {
 		echo "---";
