@@ -33,7 +33,7 @@ $time_start = microtime_float();
 
     
   $iter = 0;
-  while ($iter<5) {
+  while ($iter<7) {
     if ((microtime_float()-$time_start)>46) die("timeout 0 reached.");
 
   
