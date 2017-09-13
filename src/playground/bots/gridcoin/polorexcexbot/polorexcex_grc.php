@@ -253,12 +253,15 @@ $time_start = microtime_float();
 	echo "Balances Rex\n.";
 	print_r($balances_rex);
 	echo "* \n";
-	sleep(4);
-
+	echo "Count: ";
+	echo count($balances_rex);
+	echo "\n";
     // only one call to getBalances instead of two calls to getBalance!	
 	$balances_rex_tot_1 = -1;
 	$balances_rex_tot_2 = -1;
 	$i=0;
+	
+	/*
     while ($i<count($balances_rex)) {
                 $currency_rex = $balances_rex[$i]->Currency;
                 $available_rex = $balances_rex[$i]->Available;
@@ -271,6 +274,7 @@ $time_start = microtime_float();
 					
                 $i=$i+1;
     }
+	*/
 	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances!\n");
 	
 	
