@@ -261,8 +261,7 @@ $time_start = microtime_float();
 	$balances_rex_tot_2 = -1;
 	$i=0;
 	
-	/*
-    while ($i<count($balances_rex)) {
+	while ($i<count($balances_rex)) {
                 $currency_rex = $balances_rex[$i]->Currency;
                 $available_rex = $balances_rex[$i]->Available;
                 if ($currency_rex==$currency_1) {
@@ -270,11 +269,9 @@ $time_start = microtime_float();
                 } else 
 				if ($currency_rex==$currency_2) {
                      $balances_rex_tot_2 = $available_rex;
-                } else 
-					
+                }	
                 $i=$i+1;
     }
-	*/
 	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances!\n");
 	
 	
