@@ -344,7 +344,7 @@ $time_start = microtime_float();
     $tot_portfolio_value_2  = $balances_tot_1*$price_1_in_2 + $balances_tot_2;
     
 	echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 ->\n"; 	
-	echo "Total: $tot_portfolio_value_ref $currency_ref = $tot_portfolio_value_1 $currency_1 = $tot_portfolio_value_2 $currency2\n";
+	echo "Total: $tot_portfolio_value_ref $currency_ref = $tot_portfolio_value_1 $currency_1 = $tot_portfolio_value_2 $currency_2\n";
 	echo "\n";
      if ((microtime_float()-$time_start)>55) die("timeout 3 reached.");
     
