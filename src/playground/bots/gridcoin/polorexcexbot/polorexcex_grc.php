@@ -256,7 +256,7 @@ $time_start = microtime_float();
 	echo "Polo: $balance_polo_tot_1 $currency_1 + $balance_polo_tot_2 $currency_2 -> $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot $currency_1)\n";
 	
 	$balances_rex = $api_rex->getBalances();
-	echo "Balances Rex\n.";
+	//echo "Balances Rex.\";
 	//print_r($balances_rex);
 	//echo "* \n";
 	//echo "Count: ";
@@ -294,7 +294,7 @@ $time_start = microtime_float();
     
 	
     $balances_cex = $api_cex->getBalances();
-	echo "Balances cex\n.";
+	//echo "Balances cex.\n";
 	//print_r($balances_cex);
 	//echo "* \n";
 	//echo "Count: ";
@@ -341,11 +341,10 @@ $time_start = microtime_float();
 	$balances_tot_2 = $balance_polo_tot_2 + $balances_rex_tot_2 + $balances_cex_tot_2;
 	$tot_portfolio_value_ref = ($balances_tot_1 * $price_1_in_ref) + ($balances_tot_2 * $price_2_in_ref);	
 	$tot_portfolio_value_1  = $balances_tot_1 + ($balances_tot_2/$price_1_in_2);
-    echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 -> $tot_portfolio_value_ref $currency_ref (=$tot_portfolio_value_1  $currency_1)\n";	
-	
-	die("Finished\n");
-	
-	
+    $tot_portfolio_value_2  = $balances_tot_1*$price_1_in_2 + $balances_tot_2;
+    
+	echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 ->\n"; 	
+	echo "Total: $tot_portfolio_value_ref $currency_ref = $tot_portfolio_value_1 $currency_1 = $tot_portfolio_value_2 $currency2\n";
 	echo "\n";
      if ((microtime_float()-$time_start)>55) die("timeout 3 reached.");
     
