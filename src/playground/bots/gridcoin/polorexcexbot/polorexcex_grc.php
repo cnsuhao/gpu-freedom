@@ -115,9 +115,11 @@ $time_start = microtime_float();
     echo "Open orders on Poloniex ";
     echo count($openorders[0]);
     echo "\n";
-        
+	
     if (count($openorders[0])>0) { //hack due to API inconsistency
-            $i=0;   
+            echo "WARNING: there are open orders on Poloniex\n";
+
+			$i=0;   
             while ($i<count($openorders)) {
                  
                    if (($openorders[$i]["amount"])<=$max_tradable_1) {                        
@@ -144,7 +146,9 @@ $time_start = microtime_float();
     
     echo count($openorders_rex);
     echo "\n";
-    $i=0;
+	if (count($openorders_rex)>0) {
+	    echo "WARNING: there are open orders on Rex\n";
+        $i=0;
         while ($i<count($openorders_rex)) {
                 $orderid_rex = $openorders_rex[$i]->OrderUuid;
                 $quantity_rex = $openorders_rex[$i]->Quantity;
@@ -155,11 +159,11 @@ $time_start = microtime_float();
                      echo "Not cancelling Rex order $orderid_rex ($quantity_rex $currency_1 because not done by bot \n";
                 }
                 $i=$i+1;
-    }
+		}
+	}
     
     
     //echo "Retrieving open orders on c-cex";
-    /*
     $openorders_cex = $api_cex->getOpenOrders($curpair_1_2_rex);
     echo "Openorders ccex result: ";
     //print_r($openorders_cex);
@@ -168,7 +172,9 @@ $time_start = microtime_float();
     echo count($openorders_cex);
     echo "\n";
     
-    $i=0;
+	if (count($openorders_cex)>0) {
+	    echo "WARNING: there are open orders on Cex\n";
+        $i=0;
         while ($i<count($openorders_cex)) {
                 $orderid_cex = $openorders_cex[$i]->OrderUuid;
                 $quantity_cex = $openorders_cex[$i]->Quantity;
@@ -179,8 +185,8 @@ $time_start = microtime_float();
                      echo "Not cancelling cex order $orderid_cex ($quantity_cex $currency_1 because not done by bot \n";
                 }
                 $i=$i+1;
-    }
-    */  
+      }
+	}
     if ((microtime_float()-$time_start)>49) die("timeout 1 reached.");
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
@@ -251,11 +257,11 @@ $time_start = microtime_float();
 	
 	$balances_rex = $api_rex->getBalances();
 	echo "Balances Rex\n.";
-	print_r($balances_rex);
-	echo "* \n";
-	echo "Count: ";
-	echo count($balances_rex);
-	echo "\n";
+	//print_r($balances_rex);
+	//echo "* \n";
+	//echo "Count: ";
+	//echo count($balances_rex);
+	//echo "\n";
     // only one call to getBalances instead of two calls to getBalance!	
 	$balances_rex_tot_1 = -1;
 	$balances_rex_tot_2 = -1;
@@ -272,7 +278,7 @@ $time_start = microtime_float();
                 }	
                 $i=$i+1;
     }
-	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances!\n");
+	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances on Rex!\n");
 	
 	
     //$balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
@@ -286,16 +292,36 @@ $time_start = microtime_float();
 
 	echo "Rex : $balances_rex_tot_1 $currency_1 + $balances_rex_tot_2 $currency_2 -> $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
-	die("Finished\n");
 	
-	$balances_cex = $api_cex->getBalances();
-	echo "Balances Cex\n.";
-	print_r($balances_cex);
-	echo "* \n";
-	sleep(4);
-    $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
-    sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
-    $balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
+    $balances_cex = $api_cex->getBalances();
+	echo "Balances cex\n.";
+	//print_r($balances_cex);
+	//echo "* \n";
+	//echo "Count: ";
+	//echo count($balances_cex);
+	//echo "\n";
+    // only one call to getBalances instead of two calls to getBalance!	
+	$balances_cex_tot_1 = -1;
+	$balances_cex_tot_2 = -1;
+	$i=0;
+	
+	while ($i<count($balances_cex)) {
+                $currency_cex = $balances_cex[$i]->Currency;
+                $available_cex = $balances_cex[$i]->Available;
+                if ($currency_cex==$currency_1) {
+                     $balances_cex_tot_1 = $available_cex;
+                } else 
+				if ($currency_cex==$currency_2) {
+                     $balances_cex_tot_2 = $available_cex;
+                }	
+                $i=$i+1;
+    }
+	if (($balances_cex_tot_1==-1) || ($balances_cex_tot_2==-1)) die("Internal ERROR: could not retrieve balances on Cex!\n");
+	
+	
+    //$balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
+    //sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
+    //$balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
     //echo "*\n";
     //print_r($balances_cex_1);
     //echo "\*\n";
@@ -317,6 +343,7 @@ $time_start = microtime_float();
 	$tot_portfolio_value_1  = $balances_tot_1 + ($balances_tot_2/$price_1_in_2);
     echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 -> $tot_portfolio_value_ref $currency_ref (=$tot_portfolio_value_1  $currency_1)\n";	
 	
+	die("Finished\n");
 	
 	
 	echo "\n";
