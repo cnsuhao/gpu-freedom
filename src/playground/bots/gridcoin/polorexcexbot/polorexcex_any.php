@@ -34,7 +34,7 @@ $time_start = microtime_float();
   $max_iter=7;  
   $iter = 1;
   while ($iter<=$max_iter) {
-    if ((microtime_float()-$time_start)>46) die("timeout 0 reached.");
+    if ((microtime_float()-$time_start)>43) die("timeout 0 reached.");
 
   
 	$date = date('Y-m-d H:i:s');
@@ -178,7 +178,7 @@ $time_start = microtime_float();
                 $i=$i+1;
       }
 	}
-    if ((microtime_float()-$time_start)>49) die("timeout 1 reached.");
+    if ((microtime_float()-$time_start)>46) die("timeout 1 reached.");
    // 1. retrieve current prices
     // TODO: retrieve also bid and ask to be more accurate (using lowestAsk and highestBid)
 	
@@ -223,7 +223,7 @@ $time_start = microtime_float();
     echo "Ccex: $price_1_in_ref_cex $currency_1/$currency_ref_cex $price_2_in_ref_cex  $currency_ref_cex/$currency_2 $price_1_in_2_cex $currency_2/$currency_1\n";
     echo "\n";
 	
-	if ((microtime_float()-$time_start)>52) die("timeout 2 reached.");
+	if ((microtime_float()-$time_start)>49) die("timeout 2 reached.");
         
         
 	// 2. retrieve our current balance in currency 1 and 2
@@ -337,7 +337,7 @@ $time_start = microtime_float();
 	echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 ->\n"; 	
 	echo "Total: $tot_portfolio_value_ref $currency_ref = $tot_portfolio_value_1 $currency_1 = $tot_portfolio_value_2 $currency_2\n";
 	echo "\n";
-     if ((microtime_float()-$time_start)>55) die("timeout 3 reached.");
+     if ((microtime_float()-$time_start)>52) die("timeout 3 reached.");
     
 	// 3. now go through order book of polo and rex and see which order would make a good arbitrage
 	$orderbook = $api_polo->get_order_book($curpair_1_2);
@@ -357,7 +357,7 @@ $time_start = microtime_float();
         
     $orderbook_bid_rex = $api_rex->getOrderBook($curpair_1_2_rex, "buy" /* or buy or sell*/, 1 /*market depth*/);
     //print_r($orderbook_bid_rex[0]);
-	if ((microtime_float()-$time_start)>57) die("timeout 4.1 reached.");
+	if ((microtime_float()-$time_start)>55) die("timeout 4.1 reached.");
     
     
     $orderbook_ask_rex = $api_rex->getOrderBook($curpair_1_2_rex, "sell", 1);
@@ -605,37 +605,37 @@ $time_start = microtime_float();
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_A);
 					$api_rex->sellLimit($curpair_1_2_rex, $tradable_A, $bestbid_rex);
 					echo "$datetrading Order: BUY $tradable_A $currency_1 on Poloniex at $bestask, SELL on Bittrex at $bestbid_rex Gain_A: $gain_A_in_ref $currency_ref\n";
-                    sleep(7);				
+                    sleep(5);				
 				} else
 		        if ($trade_B==1) {
 					$api_rex->buyLimit($curpair_1_2_rex, $tradable_B, $bestask_rex);
 					$api_polo->sell($curpair_1_2, $bestbid, $tradable_B);
 					echo "$datetrading Order: BUY $tradable_B $currency_1 on Bittrex at $bestask_rex, SELL on Poloniex at $bestbid Gain_B: $gain_B_in_ref $currency_ref\n";
-				    sleep(7);
+				    sleep(5);
 				} else
                 if ($trade_C==1) {
 					$api_polo->buy($curpair_1_2, $bestask, $tradable_C);
 					$api_cex->sellLimit($curpair_1_2_cex, $tradable_C, $bestbid_cex);
 					echo "$datetrading Order: BUY $tradable_C $currency_1 on Poloniex at $bestask, SELL on Cex at $bestbid_cex Gain_C: $gain_C_in_ref $currency_ref\n";
-				    sleep(7);
+				    sleep(5);
 				} else
                 if ($trade_D==1) {
 					$api_cex->buyLimit($curpair_1_2_cex, $tradable_D, $bestask_cex);
 					$api_polo->sell($curpair_1_2, $bestbid, $tradable_D);
 					echo "$datetrading Order: BUY $tradable_D $currency_1 on Cex at $bestask_cex, SELL on Poloniex at $bestbid Gain_D: $gain_D_in_ref $currency_ref\n";
-				    sleep(7);
+				    sleep(5);
 				} else
 				if ($trade_E==1) {
 					$api_rex->buyLimit($curpair_1_2_rex, $tradable_E, $bestask_rex);
 					$api_cex->sellLimit($curpair_1_2_cex, $tradable_E, $bestbid_cex);
 					echo "$datetrading Order: BUY $tradable_E $currency_1 on Rex at $bestask_rex, SELL on Cex at $bestbid_cex Gain_E: $gain_E_in_ref $currency_ref\n";
-				    sleep(7);
+				    sleep(5);
 				} else
 			    if ($trade_F==1) {
 					$api_cex->buyLimit($curpair_1_2_cex, $tradable_F, $bestask_cex);
 					$api_rex->sellLimit($curpair_1_2_rex, $tradable_F, $bestbid_rex);
 					echo "$datetrading Order: BUY $tradable_F $currency_1 on Cex at $bestask_cex, SELL on Bittrex at $bestbid_rex Gain_F: $gain_F_in_ref $currency_ref\n";
-				    sleep(7);
+				    sleep(5);
 				} 
                 
 		   
