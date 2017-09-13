@@ -248,6 +248,12 @@ $time_start = microtime_float();
 	
 	echo "Polo: $balance_polo_tot_1 $currency_1 + $balance_polo_tot_2 $currency_2 -> $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot $currency_1)\n";
 	
+	$balances_rex = $api_rex->getBalances();
+	echo "Balances Rex\n."
+	print_r($balances_rex);
+	echo "* \n";
+	sleep(4);
+	
     $balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
     $balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
     //print_r($balances_rex_1);
@@ -259,6 +265,11 @@ $time_start = microtime_float();
 
 	echo "Rex : $balances_rex_tot_1 $currency_1 + $balances_rex_tot_2 $currency_2 -> $cur_portfolio_value_rex_ref_tot $currency_ref (=$cur_portfolio_value_rex_1_tot $currency_1)\n";	
     
+	$balances_cex = $api_cex->getBalances();
+	echo "Balances Cex\n."
+	print_r($balances_cex);
+	echo "* \n";
+	sleep(4);
     $balances_cex_tot_1 = $api_cex->getBalance($currency_1)->Available;
     sleep(2);  // the two calls need to be spaced by 1 second TODO: implement getBalances
     $balances_cex_tot_2 = $api_cex->getBalance($currency_2)->Available;
