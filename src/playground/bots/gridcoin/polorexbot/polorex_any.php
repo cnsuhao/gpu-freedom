@@ -30,7 +30,7 @@ function microtime_float()
 $time_start = microtime_float();
 $sleepsec = rand(0,5);
 echo "Startsleep $sleepsec seconds\n";
-sleep($sleepec);
+sleep($sleepsec);
 
   $max_iter=7;  
   $iter = 1;
