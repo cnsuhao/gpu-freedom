@@ -195,13 +195,15 @@ sleep($sleepsec);
 	echo "Polo: $balance_polo_tot_1 $currency_1 + $balance_polo_tot_2 $currency_2 -> $cur_portfolio_value_polo_ref_tot $currency_ref (=$cur_portfolio_value_polo_1_tot $currency_1)\n";
 	
 	$balances_rex = $api_rex->getBalances();
+	/*
 	echo "Balances Rex.\n";
 	print_r($balances_rex);
 	echo "* \n";
 	echo "Count: ";
 	echo count($balances_rex);
 	echo "\n";
-    // only one call to getBalances instead of two calls to getBalance!	
+    */
+	// only one call to getBalances instead of two calls to getBalance!	
 	$balances_rex_tot_1 = 0;
 	$balances_rex_tot_2 = 0;
 	$i=0;
