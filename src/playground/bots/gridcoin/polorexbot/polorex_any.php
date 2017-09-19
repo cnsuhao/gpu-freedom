@@ -202,8 +202,8 @@ sleep($sleepsec);
 	echo count($balances_rex);
 	echo "\n";
     // only one call to getBalances instead of two calls to getBalance!	
-	$balances_rex_tot_1 = -1;
-	$balances_rex_tot_2 = -1;
+	$balances_rex_tot_1 = 0;
+	$balances_rex_tot_2 = 0;
 	$i=0;
 	
 	while ($i<count($balances_rex)) {
@@ -217,8 +217,6 @@ sleep($sleepsec);
                 }	
                 $i=$i+1;
     }
-	if (($balances_rex_tot_1==-1) || ($balances_rex_tot_2==-1)) die("Internal ERROR: could not retrieve balances on Rex!\n");
-	
 	
     //$balances_rex_tot_1 = $api_rex->getBalance($currency_1)->Available;
     //$balances_rex_tot_2 = $api_rex->getBalance($currency_2)->Available;
