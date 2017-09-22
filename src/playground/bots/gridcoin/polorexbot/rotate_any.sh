@@ -1,3 +1,5 @@
+#!/bin/bash
+cd "$(dirname "$0")"
 rm polorex.log.14
 mv polorex.log.13 polorex.log.14
 mv polorex.log.12 polorex.log.13
