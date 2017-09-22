@@ -16,4 +16,5 @@ mv polorexcex_any.log.2 polorexcex_any.log.3
 mv polorexcex_any.log.1 polorexcex_any.log.2
 mv polorexcex_any.log polorexcex_any.log.1
 touch polorexcex_any.log
+chmod 666 *any.log*
 
