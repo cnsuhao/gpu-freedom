@@ -4,7 +4,7 @@ $currency_1 = "STEEM";
 $max_tradable_1 = 15; // maximum amount tradable in currency 1
 $currency_2 = "BTC"; // currency 2
 $max_tradable_2 = 0.0075; // maximum amount tradable in currency 2
- $currency_ref = "USDT"; // used to get an idea of portfolio value
+$currency_ref = "USDT"; // used to get an idea of portfolio value
 
 
 $poloniex_api_key="";

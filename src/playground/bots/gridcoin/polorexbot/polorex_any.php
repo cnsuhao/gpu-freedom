@@ -99,19 +99,21 @@ sleep($sleepsec);
 
 			$i=0;   
             while ($i<count($openorders)) {
-                 
-                   if (($openorders[$i]["amount"])<=$max_tradable_1) {                        
+                $cur_order = $openorders[$i]["currency"];
+				echo "Currency for this Polo order is $cur_order";
+				if (($cur_order==$currency_1) || ($cur_order==$currency_2)) {
+					if (($openorders[$i]["amount"])<=$max_tradable_1) {                        
                         //todo: check me
                         echo "Cancelling Polo order ";
                         echo $openorders[$i]["orderNumber"];
                         echo "\n";
-			$api_polo->cancel_order($curpair_1_2, $openorders[$i]["orderNumber"]);
-                   } else {
+						$api_polo->cancel_order($curpair_1_2, $openorders[$i]["orderNumber"]);
+					} else {
                         echo "Polo order ";
                         echo $openorder[$i]["orderNumber"];
                         echo " not cancelled due to high amount, not set by this bot\n";
-		   }
-                 
+					}
+                } 
               $i=$i+1;
 	    }
         }
@@ -130,13 +132,18 @@ sleep($sleepsec);
         while ($i<count($openorders_rex)) {
                 $orderid_rex = $openorders_rex[$i]->OrderUuid;
                 $quantity_rex = $openorders_rex[$i]->Quantity;
-                if ($quantity_rex<=$max_tradable_1) {
-                     echo "Cancelling Rex order $orderid_rex ($quantity_rex $currency_1) \n";
-                     $api_rex->cancel($orderid_rex);
-                } else {
-                     echo "Not cancelling Rex order $orderid_rex ($quantity_rex $currency_1 because not done by bot \n";
-                }
-                $i=$i+1;
+				$cur_order = $openorders_rex[$i]->Currency;
+				echo "Currency for this Rex order is $cur_order";
+				if (($cur_order==$currency_1) || ($cur_order==$currency_2)) {
+					
+					if ($quantity_rex<=$max_tradable_1) {
+						 echo "Cancelling Rex order $orderid_rex ($quantity_rex $currency_1) \n";
+						 $api_rex->cancel($orderid_rex);
+					} else {
+						 echo "Not cancelling Rex order $orderid_rex ($quantity_rex $currency_1 because not done by bot \n";
+					} // amount
+				} // currency
+				$i=$i+1;
 		}
 	}
     
