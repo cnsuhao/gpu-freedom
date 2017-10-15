@@ -21,7 +21,9 @@
   require_once("../lib/poloniex_api.php");
   require_once("../lib/bittrex_api.php");
   require_once("../lib/ccex_api.php");
-  require_once("conf/config.inc.php");	
+  require_once("conf/config.inc.php");
+
+  $usd_chf = 0.97;  // TODO: update this from time to time
 
 function microtime_float()
 {
@@ -349,6 +351,10 @@ sleep($sleepsec);
     
 	echo "Total: $balances_tot_1 $currency_1 + $balances_tot_2 $currency_2 ->\n"; 	
 	echo "Total: $tot_portfolio_value_ref $currency_ref = $tot_portfolio_value_1 $currency_1 = $tot_portfolio_value_2 $currency_2\n";
+	if ($currency_ref=="USDT") {
+		$tot_portfolio_chf = $tot_portfolio_value_ref * $usd_chf;
+        echo "Total: $tot_portfolio_chf CHF\n";		
+	}
 	echo "\n";
      if ((microtime_float()-$time_start)>52) die("timeout 3 reached.");
     
